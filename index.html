@@ -96,6 +96,31 @@
   button:disabled { opacity: .6; }
   .msg { min-height: 20px; font-size: 13px; color: #8c5f5f; text-align: center; flex-shrink: 0; }
 
+  /* 완료 팝업 */
+  .modal-back {
+    position: fixed; inset: 0; background: rgba(40, 16, 60, .38);
+    backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
+    padding: 24px; z-index: 50; opacity: 0; pointer-events: none; transition: opacity .22s ease;
+  }
+  .modal-back.show { opacity: 1; pointer-events: auto; }
+  .modal {
+    width: 100%; max-width: 360px; background: #fff; border-radius: 26px;
+    padding: 40px 28px 28px; text-align: center;
+    box-shadow: 0 24px 70px rgba(60, 30, 110, .28);
+    transform: translateY(12px) scale(.97); transition: transform .24s cubic-bezier(.2,.9,.3,1.2);
+  }
+  .modal-back.show .modal { transform: translateY(0) scale(1); }
+  .modal .emoji { font-size: 46px; margin-bottom: 14px; }
+  .modal .title { font-family: "PretendardB", "Pretendard SemiBold", sans-serif; font-size: 21px; font-weight: 700; color: #1c1c22; margin-bottom: 10px; }
+  .modal .body { font-size: 14px; color: #6b6b76; line-height: 1.6; }
+  .modal .ok {
+    margin-top: 26px; width: 100%; height: 52px; border: none; border-radius: 14px;
+    background: #b255d9; color: #fff; font-family: "Pretendard SemiBold", sans-serif;
+    font-size: 16px; cursor: pointer; transition: background .18s ease;
+  }
+  .modal .ok:hover { background: rgba(134, 61, 166, .9); }
+  .modal .ok:active { transform: scale(.98); }
+
   /* 세로 모바일: 폼 세로 적층 */
   @media (max-width: 640px) {
     form { flex-direction: column; width: 100%; max-width: 340px; }
@@ -132,6 +157,15 @@
     </form>
     <div class="msg" id="msg"></div>
   </main>
+
+  <div class="modal-back" id="modalBack">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="emoji" id="modalEmoji">💌</div>
+      <div class="title" id="modalTitle">완료되었어요!</div>
+      <div class="body" id="modalBody">출시 소식을 가장 먼저 보내드릴게요.</div>
+      <button class="ok" id="modalOk">확인</button>
+    </div>
+  </div>
 <script>
   // 타이프라이터 — Framer 원본 문구 (실측: 타이핑 52ms · 삭제 137ms · 휴지 2s)
   const PHRASES = ["This is all about", "Catch ya on Ditto!", "❤️‍🔥🍞🌎🤍⭐️"];
@@ -187,6 +221,18 @@
   const KEY = "sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf";
   const form = document.getElementById('wl'), btn = document.getElementById('btn'),
         email = document.getElementById('email'), msg = document.getElementById('msg');
+  const modalBack = document.getElementById('modalBack');
+  function showModal(emoji, title, body) {
+    document.getElementById('modalEmoji').textContent = emoji;
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').textContent = body;
+    modalBack.classList.add('show');
+  }
+  function closeModal() { modalBack.classList.remove('show'); }
+  document.getElementById('modalOk').addEventListener('click', closeModal);
+  modalBack.addEventListener('click', e => { if (e.target === modalBack) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
     btn.disabled = true; msg.textContent = '';
@@ -196,8 +242,8 @@
         headers: { apikey: KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.value.trim() })
       });
-      if (r.status === 201) { msg.textContent = '등록됐어요 — 출시 소식을 가장 먼저 보내드릴게요 💌'; form.reset(); }
-      else if (r.status === 409) { msg.textContent = '이미 등록된 이메일이에요.'; }
+      if (r.status === 201) { showModal('💌', '완료되었어요!', '출시 소식을 가장 먼저 보내드릴게요.'); form.reset(); }
+      else if (r.status === 409) { showModal('🙌', '이미 신청했어요', '출시되면 이 이메일로 알려드릴게요.'); }
       else { msg.textContent = '잠시 후 다시 시도해주세요.'; }
     } catch { msg.textContent = '네트워크 연결을 확인해주세요.'; }
     btn.disabled = false;
