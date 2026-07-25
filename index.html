@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ditto! - 통하면 디토해!</title>
+<meta name="description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
+<style>
+  @font-face {
+    font-family: "PP Pangram Rounded";
+    src: url("assets/font-1.woff2") format("woff2");
+    font-weight: 600; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "Pretendard SemiBold";
+    src: url("assets/font-2.woff2") format("woff2");
+    font-weight: 600; font-display: swap;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: "Pretendard SemiBold", -apple-system, sans-serif;
+    background: linear-gradient(180deg, #b46ce0 0%, #e087e6 22%, #f79fdf 44%, #fdd9f1 62%, #ffffff 82%);
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; overflow-x: hidden;
+  }
+  .dock {
+    margin-top: 34px; background: #161616; border-radius: 24px;
+    padding: 11px 13px; display: flex; gap: 11px; flex-shrink: 0;
+    box-shadow: 0 14px 34px rgba(30,10,50,.35);
+    max-width: calc(100vw + 80px);
+  }
+  .dock img { width: 52px; height: 52px; border-radius: 12px; display: block; }
+  .type-line {
+    margin-top: 54px; height: 24px;
+    font-family: "PP Pangram Rounded", sans-serif; font-style: italic;
+    font-size: 17px; color: #fff; letter-spacing: .01em;
+  }
+  .phone-wrap {
+    margin-top: 26px; position: relative; height: 440px; overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 95%);
+    mask-image: linear-gradient(180deg, #000 55%, transparent 95%);
+  }
+  .phone-wrap img { width: 262px; display: block; }
+  .count {
+    margin-top: 8px;
+    font-family: "PP Pangram Rounded", sans-serif; font-style: italic;
+    font-size: 28.8px; color: #8c5f5f; letter-spacing: .02em;
+  }
+  form { margin: 26px 0 64px; display: flex; gap: 14px; align-items: stretch; }
+  input {
+    width: 340px; height: 52px; padding: 0 18px;
+    border: 1px solid #e2e2e6; border-radius: 10px; background: #f5f5f7;
+    font-family: inherit; font-size: 15px; color: #1c1c22; outline: none;
+  }
+  input::placeholder { color: #a8a8b0; }
+  input:focus { border-color: #b46ce0; background: #fff; }
+  button {
+    height: 52px; padding: 0 26px; border: none; border-radius: 10px;
+    background: #9b4be0; color: #fff; font-family: "Pretendard SemiBold", sans-serif;
+    font-size: 16px; cursor: pointer;
+  }
+  button:active { transform: scale(.98); }
+  button:disabled { opacity: .6; }
+  .msg { min-height: 22px; margin-top: -46px; margin-bottom: 40px; font-size: 13px; color: #8c5f5f; }
+  @media (max-width: 700px) {
+    .dock { margin-top: 26px; }
+    .type-line { margin-top: 40px; }
+    .phone-wrap { height: 400px; }
+    .phone-wrap img { width: 250px; }
+    form { flex-direction: column; width: calc(100vw - 48px); max-width: 340px; }
+    input, button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+  <div class="dock">
+    <img src="assets/icon-1.png" alt=""><img src="assets/icon-2.png" alt=""><img src="assets/icon-3.png" alt="">
+    <img src="assets/icon-4.png" alt=""><img src="assets/icon-5.png" alt=""><img src="assets/icon-6.png" alt="">
+    <img src="assets/icon-7.png" alt="">
+  </div>
+  <div class="type-line"><span id="type"></span>&thinsp;_</div>
+  <div class="phone-wrap"><img src="assets/phone.png" alt="ditto! 앱 화면"></div>
+  <div class="count" id="count">00:00:00:00</div>
+  <form id="wl">
+    <input type="email" id="email" placeholder="name@email.com" required autocomplete="email">
+    <button type="submit" id="btn">출시알림 받기</button>
+  </form>
+  <div class="msg" id="msg"></div>
+<script>
+  // 타이프라이터 — Framer 원본 문구
+  const PHRASES = ["This is all about", "Catch ya on Ditto!", "❤️‍🔥🍞🍳"];
+  const typeEl = document.getElementById('type');
+  let pi = 0, ci = 0, deleting = false;
+  function tick() {
+    const p = [...PHRASES[pi]]; // 이모지 안전 분할
+    if (!deleting) {
+      ci++;
+      if (ci >= p.length) { deleting = true; setTimeout(tick, 1600); typeEl.textContent = p.join(''); return; }
+    } else {
+      ci--;
+      if (ci <= 0) { deleting = false; pi = (pi + 1) % PHRASES.length; }
+    }
+    typeEl.textContent = p.slice(0, ci).join('');
+    setTimeout(tick, deleting ? 55 : 95);
+  }
+  tick();
+
+  // 카운트다운 — 출시일 확정 시 ISO 날짜로 교체 (null이면 00:00:00:00 고정)
+  const LAUNCH_AT = null; // 예: "2026-09-01T00:00:00+09:00"
+  const countEl = document.getElementById('count');
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function updateCount() {
+    if (!LAUNCH_AT) return;
+    const diff = Math.max(0, new Date(LAUNCH_AT) - new Date());
+    const d = Math.floor(diff / 86400000), h = Math.floor(diff / 3600000) % 24,
+          m = Math.floor(diff / 60000) % 60, s = Math.floor(diff / 1000) % 60;
+    countEl.textContent = `${pad(d)}:${pad(h)}:${pad(m)}:${pad(s)}`;
+  }
+  updateCount(); setInterval(updateCount, 1000);
+
+  // 출시알림 — Supabase waitlist (publishable key, RLS: insert만 허용)
+  const SB = "https://lisqekczixwzshmpewzq.supabase.co/rest/v1/waitlist";
+  const KEY = "sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf";
+  const form = document.getElementById('wl'), btn = document.getElementById('btn'),
+        email = document.getElementById('email'), msg = document.getElementById('msg');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    btn.disabled = true; msg.textContent = '';
+    try {
+      const r = await fetch(SB, {
+        method: 'POST',
+        headers: { apikey: KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.value.trim() })
+      });
+      if (r.status === 201) { msg.textContent = '등록됐어요 — 출시 소식을 가장 먼저 보내드릴게요 💌'; form.reset(); }
+      else if (r.status === 409) { msg.textContent = '이미 등록된 이메일이에요.'; }
+      else { msg.textContent = '잠시 후 다시 시도해주세요.'; }
+    } catch { msg.textContent = '네트워크 연결을 확인해주세요.'; }
+    btn.disabled = false;
+  });
+</script>
+</body>
+</html>
