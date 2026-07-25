@@ -17,39 +17,59 @@
     font-weight: 600; font-display: swap;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { min-height: 100%; }
+  :root {
+    /* 뷰포트 높이에 맞춰 폰 목업 크기가 유동 — 풀스크린에서 스크롤 없이 채움 */
+    --phone-w: clamp(210px, 30vh, 290px);
+  }
+  html, body { height: 100%; }
   body {
     font-family: "Pretendard SemiBold", -apple-system, sans-serif;
     background: linear-gradient(180deg, #b46ce0 0%, #e087e6 22%, #f79fdf 44%, #fdd9f1 62%, #ffffff 82%);
-    display: flex; flex-direction: column; align-items: center;
-    min-height: 100vh; overflow-x: hidden;
+    min-height: 100svh; overflow-x: hidden;
+  }
+  .stage {
+    min-height: 100svh; width: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding: clamp(20px, 4vh, 40px) 20px clamp(24px, 4vh, 48px);
+    gap: clamp(14px, 2.4vh, 30px);
   }
   .dock {
-    margin-top: 34px; background: #161616; border-radius: 24px;
-    padding: 11px 13px; display: flex; gap: 11px; flex-shrink: 0;
+    background: #161616; border-radius: 24px;
+    padding: 11px 13px; display: flex; gap: clamp(6px, 1vw, 11px); flex-shrink: 0;
     box-shadow: 0 14px 34px rgba(30,10,50,.35);
-    max-width: calc(100vw + 80px);
+    max-width: 100%;
   }
-  .dock img { width: 52px; height: 52px; border-radius: 12px; display: block; }
+  .dock img {
+    width: clamp(40px, 5.6vw, 52px); height: clamp(40px, 5.6vw, 52px);
+    border-radius: 12px; display: block; cursor: pointer;
+    transition: transform .18s ease, filter .18s ease; -webkit-tap-highlight-color: transparent;
+  }
+  .dock img:hover { transform: translateY(-3px); }
+  .dock img.active { transform: translateY(-4px); filter: drop-shadow(0 6px 10px rgba(0,0,0,.3)); }
   .type-line {
-    margin-top: 54px; height: 24px;
+    height: 1.4em; min-height: 24px;
     font-family: "PP Pangram Rounded", sans-serif; font-style: italic;
-    font-size: 17px; color: #fff; letter-spacing: .01em;
+    font-size: clamp(15px, 1.4vw, 17px); color: #fff; letter-spacing: .01em;
   }
   .phone-wrap {
-    margin-top: 26px; position: relative; height: 440px; overflow: hidden;
+    position: relative; overflow: hidden; flex-shrink: 0;
+    width: var(--phone-w);
+    height: clamp(300px, 52vh, 460px);
     -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 95%);
     mask-image: linear-gradient(180deg, #000 55%, transparent 95%);
   }
-  .phone-wrap img { width: 262px; display: block; }
-  .count {
-    margin-top: 8px;
-    font-family: "PP Pangram Rounded", sans-serif; font-style: italic;
-    font-size: 28.8px; color: #8c5f5f; letter-spacing: .02em;
+  .phone-wrap img {
+    width: var(--phone-w); display: block; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%); transition: opacity .35s ease;
   }
-  form { margin: 26px 0 64px; display: flex; gap: 14px; align-items: stretch; }
+  .phone-wrap img.hidden { opacity: 0; }
+  .count {
+    font-family: "PP Pangram Rounded", sans-serif; font-style: italic;
+    font-size: clamp(22px, 2.2vw, 28.8px); color: #8c5f5f; letter-spacing: .02em; flex-shrink: 0;
+  }
+  form { display: flex; gap: 14px; align-items: stretch; flex-shrink: 0; }
   input {
-    width: 340px; height: 52px; padding: 0 18px;
+    width: clamp(220px, 26vw, 340px); height: 52px; padding: 0 18px;
     border: 1px solid #e2e2e6; border-radius: 10px; background: #f5f5f7;
     font-family: inherit; font-size: 15px; color: #1c1c22; outline: none;
   }
@@ -58,60 +78,90 @@
   button {
     height: 52px; padding: 0 26px; border: none; border-radius: 12px;
     background: #b255d9; color: #fff; font-family: "Pretendard SemiBold", sans-serif;
-    font-size: 16px; cursor: pointer; transition: background .18s ease;
+    font-size: 16px; cursor: pointer; transition: background .18s ease; white-space: nowrap;
   }
   button:hover { background: rgba(134, 61, 166, .85); }
   button:active { transform: scale(.98); }
   button:disabled { opacity: .6; }
-  .msg { min-height: 22px; margin-top: -46px; margin-bottom: 40px; font-size: 13px; color: #8c5f5f; }
-  @media (max-width: 700px) {
-    .dock { margin-top: 26px; }
-    .type-line { margin-top: 40px; }
-    .phone-wrap { height: 400px; }
-    .phone-wrap img { width: 250px; }
-    form { flex-direction: column; width: calc(100vw - 48px); max-width: 340px; }
+  .msg { min-height: 20px; font-size: 13px; color: #8c5f5f; text-align: center; flex-shrink: 0; }
+
+  /* 세로 모바일: 폼 세로 적층 */
+  @media (max-width: 640px) {
+    form { flex-direction: column; width: 100%; max-width: 340px; }
     input, button { width: 100%; }
+  }
+  /* 가로가 낮은 화면(가로 모바일·짧은 창): 폰을 더 줄이고 여백 압축 */
+  @media (max-height: 620px) {
+    :root { --phone-w: clamp(150px, 24vh, 210px); }
+    .stage { gap: clamp(8px, 1.6vh, 16px); }
+    .phone-wrap { height: clamp(180px, 34vh, 300px); }
   }
 </style>
 </head>
 <body>
-  <div class="dock">
-    <img src="assets/icon-1.png" alt=""><img src="assets/icon-2.png" alt=""><img src="assets/icon-3.png" alt="">
-    <img src="assets/icon-4.png" alt=""><img src="assets/icon-5.png" alt=""><img src="assets/icon-6.png" alt="">
-    <img src="assets/icon-7.png" alt="">
-  </div>
-  <div class="type-line"><span id="type"></span>&thinsp;_</div>
-  <div class="phone-wrap"><img src="assets/phone.png" alt="ditto! 앱 화면"></div>
-  <div class="count" id="count">00:00:00:00</div>
-  <form id="wl">
-    <input type="email" id="email" placeholder="name@email.com" autocomplete="email">
-    <button type="submit" id="btn">출시알림 받기</button>
-  </form>
-  <div class="msg" id="msg"></div>
+  <main class="stage">
+    <div class="dock" id="dock">
+      <img src="assets/icon-1.png" data-phone="1" alt="ditto 화면 1">
+      <img src="assets/icon-2.png" data-phone="2" alt="ditto 화면 2">
+      <img src="assets/icon-3.png" data-phone="3" alt="ditto 화면 3">
+      <img src="assets/icon-4.png" data-phone="4" alt="ditto 화면 4">
+      <img src="assets/icon-5.png" data-phone="5" alt="ditto 화면 5">
+      <img src="assets/icon-6.png" data-phone="2" alt="ditto 화면 6">
+      <img src="assets/icon-7.png" data-phone="1" alt="ditto 화면 7">
+    </div>
+    <div class="type-line"><span id="type"></span>&thinsp;_</div>
+    <div class="phone-wrap">
+      <img id="phoneA" src="assets/phone-1.png" alt="ditto! 앱 화면">
+      <img id="phoneB" class="hidden" alt="" aria-hidden="true">
+    </div>
+    <div class="count" id="count">00:00:00:00</div>
+    <form id="wl">
+      <input type="email" id="email" placeholder="name@email.com" autocomplete="email">
+      <button type="submit" id="btn">출시알림 받기</button>
+    </form>
+    <div class="msg" id="msg"></div>
+  </main>
 <script>
-  // 타이프라이터 — Framer 원본 문구
-  const PHRASES = ["This is all about", "Catch ya on Ditto!", "❤️‍🔥🍞🍳"];
+  // 타이프라이터 — Framer 원본 문구 (실측: 타이핑 52ms · 삭제 137ms · 휴지 2s)
+  const PHRASES = ["This is all about", "Catch ya on Ditto!", "❤️‍🔥🍞🌎🤍⭐️"];
   const typeEl = document.getElementById('type');
   let pi = 0, ci = 0, deleting = false;
   function tick() {
-    const p = [...PHRASES[pi]]; // 이모지 안전 분할
+    const p = [...PHRASES[pi]];
     if (!deleting) {
       ci++;
-      if (ci >= p.length) { deleting = true; setTimeout(tick, 2000); typeEl.textContent = p.join(''); return; }
+      if (ci >= p.length) { deleting = true; typeEl.textContent = p.join(''); setTimeout(tick, 2000); return; }
     } else {
       ci--;
       if (ci <= 0) { deleting = false; pi = (pi + 1) % PHRASES.length; }
     }
     typeEl.textContent = p.slice(0, ci).join('');
-    // 원본 실측: 타이핑 ~52ms, 삭제 ~137ms, 완성 후 휴지 ~2s
     setTimeout(tick, deleting ? 137 : 52);
   }
   tick();
 
-  // 카운트다운 — 출시일 확정 시 ISO 날짜로 교체 (null이면 00:00:00:00 고정)
+  // 독 아이콘 클릭 → 폰 화면 전환 (A/B 크로스페이드)
+  const phoneA = document.getElementById('phoneA'), phoneB = document.getElementById('phoneB');
+  let front = phoneA, back = phoneB, current = '1';
+  document.getElementById('dock').addEventListener('click', e => {
+    const icon = e.target.closest('img[data-phone]');
+    if (!icon) return;
+    const n = icon.dataset.phone;
+    document.querySelectorAll('#dock img').forEach(i => i.classList.toggle('active', i === icon));
+    if (n === current) return;
+    current = n;
+    back.onload = () => {
+      back.classList.remove('hidden');
+      front.classList.add('hidden');
+      [front, back] = [back, front];
+    };
+    back.src = `assets/phone-${n}.png`;
+  });
+
+  // 카운트다운 — 출시일 확정 시 LAUNCH_AT을 ISO 문자열로 (null이면 00:00:00:00 고정)
   const LAUNCH_AT = null; // 예: "2026-09-01T00:00:00+09:00"
   const countEl = document.getElementById('count');
-  function pad(n) { return String(n).padStart(2, '0'); }
+  const pad = n => String(n).padStart(2, '0');
   function updateCount() {
     if (!LAUNCH_AT) return;
     const diff = Math.max(0, new Date(LAUNCH_AT) - new Date());
