@@ -56,10 +56,11 @@
   input::placeholder { color: #a8a8b0; }
   input:focus { border-color: #b46ce0; background: #fff; }
   button {
-    height: 52px; padding: 0 26px; border: none; border-radius: 10px;
-    background: #9b4be0; color: #fff; font-family: "Pretendard SemiBold", sans-serif;
-    font-size: 16px; cursor: pointer;
+    height: 52px; padding: 0 26px; border: none; border-radius: 12px;
+    background: #b255d9; color: #fff; font-family: "Pretendard SemiBold", sans-serif;
+    font-size: 16px; cursor: pointer; transition: background .18s ease;
   }
+  button:hover { background: rgba(134, 61, 166, .85); }
   button:active { transform: scale(.98); }
   button:disabled { opacity: .6; }
   .msg { min-height: 22px; margin-top: -46px; margin-bottom: 40px; font-size: 13px; color: #8c5f5f; }
@@ -96,13 +97,14 @@
     const p = [...PHRASES[pi]]; // 이모지 안전 분할
     if (!deleting) {
       ci++;
-      if (ci >= p.length) { deleting = true; setTimeout(tick, 1600); typeEl.textContent = p.join(''); return; }
+      if (ci >= p.length) { deleting = true; setTimeout(tick, 2000); typeEl.textContent = p.join(''); return; }
     } else {
       ci--;
       if (ci <= 0) { deleting = false; pi = (pi + 1) % PHRASES.length; }
     }
     typeEl.textContent = p.slice(0, ci).join('');
-    setTimeout(tick, deleting ? 55 : 95);
+    // 원본 실측: 타이핑 ~52ms, 삭제 ~137ms, 완성 후 휴지 ~2s
+    setTimeout(tick, deleting ? 137 : 52);
   }
   tick();
 
