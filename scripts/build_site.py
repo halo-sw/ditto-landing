@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""ditto.at 빌드: 저장소 파일 + 사용자별 프로필 페이지(ditto.at/{아이디}) + 링크 미리보기 이미지.
+"""ditto.at 빌드: 저장소 파일 + 공유한 사용자의 프로필 페이지(ditto.at/{아이디}) + 링크 미리보기 이미지.
+
+프로필 페이지는 프로필 링크를 공유한 사람 것만 만든다. 공유 목록은
+  1) Supabase public.profile_shares (앱에서 공유할 때 기록, 테이블이 있으면)
+  2) scripts/shared-profiles.txt (한 줄에 아이디 하나, 수동 추가·예시용)
 
 GitHub Actions(.github/workflows/pages.yml)가 주기적으로 실행해 GitHub Pages에 올린다.
 프로필 페이지는 git에 커밋하지 않고 배포 산출물에만 들어간다.
@@ -7,7 +11,7 @@ GitHub Actions(.github/workflows/pages.yml)가 주기적으로 실행해 GitHub 
   python3 scripts/build_site.py _site            # 전체
   PROFILE_LIMIT=3 python3 scripts/build_site.py _site   # 로컬 확인용
 """
-import html, io, json, os, re, shutil, sys, urllib.parse, urllib.request
+import html, io, json, os, re, shutil, sys, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
@@ -36,16 +40,35 @@ def get(url, headers=None, timeout=30):
         return r.read()
 
 
+def shared_handles(key):
+    handles = set()
+    listed = ROOT / "scripts/shared-profiles.txt"
+    if listed.exists():
+        for line in listed.read_text().splitlines():
+            line = line.split("#", 1)[0].strip().lstrip("@").lower()
+            if line:
+                handles.add(line)
+    try:
+        offset = 0
+        while True:
+            page = json.loads(get(f"{SB}/rest/v1/profile_shares?select=handle&order=handle&limit=1000&offset={offset}", {"apikey": key}))
+            handles |= {(r.get("handle") or "").lower() for r in page}
+            if len(page) < 1000:
+                break
+            offset += 1000
+    except urllib.error.HTTPError as e:
+        if e.code not in (401, 404):  # 테이블이 아직 없으면 목록 파일만 쓴다
+            raise
+    return sorted(h for h in handles if HANDLE_RE.match(h))
+
+
 def profiles(key):
-    rows, offset, limit = [], 0, int(os.environ.get("PROFILE_LIMIT", "0")) or None
-    while True:
-        q = f"{SB}/rest/v1/profiles?select=handle,nickname,avatar_url&order=handle&limit=1000&offset={offset}"
-        page = json.loads(get(q, {"apikey": key}))
-        rows += page
-        if len(page) < 1000 or (limit and len(rows) >= limit):
-            break
-        offset += 1000
-    return rows[:limit] if limit else rows
+    handles = shared_handles(key)
+    rows = []
+    for i in range(0, len(handles), 100):
+        chunk = ",".join(handles[i:i + 100])
+        rows += json.loads(get(f"{SB}/rest/v1/profiles?select=handle,nickname,avatar_url&handle=in.({urllib.parse.quote(chunk)})", {"apikey": key}))
+    return rows
 
 
 def font(weight, size, cache={}):
