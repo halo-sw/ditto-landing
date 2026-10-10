@@ -1,7 +1,10 @@
 """공개 프로필 페이지의 대표 플래터 — 앱 GridEngine 규격을 그대로 옮긴 정적 HTML/CSS.
 
-  · 8열 · 셀 = (폭 − 거터 8×7) ÷ 8 · 모서리 = min(20, 12 + (min(w,h) − 2)×2), 음악은 24
-  · 디자인 기준 폭 370 (Figma 셀 39.25 · 거터 8). 모든 치수는 플래터 폭 비례(cqw)라 화면 폭에 맞춰 늘고 준다.
+  · 8열 · 셀 = (폭 − 거터 8×7) ÷ 8 · 모서리 = min(20, 12 + (min(w,h) − 2)×2), 음악은 24 (Model/GridEngine.swift)
+  · 디자인 기준 = 앱 Grid.width @ 390pt 화면 (390 − 마진 16×2 = 358, 셀 37.75 · 거터 8).
+    모든 치수는 플래터 폭 비례(cqw)라 390 폭에서 앱과 1:1, 그 밖의 폭에서는 같은 비율로 늘고 준다.
+  · 친구 플래터(Views/FriendPlatterDetail.swift)처럼: 디토 불가 위젯은 1px 테두리(#E7E1EE),
+    디토 가능 위젯은 뒤 후광 + 우하단 DittoBadge 24.
   · 대표(rep) 플래터만, priv 위젯은 빼고 그린다. 라이프 플래터는 페이지에도 미디어에도 넣지 않는다.
   · 이미지는 빌드 때 받아 {아이디}/media/ 에 600px 이내로 저장한다 (핫링크 의존 없음, 음악 커버만 실패 시 핫링크).
 
@@ -16,8 +19,8 @@ MEDIA = SB + "/storage/v1/object/public/widget-media"
 ROOT = Path(__file__).resolve().parent.parent
 APP_ASSETS = Path(os.environ.get("DITTO_APP_ASSETS") or ROOT.parent / "prj_Ditto!/DittoPrototype/Assets.xcassets")
 
-DESIGN_W = 370.0          # 8 × 39.25 + 7 × 8
-UNIT, GUT = 47.25, 8.0    # 셀 피치 · 거터 (디자인 px)
+DESIGN_W = 358.0          # Grid.width @ 390pt = 8 × 37.75 + 7 × 8
+UNIT, GUT = 45.75, 8.0    # 셀 피치 · 거터 (디자인 px)
 COLS = 8
 
 
@@ -212,6 +215,9 @@ def music_palette(im):
 ARROW = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7l4-4M4 3h3v3" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 CAMERA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2l1.4-2h6.2l1.4 2h2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
 PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>'
+YT = ('<svg viewBox="0 0 20 14.4" aria-hidden="true"><rect width="20" height="14.4" rx="5.6" fill="#f00"/>'
+      '<path d="M8.4 4.4v5.6l4.6-2.8z" fill="#fff"/></svg>')
+BADGE = '<img class="dt-badge" src="/assets/dittobadge-32.svg" alt="" style="{}">'
 PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>'
 
 
@@ -220,6 +226,12 @@ def service_tile(W, H, label, title, subtitle, content):
     small = W < 110 and H < 120
     inset = 7 if small else 8 if W < 110 else 12
     ts = 10 if small else 13 if W < 150 else 17
+    if W / max(H, 1) >= 1.7:
+        return (f'<div class="st st-w" style="padding:{u(inset)};gap:{u(10)}">'
+                f'<div class="st-body" style="flex:none;width:{u(min(H - inset * 2, W * 0.35))}">{content}</div>'
+                f'<div class="st-col" style="gap:{u(4)}"><p class="st-label" style="font-size:{u(9)}">{esc(label)}</p>'
+                f'<p class="st-title" style="font-size:{u(13)};-webkit-line-clamp:1">{esc(title)}</p>'
+                f'<p class="st-sub" style="font-size:{u(10)}">{esc(subtitle)}</p></div></div>')
     parts = [f'<div class="st" style="padding:{u(inset)};gap:{u(3 if small else 6)}">']
     if H >= 160:
         parts.append(f'<div class="st-label" style="font-size:{u(10)}">{esc(label)}{ARROW}</div>')
@@ -261,8 +273,8 @@ def r_video(w, W, H, m):
     vid = (f'<video class="cover vd" src="{esc(src)}" playsinline muted preload="none"'
            f'{f" poster={chr(34)}{esc(poster)}{chr(34)}" if poster else ""}></video>') if src else ""
     inner = (f'{img}{vid}<div class="vd-shade"></div>'
-             f'<p class="vd-title" style="font-size:{u(17)};line-height:{u(22)};padding:{u(pady)} {u(padx)} 0">{esc(title)}</p>'
-             f'<span class="vd-play" style="width:{u(44)};height:{u(44)};padding:{u(12)}">{PLAY}{PAUSE if src else ""}</span>')
+             f'<p class="vd-title" style="font-size:{u(17)};line-height:{u(24)};padding:{u(pady)} {u(padx)} 0">{esc(title)}</p>'
+             f'<span class="vd-yt" style="width:{u(20)};height:{u(14.4)};right:{u(14)};bottom:{u(12)}">{YT}</span>')
     attrs = ' data-act="video"' if src else ' data-dl data-msg="video"'
     return attrs, inner, "영상", title
 
@@ -313,7 +325,7 @@ def frames_of(w, m):
 
 def flip_box(frames, cls):
     if not frames:
-        return f'<div class="{cls} empty">{CAMERA}</div>'
+        return f'<div class="{cls} empty"><i style="width:{u(20)};height:{u(20)}">{CAMERA}</i></div>'
     imgs = "".join(f'<img src="{esc(p)}" alt=""{"" if i == 0 else " hidden"} loading="lazy">' for i, p in enumerate(frames))
     dots = (f'<span class="fl-count">1/{len(frames)}</span>' if len(frames) > 1 else "")
     return f'<div class="{cls}">{imgs}{dots}</div>'
@@ -356,27 +368,59 @@ def r_ask(w, W, H, m):
     return ' data-dl data-msg="ask"', inner, "Ask", title
 
 
+def ditto_layout(ww, hh):
+    """DittoWidgetLayout.of — (출처 변형, 배지 한 변, 가장자리 여백). Views/DittoWidgetTile.swift"""
+    if ww >= 6 and hh >= 6:
+        return "caption", 32, 12
+    if ww >= 4 and hh >= 4 and max(ww, hh) >= 6:
+        return "standard", 32, 12
+    if ww >= 4 and hh >= 4:
+        return "standard", 24, 8
+    if ww <= 2:
+        return ("narrow" if hh >= 4 else "none"), 24, 8
+    if hh <= 2:
+        return ("compact" if ww >= 6 else "text"), 24, 8
+    return "compact", 24, 8
+
+
 def r_ditto(w, W, H, m):
+    """DittoWidgetTile — 사진 > 이모지 > 제목, 우상단 DittoBadge(가져온 위젯만), 좌하단 흰 출처 칩(아이디 + 프로필)."""
     ww, hh = w["w"], w["h"]
-    big = (ww >= 4 and hh >= 4 and max(ww, hh) >= 6) or (ww >= 6 and hh >= 6)
-    badge, inset = (32, 12) if big else (24, 8)
-    show_src = not (ww <= 2 and hh < 4)
+    kind, badge, inset = ditto_layout(ww, hh)
+    src_h = {"text": 24, "compact": 28, "standard": 32, "narrow": 44}.get(kind, 0)
+    media_h = H if kind == "none" else max(H * 0.5, H - 96) if kind == "caption" else max(H * 0.55, H - src_h - inset)
     photo, _ = m.image(w.get("img") or w.get("polImg"))
+    frm = (w.get("from") or "").strip()
     if photo:
         media = f'<img class="cover" src="{esc(photo)}" alt="" loading="lazy"><span class="soft"></span>'
     elif w.get("emoji"):
-        media = f'<span class="dt-emoji" style="font-size:{u(min(W, H) * 0.42)}">{esc(w["emoji"])}</span>'
+        media = f'<span class="dt-emoji" style="height:{u(media_h)};font-size:{u(min(W, H) * 0.42)}">{esc(w["emoji"])}</span>'
     else:
-        media = f'<span class="dt-title" style="font-size:{u(15)}">{esc(w.get("title") or "디토 위젯")}</span>'
-    frm = (w.get("from") or "").strip()
+        fs = 17 if min(W, H) >= 120 else 14
+        media = (f'<span class="dt-title" style="height:{u(media_h)};font-size:{u(fs)};padding:0 {u(inset + 4)}">'
+                 f'{esc(w.get("title") or "디토 위젯")}</span>')
+    handle = frm or ""
     chip = ""
-    if frm and show_src:
-        std = ww >= 4 and hh >= 4
-        chip = (f'<span class="dt-src" style="left:{u(inset)};bottom:{u(inset)};height:{u(32 if std else 28)};'
-                f'max-width:calc(100% - {u(inset * 2)});padding:0 {u(8)};border-radius:{u(8)};font-size:{u(14 if std else 12)}">'
-                f'<b>from.</b>&nbsp;{esc(frm)}</span>')
-    b = (f'<img class="dt-badge" src="/assets/dittobadge-32.svg" alt="" style="top:{u(inset)};right:{u(inset)};width:{u(badge)};height:{u(badge)}">'
-         if frm else "")
+    if handle and kind in ("text", "compact", "standard", "narrow"):
+        std = kind == "standard"
+        av = 24 if std else 20
+        avatar = f'<i class="dt-av" style="width:{u(av)};height:{u(av)};border-radius:{u(av / 3)}"></i>'
+        if kind == "text":
+            chip = (f'<span class="dt-src" style="left:{u(inset)};bottom:{u(inset)};width:{u(min(70, W - inset * 2))};height:{u(24)};'
+                    f'padding:0 {u(6)};border-radius:{u(8)};font-size:{u(12)};line-height:{u(16)}"><b>{esc(handle)}</b></span>')
+        elif kind == "narrow":
+            chip = (f'<span class="dt-src dt-src-n" style="left:{u(inset)};right:{u(inset)};bottom:{u(inset)};height:{u(44)};'
+                    f'padding:0 {u(6)};gap:{u(2)};border-radius:{u(8)};font-size:{u(12)};line-height:{u(16)}">{avatar}<b>{esc(handle)}</b></span>')
+        else:
+            chip = (f'<span class="dt-src" style="left:{u(inset)};bottom:{u(inset)};width:{u(min(132 if std else 108, W - inset * 2))};'
+                    f'height:{u(32 if std else 28)};padding:0 {u(6)};gap:{u(6)};border-radius:{u(8)};'
+                    f'font-size:{u(14 if std else 12)};line-height:{u(20 if std else 16)}">{avatar}<b>{esc(handle)}</b></span>')
+    elif handle and kind == "caption":
+        cap = (w.get("polCaption") or w.get("title") or "").strip()
+        chip = (f'<span class="dt-cap{" on" if photo else ""}" style="padding:{u(24)} {u(16)} {u(12)};gap:{u(8)}">'
+                + (f'<b style="font-size:{u(17)};line-height:{u(24)}">{esc(cap)}</b>' if cap else "")
+                + f'<span style="gap:{u(8)};font-size:{u(14)};line-height:{u(20)}"><i class="dt-av" style="width:{u(24)};height:{u(24)};border-radius:{u(8)}"></i>{esc(handle)}</span></span>')
+    b = BADGE.format(f"top:{u(inset)};right:{u(inset)};width:{u(badge)};height:{u(badge)}") if frm else ""
     return ' data-dl data-msg="ditto"', media + chip + b, "디토 위젯", f"from. {frm}" if frm else ""
 
 
@@ -425,7 +469,6 @@ def r_music(w, W, H, m):
     attrs = ' data-dl'
     if audio:
         extra = (f'<audio preload="none" src="{esc(audio)}"></audio>'
-                 f'<span class="mu-state" aria-hidden="true" style="width:{u(24)};height:{u(24)};right:{u(10)};top:{u(10)}">{PLAY}{PAUSE}</span>'
                  f'<span class="mu-bar" style="left:{u(14)};right:{u(14)};bottom:{u(9)};height:{u(3)}"><i></i></span>')
         attrs = ' data-act="music"'
     style = f"background:linear-gradient(135deg,{top} 0%,{mid} 48%,{bot} 100%)"
@@ -497,17 +540,23 @@ def render(widgets, media):
         st = w.get("style") if isinstance(w.get("style"), dict) else {}
         custom = st.get("bg") if isinstance(st.get("bg"), str) and st["bg"].startswith("#") and len(st["bg"]) in (4, 7) else None
         bg = style or "background:" + (custom or BG.get(w["type"], "#f1eaff"))
-        glow = " glow" if w.get("allow") is True else ""
-        if glow and " data-act" not in attrs:
+        # 디토 가능 상태 (DittoAvailability.of — allow이고 디토 위젯 자체가 아닐 것)
+        available = w.get("allow") is True and w["type"] != "ditto"
+        if available and " data-act" not in attrs:
             attrs = ' data-dl data-msg="ditto"'
+        # 가능 = 뒤 후광 + 우하단 DittoBadge 24 · 불가 = 1px 테두리 (음악은 자체 테두리)
+        state = " glow" if available else (" hl" if w["type"] != "music" else "")
+        if available:
+            inner += BADGE.format(f"right:{u(8)};bottom:{u(8)};width:{u(24)};height:{u(24)}").replace('class="dt-badge"', 'class="dt-badge av"')
         name = f"{kind}{', ' + str(label) if label else ''}"
         interactive = bool(attrs)
         role = f' role="button" tabindex="0" aria-label="{esc(name)}"' if interactive else f' role="img" aria-label="{esc(name)}"'
         pos = (f"left:{w['col'] * UNIT / DESIGN_W * 100:.3f}%;top:{w['row'] * UNIT / grid_h * 100:.3f}%;"
                f"width:{W / DESIGN_W * 100:.3f}%;height:{H / grid_h * 100:.3f}%;border-radius:{u(radius(w))};{bg}")
-        tiles.append(f'<div class="w w-{esc(w["type"])}{glow}" style="{pos}"{role}{attrs}>{inner}</div>')
-    return (f'<div class="platter" id="platter"><p class="pl-head">대표 플래터</p>'
-            f'<div class="pl" style="aspect-ratio:{DESIGN_W} / {grid_h:.2f}">{"".join(tiles)}</div></div>'
+        tiles.append(f'<div class="w w-{esc(w["type"])}{state}" style="{pos}"{role}{attrs}>{inner}</div>')
+    # 앱 친구 플래터처럼 바탕(DT.backgroundNormal) 위에 바로 놓는다 — 별도 컨테이너·제목 없음
+    return (f'<section class="platter" id="platter" aria-label="대표 플래터">'
+            f'<div class="pl" style="aspect-ratio:{DESIGN_W} / {grid_h:.2f}">{"".join(tiles)}</div></section>'
             f'<div id="platterEnd" aria-hidden="true"></div>')
 
 
