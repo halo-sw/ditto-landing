@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32.1768" height="32.1768" viewBox="0 0 32.1768 32.1768"><svg x="0" y="0" width="32.1768" height="32.1768" viewBox="0 0 32.1768 32.1768" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Canonical squircle / shallow material">
+<g filter="url(#filter0_ii_0_153)">
+<path d="M8.75138 0.0883978C2.74033 0.0883978 0.0883978 2.74033 0.0883978 8.75138V23.4254C0.0883978 29.4365 2.74033 32.0884 8.75138 32.0884H23.4254C29.4365 32.0884 32.0884 29.4365 32.0884 23.4254V8.75138C32.0884 2.74033 29.4365 0.0883978 23.4254 0.0883978H8.75138Z" fill="white"/>
+<path d="M8.75138 0.0883978C2.74033 0.0883978 0.0883978 2.74033 0.0883978 8.75138V23.4254C0.0883978 29.4365 2.74033 32.0884 8.75138 32.0884H23.4254C29.4365 32.0884 32.0884 29.4365 32.0884 23.4254V8.75138C32.0884 2.74033 29.4365 0.0883978 23.4254 0.0883978H8.75138Z" fill="url(#paint0_linear_0_153)"/>
+</g>
+<path d="M8.75138 0.0883978C2.74033 0.0883978 0.0883978 2.74033 0.0883978 8.75138V23.4254C0.0883978 29.4365 2.74033 32.0884 8.75138 32.0884H23.4254C29.4365 32.0884 32.0884 29.4365 32.0884 23.4254V8.75138C32.0884 2.74033 29.4365 0.0883978 23.4254 0.0883978H8.75138Z" stroke="black" stroke-opacity="0.1" stroke-width="0.176796"/>
+</g>
+<defs>
+<filter id="filter0_ii_0_153" x="0" y="-0.141436" width="32.1768" height="32.4597" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="0.141436"/>
+<feGaussianBlur stdDeviation="0.123757"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.42 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_0_153"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="-0.141436"/>
+<feGaussianBlur stdDeviation="0.212155"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+<feBlend mode="normal" in2="effect1_innerShadow_0_153" result="effect2_innerShadow_0_153"/>
+</filter>
+<linearGradient id="paint0_linear_0_153" x1="0.0883978" y1="0.0883978" x2="32.0884" y2="32.0884" gradientUnits="userSpaceOnUse">
+<stop stop-color="#AA4AF4"/>
+<stop offset="0.36" stop-color="#AA4AF4"/>
+<stop offset="1" stop-color="#6655D2"/>
+</linearGradient>
+</defs>
+</svg>
+<svg x="6.49" y="6.94" width="19.2" height="18.3028" viewBox="0 0 19.2 18.3028" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="&#236;&#155;&#144;&#235;&#179;&#184; &#235;&#161;&#156;&#234;&#179;&#160; / &#235;&#178;&#161;&#237;&#132;&#176;" clip-path="url(#clip0_0_159)">
+<path id="Vector" d="M15.8357 1.81134C15.8357 1.81134 13.5918 0.0318367 8.76239 0C8.46632 1.71918 7.92574 4.60376 7.29451 8.03038C7.09575 4.90452 5.30768 4.3633 4.33131 4.56605C1.91367 5.06957 -0.810009 9.54599 0.226239 12.7556C1.27081 15.9913 5.96636 15.2406 7.89413 14.8443C7.89081 14.8342 7.88832 14.8242 7.88499 14.815C7.84923 11.5576 8.2584 7.06104 11.1817 4.27952C12.4782 3.04627 14.515 1.90434 15.8365 1.81218L15.8357 1.81134ZM6.01874 13.1142C5.6129 13.5608 4.70555 12.9567 3.89468 11.8943C2.22804 9.70847 2.30622 7.25877 3.51379 7.24368C4.16748 7.23531 4.81035 7.73381 5.49314 9.78895C5.89567 11.0012 6.26159 12.8461 6.01792 13.1142H6.01874Z" fill="white"/>
+<path id="Vector_2" d="M13.8165 14.0004C13.5775 14.2416 13.226 14.2591 13.0511 13.7945C12.9536 13.5341 12.7121 12.928 12.0792 12.11C11.7394 11.6705 11.0998 11.0049 10.6933 10.2322C10.2578 9.40414 10.172 8.93535 10.2411 8.23293C10.3319 7.32458 11.238 6.20188 12.5006 6.27975C14.7151 6.41621 14.5494 9.32384 14.5494 9.32384C14.5494 9.32384 15.8627 6.55434 17.969 7.46104C19.129 7.96085 19.3698 9.44523 19.0991 10.2322C18.5678 11.776 16.5981 12.3821 15.8452 12.7463C14.7109 13.2938 14.3995 13.4127 13.8157 14.0004H13.8165Z" fill="white"/>
+<path id="Vector_3" d="M12.7037 18.3028C13.5317 18.3028 14.2029 17.6281 14.2029 16.7959C14.2029 15.9635 13.5317 15.2889 12.7037 15.2889C11.8758 15.2889 11.2046 15.9635 11.2046 16.7959C11.2046 17.6281 11.8758 18.3028 12.7037 18.3028Z" fill="white"/>
+</g>
+<defs>
+<clipPath id="clip0_0_159">
+<rect width="19.2" height="18.3028" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+</svg>
