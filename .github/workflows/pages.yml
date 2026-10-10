@@ -1,0 +1,39 @@
+name: Deploy ditto.at
+
+# 저장소 파일 + 사용자별 프로필 페이지(ditto.at/{아이디})를 빌드해 GitHub Pages에 올린다.
+# 새로 가입한 아이디의 링크 미리보기는 다음 실행 때 생긴다. 그 전에도 페이지는 404.html이 바로 보여 준다.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow==11.3.0
+      - run: python scripts/build_site.py _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
