@@ -26,6 +26,7 @@
   body { font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif; background: linear-gradient(180deg, #aab6f0 0%, #cdd7f6 46%, #eef1fb 100%); min-height: 100svh; }
   [hidden] { display: none !important; }
   .wrap { min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: 24px 24px 96px; color: #1c1c22; }
+  .wrap.has-platter { padding: 20px 12px 104px; }
   .card { width: 100%; max-width: 380px; background: rgba(255,255,255,.92); border-radius: 28px; padding: 44px 28px 36px; text-align: center; box-shadow: 0 18px 60px rgba(60,60,120,.18); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
   .avatar { width: 108px; height: 108px; border-radius: 108px; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid #f0e8fa; }
   .avatar-fallback { display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #b46ce0, #f39fce); color: #fff; font-size: 48px; font-weight: 700; }
@@ -64,6 +65,116 @@
   .dl :focus-visible, .cta:focus-visible, .banner:focus-visible { outline: 2px solid #9b4be0; outline-offset: 3px; }
   @media (min-width: 640px) { .dl { bottom: 50%; border-radius: 28px; padding-bottom: 24px; transform: translate(-50%, calc(50% + 24px)); opacity: 0; transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .3s ease; } .dl.on { transform: translate(-50%, 50%); opacity: 1; } .dl-grab { display: none; } }
   @media (prefers-reduced-motion: reduce) { .dl, .dl-scrim { transition: none; } }
+  /* 대표 플래터 — 앱 GridEngine 8열 · 거터 8 · 디자인 폭 370 기준 비례 (scripts/platter.py) */
+  .has-platter .card { max-width: 420px; padding: 36px 0 32px; }
+  .has-platter .card > .avatar, .has-platter .card > .name, .has-platter .card > .handle, .has-platter .card > .sub { margin-left: 24px; margin-right: 24px; }
+  .has-platter .card > .avatar { margin: 0 auto 14px; }
+  .has-platter .foot { padding: 0 24px; }
+  .platter { margin: 22px 8px 0; padding: 12px 8px 8px; border-radius: 26px; background: #f4f2f7; text-align: left; }
+  .pl-head { font-size: 13px; font-weight: 700; color: #6b6b76; margin: 0 6px 10px; letter-spacing: -.01em; }
+  .pl { position: relative; width: 100%; container-type: inline-size; }
+  .w { position: absolute; overflow: hidden; isolation: isolate; box-shadow: 0 1px 2px rgba(40,30,60,.05), inset 0 0 0 1px rgba(94,96,104,.07); color: #171719; -webkit-tap-highlight-color: transparent; }
+  .w[role=button] { cursor: pointer; transition: transform .18s ease; }
+  .w[role=button]:active { transform: scale(.97); }
+  .w:focus-visible { outline: 2px solid #9b4be0; outline-offset: 2px; }
+  .w.glow { box-shadow: 0 0 7px 1px rgba(124,77,255,.22), 0 1px 2px rgba(40,30,60,.05); }
+  .w .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .w .soft { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 18px rgba(255,255,255,.95), inset 1px 2px 7px rgba(255,255,255,.25); pointer-events: none; }
+  .w .grow { flex: 1 1 auto; }
+  .w svg { display: block; width: 100%; height: 100%; }
+  /* 글(블록) */
+  .bl { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .bl-main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 4px; }
+  .bl-h .bl-main { flex-direction: row; align-items: center; gap: 8px; }
+  .bl-emoji { display: flex; align-items: center; line-height: 1; }
+  .bl-text, .st-title, .ask-t, .tx { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
+  .bl-text { font-weight: 500; color: #171719; }
+  .bl-src { display: flex; gap: 4px; font-weight: 500; color: #70737c; }
+  .bl-src span { flex: 1 1 auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  /* 영상 */
+  .vd-shade { position: absolute; left: 0; right: 0; top: 0; height: 57%; background: linear-gradient(#111, rgba(17,17,17,0)); }
+  .vd-title { position: absolute; left: 0; right: 0; top: 0; color: #fff; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .vd-play { position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(255,255,255,.22); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); }
+  .vd-play svg { width: 100%; height: 100%; }
+  .vd-play svg + svg, .w.playing .vd-play svg:first-child { display: none; }
+  .w.playing .vd-play svg + svg { display: block; }
+  .w.playing .vd-shade, .w.playing .vd-title { opacity: 0; transition: opacity .3s; }
+  .w.playing .vd-play { opacity: 0; transition: opacity .3s .6s; }
+  /* 스티커 */
+  .sk { position: absolute; transform: translate(-50%, -50%) rotate(var(--r)); font-style: normal; line-height: 1; }
+  .sk > * { display: block; animation: wob 3.2s ease-in-out var(--d) infinite; }
+  .sk img { object-fit: contain; }
+  .sk img.flat { mix-blend-mode: multiply; }
+  .sk-text { position: absolute; left: 0; right: 0; top: 45%; text-align: center; font-weight: 600; color: #b04a75; }
+  @keyframes wob { 0%, 100% { transform: rotate(0) translateY(0); } 50% { transform: rotate(5deg) translateY(-1.5%); } }
+  /* 서비스 타일 (폴라로이드 · 파파라치) */
+  .st { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .st-label { display: flex; align-items: center; justify-content: space-between; font-weight: 500; color: #77727c; }
+  .st-label svg { width: .9em; height: .9em; }
+  .st-body { flex: 1 1 auto; min-height: 0; display: flex; }
+  .st-title { font-weight: 700; color: #232127; }
+  .st-sub { font-weight: 400; color: #77727c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pol { flex: 1 1 auto; display: flex; flex-direction: column; margin: 2px; padding: 6px 6px 0; background: #fff; box-shadow: 0 0 0 1px #ebe6ed; }
+  .pol-chin { height: 12px; flex: none; }
+  .pol-photo, .pap-photo { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; background: #eee9ee; }
+  .pol-photo img, .pap-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pol-photo.empty, .pap-photo.empty { display: grid; place-items: center; color: #918694; }
+  .pol-photo.empty svg, .pap-photo.empty svg { width: 22%; height: auto; }
+  .pap { flex: 1 1 auto; display: flex; border-radius: 10px; overflow: hidden; }
+  .fl-count { position: absolute; right: 6px; bottom: 6px; padding: 2px 6px; border-radius: 8px; background: rgba(0,0,0,.45); color: #fff; font-size: 10px; font-weight: 600; }
+  /* Ask */
+  .ask { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .ask-h { flex-direction: row; align-items: center; }
+  .ask-col { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+  .ask-k { display: flex; align-items: center; justify-content: space-between; font-weight: 600; color: #70737c; }
+  .ask-k svg { width: .9em; height: .9em; }
+  .ask-artbox { flex: none; display: flex; justify-content: center; }
+  .ask-art { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+  .ask-h .ask-art { width: 100%; height: auto; }
+  .ask-t { font-weight: 700; color: #171719; letter-spacing: -.02em; }
+  .ask-q { background: #f5f0fa; color: #70737c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ask-a { color: #70737c; font-weight: 500; }
+  /* 디토 위젯 */
+  .dt-emoji, .dt-title { position: absolute; inset: 0 0 30% 0; display: grid; place-items: center; text-align: center; font-weight: 700; }
+  .dt-src { position: absolute; display: inline-flex; align-items: center; background: #fff; color: #1c1721; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-shadow: 0 1px 4px rgba(28,23,33,.12); }
+  .dt-src b { font-weight: 600; color: #8a4fd0; }
+  .dt-badge { position: absolute; filter: drop-shadow(0 1px 3px rgba(70,30,120,.25)); }
+  /* 음악 (CDP) */
+  .w-music { box-shadow: inset 0 0 0 1px #c8c9ce, inset 0 1px 6px rgba(255,255,255,.6); }
+  .cd { position: absolute; border-radius: 50%; background: #bec1c7; box-shadow: 0 0 0 1px rgba(255,255,255,.8), 0 3px 8px rgba(30,20,50,.18); }
+  .cd-rot { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: conic-gradient(from 15deg, #4c607e, #8294b5, #e5e6ed, #8396b6, #384968, #8395ac, #e2e4ee, #a2afc6, #495c7c, #7890ab, #4c607e); }
+  .cd-rot img { position: absolute; inset: 3%; width: 94%; height: 94%; border-radius: 50%; object-fit: cover; }
+  .cd-grooves { position: absolute; inset: 4.5%; border-radius: 50%; background: repeating-radial-gradient(circle, rgba(255,255,255,0) 0 3.4%, rgba(255,255,255,.05) 3.6% 3.8%); }
+  .cd-sheen { position: absolute; inset: 3%; border-radius: 50%; opacity: .22; background: conic-gradient(from 22deg, transparent 0 7.5%, rgba(255,183,205,.72) 14%, rgba(174,160,242,.8) 17%, rgba(119,210,242,.86) 20%, rgba(163,239,210,.72) 23%, transparent 29% 55%, rgba(244,161,205,.78) 63%, rgba(163,172,248,.8) 67%, rgba(115,219,221,.85) 71%, rgba(173,240,184,.6) 75%, transparent 81%); box-shadow: inset 0 0 0 1.5px rgba(46,63,90,.5); }
+  .cd-hub { position: absolute; left: 36.25%; top: 36.25%; width: 27.5%; height: 27.5%; border-radius: 50%; background: linear-gradient(135deg, #fff, #8b909b 50%, #f5f5f8); box-shadow: 0 0 0 1px #252d3c, 0 0 0 2.5px #fff; }
+  .cd-hole { position: absolute; left: 43.75%; top: 43.75%; width: 12.5%; height: 12.5%; border-radius: 50%; background: #dadcdf; box-shadow: inset 0 0 0 1px #949ba7; }
+  .w.playing .cd-rot { animation: spin 3.2s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .mu-info { position: absolute; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .mu-info.c { align-items: center; text-align: center; }
+  .mu-info b, .mu-info span { max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mu-info b { font-weight: 600; color: #1c1722; }
+  .mu-info span { font-weight: 400; color: #443651; }
+  .mu-state { position: absolute; display: grid; place-items: center; border-radius: 50%; padding: 6px; background: rgba(28,23,34,.62); color: #fff; opacity: .9; }
+  .mu-state svg + svg, .w.playing .mu-state svg:first-child { display: none; }
+  .w.playing .mu-state svg + svg { display: block; }
+  .mu-bar { position: absolute; border-radius: 3px; background: rgba(28,23,34,.14); overflow: hidden; opacity: 0; transition: opacity .25s; }
+  .mu-bar i { display: block; height: 100%; width: 0; background: #6b5579; border-radius: inherit; }
+  .w.playing .mu-bar, .w.paused .mu-bar { opacity: 1; }
+  /* 사진 · 상태 · 글 · 그 밖 */
+  .im-title { position: absolute; left: 0; right: 0; top: 0; color: #fff; font-weight: 600; background: linear-gradient(rgba(28,23,33,.72), rgba(28,23,33,.35) 58%, rgba(28,23,33,0)); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ph { position: absolute; inset: 0; display: grid; place-items: center; color: #8a8792; }
+  .ph svg { width: 22%; height: auto; }
+  .ss { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8px; }
+  .ss-h { flex-direction: row; justify-content: flex-start; }
+  .ss span { line-height: 1.1; }
+  .ss b { font-weight: 700; color: #171719; }
+  .tx { position: absolute; inset: 0; color: rgba(18,18,18,.72); font-weight: 500; }
+  @media (prefers-reduced-motion: reduce) {
+    .sk > * { animation: none; }
+    .w.playing .cd-rot { animation: none; }
+    .w[role=button] { transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -74,12 +185,15 @@
     <h1 class="name" id="name"></h1>
     <p class="handle" id="handle">@</p>
     <p class="sub">위젯으로 서로의 하루를 주고받는 친구들의 공간</p>
+    
+    <div class="foot">
     <a class="cta" href="/download/" data-dl>ditto! 앱에서 열기</a>
     <p class="cta-note">앱이 설치돼 있으면 바로 열리고,<br>없으면 App Store로 안내해드려요.</p>
     <div class="steps">
       <div>1&nbsp;&nbsp;ditto! 앱을 설치해요</div>
       <div>2&nbsp;&nbsp;<b id="stepHandle">@</b> 님을 친구로 추가해요</div>
       <div>3&nbsp;&nbsp;서로의 플래터를 구경해요</div>
+    </div>
     </div>
   </section>
   <section class="card" id="missing" hidden>
@@ -111,14 +225,26 @@
   if (!APP_STORE_URL) $("dlDesc").textContent = "곧 App Store에 나와요. 출시 알림을 받으면 가장 먼저 친구로 추가할 수 있어요.";
   function sync() {
     var name = $("name").textContent || "";
-    $("dlName").textContent = name;
+    if ($("dlName")) $("dlName").textContent = name;
     var src = $("avatar").hidden ? "" : $("avatar").currentSrc;
     var box = $("dlAvatar");
     box.textContent = ""; box.style.background = "";
     if (src) { box.style.background = "center/cover url(" + JSON.stringify(src) + ")"; } else { box.textContent = $("avatarFallback").textContent; }
   }
-  function open() {
-    if ($("profile").hidden) return;
+  // 위젯을 눌러 띄울 때는 그 위젯에 맞는 문구로 바꾼다 (앱이 있어야 하는 동작)
+  var MSG = {
+    ask: ["질문은 ditto! 앱에서<br>익명으로 남길 수 있어요", "앱을 받고 친구로 추가하면 바로 질문을 남길 수 있어요."],
+    ditto: ["마음에 드는 위젯은<br>앱에서 디토할 수 있어요", "디토하면 친구의 위젯이 내 플래터에도 놓여요."],
+    video: ["영상은 ditto! 앱에서<br>볼 수 있어요", "앱을 받고 친구로 추가하면 플래터의 영상을 바로 볼 수 있어요."]
+  };
+  var baseTitle = $("dlTitle").innerHTML, baseDesc = $("dlDesc").textContent;
+  if (document.getElementById("platter")) baseTitle = '<span id="dlName"></span>님의 위젯을 디토하고<br>내 플래터도 만들어 보세요';
+  function open(kind) {
+    if ($("profile").hidden || !dl.hidden) return;
+    var m = MSG[kind];
+    $("dlTitle").innerHTML = m ? m[0] : baseTitle;
+    $("dlDesc").textContent = m ? m[1] : baseDesc;
+    if (window.dittoPauseAll) window.dittoPauseAll();
     sync(); lastFocus = document.activeElement; shown = true;
     scrim.hidden = false; dl.hidden = false;
     requestAnimationFrame(function () { requestAnimationFrame(function () { scrim.classList.add("on"); dl.classList.add("on"); $("dlStore").focus(); }); });
@@ -140,9 +266,88 @@
       else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
     }
   });
-  [].forEach.call(document.querySelectorAll("[data-dl]"), function (a) { a.addEventListener("click", function (e) { e.preventDefault(); open(); }); });
-  // 프로필을 먼저 보여 주고 잠시 뒤 한 번 띄운다
-  setTimeout(function () { if (!shown) open(); }, 1400);
+  [].forEach.call(document.querySelectorAll("[data-dl]"), function (a) { a.addEventListener("click", function (e) { e.preventDefault(); open(a.getAttribute("data-msg")); }); });
+  window.dittoOpenDownload = open;
+  // 자동으로 한 번 띄운다. 플래터가 있으면 플래터를 먼저 보게 한다:
+  // 플래터 끝까지 내려 본 뒤 잠시 후, 아니면 9초 뒤. 음악·영상을 듣는 중이면 끝날 때까지 미룬다.
+  var end = $("platterEnd");
+  function auto() {
+    if (shown) return;
+    if (document.querySelector(".w.playing")) { setTimeout(auto, 3000); return; }
+    open();
+  }
+  if (!end) { setTimeout(auto, 1400); return; }
+  setTimeout(auto, 9000);
+  if ("IntersectionObserver" in window) {
+    var seen = false;
+    new IntersectionObserver(function (es, ob) {
+      es.forEach(function (e) { if (e.isIntersecting && !seen) { seen = true; ob.disconnect(); setTimeout(auto, 1500); } });
+    }).observe(end);
+  }
+})();
+</script>
+<script>
+(function () {
+  // 플래터 위젯 — 웹에서 되는 것만: 음악 30초 미리듣기 · 영상 재생 · 사진 넘겨 보기. 나머지는 앱 안내(data-dl).
+  var tiles = document.querySelectorAll(".pl .w");
+  if (!tiles.length) return;
+  var current = null;
+  function stop(t) {
+    if (!t) return;
+    var a = t.querySelector("audio, video");
+    if (a && !a.paused) a.pause();
+  }
+  window.dittoPauseAll = function () { stop(current); };
+  function media(t) {
+    var a = t.querySelector("audio, video");
+    if (!a.dataset.bound) {
+      a.dataset.bound = "1";
+      var bar = t.querySelector(".mu-bar i");
+      a.addEventListener("playing", function () { t.classList.add("playing"); t.classList.remove("paused"); });
+      a.addEventListener("pause", function () { t.classList.remove("playing"); if (!a.ended) t.classList.add("paused"); });
+      a.addEventListener("ended", function () { t.classList.remove("playing", "paused"); if (bar) bar.style.width = "0"; a.currentTime = 0; });
+      a.addEventListener("error", function () { t.classList.remove("playing", "paused"); if (window.dittoOpenDownload) window.dittoOpenDownload(); });
+      if (bar) a.addEventListener("timeupdate", function () { if (a.duration) bar.style.width = (a.currentTime / a.duration * 100) + "%"; });
+    }
+    return a;
+  }
+  function toggle(t) {
+    var a = media(t);
+    if (!a.paused) { a.pause(); return; }
+    if (current && current !== t) stop(current);
+    current = t;
+    if (a.tagName === "VIDEO") a.muted = false;   // 누른 뒤에만 소리
+    var p = a.play();
+    if (p && p.catch) p.catch(function () { if (a.tagName === "VIDEO") { a.muted = true; a.play().catch(function () {}); } });
+  }
+  function flip(t) {
+    var imgs = t.querySelectorAll(".pol-photo img, .pap-photo img");
+    if (imgs.length < 2) return;
+    var i = 0;
+    for (; i < imgs.length; i++) if (!imgs[i].hidden) break;
+    imgs[i % imgs.length].hidden = true;
+    var n = (i + 1) % imgs.length;
+    imgs[n].hidden = false;
+    var c = t.querySelector(".fl-count");
+    if (c) c.textContent = (n + 1) + "/" + imgs.length;
+  }
+  [].forEach.call(tiles, function (t) {
+    var act = t.getAttribute("data-act");
+    if (act === "music" || act === "video") t.setAttribute("aria-pressed", "false");
+    if (act) t.addEventListener("click", function () {
+      if (act === "flip") flip(t); else toggle(t);
+    });
+    if (act === "music" || act === "video") {
+      var a = t.querySelector("audio, video");
+      a.addEventListener("play", function () { t.setAttribute("aria-pressed", "true"); });
+      a.addEventListener("pause", function () { t.setAttribute("aria-pressed", "false"); });
+    }
+    t.addEventListener("keydown", function (e) {
+      if (t.getAttribute("role") !== "button") return;
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t.click(); }
+    });
+  });
+  document.addEventListener("visibilitychange", function () { if (document.hidden) stop(current); });
 })();
 </script>
 <script>

@@ -1,0 +1,526 @@
+"""공개 프로필 페이지의 대표 플래터 — 앱 GridEngine 규격을 그대로 옮긴 정적 HTML/CSS.
+
+  · 8열 · 셀 = (폭 − 거터 8×7) ÷ 8 · 모서리 = min(20, 12 + (min(w,h) − 2)×2), 음악은 24
+  · 디자인 기준 폭 370 (Figma 셀 39.25 · 거터 8). 모든 치수는 플래터 폭 비례(cqw)라 화면 폭에 맞춰 늘고 준다.
+  · 대표(rep) 플래터만, priv 위젯은 빼고 그린다. 라이프 플래터는 페이지에도 미디어에도 넣지 않는다.
+  · 이미지는 빌드 때 받아 {아이디}/media/ 에 600px 이내로 저장한다 (핫링크 의존 없음, 음악 커버만 실패 시 핫링크).
+
+위젯 테이블은 RLS로 막혀 있어 SUPABASE_SERVICE_ROLE_KEY가 있을 때만 그린다. 없으면 빈 문자열.
+"""
+import hashlib, html, io, json, os, shutil, urllib.parse
+from pathlib import Path
+from PIL import Image, ImageOps
+
+SB = "https://lisqekczixwzshmpewzq.supabase.co"
+MEDIA = SB + "/storage/v1/object/public/widget-media"
+ROOT = Path(__file__).resolve().parent.parent
+APP_ASSETS = Path(os.environ.get("DITTO_APP_ASSETS") or ROOT.parent / "prj_Ditto!/DittoPrototype/Assets.xcassets")
+
+DESIGN_W = 370.0          # 8 × 39.25 + 7 × 8
+UNIT, GUT = 47.25, 8.0    # 셀 피치 · 거터 (디자인 px)
+COLS = 8
+
+
+def u(n):
+    """디자인 px → 플래터 폭 비례 길이 (플래터가 container라 cqw = 플래터 폭의 1%)."""
+    return f"{n * 100 / DESIGN_W:.3f}cqw"
+
+
+esc = lambda s: html.escape(str(s or ""), quote=True)
+
+
+def radius(w):
+    if w["type"] == "music":
+        return 24
+    return min(20, 12 + (min(w["w"], w["h"]) - 2) * 2)
+
+
+def size_px(w):
+    return w["w"] * UNIT - GUT, w["h"] * UNIT - GUT
+
+
+# ───────────────────────── 데이터 ─────────────────────────
+
+def fetch_rep(get, handle, key):
+    """대표 플래터 위젯 (priv 제외, 그리드 밖·겹침은 버림). 실패하면 None."""
+    hdr = {"apikey": key, "Authorization": "Bearer " + key}
+    rows = json.loads(get(f"{SB}/rest/v1/profiles?select=user_id&handle=eq.{urllib.parse.quote(handle)}", hdr))
+    if not rows:
+        return None, []
+    owner = rows[0]["user_id"]
+    ws = json.loads(get(f"{SB}/rest/v1/widgets?select=id,platter,type,data&owner_id=eq.{owner}&platter=eq.rep", hdr))
+    out, taken = [], set()
+    for r in ws:
+        d = dict(r.get("data") or {})
+        if r.get("platter") != "rep" or d.get("priv") is True:
+            continue
+        d["type"] = r.get("type") or d.get("type") or ""
+        try:
+            c, rw, w, h = (int(d[k]) for k in ("col", "row", "w", "h"))
+        except (KeyError, TypeError, ValueError):
+            continue
+        if w < 1 or h < 1 or c < 0 or rw < 0 or c + w > COLS:
+            continue
+        cells = {(x, y) for x in range(c, c + w) for y in range(rw, rw + h)}
+        if cells & taken:
+            continue
+        taken |= cells
+        d.update(col=c, row=rw, w=w, h=h, id=str(r.get("id") or d.get("id") or ""))
+        out.append(d)
+    out.sort(key=lambda d: (d["row"], d["col"]))
+    return owner, out
+
+
+class Media:
+    """위젯 이미지 → {아이디}/media/ 의 로컬 파일 (상대 경로). 못 구하면 None."""
+
+    def __init__(self, get, outdir: Path, owner):
+        self.get, self.dir, self.owner, self.cache = get, outdir / "media", owner, {}
+
+    def _save(self, data, ref, max_side=600):
+        im = ImageOps.exif_transpose(Image.open(io.BytesIO(data)))
+        alpha = False
+        if im.mode in ("RGBA", "LA", "PA") or "transparency" in im.info:
+            im = im.convert("RGBA")
+            alpha = im.getchannel("A").getextrema()[0] < 250
+        im = im.convert("RGBA" if alpha else "RGB")
+        im.thumbnail((max_side, max_side), Image.LANCZOS)
+        name = hashlib.sha1(f"{ref}@{max_side}".encode()).hexdigest()[:12] + (".png" if alpha else ".jpg")
+        self.dir.mkdir(parents=True, exist_ok=True)
+        if alpha:
+            im.save(self.dir / name, "PNG", optimize=True)
+        else:
+            im.save(self.dir / name, "JPEG", quality=82, optimize=True, progressive=True)
+        return im, "media/" + name
+
+    def image(self, ref, max_side=600):
+        """(상대 경로 또는 핫링크 URL, PIL 이미지 또는 None)"""
+        if not ref or not isinstance(ref, str):
+            return None, None
+        if (ref, max_side) in self.cache:
+            return self.cache[(ref, max_side)]
+        res = (None, None)
+        try:
+            if ref.startswith("file:"):
+                name = ref[5:]
+                if "/" not in name and self.owner:
+                    data = self.get(f"{MEDIA}/{self.owner}/{urllib.parse.quote(name)}", timeout=30)
+                    im, path = self._save(data, ref, max_side)
+                    res = (path, im)
+            elif ref.startswith("https://"):
+                try:
+                    im, path = self._save(self.get(ref, timeout=30), ref, max_side)
+                    res = (path, im)
+                except Exception:
+                    if "mzstatic.com" in ref:   # 음악 커버는 핫링크 허용
+                        res = (ref, None)
+            else:
+                for ext in ("png", "jpg", "jpeg", "webp"):
+                    hits = list((APP_ASSETS / f"{ref}.imageset").glob(f"*.{ext}")) if APP_ASSETS.exists() else []
+                    if hits:
+                        im, path = self._save(hits[0].read_bytes(), ref, max_side)
+                        res = (path, im)
+                        break
+        except Exception:
+            res = (None, None)
+        self.cache[(ref, max_side)] = res
+        return res
+
+    def exists(self, ref):
+        """영상 등 원본 그대로 쓸 파일 — 공개 버킷에 있으면 URL."""
+        if not (isinstance(ref, str) and ref.startswith("file:") and self.owner):
+            return None
+        url = f"{MEDIA}/{self.owner}/{urllib.parse.quote(ref[5:])}"
+        try:
+            self.get(url, {"Range": "bytes=0-0"}, timeout=20)
+            return url
+        except Exception:
+            return None
+
+
+# ───────────────────────── 음악 커버 자동 컬러 (MusicArtworkPalette 포팅) ─────────────────────────
+
+def _lum(c):
+    def lin(v):
+        v /= 255
+        return v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4
+    return 0.2126 * lin(c[0]) + 0.7152 * lin(c[1]) + 0.0722 * lin(c[2])
+
+
+def _contrast(a, b):
+    x, y = _lum(a), _lum(b)
+    return (max(x, y) + 0.05) / (min(x, y) + 0.05)
+
+
+def _mix(c, t):
+    return tuple(round(v * (1 - t) + 255 * t) for v in c)
+
+
+def music_palette(im):
+    keys = [(160, 160, 160)] * 2
+    if im is not None:
+        px = im.convert("RGB").resize((64, 64), Image.BILINEAR).getdata()
+        buckets, ncount, nsum, total, chrom = {}, 0, [0, 0, 0], 0, 0
+        for c in px:
+            hi, lo = max(c), min(c)
+            delta = hi - lo
+            total += 1
+            if hi < 24 or lo > 244:
+                continue
+            sat = delta / hi if hi else 0
+            if sat < 0.16 or delta < 16:
+                ncount += 1
+                nsum = [a + b for a, b in zip(nsum, c)]
+                continue
+            r, g, b = c
+            hue = (g - b) / delta if hi == r else (b - r) / delta + 2 if hi == g else (r - g) / delta + 4
+            hue = (hue * 60 + 360) % 360
+            k = int(hue // 20)
+            bk = buckets.setdefault(k, {"n": 0, "sum": [0, 0, 0], "sat": 0, "br": 0, "hue": k * 20 + 10})
+            bk["n"] += 1
+            bk["sum"] = [a + b for a, b in zip(bk["sum"], c)]
+            bk["sat"] += sat
+            bk["br"] += hi / 255
+            chrom += 1
+        cands = sorted(
+            ((tuple(round(s / b["n"]) for s in b["sum"]),
+              (b["n"] / max(1, total)) ** 0.5 * (0.2 + (b["sat"] / b["n"]) ** 1.5) * (0.25 + 0.75 * b["br"] / b["n"]),
+              b["hue"]) for b in buckets.values() if b["n"] >= max(2, total * 0.015)),
+            key=lambda t: (-t[1], t[2]))
+        if chrom < max(2, total * 0.04) or not cands:
+            n = [s / ncount for s in nsum] if ncount else [160] * 3
+            g = round(sum(n) / 3)
+            keys = [(g, g, g)] * 2
+        else:
+            first = cands[0]
+            second = next((c for c in cands if min(abs(c[2] - first[2]), 360 - abs(c[2] - first[2])) >= 40), None)
+            keys = [first[0], second[0] if second else _mix(first[0], 0.22)]
+    ink = (0x49, 0x40, 0x4B)
+
+    def readable(k, t):
+        c = _mix(k, t)
+        while _contrast(c, ink) < 4.8 and t < 1:
+            t = min(1, t + 0.02)
+            c = _mix(k, t)
+        return c
+    hexc = lambda c: "#%02x%02x%02x" % c
+    return hexc(readable(keys[0], 0.70)), hexc(readable(keys[0], 0.58)), hexc(readable(keys[1], 0.62))
+
+
+# ───────────────────────── 위젯별 렌더러 ─────────────────────────
+
+ARROW = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7l4-4M4 3h3v3" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+CAMERA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2l1.4-2h6.2l1.4 2h2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
+PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>'
+PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>'
+
+
+def service_tile(W, H, label, title, subtitle, content):
+    """StandardServiceTiles.ServiceTile — 라벨 · 콘텐츠 · 제목 · 부제."""
+    small = W < 110 and H < 120
+    inset = 7 if small else 8 if W < 110 else 12
+    ts = 10 if small else 13 if W < 150 else 17
+    parts = [f'<div class="st" style="padding:{u(inset)};gap:{u(3 if small else 6)}">']
+    if H >= 160:
+        parts.append(f'<div class="st-label" style="font-size:{u(10)}">{esc(label)}{ARROW}</div>')
+    parts.append(f'<div class="st-body">{content}</div>')
+    parts.append(f'<div class="st-title" style="font-size:{u(ts)};-webkit-line-clamp:{2 if W < 110 and not small else 1}">{esc(label if small else title)}</div>')
+    if not small and H >= 160:
+        parts.append(f'<div class="st-sub" style="font-size:{u(10)}">{esc(subtitle)}</div>')
+    parts.append("</div>")
+    return "".join(parts)
+
+
+def r_block(w, W, H, m):
+    tiny = w["w"] <= 2 and w["h"] <= 2
+    large = w["w"] >= 6 and w["h"] >= 4
+    horizontal = w["h"] <= 2 and not tiny
+    compact = w["h"] <= 3
+    pad = 8 if tiny else 16 if large else 12
+    emoji_h = 24 if (tiny or compact or horizontal) else 32
+    emoji_size = 20 if emoji_h == 24 else 24
+    big_src = w["w"] >= 4 and w["h"] >= 4
+    body_fs, body_lh = (17, 26) if large else (14, 20)
+    src_fs, src_lh = (14, 20) if big_src else (12, 16)
+    emoji = (w.get("emoji") or "").strip()
+    source = (w.get("title") or "").strip() if w.get("title") is not None else "나의 아카이브 함"
+    avail = H - 2 * pad - ((8 if not tiny else 4) + src_lh if source else 0)
+    lines = max(1, int((avail if horizontal or not emoji else avail - emoji_h - 4) // body_lh))
+    e = f'<span class="bl-emoji" style="font-size:{u(emoji_size)};height:{u(emoji_h)}">{esc(emoji)}</span>' if emoji else ""
+    body = f'<p class="bl-text" style="font-size:{u(body_fs)};line-height:{u(body_lh)};-webkit-line-clamp:{lines}">{esc(w.get("text"))}</p>'
+    src = (f'<p class="bl-src" style="font-size:{u(src_fs)};line-height:{u(src_lh)}"><span>{esc(source)}</span>›</p>' if source else "")
+    return "", f'<div class="bl{" bl-h" if horizontal else ""}" style="padding:{u(pad)};gap:{u(4 if tiny else 8)}"><div class="bl-main">{e}{body}</div>{src}</div>', "글", w.get("text")
+
+
+def r_video(w, W, H, m):
+    poster, _ = m.image(w.get("img") or w.get("poster"))
+    src = m.exists(w.get("videoPath"))
+    title = w.get("title") or ""
+    padx, pady = (16, 14) if w["w"] >= 3 else (12, 10)
+    img = f'<img class="cover" src="{esc(poster)}" alt="" loading="lazy">' if poster else ""
+    vid = (f'<video class="cover vd" src="{esc(src)}" playsinline muted preload="none"'
+           f'{f" poster={chr(34)}{esc(poster)}{chr(34)}" if poster else ""}></video>') if src else ""
+    inner = (f'{img}{vid}<div class="vd-shade"></div>'
+             f'<p class="vd-title" style="font-size:{u(17)};line-height:{u(22)};padding:{u(pady)} {u(padx)} 0">{esc(title)}</p>'
+             f'<span class="vd-play" style="width:{u(44)};height:{u(44)};padding:{u(12)}">{PLAY}{PAUSE if src else ""}</span>')
+    attrs = ' data-act="video"' if src else ' data-dl data-msg="video"'
+    return attrs, inner, "영상", title
+
+
+def r_sticker(w, W, H, m):
+    dots = w.get("stickers") or []
+    out = []
+    if dots:
+        for i, d in enumerate(dots):
+            try:
+                x, y = float(d.get("x", 0.5)), float(d.get("y", 0.5))
+            except (TypeError, ValueError):
+                continue
+            s = float(d.get("s") or 1)
+            r = float(d["r"]) if d.get("r") is not None else (i * 47) % 36 - 18
+            if d.get("img"):
+                path, _ = m.image(d["img"], 160)
+                if not path:
+                    continue   # 그린 스티커 파일이 버킷에 없으면 건너뛴다
+                side = (48 if str(d["img"]).startswith("file:") else 34) * s
+                flat = ' class="flat"' if path.endswith(".jpg") else ""   # 흰 바탕 에셋은 카드 색에 녹인다
+                body = f'<img{flat} src="{esc(path)}" alt="" style="width:{u(side)};height:{u(side)}">'
+            elif d.get("e"):
+                body = f'<span style="font-size:{u((24 + (i % 3) * 5) * s)}">{esc(d["e"])}</span>'
+            else:
+                continue
+            out.append(f'<i class="sk" style="left:{x * 100:.2f}%;top:{y * 100:.2f}%;--r:{r:.1f}deg;--d:{(i * 0.37) % 2.4:.2f}s">{body}</i>')
+    else:
+        pos = [(0.25, 0.25), (0.7, 0.2), (0.45, 0.55), (0.8, 0.6), (0.2, 0.75), (0.6, 0.85)]
+        for i, e in enumerate(list(w.get("emoji") or "✨💖🌟")[:6]):
+            x, y = pos[i % 6]
+            out.append(f'<i class="sk" style="left:{x * 100}%;top:{y * 100}%;--r:{(i * 47) % 40 - 20}deg;--d:{(i * 0.37) % 2.4:.2f}s">'
+                       f'<span style="font-size:{u(24 + (i % 3) * 6)}">{esc(e)}</span></i>')
+    if w.get("text"):
+        out.append(f'<p class="sk-text" style="font-size:{u(13)}">{esc(w["text"])}</p>')
+    return "", "".join(out), "스티커", ""
+
+
+def frames_of(w, m):
+    refs = []
+    for k in ("frames",):
+        refs += [r for r in (w.get(k) or []) if isinstance(r, str)]
+    for k in ("polImg", "img"):
+        if isinstance(w.get(k), str) and w[k] not in refs:
+            refs.insert(0, w[k])
+    return [p for p in (m.image(r)[0] for r in refs) if p]
+
+
+def flip_box(frames, cls):
+    if not frames:
+        return f'<div class="{cls} empty">{CAMERA}</div>'
+    imgs = "".join(f'<img src="{esc(p)}" alt=""{"" if i == 0 else " hidden"} loading="lazy">' for i, p in enumerate(frames))
+    dots = (f'<span class="fl-count">1/{len(frames)}</span>' if len(frames) > 1 else "")
+    return f'<div class="{cls}">{imgs}{dots}</div>'
+
+
+def r_polaroid(w, W, H, m):
+    frames = frames_of(w, m)
+    cap = (w.get("polCaption") or "").strip()
+    title = "폴라로이드" if frames else "첫 장을 남겨봐"
+    content = f'<div class="pol">{flip_box(frames, "pol-photo")}<div class="pol-chin"></div></div>'
+    attrs = ' data-act="flip"' if len(frames) > 1 else ' data-dl'
+    return attrs, service_tile(W, H, "폴라로이드", title, cap or "한 장의 순간", content), "폴라로이드", cap
+
+
+def r_paparazzi(w, W, H, m):
+    frames = frames_of(w, m)
+    by = w.get("by")
+    content = f'<div class="pap">{flip_box(frames, "pap-photo")}</div>'
+    attrs = ' data-act="flip"' if len(frames) > 1 else ' data-dl'
+    return attrs, service_tile(W, H, "파파라치", w.get("title") or "친구가 담은 나",
+                               f"photo by. {by}" if by else "친구의 시선으로 남은 순간", content), "파파라치", w.get("title")
+
+
+def r_ask(w, W, H, m):
+    title = w.get("text") or "무엇이든 물어봐"
+    inset = min(16, max(8, W * 0.065))
+    art = '<img class="ask-art" src="/assets/platter/ask-mailbox.png" alt="">'
+    preview = (f'<p class="ask-q" style="font-size:{u(11)};padding:{u(6)} {u(7)};border-radius:{u(8)}">첫 질문을 남겨봐</p>')
+    if W / max(H, 1) >= 1.7:
+        inner = (f'<div class="ask ask-h" style="padding:{u(inset)};gap:{u(8)}">'
+                 f'<div style="width:{u(min(H * 0.9, W * 0.3))}">{art}</div><div class="ask-col" style="gap:{u(4)}">'
+                 f'<p class="ask-k" style="font-size:{u(9)}">ASK</p><p class="ask-t" style="font-size:{u(min(18, max(12, W * 0.055)))}">{esc(title)}</p>{preview}</div></div>')
+    else:
+        head = (f'<p class="ask-k" style="font-size:{u(10)}"><span>ASK</span>{ARROW}</p>' if H >= 160 else "")
+        inner = (f'<div class="ask" style="padding:{u(inset)};gap:{u(5 if H >= 160 else 3)}">{head}'
+                 f'<div class="ask-artbox" style="height:{u(max(35, min(H * 0.38, W * 0.64)))}">{art}</div>'
+                 f'<p class="ask-t" style="font-size:{u(min(23, max(13, W * 0.115)))};-webkit-line-clamp:{2 if W < 130 else 1}">{esc(title)}</p>'
+                 f'<span class="grow"></span>{preview}'
+                 + (f'<p class="ask-a" style="font-size:{u(10)}">익명으로 질문하기</p>' if H >= 220 else "") + '</div>')
+    return ' data-dl data-msg="ask"', inner, "Ask", title
+
+
+def r_ditto(w, W, H, m):
+    ww, hh = w["w"], w["h"]
+    big = (ww >= 4 and hh >= 4 and max(ww, hh) >= 6) or (ww >= 6 and hh >= 6)
+    badge, inset = (32, 12) if big else (24, 8)
+    show_src = not (ww <= 2 and hh < 4)
+    photo, _ = m.image(w.get("img") or w.get("polImg"))
+    if photo:
+        media = f'<img class="cover" src="{esc(photo)}" alt="" loading="lazy"><span class="soft"></span>'
+    elif w.get("emoji"):
+        media = f'<span class="dt-emoji" style="font-size:{u(min(W, H) * 0.42)}">{esc(w["emoji"])}</span>'
+    else:
+        media = f'<span class="dt-title" style="font-size:{u(15)}">{esc(w.get("title") or "디토 위젯")}</span>'
+    frm = (w.get("from") or "").strip()
+    chip = ""
+    if frm and show_src:
+        std = ww >= 4 and hh >= 4
+        chip = (f'<span class="dt-src" style="left:{u(inset)};bottom:{u(inset)};height:{u(32 if std else 28)};'
+                f'max-width:calc(100% - {u(inset * 2)});padding:0 {u(8)};border-radius:{u(8)};font-size:{u(14 if std else 12)}">'
+                f'<b>from.</b>&nbsp;{esc(frm)}</span>')
+    b = (f'<img class="dt-badge" src="/assets/dittobadge-32.svg" alt="" style="top:{u(inset)};right:{u(inset)};width:{u(badge)};height:{u(badge)}">'
+         if frm else "")
+    return ' data-dl data-msg="ditto"', media + chip + b, "디토 위젯", f"from. {frm}" if frm else ""
+
+
+def r_music(w, W, H, m):
+    cover, im = m.image(w.get("img"))
+    top, mid, bot = music_palette(im)
+    ww, hh = w["w"], w["h"]
+    # MusicCDPLayout — 디자인 좌표 (실제 크기에 비례해 위치만 늘림)
+    if ww <= 2 and hh <= 2:
+        dw, dh, disc, info, ts, as_ = 86.5, 86.5, (18.5, 8, 49.5), (8, 65.5, 70.5), (10, 13), None
+    elif ww <= 2:
+        dw, dh, disc, info, ts, as_ = 86.5, 275.5, (12, 16, 62.5), (12, 102, 62.5), (14, 18), (11, 16)
+    elif hh <= 2:
+        dw, dh, disc, info, ts, as_ = (275.5, 86.5, (205, 16, 54.5), (16, 12, 177), (17, 20), (12, 17)) if ww >= 6 else \
+                                      (181, 86.5, (106.5, 12, 62.5), (12, 16.75, 82.5), (14, 18), (10, 14))
+    elif ww >= 6 and hh >= 6:
+        dw, dh, disc, info, ts, as_ = 275.5, 275.5, (159.5, 16, 100), (16, 128, 243.5), (22, 26), (13, 18)
+    elif ww >= 6:
+        dw, dh, disc, info, ts, as_ = 275.5, 181, (159.5, 16, 100), (16, 20, 131.5), (20, 24), (12, 17)
+    elif hh >= 6:
+        dw, dh, disc, info, ts, as_ = 181, 275.5, (26.5, 16, 128), (16, 160, 149), (18, 22), (12, 17)
+    elif ww <= 3 and hh <= 3:
+        dw, dh, disc, info, ts, as_ = 133.75, 133.75, (33, 12, 67.75), (12, 87.75, 109.75), (12, 18), (10, 14)
+    elif hh <= 3:
+        dw, dh, disc, info, ts, as_ = 181, 133.75, (56.63, 12, 67.75), (12, 87.75, 157), (14, 18), (10, 14)
+    elif ww <= 3:
+        dw, dh, disc, info, ts, as_ = 133.75, 181, (18.88, 12, 96), (12, 116, 109.75), (12, 18), (10, 14)
+    else:
+        dw, dh, disc, info, ts, as_ = 181, 181, (42.5, 12, 96), (28.5, 125, 124), (14, 18), (10, 14)
+    sx, sy = W / dw, H / dh
+    centered = not (hh <= 2 and ww >= 4) and not (ww >= 6 and hh < 6)
+    d = disc[2] * min(sx, sy)
+    dx, dy = disc[0] * sx + (disc[2] * sx - d) / 2, disc[1] * sy
+    art = f'<img src="{esc(cover)}" alt="" loading="lazy">' if cover else ""
+    disc_html = (f'<span class="cd" style="left:{u(dx)};top:{u(dy)};width:{u(d)};height:{u(d)}">'
+                 f'<span class="cd-rot">{art}<span class="cd-grooves"></span></span><span class="cd-sheen"></span>'
+                 f'<span class="cd-hub"></span><span class="cd-hole"></span></span>')
+    title = esc(w.get("title"))
+    artist = esc(w.get("artist"))
+    info_html = (f'<span class="mu-info{" c" if centered else ""}" style="left:{u(info[0] * sx)};top:{u(info[1] * sy)};width:{u(info[2] * sx)}">'
+                 f'<b style="font-size:{u(ts[0])};line-height:{u(ts[1])}">{title}</b>'
+                 + (f'<span style="font-size:{u(as_[0])};line-height:{u(as_[1])}">{artist}</span>' if as_ and artist else "")
+                 + "</span>")
+    audio = w.get("mediaURL") if str(w.get("mediaURL") or "").startswith("https://") else ""
+    extra = ""
+    attrs = ' data-dl'
+    if audio:
+        extra = (f'<audio preload="none" src="{esc(audio)}"></audio>'
+                 f'<span class="mu-state" aria-hidden="true" style="width:{u(24)};height:{u(24)};right:{u(10)};top:{u(10)}">{PLAY}{PAUSE}</span>'
+                 f'<span class="mu-bar" style="left:{u(14)};right:{u(14)};bottom:{u(9)};height:{u(3)}"><i></i></span>')
+        attrs = ' data-act="music"'
+    style = f"background:linear-gradient(135deg,{top} 0%,{mid} 48%,{bot} 100%)"
+    return attrs, disc_html + info_html + extra, "음악", f"{w.get('title') or ''} · {w.get('artist') or ''}", style
+
+
+def r_image(w, W, H, m):
+    path, _ = m.image(w.get("img"))
+    title = (w.get("title") or "").strip()
+    inner = f'<img class="cover" src="{esc(path)}" alt="" loading="lazy"><span class="soft"></span>' if path else f'<span class="ph">{CAMERA}</span>'
+    if title:
+        fs = 12 if w["w"] <= 2 else 14 if (w["w"] <= 3 or w["h"] <= 2) else 17
+        pad = 8 if w["w"] <= 2 else 12 if w["w"] <= 4 else 16
+        inner += f'<p class="im-title" style="font-size:{u(fs)};padding:{u(pad)} {u(pad)} {u(20)}">{esc(title)}</p>'
+    return "", inner, "사진", title
+
+
+def r_status(w, W, H, m):
+    e, label = esc(w.get("emoji")), esc(w.get("label") or w.get("text"))
+    if w["w"] > w["h"]:
+        inner = f'<div class="ss ss-h" style="padding:0 {u(14)};gap:{u(9)}"><span style="font-size:{u(26)}">{e}</span><b style="font-size:{u(15)}">{label}</b></div>'
+    else:
+        inner = f'<div class="ss" style="gap:{u(6)}"><span style="font-size:{u(34)}">{e}</span><b style="font-size:{u(13)}">{label}</b></div>'
+    return "", inner, "상태", w.get("label") or w.get("text")
+
+
+def r_text(w, W, H, m):
+    return "", f'<p class="tx" style="padding:{u(12)};font-size:{u(13)};line-height:{u(20)}">{esc(w.get("text"))}</p>', "글", w.get("text")
+
+
+TYPE_NAMES = {"gif": "GIF", "social": "소셜", "guestbook": "방명록", "diary": "일기", "dday": "디데이", "nowplaying": "지금 듣는 곡",
+              "place": "장소", "weather": "날씨", "steps": "걸음 수", "qna": "오늘의 질문", "ghost": "고스트", "voice": "음성",
+              "bucket": "버킷리스트", "todo": "To-do", "collection": "컬렉션", "playlist": "플레이리스트", "poke": "콕 찌르기",
+              "secret": "비밀", "together": "같이 있었어", "vintageCamera": "빈티지 카메라"}
+
+
+def r_generic(w, W, H, m):
+    path, _ = m.image(w.get("img"))
+    name = TYPE_NAMES.get(w["type"], "위젯")
+    if path:
+        return " data-dl", f'<img class="cover" src="{esc(path)}" alt="" loading="lazy"><span class="soft"></span>', name, w.get("title")
+    e = esc(w.get("emoji") or "✨")
+    t = esc(w.get("title") or w.get("text") or w.get("label") or name)
+    return " data-dl", f'<div class="ss" style="gap:{u(6)}"><span style="font-size:{u(30)}">{e}</span><b style="font-size:{u(13)}">{t}</b></div>', name, w.get("title")
+
+
+RENDER = {"block": r_block, "video": r_video, "sticker": r_sticker, "polaroid": r_polaroid, "paparazzi": r_paparazzi,
+          "ask": r_ask, "ditto": r_ditto, "music": r_music, "image": r_image, "status": r_status, "mood": r_status, "text": r_text}
+BG = {"block": "rgba(112,115,124,.08)", "video": "linear-gradient(225deg,#3a4a63,#24304a 50%,#161d2e)", "sticker": "#fef4f7",
+      "polaroid": "#fff", "paparazzi": "#fff", "ask": "#fff", "ditto": "#e9d8f5", "image": "#e7e4ee", "status": "#fff",
+      "mood": "#fff3c4", "text": "#f3eefb", "guestbook": "#fff", "qna": "#fff"}
+
+
+def render(widgets, media):
+    """대표 플래터 → HTML. 위젯이 없으면 빈 문자열."""
+    if not widgets:
+        return ""
+    rows = max(w["row"] + w["h"] for w in widgets)
+    grid_h = rows * UNIT - GUT
+    tiles = []
+    for w in widgets:
+        W, H = size_px(w)
+        try:
+            res = RENDER.get(w["type"], r_generic)(w, W, H, media)
+        except Exception:
+            res = r_generic(w, W, H, media)
+        attrs, inner, kind, label = res[:4]
+        style = res[4] if len(res) > 4 else None
+        st = w.get("style") if isinstance(w.get("style"), dict) else {}
+        custom = st.get("bg") if isinstance(st.get("bg"), str) and st["bg"].startswith("#") and len(st["bg"]) in (4, 7) else None
+        bg = style or "background:" + (custom or BG.get(w["type"], "#f1eaff"))
+        glow = " glow" if w.get("allow") is True else ""
+        if glow and " data-act" not in attrs:
+            attrs = ' data-dl data-msg="ditto"'
+        name = f"{kind}{', ' + str(label) if label else ''}"
+        interactive = bool(attrs)
+        role = f' role="button" tabindex="0" aria-label="{esc(name)}"' if interactive else f' role="img" aria-label="{esc(name)}"'
+        pos = (f"left:{w['col'] * UNIT / DESIGN_W * 100:.3f}%;top:{w['row'] * UNIT / grid_h * 100:.3f}%;"
+               f"width:{W / DESIGN_W * 100:.3f}%;height:{H / grid_h * 100:.3f}%;border-radius:{u(radius(w))};{bg}")
+        tiles.append(f'<div class="w w-{esc(w["type"])}{glow}" style="{pos}"{role}{attrs}>{inner}</div>')
+    return (f'<div class="platter" id="platter"><p class="pl-head">대표 플래터</p>'
+            f'<div class="pl" style="aspect-ratio:{DESIGN_W} / {grid_h:.2f}">{"".join(tiles)}</div></div>'
+            f'<div id="platterEnd" aria-hidden="true"></div>')
+
+
+def build(get, handle, outdir: Path):
+    """빌드 진입점 — (html, 그린 위젯 수). 서비스 키가 없거나 실패하면 ("", 0)."""
+    key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+    if not key:
+        return "", 0
+    try:
+        owner, widgets = fetch_rep(get, handle, key)
+    except Exception as e:
+        print(f"platter: {handle} 위젯을 읽지 못함 ({type(e).__name__})")
+        return "", 0
+    if (outdir / "media").exists():
+        shutil.rmtree(outdir / "media")
+    return render(widgets, Media(get, outdir, owner)), len(widgets)

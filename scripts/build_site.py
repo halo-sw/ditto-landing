@@ -6,7 +6,10 @@
   2) scripts/shared-profiles.txt (한 줄에 아이디 하나, 수동 추가·예시용)
 
 GitHub Actions(.github/workflows/pages.yml)가 주기적으로 실행해 GitHub Pages에 올린다.
-프로필 페이지는 git에 커밋하지 않고 배포 산출물에만 들어간다.
+프로필 페이지는 git에 커밋하지 않고 배포 산출물에만 들어간다. (예시 @ditto4037은 커밋해 둔다)
+
+대표 플래터: SUPABASE_SERVICE_ROLE_KEY가 있으면 대표(rep) 플래터를 페이지에 그린다 (scripts/platter.py).
+위젯 테이블은 RLS로 막혀 있어 공개 키로는 읽을 수 없다. 키가 없으면 플래터 없이 프로필만 만든다.
 
   python3 scripts/build_site.py _site            # 전체
   PROFILE_LIMIT=3 python3 scripts/build_site.py _site   # 로컬 확인용
@@ -14,6 +17,9 @@ GitHub Actions(.github/workflows/pages.yml)가 주기적으로 실행해 GitHub 
 import html, io, json, os, re, shutil, sys, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import platter  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "_site").resolve()
@@ -40,7 +46,7 @@ def get(url, headers=None, timeout=30):
         return r.read()
 
 
-def shared_handles(key):
+def listed_handles():
     handles = set()
     listed = ROOT / "scripts/shared-profiles.txt"
     if listed.exists():
@@ -48,6 +54,11 @@ def shared_handles(key):
             line = line.split("#", 1)[0].strip().lstrip("@").lower()
             if line:
                 handles.add(line)
+    return handles
+
+
+def shared_handles(key):
+    handles = listed_handles()
     try:
         offset = 0
         while True:
@@ -150,8 +161,10 @@ def main():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
     reserved = set()
+    # 목록 파일에 있는 아이디 폴더(커밋해 둔 예시 프로필)는 저장소 경로가 아니라 다시 만드는 산출물이다.
+    generated = {h for h in listed_handles() if (ROOT / h / "index.html").exists()}
     for p in ROOT.iterdir():
-        if p.name in SKIP:
+        if p.name in SKIP or p.name in generated:
             continue
         reserved.add(p.name.lower())
         (shutil.copytree if p.is_dir() else shutil.copy2)(p, OUT / p.name)
@@ -161,10 +174,10 @@ def main():
     fill = lambda values: re.sub(r"\{\{(\w+)\}\}", lambda m: values.get(m.group(1), ""), template)
     # 404: 아직 빌드되지 않은 새 아이디 · /u/{아이디} 옛 주소 · 없는 페이지
     (OUT / "404.html").write_text(fill({"TITLE": "ditto!", "URL": SITE + "/", "OG_IMAGE": SITE + "/assets/og-landing.png",
-                                         "PROFILE_HIDDEN": " hidden", "AVATAR_HIDDEN": " hidden", "KEY": key}))
+                                         "PROFILE_HIDDEN": " hidden", "AVATAR_HIDDEN": " hidden", "KEY": key, "PLATTER": ""}))
 
     wordmark = Image.open(ROOT / "email/wordmark-white.png").convert("RGBA")
-    (OUT / "og").mkdir()
+    (OUT / "og").mkdir(exist_ok=True)
     built = skipped = 0
     for row in profiles(key):
         handle = (row.get("handle") or "").strip().lower()
@@ -182,13 +195,17 @@ def main():
                 avatar_ok = False
         (OUT / "og" / f"{handle}.png").write_bytes(og_image(name, handle, data, wordmark))
         title = f"{name} (@{handle}) · ditto!"
+        (OUT / handle).mkdir()
+        platter_html, n_widgets = platter.build(get, handle, OUT / handle)
+        if n_widgets:
+            print(f"platter: @{handle} 대표 플래터 위젯 {n_widgets}개")
         page = fill({
             "TITLE": html.escape(title), "URL": f"{SITE}/{handle}", "OG_IMAGE": f"{SITE}/og/{handle}.png",
             "NAME": html.escape(name), "HANDLE": handle, "INITIAL": html.escape(name[:1].upper()),
             "AVATAR": html.escape(avatar) if avatar_ok else "",
             "AVATAR_HIDDEN": "" if avatar_ok else " hidden", "FALLBACK_HIDDEN": " hidden" if avatar_ok else "", "KEY": key,
+            "PLATTER": platter_html, "WRAP_CLASS": " has-platter" if platter_html else "",
         })
-        (OUT / handle).mkdir()
         (OUT / handle / "index.html").write_text(page)
         built += 1
     print(f"site: {OUT} · profiles built {built} · skipped {skipped}")
