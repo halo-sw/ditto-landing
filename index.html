@@ -1102,6 +1102,7 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
       <li><a href="#ditto" data-s="ditto">Try it</a></li>
       <li><a href="#frequency" data-s="frequency">Frequency</a></li>
       <li><a href="#qa" data-s="qa,close">Q&amp;A</a></li>
+      <li><a href="/splup/">Guide</a></li>
     </ul>
   </nav>
   <a class="cta" href="/download/">출시알림 <span class="ar2" aria-hidden="true">↗</span></a>
@@ -1931,7 +1932,7 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
     <div class="foot-top">
       <div><h3>Story</h3><ul><li><a href="#verbs">Me too</a></li><li><a href="#background">Background</a></li><li><a href="#insight">Insight</a></li></ul></div>
       <div><h3>Experience</h3><ul><li><a href="#concept">Concept</a></li><li><a href="#widgets">Widgets</a></li><li><a href="#tour">App tour</a></li><li><a href="#ditto">Try it</a></li></ul></div>
-      <div><h3>Ditto!</h3><ul><li><a href="#frequency">Frequency</a></li><li><a href="#qa">Q&amp;A</a></li><li><a href="https://ditto.at/">ditto.at</a></li></ul></div>
+      <div><h3>Ditto!</h3><ul><li><a href="#frequency">Frequency</a></li><li><a href="#qa">Q&amp;A</a></li><li><a href="/splup/">Design guide</a></li><li><a href="https://ditto.at/">ditto.at</a></li></ul></div>
     </div>
   </div>
   <div class="foot-glow">
@@ -1957,7 +1958,7 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
   /* ---- GNB: transparent over hero, scroll-spy tabs ---- */
   (function(){
     const gnb = document.getElementById('gnb'), hero = document.getElementById('top'), ul = document.getElementById('tabs');
-    const links = [...ul.querySelectorAll('a')].map(a => ({ a, secs: a.dataset.s.split(',').map(id => document.getElementById(id)) }));
+    const links = [...ul.querySelectorAll('a[data-s]')].map(a => ({ a, secs: a.dataset.s.split(',').map(id => document.getElementById(id)) }));
     let cur = null;
     gnb.classList.add('top');
     const darks = [...document.querySelectorAll('.demo')];

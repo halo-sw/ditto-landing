@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ditto!</title>
+<meta name="description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
+<meta name="robots" content="noindex, noimageindex">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="ditto!">
+<meta property="og:url" content="https://ditto.at/">
+<meta property="og:title" content="ditto!">
+<meta property="og:description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
+<meta property="og:image" content="https://ditto.at/assets/og-landing.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ditto!">
+<meta name="twitter:description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
+<meta name="twitter:image" content="https://ditto.at/assets/og-landing.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body { font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif; background: linear-gradient(180deg, #aab6f0 0%, #cdd7f6 46%, #eef1fb 100%); min-height: 100svh; }
+  [hidden] { display: none !important; }
+  .wrap { min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: 24px 24px 96px; color: #1c1c22; }
+  .card { width: 100%; max-width: 380px; background: rgba(255,255,255,.92); border-radius: 28px; padding: 44px 28px 36px; text-align: center; box-shadow: 0 18px 60px rgba(60,60,120,.18); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .avatar { width: 108px; height: 108px; border-radius: 108px; object-fit: cover; margin: 0 auto 16px; display: block; border: 3px solid #f0e8fa; }
+  .avatar-fallback { display: flex; align-items: center; justify-content: center; background: linear-gradient(150deg, #b46ce0, #f39fce); color: #fff; font-size: 48px; font-weight: 700; }
+  .name { font-size: 22px; font-weight: 700; color: #1c1c22; margin-bottom: 2px; }
+  .handle { font-size: 14px; font-weight: 600; color: #9b4be0; margin-bottom: 14px; }
+  .sub { font-size: 13.5px; font-weight: 600; color: #6b6b76; line-height: 1.55; }
+  .cta { display: block; margin: 22px 0 10px; padding: 15px; border-radius: 14px; background: #b255d9; color: #fff; font-size: 15.5px; font-weight: 700; text-decoration: none; transition: background .18s ease; }
+  .cta:hover { background: rgba(134,61,166,.9); }
+  .cta-note { font-size: 12px; font-weight: 500; color: #9a9aa4; line-height: 1.6; margin-bottom: 24px; }
+  .steps { text-align: left; font-size: 13.5px; font-weight: 600; color: #44444c; line-height: 2; }
+  .steps b { font-weight: 700; }
+  .wordmark { height: 30px; margin-bottom: 24px; }
+  .headline { font-size: 19px; font-weight: 700; line-height: 1.45; margin-bottom: 6px; }
+  .home { display: inline-block; margin-top: 22px; font-size: 14px; font-weight: 700; color: #7e37c2; text-decoration: none; }
+  .banner { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: calc(100% - 32px); max-width: 380px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; text-decoration: none; background: rgba(28,20,40,.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 10px 34px rgba(40,16,60,.35); }
+  .banner-mark { height: 20px; }
+  .banner-text { flex: 1 1; font-size: 13px; font-weight: 600; color: #fff; text-align: left; }
+  .banner-btn { font-size: 13px; font-weight: 700; color: #fff; background: #b255d9; padding: 8px 16px; border-radius: 10px; white-space: nowrap; }
+  /* 앱 다운로드 유도 모달: 프로필을 보여 준 뒤 아래에서 올라온다 (데스크톱은 가운데) */
+  .dl-scrim { position: fixed; inset: 0; z-index: 40; background: rgba(22,14,34,.42); opacity: 0; transition: opacity .35s ease; }
+  .dl-scrim.on { opacity: 1; }
+  .dl { position: fixed; z-index: 41; left: 50%; bottom: 0; width: min(100%, 440px); transform: translate(-50%, 104%); transition: transform .45s cubic-bezier(.22,1,.36,1);
+    background: #fff; color: #1c1c22; border-radius: 28px 28px 0 0; padding: 12px 24px calc(24px + env(safe-area-inset-bottom, 0px)); text-align: center; box-shadow: 0 -18px 60px rgba(40,16,60,.28); }
+  .dl.on { transform: translate(-50%, 0); }
+  .dl-grab { width: 40px; height: 5px; border-radius: 3px; background: #e4dcee; margin: 0 auto 18px; }
+  .dl-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #f4f1f8; color: #44444c; font-size: 20px; line-height: 1; cursor: pointer; }
+  .dl-av { position: relative; width: 84px; height: 84px; margin: 6px auto 14px; }
+  .dl-av img, .dl-av span { width: 84px; height: 84px; border-radius: 84px; object-fit: cover; display: flex; align-items: center; justify-content: center; border: 3px solid #f0e8fa; background: linear-gradient(150deg, #b46ce0, #f39fce); color: #fff; font-size: 36px; font-weight: 700; }
+  .dl-av i { position: absolute; right: -6px; bottom: -4px; width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(135deg, #AA4AF4, #6655D2); box-shadow: 0 0 0 3px #fff; display: grid; place-items: center; }
+  .dl-av i img { width: 20px; height: auto; border: 0; border-radius: 0; background: none; }
+  .dl h2 { font-size: 20px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
+  .dl p { margin-top: 8px; font-size: 14px; font-weight: 500; color: #6b6b76; line-height: 1.6; }
+  .dl-store { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 22px; height: 54px; border-radius: 14px; background: #16121B; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none; }
+  .dl-store svg { width: 20px; height: 20px; }
+  .dl-later { margin-top: 8px; width: 100%; height: 46px; border: 0; border-radius: 14px; background: none; color: #6b6b76; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
+  .dl :focus-visible, .cta:focus-visible, .banner:focus-visible { outline: 2px solid #9b4be0; outline-offset: 3px; }
+  @media (min-width: 640px) { .dl { bottom: 50%; border-radius: 28px; padding-bottom: 24px; transform: translate(-50%, calc(50% + 24px)); opacity: 0; transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .3s ease; } .dl.on { transform: translate(-50%, 50%); opacity: 1; } .dl-grab { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .dl, .dl-scrim { transition: none; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="card" id="profile" hidden>
+    <div class="avatar avatar-fallback" id="avatarFallback"></div>
+    <img class="avatar" id="avatar" src="" alt="" hidden>
+    <h1 class="name" id="name"></h1>
+    <p class="handle" id="handle">@</p>
+    <p class="sub">위젯으로 서로의 하루를 주고받는 친구들의 공간</p>
+    <a class="cta" href="/download/" data-dl>ditto! 앱에서 열기</a>
+    <p class="cta-note">앱이 설치돼 있으면 바로 열리고,<br>없으면 App Store로 안내해드려요.</p>
+    <div class="steps">
+      <div>1&nbsp;&nbsp;ditto! 앱을 설치해요</div>
+      <div>2&nbsp;&nbsp;<b id="stepHandle">@</b> 님을 친구로 추가해요</div>
+      <div>3&nbsp;&nbsp;서로의 플래터를 구경해요</div>
+    </div>
+  </section>
+  <section class="card" id="missing" hidden>
+    <img class="wordmark" src="/assets/wordmark.svg" alt="ditto!">
+    <h1 class="headline">페이지를 찾을 수 없어요</h1>
+    <p class="sub">주소가 바뀌었거나 없는 페이지예요.</p>
+    <a class="home" href="/">ditto! 홈으로</a>
+  </section>
+</main>
+<a class="banner" id="banner" href="/download/" data-dl hidden><img class="banner-mark" src="/email/wordmark-white.png" alt="ditto!"><span class="banner-text">앱에서 더 자세히 보기</span><span class="banner-btn">다운로드</span></a>
+<div class="dl-scrim" id="dlScrim" hidden></div>
+<section class="dl" id="dl" role="dialog" aria-modal="true" aria-labelledby="dlTitle" aria-describedby="dlDesc" hidden>
+  <div class="dl-grab" aria-hidden="true"></div>
+  <button class="dl-x" id="dlClose" type="button" aria-label="닫기">×</button>
+  <div class="dl-av" aria-hidden="true"><span id="dlAvatar"></span><i><img src="/email/wordmark-white.png" alt=""></i></div>
+  <h2 id="dlTitle"><span id="dlName"></span>님의 플래터는<br>ditto! 앱에서 볼 수 있어요</h2>
+  <p id="dlDesc">앱을 받으면 바로 친구로 추가하고, 서로의 위젯을 구경할 수 있어요.</p>
+  <a class="dl-store" id="dlStore" href="/download/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span id="dlStoreLabel">App Store에서 받기</span></a>
+  <button class="dl-later" id="dlLater" type="button">웹에서 먼저 둘러볼게요</button>
+</section>
+<script>
+(function () {
+  // 앱 다운로드 유도 모달. 출시 후 APP_STORE_URL만 채우면 App Store로 바로 연결된다. 비어 있으면 출시 알림 신청(/download/)으로 보낸다.
+  var APP_STORE_URL = "";
+  var $ = function (id) { return document.getElementById(id); };
+  var dl = $("dl"), scrim = $("dlScrim"), lastFocus = null, shown = false;
+  $("dlStore").href = APP_STORE_URL || "/download/";
+  $("dlStoreLabel").textContent = APP_STORE_URL ? "App Store에서 받기" : "출시 알림 받기";
+  if (!APP_STORE_URL) $("dlDesc").textContent = "곧 App Store에 나와요. 출시 알림을 받으면 가장 먼저 친구로 추가할 수 있어요.";
+  function sync() {
+    var name = $("name").textContent || "";
+    $("dlName").textContent = name;
+    var src = $("avatar").hidden ? "" : $("avatar").currentSrc;
+    var box = $("dlAvatar");
+    box.textContent = ""; box.style.background = "";
+    if (src) { box.style.background = "center/cover url(" + JSON.stringify(src) + ")"; } else { box.textContent = $("avatarFallback").textContent; }
+  }
+  function open() {
+    if ($("profile").hidden) return;
+    sync(); lastFocus = document.activeElement; shown = true;
+    scrim.hidden = false; dl.hidden = false;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { scrim.classList.add("on"); dl.classList.add("on"); $("dlStore").focus(); }); });
+  }
+  function close() {
+    scrim.classList.remove("on"); dl.classList.remove("on");
+    setTimeout(function () { scrim.hidden = true; dl.hidden = true; }, 450);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  $("dlClose").addEventListener("click", close);
+  $("dlLater").addEventListener("click", close);
+  scrim.addEventListener("click", close);
+  document.addEventListener("keydown", function (e) {
+    if (dl.hidden) return;
+    if (e.key === "Escape") { close(); return; }
+    if (e.key === "Tab") {
+      var f = [$("dlClose"), $("dlStore"), $("dlLater")], i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+  [].forEach.call(document.querySelectorAll("[data-dl]"), function (a) { a.addEventListener("click", function (e) { e.preventDefault(); open(); }); });
+  // 프로필을 먼저 보여 주고 잠시 뒤 한 번 띄운다
+  setTimeout(function () { if (!shown) open(); }, 1400);
+})();
+</script>
+<script>
+(function () {
+  // 미리 만든 페이지는 내용이 이미 채워져 있다. 404 페이지(아직 빌드 전인 새 아이디)일 때만 주소에서 아이디를 읽어 불러온다.
+  var SB = "https://lisqekczixwzshmpewzq.supabase.co", KEY = "sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf";
+  var $ = function (id) { return document.getElementById(id); };
+  var prebuilt = "" !== "";
+  var seg = location.pathname.split("/").filter(Boolean);
+  if (!prebuilt && seg[0] === "u" && seg[1]) { location.replace("/" + seg[1].toLowerCase() + location.search); return; }
+  var handle = prebuilt ? "" : (seg.length === 1 ? decodeURIComponent(seg[0]).replace(/^@/, "") : "");
+  if (!/^[A-Za-z0-9_.]{1,30}$/.test(handle)) { $("missing").hidden = false; document.title = "ditto!"; return; }
+  if (!prebuilt && handle !== handle.toLowerCase()) { location.replace("/" + handle.toLowerCase()); return; }
+  var show = function (name, avatar) {
+    $("name").textContent = name || handle;
+    $("handle").textContent = "@" + handle;
+    $("stepHandle").textContent = "@" + handle;
+    $("avatarFallback").textContent = (name || handle).charAt(0).toUpperCase();
+    if (avatar && /^https:\/\//.test(avatar)) {
+      var img = $("avatar");
+      img.onload = function () { img.hidden = false; $("avatarFallback").hidden = true; };
+      img.onerror = function () { img.hidden = true; $("avatarFallback").hidden = false; };
+      if (img.getAttribute("src") !== avatar) img.src = avatar;
+    }
+    document.title = (name || handle) + " (@" + handle + ") · ditto!";
+  };
+  // 공유하지 않은 아이디는 보여 주지 않는다 (미리 만든 페이지 = 공유한 사람).
+  if (!prebuilt) { $("missing").hidden = false; document.title = "ditto!"; return; }
+  fetch(SB + "/rest/v1/profiles?select=nickname,handle,avatar_url&handle=ilike." + encodeURIComponent(handle.replace(/[_%]/g, "\\$&")) + "&limit=1", { headers: { apikey: KEY } })
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (rows) { if (rows && rows[0]) show(rows[0].nickname, rows[0].avatar_url); else if (!prebuilt) { $("profile").hidden = true; $("banner").hidden = true; $("missing").hidden = false; document.title = "ditto!"; } })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>

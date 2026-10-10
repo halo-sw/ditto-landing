@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["3K5K5Q6WGY.com.ditto.DittoPrototype"],
+        "components": [
+          { "/": "/", "exclude": true },
+          { "/": "/download*", "exclude": true },
+          { "/": "/splup*", "exclude": true },
+          { "/": "/assets/*", "exclude": true },
+          { "/": "/email*", "exclude": true },
+          { "/": "/og/*", "exclude": true },
+          { "/": "/*/*", "exclude": true },
+          { "/": "/*" }
+        ]
+      }
+    ]
+  }
+}
