@@ -1,0 +1,396 @@
+{
+  "version": "2026-10-07-artwork-rule-v2",
+  "sampleSizes": [
+    "4x2",
+    "4x4",
+    "4x6"
+  ],
+  "albums": [
+    {
+      "id": "whykiiikiii",
+      "album": "WhyKiiiKiii",
+      "artist": "KiiiKiii",
+      "track": "Pop Off Pop Off",
+      "source": "https://music.bugs.co.kr/album/4153260",
+      "originalFile": "4153260.jpg",
+      "asset": "./widget-assets/albums/whykiiikiii.jpg",
+      "palette": {
+        "base": "#3c535d",
+        "accent": "#517480",
+        "ambient": [
+          "#80becf",
+          "#967654"
+        ],
+        "keyColors": [
+          "#80becf",
+          "#967654"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 5.05,
+        "monochrome": false,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "verified",
+      "figmaBytes": 29823,
+      "cdp": {
+        "top": "#d9ecf1",
+        "middle": "#cae4eb",
+        "bottom": "#d7cbbe",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#80becf",
+        "keyColors": [
+          "#80becf",
+          "#967654"
+        ],
+        "secondaryContrast": 6.22
+      }
+    },
+    {
+      "id": "ubermensch",
+      "album": "Übermensch",
+      "artist": "G-DRAGON",
+      "track": "TOO BAD",
+      "source": "https://music.apple.com/us/album/1794882375",
+      "originalFile": "JOF_0YJ9I81TsaHXsfJQ8-tI02lbSEsugE17I6hfSWKYoCjJHOmQGwKqrWGdEBsfubmz_tSmahBEtG5dWlrmUQ.webp",
+      "asset": "./widget-assets/albums/ubermensch.jpg",
+      "palette": {
+        "base": "#69482f",
+        "accent": "#96643b",
+        "ambient": [
+          "#b07542",
+          "#2b496a"
+        ],
+        "keyColors": [
+          "#b07542",
+          "#2b496a"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 5.02,
+        "monochrome": false,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "verified",
+      "figmaBytes": 11181,
+      "cdp": {
+        "top": "#e7d6c6",
+        "middle": "#dec5b0",
+        "bottom": "#aebac6",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#b07542",
+        "keyColors": [
+          "#b07542",
+          "#2b496a"
+        ],
+        "secondaryContrast": 5.02
+      }
+    },
+    {
+      "id": "ruby",
+      "album": "Ruby",
+      "artist": "JENNIE",
+      "track": "like JENNIE",
+      "source": "https://music.apple.com/us/album/1795979743",
+      "originalFile": "PcwQTeQVzwMmyxhOal5AqBjMFvk3Iw3cuNxkcoJ92sB4xY20T-MQaWr26dKr2gE3P34eiUj8cvrNHBv6JgXkMQ.webp",
+      "asset": "./widget-assets/albums/ruby.jpg",
+      "palette": {
+        "base": "#6e1917",
+        "accent": "#9d1c17",
+        "ambient": [
+          "#9d1c17",
+          "#b34e4a"
+        ],
+        "keyColors": [
+          "#9d1c17",
+          "#b34e4a"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 8.04,
+        "monochrome": false,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "verified",
+      "figmaBytes": 6602,
+      "cdp": {
+        "top": "#e2bbb9",
+        "middle": "#daa9a7",
+        "bottom": "#e2bcba",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#9d1c17",
+        "keyColors": [
+          "#9d1c17",
+          "#b34e4a"
+        ],
+        "secondaryContrast": 4.82
+      },
+      "video": {
+        "youtubeId": "JSFG-IE8n_c",
+        "poster": "./widget-assets/music-video/ruby.jpg",
+        "source": "https://www.youtube.com/watch?v=JSFG-IE8n_c"
+      }
+    },
+    {
+      "id": "gnx",
+      "album": "GNX",
+      "artist": "Kendrick Lamar",
+      "track": "luther",
+      "source": "https://music.apple.com/us/album/1781270319",
+      "originalFile": "ab67616d0000b273e2a0a166493a2bde5480a420.jpg",
+      "asset": "./widget-assets/albums/gnx.jpg",
+      "palette": {
+        "base": "#4f4f53",
+        "accent": "#6e6e71",
+        "ambient": [
+          "#a1a1a1",
+          "#a1a1a1"
+        ],
+        "keyColors": [
+          "#a1a1a1",
+          "#a1a1a1"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 5.08,
+        "monochrome": true,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "verified",
+      "figmaBytes": 10284,
+      "cdp": {
+        "top": "#e3e3e3",
+        "middle": "#d8d8d8",
+        "bottom": "#dbdbdb",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#a1a1a1",
+        "keyColors": [
+          "#a1a1a1",
+          "#a1a1a1"
+        ],
+        "secondaryContrast": 6.96
+      }
+    },
+    {
+      "id": "like-a-flower",
+      "album": "Like A Flower",
+      "artist": "IRENE",
+      "track": "Like A Flower",
+      "source": "https://music.bugs.co.kr/album/4110802",
+      "originalFile": "4110802.jpg",
+      "asset": "./widget-assets/albums/like-a-flower.jpg",
+      "palette": {
+        "base": "#3c4c5b",
+        "accent": "#526a7d",
+        "ambient": [
+          "#526a7d",
+          "#788b9a"
+        ],
+        "keyColors": [
+          "#526a7d",
+          "#788b9a"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 5.65,
+        "monochrome": false,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "verified",
+      "figmaBytes": 7457,
+      "cdp": {
+        "top": "#cbd2d8",
+        "middle": "#b6c0c8",
+        "bottom": "#ccd3d9",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#526a7d",
+        "keyColors": [
+          "#526a7d",
+          "#788b9a"
+        ],
+        "secondaryContrast": 5.36
+      }
+    },
+    {
+      "id": "derre",
+      "album": "데레",
+      "artist": "BIBI",
+      "track": "데레",
+      "source": "https://music.bugs.co.kr/album/4109752",
+      "originalFile": "4109752.jpg",
+      "asset": "./widget-assets/albums/derre.jpg",
+      "palette": {
+        "base": "#6d4148",
+        "accent": "#9c5960",
+        "ambient": [
+          "#e78088",
+          "#ec9ca2"
+        ],
+        "keyColors": [
+          "#e78088",
+          "#ec9ca2"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 5.24,
+        "monochrome": false,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "verified",
+      "figmaBytes": 19241,
+      "cdp": {
+        "top": "#f8d9db",
+        "middle": "#f5cacd",
+        "bottom": "#f8d9dc",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#e78088",
+        "keyColors": [
+          "#e78088",
+          "#ec9ca2"
+        ],
+        "secondaryContrast": 6.71
+      }
+    },
+    {
+      "id": "gaussian",
+      "album": "GAUSSIAN",
+      "artist": "youra",
+      "track": "미미 (MIMI)",
+      "source": "https://www.ktown4u.com/iteminfo?goods_no=51071",
+      "originalFile": "GD00051071.default.2.jpg",
+      "asset": "./widget-assets/albums/gaussian.jpg",
+      "palette": {
+        "base": "#604d41",
+        "accent": "#886c56",
+        "ambient": [
+          "#a88667",
+          "#536d70"
+        ],
+        "keyColors": [
+          "#a88667",
+          "#536d70"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 4.85,
+        "monochrome": false,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "verified",
+      "figmaBytes": 11600,
+      "cdp": {
+        "top": "#e5dbd1",
+        "middle": "#daccbf",
+        "bottom": "#bec8c9",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#a88667",
+        "keyColors": [
+          "#a88667",
+          "#536d70"
+        ],
+        "secondaryContrast": 5.8
+      }
+    },
+    {
+      "id": "cover-08",
+      "album": "Big Void",
+      "artist": "실리카겔",
+      "track": "Big Void",
+      "source": "user-confirmed",
+      "originalFile": "news-p.v1.20260821.cfc62b32df504c40a8983ba4b7f77db3_P1.jpg",
+      "asset": "./widget-assets/albums/cover-08.jpg",
+      "palette": {
+        "base": "#881d1d",
+        "accent": "#c52220",
+        "ambient": [
+          "#c52220",
+          "#d25351"
+        ],
+        "keyColors": [
+          "#c52220",
+          "#d25351"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 5.8,
+        "monochrome": false,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "user-confirmed",
+      "figmaBytes": 13582,
+      "cdp": {
+        "top": "#eebdbc",
+        "middle": "#e8a7a6",
+        "bottom": "#eebebd",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#c52220",
+        "keyColors": [
+          "#c52220",
+          "#d25351"
+        ],
+        "secondaryContrast": 4.96
+      }
+    },
+    {
+      "id": "how-sweet",
+      "album": "How Sweet",
+      "artist": "NewJeans",
+      "track": "How Sweet",
+      "source": "https://music.apple.com/us/album/how-sweet-ep/1744448415",
+      "originalFile": "3snVTLdFU3J74NdAImAj9rcGrZzZxZnkcwEDXZb4ntmQCq8yjhpEXmmP3A4v33LuaUIkaTGMwZOXRPU85dwykg.webp",
+      "asset": "./widget-assets/albums/how-sweet.jpg",
+      "palette": {
+        "base": "#202e3d",
+        "accent": "#273d50",
+        "ambient": [
+          "#273d50",
+          "#92553f"
+        ],
+        "keyColors": [
+          "#273d50",
+          "#92553f"
+        ],
+        "foreground": "#FFFFFF",
+        "contrast": 11.23,
+        "monochrome": false,
+        "source": "artwork-pixels",
+        "algorithmVersion": "cover-key-colors-v2"
+      },
+      "metadataStatus": "verified",
+      "figmaBytes": 23514,
+      "cdp": {
+        "top": "#bec5cb",
+        "middle": "#b1b9c0",
+        "bottom": "#d6beb6",
+        "foreground": "#29282E",
+        "secondary": "#49404B",
+        "accent": "#273d50",
+        "keyColors": [
+          "#273d50",
+          "#92553f"
+        ],
+        "secondaryContrast": 4.99
+      },
+      "video": {
+        "youtubeId": "Q3K0TOvTOno",
+        "poster": "./widget-assets/music-video/how-sweet.jpg",
+        "source": "https://www.youtube.com/watch?v=Q3K0TOvTOno"
+      }
+    }
+  ],
+  "figmaFrameId": "2294:11852",
+  "figmaServicesFrameId": "1314:3085",
+  "provenance": "Nine visual regression examples; every artwork uses the same pixel-based color rule, with no album-specific overrides.",
+  "videoSizes": [
+    "6x6",
+    "6x8"
+  ]
+}

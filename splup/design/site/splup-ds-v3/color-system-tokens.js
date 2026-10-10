@@ -1,0 +1,3170 @@
+window.SPLUP_COLOR_SYSTEM = {
+  "version": "3.3.0",
+  "date": "2026-10-04",
+  "figma": "https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD?node-id=1581-129639",
+  "primitive": {
+    "purple": {
+      "50": "#F9F4FF",
+      "100": "#F2E8FF",
+      "200": "#E5CEFF",
+      "300": "#D6AEFF",
+      "400": "#C588FF",
+      "500": "#AA4AF4",
+      "600": "#9D3EE4",
+      "700": "#862FC6",
+      "800": "#6F26A4",
+      "900": "#582082",
+      "950": "#421763"
+    },
+    "gray": {
+      "50": "#FAF9FC",
+      "100": "#F3F0F7",
+      "200": "#E7E1EE",
+      "300": "#D5CCDF",
+      "400": "#B2A7BF",
+      "500": "#897B99",
+      "600": "#6D5F7D",
+      "700": "#584A68",
+      "800": "#443651",
+      "900": "#2D2435",
+      "950": "#1C1722"
+    },
+    "danger": {
+      "50": "#FFF3F7",
+      "100": "#FFE3ED",
+      "200": "#FFC6D9",
+      "300": "#FFA4C4",
+      "400": "#FF79A5",
+      "500": "#FF5488",
+      "600": "#DC3E71",
+      "700": "#B92E5B",
+      "800": "#922346",
+      "900": "#651C35",
+      "950": "#471324"
+    }
+  },
+  "semantic": {
+    "bg/default": {
+      "Light": "#FFFFFF",
+      "Dark": "#1C1722"
+    },
+    "bg/subtle": {
+      "Light": "#FAF9FC",
+      "Dark": "#2D2435"
+    },
+    "bg/brand-subtle": {
+      "Light": "#F9F4FF",
+      "Dark": "#AA4AF424"
+    },
+    "bg/inverse": {
+      "Light": "#2D2435",
+      "Dark": "#F3F0F7"
+    },
+    "layer/basement": {
+      "Light": "#F3F0F7",
+      "Dark": "#1C1722"
+    },
+    "layer/default": {
+      "Light": "#FFFFFF",
+      "Dark": "#2D2435"
+    },
+    "layer/floating": {
+      "Light": "#FFFFFF",
+      "Dark": "#443651"
+    },
+    "layer/modal": {
+      "Light": "#FFFFFF",
+      "Dark": "#443651"
+    },
+    "fill/brand": {
+      "Light": "#AA4AF4",
+      "Dark": "#C588FF"
+    },
+    "fill/brand-pressed": {
+      "Light": "#9D3EE4",
+      "Dark": "#D6AEFF"
+    },
+    "fill/brand-tonal": {
+      "Light": "#F2E8FF",
+      "Dark": "#582082"
+    },
+    "fill/subtle": {
+      "Light": "#F3F0F7",
+      "Dark": "#443651"
+    },
+    "fill/disabled": {
+      "Light": "#E7E1EE",
+      "Dark": "#584A68"
+    },
+    "text/strong": {
+      "Light": "#1C1722",
+      "Dark": "#FAF9FC"
+    },
+    "text/default": {
+      "Light": "#443651",
+      "Dark": "#E7E1EE"
+    },
+    "text/subtle": {
+      "Light": "#6D5F7D",
+      "Dark": "#B2A7BF"
+    },
+    "text/disabled": {
+      "Light": "#B2A7BF",
+      "Dark": "#6D5F7D"
+    },
+    "text/brand": {
+      "Light": "#862FC6",
+      "Dark": "#D6AEFF"
+    },
+    "text/on-brand": {
+      "Light": "#FFFFFF",
+      "Dark": "#421763"
+    },
+    "text/inverse": {
+      "Light": "#FAF9FC",
+      "Dark": "#2D2435"
+    },
+    "border/default": {
+      "Light": "#E7E1EE",
+      "Dark": "#443651"
+    },
+    "border/strong": {
+      "Light": "#D5CCDF",
+      "Dark": "#584A68"
+    },
+    "border/brand": {
+      "Light": "#AA4AF4",
+      "Dark": "#C588FF"
+    },
+    "border/brand-subtle": {
+      "Light": "#E5CEFF",
+      "Dark": "#AA4AF447"
+    },
+    "text/placeholder": {
+      "Light": "#6D5F7D",
+      "Dark": "#B2A7BF"
+    },
+    "icon/default": {
+      "Light": "#443651",
+      "Dark": "#E7E1EE"
+    },
+    "icon/subtle": {
+      "Light": "#6D5F7D",
+      "Dark": "#B2A7BF"
+    },
+    "icon/disabled": {
+      "Light": "#B2A7BF",
+      "Dark": "#6D5F7D"
+    },
+    "border/control": {
+      "Light": "#897B99",
+      "Dark": "#897B99"
+    },
+    "border/focus": {
+      "Light": "#862FC6",
+      "Dark": "#D6AEFF"
+    },
+    "selection/bg": {
+      "Light": "#F2E8FF",
+      "Dark": "#582082"
+    },
+    "selection/fg": {
+      "Light": "#582082",
+      "Dark": "#F2E8FF"
+    },
+    "selection/border": {
+      "Light": "#862FC6",
+      "Dark": "#D6AEFF"
+    },
+    "unselected/bg": {
+      "Light": "#FFFFFF",
+      "Dark": "#2D2435"
+    },
+    "unselected/fg": {
+      "Light": "#6D5F7D",
+      "Dark": "#B2A7BF"
+    },
+    "unselected/border": {
+      "Light": "#897B99",
+      "Dark": "#897B99"
+    },
+    "action/primary/bg": {
+      "Light": "#9D3EE4",
+      "Dark": "#C588FF"
+    },
+    "action/primary/hover": {
+      "Light": "#862FC6",
+      "Dark": "#D6AEFF"
+    },
+    "action/primary/pressed": {
+      "Light": "#6F26A4",
+      "Dark": "#E5CEFF"
+    },
+    "action/primary/fg": {
+      "Light": "#FFFFFF",
+      "Dark": "#421763"
+    },
+    "action/secondary/bg": {
+      "Light": "#F2E8FF",
+      "Dark": "#582082"
+    },
+    "action/secondary/hover": {
+      "Light": "#E5CEFF",
+      "Dark": "#6F26A4"
+    },
+    "action/secondary/pressed": {
+      "Light": "#D6AEFF",
+      "Dark": "#862FC6"
+    },
+    "action/secondary/fg": {
+      "Light": "#582082",
+      "Dark": "#F2E8FF"
+    },
+    "action/neutral/bg": {
+      "Light": "#F3F0F7",
+      "Dark": "#443651"
+    },
+    "action/neutral/hover": {
+      "Light": "#E7E1EE",
+      "Dark": "#584A68"
+    },
+    "action/neutral/pressed": {
+      "Light": "#D5CCDF",
+      "Dark": "#6D5F7D"
+    },
+    "action/neutral/fg": {
+      "Light": "#443651",
+      "Dark": "#FAF9FC"
+    },
+    "action/ghost/bg": {
+      "Light": "#FFFFFF",
+      "Dark": "#1C1722"
+    },
+    "action/ghost/hover": {
+      "Light": "#F3F0F7",
+      "Dark": "#2D2435"
+    },
+    "action/ghost/pressed": {
+      "Light": "#E7E1EE",
+      "Dark": "#443651"
+    },
+    "action/ghost/fg": {
+      "Light": "#862FC6",
+      "Dark": "#D6AEFF"
+    },
+    "action/danger/bg": {
+      "Light": "#B92E5B",
+      "Dark": "#FFA4C4"
+    },
+    "action/danger/hover": {
+      "Light": "#922346",
+      "Dark": "#FFC6D9"
+    },
+    "action/danger/pressed": {
+      "Light": "#651C35",
+      "Dark": "#FFE3ED"
+    },
+    "action/danger/fg": {
+      "Light": "#FFFFFF",
+      "Dark": "#471324"
+    },
+    "action/disabled/bg": {
+      "Light": "#E7E1EE",
+      "Dark": "#584A68"
+    },
+    "action/disabled/fg": {
+      "Light": "#897B99",
+      "Dark": "#B2A7BF"
+    },
+    "status/success/bg": {
+      "Light": "#ECFCEF",
+      "Dark": "#003D18"
+    },
+    "status/success/fg": {
+      "Light": "#00662C",
+      "Dark": "#A9EDBB"
+    },
+    "status/warning/bg": {
+      "Light": "#FFF5ED",
+      "Dark": "#4E2500"
+    },
+    "status/warning/fg": {
+      "Light": "#894900",
+      "Dark": "#FFD0A6"
+    },
+    "status/danger/bg": {
+      "Light": "#FFF3F7",
+      "Dark": "#471324"
+    },
+    "status/danger/fg": {
+      "Light": "#922346",
+      "Dark": "#FFC6D9"
+    },
+    "status/info/bg": {
+      "Light": "#F1F8FF",
+      "Dark": "#003160"
+    },
+    "status/info/fg": {
+      "Light": "#00539A",
+      "Dark": "#B9DDFF"
+    }
+  },
+  "graphics": [
+    {
+      "id": "indigo",
+      "name": "Blue Original",
+      "label": "블루 · 기준",
+      "kind": "reference-tonal",
+      "source": "1060:133434",
+      "stops": [
+        [
+          0,
+          "#93B3FA"
+        ],
+        [
+          0.33,
+          "#71ACF8"
+        ],
+        [
+          0.82,
+          "#203977"
+        ],
+        [
+          1,
+          "#5680F6"
+        ]
+      ],
+      "glow": "#D2ECFF",
+      "art": "paparazzi-camera",
+      "use": "사진 · 카메라",
+      "number": 1,
+      "key": "#71ACF8",
+      "light": "#93B3FA",
+      "deep": "#203977",
+      "tail": "#5680F6",
+      "colors": [
+        "#93B3FA",
+        "#71ACF8",
+        "#203977",
+        "#5680F6"
+      ],
+      "glowOpacity": 0.38,
+      "sourceTokens": [],
+      "sourceColors": [
+        "#93B3FA",
+        "#71ACF8",
+        "#203977"
+      ],
+      "recipeLabel": "블루 계열 · 채도 100%",
+      "titleColor": "#FFFFFF",
+      "family": "blue",
+      "referencePalette": "indigo",
+      "saturationScale": 1
+    },
+    {
+      "id": "peach",
+      "name": "Amber Original",
+      "label": "앰버 · 기준",
+      "kind": "reference-tonal",
+      "source": "1060:133434",
+      "stops": [
+        [
+          0,
+          "#F2AD88"
+        ],
+        [
+          0.44,
+          "#F3AF65"
+        ],
+        [
+          0.85,
+          "#929446"
+        ],
+        [
+          1,
+          "#B4B462"
+        ]
+      ],
+      "glow": "#FFDE91",
+      "art": "vintage-camera",
+      "use": "필름 · 빈티지",
+      "number": 2,
+      "key": "#F3AF65",
+      "light": "#F2AD88",
+      "deep": "#929446",
+      "tail": "#B4B462",
+      "colors": [
+        "#F2AD88",
+        "#F3AF65",
+        "#929446",
+        "#B4B462"
+      ],
+      "glowOpacity": 0.38,
+      "sourceTokens": [],
+      "sourceColors": [
+        "#F2AD88",
+        "#F3AF65",
+        "#929446"
+      ],
+      "recipeLabel": "앰버 계열 · 채도 100%",
+      "titleColor": "#FFFFFF",
+      "family": "amber",
+      "referencePalette": "peach",
+      "saturationScale": 1
+    },
+    {
+      "id": "pink",
+      "name": "Rose Original",
+      "label": "로즈 · 기준",
+      "kind": "reference-tonal",
+      "source": "1060:133434",
+      "stops": [
+        [
+          0,
+          "#F3A8D7"
+        ],
+        [
+          0.45,
+          "#FFA899"
+        ],
+        [
+          0.88,
+          "#C34E7A"
+        ],
+        [
+          1,
+          "#EF709C"
+        ]
+      ],
+      "glow": "#FFD6C4",
+      "art": "together-keyring",
+      "use": "키링 · 관계",
+      "number": 3,
+      "key": "#FFA899",
+      "light": "#F3A8D7",
+      "deep": "#C34E7A",
+      "tail": "#EF709C",
+      "colors": [
+        "#F3A8D7",
+        "#FFA899",
+        "#C34E7A",
+        "#EF709C"
+      ],
+      "glowOpacity": 0.38,
+      "sourceTokens": [],
+      "sourceColors": [
+        "#F3A8D7",
+        "#FFA899",
+        "#C34E7A"
+      ],
+      "recipeLabel": "로즈 계열 · 채도 100%",
+      "titleColor": "#FFFFFF",
+      "family": "rose",
+      "referencePalette": "pink",
+      "saturationScale": 1
+    },
+    {
+      "id": "violet",
+      "name": "Purple Original",
+      "label": "퍼플 · 기준",
+      "kind": "reference-tonal",
+      "source": "1060:133434",
+      "stops": [
+        [
+          0,
+          "#E8C8F8"
+        ],
+        [
+          0.4,
+          "#E7ADDD"
+        ],
+        [
+          0.86,
+          "#8C4DBC"
+        ],
+        [
+          1,
+          "#A486F5"
+        ]
+      ],
+      "glow": "#FFD7F0",
+      "art": "ask-envelope",
+      "use": "질문 · 편지",
+      "number": 4,
+      "key": "#E7ADDD",
+      "light": "#E8C8F8",
+      "deep": "#8C4DBC",
+      "tail": "#A486F5",
+      "colors": [
+        "#E8C8F8",
+        "#E7ADDD",
+        "#8C4DBC",
+        "#A486F5"
+      ],
+      "glowOpacity": 0.38,
+      "sourceTokens": [],
+      "sourceColors": [
+        "#E8C8F8",
+        "#E7ADDD",
+        "#8C4DBC"
+      ],
+      "recipeLabel": "퍼플 계열 · 채도 100%",
+      "titleColor": "#FFFFFF",
+      "family": "purple",
+      "referencePalette": "violet",
+      "saturationScale": 1
+    },
+    {
+      "id": "cyan",
+      "name": "Aqua Original",
+      "label": "아쿠아 · 기준",
+      "kind": "reference-tonal",
+      "source": "1060:133434",
+      "stops": [
+        [
+          0,
+          "#90F3C1"
+        ],
+        [
+          0.43,
+          "#45D7CF"
+        ],
+        [
+          0.86,
+          "#1C91B2"
+        ],
+        [
+          1,
+          "#5FCEE2"
+        ]
+      ],
+      "glow": "#D4FFE4",
+      "art": "gif-frames",
+      "use": "연속 이미지 · GIF",
+      "number": 5,
+      "key": "#45D7CF",
+      "light": "#90F3C1",
+      "deep": "#1C91B2",
+      "tail": "#5FCEE2",
+      "colors": [
+        "#90F3C1",
+        "#45D7CF",
+        "#1C91B2",
+        "#5FCEE2"
+      ],
+      "glowOpacity": 0.38,
+      "sourceTokens": [],
+      "sourceColors": [
+        "#90F3C1",
+        "#45D7CF",
+        "#1C91B2"
+      ],
+      "recipeLabel": "아쿠아 계열 · 채도 100%",
+      "titleColor": "#FFFFFF",
+      "family": "aqua",
+      "referencePalette": "cyan",
+      "saturationScale": 1
+    },
+    {
+      "id": "mint",
+      "name": "Lilac",
+      "label": "라일락",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#D2B9DF"
+        ],
+        [
+          0.38,
+          "#C07ED7"
+        ],
+        [
+          0.84,
+          "#78338A"
+        ],
+        [
+          1,
+          "#AA59C4"
+        ]
+      ],
+      "glow": "#EEE4F1",
+      "art": "paparazzi-camera",
+      "use": "사진 · 카메라",
+      "number": 6,
+      "key": "#C07ED7",
+      "light": "#D2B9DF",
+      "deep": "#78338A",
+      "tail": "#AA59C4",
+      "colors": [
+        "#D2B9DF",
+        "#C07ED7",
+        "#78338A",
+        "#AA59C4"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#D2B9DF",
+        "#C07ED7",
+        "#78338A"
+      ],
+      "recipeLabel": "라일락 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "lilac",
+      "dominantHue": 284,
+      "hueRange": 9,
+      "brandAnchor": "splupPurple",
+      "brandAnchorColor": "#AA4AF4"
+    },
+    {
+      "id": "periwinkle",
+      "name": "Iris",
+      "label": "아이리스",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#B7A8DB"
+        ],
+        [
+          0.38,
+          "#865AD3"
+        ],
+        [
+          0.84,
+          "#472673"
+        ],
+        [
+          1,
+          "#703DC2"
+        ]
+      ],
+      "glow": "#E9E4F2",
+      "art": "vintage-camera",
+      "use": "필름 · 빈티지",
+      "number": 7,
+      "key": "#865AD3",
+      "light": "#B7A8DB",
+      "deep": "#472673",
+      "tail": "#703DC2",
+      "colors": [
+        "#B7A8DB",
+        "#865AD3",
+        "#472673",
+        "#703DC2"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#B7A8DB",
+        "#865AD3",
+        "#472673"
+      ],
+      "recipeLabel": "아이리스 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "iris",
+      "dominantHue": 262,
+      "hueRange": 9,
+      "brandAnchor": "deepPurple",
+      "brandAnchorColor": "#6655D2"
+    },
+    {
+      "id": "apricot",
+      "name": "Peony",
+      "label": "피오니",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#E5B3D3"
+        ],
+        [
+          0.38,
+          "#E269AC"
+        ],
+        [
+          0.84,
+          "#96275C"
+        ],
+        [
+          1,
+          "#D1428E"
+        ]
+      ],
+      "glow": "#F3E2EB",
+      "art": "together-keyring",
+      "use": "키링 · 관계",
+      "number": 8,
+      "key": "#E269AC",
+      "light": "#E5B3D3",
+      "deep": "#96275C",
+      "tail": "#D1428E",
+      "colors": [
+        "#E5B3D3",
+        "#E269AC",
+        "#96275C",
+        "#D1428E"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#E5B3D3",
+        "#E269AC",
+        "#96275C"
+      ],
+      "recipeLabel": "피오니 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "peony",
+      "dominantHue": 327,
+      "hueRange": 9,
+      "brandAnchor": "platterPink",
+      "brandAnchorColor": "#FA97E2"
+    },
+    {
+      "id": "rose",
+      "name": "Mulberry",
+      "label": "멀베리",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#DAAED9"
+        ],
+        [
+          0.38,
+          "#CD60C0"
+        ],
+        [
+          0.84,
+          "#6F2A62"
+        ],
+        [
+          1,
+          "#B742A8"
+        ]
+      ],
+      "glow": "#F1E4EF",
+      "art": "ask-envelope",
+      "use": "질문 · 편지",
+      "number": 9,
+      "key": "#CD60C0",
+      "light": "#DAAED9",
+      "deep": "#6F2A62",
+      "tail": "#B742A8",
+      "colors": [
+        "#DAAED9",
+        "#CD60C0",
+        "#6F2A62",
+        "#B742A8"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#DAAED9",
+        "#CD60C0",
+        "#6F2A62"
+      ],
+      "recipeLabel": "멀베리 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "mulberry",
+      "dominantHue": 307,
+      "hueRange": 9,
+      "brandAnchor": "hotPink",
+      "brandAnchorColor": "#FF2CBF"
+    },
+    {
+      "id": "lagoon",
+      "name": "Ruby",
+      "label": "루비",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#E3B0BC"
+        ],
+        [
+          0.38,
+          "#DF5D71"
+        ],
+        [
+          0.84,
+          "#85232B"
+        ],
+        [
+          1,
+          "#CC3347"
+        ]
+      ],
+      "glow": "#F3E2E5",
+      "art": "gif-frames",
+      "use": "연속 이미지 · GIF",
+      "number": 10,
+      "key": "#DF5D71",
+      "light": "#E3B0BC",
+      "deep": "#85232B",
+      "tail": "#CC3347",
+      "colors": [
+        "#E3B0BC",
+        "#DF5D71",
+        "#85232B",
+        "#CC3347"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#E3B0BC",
+        "#DF5D71",
+        "#85232B"
+      ],
+      "recipeLabel": "루비 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "ruby",
+      "dominantHue": 351,
+      "hueRange": 9,
+      "brandAnchor": "coral",
+      "brandAnchorColor": "#FF5488"
+    },
+    {
+      "id": "lime",
+      "name": "Salmon",
+      "label": "살몬",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#E5B6B3"
+        ],
+        [
+          0.38,
+          "#E37B68"
+        ],
+        [
+          0.84,
+          "#9B4027"
+        ],
+        [
+          1,
+          "#D46049"
+        ]
+      ],
+      "glow": "#F3E5E2",
+      "art": "paparazzi-camera",
+      "use": "사진 · 카메라",
+      "number": 11,
+      "key": "#E37B68",
+      "light": "#E5B6B3",
+      "deep": "#9B4027",
+      "tail": "#D46049",
+      "colors": [
+        "#E5B6B3",
+        "#E37B68",
+        "#9B4027",
+        "#D46049"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#E5B6B3",
+        "#E37B68",
+        "#9B4027"
+      ],
+      "recipeLabel": "살몬 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "salmon",
+      "dominantHue": 9,
+      "hueRange": 9,
+      "brandAnchor": "coral",
+      "brandAnchorColor": "#FF5488"
+    },
+    {
+      "id": "midnight",
+      "name": "Terracotta",
+      "label": "테라코타",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#DEB9AB"
+        ],
+        [
+          0.38,
+          "#D6875C"
+        ],
+        [
+          0.84,
+          "#844F29"
+        ],
+        [
+          1,
+          "#C46D3B"
+        ]
+      ],
+      "glow": "#F2E8E3",
+      "art": "vintage-camera",
+      "use": "필름 · 빈티지",
+      "number": 12,
+      "key": "#D6875C",
+      "light": "#DEB9AB",
+      "deep": "#844F29",
+      "tail": "#C46D3B",
+      "colors": [
+        "#DEB9AB",
+        "#D6875C",
+        "#844F29",
+        "#C46D3B"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#DEB9AB",
+        "#D6875C",
+        "#844F29"
+      ],
+      "recipeLabel": "테라코타 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "terracotta",
+      "dominantHue": 21,
+      "hueRange": 9,
+      "brandAnchor": "peach",
+      "brandAnchorColor": "#FF925D"
+    },
+    {
+      "id": "silver",
+      "name": "Apricot",
+      "label": "살구",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#E8D0BA"
+        ],
+        [
+          0.38,
+          "#E6B170"
+        ],
+        [
+          0.84,
+          "#A07227"
+        ],
+        [
+          1,
+          "#D69B4C"
+        ]
+      ],
+      "glow": "#F3EBE2",
+      "art": "together-keyring",
+      "use": "키링 · 관계",
+      "number": 13,
+      "key": "#E6B170",
+      "light": "#E8D0BA",
+      "deep": "#A07227",
+      "tail": "#D69B4C",
+      "colors": [
+        "#E8D0BA",
+        "#E6B170",
+        "#A07227",
+        "#D69B4C"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#E8D0BA",
+        "#E6B170",
+        "#A07227"
+      ],
+      "recipeLabel": "살구 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "apricot",
+      "dominantHue": 33,
+      "hueRange": 9,
+      "brandAnchor": "peach",
+      "brandAnchorColor": "#FF925D"
+    },
+    {
+      "id": "amber",
+      "name": "Saffron",
+      "label": "사프란",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#E5D4AE"
+        ],
+        [
+          0.38,
+          "#E3C254"
+        ],
+        [
+          0.84,
+          "#89771F"
+        ],
+        [
+          1,
+          "#CAA72B"
+        ]
+      ],
+      "glow": "#F3EFE2",
+      "art": "ask-envelope",
+      "use": "질문 · 편지",
+      "number": 14,
+      "key": "#E3C254",
+      "light": "#E5D4AE",
+      "deep": "#89771F",
+      "tail": "#CAA72B",
+      "colors": [
+        "#E5D4AE",
+        "#E3C254",
+        "#89771F",
+        "#CAA72B"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#E5D4AE",
+        "#E3C254",
+        "#89771F"
+      ],
+      "recipeLabel": "사프란 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "saffron",
+      "dominantHue": 46,
+      "hueRange": 9,
+      "brandAnchor": "lime",
+      "brandAnchorColor": "#F9F871"
+    },
+    {
+      "id": "berry",
+      "name": "Citron",
+      "label": "시트론",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#E3E2BA"
+        ],
+        [
+          0.38,
+          "#D6DB75"
+        ],
+        [
+          0.84,
+          "#79832A"
+        ],
+        [
+          1,
+          "#B6BF3B"
+        ]
+      ],
+      "glow": "#F1F2E3",
+      "art": "gif-frames",
+      "use": "연속 이미지 · GIF",
+      "number": 15,
+      "key": "#D6DB75",
+      "light": "#E3E2BA",
+      "deep": "#79832A",
+      "tail": "#B6BF3B",
+      "colors": [
+        "#E3E2BA",
+        "#D6DB75",
+        "#79832A",
+        "#B6BF3B"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#E3E2BA",
+        "#D6DB75",
+        "#79832A"
+      ],
+      "recipeLabel": "시트론 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "citron",
+      "dominantHue": 63,
+      "hueRange": 9,
+      "brandAnchor": "lime",
+      "brandAnchorColor": "#F9F871"
+    },
+    {
+      "id": "melon-soda",
+      "name": "Pear",
+      "label": "페어",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#D6E2B6"
+        ],
+        [
+          0.38,
+          "#B1D869"
+        ],
+        [
+          0.84,
+          "#567826"
+        ],
+        [
+          1,
+          "#89B738"
+        ]
+      ],
+      "glow": "#EDF2E3",
+      "art": "paparazzi-camera",
+      "use": "사진 · 카메라",
+      "number": 16,
+      "key": "#B1D869",
+      "light": "#D6E2B6",
+      "deep": "#567826",
+      "tail": "#89B738",
+      "colors": [
+        "#D6E2B6",
+        "#B1D869",
+        "#567826",
+        "#89B738"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#D6E2B6",
+        "#B1D869",
+        "#567826"
+      ],
+      "recipeLabel": "페어 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "pear",
+      "dominantHue": 81,
+      "hueRange": 9,
+      "brandAnchor": "lime",
+      "brandAnchorColor": "#F9F871"
+    },
+    {
+      "id": "peach-pool",
+      "name": "Sage",
+      "label": "세이지",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#C7DBBD"
+        ],
+        [
+          0.38,
+          "#90C97E"
+        ],
+        [
+          0.84,
+          "#3F6F34"
+        ],
+        [
+          1,
+          "#64AB4F"
+        ]
+      ],
+      "glow": "#E8F0E6",
+      "art": "vintage-camera",
+      "use": "필름 · 빈티지",
+      "number": 17,
+      "key": "#90C97E",
+      "light": "#C7DBBD",
+      "deep": "#3F6F34",
+      "tail": "#64AB4F",
+      "colors": [
+        "#C7DBBD",
+        "#90C97E",
+        "#3F6F34",
+        "#64AB4F"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#C7DBBD",
+        "#90C97E",
+        "#3F6F34"
+      ],
+      "recipeLabel": "세이지 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "sage",
+      "dominantHue": 105,
+      "hueRange": 9,
+      "brandAnchor": "mint",
+      "brandAnchorColor": "#07E7B4"
+    },
+    {
+      "id": "petal-moss",
+      "name": "Fern",
+      "label": "펀",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#AFDAB3"
+        ],
+        [
+          0.38,
+          "#61CC75"
+        ],
+        [
+          0.84,
+          "#296B3A"
+        ],
+        [
+          1,
+          "#3FAB55"
+        ]
+      ],
+      "glow": "#E4F1E7",
+      "art": "together-keyring",
+      "use": "키링 · 관계",
+      "number": 18,
+      "key": "#61CC75",
+      "light": "#AFDAB3",
+      "deep": "#296B3A",
+      "tail": "#3FAB55",
+      "colors": [
+        "#AFDAB3",
+        "#61CC75",
+        "#296B3A",
+        "#3FAB55"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#AFDAB3",
+        "#61CC75",
+        "#296B3A"
+      ],
+      "recipeLabel": "펀 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "fern",
+      "dominantHue": 131,
+      "hueRange": 9,
+      "brandAnchor": "mint",
+      "brandAnchorColor": "#07E7B4"
+    },
+    {
+      "id": "butter-denim",
+      "name": "Jade",
+      "label": "제이드",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#AEE0C6"
+        ],
+        [
+          0.38,
+          "#5BD7A1"
+        ],
+        [
+          0.84,
+          "#20694F"
+        ],
+        [
+          1,
+          "#35B680"
+        ]
+      ],
+      "glow": "#E3F2EC",
+      "art": "ask-envelope",
+      "use": "질문 · 편지",
+      "number": 19,
+      "key": "#5BD7A1",
+      "light": "#AEE0C6",
+      "deep": "#20694F",
+      "tail": "#35B680",
+      "colors": [
+        "#AEE0C6",
+        "#5BD7A1",
+        "#20694F",
+        "#35B680"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#AEE0C6",
+        "#5BD7A1",
+        "#20694F"
+      ],
+      "recipeLabel": "제이드 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "jade",
+      "dominantHue": 154,
+      "hueRange": 9,
+      "brandAnchor": "mint",
+      "brandAnchorColor": "#07E7B4"
+    },
+    {
+      "id": "coral-lilac",
+      "name": "Turquoise",
+      "label": "터쿼이즈",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#B8E5DD"
+        ],
+        [
+          0.38,
+          "#6DDFD3"
+        ],
+        [
+          0.84,
+          "#227774"
+        ],
+        [
+          1,
+          "#36C9BD"
+        ]
+      ],
+      "glow": "#E3F2F1",
+      "art": "gif-frames",
+      "use": "연속 이미지 · GIF",
+      "number": 20,
+      "key": "#6DDFD3",
+      "light": "#B8E5DD",
+      "deep": "#227774",
+      "tail": "#36C9BD",
+      "colors": [
+        "#B8E5DD",
+        "#6DDFD3",
+        "#227774",
+        "#36C9BD"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#B8E5DD",
+        "#6DDFD3",
+        "#227774"
+      ],
+      "recipeLabel": "터쿼이즈 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "turquoise",
+      "dominantHue": 174,
+      "hueRange": 9,
+      "brandAnchor": "cyan",
+      "brandAnchorColor": "#27E5F2"
+    },
+    {
+      "id": "lilac-lagoon",
+      "name": "Petrol",
+      "label": "페트롤",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#AAD5DA"
+        ],
+        [
+          0.38,
+          "#5DBBD0"
+        ],
+        [
+          0.84,
+          "#245566"
+        ],
+        [
+          1,
+          "#3B98AF"
+        ]
+      ],
+      "glow": "#E4EFF1",
+      "art": "paparazzi-camera",
+      "use": "사진 · 카메라",
+      "number": 21,
+      "key": "#5DBBD0",
+      "light": "#AAD5DA",
+      "deep": "#245566",
+      "tail": "#3B98AF",
+      "colors": [
+        "#AAD5DA",
+        "#5DBBD0",
+        "#245566",
+        "#3B98AF"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#AAD5DA",
+        "#5DBBD0",
+        "#245566"
+      ],
+      "recipeLabel": "페트롤 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "petrol",
+      "dominantHue": 191,
+      "hueRange": 9,
+      "brandAnchor": "aqua",
+      "brandAnchorColor": "#39B9CC"
+    },
+    {
+      "id": "blush-cocoa",
+      "name": "Ice Blue",
+      "label": "아이스블루",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#C5DAE3"
+        ],
+        [
+          0.38,
+          "#8EBBD7"
+        ],
+        [
+          0.84,
+          "#386589"
+        ],
+        [
+          1,
+          "#699FC4"
+        ]
+      ],
+      "glow": "#E5ECF0",
+      "art": "vintage-camera",
+      "use": "필름 · 빈티지",
+      "number": 22,
+      "key": "#8EBBD7",
+      "light": "#C5DAE3",
+      "deep": "#386589",
+      "tail": "#699FC4",
+      "colors": [
+        "#C5DAE3",
+        "#8EBBD7",
+        "#386589",
+        "#699FC4"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#C5DAE3",
+        "#8EBBD7",
+        "#386589"
+      ],
+      "recipeLabel": "아이스블루 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "ice-blue",
+      "dominantHue": 203,
+      "hueRange": 9,
+      "brandAnchor": "sky",
+      "brandAnchorColor": "#48B5F4"
+    },
+    {
+      "id": "aqua-apricot",
+      "name": "Azure",
+      "label": "애저",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#B0C9E3"
+        ],
+        [
+          0.38,
+          "#6799E0"
+        ],
+        [
+          0.84,
+          "#244684"
+        ],
+        [
+          1,
+          "#4079CE"
+        ]
+      ],
+      "glow": "#E3E9F3",
+      "art": "together-keyring",
+      "use": "키링 · 관계",
+      "number": 23,
+      "key": "#6799E0",
+      "light": "#B0C9E3",
+      "deep": "#244684",
+      "tail": "#4079CE",
+      "colors": [
+        "#B0C9E3",
+        "#6799E0",
+        "#244684",
+        "#4079CE"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#B0C9E3",
+        "#6799E0",
+        "#244684"
+      ],
+      "recipeLabel": "애저 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "azure",
+      "dominantHue": 215,
+      "hueRange": 9,
+      "brandAnchor": "blue",
+      "brandAnchorColor": "#398FE8"
+    },
+    {
+      "id": "iris-cream",
+      "name": "Cobalt",
+      "label": "코발트",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#A3B3E1"
+        ],
+        [
+          0.38,
+          "#4561DE"
+        ],
+        [
+          0.84,
+          "#1B256F"
+        ],
+        [
+          1,
+          "#2C46C3"
+        ]
+      ],
+      "glow": "#E2E5F3",
+      "art": "ask-envelope",
+      "use": "질문 · 편지",
+      "number": 24,
+      "key": "#4561DE",
+      "light": "#A3B3E1",
+      "deep": "#1B256F",
+      "tail": "#2C46C3",
+      "colors": [
+        "#A3B3E1",
+        "#4561DE",
+        "#1B256F",
+        "#2C46C3"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#A3B3E1",
+        "#4561DE",
+        "#1B256F"
+      ],
+      "recipeLabel": "코발트 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "cobalt",
+      "dominantHue": 229,
+      "hueRange": 9,
+      "brandAnchor": "blue",
+      "brandAnchorColor": "#398FE8"
+    },
+    {
+      "id": "mint-periwinkle",
+      "name": "Periwinkle",
+      "label": "페리윙클",
+      "kind": "color-extension",
+      "stops": [
+        [
+          0,
+          "#BEBFE4"
+        ],
+        [
+          0.38,
+          "#7F7ADC"
+        ],
+        [
+          0.84,
+          "#3B3092"
+        ],
+        [
+          1,
+          "#635CCC"
+        ]
+      ],
+      "glow": "#E4E4F2",
+      "art": "gif-frames",
+      "use": "연속 이미지 · GIF",
+      "number": 25,
+      "key": "#7F7ADC",
+      "light": "#BEBFE4",
+      "deep": "#3B3092",
+      "tail": "#635CCC",
+      "colors": [
+        "#BEBFE4",
+        "#7F7ADC",
+        "#3B3092",
+        "#635CCC"
+      ],
+      "glowOpacity": 0.32,
+      "source": "brand-related hue family with reference surface",
+      "sourceColors": [
+        "#BEBFE4",
+        "#7F7ADC",
+        "#3B3092"
+      ],
+      "recipeLabel": "페리윙클 · 밝은 톤 → 깊은 톤",
+      "titleColor": "#FFFFFF",
+      "family": "periwinkle",
+      "dominantHue": 243,
+      "hueRange": 9,
+      "brandAnchor": "deepPurple",
+      "brandAnchorColor": "#6655D2"
+    }
+  ],
+  "events": [
+    {
+      "id": "purple",
+      "name": "Lavender",
+      "stops": [
+        [
+          0,
+          "#EBECF9"
+        ],
+        [
+          0.15,
+          "#E8E2F7"
+        ],
+        [
+          0.35,
+          "#E5D7F5"
+        ],
+        [
+          0.55,
+          "#E4CFF2"
+        ],
+        [
+          0.65,
+          "#DECAF1"
+        ],
+        [
+          0.73,
+          "#D5C6F0"
+        ],
+        [
+          0.77,
+          "#CEC2EE"
+        ],
+        [
+          0.82,
+          "#C5BFEE"
+        ],
+        [
+          0.9,
+          "#B8BDEC"
+        ],
+        [
+          1,
+          "#BBC2ED"
+        ]
+      ],
+      "source": "사용자 첨부 EVENT 8종의 중앙 색상 샘플 → 편집 가능한 10-stop gradient"
+    },
+    {
+      "id": "yellow",
+      "name": "Golden hour",
+      "stops": [
+        [
+          0,
+          "#C4C2CA"
+        ],
+        [
+          0.15,
+          "#C4BDCB"
+        ],
+        [
+          0.35,
+          "#C0B0C6"
+        ],
+        [
+          0.55,
+          "#CAB097"
+        ],
+        [
+          0.65,
+          "#DFB87E"
+        ],
+        [
+          0.73,
+          "#C9BB71"
+        ],
+        [
+          0.77,
+          "#CDC586"
+        ],
+        [
+          0.82,
+          "#DED8C2"
+        ],
+        [
+          0.9,
+          "#EDE6F8"
+        ],
+        [
+          1,
+          "#FDF4FD"
+        ]
+      ],
+      "source": "사용자 첨부 EVENT 8종의 중앙 색상 샘플 → 편집 가능한 10-stop gradient"
+    },
+    {
+      "id": "red",
+      "name": "Rose horizon",
+      "stops": [
+        [
+          0,
+          "#F5DCE6"
+        ],
+        [
+          0.15,
+          "#F3D4E6"
+        ],
+        [
+          0.35,
+          "#F1C9E4"
+        ],
+        [
+          0.55,
+          "#E99AAE"
+        ],
+        [
+          0.65,
+          "#E07583"
+        ],
+        [
+          0.73,
+          "#D65C60"
+        ],
+        [
+          0.77,
+          "#D35F6C"
+        ],
+        [
+          0.82,
+          "#D784B4"
+        ],
+        [
+          0.9,
+          "#E6C0F1"
+        ],
+        [
+          1,
+          "#F8DBFA"
+        ]
+      ],
+      "source": "사용자 첨부 EVENT 8종의 중앙 색상 샘플 → 편집 가능한 10-stop gradient"
+    },
+    {
+      "id": "black",
+      "name": "Mist",
+      "stops": [
+        [
+          0,
+          "#EAEFF4"
+        ],
+        [
+          0.15,
+          "#E5E8F1"
+        ],
+        [
+          0.35,
+          "#E0DFED"
+        ],
+        [
+          0.55,
+          "#D7D3E6"
+        ],
+        [
+          0.65,
+          "#BEBDD3"
+        ],
+        [
+          0.73,
+          "#A6A9BD"
+        ],
+        [
+          0.77,
+          "#A9AEC4"
+        ],
+        [
+          0.82,
+          "#BDC7DE"
+        ],
+        [
+          0.9,
+          "#D5DDEA"
+        ],
+        [
+          1,
+          "#F6F8FB"
+        ]
+      ],
+      "source": "사용자 첨부 EVENT 8종의 중앙 색상 샘플 → 편집 가능한 10-stop gradient"
+    },
+    {
+      "id": "green",
+      "name": "Mint horizon",
+      "stops": [
+        [
+          0,
+          "#E7F9E7"
+        ],
+        [
+          0.15,
+          "#E3F6E7"
+        ],
+        [
+          0.35,
+          "#E0F3E4"
+        ],
+        [
+          0.55,
+          "#C5EAC3"
+        ],
+        [
+          0.65,
+          "#93E0A6"
+        ],
+        [
+          0.73,
+          "#74D890"
+        ],
+        [
+          0.77,
+          "#73D795"
+        ],
+        [
+          0.82,
+          "#92E0BD"
+        ],
+        [
+          0.9,
+          "#C6EFF0"
+        ],
+        [
+          1,
+          "#FBFFF7"
+        ]
+      ],
+      "source": "사용자 첨부 EVENT 8종의 중앙 색상 샘플 → 편집 가능한 10-stop gradient"
+    },
+    {
+      "id": "white",
+      "name": "Slate",
+      "stops": [
+        [
+          0,
+          "#BDC8D7"
+        ],
+        [
+          0.15,
+          "#BAC3D4"
+        ],
+        [
+          0.35,
+          "#B8BDD1"
+        ],
+        [
+          0.55,
+          "#B1B3CA"
+        ],
+        [
+          0.65,
+          "#A8ABC5"
+        ],
+        [
+          0.73,
+          "#9AA2BD"
+        ],
+        [
+          0.77,
+          "#9AA5C0"
+        ],
+        [
+          0.82,
+          "#AEB8CD"
+        ],
+        [
+          0.9,
+          "#D0D6E2"
+        ],
+        [
+          1,
+          "#F4F6F9"
+        ]
+      ],
+      "source": "사용자 첨부 EVENT 8종의 중앙 색상 샘플 → 편집 가능한 10-stop gradient"
+    },
+    {
+      "id": "blue",
+      "name": "Blue hour",
+      "stops": [
+        [
+          0,
+          "#DFF1FD"
+        ],
+        [
+          0.15,
+          "#DAEBFC"
+        ],
+        [
+          0.35,
+          "#D5E3FB"
+        ],
+        [
+          0.55,
+          "#D0D8F6"
+        ],
+        [
+          0.65,
+          "#C1CDF3"
+        ],
+        [
+          0.73,
+          "#ADC1ED"
+        ],
+        [
+          0.77,
+          "#A7C2EC"
+        ],
+        [
+          0.82,
+          "#B3CEF0"
+        ],
+        [
+          0.9,
+          "#D4E2F6"
+        ],
+        [
+          1,
+          "#F5F9FE"
+        ]
+      ],
+      "source": "사용자 첨부 EVENT 8종의 중앙 색상 샘플 → 편집 가능한 10-stop gradient"
+    },
+    {
+      "id": "orange",
+      "name": "Apricot",
+      "stops": [
+        [
+          0,
+          "#FDF2E0"
+        ],
+        [
+          0.15,
+          "#FCEDD5"
+        ],
+        [
+          0.35,
+          "#FBE7C9"
+        ],
+        [
+          0.55,
+          "#F9D8A9"
+        ],
+        [
+          0.65,
+          "#F5BE83"
+        ],
+        [
+          0.73,
+          "#F09762"
+        ],
+        [
+          0.77,
+          "#F2AA71"
+        ],
+        [
+          0.82,
+          "#F6C28A"
+        ],
+        [
+          0.9,
+          "#F9D8B6"
+        ],
+        [
+          1,
+          "#FEF7F2"
+        ]
+      ],
+      "source": "사용자 첨부 EVENT 8종의 중앙 색상 샘플 → 편집 가능한 10-stop gradient"
+    }
+  ],
+  "brand": {
+    "direction": "Original soft three-color palette / subtle fluid motion",
+    "core": [
+      "purple-pink",
+      "deep-purple",
+      "pink-coral",
+      "peach-yellow",
+      "cyan-blue",
+      "mint-lime"
+    ],
+    "motion": {
+      "durationSeconds": 18,
+      "easing": "ease-in-out",
+      "translationRatioMax": 0.035,
+      "scaleRange": [
+        0.98,
+        1.03
+      ],
+      "containerMotion": false,
+      "reducedMotion": "static",
+      "keyframeSeconds": [
+        0,
+        6,
+        12,
+        18
+      ]
+    },
+    "finishes": [
+      "Plain",
+      "Glass"
+    ],
+    "fluidPalettes": [
+      {
+        "id": "purple-pink",
+        "number": "01",
+        "name": "퍼플 · 핑크",
+        "colors": [
+          "#AA4AF4",
+          "#6655D2",
+          "#FA97E2"
+        ],
+        "tokens": [
+          "color.primitive.brandGraphic.splupPurple",
+          "color.primitive.brandGraphic.deepPurple",
+          "color.primitive.brandGraphic.platterPink"
+        ],
+        "phase": 0.2,
+        "variant": "violet",
+        "widget": {
+          "stops": [
+            [
+              0,
+              "#FCCBF0"
+            ],
+            [
+              0.38,
+              "#B867F6"
+            ],
+            [
+              0.72,
+              "#6655D2"
+            ],
+            [
+              1,
+              "#5645AD"
+            ]
+          ],
+          "foreground": "#FFFFFF"
+        },
+        "surface": {
+          "base": "#ebd5fc",
+          "blurRatio": 0.1,
+          "rimOpacity": 0.16,
+          "rimBlurRatio": 0.028125,
+          "rimWidthRatio": 0.06875,
+          "source": "design/brand/color-system/gradient-buttons/purple-pink-soft.svg",
+          "method": "overlapping full-surface radial fields",
+          "overscan": 0.3,
+          "figmaBlurRatio": 0.2,
+          "falloff": [
+            [
+              0,
+              1
+            ],
+            [
+              0.52,
+              0.38
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "fields": [
+            {
+              "center": [
+                0.38,
+                0.18
+              ],
+              "radius": [
+                0.93,
+                0.9
+              ],
+              "opacity": 0.94
+            },
+            {
+              "center": [
+                0.08,
+                0.72
+              ],
+              "radius": [
+                0.94,
+                0.92
+              ],
+              "opacity": 0.9
+            },
+            {
+              "center": [
+                0.9,
+                0.76
+              ],
+              "radius": [
+                1.02,
+                0.98
+              ],
+              "opacity": 0.9
+            }
+          ]
+        }
+      },
+      {
+        "id": "deep-purple",
+        "number": "02",
+        "name": "딥 퍼플 · 바이올렛",
+        "colors": [
+          "#6655D2",
+          "#7841C4",
+          "#AA4AF4"
+        ],
+        "tokens": [
+          "color.primitive.brandGraphic.deepPurple",
+          "color.primitive.brandGraphic.violet",
+          "color.primitive.brandGraphic.splupPurple"
+        ],
+        "phase": 1.2,
+        "variant": "indigo",
+        "widget": {
+          "stops": [
+            [
+              0,
+              "#D4A4FA"
+            ],
+            [
+              0.38,
+              "#7E70D9"
+            ],
+            [
+              0.72,
+              "#7841C4"
+            ],
+            [
+              1,
+              "#6336A2"
+            ]
+          ],
+          "foreground": "#FFFFFF"
+        },
+        "surface": {
+          "base": "#dcd8f5",
+          "blurRatio": 0.1,
+          "rimOpacity": 0.16,
+          "rimBlurRatio": 0.028125,
+          "rimWidthRatio": 0.06875,
+          "source": "design/brand/color-system/gradient-buttons/deep-purple-soft.svg",
+          "method": "overlapping full-surface radial fields",
+          "overscan": 0.3,
+          "figmaBlurRatio": 0.2,
+          "falloff": [
+            [
+              0,
+              1
+            ],
+            [
+              0.52,
+              0.38
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "fields": [
+            {
+              "center": [
+                0.38,
+                0.18
+              ],
+              "radius": [
+                0.93,
+                0.9
+              ],
+              "opacity": 0.94
+            },
+            {
+              "center": [
+                0.08,
+                0.72
+              ],
+              "radius": [
+                0.94,
+                0.92
+              ],
+              "opacity": 0.9
+            },
+            {
+              "center": [
+                0.9,
+                0.76
+              ],
+              "radius": [
+                1.02,
+                0.98
+              ],
+              "opacity": 0.9
+            }
+          ]
+        }
+      },
+      {
+        "id": "pink-coral",
+        "number": "03",
+        "name": "핑크 · 코랄",
+        "colors": [
+          "#FA97E2",
+          "#FF2CBF",
+          "#FF5488"
+        ],
+        "tokens": [
+          "color.primitive.brandGraphic.platterPink",
+          "color.primitive.brandGraphic.hotPink",
+          "color.primitive.brandGraphic.coral"
+        ],
+        "phase": 2.1,
+        "variant": "pink",
+        "widget": {
+          "stops": [
+            [
+              0,
+              "#FFAAC4"
+            ],
+            [
+              0.38,
+              "#FBA8E7"
+            ],
+            [
+              0.72,
+              "#FF2CBF"
+            ],
+            [
+              1,
+              "#C8269E"
+            ]
+          ],
+          "foreground": "#FFFFFF"
+        },
+        "surface": {
+          "base": "#fee7f8",
+          "blurRatio": 0.1,
+          "rimOpacity": 0.16,
+          "rimBlurRatio": 0.028125,
+          "rimWidthRatio": 0.06875,
+          "source": "design/brand/color-system/gradient-buttons/pink-coral-soft.svg",
+          "method": "overlapping full-surface radial fields",
+          "overscan": 0.3,
+          "figmaBlurRatio": 0.2,
+          "falloff": [
+            [
+              0,
+              1
+            ],
+            [
+              0.52,
+              0.38
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "fields": [
+            {
+              "center": [
+                0.38,
+                0.18
+              ],
+              "radius": [
+                0.93,
+                0.9
+              ],
+              "opacity": 0.94
+            },
+            {
+              "center": [
+                0.08,
+                0.72
+              ],
+              "radius": [
+                0.94,
+                0.92
+              ],
+              "opacity": 0.9
+            },
+            {
+              "center": [
+                0.9,
+                0.76
+              ],
+              "radius": [
+                1.02,
+                0.98
+              ],
+              "opacity": 0.9
+            }
+          ]
+        }
+      },
+      {
+        "id": "peach-yellow",
+        "number": "04",
+        "name": "피치 · 옐로",
+        "colors": [
+          "#FF925D",
+          "#F9F871",
+          "#FA97E2"
+        ],
+        "tokens": [
+          "color.primitive.brandGraphic.peach",
+          "color.primitive.brandGraphic.lime",
+          "color.primitive.brandGraphic.platterPink"
+        ],
+        "phase": 3.2,
+        "variant": "peach",
+        "widget": {
+          "stops": [
+            [
+              0,
+              "#FCCBF0"
+            ],
+            [
+              0.38,
+              "#FFA377"
+            ],
+            [
+              0.72,
+              "#F9F871"
+            ],
+            [
+              1,
+              "#C4BF64"
+            ]
+          ],
+          "foreground": "#FFFFFF"
+        },
+        "surface": {
+          "base": "#ffe6da",
+          "blurRatio": 0.1,
+          "rimOpacity": 0.16,
+          "rimBlurRatio": 0.028125,
+          "rimWidthRatio": 0.06875,
+          "source": "design/brand/color-system/gradient-buttons/peach-yellow-soft.svg",
+          "method": "overlapping full-surface radial fields",
+          "overscan": 0.3,
+          "figmaBlurRatio": 0.2,
+          "falloff": [
+            [
+              0,
+              1
+            ],
+            [
+              0.52,
+              0.38
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "fields": [
+            {
+              "center": [
+                0.38,
+                0.18
+              ],
+              "radius": [
+                0.93,
+                0.9
+              ],
+              "opacity": 0.94
+            },
+            {
+              "center": [
+                0.08,
+                0.72
+              ],
+              "radius": [
+                0.94,
+                0.92
+              ],
+              "opacity": 0.9
+            },
+            {
+              "center": [
+                0.9,
+                0.76
+              ],
+              "radius": [
+                1.02,
+                0.98
+              ],
+              "opacity": 0.9
+            }
+          ]
+        }
+      },
+      {
+        "id": "cyan-blue",
+        "number": "05",
+        "name": "시안 · 블루",
+        "colors": [
+          "#48B5F4",
+          "#27E5F2",
+          "#398FE8"
+        ],
+        "tokens": [
+          "color.primitive.brandGraphic.sky",
+          "color.primitive.brandGraphic.cyan",
+          "color.primitive.brandGraphic.blue"
+        ],
+        "phase": 4.1,
+        "variant": "cyan",
+        "widget": {
+          "stops": [
+            [
+              0,
+              "#9CC7F4"
+            ],
+            [
+              0.38,
+              "#65C1F6"
+            ],
+            [
+              0.72,
+              "#27E5F2"
+            ],
+            [
+              1,
+              "#26B1C5"
+            ]
+          ],
+          "foreground": "#FFFFFF"
+        },
+        "surface": {
+          "base": "#d5eefc",
+          "blurRatio": 0.1,
+          "rimOpacity": 0.16,
+          "rimBlurRatio": 0.028125,
+          "rimWidthRatio": 0.06875,
+          "source": "design/brand/color-system/gradient-buttons/cyan-blue-soft.svg",
+          "method": "overlapping full-surface radial fields",
+          "overscan": 0.3,
+          "figmaBlurRatio": 0.2,
+          "falloff": [
+            [
+              0,
+              1
+            ],
+            [
+              0.52,
+              0.38
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "fields": [
+            {
+              "center": [
+                0.38,
+                0.18
+              ],
+              "radius": [
+                0.93,
+                0.9
+              ],
+              "opacity": 0.94
+            },
+            {
+              "center": [
+                0.08,
+                0.72
+              ],
+              "radius": [
+                0.94,
+                0.92
+              ],
+              "opacity": 0.9
+            },
+            {
+              "center": [
+                0.9,
+                0.76
+              ],
+              "radius": [
+                1.02,
+                0.98
+              ],
+              "opacity": 0.9
+            }
+          ]
+        }
+      },
+      {
+        "id": "mint-lime",
+        "number": "06",
+        "name": "민트 · 라임",
+        "colors": [
+          "#07E7B4",
+          "#F9F871",
+          "#39B9CC"
+        ],
+        "tokens": [
+          "color.primitive.brandGraphic.mint",
+          "color.primitive.brandGraphic.lime",
+          "color.primitive.brandGraphic.aqua"
+        ],
+        "phase": 5.1,
+        "variant": "mint",
+        "widget": {
+          "stops": [
+            [
+              0,
+              "#9CDCE6"
+            ],
+            [
+              0.38,
+              "#2FEBC0"
+            ],
+            [
+              0.72,
+              "#F9F871"
+            ],
+            [
+              1,
+              "#C4BF64"
+            ]
+          ],
+          "foreground": "#FFFFFF"
+        },
+        "surface": {
+          "base": "#c6f9ee",
+          "blurRatio": 0.1,
+          "rimOpacity": 0.16,
+          "rimBlurRatio": 0.028125,
+          "rimWidthRatio": 0.06875,
+          "source": "design/brand/color-system/gradient-buttons/mint-lime-soft.svg",
+          "method": "overlapping full-surface radial fields",
+          "overscan": 0.3,
+          "figmaBlurRatio": 0.2,
+          "falloff": [
+            [
+              0,
+              1
+            ],
+            [
+              0.52,
+              0.38
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "fields": [
+            {
+              "center": [
+                0.38,
+                0.18
+              ],
+              "radius": [
+                0.93,
+                0.9
+              ],
+              "opacity": 0.94
+            },
+            {
+              "center": [
+                0.08,
+                0.72
+              ],
+              "radius": [
+                0.94,
+                0.92
+              ],
+              "opacity": 0.9
+            },
+            {
+              "center": [
+                0.9,
+                0.76
+              ],
+              "radius": [
+                1.02,
+                0.98
+              ],
+              "opacity": 0.9
+            }
+          ]
+        }
+      }
+    ],
+    "rendering": "Three full-surface translucent fields extend beyond the canvas and fade fully to zero. Existing source colors and light base retained; no closed color islands or dark core.",
+    "usage": {
+      "fluid": "brand backgrounds",
+      "button": "adopted static Ditto action palettes; independent of Fluid",
+      "icon": "static Fluid + soft diffuse rim and top veil; Plain/Glass logo finishes",
+      "widget": "linear editable stops from shared sources"
+    },
+    "appIcon": {
+      "canvasSize": 240,
+      "radius": 54,
+      "cornerSmoothing": 1,
+      "logo": {
+        "width": 124,
+        "height": 120.55555555555556,
+        "widthRatio": 0.5166666666666667,
+        "heightRatio": 0.5023148148148148,
+        "alignment": "center",
+        "preserveAspectRatio": true
+      },
+      "softShell": {
+        "rim": {
+          "color": "#FFFFFF",
+          "opacity": 0.68,
+          "width": 26,
+          "figmaBlur": 24,
+          "svgStdDeviation": 12,
+          "alignment": "CENTER"
+        },
+        "topVeil": {
+          "color": "#FFFFFF",
+          "stops": [
+            [
+              0,
+              0.34
+            ],
+            [
+              0.24,
+              0.12
+            ],
+            [
+              0.62,
+              0
+            ],
+            [
+              1,
+              0.01
+            ]
+          ]
+        },
+        "glassEdge": {
+          "width": 1.2,
+          "figmaBlur": 0.75,
+          "svgStdDeviation": 0.375,
+          "stops": [
+            [
+              0,
+              0.8
+            ],
+            [
+              0.55,
+              0.18
+            ],
+            [
+              1,
+              0.4
+            ]
+          ]
+        }
+      },
+      "figmaSet": "1592:7176",
+      "figmaGuide": "1594:7404"
+    }
+  },
+  "focus": {
+    "width": 2,
+    "gap": 2,
+    "token": "border/focus",
+    "trigger": "focus-visible / 키보드"
+  },
+  "selection": {
+    "width": 2,
+    "gap": 0,
+    "token": "selection/border",
+    "trigger": "선택값"
+  },
+  "dittoButton": {
+    "height": 60,
+    "radius": 12,
+    "icon": 27,
+    "gap": 10,
+    "label": 17,
+    "padding": 20,
+    "variants": [
+      "Label"
+    ],
+    "states": [
+      "Default",
+      "Holding",
+      "Pending",
+      "Complete",
+      "Error",
+      "Disabled"
+    ],
+    "foreground": "#FFFFFF",
+    "paletteSource": "component.dittoButton.gradient.palettes",
+    "sharedWithFluid": false,
+    "palettes": [
+      {
+        "id": "purple",
+        "name": "퍼플 · 바이올렛",
+        "colors": [
+          "#AA4AF4",
+          "#6655D2"
+        ],
+        "offsets": [
+          0,
+          0.36,
+          1
+        ],
+        "colorIndices": [
+          0,
+          0,
+          1
+        ],
+        "from": [
+          0,
+          0
+        ],
+        "to": [
+          181,
+          181
+        ],
+        "variant": "violet",
+        "figmaSource": "1581:124721"
+      },
+      {
+        "id": "lavender",
+        "name": "딥 퍼플 · 이클립스",
+        "colors": [
+          "#6655D2",
+          "#2C2F3A"
+        ],
+        "offsets": [
+          0,
+          0.36,
+          1
+        ],
+        "colorIndices": [
+          0,
+          0,
+          1
+        ],
+        "from": [
+          10,
+          0
+        ],
+        "to": [
+          181,
+          181
+        ],
+        "variant": "indigo",
+        "figmaSource": "1581:124722"
+      },
+      {
+        "id": "coral",
+        "name": "핑크 · 코랄",
+        "colors": [
+          "#FA97E2",
+          "#FF2CBF",
+          "#FF5488"
+        ],
+        "offsets": [
+          0,
+          0.25,
+          0.9,
+          1
+        ],
+        "colorIndices": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "from": [
+          0,
+          30
+        ],
+        "to": [
+          195,
+          151
+        ],
+        "variant": "pink",
+        "figmaSource": "1581:124723"
+      },
+      {
+        "id": "peach",
+        "name": "피치 · 옐로",
+        "colors": [
+          "#FF925D",
+          "#F9F871"
+        ],
+        "offsets": [
+          0,
+          0.28,
+          1
+        ],
+        "colorIndices": [
+          0,
+          0,
+          1
+        ],
+        "from": [
+          0,
+          20
+        ],
+        "to": [
+          205,
+          170
+        ],
+        "variant": "peach",
+        "figmaSource": "1581:124724"
+      },
+      {
+        "id": "sky",
+        "name": "시안 · 블루",
+        "colors": [
+          "#48B5F4",
+          "#27E5F2"
+        ],
+        "offsets": [
+          0,
+          0.25,
+          1
+        ],
+        "colorIndices": [
+          0,
+          0,
+          1
+        ],
+        "from": [
+          0,
+          20
+        ],
+        "to": [
+          205,
+          170
+        ],
+        "variant": "cyan",
+        "figmaSource": "1581:124725"
+      },
+      {
+        "id": "mint",
+        "name": "민트 · 라임",
+        "colors": [
+          "#07E7B4",
+          "#F9F871"
+        ],
+        "offsets": [
+          0,
+          0.28,
+          1
+        ],
+        "colorIndices": [
+          0,
+          0,
+          1
+        ],
+        "from": [
+          0,
+          20
+        ],
+        "to": [
+          205,
+          170
+        ],
+        "variant": "mint",
+        "figmaSource": "1581:124726"
+      }
+    ],
+    "whiteCoatOpacity": 0.09,
+    "originalCTA": {
+      "variant": "violet",
+      "content": "Label",
+      "fill": "#A25AD6",
+      "rgb": {
+        "r": 0.6355645656585693,
+        "g": 0.3519641160964966,
+        "b": 0.8375813961029053
+      },
+      "foreground": "#FFFFFF",
+      "figmaSource": "1581:131370",
+      "effects": [
+        {
+          "type": "INNER_SHADOW",
+          "visible": true,
+          "radius": 32,
+          "boundVariables": {},
+          "color": {
+            "r": 0.8090571165084839,
+            "g": 0.6293146014213562,
+            "b": 0.9131184816360474,
+            "a": 0.25
+          },
+          "offset": {
+            "x": 0,
+            "y": -12
+          },
+          "spread": 0,
+          "blendMode": "NORMAL"
+        },
+        {
+          "type": "INNER_SHADOW",
+          "visible": true,
+          "radius": 4,
+          "boundVariables": {},
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 0.4000000059604645
+          },
+          "offset": {
+            "x": 0,
+            "y": 4
+          },
+          "spread": 0,
+          "blendMode": "NORMAL"
+        }
+      ]
+    },
+    "stateTone": {
+      "hover": 0.006,
+      "pressed": 0.012
+    },
+    "role": "action",
+    "layout": "full-width label button only",
+    "width": {
+      "reference": 370,
+      "minimum": 280,
+      "maximum": "container"
+    },
+    "hold": {
+      "durationMs": 3000,
+      "progress": "internal elapsed time only; visible feedback is continuous color depth, no bar or rail",
+      "commit": "once after uninterrupted hold; complete only after persistence succeeds",
+      "cancelOn": [
+        "early-release",
+        "out-of-bounds",
+        "touch-movement-over-12px",
+        "pointercancel",
+        "lostpointercapture",
+        "blur",
+        "Escape",
+        "page-hidden",
+        "pagehide"
+      ],
+      "resetProgressOnCancel": true,
+      "pressFeedbackMs": 110,
+      "cancelFeedbackMs": 360,
+      "reducedMotion": "same 3000ms; static pressed tint, no spatial/material animation; remaining seconds and status text",
+      "keyboard": [
+        "Space hold",
+        "Enter hold",
+        "Escape cancel"
+      ],
+      "assistiveAlternative": "explicit confirmation dialog on screen-reader activation; no action on first activation",
+      "material": {
+        "type": "soft color pressure",
+        "source": "sasha_birukoff_-_fluid_illumination_JqSmjZ.mp4",
+        "pressMs": 110,
+        "deepenMs": 2890,
+        "releaseMs": 360,
+        "pressure": [
+          0,
+          0.12,
+          0.58,
+          0
+        ],
+        "depthInk": "adopted base hue at 58% RGB intensity",
+        "easing": "smoothstep during hold; ease-out on release",
+        "depthTranslationYAtMax": 1.74,
+        "depthScaleAtMax": [
+          1.0696,
+          0.9072
+        ],
+        "edgeLightMaxOpacity": 0.406,
+        "directionalFill": false,
+        "idleMotion": false
+      }
+    },
+    "badge": {
+      "role": "non-interactive ownership indicator",
+      "sizes": [
+        24,
+        32
+      ],
+      "label": "디토한 위젯",
+      "placement": "widget top trailing, inset 8px",
+      "action": null,
+      "hover": false,
+      "focus": false,
+      "paletteCount": 6,
+      "componentSet": "1247:2764"
+    },
+    "figma": {
+      "guide": "1594:7230",
+      "visualStateSet": "1592:7054",
+      "holdComponentSet": "1699:8399",
+      "badgeComponentSet": "1247:2764",
+      "prototypeStates": [
+        "Idle",
+        "HoldingStart",
+        "HoldingEnd",
+        "Pending",
+        "Complete"
+      ],
+      "prototypeCommit": "simulated success after 650ms; no widget is saved",
+      "materialTransition": {
+        "type": "SMART_ANIMATE",
+        "easing": "EASE_IN_AND_OUT",
+        "pressMs": 110,
+        "deepenMs": 2890,
+        "releaseMs": 360
+      }
+    }
+  },
+  "widgetGraphics": {
+    "sourceNode": "1060:133434",
+    "guidePalette": "1594:7495",
+    "totalCount": 25,
+    "componentSet": "1592:7115",
+    "canvas": 288,
+    "radius": 28,
+    "padding": 20,
+    "title": {
+      "size": 24,
+      "lineHeight": 30,
+      "bottom": 20,
+      "maxLines": 1,
+      "color": "#FFFFFF"
+    },
+    "artwork": {
+      "x": 20,
+      "y": 20,
+      "width": 248,
+      "height": 210,
+      "fit": "contain",
+      "objectSize": 204
+    },
+    "glow": {
+      "x": 17.28,
+      "y": 23.76,
+      "width": 165.6,
+      "height": 115.2,
+      "blur": 33.12
+    },
+    "titleShade": {
+      "color": "#1C1722",
+      "opacity": 0.12,
+      "stops": [
+        [
+          0,
+          0
+        ],
+        [
+          0.62,
+          0
+        ],
+        [
+          0.8,
+          0.12
+        ],
+        [
+          0.93,
+          0.12
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    "assets": {
+      "paparazzi-camera": "color-assets/widget-objects/paparazzi-camera.png",
+      "vintage-camera": "color-assets/widget-objects/vintage-camera.png",
+      "together-keyring": "color-assets/widget-objects/together-keyring.png",
+      "ask-envelope": "color-assets/widget-objects/ask-envelope.png",
+      "gif-frames": "color-assets/widget-objects/gif-frames.png"
+    },
+    "examples": [
+      {
+        "palette": "indigo",
+        "title": "Paparazzi",
+        "caption": "블루 · 사진 · 카메라",
+        "note": "카메라 외곽을 살리고 좌우 20px 여백을 유지해요."
+      },
+      {
+        "palette": "peach",
+        "title": "Vintage",
+        "caption": "앰버 · 필름 · 빈티지",
+        "note": "카메라는 상단 중앙에, 제목은 8px 간격 아래에 놓아요."
+      },
+      {
+        "palette": "pink",
+        "title": "Together",
+        "caption": "로즈 · 키링 · 관계",
+        "note": "키링 전체를 담고, 하단 제목 공간은 비워 둬요."
+      },
+      {
+        "palette": "violet",
+        "title": "Ask",
+        "caption": "퍼플 · 질문 · 편지",
+        "note": "질문 카드를 상단에 담고 제목은 아래에 고정해요."
+      },
+      {
+        "palette": "cyan",
+        "title": "GIF",
+        "caption": "아쿠아 · 연속 이미지 · GIF",
+        "note": "프레임 묶음의 기울기는 유지하고 이미지 전체를 담아요."
+      }
+    ],
+    "guidePlacement": "1663:8765",
+    "paletteNames": {
+      "indigo": "Blue Original",
+      "peach": "Amber Original",
+      "pink": "Rose Original",
+      "violet": "Purple Original",
+      "cyan": "Aqua Original",
+      "mint": "Lilac",
+      "periwinkle": "Iris",
+      "apricot": "Peony",
+      "rose": "Mulberry",
+      "lagoon": "Ruby",
+      "lime": "Salmon",
+      "midnight": "Terracotta",
+      "silver": "Apricot",
+      "amber": "Saffron",
+      "berry": "Citron",
+      "melon-soda": "Pear",
+      "peach-pool": "Sage",
+      "petal-moss": "Fern",
+      "butter-denim": "Jade",
+      "coral-lilac": "Turquoise",
+      "lilac-lagoon": "Petrol",
+      "blush-cocoa": "Ice Blue",
+      "aqua-apricot": "Azure",
+      "iris-cream": "Cobalt",
+      "mint-periwinkle": "Periwinkle"
+    },
+    "colorSource": "5 unchanged references plus 20 independent brand-related hue families",
+    "referenceRole": "first five retain exact reference colors; all share soft upper light and deep lower tone",
+    "colorMix": {
+      "mode": "reference five plus twenty distinct colors",
+      "preservedReferenceCount": 5,
+      "distinctExtensionCount": 20,
+      "withinSurface": "one dominant hue with a 9-degree neighbouring hue range; light to deep",
+      "betweenSurfaces": "different hue families, not repeated saturation levels",
+      "titleInk": "#FFFFFF"
+    },
+    "referenceCount": 5,
+    "extensionCount": 20
+  }
+};

@@ -1,0 +1,368 @@
+{
+  "version": "2026-10-07-final-artwork-rules",
+  "sizes": {
+    "compact": {
+      "grid": "4x2",
+      "w": 181,
+      "h": 86.5
+    },
+    "standard": {
+      "grid": "6x2",
+      "w": 275.5,
+      "h": 86.5
+    },
+    "expanded": {
+      "grid": "6x4",
+      "w": 275.5,
+      "h": 181
+    },
+    "vertical": {
+      "grid": "2x6",
+      "w": 86.5,
+      "h": 275.5
+    }
+  },
+  "motion": {
+    "rotationMs": 8000,
+    "equalizerMs": 720,
+    "pressMs": 110,
+    "resizeMs": 280,
+    "easing": "cubic-bezier(.22,1,.36,1)",
+    "tiltY": 0,
+    "projection": 1,
+    "previewDuration": 30
+  },
+  "states": [
+    "idle",
+    "loading",
+    "playing",
+    "paused",
+    "ended",
+    "error"
+  ],
+  "interaction": {
+    "surface": "toggle playback",
+    "expanded": [
+      "tap widget or video area",
+      "seek in local audio / motion prototype"
+    ],
+    "preserveOnResize": [
+      "position",
+      "status",
+      "disc angle"
+    ],
+    "singleActive": true,
+    "reducedMotion": true
+  },
+  "audio": {
+    "default": "silent 30s motion preview",
+    "localFile": "HTMLAudioElement via object URL; never uploaded",
+    "services": "YouTube metadata/artwork import verified; streaming account playback is not connected"
+  },
+  "figma": {
+    "fileKey": "XG8Cm5nLScPoNc9NAXX1DD",
+    "guide": "2317:10940",
+    "playbackVariants": "1356:4921",
+    "motion": "1360:6413",
+    "externalLinkVariants": "1436:6407",
+    "musicVariants": "2142:145642",
+    "cdObject": "2225:8085",
+    "albumNine": "2294:11852",
+    "videoSizes": "2294:11822",
+    "videoPosterComponents": {
+      "how-sweet": "2302:10465",
+      "ruby": "2302:10466"
+    },
+    "widgetSystem": "1241:2758",
+    "musicFamily": "2317:10940",
+    "detailGuide": "2294:11819",
+    "finalVisualReference": "2294:11819",
+    "colorRule": "2325:10928",
+    "artworkImportContract": "2325:10931",
+    "supportGuide": "2472:11983",
+    "defaultComparisonRow": "2378:10643"
+  },
+  "disc": {
+    "aspectRatio": 1,
+    "outerDiameterMm": 120,
+    "holeDiameterMm": 15,
+    "holeRatio": 0.125,
+    "hubRatio": 0.275,
+    "projection": "front",
+    "crop": "centered circular artwork",
+    "source": "https://ecma-international.org/wp-content/uploads/ECMA-130_2nd_edition_june_1996.pdf",
+    "surface": "Album artwork cropped to the circular disc; original metal rim, silver hub and restrained reflective overlay",
+    "diameterPx": {
+      "3x4": 96,
+      "4x4": 96
+    }
+  },
+  "sourceRow": {
+    "position": "after-title-and-artist",
+    "height": 16,
+    "iconSize": 16,
+    "gap": 5,
+    "compact": "Tiny/short square hides source; full data in accessible name",
+    "playbackStatus": "No added playback status or button row",
+    "rail": "Service icon only; no album thumbnail",
+    "albumThumbnail": false
+  },
+  "background": {
+    "mode": "album-derived-light-cdp",
+    "sampleSize": 64,
+    "source": "The same pixel-only cover-key-colors-v2 algorithm for every album, upload and imported cover. Catalog palettes are generated regression snapshots, never runtime overrides.",
+    "whiteMix": [
+      0.7,
+      0.58,
+      0.62
+    ],
+    "fallback": "neutral silver",
+    "coverBlur": false,
+    "external": "Same cover key-color enclosure; provider logo and link only",
+    "figma": "Album component stores original Album pixels plus a light key-color gradient. Background instances hide pixels. No duplicate source thumbnail or additional white wash.",
+    "videoIndependent": true,
+    "gradientAngle": 135,
+    "algorithm": {
+      "version": "cover-key-colors-v2",
+      "alphaMinimum": 204,
+      "ignoreNearBlackMax": 24,
+      "ignoreNearWhiteMin": 244,
+      "neutralSaturationBelow": 0.16,
+      "neutralChannelDeltaBelow": 16,
+      "hueBucketDegrees": 20,
+      "minimumBucketShare": 0.015,
+      "minimumChromaticShare": 0.04,
+      "secondaryHueDistance": 40,
+      "score": "sqrt(populationShare) * (0.2 + saturation^1.5) * (0.25 + 0.75 * brightness)",
+      "singleHue": "second key = first key mixed with 22% white",
+      "monochrome": "neutral grayscale from non-extreme neutral pixels",
+      "empty": "neutral #A0A0A0",
+      "readability": "Raise stop white mix in 2% steps until secondary text reaches 4.8:1",
+      "albumSpecificOverrides": false
+    }
+  },
+  "spacing": {
+    "basisViewport": 402,
+    "tinyPadding": 8,
+    "compactPadding": 12,
+    "expandedTextAndTimelinePadding": 16,
+    "border": {
+      "width": 1,
+      "alignment": "INSIDE"
+    },
+    "titleArtist": 2,
+    "artistSource": 3,
+    "sourceHeight": 16,
+    "sourceIcon": 16,
+    "sourceIconGap": 5,
+    "rail": {
+      "padding": 12,
+      "narrowViewport": "Reduce only as needed to preserve 44px text width; minimum 8px",
+      "discToText": 18,
+      "titleLines": 2,
+      "artistLines": 1,
+      "footerBottom": 16,
+      "touchTarget": "entire widget"
+    },
+    "squareDiscTop": 12,
+    "squareDiscToTitle": 8,
+    "compactTextBottom": 12,
+    "expandedTimelineBottom": 16
+  },
+  "external": {
+    "artwork": "Album image only on the CD; service logo is independent",
+    "surface": "open validated provider HTTPS link",
+    "playbackControl": false,
+    "providers": [
+      "Spotify",
+      "Apple Music",
+      "YouTube Music"
+    ],
+    "figmaVariants": "1436:6407"
+  },
+  "appearance": {
+    "reference": "User-approved Figma final visual reference 2294:11819",
+    "shell": "Calculated from the selected album image",
+    "foreground": "#29282E",
+    "secondary": "#49404B",
+    "disc": "Album cover on disc; silver rim and central hub; subtle reflective sheen",
+    "providerArtwork": "CD artwork in smaller sizes; MV poster at 6x6/6x8",
+    "gridSizes": [
+      "2x2",
+      "4x2",
+      "6x2",
+      "3x3",
+      "4x3",
+      "3x4",
+      "4x4",
+      "6x4",
+      "4x6",
+      "6x6",
+      "6x8",
+      "2x6"
+    ],
+    "titleScale": "design/tokens/widget-title-scale.json"
+  },
+  "expansion": {
+    "scope": [
+      "6x2",
+      "6x4",
+      "4x6",
+      "6x6",
+      "6x8",
+      "2x6"
+    ],
+    "provider": "YouTube",
+    "standalonePlayButton": false,
+    "titleSizes": {
+      "6x2": 17,
+      "6x4": 20,
+      "4x6": 18,
+      "6x6": 22,
+      "6x8": 22,
+      "2x6": 14,
+      "4x4": 18
+    },
+    "controls": {
+      "6x2": [],
+      "6x4": [
+        "progress"
+      ],
+      "4x6": [
+        "progress"
+      ],
+      "6x6": [
+        "progress"
+      ],
+      "6x8": [
+        "progress"
+      ],
+      "2x6": []
+    },
+    "videoPresentation": {
+      "defaultSizes": [
+        "6x6",
+        "6x8"
+      ],
+      "viewportHeight": {
+        "6x6": 155,
+        "6x8": 244
+      },
+      "posterSource": "verified YouTube music-video poster",
+      "colorSource": "album cover, independent of MV frames",
+      "missingVideo": "album cover fallback; no fabricated MV",
+      "interaction": "tap video area; no added button row",
+      "figmaProperty": "영상 포스터",
+      "prototype": "static MV poster; official YouTube embed opens on web; not inline live playback"
+    },
+    "figmaSection": "2294:11822",
+    "controlComponents": null,
+    "presentationComponents": "2285:11189",
+    "compact": "Preserve approved structure; correct padding and use 96px disc at 3x4 / 4x4",
+    "implemented": [
+      "Figma",
+      "web prototype"
+    ],
+    "notImplemented": [
+      "SwiftUI MV layouts",
+      "live YouTube timeline synchronization",
+      "inline YouTube playback"
+    ],
+    "bottomButtonRow": false
+  },
+  "verification": {
+    "albumCount": 9,
+    "algorithmAlsoCheckedOnDefaultRose": true,
+    "secondaryTextMinContrast": 4.82,
+    "minimumRequiredSecondaryContrast": 4.8,
+    "figmaAlbumSwapVerified": true,
+    "videoPosterDoesNotRecolorBody": true,
+    "noCircularControlRow": true,
+    "noStandalonePlayButton": true,
+    "sourceThumbnailCount": 0,
+    "cdDiameter4x4": 96,
+    "serviceLogosIndependent": true,
+    "sameImageDifferentURLSameColors": true,
+    "layoutBoundsChecked": 12,
+    "mobileViewport": 390,
+    "liveYouTubeVideoId": "UsbRoaH6y-Q",
+    "liveYouTubeAlbumCoverExactMatch": true,
+    "streamingPlaybackTested": false,
+    "records": [
+      "verification-final-import.json",
+      "figma-final-rules-state.json",
+      "album-all-final-palettes.json"
+    ]
+  },
+  "youtubeImport": {
+    "contract": "music-artwork-import.json",
+    "implementation": "design/tools/resolve-youtube-music.cjs",
+    "previewEndpoint": "POST /api/music/youtube/resolve",
+    "status": "Implemented and verified locally; not a deployed production endpoint",
+    "albumField": "albumArtwork",
+    "videoField": "videoPoster",
+    "fallback": "Request cover when attribution artwork is missing; never relabel a video thumbnail as album artwork",
+    "figma": "Rule and function contract documented. Figma does not execute the network resolver or extract colors automatically on image replacement."
+  },
+  "defaultArtwork": {
+    "name": "Default · 커버 없음",
+    "figmaArtwork": "2378:10619",
+    "figmaPoster": "2378:10621",
+    "figmaReview": "2378:10640",
+    "select": "앨범 커버 → Splup/Music/Artwork/Default · 커버 없음",
+    "sizes": [
+      "2x2",
+      "4x2",
+      "6x2",
+      "3x3",
+      "4x3",
+      "3x4",
+      "4x4",
+      "6x4",
+      "4x6",
+      "6x6",
+      "6x8",
+      "2x6"
+    ],
+    "shell": {
+      "top": "#e3e3e3",
+      "middle": "#d7d7d7",
+      "bottom": "#dbdbdb"
+    },
+    "disc": "Neutral silver reflection with original metal rim and hub",
+    "states": {
+      "missing": "No substitute album. Preserve metadata, provider and valid video.",
+      "loading": "Show silver disc and neutral shell until artwork is available.",
+      "error": "Return to silver default; keep metadata and playback availability.",
+      "restored": "Show artwork and recompute shell from pixels.",
+      "noTrack": "음악 추가 / YouTube 링크로 연결; tap requests link entry rather than starting preview audio.",
+      "noVideoImage": "Silver disc placeholder in the video area; valid video link remains available."
+    },
+    "minimumSecondaryTextContrast": 6.89,
+    "changesOriginalGeometry": false
+  },
+  "guideOrganization": {
+    "order": [
+      "12 album-cover sizes",
+      "12 coverless sizes aligned to the same columns",
+      "9 artwork-color regression examples"
+    ],
+    "sizeOrder": [
+      "2x2",
+      "4x2",
+      "6x2",
+      "3x3",
+      "4x3",
+      "3x4",
+      "4x4",
+      "6x4",
+      "4x6",
+      "6x6",
+      "6x8",
+      "2x6"
+    ],
+    "columnGap": 24,
+    "technicalRulesAndEdgeStates": "2472:11983",
+    "preserveMasterAndInstanceIds": true
+  }
+}

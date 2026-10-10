@@ -1,0 +1,29 @@
+{
+  "id": "ditto-splash",
+  "name": "Ditto Original Splash",
+  "key": "#F4BDD0",
+  "colors": [
+    "#CBB2F5",
+    "#F09BED",
+    "#F3AE78",
+    "#F2D58F"
+  ],
+  "blur": 120,
+  "direction": "기존 앱 스플래시 색상을 기준으로 살구·크림의 채도를 높이고 라벤더·핑크의 강도를 맞춘 배합. 상단 라벤더, 좌측 핑크, 우측 살구, 하단 크림.",
+  "source": "기존 스플래시 추출색을 바탕으로 채도 보정한 색상. 원본 디자인 토큰과는 다름.",
+  "finish": {
+    "type": "satin",
+    "edge": {
+      "type": "tinted satin bloom",
+      "blur": 38,
+      "width": 145,
+      "opacity": 0.76,
+      "colors": [
+        "#EBDCFF",
+        "#FBE0F2",
+        "#FFF0CC"
+      ]
+    },
+    "description": "하트 음영 없이 외곽에만 새틴 반사광 적용."
+  }
+}

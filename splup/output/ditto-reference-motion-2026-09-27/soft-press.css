@@ -1,0 +1,28 @@
+/* Stable hit area; only the material surface and its light are animated. */
+.tile { transition: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.tile:active { transform: none; }
+.tile .soft-surface { display: block; position: relative; width: 100%; height: 100%; isolation: isolate; transform-origin: 50% 55%; pointer-events: none; }
+.soft-surface svg { display: block; }
+.soft-surface > svg { position: relative; }
+.color-pressure { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.color-pressure[hidden] { display: none; }
+.soft-light { position: absolute; inset: 0; border-radius: 27%; opacity: 0; pointer-events: none; background: radial-gradient(ellipse 52% 42% at var(--press-x, 50%) var(--press-y, 46%), rgb(255 255 255 / 28%), rgb(255 255 255 / 6%) 48%, transparent 78%); }
+.tile .logo { transform-origin: 50% 50%; }
+.tile[data-soft-phase="pressing"] .soft-surface,
+.tile[data-soft-phase="releasing"] .soft-surface { will-change: transform; }
+.tile[data-soft-phase="pressing"] .soft-light,
+.tile[data-soft-phase="releasing"] .soft-light { will-change: opacity; }
+.motion-progress { display: block; min-height: 1.5em; margin-top: 4px; color: #6e6677; font-size: 13px; font-variant-numeric: tabular-nums; }
+.material-comparison { margin-top: 52px; padding-top: 28px; border-top: 1px solid #d2cdd7; }
+.material-comparison h2 { font-size: 22px; margin: 0 0 8px; }
+.material-comparison > p { font-size: 13px; color: #635b6c; }
+.material-pairs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px 44px; margin-top: 24px; }
+.material-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 20px; }
+.material-pair h3 { grid-column: 1/-1; font-size: 14px; margin: 0; font-weight: 650; }
+.material-pair figcaption { font-size: 12px; color: #635b6c; margin-top: 10px; text-align: center; }
+.material-sample { cursor: default; pointer-events: none; }
+.record .material-comparison { display: none; }
+@media(max-width:620px) { .material-pairs { grid-template-columns: 1fr; gap: 28px; } }
+@media (prefers-reduced-motion: reduce) {
+  .soft-surface, .tile .logo { transform: none !important; }
+}

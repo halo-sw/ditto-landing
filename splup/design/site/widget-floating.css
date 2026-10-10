@@ -1,0 +1,23 @@
+/* Common outer shell: never replaces the widget's inner material. */
+.ds-current .wf-visual { position:absolute; inset:0; border-radius:inherit; isolation:isolate; transform-origin:center; transition:transform var(--wf-motion-liftMs) var(--wf-ease); }
+.ds-current .wf-visual::before,.ds-current .wf-visual::after,.ds-current .wf-release-shadow { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:-1; }
+.ds-current .wf-visual::before { box-shadow:var(--wf-rest); opacity:1; transition:opacity var(--wf-motion-liftMs) var(--wf-ease); }
+.ds-current .wf-visual::after { box-shadow:var(--wf-selected); opacity:0; transition:opacity var(--wf-motion-liftMs) var(--wf-ease); }
+.ds-current .wf-release-shadow { box-shadow:var(--wf-lifted); opacity:0; }
+.ds-current .sim-widget.is-selected .wf-visual { outline:var(--wf-selection-width) solid var(--wf-selection); outline-offset:var(--wf-selection-offset); }
+.ds-current .sim-widget.is-selected .wf-visual::before { opacity:0; }
+.ds-current .sim-widget.is-selected .wf-visual::after { opacity:1; }
+.ds-current .sim-widget.is-pressing .wf-visual { transform:scale(var(--wf-motion-pressScale)); transition-duration:var(--wf-motion-pressMs); }
+.ds-current .sim-widget.is-pressing .wf-visual::before { opacity:0; }
+.ds-current .sim-widget.is-pressing .wf-visual::after { box-shadow:var(--wf-pressed); opacity:1; }
+.ds-current .sim-widget.is-moving:not(.is-resizing) .wf-visual { transform:translateY(var(--wf-motion-liftY)) scale(var(--wf-motion-liftScale)); will-change:transform; }
+.ds-current .sim-widget.is-moving:not(.is-resizing) .wf-visual::before { opacity:0; }
+.ds-current .sim-widget.is-moving:not(.is-resizing) .wf-visual::after { box-shadow:var(--wf-lifted); opacity:1; }
+.ds-current .sim-widget.is-moving { z-index:20; }
+.ds-current .sim-widget-face:focus-visible { outline:3px solid #5A267C; outline-offset:-4px; }
+.wf-guide { margin:20px 0; padding:20px 0; border-block:1px solid #ded9e4; }
+.wf-guide p { margin:6px 0; }
+@media (prefers-reduced-motion:reduce) {
+  .ds-current .wf-visual,.ds-current .wf-visual::before,.ds-current .wf-visual::after { transition:none!important; }
+  .ds-current .sim-widget .wf-visual { transform:none!important; }
+}

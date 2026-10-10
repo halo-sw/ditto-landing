@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 256 256" preserveAspectRatio="none" color-interpolation="sRGB" role="img" aria-labelledby="title">
+<title id="title">Splup 피치 · 옐로 · Shared Profile Satin</title>
+<defs><radialGradient id="foundation" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(102.4 61.44) rotate(0) scale(220.16 220.16)"><stop offset="0" stop-color="#FFBC87" stop-opacity="1"/><stop offset="0.53" stop-color="#FFA36F" stop-opacity="1"/><stop offset="1" stop-color="#F68A50" stop-opacity="1"/></radialGradient>
+<radialGradient id="color" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(192 200.96) rotate(-22) scale(148.992 123.904)"><stop offset="0" stop-color="#FFBC87" stop-opacity="1"/><stop offset="0.48" stop-color="#FFBC87" stop-opacity="0.9"/><stop offset="1" stop-color="#FFBC87" stop-opacity="0"/></radialGradient>
+<radialGradient id="depth" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(37.888 192) rotate(-32) scale(113.92 143.104)"><stop offset="0" stop-color="#F68A50" stop-opacity="1"/><stop offset="1" stop-color="#F68A50" stop-opacity="0"/></radialGradient>
+<radialGradient id="silk" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(97.28 25.6) rotate(-15) scale(199.68 117.76)"><stop offset="0" stop-color="#FFBC87" stop-opacity="1"/><stop offset="1" stop-color="#FFBC87" stop-opacity="0"/></radialGradient>
+<radialGradient id="reflection" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(66.56 40.96) rotate(0) scale(179.2 179.2)"><stop offset="0" stop-color="#FFFFFF" stop-opacity="1"/><stop offset="0.65" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient></defs>
+<rect width="256" height="256" fill="url(#foundation)" opacity="1"/>
+<rect width="256" height="256" fill="url(#color)" opacity="1"/>
+<rect width="256" height="256" fill="url(#depth)" opacity="0.64"/>
+<rect width="256" height="256" fill="url(#silk)" opacity="0.3"/>
+<rect width="256" height="256" fill="url(#reflection)" opacity="0.13"/>
+</svg>

@@ -1,0 +1,665 @@
+window.SPLUP_COLORGRAPHY = {
+  "version": "1.0.0",
+  "date": "2026-10-05",
+  "colorSystemVersion": "3.3.0",
+  "naming": "color/{property}/{role}-{variant}-{state}",
+  "compatibility": "Documentation aliases resolve to existing semantic keys. Existing keys and color values are preserved.",
+  "tokens": [
+    {
+      "name": "color/bg/canvas",
+      "source": "bg/default",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "화면의 기본 바탕"
+    },
+    {
+      "name": "color/bg/canvas-subtle",
+      "source": "bg/subtle",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "본문 뒤에서 영역을 은은하게 나누는 배경"
+    },
+    {
+      "name": "color/bg/brand-subtle",
+      "source": "bg/brand-subtle",
+      "property": "bg",
+      "role": "brand",
+      "variant": "default",
+      "state": "default",
+      "usage": "브랜드 보라색을 연하게 깔아 두는 배경"
+    },
+    {
+      "name": "color/bg/inverted",
+      "source": "bg/inverse",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "주변 화면과 밝기가 반대인 안내 영역의 배경"
+    },
+    {
+      "name": "color/bg/layer-basement",
+      "source": "layer/basement",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "스크롤하는 콘텐츠 아래에 깔리는 바탕"
+    },
+    {
+      "name": "color/bg/layer-default",
+      "source": "layer/default",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "기본 카드와 콘텐츠 영역의 배경"
+    },
+    {
+      "name": "color/bg/layer-floating",
+      "source": "layer/floating",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "작게 떠 있는 메뉴와 색상 선택창의 배경"
+    },
+    {
+      "name": "color/bg/layer-modal",
+      "source": "layer/modal",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "확인 창과 팝업의 배경"
+    },
+    {
+      "name": "color/bg/brand-decorative",
+      "source": "fill/brand",
+      "property": "bg",
+      "role": "brand",
+      "variant": "default",
+      "state": "default",
+      "usage": "브랜드 색으로 강조하는 장식의 바탕"
+    },
+    {
+      "name": "color/bg/brand-decorative-pressed",
+      "source": "fill/brand-pressed",
+      "property": "bg",
+      "role": "brand",
+      "variant": "default",
+      "state": "pressed",
+      "usage": "브랜드 색의 장식을 누를 때 보이는 바탕"
+    },
+    {
+      "name": "color/bg/brand-tonal",
+      "source": "fill/brand-tonal",
+      "property": "bg",
+      "role": "brand",
+      "variant": "weak",
+      "state": "default",
+      "usage": "브랜드 색을 연하게 채우는 영역"
+    },
+    {
+      "name": "color/bg/neutral-weak",
+      "source": "fill/subtle",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "weak",
+      "state": "default",
+      "usage": "정보를 은은하게 구분하는 회색 바탕"
+    },
+    {
+      "name": "color/bg/neutral-fill-disabled",
+      "source": "fill/disabled",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "disabled",
+      "usage": "사용할 수 없는 요소의 연한 바탕"
+    },
+    {
+      "name": "color/fg/neutral-strong",
+      "source": "text/strong",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "strong",
+      "state": "default",
+      "usage": "제목과 중요한 정보를 전달하는 글자"
+    },
+    {
+      "name": "color/fg/neutral",
+      "source": "text/default",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "본문에 사용하는 글자"
+    },
+    {
+      "name": "color/fg/neutral-subtle",
+      "source": "text/subtle",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "subtle",
+      "state": "default",
+      "usage": "덧붙이는 설명의 글자"
+    },
+    {
+      "name": "color/fg/neutral-text-disabled",
+      "source": "text/disabled",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "disabled",
+      "state": "disabled",
+      "usage": "사용할 수 없는 항목의 글자"
+    },
+    {
+      "name": "color/fg/brand",
+      "source": "text/brand",
+      "property": "fg",
+      "role": "brand",
+      "variant": "brand",
+      "state": "default",
+      "usage": "브랜드 색으로 보여주는 링크와 강조 글자"
+    },
+    {
+      "name": "color/fg/on-brand-decorative",
+      "source": "text/on-brand",
+      "property": "fg",
+      "role": "brand",
+      "variant": "on-brand",
+      "state": "default",
+      "usage": "브랜드 배경 위의 글자·아이콘 · 함께 쓸 때 대비 확인"
+    },
+    {
+      "name": "color/fg/inverted",
+      "source": "text/inverse",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "inverse",
+      "state": "default",
+      "usage": "주변과 밝기가 반대인 배경 위의 글자·아이콘"
+    },
+    {
+      "name": "color/fg/neutral-placeholder",
+      "source": "text/placeholder",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "placeholder",
+      "state": "default",
+      "usage": "입력 전에 보여주는 예시 글자"
+    },
+    {
+      "name": "color/fg/neutral-icon",
+      "source": "icon/default",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "icon",
+      "state": "default",
+      "usage": "기능을 알려주는 기본 아이콘"
+    },
+    {
+      "name": "color/fg/neutral-icon-subtle",
+      "source": "icon/subtle",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "icon",
+      "state": "default",
+      "usage": "보조 정보를 알려주는 아이콘"
+    },
+    {
+      "name": "color/fg/neutral-icon-disabled",
+      "source": "icon/disabled",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "icon",
+      "state": "disabled",
+      "usage": "사용할 수 없는 기능의 아이콘"
+    },
+    {
+      "name": "color/stroke/neutral",
+      "source": "border/default",
+      "property": "stroke",
+      "role": "neutral",
+      "variant": "default",
+      "state": "default",
+      "usage": "영역을 나누는 일반 구분선"
+    },
+    {
+      "name": "color/stroke/neutral-strong",
+      "source": "border/strong",
+      "property": "stroke",
+      "role": "neutral",
+      "variant": "strong",
+      "state": "default",
+      "usage": "영역을 또렷하게 나누는 테두리"
+    },
+    {
+      "name": "color/stroke/brand",
+      "source": "border/brand",
+      "property": "stroke",
+      "role": "brand",
+      "variant": "brand",
+      "state": "default",
+      "usage": "브랜드 색으로 강조하는 테두리"
+    },
+    {
+      "name": "color/stroke/brand-weak",
+      "source": "border/brand-subtle",
+      "property": "stroke",
+      "role": "brand",
+      "variant": "brand-subtle",
+      "state": "default",
+      "usage": "브랜드 색으로 연하게 표시하는 테두리"
+    },
+    {
+      "name": "color/stroke/control",
+      "source": "border/control",
+      "property": "stroke",
+      "role": "neutral",
+      "variant": "control",
+      "state": "default",
+      "usage": "입력창과 선택 항목의 위치를 알려주는 테두리"
+    },
+    {
+      "name": "color/stroke/focus",
+      "source": "border/focus",
+      "property": "stroke",
+      "role": "brand",
+      "variant": "focus",
+      "state": "focus",
+      "usage": "키보드로 조작할 위치 · 바깥 링 2px, 간격 2px"
+    },
+    {
+      "name": "color/bg/neutral-selected",
+      "source": "selection/bg",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "selection",
+      "state": "selected",
+      "usage": "선택 항목의 바탕"
+    },
+    {
+      "name": "color/fg/neutral-selected",
+      "source": "selection/fg",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "selection",
+      "state": "selected",
+      "usage": "선택 항목의 글자·아이콘"
+    },
+    {
+      "name": "color/stroke/neutral-selected",
+      "source": "selection/border",
+      "property": "stroke",
+      "role": "neutral",
+      "variant": "selection",
+      "state": "selected",
+      "usage": "선택 항목의 테두리"
+    },
+    {
+      "name": "color/bg/neutral-unselected",
+      "source": "unselected/bg",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "selection",
+      "state": "default",
+      "usage": "미선택 항목의 바탕"
+    },
+    {
+      "name": "color/fg/neutral-unselected",
+      "source": "unselected/fg",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "selection",
+      "state": "default",
+      "usage": "미선택 항목의 글자·아이콘"
+    },
+    {
+      "name": "color/stroke/neutral-unselected",
+      "source": "unselected/border",
+      "property": "stroke",
+      "role": "neutral",
+      "variant": "selection",
+      "state": "default",
+      "usage": "미선택 항목의 테두리"
+    },
+    {
+      "name": "color/bg/brand-solid",
+      "source": "action/primary/bg",
+      "property": "bg",
+      "role": "brand",
+      "variant": "solid",
+      "state": "default",
+      "usage": "주요 버튼 · 기본"
+    },
+    {
+      "name": "color/bg/brand-solid-hovered",
+      "source": "action/primary/hover",
+      "property": "bg",
+      "role": "brand",
+      "variant": "solid",
+      "state": "hovered",
+      "usage": "주요 버튼 · 포인터 올림"
+    },
+    {
+      "name": "color/bg/brand-solid-pressed",
+      "source": "action/primary/pressed",
+      "property": "bg",
+      "role": "brand",
+      "variant": "solid",
+      "state": "pressed",
+      "usage": "주요 버튼 · 누르는 중"
+    },
+    {
+      "name": "color/fg/on-brand-solid",
+      "source": "action/primary/fg",
+      "property": "fg",
+      "role": "brand",
+      "variant": "solid",
+      "state": "default",
+      "usage": "주요 버튼 위의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/brand-weak",
+      "source": "action/secondary/bg",
+      "property": "bg",
+      "role": "brand",
+      "variant": "weak",
+      "state": "default",
+      "usage": "보조 버튼 · 기본"
+    },
+    {
+      "name": "color/bg/brand-weak-hovered",
+      "source": "action/secondary/hover",
+      "property": "bg",
+      "role": "brand",
+      "variant": "weak",
+      "state": "hovered",
+      "usage": "보조 버튼 · 포인터 올림"
+    },
+    {
+      "name": "color/bg/brand-weak-pressed",
+      "source": "action/secondary/pressed",
+      "property": "bg",
+      "role": "brand",
+      "variant": "weak",
+      "state": "pressed",
+      "usage": "보조 버튼 · 누르는 중"
+    },
+    {
+      "name": "color/fg/on-brand-weak",
+      "source": "action/secondary/fg",
+      "property": "fg",
+      "role": "brand",
+      "variant": "weak",
+      "state": "default",
+      "usage": "보조 버튼 위의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/neutral-solid",
+      "source": "action/neutral/bg",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "solid",
+      "state": "default",
+      "usage": "일반 버튼 · 기본"
+    },
+    {
+      "name": "color/bg/neutral-solid-hovered",
+      "source": "action/neutral/hover",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "solid",
+      "state": "hovered",
+      "usage": "일반 버튼 · 포인터 올림"
+    },
+    {
+      "name": "color/bg/neutral-solid-pressed",
+      "source": "action/neutral/pressed",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "solid",
+      "state": "pressed",
+      "usage": "일반 버튼 · 누르는 중"
+    },
+    {
+      "name": "color/fg/on-neutral-solid",
+      "source": "action/neutral/fg",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "solid",
+      "state": "default",
+      "usage": "일반 버튼 위의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/brand-ghost",
+      "source": "action/ghost/bg",
+      "property": "bg",
+      "role": "brand",
+      "variant": "ghost",
+      "state": "default",
+      "usage": "배경 없는 글자 버튼 · 기본"
+    },
+    {
+      "name": "color/bg/brand-ghost-hovered",
+      "source": "action/ghost/hover",
+      "property": "bg",
+      "role": "brand",
+      "variant": "ghost",
+      "state": "hovered",
+      "usage": "배경 없는 글자 버튼 · 포인터 올림"
+    },
+    {
+      "name": "color/bg/brand-ghost-pressed",
+      "source": "action/ghost/pressed",
+      "property": "bg",
+      "role": "brand",
+      "variant": "ghost",
+      "state": "pressed",
+      "usage": "배경 없는 글자 버튼 · 누르는 중"
+    },
+    {
+      "name": "color/fg/on-brand-ghost",
+      "source": "action/ghost/fg",
+      "property": "fg",
+      "role": "brand",
+      "variant": "ghost",
+      "state": "default",
+      "usage": "배경 없는 글자 버튼 위의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/critical-solid",
+      "source": "action/danger/bg",
+      "property": "bg",
+      "role": "critical",
+      "variant": "solid",
+      "state": "default",
+      "usage": "삭제·위험을 알리는 버튼 · 기본"
+    },
+    {
+      "name": "color/bg/critical-solid-hovered",
+      "source": "action/danger/hover",
+      "property": "bg",
+      "role": "critical",
+      "variant": "solid",
+      "state": "hovered",
+      "usage": "삭제·위험을 알리는 버튼 · 포인터 올림"
+    },
+    {
+      "name": "color/bg/critical-solid-pressed",
+      "source": "action/danger/pressed",
+      "property": "bg",
+      "role": "critical",
+      "variant": "solid",
+      "state": "pressed",
+      "usage": "삭제·위험을 알리는 버튼 · 누르는 중"
+    },
+    {
+      "name": "color/fg/on-critical-solid",
+      "source": "action/danger/fg",
+      "property": "fg",
+      "role": "critical",
+      "variant": "solid",
+      "state": "default",
+      "usage": "삭제·위험을 알리는 버튼 위의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/neutral-action-disabled",
+      "source": "action/disabled/bg",
+      "property": "bg",
+      "role": "neutral",
+      "variant": "action",
+      "state": "disabled",
+      "usage": "사용할 수 없는 버튼의 바탕"
+    },
+    {
+      "name": "color/fg/neutral-action-disabled",
+      "source": "action/disabled/fg",
+      "property": "fg",
+      "role": "neutral",
+      "variant": "action",
+      "state": "disabled",
+      "usage": "사용할 수 없는 버튼의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/positive-weak",
+      "source": "status/success/bg",
+      "property": "bg",
+      "role": "positive",
+      "variant": "weak",
+      "state": "default",
+      "usage": "성공 메시지 바탕"
+    },
+    {
+      "name": "color/fg/positive",
+      "source": "status/success/fg",
+      "property": "fg",
+      "role": "positive",
+      "variant": "default",
+      "state": "default",
+      "usage": "성공 메시지의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/warning-weak",
+      "source": "status/warning/bg",
+      "property": "bg",
+      "role": "warning",
+      "variant": "weak",
+      "state": "default",
+      "usage": "주의 메시지 바탕"
+    },
+    {
+      "name": "color/fg/warning",
+      "source": "status/warning/fg",
+      "property": "fg",
+      "role": "warning",
+      "variant": "default",
+      "state": "default",
+      "usage": "주의 메시지의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/critical-weak",
+      "source": "status/danger/bg",
+      "property": "bg",
+      "role": "critical",
+      "variant": "weak",
+      "state": "default",
+      "usage": "오류 메시지 바탕"
+    },
+    {
+      "name": "color/fg/critical",
+      "source": "status/danger/fg",
+      "property": "fg",
+      "role": "critical",
+      "variant": "default",
+      "state": "default",
+      "usage": "오류 메시지의 글자·아이콘"
+    },
+    {
+      "name": "color/bg/informative-weak",
+      "source": "status/info/bg",
+      "property": "bg",
+      "role": "informative",
+      "variant": "weak",
+      "state": "default",
+      "usage": "안내 메시지 바탕"
+    },
+    {
+      "name": "color/fg/informative",
+      "source": "status/info/fg",
+      "property": "fg",
+      "role": "informative",
+      "variant": "default",
+      "state": "default",
+      "usage": "안내 메시지의 글자·아이콘"
+    }
+  ],
+  "contrastPairs": [
+    {
+      "label": "본문",
+      "fg": "text/default",
+      "bg": "bg/default",
+      "minimum": 4.5
+    },
+    {
+      "label": "덧붙이는 설명의 글자",
+      "fg": "text/subtle",
+      "bg": "bg/default",
+      "minimum": 4.5
+    },
+    {
+      "label": "주요 버튼",
+      "fg": "action/primary/fg",
+      "bg": "action/primary/bg",
+      "minimum": 4.5
+    },
+    {
+      "label": "선택 항목",
+      "fg": "selection/fg",
+      "bg": "selection/bg",
+      "minimum": 4.5
+    },
+    {
+      "label": "포커스 링 / 화면",
+      "fg": "border/focus",
+      "bg": "bg/default",
+      "minimum": 3
+    },
+    {
+      "label": "컨트롤 경계 / 화면",
+      "fg": "border/control",
+      "bg": "bg/default",
+      "minimum": 3
+    },
+    {
+      "label": "성공 메시지",
+      "fg": "status/success/fg",
+      "bg": "status/success/bg",
+      "minimum": 4.5
+    },
+    {
+      "label": "주의 메시지",
+      "fg": "status/warning/fg",
+      "bg": "status/warning/bg",
+      "minimum": 4.5
+    },
+    {
+      "label": "오류 메시지",
+      "fg": "status/danger/fg",
+      "bg": "status/danger/bg",
+      "minimum": 4.5
+    },
+    {
+      "label": "안내 메시지",
+      "fg": "status/info/fg",
+      "bg": "status/info/bg",
+      "minimum": 4.5
+    }
+  ]
+};

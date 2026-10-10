@@ -1,0 +1,2040 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Splup 디자인 가이드 · Ditto</title>
+<meta name="description" content="디토의 화면을 함께 만드는 기준. 색과 글자부터 버튼과 위젯까지, 필요한 규칙과 실제 예시를 확인하세요.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script>try{var t=localStorage.getItem("splup-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+@font-face { font-family: "LINE Seed Sans App"; src: url(./fonts/LINESeedSans_A_Rg.otf) format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "LINE Seed Sans App"; src: url(./fonts/LINESeedSans_A_Bd.otf) format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+.splup-graphics{font-family:Pretendard,'Ditto Adopted Pretendard',sans-serif}
+.splup-graphics .sg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 24px;margin:28px 0}
+.splup-graphics table{width:100%;border-collapse:collapse;font-size:13px;overflow-wrap:anywhere}.splup-graphics td,.splup-graphics th{padding:14px 10px;text-align:left;border-bottom:1px solid #ddd}.splup-graphics>img{max-width:100%;height:auto}.splup-graphics figure{margin:0;min-width:0}.splup-graphics .sg-art{position:relative;max-width:270px;margin:0 auto 16px}.splup-graphics .sg-art>img:first-child{width:100%;display:block}.splup-graphics .sg-art .sg-symbol{position:absolute;width:29%;height:auto;left:35.5%;top:50%;transform:translateY(-50%);filter:brightness(0) invert(1);margin:0}.splup-graphics figcaption{font-size:14px;line-height:1.7}.splup-graphics code{font-size:12px}.splup-graphics .sg-splash{display:flex;gap:32px;align-items:center;margin:28px 0}.splup-graphics .sg-splash>img{width:240px;max-width:45%;border-radius:24px}.splup-graphics .sg-swatches{display:flex;gap:12px;flex-wrap:wrap}.splup-graphics .sg-swatches i{width:14px;height:14px;display:inline-block;border-radius:50%;margin-right:5px;vertical-align:middle}@media(max-width:700px){.splup-graphics .sg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.splup-graphics .sg-splash{flex-direction:column;align-items:flex-start}.splup-graphics .sg-splash>img{max-width:100%}}
+
+
+.da-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 40px;margin:28px 0}.da-grid figure{margin:0;text-align:center}.da-grid figcaption{margin-top:14px;font-size:13px}.da-button{display:block;position:relative;aspect-ratio:1;width:100%;max-width:230px;margin:auto;padding:0;border:0;background:none;cursor:pointer;touch-action:pan-y}.da-button:focus-visible{outline:3px solid #7841c4;outline-offset:6px;border-radius:28%}.da-surface{display:block;position:absolute;inset:0;transition:transform 360ms cubic-bezier(.22,1,.36,1)}.da-surface svg{display:block;width:100%;height:100%}.da-depth{position:absolute;inset:1px;border-radius:27%;box-shadow:inset 0 1px 2px #ffffff61,inset 0 -1px 2px #0000000a;transition:box-shadow 110ms,background 110ms}.da-icon{position:absolute!important;width:32%!important;height:auto!important;left:34%;top:50%;margin:0!important;transform:translateY(-50%);filter:brightness(0) invert(1);pointer-events:none;transition:transform 360ms cubic-bezier(.22,1,.36,1)}.da-button[data-pressed=true] .da-surface{transform:translateY(.8px) scale(1.006,.97);transition-duration:110ms}.da-button[data-pressed=true] .da-icon{transform:translateY(calc(-50% + .5px)) scale(.99);transition-duration:110ms}.da-button[data-pressed=true] .da-depth{background:#00000003;box-shadow:inset 0 2px 3px #00000014,inset 0 -1px 1px #ffffff21}.da-status{min-height:2em;font-size:13px}@media(max-width:650px){.da-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}}@media(prefers-reduced-motion:reduce){.da-surface,.da-icon,.da-depth{transition:none!important}.da-button[data-pressed=true] .da-surface{transform:none}.da-button[data-pressed=true] .da-icon{transform:translateY(-50%)}}
+
+.compare-row{display:grid;grid-template-columns:minmax(110px,.7fr) 1fr 1fr;align-items:center;gap:24px;padding:30px 0;border-bottom:1px solid #8883}.compare-row h3{font-size:16px;line-height:1.6}.compare-row h3 small{display:block;opacity:.55;margin-bottom:8px}.compare-row figure{margin:0;min-width:0;text-align:center}.compare-label{font-size:12px;opacity:.7;margin-bottom:16px}.compare-row .sg-art,.compare-row .da-button{width:min(100%,200px);margin:0 auto 16px}.compare-chips{display:flex;justify-content:center;gap:6px 10px;flex-wrap:wrap}.compare-chips span{white-space:nowrap}.compare-chips i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}.compare-chips code{font-size:10px!important;opacity:.8}@media(max-width:650px){.compare-row{grid-template-columns:1fr 1fr;gap:16px}.compare-row h3{grid-column:1/-1;margin:0}.compare-row h3 small{display:inline;margin-right:10px}.compare-label{font-size:10px}}
+</style>
+
+<link rel="stylesheet" href="color-system.css">
+<link rel="stylesheet" href="colorgraphy.css">
+<link rel="stylesheet" href="multi-palettes.css">
+</head>
+<body>
+<a class="skip-content" href="#main-content">본문으로 건너뛰기</a>
+<style>
+  /* ══ Splup Docs 스킨 — 뉴트럴 그레이 · 헤딩 500 · Pretendard ══ */
+  :root {
+    --bg: #FFFFFF;
+    --surface: #FFFFFF;
+    --surface-soft: #F3F4F5;
+    --ink: #1A1C20;
+    --ink-soft: #555D6D;             /* gray-800 */
+    --ink-faint: #868B94;
+    --hairline: rgba(7, 12, 20, .085);
+    --accent: #AA4AF4;
+    --accent-text: #8C2BD6;
+    --accent-bg: rgba(170, 74, 244, .085);
+    --code-bg: #F4F4F5;
+    --sev-conflict: #D8375C;  --sev-conflict-bg: #FDEBEF;
+    --sev-clean: #B26A00;     --sev-clean-bg: #FFF3DF;
+    --sev-info: #56607A;      --sev-info-bg: #EDF0F4;
+    --shadow: 0 1px 2px rgba(10, 12, 16, .04);
+    --pop-shadow: 0 8px 30px rgba(10, 12, 16, .12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #171717; --surface: #1A1A1A; --surface-soft: #212121;
+      --ink: #EBEBEB; --ink-soft: #B4B4B4; --ink-faint: #9B9B9B;
+      --hairline: #2E2E2E;
+      --accent: #C588FF; --accent-text: #C588FF; --accent-bg: rgba(197, 136, 255, .10);
+      --code-bg: #212121;
+      --sev-conflict: #FF8CA3; --sev-conflict-bg: #3A262C;
+      --sev-clean: #F2C06B;    --sev-clean-bg: #37301F;
+      --sev-info: #AEB8D0;     --sev-info-bg: #24272E;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+      --pop-shadow: 0 8px 30px rgba(0, 0, 0, .5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171717; --surface: #1A1A1A; --surface-soft: #212121;
+    --ink: #EBEBEB; --ink-soft: #B4B4B4; --ink-faint: #9B9B9B;
+    --hairline: #2E2E2E;
+    --accent: #C588FF; --accent-text: #C588FF; --accent-bg: rgba(197, 136, 255, .10);
+    --code-bg: #212121;
+    --sev-conflict: #FF8CA3; --sev-conflict-bg: #3A262C;
+    --sev-clean: #F2C06B;    --sev-clean-bg: #37301F;
+    --sev-info: #AEB8D0;     --sev-info-bg: #24272E;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    --pop-shadow: 0 8px 30px rgba(0, 0, 0, .5);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 16px; line-height: 1.75; margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* 타이포 규칙: 강조 600 · 헤딩 500 */
+  b, strong { font-weight: 600; }
+  .brandface { font-family: "LINE Seed Sans App", "LINE Seed Sans KR", "Pretendard Variable", Pretendard, sans-serif; }
+  code, .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .86em; }
+  code { background: var(--code-bg); border: 1px solid var(--hairline); border-radius: 6px; padding: 1.5px 5px; }
+  a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--ink) 35%, transparent); }
+  a:hover { text-decoration-color: var(--ink); }
+  ::selection { background: color-mix(in srgb, var(--accent) 26%, transparent); }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+  /* ── 탑바: 풀폭 헤더 64→76px + 섹션 내비 ── */
+  :root { --hh: 64px; }
+  @media (min-width: 968px) { :root { --hh: 72px; } }
+  @media (min-width: 1120px) { :root { --hh: 76px; } }
+  .topbar {
+    position: sticky; top: 0; z-index: 50; height: var(--hh);
+    display: flex; align-items: center; gap: 22px; padding: 0 24px;
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .top-nav { display: flex; align-items: center; gap: 4px; height: 100%; }
+  .top-nav a {
+    display: flex; align-items: center; height: 100%; padding: 0 12px;
+    font-size: 13.5px; color: var(--ink-soft); position: relative; text-decoration: none;
+  }
+  .top-nav a:hover { color: var(--ink); text-decoration: none; }
+  .top-nav a.active { color: var(--ink); font-weight: 500; }
+  .top-nav a.active::after {
+    content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px;
+    height: 2px; background: var(--ink); border-radius: 2px;
+  }
+  @media (max-width: 900px) { .top-nav { display: none; } }
+  .menu-btn { display: none; background: none; border: 1px solid var(--hairline); border-radius: 8px; color: var(--ink); font-size: 15px; padding: 4px 10px; cursor: pointer; }
+  .logo { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14.5px; letter-spacing: -.01em; }
+  .logo-dot { width: 20px; height: 20px; border-radius: 7px 9px 8px 10px; background: linear-gradient(160deg, #B9A9FA, #AA4AF4 60%, #920CB3); flex: none; }
+  .logo .ver { font-size: 11px; font-weight: 500; color: var(--ink-soft); background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: 999px; padding: 1.5px 8px; }
+  /* 워드마크 (인라인 SVG · currentColor 재채색 — 라이트=잉크, 다크=화이트 자동) */
+  .wm { display: block; width: auto; aspect-ratio: 370 / 134; color: var(--ink); flex: none; }
+  .logo .wm { height: 19px; }
+  .side-tab .wm { height: 14px; margin-bottom: 3px; }
+  .wm-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 14px 0; }
+  .wm-chip { border: 1px solid var(--hairline); border-radius: 10px; overflow: hidden; }
+  .wm-chip .stage { height: 96px; display: flex; align-items: center; justify-content: center; }
+  .wm-chip .stage .wm { height: 34px; }
+  .wm-chip .cap { padding: 8px 12px; font-size: 11.5px; color: var(--ink-soft); border-top: 1px solid var(--hairline); background: var(--surface); }
+
+  /* 검색 (⌘K) */
+  .top-search { margin-left: auto; position: relative; display: flex; align-items: center; }
+  .top-search input {
+    width: 220px; height: 34px; border: 1px solid var(--hairline); border-radius: 10px;
+    background: color-mix(in srgb, var(--surface-soft) 55%, transparent);
+    color: var(--ink); font-family: inherit; font-size: 13px; padding: 0 44px 0 12px;
+  }
+  .top-search input::placeholder { color: var(--ink-faint); }
+  .top-search kbd {
+    position: absolute; right: 8px; font-family: inherit; font-size: 10.5px; color: var(--ink-faint);
+    border: 1px solid var(--hairline); border-radius: 5px; padding: 1px 5px; background: var(--surface);
+    pointer-events: none;
+  }
+  .search-pop {
+    position: absolute; top: 44px; right: 0; width: 330px; max-height: 380px; overflow-y: auto;
+    background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px;
+    box-shadow: var(--pop-shadow); padding: 6px; z-index: 60;
+  }
+  .search-pop .s-item { display: block; padding: 8px 10px; border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--ink); text-decoration: none; }
+  .search-pop .s-item:hover, .search-pop .s-item.on { background: var(--surface-soft); text-decoration: none; }
+  .search-pop .s-item span { display: block; font-size: 11px; color: var(--ink-faint); }
+  .search-pop .s-none { padding: 12px 10px; font-size: 12.5px; color: var(--ink-faint); }
+  @media (max-width: 700px) { .top-search input { width: 140px; } }
+
+  /* ── 셸: 사이드바 240 · 본문(중앙 900) · TOC 200 · 전체 폭 97rem ── */
+  .shell { display: grid; grid-template-columns: 240px minmax(0, 1fr) 200px; max-width: 97rem; margin: 0 auto; }
+  @media (max-width: 1279px) { .shell { grid-template-columns: 240px minmax(0, 1fr); } .toc { display: none; } }
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; }
+    .menu-btn { display: block; }
+  }
+
+  /* ── 사이드바: 활성 섹션의 트리만 표시 ── */
+  .sidebar {
+    border-right: 1px solid var(--hairline); background: var(--bg);
+    padding: 20px 14px 40px; position: sticky; top: var(--hh); height: calc(100vh - var(--hh));
+    overflow-y: auto; font-size: 13px;
+  }
+  @media (max-width: 900px) {
+    .sidebar { position: fixed; inset: var(--hh) 0 0 0; z-index: 40; height: auto; display: none; border-right: none; }
+    .sidebar.open { display: block; }
+  }
+  .nav-group.off { display: none; }
+  .sidebar.open .nav-group.off { display: block; }   /* 모바일 오버레이에선 전체 트리 */
+  .side-tab {
+    display: flex; align-items: center; gap: 10px; padding: 9px 10px; margin-bottom: 14px;
+    border: 1px solid var(--hairline); border-radius: 10px; background: var(--surface); box-shadow: var(--shadow);
+  }
+  .side-tab .logo-dot { width: 30px; height: 30px; border-radius: 9px 12px 10px 13px; }
+  .side-tab b { display: block; font-size: 13px; font-weight: 600; line-height: 1.3; }
+  .side-tab span { display: block; font-size: 11px; color: var(--ink-faint); }
+  .nav-group { margin-bottom: 18px; }
+  .nav-group > .gl { display: none; font-size: 12.5px; font-weight: 600; color: var(--ink); padding: 0 10px; margin-bottom: 4px; }
+  .sidebar.open .nav-group > .gl { display: block; }   /* 모바일 전체 트리에서만 라벨 */
+  .nav-group a {
+    display: block; padding: 6px 10px; border-radius: 8px; color: var(--ink-soft);
+    font-size: 13.5px; font-weight: 400; margin: 1px 0;
+  }
+  .nav-group a { text-decoration: none; padding: 7px 10px; }
+  .nav-group a:hover { color: var(--ink); background: var(--surface-soft); }
+  .nav-group a.active { color: var(--ink); background: var(--surface-soft); font-weight: 500; }
+
+  /* ── TOC (On this page · 200px · xl 전용) ── */
+  .toc { padding: 48px 16px 40px 0; position: sticky; top: var(--hh); height: calc(100vh - var(--hh)); overflow-y: auto; font-size: 12px; }
+  .toc-t { font-size: 12px; font-weight: 500; color: var(--ink-soft); margin-bottom: 6px; }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li a { display: block; padding: 6px 0; color: var(--ink-faint); line-height: 1.45; overflow-wrap: anywhere; text-decoration: none; }
+  .toc li a:hover { color: var(--ink); }
+  .toc li a.active { color: var(--ink); font-weight: 500; }
+
+  /* ── 본문: 중앙 900px · 패딩 16→32 ── */
+  main { padding: 24px 16px 90px; min-width: 0; }
+  @media (min-width: 768px) { main { padding: 32px 24px 90px; } }
+  @media (min-width: 1280px) { main { padding: 56px 32px 100px; } }
+  .page { max-width: 900px; margin: 0 auto; width: 100%; }
+  .page[hidden] { display: none; }
+  .crumb { font-size: 12.5px; color: var(--ink-faint); margin-bottom: 12px; font-weight: 400; }
+  .crumb b { color: var(--ink-soft); font-weight: 500; }
+  h1 { font-size: 2rem; margin: 0 0 16px; letter-spacing: -.025em; font-weight: 500; line-height: 1.1; text-wrap: balance; }
+  @media (min-width: 768px) { h1 { font-size: 3rem; } }
+  @media (min-width: 1280px) { h1 { font-size: 3.75rem; } }
+  .desc { color: var(--ink-soft); margin: 0 0 40px; font-size: 17px; line-height: 1.7; }
+  h2 { font-size: 21px; margin: 56px 0 16px; font-weight: 500; letter-spacing: -.01em; scroll-margin-top: calc(var(--hh) + 16px); }
+  h3 { font-size: 16px; margin: 28px 0 10px; font-weight: 500; scroll-margin-top: calc(var(--hh) + 16px); }
+  p, ul { max-width: none; }
+  .muted { color: var(--ink-soft); font-size: 13.5px; }
+  .content-max { max-width: none; }
+  ul { padding-left: 1.25rem; }
+  li { margin: 5px 0; }
+
+  .callout {
+    display: flex; gap: 10px; border: 1px solid var(--hairline);
+    background: var(--surface-soft); border-radius: 10px; padding: 12px 14px;
+    font-size: 13px; margin: 16px 0;
+  }
+  .callout.info { background: var(--accent-bg); border-color: color-mix(in srgb, var(--accent) 25%, transparent); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 6px; }
+  .chips span { background: var(--surface); border: 1px solid var(--hairline); border-radius: 999px; padding: 4.5px 13px; font-size: 12.5px; font-weight: 400; color: var(--ink-soft); }
+  .chips b { color: var(--ink); font-weight: 600; }
+
+  /* ── 테이블 ── */
+  .tbl-scroll { overflow-x: auto; border: 1px solid var(--hairline); border-radius: 10px; background: var(--surface); margin: 12px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th { text-align: left; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); padding: 9px 14px; border-bottom: 1px solid var(--hairline); white-space: nowrap; background: var(--surface-soft); }
+  td { padding: 9.5px 14px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td .dot { display: inline-block; width: 11px; height: 11px; border-radius: 3.5px; margin-right: 6px; vertical-align: -1px; border: 1px solid rgba(0,0,0,.12); }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ── 컬러 보드 ── */
+  .core-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .swatch-card { border-radius: 12px; min-height: 150px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .swatch-card .nm { font-weight: 700; font-size: 15.5px; line-height: 1.25; }
+  .swatch-card .hx { font-size: 12px; opacity: .85; margin-top: 4px; }
+  .swatch-card .role { font-size: 11.5px; opacity: .72; margin-top: 7px; line-height: 1.45; }
+  .ramp { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+  .ramp .cell { border-radius: 10px; height: 74px; padding: 10px; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; }
+  .ramp .cell .t { font-size: 11px; font-weight: 600; opacity: .92; }
+  .ramp .cell .h { font-size: 10.5px; opacity: .75; }
+  .gradbar { border-radius: 10px; height: 46px; margin-top: 10px; display: flex; align-items: flex-end; padding: 8px 12px; color: #fff; font-size: 11px; font-weight: 600; justify-content: space-between; }
+  .pantone-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+  .pantone { background: #FFFFFF; color: #1C1F27; border: 1px solid var(--hairline); border-radius: 10px; overflow: hidden; }
+  .pantone .block { height: 104px; }
+  .pantone .meta { padding: 10px 13px 12px; }
+  .pantone .meta b { display: block; font-size: 12.5px; letter-spacing: .02em; }
+  .pantone .meta span { font-size: 11.5px; color: #565D6E; }
+  .accent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(108px, 1fr)); gap: 8px; margin-top: 10px; }
+  .accent-grid .cell { border-radius: 10px; height: 84px; padding: 9px 11px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .accent-grid .t { font-size: 11px; font-weight: 600; }
+  .accent-grid .h { font-size: 10px; opacity: .8; }
+
+  /* ── 타이포 보이스 패널 ── */
+  .typo-split { display: grid; grid-template-columns: 1fr 1fr; border-radius: 12px; overflow: hidden; border: 1px solid var(--hairline); }
+  @media (max-width: 760px) { .typo-split { grid-template-columns: 1fr; } }
+  .typo-pane { padding: 28px 26px 32px; }
+  .typo-pane.dark { background: #2D313D; color: #F2F5FB; }   /* 의도적 고정 지면 — 보이스 대비 시연 */
+  .typo-pane.light { background: #FFFFFF; color: #262A35; }
+  .voice-tag { display: inline-block; border-radius: 999px; padding: 3px 12px; font-size: 11.5px; font-weight: 600; margin-bottom: 18px; }
+  .typo-pane.dark .voice-tag { background: #C99DF8; color: #241C2B; }
+  .typo-pane.light .voice-tag { background: #F0E4FD; color: #6F26A4; }
+  .typo-pane .face { font-size: clamp(22px, 3vw, 30px); font-weight: 700; margin: 0 0 22px; letter-spacing: -.01em; }
+  .spec { margin: 18px 0 0; }
+  .spec .label { font-size: 11px; letter-spacing: .05em; opacity: .62; margin-bottom: 4px; }
+
+  /* ── 스케일 스페시멘 램프 ── */
+  .scale-ramp { background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; margin-top: 10px; overflow: hidden; }
+  .scale-row { display: grid; grid-template-columns: 200px 1fr; gap: 18px; padding: 13px 18px; border-bottom: 1px solid var(--hairline); align-items: baseline; }
+  .scale-row:last-child { border-bottom: none; }
+  @media (max-width: 680px) { .scale-row { grid-template-columns: 1fr; gap: 4px; } }
+  .scale-meta { font-size: 11.5px; color: var(--ink-faint); line-height: 1.5; }
+  .scale-meta code { font-size: 12px; color: var(--ink); font-weight: 600; background: none; border: none; padding: 0; }
+  .scale-meta .sz { font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+  .scale-meta .rmk { display: block; font-size: 10.5px; }
+  .scale-demo { min-width: 0; overflow-wrap: break-word; }
+  .scale-demo .ko, .scale-demo .en { display: block; }
+  .scale-demo .ko { font-weight: 700; letter-spacing: 0; }
+  .scale-demo .en { font-weight: 400; opacity: .58; letter-spacing: 0; }
+  .alias-demo p { margin: 0; letter-spacing: 0; }
+
+  /* ── 감사 카드 ── */
+  .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 13px; }
+  .audit-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 15px 17px 13px; position: relative; overflow: hidden; }
+  .audit-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+  .audit-card.conflict::before { background: var(--sev-conflict); }
+  .audit-card.clean::before { background: var(--sev-clean); }
+  .audit-card.info::before { background: var(--sev-info); }
+  .audit-head { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
+  .audit-head b { font-size: 13.5px; }
+  .sev { font-size: 10px; font-weight: 600; letter-spacing: .06em; border-radius: 999px; padding: 2.5px 9px; white-space: nowrap; }
+  .sev.conflict { color: var(--sev-conflict); background: var(--sev-conflict-bg); }
+  .sev.clean { color: var(--sev-clean); background: var(--sev-clean-bg); }
+  .sev.info { color: var(--sev-info); background: var(--sev-info-bg); }
+  .audit-card p { margin: 0 0 9px; font-size: 12.5px; color: var(--ink-soft); }
+  .evidence { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
+  .evidence code { background: var(--code-bg); border-radius: 6px; padding: 2.5px 7px; font-size: 11px; color: var(--ink); }
+  .fix { font-size: 12.5px; margin: 0; }
+  .fix b { color: var(--ink); }
+  .swrow { display: inline-flex; gap: 4px; vertical-align: -2px; margin-left: 4px; }
+  .swrow i { width: 13px; height: 13px; border-radius: 3.5px; display: inline-block; border: 1px solid rgba(0,0,0,.15); }
+
+  /* ── 로드맵 ── */
+  .roadmap { counter-reset: step; list-style: none; padding: 0; margin: 0; max-width: 78ch; }
+  .roadmap li { counter-increment: step; position: relative; padding: 12px 16px 12px 56px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; margin-bottom: 8px; }
+  .roadmap li::before {
+    content: counter(step); position: absolute; left: 15px; top: 13px;
+    width: 26px; height: 26px; border-radius: 50%; background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    color: var(--ink); font-weight: 600; font-size: 12.5px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .roadmap b { display: block; margin-bottom: 1px; font-size: 13.5px; }
+  .roadmap span { color: var(--ink-soft); font-size: 12.5px; }
+
+  /* ── 이전/다음 카드 ── */
+  .page-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 56px; }
+  .page-nav a { flex: 1; max-width: 47%; border: 1px solid var(--hairline); border-radius: 10px; padding: 11px 14px; font-size: 13.5px; font-weight: 500; color: var(--ink); background: var(--surface); text-decoration: none; }
+  .page-nav a:hover { background: var(--surface-soft); text-decoration: none; }
+  .page-nav .dir { display: block; font-size: 11.5px; color: var(--ink-faint); font-weight: 400; margin-bottom: 2px; }
+  .page-nav a .dir::before { content: "← "; }
+  .page-nav a.next .dir::before { content: ""; }
+  .page-nav a.next .dir::after { content: " →"; }
+  .page-nav .next { margin-left: auto; text-align: right; }
+  .src-note { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--hairline); color: var(--ink-faint); font-size: 12px; max-width: 78ch; }
+
+  /* ── 스페이싱 바 ── */
+  .sbar { height: 14px; background: var(--accent-bg); border: 1px solid var(--accent); border-right-width: 2px; border-radius: 3px; display: inline-block; vertical-align: middle; }
+
+  /* ── 라디우스·엘리베이션 데모 ── */
+  .demo-row { display: flex; flex-wrap: wrap; gap: 16px; margin: 14px 0; }
+  .demo-box { width: 128px; height: 84px; background: var(--surface); border: 1px solid var(--hairline); display: flex; align-items: flex-end; padding: 9px 11px; font-size: 11px; color: var(--ink-soft); }
+  .demo-box b { color: var(--ink); margin-right: 4px; }
+
+  /* ── 비율 데모 ── */
+  .ratio-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; margin: 14px 0; }
+  .ratio-cell { background: var(--accent-bg); border: 1.5px solid var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--accent-text); }
+
+  /* ── z스택 데모 ── */
+  .zstack { position: relative; height: 190px; max-width: 460px; margin: 14px 0; }
+  .zstack .layer { position: absolute; border-radius: 10px; border: 1px solid var(--hairline); background: var(--surface); padding: 8px 12px; font-size: 11.5px; font-weight: 600; box-shadow: var(--pop-shadow); }
+  .zstack .layer span { display: block; font-weight: 400; font-size: 10.5px; color: var(--ink-faint); }
+
+  /* ── 버튼 데모 ── */
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 14px 0; }
+  .dbtn {
+    min-width: 150px; height: 48px; border: none; border-radius: 16px;
+    font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; padding: 0 22px;
+    transition: transform .15s ease; color: #fff; position: relative; overflow: hidden;
+  }
+  .dbtn:active { transform: scale(.97); }
+  .dbtn.primary { background: linear-gradient(180deg, #C78FF7 0%, #AA4AF4 52%, #9430D8 100%); box-shadow: 0 4px 10px rgba(148, 48, 216, .28); }
+  .dbtn.primary::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 50%); pointer-events: none; }
+  .dbtn.secondary { background: var(--surface-soft); color: var(--ink); border: 1px solid var(--hairline); }
+  .dbtn.destructive { background: #DC3F3A; }
+  .dbtn.disabled { background: var(--surface-soft); color: var(--ink-faint); cursor: not-allowed; }
+  .dbtn.disabled:active { transform: none; }
+  .dchip-demo { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .seg-demo { display: inline-flex; gap: 4px; padding: 4px; border-radius: 13px; background: var(--surface-soft); }
+  .seg-demo span { padding: 6px 18px; border-radius: 10px; font-size: 12.5px; font-weight: 600; color: var(--ink-faint); }
+  .seg-demo .on { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  @media (prefers-reduced-motion: reduce) { .dbtn { transition: none; } .dbtn:active { transform: none; } }
+
+  /* ── 플래터 그리드 시뮬레이터 ── */
+  .sim-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0 8px; }
+  .sim-controls button {
+    background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px;
+    color: var(--ink); font-size: 12.5px; font-weight: 500; padding: 6px 11px; cursor: pointer;
+    font-family: inherit;
+  }
+  .sim-controls button:hover { background: var(--surface-soft); }
+  .sim-controls label { font-size: 12px; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .sim-controls input[type=range] { accent-color: var(--accent); width: 120px; }
+  #simCount { font-size: 12px; font-weight: 600; color: var(--ink); background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: 999px; padding: 3px 10px; }
+  .sim-status { font-size: 12px; color: var(--ink-soft); background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: 8px; padding: 7px 12px; margin-bottom: 12px; min-height: 18px; }
+  .sim-outer { overflow-x: auto; border: 1px solid var(--hairline); border-radius: 12px; background: var(--surface-soft); padding: 12px 0; }
+  #simBoard { position: relative; margin: 0 auto; background: var(--surface); border-radius: 10px; box-shadow: var(--shadow); touch-action: none; }
+  #simBoard .gcell { position: absolute; border-radius: 6px; background: var(--code-bg); opacity: .55; pointer-events: none; }
+  #simBoard .widget {
+    position: absolute; display: flex; align-items: flex-end; padding: 6px 9px;
+    font-size: 11px; font-weight: 600; color: #fff; cursor: grab; user-select: none;
+    -webkit-user-select: none; box-shadow: 0 1px 3px rgba(0,0,0,.12);
+    transition: left .18s ease, top .18s ease;
+  }
+  #simBoard .widget.drag { transition: none; cursor: grabbing; z-index: 10; box-shadow: 0 10px 24px rgba(0,0,0,.22); opacity: .92; }
+  #simBoard .widget .wlab { pointer-events: none; }
+  #simBoard .widget .rsz {
+    position: absolute; right: 5px; bottom: 5px; width: 15px; height: 15px;
+    border-radius: 50%; border: 2px solid rgba(255,255,255,.95);
+    background: rgba(0,0,0,.28); cursor: nwse-resize; touch-action: none;
+  }
+  #simBoard .widget.rszing { transition: none; z-index: 10; box-shadow: 0 10px 24px rgba(0,0,0,.22); }
+  @media (prefers-reduced-motion: reduce) { #simBoard .widget { transition: none; } }
+</style>
+
+<svg style="display:none" aria-hidden="true"><symbol id="wm-ditto" viewBox="0 0 370 134"><path d="M140.496 15.9557C140.496 15.9557 120.588 0.280443 77.741 0C75.1142 15.1439 70.3181 40.5535 64.7177 70.738C62.9542 43.2029 47.0902 38.4354 38.4278 40.2214C16.9782 44.6568 -7.18676 84.0886 2.00698 112.362C11.2745 140.863 52.9341 134.251 70.0377 130.76C70.0082 130.672 69.986 130.583 69.9565 130.502C69.6392 101.808 73.2695 62.1993 99.2053 37.6974C110.709 26.8339 128.779 16.7749 140.503 15.9631L140.496 15.9557ZM53.3989 115.52C49.7982 119.454 41.7481 114.133 34.554 104.775C19.7673 85.5203 20.4609 63.941 31.1746 63.8081C36.9742 63.7343 42.6778 68.1255 48.7357 86.2288C52.3069 96.9077 55.5535 113.159 53.3916 115.52H53.3989Z" fill="currentColor"></path><path d="M227.933 118.015C241.332 137.756 263.121 132.214 273.399 124.827C306.345 101.173 287.102 40.3986 240.579 40.3986C222.937 40.3986 214.083 53.3063 212.74 63.3284C225.121 65.7712 236.005 73.7417 240.454 80.9742C245.804 67.3063 250.909 63.7343 256.097 63.8008C266.81 63.941 267.083 87.2915 252.717 104.775C248.253 110.199 238.366 118.79 227.933 118.015Z" fill="currentColor"></path><path d="M109.174 37.594C110.62 39.1586 152.811 54.1254 167.14 62.1845C186.693 73.1881 162.396 55.8228 162.396 55.8228L149.328 130.605H181.425L170.512 46.8929C175.338 49.5129 191.202 54.4944 204.852 48.797C222.775 39.5055 211.877 -0.819233 109.167 37.594H109.174Z" fill="currentColor"></path><path d="M243.811 87.9409C243.811 87.9409 243.833 87.904 243.841 87.8818C243.818 87.8818 243.796 87.8818 243.774 87.8966C243.782 87.9114 243.796 87.9335 243.804 87.9483L243.811 87.9409Z" fill="currentColor"></path><path d="M189.401 102.472C187.918 99.7416 187.653 98.6568 186.376 96.2435C132.926 110.022 90.1887 90.5387 144.827 66.8486C138.511 59.6088 114.523 54.6346 94.3281 60.5977C89.4065 62.0516 88.0194 63.4833 87.8349 64.3837C85.3336 72.2066 109.115 66.0073 80.1907 130.598L189.394 102.465L189.401 102.472Z" fill="currentColor"></path><path d="M237.694 92.5239C230.242 78.1549 196.75 62.8856 168.033 60.214C164.735 59.9778 187.07 79.0184 202.262 91.5202L194.419 130.598H220.384L211.345 98.6346C221.461 109.653 234.809 110.915 238.056 104.605C239.635 101.542 240.218 97.3874 237.694 92.5239Z" fill="currentColor"></path><path d="M322.297 93.6236C320.18 95.7491 317.066 95.9041 315.516 91.8081C314.653 89.5129 312.513 84.1698 306.906 76.9594C303.895 73.0849 298.228 67.2177 294.628 60.4059C290.769 53.107 290.009 48.9742 290.621 42.7823C291.425 34.7749 299.453 24.8782 310.639 25.5646C330.259 26.7675 328.791 52.3985 328.791 52.3985C328.791 52.3985 340.427 27.9852 359.087 35.9779C369.366 40.3838 371.498 53.4686 369.1 60.4059C364.392 74.0148 346.942 79.3579 340.272 82.5683C330.222 87.3948 327.462 88.4428 322.29 93.6236H322.297Z" fill="currentColor"></path><path d="M312.44 131.55C319.775 131.55 325.721 125.602 325.721 118.266C325.721 110.929 319.775 104.982 312.44 104.982C305.105 104.982 299.158 110.929 299.158 118.266C299.158 125.602 305.105 131.55 312.44 131.55Z" fill="currentColor"></path></symbol></svg>
+<link rel="stylesheet" href="visual-docs.css">
+<link rel="stylesheet" href="profile-avatar-tokens.css">
+<link rel="stylesheet" href="profile-avatars.css">
+<link rel="stylesheet" href="widget-system.css">
+<link rel="stylesheet" href="music-player.css"><link rel="stylesheet" href="music-player-expanded.css">
+<link rel="stylesheet" href="profile-colors.css">
+<link rel="stylesheet" href="detail-colors.css">
+<link rel="stylesheet" href="docs-reorg.css">
+<link rel="stylesheet" href="docs-chrome.css">
+<header class="topbar">
+  <a class="logo" href="#overview" aria-label="Splup 디자인 가이드 처음으로"><svg class="wm" viewBox="0 0 370 134" aria-hidden="true"><use href="#wm-ditto"/></svg><span class="logo-label">Splup <small>디자인 가이드</small></span></a>
+  <nav class="top-nav" id="topNav" aria-label="주요 카테고리">
+<a href="#overview" data-group="start">처음으로</a><a href="#colorgraphy" data-group="colorgraphy">컬러</a><a href="#foundations" data-group="foundations">기본 규칙</a><a href="#components" data-group="components">컴포넌트</a><a href="#patterns" data-group="brand">적용 방법</a><a href="#resources" data-group="reference">자료</a><a href="#roadmap" data-group="migration">변경 기록</a></nav>
+  <div class="top-search">
+    <input id="searchInput" type="search" placeholder="문서 검색" autocomplete="off" aria-label="문서 검색" role="combobox" aria-autocomplete="list" aria-controls="searchPop" aria-expanded="false">
+    <kbd>⌘K</kbd>
+    <div class="search-pop" id="searchPop" role="listbox" aria-label="문서 검색 결과" hidden></div>
+  </div>
+</header>
+
+<div class="shell">
+
+
+<main id="main-content" tabindex="-1">
+<details class="docs-mobile-toc" id="mobileToc" hidden><summary>이 문서의 내용</summary><ul id="mobileTocList"></ul></details>
+
+<!-- ═══════════ 문서 시작 · 카테고리 목록 ═══════════ -->
+<article class="page docs-home" id="page-overview">
+  <div class="docs-home-intro">
+    <div class="crumb">Splup</div>
+    <h1>디자인 가이드</h1>
+    <p class="desc">디토의 화면을 함께 만드는 기준입니다. 색과 글자부터 버튼과 위젯까지, 필요한 규칙을 찾아 적용하세요.</p>
+    <nav class="docs-shortcuts" aria-label="자주 찾는 문서">
+      <h2>자주 찾는 문서</h2>
+      <a href="#multi-palette">멀티 팔레트 8종</a>
+      <a href="#ditto-action">디토하기 버튼</a>
+      <a href="#widget-system">위젯 크기와 구성</a>
+      <a href="#profile-handles">프로필 구성</a>
+    </nav>
+  </div>
+  <nav class="docs-home-directory" aria-label="전체 가이드">
+    <h2>전체 가이드</h2>
+    <div class="docs-topic-list">
+      <a href="#colorgraphy"><span class="index-number" aria-hidden="true">01</span><span><strong>컬러</strong><small>기본색과 사용처, 브랜드 그래픽과 팔레트</small></span><b aria-hidden="true">→</b></a>
+      <a href="#foundations"><span class="index-number" aria-hidden="true">02</span><span><strong>기본 규칙</strong><small>글자, 간격, 모서리, 움직임과 화면의 순서</small></span><b aria-hidden="true">→</b></a>
+      <a href="#components"><span class="index-number" aria-hidden="true">03</span><span><strong>컴포넌트</strong><small>프로필, 버튼과 위젯의 모습과 동작</small></span><b aria-hidden="true">→</b></a>
+      <a href="#patterns"><span class="index-number" aria-hidden="true">04</span><span><strong>적용 방법</strong><small>플래터 배치와 사용자에게 건네는 말</small></span><b aria-hidden="true">→</b></a>
+      <a href="../navigation-sheets.html"><span class="index-number" aria-hidden="true">05</span><span><strong>상단 바와 바텀시트</strong><small>헤더 구성과 아래에서 열리는 화면의 사용 기준</small></span><b aria-hidden="true">→</b></a>
+      <a href="#resources"><span class="index-number" aria-hidden="true">06</span><span><strong>자료</strong><small>공통 설정값, 원본 파일과 기존 화면 변경 방법</small></span><b aria-hidden="true">→</b></a>
+      <a href="#roadmap"><span class="index-number" aria-hidden="true">07</span><span><strong>변경 기록</strong><small>반영된 내용과 확인이 필요한 항목</small></span><b aria-hidden="true">→</b></a>
+    </div>
+  </nav>
+</article>
+
+<article class="page docs-index" id="page-colorgraphy" hidden>
+  <div class="crumb">Splup / 컬러</div>
+  <h1>컬러</h1>
+  <p class="desc">Splup의 색은 사용자가 무엇을 할 수 있는지 알려주고, 자신의 공간을 표현하도록 돕습니다. 이 가이드는 색을 고르는 이유부터 화면에 적용하는 방법까지 하나의 기준으로 정리합니다.</p>
+  <div class="cg-index-meta"><span>컬러 기준 3.3.0</span><span>밝은 화면 · 어두운 화면</span><span>66개 사용처별 색상</span><span>업데이트 2026.10.05</span></div>
+  <nav class="cg-index-quick" aria-label="컬러 기준 빠른 이동"><a href="#color-overview">개요 →</a><a href="#color-roles">역할별 컬러 →</a><a href="#color-palette">팔레트 →</a></nav>
+  <div class="docs-index-list">
+    <a href="#color"><span class="index-number">01</span><span class="index-copy"><strong>컬러 기준</strong><small>어디에 어떤 색을 쓰는지, 밝은 화면과 어두운 화면에서 어떻게 보이는지 확인합니다.</small></span><b aria-hidden="true">→</b></a>
+    <a href="#color-application"><span class="index-number">02</span><span class="index-copy"><strong>앱에서의 적용</strong><small>버튼을 누르거나 색을 고를 때, 사용자의 행동을 어떻게 보여주는지 설명합니다.</small></span><b aria-hidden="true">→</b></a>
+    <a href="#brand-graphics"><span class="index-number">03</span><span class="index-copy"><strong>브랜드 표현</strong><small>Fluid 6조합 · 멀티 팔레트 8종 · 앱 아이콘 · 위젯 25종 · EVENT 8종의 사용처를 안내합니다.</small></span><b aria-hidden="true">→</b></a>
+  </div>
+  <section class="cg-index-rules"><h2>같은 역할, 같은 컬러</h2><p>같은 뜻을 전달하는 요소에는 같은 색을 사용합니다. 예를 들어 적용 버튼은 브랜드 보라색, 보조 설명은 보랏빛 회색을 사용합니다. 화면을 만들 때는 01의 사용처별 색상에서 시작하고, 공간의 분위기를 더할 때는 03의 색 조합을 선택합니다.</p><p><a href="../../tokens/colorgraphy.json" download>사용처별 색상 데이터 다운로드</a> · <a href="../../tokens/colorgraphy.css" download>밝은 화면·어두운 화면 스타일 다운로드</a></p></section>
+</article>
+
+<article class="page content-max splup-graphics" id="page-color" hidden>
+  <div class="crumb">Splup / 01 · 컬러 기준</div><h1>컬러 기준</h1>
+  <div class="cs-root" data-color-system-core></div>
+  <h2>색을 바꿀 때도 같은 기준을 사용합니다</h2>
+  <p>기본색에 사용처를 연결하고, 그 이름을 버튼과 카드에서 함께 사용합니다. 공통 원본을 바꾸면 연결된 색상을 같은 기준으로 갱신할 수 있습니다. 브랜드 배경과 앱 아이콘의 색 조합은 03에서 따로 확인합니다.</p>
+  <p><a href="../../tokens/color-system.json" download>통합 컬러 토큰 JSON ↓</a> · <a href="#color-application">02 · 앱에서의 적용 →</a></p>
+</article>
+
+<!-- ═══════════ TYPOGRAPHY ═══════════ -->
+<article class="page content-max" id="page-typography" hidden>
+  <div class="crumb">기본 규칙 / <b>Typography</b></div>
+  <h1>글자 스타일</h1><p class="desc">모든 신규 UI 텍스트는 Pretendard를 사용합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="type-specimen"><b>나의 일상, 우리의 공간.</b><span>친구의 순간을 내 플래터에 담아요.</span><small>Pretendard · Regular / Medium / Bold</small></div></div>
+
+  <h2>Pretendard · 하나의 서체</h2><p>브랜드 설명과 사용자 콘텐츠 모두 Pretendard를 사용합니다. 위계는 크기·굵기·행간으로 구분하며, 로고는 원본 SVG 아트로 유지합니다.</p>
+  <h2>글자 크기 14단계</h2>
+  <p class="muted">글자 크기마다 행간을 함께 정합니다. 굵기는 보통(400), 중간(500), 굵게(700) 세 가지입니다. <code>Static</code>이 붙은 스타일은 기기의 글자 크기 설정과 관계없이 크기를 유지합니다. 국문은 Pretendard, 별도 영문 브랜드 예시는 LINE Seed Sans App을 사용합니다.</p>
+  <div class="scale-ramp">
+    <div class="scale-row"><div class="scale-meta"><code>t1</code> <span class="sz">11 / 15</span><span class="rmk">현 captionSm 자리</span></div>
+      <div class="scale-demo" style="font-size:11px;line-height:15px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t2</code> <span class="sz">12 / 16</span><span class="rmk">현 captionMd 자리</span></div>
+      <div class="scale-demo" style="font-size:12px;line-height:16px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t3</code> <span class="sz">13 / 18</span><span class="rmk">현 labelSm 자리</span></div>
+      <div class="scale-demo" style="font-size:13px;line-height:18px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t4</code> <span class="sz">14 / 19</span><span class="rmk">현 bodySm·labelMd 자리</span></div>
+      <div class="scale-demo" style="font-size:14px;line-height:19px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t5</code> <span class="sz">16 / 22</span><span class="rmk">현 bodyMd·labelLg 자리</span></div>
+      <div class="scale-demo" style="font-size:16px;line-height:22px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t6</code> <span class="sz">18 / 24</span><span class="rmk"><b>= 보드 Body 18</b></span></div>
+      <div class="scale-demo" style="font-size:18px;line-height:24px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t7</code> <span class="sz">20 / 27</span><span class="rmk">기존 19px 제목을 바꾸는 단계</span></div>
+      <div class="scale-demo" style="font-size:20px;line-height:27px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t8</code> <span class="sz">22 / 30</span><span class="rmk">현 titleLg 자리</span></div>
+      <div class="scale-demo" style="font-size:22px;line-height:30px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t9</code> <span class="sz">24 / 32</span><span class="rmk"><b>= 보드 Display 24</b></span></div>
+      <div class="scale-demo" style="font-size:24px;line-height:32px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t10</code> <span class="sz">26 / 35</span><span class="rmk"><code>screenTitle</code> = t10 Bold</span></div>
+      <div class="scale-demo" style="font-size:26px;line-height:35px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t11</code> <span class="sz">28 / 38</span><span class="rmk">현 displayMd 자리 · 넓은 화면에 권장</span></div>
+      <div class="scale-demo" style="font-size:28px;line-height:38px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t12</code> <span class="sz">32 / 42</span><span class="rmk">넓은 화면에 권장</span></div>
+      <div class="scale-demo" style="font-size:32px;line-height:42px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t13</code> <span class="sz">40 / 52</span><span class="rmk">넓은 화면에 권장</span></div>
+      <div class="scale-demo" style="font-size:40px;line-height:52px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>t14</code> <span class="sz">48 / 60</span><span class="rmk"><b>= 보드 Display 48</b> · 넓은 화면에 권장</span></div>
+      <div class="scale-demo" style="font-size:48px;line-height:60px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
+  </div>
+  <p class="muted" style="margin-top:8px">예제는 전 단계 동일 — 국문(Pretendard <b>Bold</b>) + 라틴(LINE Seed Sans App <b>Regular</b>)을 실제 크기/행간로 렌더.
+  각 단계 × Rg·Md·Bd = 스타일 42종 + 크기가 고정된 스타일 42종. 보드의 브랜드 스케일 48·24·18px이 <b>t14·t9·t6에 정확히 일치</b>하므로 브랜드 전용 커스텀 스타일이 필요 없다.</p>
+
+  <h2>제목·본문·주석에 쓰는 글자 스타일</h2>
+  <div class="scale-ramp">
+    <div class="scale-row"><div class="scale-meta"><code>screenTitle</code> <span class="sz">t10 Bold · 26 / 35</span><span class="rmk">화면 주요 타이틀</span></div>
+      <div class="scale-demo alias-demo"><p style="font-size:26px;line-height:35px;font-weight:700">주고받은 것들은 파형으로 쌓입니다</p></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>articleBody</code> <span class="sz">t5 Rg + lh t6 · 16 / 24</span><span class="rmk">콘텐츠 본문 · 유일한 교차 짝</span></div>
+      <div class="scale-demo alias-demo"><p style="font-size:16px;line-height:24px;font-weight:400">디토는 공감의 표현 중 가장 비용이 큰 형태, 소유로 하는 공감입니다. 무엇을 들이는가가 곧 선택이고, 선택이라서 상대에게 의미가 됩니다. "나도(ditto)"라는 말이 가장 짧은 형태의 이 행동입니다.</p></div></div>
+    <div class="scale-row"><div class="scale-meta"><code>articleNote</code> <span class="sz">t4 Rg + lh t5 · 14 / 22</span><span class="rmk">주석·부가 정보 (일반 본문 금지)</span></div>
+      <div class="scale-demo alias-demo"><p style="font-size:14px;line-height:22px;font-weight:400;opacity:.72">디토는 공감의 표현 중 가장 비용이 큰 형태, 소유로 하는 공감입니다. 무엇을 들이는가가 곧 선택이고, 선택이라서 상대에게 의미가 됩니다. "나도(ditto)"라는 말이 가장 짧은 형태의 이 행동입니다.</p></div></div>
+  </div>
+
+  <h2>기존 글자 스타일을 새 기준으로 바꾸기</h2>
+  <p>기존 화면의 글자를 변경할 때는 왼쪽의 스타일을 찾아 오른쪽의 새 스타일로 바꿉니다. <code>DDSType</code>은 기존 앱의 글자 스타일 이름이고, <code>t1–t14</code>는 새 기준의 크기 단계입니다. 크기나 굵기가 달라지는 항목은 화면에서 다시 확인합니다.</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>기존 스타일 · 크기 / 행간 배수</th><th>새 스타일 · 크기 / 행간(px)</th><th>달라지는 점</th></tr></thead>
+      <tbody>
+        <tr><td><b class="docs-style-label">화면 강조 제목</b><code>displayMd</code> 28 굵게 /1.3</td><td><code>t11Bold</code> 28/38</td><td>행간 36.4px → 38px</td></tr>
+        <tr><td><b class="docs-style-label">큰 제목</b><code>titleLg</code> 22 굵게 /1.35</td><td><code>t8Bold</code> 22/30</td><td>기존과 같은 크기</td></tr>
+        <tr><td><b class="docs-style-label">중간 제목</b><code>titleMd</code> 19 굵게 /1.4</td><td><code>t7Bold</code> 20/27</td><td>19px → 20px로 변경</td></tr>
+        <tr><td><b class="docs-style-label">작은 제목</b><code>titleSm</code> 17 약간 굵게 /1.4</td><td><code>t6Bold</code> 18/24</td><td>17px → 18px, 굵기 600 → 700</td></tr>
+        <tr><td><b class="docs-style-label">큰 본문</b><code>bodyLg</code> 17 보통 /1.6</td><td><code>t6Regular</code> 18/24</td><td>17px → 18px, 행간이 좁아짐</td></tr>
+        <tr><td><b class="docs-style-label">기본 본문</b><code>bodyMd</code> 16 보통 /1.55</td><td><code>articleBody</code> 16/24</td><td>본문용 스타일로 연결</td></tr>
+        <tr><td><b class="docs-style-label">작은 본문</b><code>bodySm</code> 14 보통 /1.5</td><td><code>articleNote</code> 14/22</td><td>기존과 같은 크기</td></tr>
+        <tr><td><b class="docs-style-label">큰 버튼 문구</b><code>labelLg</code> 16 약간 굵게 /1.0</td><td><code>t5Bold</code> 16/22</td><td>굵기 600 → 700, 행간 확대</td></tr>
+        <tr><td><b class="docs-style-label">기본 버튼 문구</b><code>labelMd</code> 14 약간 굵게 /1.0</td><td><code>t4Bold</code> 14/19</td><td>굵기 600 → 700, 행간 확대</td></tr>
+        <tr><td><b class="docs-style-label">작은 버튼 문구</b><code>labelSm</code> 13 약간 굵게 /1.0</td><td><code>t3Bold</code> 13/18</td><td>굵기 600 → 700, 행간 확대</td></tr>
+        <tr><td><b class="docs-style-label">보조 설명</b><code>captionMd</code> 12 보통 /1.4</td><td><code>t2Regular</code> 12/16</td><td>기존과 같은 크기</td></tr>
+        <tr><td><b class="docs-style-label">작은 보조 설명</b><code>captionSm</code> 11 중간 굵기 /1.3</td><td><code>t1Medium</code> 11/15</td><td>기존과 같은 크기</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">변경 후에는 글자 크기(19·17px), 굵기(600), 버튼 문구의 행간, 자간(−1%)을 확인합니다. 자세한 검토는 <a href="#audit">기존 구현 검토</a>에 남겨두었습니다.</p>
+
+  <h2>사용할 때 확인할 것</h2>
+  <ul style="font-size:13.5px">
+    <li><b>글꼴을 나누는 기준</b> — LINE Seed Sans App: 워드마크·온보딩/스플래시 타이틀·빈 상태 브랜드 카피·발표/마케팅 지면의 라틴. Pretendard: UI 전 영역·사용자 생성 콘텐츠·국문 전체. <b>스타일(tN)은 공유하고 폰트만 보이스로 갈린다</b> — 예: 브랜드 Display = <code>t14StaticBold</code>+LINE Seed, 화면 타이틀 = <code>screenTitle</code>+Pretendard.</li>
+    <li><b>한글이 있는 문장의 글꼴</b> — LINE Seed Sans App은 라틴 전용(한글 글리프 없음). iOS에서 자동 폴백이 시스템체로 떨어지므로, 국문 혼용 문자열은 코드에서 <b>명시적으로 Pretendard를 지정</b>한다. 한글 브랜드 표기가 꼭 필요한 예외 지점만 LINE Seed Sans KR(Th·Rg·Bd) 검토.</li>
+    <li><b>크기를 고정하는 경우</b> — 브랜드 지면(온보딩·스플래시·공유 카드·발표)은 레이아웃 고정이므로 <code>tNStatic*</code>을 쓴다. 스크롤되는 UI 본문은 기기의 글자 크기 설정을 따르는 스타일.</li>
+    <li><b>글꼴별 지원 굵기</b> — 3단(400/500/700) 중 LINE Seed Sans App은 Rg(400)·Bd(700)만 대응하고 <b>Medium(500)이 없다</b>(보유: Th·Rg·Bd·XBd·He). 브랜드 보이스에서 Medium 스타일 사용 금지 — 보드가 EN Display 24를 Regular로 지정한 것과 일치. 국문 Medium은 Pretendard 가변 wght 500으로 정상 지원.</li>
+  </ul>
+
+  <div class="page-nav">
+    <a href="#color"><span class="dir">이전</span>컬러 기준</a>
+    <a class="next" href="#spacing"><span class="dir">다음</span>간격</a>
+  </div>
+</article>
+
+<!-- ═══════════ SPACING ═══════════ -->
+<article class="page content-max" id="page-spacing" hidden>
+  <div class="crumb">기본 규칙 / <b>Spacing</b></div>
+  <h1>간격</h1>
+  <p class="desc">화면 가장자리, 버튼 사이, 글자 사이의 간격을 같은 기준으로 맞춥니다. 먼저 사용처별 간격을 고르고, 맞는 항목이 없으면 아래 19단계에서 선택합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="spacing-specimen"><div><span>4</span><i style="width:12px"></i></div><div><span>8</span><i style="width:24px"></i></div><div><span>12</span><i style="width:36px"></i></div><div><span>16</span><i style="width:48px"></i></div><div><span>24</span><i style="width:72px"></i></div><div><span>32</span><i style="width:96px"></i></div><div><span>48</span><i style="width:144px"></i></div></div></div>
+
+  <h2>간격 크기 19단계</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>토큰</th><th class="num">값</th><th>시각</th></tr></thead>
+      <tbody>
+        <tr><td><code>x0_5</code></td><td class="num">2</td><td><span class="sbar" style="width:2px"></span></td></tr>
+        <tr><td><code>x1</code></td><td class="num">4</td><td><span class="sbar" style="width:4px"></span></td></tr>
+        <tr><td><code>x1_5</code></td><td class="num">6</td><td><span class="sbar" style="width:6px"></span></td></tr>
+        <tr><td><code>x2</code></td><td class="num">8</td><td><span class="sbar" style="width:8px"></span></td></tr>
+        <tr><td><code>x2_5</code></td><td class="num">10</td><td><span class="sbar" style="width:10px"></span></td></tr>
+        <tr><td><code>x3</code></td><td class="num">12</td><td><span class="sbar" style="width:12px"></span></td></tr>
+        <tr><td><code>x3_5</code></td><td class="num">14</td><td><span class="sbar" style="width:14px"></span></td></tr>
+        <tr><td><code>x4</code></td><td class="num">16</td><td><span class="sbar" style="width:16px"></span></td></tr>
+        <tr><td><code>x4_5</code></td><td class="num">18</td><td><span class="sbar" style="width:18px"></span></td></tr>
+        <tr><td><code>x5</code></td><td class="num">20</td><td><span class="sbar" style="width:20px"></span></td></tr>
+        <tr><td><code>x6</code></td><td class="num">24</td><td><span class="sbar" style="width:24px"></span></td></tr>
+        <tr><td><code>x7</code></td><td class="num">28</td><td><span class="sbar" style="width:28px"></span></td></tr>
+        <tr><td><code>x8</code></td><td class="num">32</td><td><span class="sbar" style="width:32px"></span></td></tr>
+        <tr><td><code>x9</code></td><td class="num">36</td><td><span class="sbar" style="width:36px"></span></td></tr>
+        <tr><td><code>x10</code></td><td class="num">40</td><td><span class="sbar" style="width:40px"></span></td></tr>
+        <tr><td><code>x12</code></td><td class="num">48</td><td><span class="sbar" style="width:48px"></span></td></tr>
+        <tr><td><code>x13</code></td><td class="num">52</td><td><span class="sbar" style="width:52px"></span></td></tr>
+        <tr><td><code>x14</code></td><td class="num">56</td><td><span class="sbar" style="width:56px"></span></td></tr>
+        <tr><td><code>x16</code></td><td class="num">64</td><td><span class="sbar" style="width:64px"></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>사용처별 간격 6가지</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>토큰</th><th>참조</th><th class="num">값</th><th>용도</th></tr></thead>
+      <tbody>
+        <tr><td><code>globalGutter</code></td><td><code>x4</code></td><td class="num">16</td><td>화면 좌우 기본 여백 (플래터 그리드 마진과 동일)</td></tr>
+        <tr><td><code>betweenChips</code></td><td><code>x2</code></td><td class="num">8</td><td>칩 사이 수평 간격</td></tr>
+        <tr><td><code>componentDefault</code></td><td><code>x3</code></td><td class="num">12</td><td>컴포넌트 간 기본 수직 간격</td></tr>
+        <tr><td><code>navToTitle</code></td><td><code>x5</code></td><td class="num">20</td><td>내비 바 ↔ 페이지 타이틀</td></tr>
+        <tr><td><code>screenBottom</code></td><td><code>x14</code></td><td class="num">56</td><td>화면 하단 여백</td></tr>
+        <tr><td><code>betweenText</code></td><td><code>x1_5</code></td><td class="num">6</td><td>텍스트 요소 간 수직 간격</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">스케일 밖 레이아웃 클리어런스 2종 — <code>scrollBottomClearance 110</code>(스크롤 콘텐츠가 플로팅 탭바/CTA를 피할 여유) · <code>scrollBottomClearanceTall 148</code>(홈 그리드 제외 리스트 탭). 레거시 별칭 <code>s4~s48</code>·<code>screenMargin</code>은 호환용 — 신규 코드 사용 금지.</p>
+
+  <div class="page-nav">
+    <a href="#typography"><span class="dir">이전</span>글자 스타일</a>
+    <a class="next" href="#radius"><span class="dir">다음</span>모서리와 그림자</a>
+  </div>
+</article>
+
+<!-- ═══════════ RADIUS & ELEVATION ═══════════ -->
+<article class="page content-max" id="page-radius" hidden>
+  <div class="crumb">기본 규칙 / <b>Radius &amp; Elevation</b></div>
+  <h1>모서리와 그림자</h1>
+  <p class="desc">모서리는 기본 16px, 내부 요소 8px, 완전한 원형으로 구분합니다. 그림자는 요소가 배경에서 얼마나 떠 있는지 보여줍니다. 위젯과 전용 버튼은 각자의 크기 규칙을 따릅니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="radius-specimen"><div><i style="border-radius:8px"></i><span>R8</span></div><div><i style="border-radius:12px"></i><span>R12</span></div><div><i style="border-radius:16px"></i><span>R16</span></div><div><i style="border-radius:24px"></i><span>R24</span></div></div></div>
+
+  <h2>모서리 모양</h2>
+  <div class="demo-row">
+    <div class="demo-box" style="border-radius:16px"><span><b>base</b>16 — 카드·위젯·버튼·시트</span></div>
+    <div class="demo-box" style="border-radius:8px"><span><b>nested</b>8 — 카드 내부 중첩 박스</span></div>
+    <div class="demo-box" style="border-radius:999px;width:150px;height:44px;align-items:center"><span><b>full</b>아바타·토글·pill</span></div>
+  </div>
+  <p class="muted">위젯의 라운드는 이 3단이 아니라 <b>크기 비례 공식</b>을 따른다 — <a href="#grid">Platter Grid</a> 참조. 브랜드 그래픽의 블롭은 라디우스 16–24 범위(<a href="#assets">브랜드 에셋</a>).</p>
+
+  <h2>그림자의 깊이 3단계</h2>
+  <div class="demo-row">
+    <div class="demo-box" style="border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)"><span><b>e1</b>위젯·카드</span></div>
+    <div class="demo-box" style="border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.09)"><span><b>e2</b>홈 네비·FAB</span></div>
+    <div class="demo-box" style="border-radius:16px;box-shadow:0 12px 32px rgba(0,0,0,.14)"><span><b>e3</b>시트·다이얼로그</span></div>
+  </div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>토큰</th><th>색</th><th class="num">radius</th><th class="num">y</th><th>용도</th></tr></thead>
+      <tbody>
+        <tr><td><code>e1</code></td><td>black 6%</td><td class="num">1.5</td><td class="num">1</td><td>위젯·카드</td></tr>
+        <tr><td><code>e2</code></td><td>black 9%</td><td class="num">6</td><td class="num">4</td><td>홈 네비·FAB</td></tr>
+        <tr><td><code>e3</code></td><td>black 14%</td><td class="num">16</td><td class="num">12</td><td>시트·다이얼로그</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>상황에 맞는 그림자</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>토큰</th><th>스펙</th><th>용도</th></tr></thead>
+      <tbody>
+        <tr><td><code>raised</code></td><td>black 8% · r3 · y1</td><td>세그먼트 활성 탭·작은 부상 요소</td></tr>
+        <tr><td><code>floating</code></td><td>black 9% · r6 · y2</td><td>컴포저 칩·팝오버</td></tr>
+        <tr><td><code>card</code></td><td><span class="mono">#E5E5E5</span> · r32 · y4</td><td>바탕에서 크게 뜬 부드러운 확산 (Figma light)</td></tr>
+        <tr><td><code>glassDrop</code></td><td>black 5% · r23 · y18</td><td>글래스 재질의 드롭 성분</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted"><b>글래스 재질</b> <code>dsGlass()</code> — ultraThinMaterial 블러 + 화이트 35% 스트로크 0.8 + glassDrop 그림자. UpButton·탭바 계열 유리 질감의 공용 규격.</p>
+
+  <div class="page-nav">
+    <a href="#spacing"><span class="dir">이전</span>간격</a>
+    <a class="next" href="#motion"><span class="dir">다음</span>움직임</a>
+  </div>
+</article>
+
+<!-- ═══════════ MOTION ═══════════ -->
+<article class="page content-max" id="page-motion" hidden>
+  <div class="crumb">기본 규칙 / <b>Motion</b></div>
+  <h1>움직임</h1>
+  <p class="desc">움직임은 눌렀는지, 화면이 바뀌었는지 알려주는 데 사용합니다. 아래 동작별 설정을 함께 사용해 같은 행동이 화면마다 다르게 느껴지지 않도록 합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="motion-specimen"><div class="motion-track"><i></i></div><button type="button" class="demo-replay">눌림·복원 재생</button><span>110ms 누름 / 360ms 복원 · Ditto Action</span></div></div>
+
+  <h2>동작별 움직임 설정</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>토큰</th><th>프리셋</th><th class="num">duration</th><th>용도</th></tr></thead>
+      <tbody>
+        <tr><td><code>Motion.lift</code></td><td>snappy</td><td class="num">0.30</td><td>드래그 리프트 등 소형 요소</td></tr>
+        <tr><td><code>Motion.push</code></td><td>smooth</td><td class="num">0.35</td><td>페이지 푸시 — 시스템 내비게이션 타이밍</td></tr>
+        <tr><td><code>Motion.settle</code></td><td>smooth</td><td class="num">0.35</td><td>탭바·플로팅 요소 출입</td></tr>
+        <tr><td><code>Motion.appear</code></td><td>smooth</td><td class="num">0.40</td><td>배너·토스트 등장</td></tr>
+        <tr><td><code>Motion.sheet</code></td><td>smooth</td><td class="num">0.50</td><td>시트 — 시스템 시트 타이밍 (바운스 없음)</td></tr>
+        <tr><td><code>Motion.popIn</code></td><td><b>bouncy</b></td><td class="num">0.30</td><td>리액션 팝 — <b>유일하게 허용된 탄성</b></td></tr>
+        <tr><td><code>Motion.fade</code></td><td>easeInOut</td><td class="num">0.22</td><td>짧은 크로스페이드 표준</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">컴포넌트 내부 별칭 <code>DSMotion</code>: springFast(snappy 0.3) · springSoft(smooth 0.35) · easeQuick(0.2) · ease(0.22) — 새 코드는 의도가 뚜렷하면 <code>Motion.*</code> 우선.</p>
+
+  <h2>피해야 할 움직임</h2>
+  <ul style="font-size:13.5px">
+    <li><b>하단 탭 전환은 애니메이션 없음</b> — 즉시 교체 (ContentView).</li>
+    <li>섹션 로딩의 장식적 등장·스태거 금지.</li>
+    <li>커스텀 스프링 파라미터(response/damping 직접 지정) 금지 — 시스템 프리셋의 duration 변형만.</li>
+  </ul>
+
+  <h2>움직임 줄이기 설정</h2>
+  <p class="muted">모션 감소 설정(<code>UIAccessibility.isReduceMotionEnabled</code>)에서는 ① pressed 스케일 → 1 ② <code>popIn</code>(bouncy) → <code>fade</code> ③ 장식성 글로우 펄스 정지. 전환 자체(시트·푸시)는 시스템이 크로스페이드로 대체하므로 별도 처리 없음. 코드 연동은 <a href="#backlog">추가 작업 2</a>.</p>
+
+  <div class="page-nav">
+    <a href="#radius"><span class="dir">이전</span>모서리와 그림자</a>
+    <a class="next" href="#interaction"><span class="dir">다음</span>입력과 반응</a>
+  </div>
+</article>
+
+<!-- ═══════════ INTERACTION ═══════════ -->
+<article class="page content-max" id="page-interaction" hidden>
+  <div class="crumb">기본 규칙 / <b>Interaction</b></div>
+  <h1>입력과 반응</h1>
+  <p class="desc">누를 수 있는 요소는 반응을 보여주고, 사용할 수 없는 요소는 상태를 구분합니다. 버튼의 크기 변화, 관계를 표현하는 빛, 카드 테두리의 기준을 확인하세요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="state-specimen"><button type="button" class="spec-cta">눌러보기</button><button type="button" class="spec-cta" disabled>비활성</button><span class="spec-feedback" role="status">직접 눌러 상태를 확인하세요.</span></div></div>
+
+  <h2>눌림과 비활성 상태</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>토큰</th><th class="num">값</th><th>용도</th><th>Reduced Motion</th></tr></thead>
+      <tbody>
+        <tr><td><code>pressedScaleButton</code></td><td class="num">0.97</td><td>일반 버튼 (PressableStyle 기본)</td><td>1로 무효화</td></tr>
+        <tr><td><code>pressedScaleTile</code></td><td class="num">0.98</td><td>큰 타일·세그먼트</td><td>1로 무효화</td></tr>
+        <tr><td><code>pressedScaleFloating</code></td><td class="num">0.95</td><td>플로팅·캡슐 CTA</td><td>1로 무효화</td></tr>
+        <tr><td><code>disabledOpacity</code></td><td class="num">0.4</td><td>비활성 전역</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">pressed 스케일 3단은 <a href="#motion">Reduced Motion 규칙</a>에서 전부 1로 무효화된다. pressed <b>색</b> 짝은 현재 <code>fillBrandPressed</code> 하나뿐 — 주요 fill·layer로 확장 예정(<a href="#backlog">추가 작업 1</a>).</p>
+
+  <h2>주파수와 관계를 표현하는 빛</h2>
+  <p class="muted">주파수(퍼플)·관계 스택(오렌지) 게이트의 진행을 표현하는 디토! 고유 장치. 팡파레 없는 은은한 발광 — <a href="#voice">주파수의 물성</a>과 동일 원칙.</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>토큰</th><th>색</th><th class="num">α</th><th class="num">radius</th></tr></thead>
+      <tbody>
+        <tr><td><code>frequencyBase</code></td><td rowspan="4"><span class="dot" style="background:#7C4DFF"></span><span class="mono">#7C4DFF</span> ⚠</td><td class="num">.22</td><td class="num">7</td></tr>
+        <tr><td><code>frequency1</code></td><td class="num">.28</td><td class="num">10</td></tr>
+        <tr><td><code>frequency2</code></td><td class="num">.50</td><td class="num">16</td></tr>
+        <tr><td><code>frequency3</code></td><td class="num">.72</td><td class="num">22</td></tr>
+        <tr><td><code>stack1</code></td><td rowspan="3"><span class="dot" style="background:#FB7153"></span>DT.objOrange (레거시 참조) ⚠</td><td class="num">.24</td><td class="num">10</td></tr>
+        <tr><td><code>stack2</code></td><td class="num">.45</td><td class="num">16</td></tr>
+        <tr><td><code>stack3</code></td><td class="num">.68</td><td class="num">22</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">⚠ 주파수 글로우 <span class="mono">#7C4DFF</span>는 Splup(<span class="mono">#AA4AF4</span>)도 Deep(<span class="mono">#6655D2</span>)도 아닌 제3의 퍼플 — <a href="#audit">검토 M</a>에서 브랜드 축 정렬 결정 대기.</p>
+
+  <h2>카드의 얇은 테두리</h2>
+  <p class="muted"><code>hairline(color:radius:)</code> — 카드 공용 1px continuous 스트로크 오버레이. 기본색이 레거시 <code>DT.lineSubtle</code> 참조라 이관 시 <code>borderDefault</code> 계열로 교체 대상.</p>
+
+  <div class="page-nav">
+    <a href="#motion"><span class="dir">이전</span>움직임</a>
+    <a class="next" href="#zindex"><span class="dir">다음</span>화면이 겹치는 순서</a>
+  </div>
+</article>
+
+<!-- ═══════════ Z-INDEX ═══════════ -->
+<article class="page content-max" id="page-zindex" hidden>
+  <div class="crumb">기본 규칙 / <b>Z-Index &amp; 오버레이</b></div>
+  <h1>화면이 겹치는 순서</h1>
+  <p class="desc">여러 화면이 함께 열릴 때 무엇을 앞에 보여줄지 정합니다. 상세 화면, 바텀시트, 카메라, 안내 메시지를 아래 5가지 순서에 맞춰 배치합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="layer-specimen"><span>배경</span><span>콘텐츠</span><span>모달</span></div></div>
+
+  <h2>화면 종류별 표시 순서</h2>
+  <div class="zstack" aria-hidden="true">
+    <div class="layer" style="left:0;top:118px;width:180px;z-index:1">page 5<span>콘텐츠 영역 푸시</span></div>
+    <div class="layer" style="left:60px;top:88px;width:200px;z-index:2">sheet 20–28<span>바텀시트·작성 화면·확인 창</span></div>
+    <div class="layer" style="left:120px;top:58px;width:200px;z-index:3">fullscreen 29–33<span>풀스크린 오버레이</span></div>
+    <div class="layer" style="left:180px;top:28px;width:200px;z-index:4">capture 34–35<span>카메라·아카이브</span></div>
+    <div class="layer" style="left:240px;top:0;width:200px;z-index:5">toast 36–40<span>항상 가장 앞에 표시</span></div>
+  </div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>화면 종류</th><th class="num">범위</th><th>현재 표시하는 화면</th></tr></thead>
+      <tbody>
+        <tr><td><code>page</code></td><td class="num">5</td><td>FriendPlatterDetail · GroupDetail — <b>모달 아님</b>, modalUp 미등록</td></tr>
+        <tr><td><code>sheet</code></td><td class="num">20–28</td><td>Add/컴포저 20–21 · 디토 22–23 · 상세/댓글 24 · 신청 25 · 초대/프로필편집/교체 26 · 신고/그룹생성 27 · FullSheet 28</td></tr>
+        <tr><td><code>fullscreen</code></td><td class="num">29–33</td><td>프로필공유 29 · 내포스트 30 · 포스트상세 31 · 에디터/궤도 32 · 유저프로필/궤도프로필 33</td></tr>
+        <tr><td><code>capture</code></td><td class="num">34–35</td><td>폴라로이드 카메라 34 · 아카이브 35</td></tr>
+        <tr><td><code>toast</code></td><td class="num">36–40</td><td>배너 36 · 토스트 40 — 모달 아님</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>겹쳐 열린 화면의 사용 기준</h2>
+  <ul style="font-size:13.5px">
+    <li><b>모달(시트·다이얼로그·풀스크린 모달)이 표출되면 하단 탭바를 숨긴다.</b> 판정은 <code>AppState.modalUp</code> 한 곳에서 통합 — 새 모달 상태(@Published)를 추가하면 반드시 modalUp에 등록.</li>
+    <li>페이지 푸시(contentArea 오버레이)는 모달이 아니다 — modalUp에 넣지 않고 <code>page</code> 밴드에 둔다.</li>
+    <li>토스트/스낵바는 모달이 아니다 — <code>toast</code> 밴드.</li>
+    <li>스크림은 시맨틱 토큰 2단만: <code>scrim</code>(black ≈45.5% — 시트·다이얼로그 표준 딤) · <code>scrimMuted</code>(≈17.3% — 맥락을 남기는 가벼운 딤).</li>
+  </ul>
+
+  <div class="page-nav">
+    <a href="#interaction"><span class="dir">이전</span>입력과 반응</a>
+    <a class="next" href="#darkmode"><span class="dir">다음</span>다크 모드</a>
+  </div>
+</article>
+
+<!-- ═══════════ 다크 모드 ═══════════ -->
+<article class="page content-max" id="page-darkmode" hidden>
+  <div class="crumb">기본 규칙 / <b>다크 모드</b></div>
+  <h1>밝은 화면과 어두운 화면</h1>
+  <p class="desc">밝은 화면과 어두운 화면에서도 같은 역할을 알아볼 수 있어야 합니다. 배경, 콘텐츠, 글자의 밝기를 함께 조절해 읽기 편한 상태를 유지합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="theme-specimen"><div><small>LIGHT</small><b>나의 플래터</b><span>오늘의 기록</span></div><div><small>DARK</small><b>나의 플래터</b><span>오늘의 기록</span></div></div></div>
+
+  <h2>배경과 콘텐츠의 밝기 구분</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>지면</th><th>라이트</th><th>다크</th><th>적용</th></tr></thead>
+      <tbody>
+        <tr><td><b>브랜드 지면</b></td><td><span class="dot" style="background:#F4F9FF"></span>Bright White <code>#F4F9FF</code></td><td><span class="dot" style="background:#2D313D"></span>Total Eclipse <code>#2D313D</code></td><td>발표·온보딩·스플래시·프로필 공유 카드</td></tr>
+        <tr><td><b>앱 UI 지면</b></td><td><code>#FFFFFF / #FAFAFA</code></td><td><span class="dot" style="background:#181818"></span>gray950 <code>#181818</code> 계열</td><td>탭·리스트·시트 등 일상 UI (기존 유지)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">이 분리가 확정되면 <a href="#audit">검토 A</a>의 잉크 5종(#171719·#111111·#141317·#181818·#2D313D)이 지면별 토큰으로 수렴된다.</p>
+
+  <h2>규칙</h2>
+  <ul style="font-size:13.5px">
+    <li><b>위젯 내부는 WInk 고정 잉크</b> — 위젯은 콘텐츠 표면이므로 다크에서도 라이트로 렌더한다.</li>
+    <li><b>브랜드 컬러의 다크 대응</b> — Splup 계열은 500→400 밝힘(<span class="mono">#AA4AF4 → #C588FF</span>)이 기존 규칙. Deep Purple·Platter Pink는 다크에서도 원색 유지(지면이 Eclipse라 대비 충분).</li>
+    <li><b>액센트 8종의 다크 짝</b> — 채도 −8~12%로 tokens.json에 함께 정의한다 (<a href="#audit">검토 K</a>).</li>
+    <li>화면별 하드코딩 hex는 발견 시 토큰으로 수렴 (<a href="#audit">검토 E</a> 체크리스트).</li>
+  </ul>
+
+  <div class="page-nav">
+    <a href="#zindex"><span class="dir">이전</span>화면이 겹치는 순서</a>
+    <a class="next" href="#grid"><span class="dir">다음</span>플래터 배치</a>
+  </div>
+</article>
+
+<!-- ═══════════ PLATTER GRID ═══════════ -->
+<article class="page content-max" id="page-grid" hidden>
+  <div class="crumb">기본 규칙 / <b>Platter Grid</b></div>
+  <h1>플래터 배치</h1>
+  <p class="desc">플래터는 위젯을 놓는 공간입니다. 위젯의 크기와 간격을 격자에 맞추고, 위치가 겹치거나 바깥으로 나갔을 때의 처리 방법을 함께 정합니다.</p>
+
+  <h2>규격</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>항목</th><th>값</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>그리드</td><td><b>8열 × 16행</b> 고정</td><td></td></tr>
+        <tr><td>좌우 마진</td><td class="num">16</td><td><code>globalGutter</code>와 동일</td></tr>
+        <tr><td>거터</td><td class="num">8</td><td>스펙 고정</td></tr>
+        <tr><td>셀</td><td><code>(W − 16×2 − 8×7) ÷ 8</code></td><td>화면 폭 반응 · W 클램프 320–620</td></tr>
+        <tr><td>피치 UNIT</td><td><code>CELL + 8</code></td><td>390pt 기준 ≈46</td></tr>
+        <tr><td>위젯 라운드</td><td><code>min(20, 12 + (min(w,h)−2)×2)</code></td><td>2단 12 · 3단 14 · 4단 16 · 6단+ 20</td></tr>
+        <tr><td>위젯 크기</td><td>2×2 ~ <b>6×8</b></td><td>크기 조절 범위 제한(러버밴드)</td></tr>
+        <tr><td>위젯 수</td><td>플래터당 <b>10</b></td><td>디토 위젯 제외 카운트, 초과 시 안내 시트</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>위젯 비율 5종</h2>
+  <div class="ratio-row">
+    <div class="ratio-cell" style="width:96px;height:96px">3:3 · 4×4</div>
+    <div class="ratio-cell" style="width:144px;height:48px">1:6 · 6×2</div>
+    <div class="ratio-cell" style="width:72px;height:96px">3:4 · 3×4</div>
+    <div class="ratio-cell" style="width:96px;height:72px">4:3 · 4×3</div>
+    <div class="ratio-cell" style="width:48px;height:144px">6:1 · 2×6</div>
+  </div>
+  <p class="muted">타입×비율 매트릭스는 <code>WidgetFrame.swift</code>(WidgetFrameSpec)이 공통 원본.</p>
+
+  <h2>위젯을 놓고 옮기는 순서</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>함수</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><code>findFree</code></td><td>행 우선 첫 빈 슬롯</td></tr>
+        <tr><td><code>firstFit(start)</code></td><td>지정 행부터 + 상단 랩어라운드 — 추가·대표 위젯으로 변경할 위치</td></tr>
+        <tr><td><code>resolve(dirs)</code></td><td>방향 우선 푸시, 연쇄 깊이 ≤3, 실패 시 원래 위치로 복귀</td></tr>
+        <tr><td><code>trySwap</code></td><td>동일 크기 단일 충돌 = 자리 교환</td></tr>
+        <tr><td><code>promote</code></td><td>라이프→대표: 세그먼트 흡수 후 first-fit 착지 + 글로우</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>직접 배치해 보기</h2>
+  <p class="muted">GridEngine과 동일한 공식·규칙을 브라우저에서 재현한 데모입니다. 위젯을 추가하고 <b>드래그해서 옮기고, 우하단 핸들로 크기를 늘려보세요</b> —
+  행 우선 착지, 동일 크기 자리 교환, 방향 푸시(연쇄 ≤3), 원래 위치로 복귀, 크기 조절 범위 제한(2×2~6×8 러버밴드), 10개 제한, 크기 비례 라운드가 실제 공식대로 동작합니다.
+  화면 폭 슬라이더로 셀의 반응형 계산(<code>W 320–620 클램프</code>)도 확인할 수 있어요.</p>
+  <div class="sim-controls">
+    <button data-add="2,2">＋ 2×2</button>
+    <button data-add="4,4">＋ 4×4</button>
+    <button data-add="6,2">＋ 6×2</button>
+    <button data-add="3,4">＋ 3×4</button>
+    <button data-add="4,3">＋ 4×3</button>
+    <button data-add="2,6">＋ 2×6</button>
+    <button id="simReset">초기화</button>
+    <label>W <input type="range" id="simW" min="320" max="620" value="390" step="2"> <span id="simWv" class="mono num">390</span></label>
+    <span id="simCount" class="mono num">0/10</span>
+  </div>
+  <div id="simStatus" class="sim-status">위젯을 추가해 보세요 — 행 우선 첫 빈 슬롯(findFree)에 착지합니다.</div>
+  <div class="sim-outer"><div id="simBoard" aria-label="플래터 그리드 시뮬레이터"></div></div>
+  <p class="muted" style="margin-top:8px">데모 범위: <code>findFree</code>·<code>resolve</code>(드래그 방향 우선 푸시)·<code>trySwap</code>·리사이즈 러버밴드(2×2~6×8)·10개 캡·라운드/셀 공식. 앱 전용 동작(디토 슬롯·디토 잠금·<code>promote</code> 글로우)은 생략.</p>
+
+  <h2>플래터별 규칙</h2>
+  <ul style="font-size:13.5px">
+    <li><b>내 플래터</b> — 위 규격 전부.</li>
+    <li><b>그룹 플래터</b> — 자유 배치(first-fit 실패 시 아래로 성장) + 24시간 소멸.</li>
+    <li><b>아카이브</b> — 코르크보드 렌더.</li>
+    <li><b>디토 슬롯</b>(핑크 ＋, <a href="#color">Platter Pink</a>) — Ditto! 위젯 전용, 10개 카운트 제외.</li>
+    <li><b>디토 잠금</b> — 디토된(allow+count&gt;0) 위젯은 수정 영구 잠금.</li>
+  </ul>
+
+  <div class="page-nav">
+    <a href="#darkmode"><span class="dir">이전</span>다크 모드</a>
+    <a class="next" href="#buttons"><span class="dir">다음</span>버튼과 선택 요소</a>
+  </div>
+</article>
+
+<!-- ═══════════ 버튼 & 인터랙션 ═══════════ -->
+<article class="page content-max" id="page-buttons" hidden>
+  <div class="crumb">컴포넌트 / <b>버튼 &amp; 인터랙션</b></div>
+  <h1>버튼과 선택 요소</h1>
+  <p class="desc">버튼은 행동을 실행하고, 칩과 선택 탭은 값을 고릅니다. 사용 목적에 맞는 형태를 선택하고 기본·눌림·비활성 상태를 함께 확인합니다.</p>
+
+  <h2>일반 버튼</h2>
+  <div class="btn-row">
+    <button class="dbtn primary" type="button">추가하기</button>
+    <button class="dbtn secondary" type="button">보조 동작</button>
+    <button class="dbtn destructive" type="button">내리기</button>
+    <button class="dbtn disabled" type="button" aria-disabled="true" disabled>비활성</button>
+  </div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>속성</th><th>값</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>높이 · 라운드</td><td class="num">60 · 12 (continuous)</td><td>기본 CTA 기준 — 화면별 예외는 별도 검수</td></tr>
+        <tr><td>라벨</td><td><code>label</code> (17 Bold)</td><td>새 글자 기준 적용 후 <code>t4Bold</code></td></tr>
+        <tr><td>프라이머리 배경</td><td class="mono">#C78FF7 → #AA4AF4 52% → #9430D8</td><td>CTA 세로 그라디언트 + 상단 글로스(white 30%→0 @50%)</td></tr>
+        <tr><td>프라이머리 섀도우</td><td class="mono">#9430D8 28% · r10 · y4</td><td>은은한 브랜드 섀도우 — 비활성 시 제거</td></tr>
+        <tr><td>파괴적</td><td><code>danger</code> 배경 + 화이트 라벨</td><td>카피는 결과를 말한다("내리기") — <a href="#writing">UX Writing</a></td></tr>
+        <tr><td>pressed</td><td class="num">scale 0.97</td><td><code>PressableStyle(pressedScaleButton)</code> · Reduced Motion 시 1</td></tr>
+        <tr><td>disabled</td><td>배경 subtle + 라벨 assistive</td><td>터치 무시 · 로딩 중에는 스피너로 교체</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>칩과 선택 탭</h2>
+  <div class="btn-row">
+    <span class="dchip-demo" style="background:var(--surface-soft);color:var(--ink-soft)">칩 · 라이트</span>
+    <span class="dchip-demo" style="background:#2D313D;color:#fff">칩 · 다크</span>
+    <span class="seg-demo"><span class="on">주파수</span><span>그룹채팅</span></span>
+  </div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>컴포넌트</th><th>규격</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td><code>DChip</code></td><td>높이 28 · 캡슐 · <code>labelSm</code> · 수평 패딩 x3(12)</td><td>라이트/다크 2변형 — 사진 위에는 다크</td></tr>
+        <tr><td><code>SegmentControl</code></td><td>pill 컨테이너(라운드 13 · fill strong · 내부 패딩 x1) + 탭 라운드 10</td><td>활성 = 화이트 + raised 그림자(black 8% · r3 · y1) · pressed 0.98</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>인터랙션 공통 규칙</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>규칙</th><th>값</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>롱프레스 (허용 위젯)</td><td class="num">0.8s 게이지</td><td>편집 진입 — 게이지 완주 후 커밋</td></tr>
+        <tr><td>롱프레스 (비허용)</td><td class="num">0.45s 조기 흔들림</td><td>불가함을 빨리 알린다 — 기다리게 하지 않음</td></tr>
+        <tr><td>햅틱 표준</td><td>리프트 medium · 커밋 medium · 비허용 rigid · 소형 light</td><td>전 컴포넌트 공통</td></tr>
+        <tr><td>상세 층위</td><td>내/친구 위젯 상세 = 시트(<code>Motion.sheet</code>) · 플래터 = 페이지 · 파괴적 = 알럿</td><td>층위 혼용 금지</td></tr>
+        <tr><td>컴포저 CTA 카피</td><td>[추가하기] / [수정 완료]</td><td>동작을 그대로 — <a href="#writing">UX Writing 형식 규칙</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>컴포넌트 목록</h2>
+  <p class="muted">코드에 존재하는 전체 세트. 본 페이지는 버튼·칩·세그먼트를 선행 문서화한 것 — 나머지의 슬롯·변형·상태 스키마 문서화는 <a href="#backlog">추가 작업 6</a>.</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>파일</th><th>컴포넌트</th></tr></thead>
+      <tbody>
+        <tr><td><code>Components.swift</code></td><td>DButton · DChip · SegmentControl · AvatarStack · StatusBar</td></tr>
+        <tr><td><code>DSComponents.swift</code></td><td>Skeleton · Snackbar · Callout · Badge · Divider · ListRow · Switch · ProgressCircle · AlertDialog · Spinner · Toggle · Sheet(DSSheetSpec) · Banner · TextArea · ColorSheet</td></tr>
+        <tr><td><code>AddComponents.swift</code></td><td>컴포저 세트 — InputField · LinkField · PositionGrid · FormatRows</td></tr>
+        <tr><td><code>SwipeTabs.swift</code></td><td>텍스트 탭 + 페이징</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <a href="#grid"><span class="dir">이전</span>플래터 배치</a>
+    <a class="next" href="#voice"><span class="dir">다음</span>디토의 말과 용어</a>
+  </div>
+</article>
+
+<!-- ═══════════ 용어 · 라이팅 ═══════════ -->
+<article class="page content-max" id="page-voice" hidden>
+  <div class="crumb">적용 방법 / <b>용어 · 라이팅</b></div>
+  <h1>디토의 말과 용어</h1>
+  <p class="desc">친구의 일상을 내 공간에 담는 행동은 ‘디토’, 관계가 이어지는 리듬은 ‘주파수’라고 부릅니다. 같은 뜻은 같은 말로 표현하고, 사용자가 행동을 이해할 수 있도록 설명합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="copy-specimen"><small>Ditto의 말투</small><b>내 플래터에 담았어요.</b><span>짧고 명확하게, 사용자의 행동을 설명합니다.</span></div></div>
+
+  <div class="callout"><div>⚠️</div><div>
+    <b>절대 규칙</b> — '공명', 'Halo'는 사용자 노출 텍스트에서 금지. 상호공감 → <b>디토</b>, 신호/축적 → <b>주파수</b>로 쓴다.
+    (앱 코드 정리 완료 · 내부 기획서 4건에 '공명' 잔존 — 내부 문서라 보류 중)
+  </div></div>
+
+  <h2>디토에서 쓰는 말의 뜻</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>개념</th><th>한 줄 정의</th><th>표현하는 느낌</th></tr></thead>
+      <tbody>
+        <tr><td><b>플래터</b></td><td>내 방을 차려 보여주는 일</td><td>책상 위 물건들의 배열 — 8×16 그리드의 은유</td></tr>
+        <tr><td><b>디토</b></td><td>너의 것을 나도 갖는 일</td><td>상대의 조각을 <b>간직하는</b> 행동 — 소장품(keepsake)의 물성</td></tr>
+        <tr><td><b>주파수</b></td><td>어느새 친해져 있는 일</td><td>조용히 <b>익는</b> 신호 — 팡파레 없는 은은한 발광</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>라이팅 원칙</h2>
+  <ul style="font-size:13.5px">
+    <li><b>숫자를 세지 않는다</b> — 주고받은 것들은 수치가 아니라 <b>파형</b>으로 쌓인다. 주파수 진행률·카운트를 사용자에게 노출하지 않는 톤을 카피에서도 지킨다.</li>
+    <li><b>버벌 시그니처</b> — 국문 <b>"통하면 디토해!"</b> · 글로벌 <b>"Everything about you!"</b> / <b>"Say it Ditto!"</b>. 브랜드 보이스(LINE Seed) 지면에서 사용.</li>
+    <li><b>제품 수치는 근거와 함께</b> — 친구 15명(던바 15) · 디토 슬롯 3개 · 주파수 21일 게이트(Hall 200시간). 발표·문서에서 수치를 쓸 때는 근거를 각주로.</li>
+    <li><b>보이스 연결</b> — 서비스가 말하는 문장(브랜드 카피)은 LINE Seed 지면, 사용자가 말하는 자리는 Pretendard — <a href="#typography">Typography 글꼴을 나누는 기준</a>와 동일 규칙.</li>
+  </ul>
+
+  <div class="page-nav">
+    <a href="#buttons"><span class="dir">이전</span>버튼과 선택 요소</a>
+    <a class="next" href="#writing"><span class="dir">다음</span>상황별 문구</a>
+  </div>
+</article>
+
+<!-- ═══════════ UX WRITING ═══════════ -->
+<article class="page content-max" id="page-writing" hidden>
+  <div class="crumb">적용 방법 / <b>UX Writing</b></div>
+  <h1>상황별 문구</h1>
+  <p class="desc">사용자에게 필요한 정보만 짧게 전달합니다. 친근한 해요체를 사용하되, 공유나 반응을 재촉하지 않습니다. 무엇이 바뀌었고 다음에 무엇을 할 수 있는지 알려줍니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="copy-specimen"><small>완료 피드백 예시</small><b>변경 내용을 저장했어요.</b><span>다음 행동이 필요한 경우에만 안내를 덧붙입니다.</span></div></div>
+
+  <h2>문구를 읽는 네 사람</h2>
+  <p class="muted">위젯 기획서 15종이 공유하는 고정 페르소나(<code>00_공통규격_템플릿.md</code>). 같은 화면도 관계 거리에 따라 다른 사람에게 말하고 있음을 항상 의식한다.</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>페르소나</th><th>관계·상태</th><th>카피가 해야 할 일</th></tr></thead>
+      <tbody>
+        <tr><td><b>하늘</b> <span class="mono">@skyblue</span> · 22 · 대학생</td><td>만드는 사람 — 플래터를 매일 손보지만 대표 선정은 신중</td><td><b>부담 낮추기.</b> 빈 상태·컴포저에서 "잘 써야 한다"는 압박을 지운다. 한 줄이면 충분하다고 말해준다</td></tr>
+        <tr><td><b>지민</b> <span class="mono">@jimin_dt</span></td><td>오래된 친구 — 자주 보지만 말은 아끼는 편</td><td><b>반응 문턱 낮추기.</b> 댓글 대신 디토·리액션이라는 "말 없는 응답"이 충분한 반응임을 카피가 보증한다</td></tr>
+        <tr><td><b>유나</b> <span class="mono">@yuna_dt</span></td><td>친구의 친구(거리 2) — 비친구, 디토하며 주파수가 쌓이는 중</td><td><b>안전한 관망 허용.</b> 볼 수 있는 것과 없는 것의 경계를 다정하게 긋는다. "권한 없음"이 아니라 "친구가 되면"</td></tr>
+        <tr><td><b>도현</b> <span class="mono">@dohyun_dt</span></td><td>그룹 경유 3주차 친구 — 1:1로 말한 적 거의 없음</td><td><b>어색함 인정.</b> 아직 서먹한 사이에 과한 친밀 어투를 강요하지 않는다. 그룹이라는 공용 지대의 말투 유지</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>말투의 기준 5가지</h2>
+  <ul style="font-size:13.5px">
+    <li><b>① 해요체, 청유형.</b> 명령하지 않는다 — "작성하세요" 대신 "남겨보세요", 확인 질문은 "~할까요?". 브랜드 버벌("통하면 디토해!")을 제외하면 시스템 카피에 느낌표를 아낀다.</li>
+    <li><b>② 재촉하지 않는다.</b> 주파수는 조용히 익는 것 — 스트릭·D-Day 카운트다운·"놓친 소식 N건!" 류의 FOMO 어투 금지. 알림 기본값도 조용한 쪽(D-Day 알림 기본 없음).</li>
+    <li><b>③ 숫자로 압박하지 않는다.</b> 주파수 진행률·게이트 수치(21일)를 사용자에게 노출하지 않는다. 잠금 카피는 <b>"곧 열려요"</b>가 공통 원본. 상한(친구 15·디토 슬롯 3·위젯 10)은 도달했을 때만 알려준다.</li>
+    <li><b>④ 행동을 수단화하지 않는다.</b> 디토는 목적이지 수단이 아니다 — "친구가 되려면 더 디토하세요"처럼 행동을 보상의 조건으로 쓰는 문장 금지.</li>
+    <li><b>⑤ 장난기는 브랜드 자리에서만.</b> 위트는 브랜드 보이스(LINE Seed 지면·온보딩·빈 상태 첫 줄)까지. 확인·삭제·오류 등 사용자가 결정하는 순간의 카피는 서체처럼 뒤로 물러난다(<a href="#typography">글꼴을 나누는 기준</a>와 동일 구조).</li>
+  </ul>
+
+  <h2>문장과 표기 규칙</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>항목</th><th>규칙</th><th>예</th></tr></thead>
+      <tbody>
+        <tr><td>제목</td><td>"제목 — 부제" 형식 허용</td><td>한줄일기 — 오늘을 한 줄로</td></tr>
+        <tr><td>금지 3종</td><td><b>설명형 꼬리말 · 시적 카피 · 내부 용어</b>(Halo 등)</td><td>"~하는 공간입니다" 꼬리말 ✕ · 문서에 없는 시적 문구 ✕</td></tr>
+        <tr><td>CTA</td><td>동작을 그대로 말한다 — <b>[추가하기] / [수정 완료]</b></td><td>코드의 "블록 추가"는 카피 갭으로 기록됨 → [추가하기]로 수렴</td></tr>
+        <tr><td>토스트</td><td><b>"~했어요 — 결과 위치"</b> 패턴</td><td>"위젯을 추가했어요 — 라이프에 게시됐어요"</td></tr>
+        <tr><td>잠금 타일</td><td>수치 없는 예고</td><td>"곧 열려요"</td></tr>
+        <tr><td>비친구 상세</td><td>열람 ○ + <b>입력 대체 문구</b></td><td>"친구가 되면 함께 쓸 수 있어요"</td></tr>
+        <tr><td>글자수</td><td>카운터는 <span class="mono">현재/최대</span>만, 잔소리 없음</td><td><span class="mono">13/100</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>상황별 권장 문구와 피할 문구</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>상황 (대상)</th><th>Do</th><th>Don't</th></tr></thead>
+      <tbody>
+        <tr><td>빈 플래터 (하늘)</td><td>"아직 비어 있어요 — 오늘 들은 노래 하나면 충분해요"</td><td>"첫 게시물을 작성하여 프로필을 완성하세요!"</td></tr>
+        <tr><td>주파수 잠금 (유나)</td><td>"곧 열려요"</td><td>"D-3! 3일만 더 디토하면 잠금 해제!"</td></tr>
+        <tr><td>비친구 입력 차단 (유나)</td><td>"친구가 되면 함께 쓸 수 있어요"</td><td>"권한이 없습니다"</td></tr>
+        <tr><td>리액션 유도 (지민)</td><td>"마음에 남으면 디토해 두세요"</td><td>"댓글을 남겨 친구에게 관심을 표현해 보세요!"</td></tr>
+        <tr><td>친구 상한 도달 (하늘)</td><td>"자리가 다 찼어요 — 디토!는 열다섯 명까지의 공간이에요"</td><td>"친구 한도 15/15 초과. 기존 친구를 삭제하세요"</td></tr>
+        <tr><td>위젯 삭제 확인 (하늘)</td><td>"이 위젯을 내릴까요? 친구가 디토해 간 것은 그대로 남아요"</td><td>"정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다"</td></tr>
+        <tr><td>오류 (전원)</td><td>"지금은 올릴 수 없어요 — 잠시 후 다시 시도해 주세요"</td><td>"요청 처리 중 오류가 발생했습니다 (코드 500)"</td></tr>
+        <tr><td>알림 (지민→하늘)</td><td>"지민이 방명록에 한 줄 남겼어요"</td><td>"놓친 소식 3건! 지금 확인하세요 🔥"</td></tr>
+        <tr><td>그룹 초대 (도현)</td><td>"'우리 음악 기록'에 초대받았어요 — 천천히 둘러봐도 돼요"</td><td>"도현님이 애타게 기다리고 있어요! 바로 수락하기"</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">Don't 열의 문장은 일반 SNS의 관성 어투다 — Ditto!의 타겟이 떠나온 바로 그 말투이므로, 리뷰에서 이 패턴이 보이면 즉시 교체한다.
+  개념어 사용 범위는 <a href="#voice">용어 · 라이팅</a>, 서체 층위는 <a href="#typography">Typography</a>를 따른다.</p>
+
+  <div class="page-nav">
+    <a href="#voice"><span class="dir">이전</span>디토의 말과 용어</a>
+    <a class="next" href="#assets"><span class="dir">다음</span>브랜드 에셋</a>
+  </div>
+</article>
+
+<!-- ═══════════ 브랜드 에셋 ═══════════ -->
+<article class="page content-max" id="page-assets" hidden>
+  <div class="crumb">적용 방법 / <b>브랜드 에셋</b></div>
+  <h1>브랜드 원본 파일</h1>
+  <p class="desc">로고, 아이콘, 배경 그래픽의 원본과 사용 기준입니다. 원본의 비율을 유지하고, 사용할 화면에 맞는 색과 크기를 선택합니다.</p>
+
+  <h2>디토 로고</h2>
+  <p class="muted">앱 에셋 카탈로그의 SVG 벡터 원본(<code>Assets.xcassets/wordmark-*.imageset</code>, 370×134)이 공통 원본.
+  단색 8패스라 지면에 따라 재채색해 쓴다 — 이 문서의 헤더·사이드바 로고도 이 원본을 currentColor로 임베드해 라이트/다크에 자동 적응한다.
+  <b>심볼(스플럽 블롭)·앱 아이콘은 이번 업데이트에서 제외</b> — 다음 차수.</p>
+  <div class="wm-row">
+    <div class="wm-chip">
+      <div class="stage" style="background:#F4F9FF"><svg class="wm" viewBox="0 0 370 134" style="color:#1E1E1E" role="img" aria-label="Ditto! 워드마크 블랙"><use href="#wm-ditto"/></svg></div>
+      <div class="cap"><b>블랙</b> <span class="mono">#1E1E1E</span> — 라이트·Bright White 지면</div>
+    </div>
+    <div class="wm-chip">
+      <div class="stage" style="background:#2D313D"><svg class="wm" viewBox="0 0 370 134" style="color:#FFFFFF" role="img" aria-label="Ditto! 워드마크 화이트"><use href="#wm-ditto"/></svg></div>
+      <div class="cap"><b>화이트</b> — 다크(Total Eclipse)·S2 포토 오버레이</div>
+    </div>
+  </div>
+  <p class="muted">워드마크는 <b>블랙/화이트 2종만</b> 운용한다 — 퍼플 변형(wordmark-purple)은 사용 지면이 없어 v3에서 제외(에셋은 카탈로그에 잔존, 신규 사용 금지). 색은 지면이 말하고, 워드마크는 잉크로만 얹는다.</p>
+
+  <h2>원본 파일 목록</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>에셋</th><th>위치</th><th>용도 · 규정</th></tr></thead>
+      <tbody>
+        <tr><td>스플럽 블롭 로고</td><td><code>design/brand/splup-logo.png</code></td><td>심볼 — 블루→퍼플 블롭. 문서 사이트·앱 아이콘 계열의 기준 형태</td></tr>
+        <tr><td>워드마크 블랙/화이트</td><td>SVG 공통 원본 <code>Assets.xcassets/wordmark-black.imageset</code> · PNG <code>.codex_tmp/*/assets/wordmark-*.png</code></td><td>라이트 = 블랙, 다크(Eclipse)·포토 = 화이트. 퍼플 변형은 v3 제외(신규 사용 금지)</td></tr>
+        <tr><td>브랜드 그라디언트 바</td><td><code>brand-gradient-bar.png</code></td><td>지면 장식 — 토큰 <code>gradient.brandBar</code>(#A848F2→#310183)와 동일 축</td></tr>
+        <tr><td>오브제 그라디언트 텍스처 7색</td><td><code>grad-obj-*</code> imageset (red·orange·yellow·green·blue·purple·black)</td><td>배경(블러 확대)·이미지 카드 fill <b>전용</b> — UI 컬러로 쓰지 않는다</td></tr>
+        <tr><td>핸들 톤 10색</td><td><code>DGrad.handleTones</code> (코드 토큰)</td><td>핸들 pill·프로필 배너 전용 — base·pastel·light + handleShine 규칙</td></tr>
+        <tr><td>디토 위젯 렌더 4종</td><td><code>dittoWidget_{b,p,purple,yellow}_final.png</code></td><td>발표·소개 지면의 위젯 실물 컷</td></tr>
+        <tr><td>무드 드래프트 S1–S5</td><td><code>design/brand/mood-drafts/01–05</code></td><td>대역 이미지 — <b>실촬영 후 교체 예정</b> (브랜드 소품 전 컷 심기)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>사용 규정</h2>
+  <ul style="font-size:13.5px">
+    <li><b>크롭 에셋은 실체를 확인한다</b> — 過去 사례: kv-logo-master가 옛 덱 슬라이드 크롭이어서 wordmark-black으로 교체(08-20). 출처 불명 크롭 재사용 금지.</li>
+    <li><b>블롭 형태 규칙</b> — 장식 블롭·잔존 박스는 라디우스 16–24로 블롭화. 여백 밴드 마커는 ♥ 모티프.</li>
+    <li><b>텍스처 vs 토큰</b> — Splup Gradient·brand-bar는 <a href="#tokens">토큰</a>(코드로 그림), 오브제 7색은 이미지 텍스처(fill 전용). 혼용하지 않는다.</li>
+    <li>아이코노그래피 카탈로그(<code>Ditto_Iconography_Catalog.svg</code>)는 에셋 소재로만 참조 — 별도 문서화는 하지 않는다.</li>
+  </ul>
+
+  <div class="page-nav">
+    <a href="#writing"><span class="dir">이전</span>상황별 문구</a>
+    <a class="next" href="#mapping"><span class="dir">다음</span>기존 화면 변경하기</a>
+  </div>
+<p class="avatar-download"><a href="../../brand/color-system/profile-avatars/splup-profile-avatars-10.zip" download>프로필 기본 아바타 10종 다운로드 ↗</a><span>핸들과 연결한 SVG·PNG·팔레트</span></p><p><a href="#profile-avatars">기본 아바타와 대표·라이프 적용 비교 →</a></p></article>
+
+<!-- ═══════════ 변경 매핑 ═══════════ -->
+<article class="page content-max" id="page-mapping" hidden>
+<div class="crumb">Resources / 변경 가이드</div>
+<h1>기존 화면 변경하기</h1>
+<p class="desc">기존 화면을 새 기준에 맞추는 순서입니다. 색과 글꼴을 먼저 확인하고, 버튼은 실행할 행동에 맞게 선택합니다.</p>
+<nav class="guide-jumps" aria-label="변경 항목 바로가기"><button type="button" data-guide-target="mapping-colors">컬러</button><button type="button" data-guide-target="mapping-type">글꼴</button><button type="button" data-guide-target="mapping-buttons">버튼</button><button type="button" data-guide-target="mapping-start">적용 순서</button></nav>
+<h2 id="mapping-colors">컬러는 용도에 맞게 골라요</h2>
+<p>대표 보라색은 그대로예요. 브랜드 배경과 버튼은 각각 정해진 배색을 사용해요.</p>
+<div class="guide-colors"><div style="--swatch:#AA4AF4"><i></i><b>Splup Purple</b><code>#AA4AF4</code><span>기존 대표색 유지</span></div><div style="--swatch:#6655D2"><i></i><b>Deep Purple</b><code>#6655D2</code><span>브랜드 보조색</span></div><div style="--swatch:#FA97E2"><i></i><b>Platter Pink</b><code>#FA97E2</code><span>브랜드 핑크 기준</span></div></div>
+<p class="guide-note">기존 화면의 모든 보라·핑크를 한꺼번에 바꾸지는 마세요. 글자·배경·상태색은 각 역할의 기준을 유지해요.</p>
+<a class="guide-link" href="#color-application">실제 그래픽과 버튼 배색 비교하기 →</a>
+<h2 id="mapping-type">글꼴은 Pretendard로 통일해요</h2>
+<div class="guide-type"><small>지금 사용하는 글꼴</small><b>나의 일상, 우리의 공간.</b><span>Pretendard · 크기와 굵기로 위계를 만들어요.</span></div>
+<p>화면 제목, 본문, 버튼 문구 모두 Pretendard를 사용해요. 로고와 앱 아이콘은 제공된 SVG 원본을 사용하세요.</p>
+<a class="guide-link" href="#typography">글자 크기와 굵기 보기 →</a>
+<h2 id="mapping-buttons">버튼은 두 가지로 나눠요</h2>
+<div class="guide-button-pair"><div><div class="guide-example"><span class="sample-button">저장하기</span></div><h3>일반 버튼</h3><p>저장·완료·취소처럼 기본적인 행동에 사용해요.</p><small>높이 60 · 모서리 12 · 글자 17 Bold</small><a class="guide-link" href="#buttons">일반 버튼 기준 →</a></div><div><div class="guide-example"><span class="sample-button" style="background:#A25AD6;color:white">내 플래터에 디토하기</span></div><h3>Ditto 액션 버튼</h3><p>3초간 꾸욱 누르면 색이 안쪽으로 깊어지고, 중간에 떼면 취소돼요.</p><small>긴 버튼 · 높이 60 · R12 · 3초 누름</small><a class="guide-link" href="#ditto-action">직접 눌러보기 →</a></div></div>
+<p class="guide-note">위 이미지는 용도를 설명하는 예시예요. 실제 모양과 눌림은 ‘직접 눌러보기’에서 확인할 수 있어요.</p>
+<h2 id="mapping-start">이 순서로 적용하면 돼요</h2>
+<ol class="guide-steps"><li><b>화면에서 쓰는 색과 글꼴을 확인해요.</b><span>대표색과 Pretendard부터 현재 기준과 비교하세요.</span></li><li><b>배경 그래픽과 버튼을 구분해요.</b><span>꾸미는 요소인지, 사용자가 누르는 요소인지 먼저 정하세요.</span></li><li><b>한 화면씩 바꾸고 확인해요.</b><span>글자가 잘 읽히는지, 버튼이 잘 눌리는지, 작은 화면에서도 맞는지 확인하세요.</span></li></ol>
+<h2>어디까지 반영됐나요?</h2>
+<div class="guide-status"><p><b>완료</b> 로컬 디자인 시스템 문서·컬러 기준·웹 예시</p><p><b>별도 확인 필요</b> Figma 최종 라이브러리와 실제 앱 화면 적용</p></div>
+<details class="guide-details"><summary>개발할 때 참고할 이름</summary><p>디자인에서 정한 값을 코드에서 같은 이름으로 불러오기 위한 기준이에요.</p><dl><dt>브랜드 그래픽 배색</dt><dd><code>gradient.brandGraphic</code></dd><dt>Ditto 액션 버튼</dt><dd><code>component.dittoButton</code></dd><dt>화면 역할별 색상</dt><dd><code>DDSColor</code> · 글자, 배경, 테두리 등에 사용</dd><dt>원본 색상 목록</dt><dd><code>DDSPalette</code></dd></dl><a href="../../tokens/tokens.json">컬러·규격 기준 파일 열기</a></details>
+<details class="guide-details"><summary>이전 v2 → v3 검토 기록</summary><p>아래 표는 당시의 검토 기록이에요. 현재 확정안이 아니며, 이전의 LINE Seed 혼용이나 이관 제안은 위 최신 기준보다 우선하지 않아요.</p><div class="tbl-scroll">
+    <table>
+      <thead><tr><th>영역</th><th>기존 (v2 · DDS)</th><th>신규 (v3)</th><th>판정</th></tr></thead>
+      <tbody>
+        <tr><td>키 컬러</td><td><span class="dot" style="background:#AA4AF4"></span><code>purple500 #AA4AF4</code></td><td><span class="dot" style="background:#AA4AF4"></span>Splup Purple <code>#AA4AF4</code></td><td>✅ 동일 — 유지</td></tr>
+        <tr><td>브랜드 2색</td><td>없음 (<code>#6655D2</code>는 indigo 핸들·프로필 장식색)</td><td><span class="dot" style="background:#6655D2"></span>Deep Purple <code>brand.deep</code></td><td>🆕 승격 — 참조 6곳 재지정</td></tr>
+        <tr><td>브랜드 핑크</td><td><span class="dot" style="background:#FA729A"></span><code>accentPink #FA729A</code> 外 산재</td><td><span class="dot" style="background:#FA97E2"></span>Platter Pink <code>#FA97E2</code></td><td>🔁 공통 원본 교체 — 감사 D</td></tr>
+        <tr><td>브랜드 심도</td><td>UI 램프 <code>purple600–950</code> 겸용</td><td>night 4단 <code>#8C2BD6→#2D0080</code> 분리</td><td>🆕 별도 스케일 — UI 램프 유지</td></tr>
+        <tr><td>다크 앵커</td><td><span class="dot" style="background:#181818"></span><code>gray950 #181818</code> · ink <code>#171719</code> 혼재</td><td><span class="dot" style="background:#2D313D"></span>Total Eclipse <code>#2D313D</code> (브랜드 지면)</td><td>⚠️ 이원화 결정 — 감사 A</td></tr>
+        <tr><td>라이트 앵커</td><td><code>#FFFFFF / #FAFAFA</code></td><td><span class="dot" style="background:#F4F9FF"></span>Bright White <code>#F4F9FF</code> (브랜드 지면)</td><td>⚠️ 지면 위계 정의 — 감사 A</td></tr>
+        <tr><td>브랜드 그라디언트</td><td>CTA <code>DGrad.primaryButton</code> (#C78FF7→#AA4AF4→#9430D8)</td><td>Splup Gradient (#B9A9FA→#920CB3) + brand-bar</td><td>⚠️ 역할 분리 — 감사 I</td></tr>
+        <tr><td>액센트</td><td><code>DDSPalette.accent*</code> 6종 (장식 전용)</td><td>액센트 8종 (사용자 선택 구조)</td><td>🔁 통폐합 매핑 — 감사 I</td></tr>
+        <tr><td>서체</td><td>Pretendard 단일</td><td>2보이스: LINE Seed(브랜드) + Pretendard(사용자)</td><td>🆕 폰트만 치환 — 스타일은 공유</td></tr>
+        <tr><td>글자 크기 기준</td><td><code>DDSType</code> 12스타일 · 자간 −1% · 행간 배수</td><td>새 크기 기준: <code>t1–t14</code> × 3웨이트 + Static + 별칭 3종</td><td>🔁 전면 이관 — 감사 L</td></tr>
+        <tr><td>발표 덱 잉크</td><td><code>#160F1E</code>(5곳) · <code>#241C2B</code>(1곳)</td><td>Total Eclipse <code>#2D313D</code></td><td>⚠️ 교체 여부 — 감사 H</td></tr>
+      </tbody>
+    </table>
+  </div></details>
+<div class="page-nav"><a href="#resources">리소스 전체 보기</a><a href="#color-application">컬러 비교하기 →</a></div></article>
+
+<!-- ═══════════ 감사 ═══════════ -->
+<article class="page" id="page-audit" hidden>
+  <div class="crumb">Migration / <b>기존 구현 검토</b></div>
+  <h1>기존 구현 검토</h1><p class="desc">아래는 이전 설계와 검토 기록입니다. 현재 제작은 Pretendard 단일 서체, 기본 CTA R12·60pt, 최신 Colorgraphy와 Ditto Action 규격을 우선합니다.</p>
+<details class="docs-history"><summary>2026년 8월의 검토 기록 보기</summary>
+  <p class="desc">코드 전수 스캔 결과(2026-08-26, 워킹트리 기준).
+  <b style="color:var(--sev-conflict)">충돌</b> = v3 도입과 부딪혀 결정이 필요한 것 ·
+  <b style="color:var(--sev-clean)">정리</b> = 규칙 위반이라 순차 청소 대상 · <b>정보</b> = 알고 두면 되는 것.</p>
+
+  <div class="audit-grid">
+    <div class="audit-card conflict">
+      <div class="audit-head"><b>A. 잉크·블랙 5종 혼용</b><span class="sev conflict">충돌</span></div>
+      <p>다크 잉크가 <span class="mono">#171719</span>(12곳)·<span class="mono">#111111</span>(10곳)·<span class="mono">#141317</span>(5곳)·<span class="mono">#181818</span>(gray950)로 이미 4종 산재. Total Eclipse <span class="mono">#2D313D</span>가 들어오면 5종이 된다.
+      <span class="swrow"><i style="background:#171719"></i><i style="background:#111111"></i><i style="background:#141317"></i><i style="background:#181818"></i><i style="background:#2D313D"></i></span></p>
+      <div class="evidence"><code>HomeTab.swift:52</code><code>FriendPlatterDetail.swift:92</code><code>Overlays.swift:831·878</code><code>OnboardingScenes.swift:227</code><code>Gradients.swift:59 (LP)</code></div>
+      <p class="fix"><b>수정 방향</b> — 지면 2층 선언: 브랜드 지면(발표·온보딩·프로필 공유)=Eclipse, 앱 UI 다크=gray950 유지. 잉크는 <code>textStrong</code>/<code>WInk</code> 토큰 경유로 수렴, #111111·#141317은 폐기.</p>
+    </div>
+
+    <div class="audit-card conflict">
+      <div class="audit-head"><b>B. 레드 2계 병존</b><span class="sev conflict">충돌</span></div>
+      <p><span class="mono">#E5484D</span>(뷰 10곳 + 에디터 T팔레트)와 시맨틱 <span class="mono">danger500 #DC3F3A</span>가 따로 논다. 어느 쪽이 파괴적 액션의 공통 원본인지 애매.
+      <span class="swrow"><i style="background:#E5484D"></i><i style="background:#DC3F3A"></i></span></p>
+      <div class="evidence"><code>Views 전반 10곳</code><code>LegacyTokens.swift:123 (editorTextColors)</code></div>
+      <p class="fix"><b>수정 방향</b> — UI 파괴 액션은 <code>DDSColor.danger</code>로 통일. #E5484D는 에디터 텍스트 팔레트(기능 구성값)에만 잔류 허용.</p>
+    </div>
+
+    <div class="audit-card conflict">
+      <div class="audit-head"><b>C. #6655D2 신분 충돌</b><span class="sev conflict">충돌</span></div>
+      <p>Deep Purple로 승격되는 <span class="mono">#6655D2</span>가 현재는 "장식색 중 하나"로 6곳에 산재 — indigo 핸들톤, 프로필 10색의 7번, objPurple 하단, LP 레코드 중심. 브랜드 2색이 사용자 선택지에 섞여 있으면 위계가 무너진다.</p>
+      <div class="evidence"><code>ColorGlobal.swift:71 (profile)</code><code>Gradients.swift:26·57·58·101</code><code>LegacyTokens.swift:81</code></div>
+      <p class="fix"><b>수정 방향</b> — <code>brand.deep</code> 토큰 신설 후 6곳을 참조로 교체. 프로필/핸들의 indigo를 브랜드와 분리할지(색 미세 조정) 결정 필요.</p>
+    </div>
+
+    <div class="audit-card conflict">
+      <div class="audit-head"><b>D. 핑크 3계 혼선</b><span class="sev conflict">충돌</span></div>
+      <p>신규 Platter Pink <span class="mono">#FA97E2</span> vs 기존 <span class="mono">accentPink #FA729A</span> vs 뷰에 흩어진 <span class="mono">#EB8FD0</span>(2)·<span class="mono">#CEA0E9</span>(3). 디토 슬롯(핑크 ＋)의 공통 원본이 불명확.
+      <span class="swrow"><i style="background:#FA97E2"></i><i style="background:#FA729A"></i><i style="background:#EB8FD0"></i><i style="background:#CEA0E9"></i></span></p>
+      <div class="evidence"><code>ColorGlobal.swift:69</code><code>WidgetContent.swift 外</code></div>
+      <p class="fix"><b>수정 방향</b> — 디토 슬롯·그룹 접점은 전부 <code>brand.platterPink</code>로 공통 설정으로 통합, 나머지 유사 핑크는 근접 매핑 후 폐기.</p>
+    </div>
+
+    <div class="audit-card conflict">
+      <div class="audit-head"><b>G. LINE Seed 미탑재</b><span class="sev conflict">충돌</span></div>
+      <p>앱·Figma 어디에도 LINE Seed가 없다. 현재 브랜드 보이스(온보딩 타이틀·워드마크 주변 카피)까지 전부 Pretendard. Figma 텍스트 스타일은 아직 Gothic A1 임시 상태(07-31 기록).</p>
+      <div class="evidence"><code>Typography.swift (Pretendard 단일)</code><code>Figma 6bedL… 텍스트 스타일</code></div>
+      <p class="fix"><b>수정 방향</b> — OTF 5웨이트 번들 임베드 + <code>UIAppFonts</code> 등록 → t스케일 기반 <code>DDSText</code> 신설 → 브랜드 모먼트만 교체. Figma는 스타일 수동 교체(로컬 폰트라 API 불가).</p>
+    </div>
+
+    <div class="audit-card conflict">
+      <div class="audit-head"><b>H. 발표 덱 잉크 삼원화</b><span class="sev conflict">충돌</span></div>
+      <p>덱(<span class="mono">build_v2final.mjs</span>)은 dark <span class="mono">#160F1E</span>(5곳)·ink <span class="mono">#241C2B</span>(1곳), 앱 다크는 <span class="mono">#181818</span>, 새 브랜드는 <span class="mono">#2D313D</span> — 세 지면의 "밤"이 전부 다른 색.
+      <span class="swrow"><i style="background:#160F1E"></i><i style="background:#241C2B"></i><i style="background:#181818"></i><i style="background:#2D313D"></i></span></p>
+      <div class="evidence"><code>.codex_tmp/ditto_final/build_v2final.mjs</code><code>CLAUDE.md 브랜드 토큰 절</code></div>
+      <p class="fix"><b>수정 방향</b> — 발표·인쇄물은 Total Eclipse로 교체(재빌드 1회). CLAUDE.md의 ink/dark 정의도 v3 값으로 갱신.</p>
+    </div>
+
+    <div class="audit-card conflict">
+      <div class="audit-head"><b>L. t스케일 이관 결정 5건</b><span class="sev conflict">충돌</span></div>
+      <p>타입 스케일을 t1–t14로 이관하면 현행 <code>DDSType</code>과 어긋나는 축이 다섯: ① 19px(titleMd)·17px(titleSm·bodyLg) 소멸 → 20·18로 스냅 ② Semibold(600) 소멸 → 라벨류는 Bold(700) 스냅 ③ 라벨 행간 1.0 관행 vs v3 고정 짝(예 16/22) — pill·버튼 높이가 미세하게 변함 ④ 자간 −1% 폐지(새 크기 기준엔 자간 토큰 없음) ⑤ LINE Seed Sans App에 Medium(500) 웨이트 없음.</p>
+      <div class="evidence"><code>Typography.swift (DDSType 12종)</code><code>.dtype() 호출 전 화면</code></div>
+      <p class="fix"><b>수정 방향</b> — 이관표(<a href="#typography">Typography</a>) 기준으로 <code>DDSText</code> 신설 후 파일 단위 점진 교체(빅뱅 금지). ③은 컴포넌트 고정 높이로 흡수, ⑤는 브랜드 보이스에서 Medium 사용 금지 규칙으로 해소.</p>
+    </div>
+
+    <div class="audit-card conflict">
+      <div class="audit-head"><b>M. 글로우 퍼플 축 이탈</b><span class="sev conflict">충돌</span></div>
+      <p>주파수 글로우(GlowSpec)가 <span class="mono">#7C4DFF</span> — Splup <span class="mono">#AA4AF4</span>도 Deep <span class="mono">#6655D2</span>도 아닌 제3의 퍼플이 게이트 시그널이라는 핵심 표현을 맡고 있다. 관계 스택 글로우는 레거시 <span class="mono">DT.objOrange</span>를 Foundation 파일에서 직접 참조.
+      <span class="swrow"><i style="background:#7C4DFF"></i><i style="background:#AA4AF4"></i><i style="background:#6655D2"></i></span></p>
+      <div class="evidence"><code>Interaction.swift:22-28</code></div>
+      <p class="fix"><b>수정 방향</b> — 주파수 글로우를 브랜드 축(Splup 또는 <code>brand.deep</code>)으로 재정의할지 결정. 시각 검증 후 α·radius 재조정, DT 참조는 토큰 경유로 교체.</p>
+    </div>
+
+    <div class="audit-card clean">
+      <div class="audit-head"><b>E. raw hex 하드코딩 175건+</b><span class="sev clean">정리</span></div>
+      <p>§2 규칙(raw hex 금지) 위반이 17개 파일에 누적. 위젯 내부 고정 잉크(WInk) 같은 정당 케이스와 구분해 순차 이관 필요.</p>
+      <div class="evidence"><code class="num">WidgetContent 45</code><code class="num">OnboardingScenes 29</code><code class="num">AppState 17</code><code class="num">FriendsTab 15</code><code class="num">Overlays 13</code><code class="num">OnboardingFlow 11</code><code class="num">PolaroidCamera 10</code><code class="num">+10개 파일</code></div>
+      <p class="fix"><b>수정 방향</b> — 빅뱅 금지 원칙대로, 파일을 기능 수정으로 열 때마다 해당 파일만 토큰 이관. v3 신규 색 도입 시 이 목록이 체크리스트.</p>
+    </div>
+
+    <div class="audit-card clean">
+      <div class="audit-head"><b>F. 타이포 토큰 이탈 34곳</b><span class="sev clean">정리</span></div>
+      <p><code>.system(size:)</code> 직접 호출이 34곳 — 스타일 외 임의 크기. LINE Seed 도입 시 브랜드/사용자 보이스 구분이 불가능해지는 지점이기도 하다.</p>
+      <div class="evidence"><code class="num">OnboardingScenes 10</code><code class="num">WidgetContent 4</code><code class="num">StickerBoard 3</code><code class="num">기타 17곳</code></div>
+      <p class="fix"><b>수정 방향</b> — 신규 t스케일(<code>DDSText.tN*</code>)로 흡수. 스케일에 없는 크기는 가장 가까운 tN으로 스냅(§3 원칙 — 임의값 추가 금지).</p>
+    </div>
+
+    <div class="audit-card clean">
+      <div class="audit-head"><b>I. 그라디언트·액센트 이중 체계</b><span class="sev clean">정리</span></div>
+      <p>기존 <code>accent*</code> 6종(장식)·핸들 10톤·오브제 7색 위에 신규 액센트 8종이 얹힌다. CTA 그라디언트(<span class="mono">#C78FF7→#9430D8</span>)와 Splup Gradient도 축이 미묘하게 다르다.</p>
+      <div class="evidence"><code>ColorGlobal.swift:68-69</code><code>Gradients.swift:15-19</code></div>
+      <p class="fix"><b>수정 방향</b> — 역할 분리 선언: 신규 8종=사용자 선택 액센트 / 핸들·오브제=기존 유지(사용자 커스텀 자산) / 구 accent* 6종은 근접 매핑 후 폐기. CTA는 컴포넌트 토큰으로 유지, 브랜드 지면만 Splup Gradient.</p>
+    </div>
+
+    <div class="audit-card info">
+      <div class="audit-head"><b>J. 레거시 심 DT·DS</b><span class="sev info">정보</span></div>
+      <p>DT 퍼플 램프(light <span class="mono">#8E17EB</span> 축)는 신규 night 램프와 완전히 다른 축이지만, 정의가 DDS로 재지정된 별칭이라 실해는 없음.</p>
+      <div class="evidence"><code>Legacy/LegacyTokens.swift</code><code>Legacy/SeedShim.swift</code></div>
+      <p class="fix"><b>수정 방향</b> — 정책 유지(신규 코드 사용 금지). 단 <b>v3 신규 토큰의 레거시 별칭은 만들지 않는다</b>.</p>
+    </div>
+
+    <div class="audit-card info">
+      <div class="audit-head"><b>K. 다크 모드 상호작용</b><span class="sev info">정보</span></div>
+      <p>v3 보드는 라이트(Bright White) 기준. 다크에서 Splup 계열은 기존 규칙(500→400 밝힘: <span class="mono">#C588FF</span>)이 이미 있으나, Deep Purple·Platter Pink·액센트 8종의 다크 대응값은 미정의.</p>
+      <div class="evidence"><code>ColorTheme.swift (adaptive 패턴)</code></div>
+      <p class="fix"><b>수정 방향</b> — 브랜드 3색은 다크에서도 원색 유지(지면이 Eclipse라 대비 충분), 액센트 8종은 채도 −8~12% 다크 짝을 tokens.json에 함께 정의.</p>
+    </div>
+  </div>
+
+  </details>
+<div class="page-nav">
+    <a href="#mapping"><span class="dir">이전</span>기존 화면 변경하기</a>
+    <a class="next" href="#backlog"><span class="dir">다음</span>추가 작업 목록</a>
+  </div>
+</article>
+
+<!-- ═══════════ 추가 작업 목록 ═══════════ -->
+<article class="page content-max" id="page-backlog" hidden>
+  <div class="crumb">Migration / <b>추가 작업 목록</b></div>
+  <h1>추가 작업 목록</h1><p class="desc">아래는 이전 설계와 검토 기록입니다. 현재 제작은 Pretendard 단일 서체, 기본 CTA R12·60pt, 최신 Colorgraphy와 Ditto Action 규격을 우선합니다.</p>
+<details class="docs-history"><summary>2026년 8월의 검토 기록 보기</summary>
+  <p class="desc">현 시스템에 <b>추가·보강해야 할 항목만</b> 정리한 목록입니다. 완료한 항목은 관련 문서에 반영합니다.
+  기존 것의 애매한 적용은 <a href="#audit">감사 보드</a>가, 새로 필요한 것은 이 백로그가 담당한다.</p>
+
+  <h2>앞으로 추가할 항목</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>#</th><th>항목</th><th>현황</th><th>추가할 것</th><th>우선순위</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>pressed 색 짝 확장</td><td><code>fillBrandPressed</code> 1개뿐</td><td>주요 fill·layer 시맨틱에 pressed 쌍 정의 (tokens.json → DDSColor)</td><td><span class="sev conflict">P1</span></td></tr>
+        <tr><td class="num">2</td><td>Reduced Motion 코드 연동</td><td>규칙만 문서화(<a href="#motion">Motion</a>)</td><td><code>isReduceMotionEnabled</code> 연동: pressed 스케일 1 · popIn→fade · 글로우 펄스 정지</td><td><span class="sev conflict">P1</span></td></tr>
+        <tr><td class="num">3</td><td>액센트 8종 다크 짝</td><td>라이트 값만 확정</td><td>채도 −8~12% 다크 대응값을 tokens.json에 쌍으로 (<a href="#audit">검토 K</a>)</td><td><span class="sev conflict">P1</span></td></tr>
+        <tr><td class="num">4</td><td>그라디언트 설정 통합</td><td>스톱이 코드(<code>Gradients.swift</code>) 하드코딩</td><td><code>gradient.splup / brandBar</code>를 tokens.json 1급 토큰으로 (로드맵 1과 연동)</td><td><span class="sev conflict">P1</span></td></tr>
+        <tr><td class="num">5</td><td>다이나믹 타입 연동</td><td>Static(px 고정)만 정의</td><td>기기의 글자 크기 설정을 따르는 스타일의 UIFontMetrics 연동 — DDSText 신설과 함께</td><td><span class="sev clean">P2</span></td></tr>
+        <tr><td class="num">6</td><td>컴포넌트 스펙 문서화</td><td>코드만 존재 · <a href="#buttons">버튼 &amp; 인터랙션</a>만 선행 문서화</td><td>슬롯·변형·상태 스키마 + DSSnapshots 실렌더 카탈로그 (별도 트랙)</td><td><span class="sev clean">P2</span></td></tr>
+        <tr><td class="num">7</td><td>접근성 명문화</td><td>대비 4.5:1 보장이 코드 주석 수준</td><td>대비 기준·터치 타깃 44pt·모션 감소를 규칙 페이지로 승격</td><td><span class="sev clean">P2</span></td></tr>
+        <tr><td class="num">8</td><td>토큰 모드 구조</td><td>tokens.json 평면 (라이트/다크 쌍만)</td><td>color(light/dark) · motion(preferred/reduced) 컬렉션×모드 구조 도입</td><td><span class="sev info">P3</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>최근 반영한 내용</h2>
+  <ul style="font-size:13.5px">
+    <li><a href="#interaction">Interaction 페이지 신설</a> — 상태별 크기·투명도·시그널 글로우·헤어라인 문서화.</li>
+    <li><a href="#buttons">버튼 &amp; 인터랙션 컴포넌트 문서화</a> — DButton·DChip·SegmentControl 구조와 상태 규칙.</li>
+    <li><a href="#motion">Reduced Motion 규칙 신설</a> — 모션 감소 대응 원칙 확정 (코드 연동은 #2).</li>
+    <li><a href="#audit">검토 M</a> — 주파수 글로우 <span class="mono">#7C4DFF</span> 브랜드 축 이탈 발견.</li>
+  </ul>
+
+  </details>
+<div class="page-nav">
+    <a href="#audit"><span class="dir">이전</span>기존 구현 검토</a>
+    <a class="next" href="#tokens"><span class="dir">다음</span>공통 설정값</a>
+  </div>
+</article>
+
+<!-- ═══════════ 토큰 ═══════════ -->
+<article class="page content-max" id="page-tokens" hidden>
+  <div class="crumb">자료 / <b>공통 설정값</b></div>
+  <h1>공통 설정값</h1>
+  <p class="desc">색, 글자, 간격처럼 여러 화면에서 반복하는 값을 이름으로 저장합니다. 같은 이름을 사용하면 공통 원본을 수정했을 때 연결된 화면을 함께 바꿀 수 있습니다. 아래 표에서 이름, 값, 적용 위치를 확인하세요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="token-specimen"><span style="background:#AA4AF4"></span><code>purple.500</code><b>→</b><code>fillBrand</code><b>→</b><span class="sample-button">추가하기</span></div></div>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>tokens.json 경로</th><th>값</th><th>Swift 공통 원본</th><th>용도</th></tr></thead>
+      <tbody>
+        <tr><td><code>color.brand.splup</code></td><td class="mono">#AA4AF4</td><td><code>DDSBrand.splup</code></td><td>키 컬러 (= purple500 참조)</td></tr>
+        <tr><td><code>color.brand.deep</code></td><td class="mono">#6655D2</td><td><code>DDSBrand.deep</code></td><td>브랜드 2색</td></tr>
+        <tr><td><code>color.brand.platterPink</code></td><td class="mono">#FA97E2</td><td><code>DDSBrand.platterPink</code></td><td>디토 슬롯·그룹 접점</td></tr>
+        <tr><td><code>color.brand.night.100–400</code></td><td class="mono">#8C2BD6 · #6D01B9 · #4E009C · #2D0080</td><td><code>DDSBrand.night1–4</code></td><td>브랜드 심도(그래픽 전용)</td></tr>
+        <tr><td><code>color.brand.eclipse</code></td><td class="mono">#2D313D</td><td><code>DDSBrand.eclipse</code></td><td>브랜드 다크 지면 (19-4010 TCX)</td></tr>
+        <tr><td><code>color.brand.brightWhite</code></td><td class="mono">#F4F9FF</td><td><code>DDSBrand.brightWhite</code></td><td>브랜드 라이트 지면 (11-0601 TCX)</td></tr>
+        <tr><td><code>color.accent.magenta … sky</code> (8)</td><td class="mono">#FF2CBF … #48B5F4</td><td><code>DDSAccent.*</code></td><td>사용자 선택 액센트 (+다크 짝)</td></tr>
+        <tr><td><code>gradient.splup</code></td><td class="mono">#B9A9FA → #9A36F0 55% → #920CB3</td><td><code>DGrad.splup</code></td><td>키비주얼 세로</td></tr>
+        <tr><td><code>gradient.brandBar</code></td><td class="mono">#A848F2 → #310183</td><td><code>DGrad.brandBar</code></td><td>브랜드 가로 바</td></tr>
+        <tr><td><code>typography.fontFamily.global / korean</code></td><td>LINE Seed Sans App / Pretendard</td><td><code>DDSFont.lineSeed() / .pretendard()</code></td><td>2보이스 서체</td></tr>
+        <tr><td><code>font-size.t1–t14</code> (+<code>-static</code>)</td><td class="mono">11–48px</td><td rowspan="3"><code>DDSText.tN{Rg,Md,Bd}</code><br>(+<code>Static</code>)</td><td>글로벌 스케일</td></tr>
+        <tr><td><code>line-height.t1–t14</code> (+<code>-static</code>)</td><td class="mono">15–60px (고정 짝)</td><td>글로벌 스케일</td></tr>
+        <tr><td><code>font-weight.regular/medium/bold</code></td><td class="mono">400 / 500 / 700</td><td>자간 토큰 없음</td></tr>
+        <tr><td><code>textStyle</code> 별칭 3종</td><td>screenTitle t10Bd · articleBody t5Rg+lh t6 · articleNote t4Rg+lh t5</td><td><code>DDSText.screenTitle …</code></td><td>시맨틱 별칭</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-nav">
+    <a href="#backlog"><span class="dir">이전</span>추가 작업 목록</a>
+    <a class="next" href="#roadmap"><span class="dir">다음</span>적용 로드맵</a>
+  </div>
+</article>
+
+<!-- ═══════════ 로드맵 ═══════════ -->
+<article class="page docs-index" id="page-roadmap" hidden>
+  <div class="crumb">Splup / 변경 기록</div><h1>변경 기록</h1>
+  <p class="desc">문서에 그려진 모습과 앱에 적용된 상태는 다를 수 있습니다. 이 페이지에서는 무엇이 준비됐고 무엇을 더 확인해야 하는지 나눠 봅니다.</p>
+  <div class="docs-status-grid">
+    <section><span class="docs-status ready">문서 반영</span><h3>Splup 웹 가이드</h3><p>브랜드 컬러, 그래픽 팔레트, 프로필 10색, 우측 액션 5개 상태를 확인할 수 있습니다.</p></section>
+    <section><span class="docs-status ready">디자인 반영</span><h3>Figma 프로필 가이드</h3><p>대표·라이프 표면과 친구 상태 아이콘을 같은 기준으로 정리했습니다.</p></section>
+    <section><span class="docs-status pending">기기 검증 필요</span><h3>앱 적용 상태</h3><p>10색 프로필 설정이 소스에 연결되어 있습니다. 실제 기기 화면은 별도 검증이 필요합니다.</p></section>
+  </div>
+  <h2>최근 변경</h2>
+  <ol class="docs-change-list"><li><time datetime="2026-10-05">2026.10.05</time><span>문서 목록과 상단 메뉴를 정리했습니다. 제목과 설명을 쉬운 말로 바꾸고 모바일 목차, 검색, 문서 이동을 개선했습니다.</span></li><li><time datetime="2026-09-29">2026.09.29</time><span>프로필 외곽선을 정리하고 친구 상태를 사람+체크 아이콘으로 구분했습니다.</span></li><li><time datetime="2026-09-28">2026.09.28</time><span>프로필 10색과 대표·라이프 표면, 우측 액션 상태를 디자인 가이드에 반영했습니다.</span></li></ol>
+  <div class="docs-related"><span>다음 단계</span><a href="#mapping">기존 화면 변경 가이드 ↗</a><a href="#audit">검토 기록 ↗</a></div>
+</article>
+
+<article class="page content-max splup-graphics" id="page-brand-graphics" hidden>
+  <div class="crumb">Splup / 03 · 브랜드 표현</div><h1>브랜드 표현</h1><div class="cs-root" data-color-system-brand></div>
+  <p><a href="#color">01 · 컬러 기준으로 돌아가기 →</a></p>
+</article>
+<article class="page content-max splup-graphics" id="page-color-application" hidden>
+  <div class="crumb">Splup / 02 · 앱에서의 적용</div><h1>앱에서의 적용</h1>
+  <p>사용자가 누를 수 있는 곳, 이미 고른 것, 아직 사용할 수 없는 것을 색으로 구분합니다. 일반 버튼부터 Ditto, 색상 선택, 프로필까지 실제 화면에 적용하는 방법을 설명합니다.</p>
+  <div class="cs-root" data-color-system-application></div>
+  <div class="cs-root" data-color-system-ditto id="ditto-long-press"></div>
+  <h2 id="detail-colors">상세페이지 · 배경과 텍스트</h2>
+  <p>배경과 글자색을 따로 고르면 원하는 분위기와 읽기 편한 화면을 함께 만들 수 있습니다. 색상표의 무지개 버튼을 누르면 작은 컬러 휠이 열립니다. 그라디언트는 배경에만 사용합니다.</p>
+  <div class="detail-colors" data-detail-colors></div>
+  <p><a href="../../tokens/detail-colors.json" download>상세 컬러 토큰 JSON ↓</a> · <a href="#widget-system">위젯 크기와 음원 출처 규격 →</a></p>
+  <h2>프로필 · 같은 색, 같은 선택 규칙</h2>
+  <p>프로필의 10가지 색은 나를 표현하는 선택지입니다. 같은 색을 프로필 핸들과 기본 아바타에 함께 사용합니다. 고른 색에는 테두리를, 키보드로 이동한 위치에는 바깥 링을 표시합니다.</p>
+  <p><a href="#profile-handles">프로필 핸들과 적용 예시 →</a> · <a href="#profile-avatars">기본 아바타 에셋 →</a></p>
+  <h2>앱 적용과 편집</h2>
+  <table><thead><tr><th>대상</th><th>적용 기준</th></tr></thead><tbody>
+    <tr><td>일반 화면</td><td>배경, 글자, 테두리는 사용처별 색상을 연결합니다. 밝은 화면과 어두운 화면을 함께 확인합니다.</td></tr>
+    <tr><td>Ditto</td><td>로고와 문구가 있는 긴 버튼을 사용합니다. 3초 동안 누르면 색이 깊어지고, 일찍 떼면 360ms 동안 원래 색으로 돌아오며 취소됩니다.</td></tr>
+    <tr><td>위젯</td><td>배경 25종 위에 이미지와 제목을 각각 배치합니다. 작은 Ditto 마크는 가져온 위젯임을 알려줍니다.</td></tr>
+    <tr><td>재사용</td><td>Figma에서는 Palette로 배경을, Title로 제목을, Artwork로 이미지를 바꿉니다. 앱에서는 같은 색상 데이터와 공통 버튼·카드를 사용합니다.</td></tr>
+  </tbody></table>
+  <details><summary>개발 적용 파일과 갱신 방법</summary><p><code>color-system.json</code> 변경 후 <code>python3 scripts/sync_splup_colors.py</code>로 앱 컬러를 갱신해요. <code>SplupColor</code>는 역할별 색, <code>SplupGraphicPalette</code>는 위젯·EVENT 배경, <code>DittoHoldButton</code>은 실제 가져오기 동작에 연결하는 컴포넌트예요. 비동기 저장을 연결할 때는 요청 중 중복 입력을 막고 성공 뒤에만 완료를 표시해요.</p></details>
+  <p><a href="#brand-graphics">03 · 브랜드 표현 →</a></p>
+</article>
+<article class="page docs-index" id="page-foundations" hidden>
+  <div class="crumb">Splup / 기본 규칙</div><h1>기본 규칙</h1><p class="desc">글자와 간격에서 움직임과 표면까지. 필요한 규칙을 골라 실제 예시와 함께 확인하세요.</p>
+  <div class="docs-index-list">
+    <a href="#typography"><span class="index-number">01</span><span class="index-copy"><strong>글자 스타일</strong><small>글자의 크기·굵기·역할</small></span><b aria-hidden="true">→</b></a>
+    <a href="#spacing"><span class="index-number">02</span><span class="index-copy"><strong>간격</strong><small>화면 안팎의 간격과 리듬</small></span><b aria-hidden="true">→</b></a>
+    <a href="#radius"><span class="index-number">03</span><span class="index-copy"><strong>모서리와 그림자</strong><small>모서리와 표면 깊이</small></span><b aria-hidden="true">→</b></a>
+    <a href="#motion"><span class="index-number">04</span><span class="index-copy"><strong>움직임</strong><small>움직임의 길이와 동작 줄이기</small></span><b aria-hidden="true">→</b></a>
+    <a href="#interaction"><span class="index-number">05</span><span class="index-copy"><strong>입력과 반응</strong><small>기본·눌림·비활성 상태</small></span><b aria-hidden="true">→</b></a>
+    <a href="#zindex"><span class="index-number">06</span><span class="index-copy"><strong>화면이 겹치는 순서</strong><small>겹치는 화면의 순서</small></span><b aria-hidden="true">→</b></a>
+    <a href="#darkmode"><span class="index-number">07</span><span class="index-copy"><strong>밝은 화면과 어두운 화면</strong><small>밝은 화면과 어두운 화면의 명도 관계</small></span><b aria-hidden="true">→</b></a>
+  </div>
+</article><article class="page docs-index" id="page-components" hidden>
+  <div class="crumb">Splup / 컴포넌트</div><h1>컴포넌트</h1><p class="desc">모양만 보여주지 않고 상태와 반응, 적용 기준을 함께 정리했습니다.</p>
+  <div class="docs-index-list">
+    <a href="#profile-handles"><span class="index-number">01</span><span class="index-copy"><strong>프로필 구성</strong><small>대표·라이프 10색과 우측 액션 5개 상태</small></span><b aria-hidden="true">→</b></a>
+    <a href="#buttons"><span class="index-number">02</span><span class="index-copy"><strong>일반 버튼</strong><small>저장·완료처럼 기본적인 행동</small></span><b aria-hidden="true">→</b></a>
+    <a href="#ditto-action"><span class="index-number">03</span><span class="index-copy"><strong>디토하기 버튼</strong><small>3초 동안 누르는 긴 버튼 · 가져온 위젯의 표시</small></span><b aria-hidden="true">→</b></a>
+    <a href="#widget-system"><span class="index-number">04</span><span class="index-copy"><strong>위젯 크기와 Ditto</strong><small>기존 위젯 구성 · 13개 유형 · 실제 플래터 예시</small></span><b aria-hidden="true">→</b></a>
+  </div>
+</article><article class="page docs-index" id="page-patterns" hidden>
+  <div class="crumb">Splup / 적용 방법</div><h1>적용 방법</h1><p class="desc">단일 요소를 넘어, 플래터의 구성과 사용자를 대하는 언어를 확인하세요.</p>
+  <div class="docs-index-list">
+    <a href="#grid"><span class="index-number">01</span><span class="index-copy"><strong>플래터 배치</strong><small>위젯 크기와 배치 규칙</small></span><b aria-hidden="true">→</b></a>
+    <a href="#voice"><span class="index-number">02</span><span class="index-copy"><strong>말과 용어</strong><small>관계를 표현하는 말의 기준</small></span><b aria-hidden="true">→</b></a>
+    <a href="#writing"><span class="index-number">03</span><span class="index-copy"><strong>상황별 문구</strong><small>상황별 문장과 피해야 할 표현</small></span><b aria-hidden="true">→</b></a>
+  </div>
+</article><article class="page docs-index" id="page-resources" hidden>
+  <div class="crumb">Splup / 자료</div><h1>자료</h1>
+  <p class="desc">색, 간격, 모서리의 공통 설정값과 브랜드 원본 파일을 제공합니다. 기존 화면을 수정할 때는 변경 가이드를 함께 확인합니다.</p>
+  <div class="docs-index-list">
+    <a href="#tokens"><span class="index-number">01</span><span class="index-copy"><strong>공통 설정값</strong><small>색·간격·반경의 이름과 실제 값</small></span><b aria-hidden="true">→</b></a>
+    <a href="#assets"><span class="index-number">02</span><span class="index-copy"><strong>브랜드 에셋</strong><small>원본 로고·아이콘·그래픽 파일과 사용 기준</small></span><b aria-hidden="true">→</b></a>
+    <a href="#mapping"><span class="index-number">03</span><span class="index-copy"><strong>변경 가이드</strong><small>기존 규격을 새 기준으로 옮기는 순서</small></span><b aria-hidden="true">→</b></a>
+  </div>
+  <div class="docs-related"><span>계속 보기</span><a href="#roadmap">반영 상태와 최근 변경 ↗</a></div>
+</article>
+<article class="page content-max" id="page-profile-avatars" hidden>
+  <div class="crumb">컬러 / 기본 아바타</div>
+  <h1>프로필 기본 아바타</h1>
+  <p class="desc">프로필과 같은 색을 사용하는 기본 아바타 10가지입니다. 사진을 등록하지 않았을 때 표시하며, 아래 예시에서 실제 크기로 비교할 수 있습니다.</p>
+  <h2>핸들에 넣어서 비교하기</h2>
+  <p>컬러를 고르면 같은 배색의 대표·라이프 핸들에 함께 적용돼요. 실제 48px 크기로 확인하세요.</p>
+  <div class="avatar-workbench" data-avatar-demo style="--handle-top:#B66BEC;--handle-bottom:#9270D9;--handle-life:#C792ED">
+    <div class="avatar-picker" role="group" aria-label="기본 아바타 10종 선택"><button type="button" data-avatar-choice="purple-pink" aria-pressed="true" aria-label="01 퍼플 · 핑크 선택"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" ><span><small>01</small>퍼플 · 핑크</span></button><button type="button" data-avatar-choice="deep-purple" aria-pressed="false" aria-label="02 딥 퍼플 · 바이올렛 선택"><img class="" src="../../brand/color-system/profile-avatars/deep-purple.svg" alt="딥 퍼플 · 바이올렛 기본 아바타" width="96" height="96" ><span><small>02</small>딥 퍼플 · 바이올렛</span></button><button type="button" data-avatar-choice="pink-coral" aria-pressed="false" aria-label="03 핑크 · 코랄 선택"><img class="" src="../../brand/color-system/profile-avatars/pink-coral.svg" alt="핑크 · 코랄 기본 아바타" width="96" height="96" ><span><small>03</small>핑크 · 코랄</span></button><button type="button" data-avatar-choice="peach-yellow" aria-pressed="false" aria-label="04 피치 · 옐로 선택"><img class="" src="../../brand/color-system/profile-avatars/peach-yellow.svg" alt="피치 · 옐로 기본 아바타" width="96" height="96" ><span><small>04</small>피치 · 옐로</span></button><button type="button" data-avatar-choice="cyan-blue" aria-pressed="false" aria-label="05 시안 · 블루 선택"><img class="" src="../../brand/color-system/profile-avatars/cyan-blue.svg" alt="시안 · 블루 기본 아바타" width="96" height="96" ><span><small>05</small>시안 · 블루</span></button><button type="button" data-avatar-choice="mint-lime" aria-pressed="false" aria-label="06 민트 · 라임 선택"><img class="" src="../../brand/color-system/profile-avatars/mint-lime.svg" alt="민트 · 라임 기본 아바타" width="96" height="96" ><span><small>06</small>민트 · 라임</span></button><button type="button" data-avatar-choice="coral-red" aria-pressed="false" aria-label="07 코랄 · 레드 선택"><img class="" src="../../brand/color-system/profile-avatars/coral-red.svg" alt="코랄 · 레드 기본 아바타" width="96" height="96" ><span><small>07</small>코랄 · 레드</span></button><button type="button" data-avatar-choice="gold-yellow" aria-pressed="false" aria-label="08 골드 · 옐로 선택"><img class="" src="../../brand/color-system/profile-avatars/gold-yellow.svg" alt="골드 · 옐로 기본 아바타" width="96" height="96" ><span><small>08</small>골드 · 옐로</span></button><button type="button" data-avatar-choice="lime-green" aria-pressed="false" aria-label="09 라임 · 그린 선택"><img class="" src="../../brand/color-system/profile-avatars/lime-green.svg" alt="라임 · 그린 기본 아바타" width="96" height="96" ><span><small>09</small>라임 · 그린</span></button><button type="button" data-avatar-choice="neutral-gray" aria-pressed="false" aria-label="10 뉴트럴 · 그레이 선택"><img class="" src="../../brand/color-system/profile-avatars/neutral-gray.svg" alt="뉴트럴 · 그레이 기본 아바타" width="96" height="96" ><span><small>10</small>뉴트럴 · 그레이</span></button></div>
+    <div class="avatar-handle-pair"><section><h3>대표</h3><div class="profile-handle representative"><span class="handle-avatar avatar-art"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" data-avatar-live></span><div class="ph-identity"><b>지우 ⭐</b><span>나의 애칭목록</span></div><span class="avatar-demo-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section><section><h3>라이프</h3><div class="profile-handle life"><span class="handle-avatar avatar-art"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" data-avatar-live></span><div class="ph-identity"><b>지우 ⭐</b><span>나의 애칭목록</span></div><span class="avatar-demo-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section></div>
+    <p class="avatar-choice-status" role="status" aria-live="polite">01 · 퍼플 · 핑크</p><h3>크기를 바꿔서 확인하기</h3><p>사각 프로필에 맞춰 만든 컬러 표면입니다. 크기와 비율을 바꿔도 색이 전체 영역을 채워요.</p><div class="avatar-resize-controls"><label>크기 <input type="range" min="24" max="192" step="8" value="96" data-avatar-size><output data-avatar-size-value>96px</output></label><label>비율 <select data-avatar-ratio><option value="1">정사각형</option><option value="1.25">세로형 4:5</option><option value="0.5625">가로형 16:9</option></select></label></div><div class="avatar-resize-stage"><div class="avatar-resize-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 크기 조절 미리보기" data-avatar-live></div></div><p class="avatar-resize-status" role="status" aria-live="polite">96 × 96 · 모서리 24</p>
+  </div>
+  <h2>아바타 에셋 10종</h2>
+  <p>동일한 광택·번짐으로 통일했어요. 48×48 · 모서리 12의 라운드 사각형에 테두리 없이 적용합니다.</p>
+  <div class="avatar-asset-grid"><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>01</small>퍼플 · 핑크</strong><div class="avatar-color-chips"><span><i style="background:#B66BEC"></i><code>#B66BEC</code></span><span><i style="background:#9270D9"></i><code>#9270D9</code></span><span><i style="background:#C792ED"></i><code>#C792ED</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/purple-pink.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/purple-pink.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/purple-pink-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/deep-purple.svg" alt="딥 퍼플 · 바이올렛 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>02</small>딥 퍼플 · 바이올렛</strong><div class="avatar-color-chips"><span><i style="background:#9580DE"></i><code>#9580DE</code></span><span><i style="background:#8D73CE"></i><code>#8D73CE</code></span><span><i style="background:#AE99E6"></i><code>#AE99E6</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/deep-purple.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/deep-purple.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/deep-purple-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/pink-coral.svg" alt="핑크 · 코랄 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>03</small>핑크 · 코랄</strong><div class="avatar-color-chips"><span><i style="background:#FA91D9"></i><code>#FA91D9</code></span><span><i style="background:#F064B3"></i><code>#F064B3</code></span><span><i style="background:#F5A5D8"></i><code>#F5A5D8</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/pink-coral.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/pink-coral.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/pink-coral-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/peach-yellow.svg" alt="피치 · 옐로 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>04</small>피치 · 옐로</strong><div class="avatar-color-chips"><span><i style="background:#FFA36F"></i><code>#FFA36F</code></span><span><i style="background:#F68A50"></i><code>#F68A50</code></span><span><i style="background:#FFBC87"></i><code>#FFBC87</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/peach-yellow.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/peach-yellow.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/peach-yellow-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/cyan-blue.svg" alt="시안 · 블루 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>05</small>시안 · 블루</strong><div class="avatar-color-chips"><span><i style="background:#62C3F1"></i><code>#62C3F1</code></span><span><i style="background:#369FD9"></i><code>#369FD9</code></span><span><i style="background:#89CDEE"></i><code>#89CDEE</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/cyan-blue.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/cyan-blue.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/cyan-blue-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/mint-lime.svg" alt="민트 · 라임 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>06</small>민트 · 라임</strong><div class="avatar-color-chips"><span><i style="background:#38DBB1"></i><code>#38DBB1</code></span><span><i style="background:#09BA97"></i><code>#09BA97</code></span><span><i style="background:#6BDDC2"></i><code>#6BDDC2</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/mint-lime.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/mint-lime.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/mint-lime-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/coral-red.svg" alt="코랄 · 레드 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>07</small>코랄 · 레드</strong><div class="avatar-color-chips"><span><i style="background:#F77983"></i><code>#F77983</code></span><span><i style="background:#E9576F"></i><code>#E9576F</code></span><span><i style="background:#F39CA8"></i><code>#F39CA8</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/coral-red.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/coral-red.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/coral-red-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/gold-yellow.svg" alt="골드 · 옐로 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>08</small>골드 · 옐로</strong><div class="avatar-color-chips"><span><i style="background:#F4D76C"></i><code>#F4D76C</code></span><span><i style="background:#DDC057"></i><code>#DDC057</code></span><span><i style="background:#EDDA94"></i><code>#EDDA94</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/gold-yellow.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/gold-yellow.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/gold-yellow-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/lime-green.svg" alt="라임 · 그린 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>09</small>라임 · 그린</strong><div class="avatar-color-chips"><span><i style="background:#C8E96B"></i><code>#C8E96B</code></span><span><i style="background:#ACCE48"></i><code>#ACCE48</code></span><span><i style="background:#D1E796"></i><code>#D1E796</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/lime-green.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/lime-green.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/lime-green-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/neutral-gray.svg" alt="뉴트럴 · 그레이 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>10</small>뉴트럴 · 그레이</strong><div class="avatar-color-chips"><span><i style="background:#AEB3BF"></i><code>#AEB3BF</code></span><span><i style="background:#929AA9"></i><code>#929AA9</code></span><span><i style="background:#BDC4D0"></i><code>#BDC4D0</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/neutral-gray.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/neutral-gray.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/neutral-gray-rounded.png" download>사각 PNG</a></div></figcaption></figure></div>
+  <p><a class="avatar-doc-link" href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1126-115578" target="_blank" rel="noopener">Figma에서 10종과 프로필 핸들 적용 보기 ↗</a></p>
+<p class="avatar-download"><a href="../../brand/color-system/profile-avatars/splup-profile-avatars-10.zip" download>10종 모두 다운로드 ↗</a><span>SVG · 1024px PNG · 512px 라운드 사각 PNG · 팔레트 JSON</span></p>
+  <h2>브랜드 그래픽과 어떻게 이어지나요?</h2>
+  <div class="avatar-principles"><section><h3>핸들과 같은 주색</h3><p>01–06은 브랜드 그래픽, 07–10은 기존 프로필 핸들 팔레트에서 파생했어요. 아바타는 작은 크기에 맞춰 보조색의 채도를 조절합니다.</p></section><section><h3>빛은 같은 방향</h3><p>위쪽의 넓은 반사광과 아래쪽의 얕은 음영만 사용해요. 흰 테두리·노이즈·로고는 넣지 않습니다.</p></section><section><h3>선택과 미등록은 구분</h3><p>선택한 기본 아바타는 이미지 전체를 표시해요. 사진도 아바타 선택도 없으면 기존 라이트 그레이 바탕과 회색 사람 아이콘을 유지합니다.</p></section></div>
+  <p>라이프와 대표를 전환할 때 아바타는 유지합니다. 팔레트를 바꿀 때 같은 계열을 추천하되, 사용자가 고른 아바타를 임의로 바꾸지 않습니다.</p>
+  <details class="guide-details"><summary>개발용 컬러·에셋 기준</summary><p><code>component.profileAvatar</code> · <code>handlePaletteId</code>로 프로필 핸들 배색을 연결합니다. 이 페이지는 디자인 시스템 예시이며 실제 앱 적용은 별도입니다. Figma에는 10종의 편집 가능한 그라디언트 컴포넌트와 대표·라이프 적용 예시를 등록했어요. 기존 프로필 핸들의 Avatar 항목에서 선택할 수 있어요. 크기 변경은 Resize, 비율을 유지하며 모서리까지 확대하려면 Scale(K)을 사용하세요.</p><a href="../../tokens/tokens.json">디자인 토큰</a> · <a href="../../brand/color-system/profile-avatars/palette.json">아바타 팔레트 JSON</a></details>
+  <p><a href="#profile-handles">프로필 핸들과 우측 버튼 가이드 →</a></p>
+</article>
+<article class="page content-max" id="page-profile-handles" hidden><div class="crumb">컴포넌트 / Profile Handle</div><h1>프로필 구성</h1><p class="desc">같은 프로필을 대표와 라이프에서 어떻게 보여줄지 정합니다. 색을 선택해 두 모습을 비교하고, 오른쪽 버튼의 배치와 동작을 확인하세요.</p><a class="avatar-doc-link" href="#profile-avatars">같은 팔레트의 기본 아바타 10종 보기 →</a><h2>대표와 라이프 비교</h2><div class="handle-picker" role="group" aria-label="프로필 컬러 선택"><button type="button" data-handle-palette="0" aria-pressed="false"><i style="background:#9270D9"></i>01 퍼플 · 핑크</button><button type="button" data-handle-palette="1" aria-pressed="false"><i style="background:#8D73CE"></i>02 딥 퍼플 · 바이올렛</button><button type="button" data-handle-palette="2" aria-pressed="false"><i style="background:#F064B3"></i>03 핑크 · 코랄</button><button type="button" data-handle-palette="3" aria-pressed="false"><i style="background:#F68A50"></i>04 피치 · 옐로</button><button type="button" data-handle-palette="4" aria-pressed="false"><i style="background:#369FD9"></i>05 시안 · 블루</button><button type="button" data-handle-palette="5" aria-pressed="false"><i style="background:#09BA97"></i>06 민트 · 라임</button><button type="button" data-handle-palette="6" aria-pressed="false"><i style="background:#E9576F"></i>07 코랄 · 레드</button><button type="button" data-handle-palette="7" aria-pressed="false"><i style="background:#DDC057"></i>08 골드 · 옐로</button><button type="button" data-handle-palette="8" aria-pressed="false"><i style="background:#ACCE48"></i>09 라임 · 그린</button><button type="button" data-handle-palette="9" aria-pressed="false"><i style="background:#929AA9"></i>10 뉴트럴 · 그레이</button></div><div class="handle-comparison"><section><h3>대표</h3><p>주색의 깊이와 얕은 광택으로 강조해요.</p><div class="profile-handle representative"><span class="handle-avatar avatar-art"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" data-handle-avatar></span><div><b>지우 ⭐</b><span>나의 애칭목록</span></div><div class="ph-actions"><button aria-label="프로필 수정" data-profile-edit><img src="../../brand/color-system/profile-pencil.svg" alt="" aria-hidden="true"></button><button aria-label="설정" data-profile-settings><img src="../../brand/color-system/profile-gear.svg" alt="" aria-hidden="true"></button></div></div></section><section><h3>라이프</h3><p>같은 계열의 선명한 단색으로 구분해요.</p><div class="profile-handle life"><span class="handle-avatar avatar-art"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" data-handle-avatar></span><div><b>지우 ⭐</b><span>나의 애칭목록</span></div><div class="ph-actions"><button aria-label="프로필 수정" data-profile-edit><img src="../../brand/color-system/profile-pencil.svg" alt="" aria-hidden="true"></button><button aria-label="설정" data-profile-settings><img src="../../brand/color-system/profile-gear.svg" alt="" aria-hidden="true"></button></div></div></section></div><button type="button" class="avatar-fallback-toggle" data-avatar-fallback aria-pressed="false">사진 미등록 상태 보기</button><p class="handle-recipe" aria-live="polite"></p><section class="profile-color-editor" id="profile-color-editor" data-profile-color-editor>
+<h2>프로필 컬러 변경</h2><p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1211-128856" target="_blank" rel="noopener">Figma · 통합 Profile System 보기 →</a></p><p>컬러칩은 핸들과 같은 원본 색으로 표시해요. 좁은 화면에서는 옆으로 스와이프해 다른 색을 볼 수 있어요. 사진과 아바타는 그대로 유지돼요.</p>
+<div class="profile-editor-layout"><div><fieldset class="profile-color-palette"><legend>핸들 컬러 선택 · 가로로 넘겨 10색 보기</legend><div class="profile-color-options"><label class="profile-color-option" title="퍼플 · 핑크 · #C792ED"><input type="radio" name="profile-color-draft" value="purple-pink" aria-label="퍼플 · 핑크" checked><span class="profile-color-chip" style="background:var(--profile-selector-preview-purple-pink)" aria-hidden="true"></span></label><label class="profile-color-option" title="딥 퍼플 · 바이올렛 · #AE99E6"><input type="radio" name="profile-color-draft" value="deep-purple" aria-label="딥 퍼플 · 바이올렛" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-deep-purple)" aria-hidden="true"></span></label><label class="profile-color-option" title="핑크 · 코랄 · #F5A5D8"><input type="radio" name="profile-color-draft" value="pink-coral" aria-label="핑크 · 코랄" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-pink-coral)" aria-hidden="true"></span></label><label class="profile-color-option" title="피치 · 옐로 · #FFBC87"><input type="radio" name="profile-color-draft" value="peach-yellow" aria-label="피치 · 옐로" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-peach-yellow)" aria-hidden="true"></span></label><label class="profile-color-option" title="시안 · 블루 · #89CDEE"><input type="radio" name="profile-color-draft" value="cyan-blue" aria-label="시안 · 블루" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-cyan-blue)" aria-hidden="true"></span></label><label class="profile-color-option" title="민트 · 라임 · #6BDDC2"><input type="radio" name="profile-color-draft" value="mint-lime" aria-label="민트 · 라임" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-mint-lime)" aria-hidden="true"></span></label><label class="profile-color-option" title="코랄 · 레드 · #F39CA8"><input type="radio" name="profile-color-draft" value="coral-red" aria-label="코랄 · 레드" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-coral-red)" aria-hidden="true"></span></label><label class="profile-color-option" title="골드 · 옐로 · #EDDA94"><input type="radio" name="profile-color-draft" value="gold-yellow" aria-label="골드 · 옐로" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-gold-yellow)" aria-hidden="true"></span></label><label class="profile-color-option" title="라임 · 그린 · #D1E796"><input type="radio" name="profile-color-draft" value="lime-green" aria-label="라임 · 그린" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-lime-green)" aria-hidden="true"></span></label><label class="profile-color-option" title="뉴트럴 · 그레이 · #BDC4D0"><input type="radio" name="profile-color-draft" value="neutral-gray" aria-label="뉴트럴 · 그레이" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-neutral-gray)" aria-hidden="true"></span></label></div></fieldset><p class="profile-color-choice" data-profile-color-choice></p><div class="profile-color-actions"><button type="button" data-profile-color-cancel>취소</button><button type="button" class="profile-color-apply" data-profile-color-apply>적용하기</button></div><p class="profile-color-status" data-profile-color-status role="status" aria-live="polite">디자인 시스템 미리보기예요. 실제 프로필은 저장되지 않아요.</p></div><div class="profile-editor-previews"><section><h3>대표</h3><div class="profile-handle representative"><span class="handle-avatar avatar-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="선택한 사각 기본 아바타"></span><div class="ph-identity"><b>지우</b><span>나의 애칭목록</span></div><span class="profile-editor-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section><section><h3>라이프</h3><div class="profile-handle life"><span class="handle-avatar avatar-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="선택한 사각 기본 아바타"></span><div class="ph-identity"><b>지우</b><span>나의 애칭목록</span></div><span class="profile-editor-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section></div></div><p class="profile-color-values" data-profile-color-values></p>
+</section><section class="profile-color-editor" id="profile-color-carousel" data-profile-carousel-demo data-profile-color-editor>
+<h2>좁은 화면 · 스와이프 적용 예시</h2><p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1211-128856" target="_blank" rel="noopener">Figma · 통합 Profile System 보기 →</a></p><p>색을 줄이지 않고 가로로 넘겨요. 스와이프는 목록만 이동하고, 컬러칩을 눌러야 선택이 바뀌어요.</p>
+<div class="profile-editor-layout"><div><fieldset class="profile-color-palette"><legend>핸들 컬러 선택 · 가로로 넘겨 10색 보기</legend><div class="profile-color-options" aria-label="10색 컬러 목록, 가로 스와이프 가능"><label class="profile-color-option" title="퍼플 · 핑크 · #C792ED"><input type="radio" name="profile-color-carousel-draft" value="purple-pink" aria-label="퍼플 · 핑크" checked><span class="profile-color-chip" style="background:var(--profile-selector-preview-purple-pink)" aria-hidden="true"></span></label><label class="profile-color-option" title="딥 퍼플 · 바이올렛 · #AE99E6"><input type="radio" name="profile-color-carousel-draft" value="deep-purple" aria-label="딥 퍼플 · 바이올렛" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-deep-purple)" aria-hidden="true"></span></label><label class="profile-color-option" title="핑크 · 코랄 · #F5A5D8"><input type="radio" name="profile-color-carousel-draft" value="pink-coral" aria-label="핑크 · 코랄" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-pink-coral)" aria-hidden="true"></span></label><label class="profile-color-option" title="피치 · 옐로 · #FFBC87"><input type="radio" name="profile-color-carousel-draft" value="peach-yellow" aria-label="피치 · 옐로" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-peach-yellow)" aria-hidden="true"></span></label><label class="profile-color-option" title="시안 · 블루 · #89CDEE"><input type="radio" name="profile-color-carousel-draft" value="cyan-blue" aria-label="시안 · 블루" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-cyan-blue)" aria-hidden="true"></span></label><label class="profile-color-option" title="민트 · 라임 · #6BDDC2"><input type="radio" name="profile-color-carousel-draft" value="mint-lime" aria-label="민트 · 라임" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-mint-lime)" aria-hidden="true"></span></label><label class="profile-color-option" title="코랄 · 레드 · #F39CA8"><input type="radio" name="profile-color-carousel-draft" value="coral-red" aria-label="코랄 · 레드" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-coral-red)" aria-hidden="true"></span></label><label class="profile-color-option" title="골드 · 옐로 · #EDDA94"><input type="radio" name="profile-color-carousel-draft" value="gold-yellow" aria-label="골드 · 옐로" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-gold-yellow)" aria-hidden="true"></span></label><label class="profile-color-option" title="라임 · 그린 · #D1E796"><input type="radio" name="profile-color-carousel-draft" value="lime-green" aria-label="라임 · 그린" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-lime-green)" aria-hidden="true"></span></label><label class="profile-color-option" title="뉴트럴 · 그레이 · #BDC4D0"><input type="radio" name="profile-color-carousel-draft" value="neutral-gray" aria-label="뉴트럴 · 그레이" ><span class="profile-color-chip" style="background:var(--profile-selector-preview-neutral-gray)" aria-hidden="true"></span></label></div></fieldset><p class="profile-color-choice" data-profile-color-choice></p><div class="profile-color-actions"><button type="button" data-profile-color-cancel>취소</button><button type="button" class="profile-color-apply" data-profile-color-apply>적용하기</button></div><p class="profile-color-status" data-profile-color-status role="status" aria-live="polite">디자인 시스템 미리보기예요. 실제 프로필은 저장되지 않아요.</p></div><div class="profile-editor-previews"><section><h3>대표</h3><div class="profile-handle representative"><span class="handle-avatar avatar-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="선택한 사각 기본 아바타"></span><div class="ph-identity"><b>지우</b><span>나의 애칭목록</span></div><span class="profile-editor-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section><section><h3>라이프</h3><div class="profile-handle life"><span class="handle-avatar avatar-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="선택한 사각 기본 아바타"></span><div class="ph-identity"><b>지우</b><span>나의 애칭목록</span></div><span class="profile-editor-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section></div></div><p class="profile-color-values" data-profile-color-values></p>
+</section><section class="profile-action-guide" id="profile-action-guide"><h2>프로필 오른쪽 버튼 배치</h2><p>아래는 상태 전환을 확인하는 데모예요. 실제 프로필 저장이나 친구 요청은 전송되지 않아요.</p><div class="ph-state-list"><section class="ph-state-card" data-profile-state="self"><h3>내 프로필 · 기본</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button aria-label="프로필 수정" data-profile-edit><img src="../../brand/color-system/profile-pencil.svg" alt="" aria-hidden="true"></button><button aria-label="설정" data-profile-settings><img src="../../brand/color-system/profile-gear.svg" alt="" aria-hidden="true"></button></div></div><p>수정은 프로필 편집을 열고, 설정은 계정 설정으로 이동해요.</p></section><section class="ph-state-card" data-profile-state="editing"><h3>내 프로필 · 수정 중</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-primary" data-profile-done>수정완료</button></div></div><p>수정완료 후 기본 상태로 돌아가요. 저장 중에는 중복 입력을 막아요.</p></section><section class="ph-state-card" data-profile-state="friend"><h3>친구 프로필 · 친구인 상태</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><span class="ph-status ph-circle" role="img" aria-label="친구인 상태" title="친구"><img src="../../brand/color-system/profile-person-check.svg" alt="" aria-hidden="true"></span></div></div><p>사람과 체크를 함께 사용해 친구 관계를 표시해요. 친구 삭제를 즉시 실행하지 않아요.</p></section><section class="ph-state-card" data-profile-state="add"><h3>친구 프로필 · 추가 가능</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-circle" data-profile-add aria-label="친구 추가하기" title="친구 추가하기"><img src="../../brand/color-system/profile-person-plus.svg" alt=""></button></div></div><p>요청을 보낸 뒤 요청됨으로 바꿔요. 수락 전에는 친구로 표시하지 않아요.</p></section><section class="ph-state-card" data-profile-state="unavailable"><h3>친구 프로필 · 추가 불가</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-circle ph-disabled" disabled aria-label="친구추가 불가" title="친구추가 불가"><img src="../../brand/color-system/profile-person-x.svg" alt=""></button></div></div><p>버튼은 비활성화하고 추가할 수 없는 사유를 아래에 안내해요.</p></section></div><p class="ph-feedback" role="status" aria-live="polite">수정 버튼을 눌러 상태 변화를 확인해보세요.</p><h3>공통 배치 규칙</h3><ul><li>핸들 높이 64 · 모서리 16 · 사진 48 · 우측 여백 8.</li><li>터치 영역은 최소 44 × 44, 아이콘은 20. 두 액션 사이는 4.</li><li>이름 영역만 줄어들고 버튼은 고정돼요. 긴 이름은 한 줄 말줄임으로 처리해요.</li><li>친구 상태는 사람+체크·사람 추가·추가 불가 아이콘으로 구분해요. 각 아이콘에는 스크린 리더용 상태 이름을 제공해요.</li><li>큰 글자 설정에서는 높이를 늘리고 액션을 다음 줄로 배치해요.</li></ul></section><h2>어떻게 달라지나요?</h2><ul><li>대표: 그래픽 팔레트의 주색을 중심으로 위에서 아래로 색이 깊어져요.</li><li>라이프: 같은 컬러군의 단색을 사용해요.</li><li>두 핸들의 크기와 아이콘은 같고, 라이프는 음영 없이 단색으로 표현해요.</li><li>여러 색을 모두 넣기보다, 이름과 편집 기능이 잘 보이도록 색을 단순화했어요.</li></ul><h2>적용 기준</h2><p>높이 64 · 모서리 16 · 프로필 이미지 48. 어두운 글자로 읽기 쉽게 맞췄어요. 위 핸들은 색과 형태를 비교하는 예시이며 편집·설정 기능은 연결되지 않았어요.</p><p>앱 소스의 프로필 선택도 10종으로 연결했어요. 기존 선택은 유지하고 이전 컬러 ID는 가까운 팔레트로 연결되며 직접 지정한 커스텀 색은 유지해요. 실제 기기 화면 검증은 별도입니다.</p><details class="guide-details"><summary>개발용 컬러 기준</summary><p><code>component.profileHandle</code><br><code>DGrad.profileHandlePalettes</code></p><a href="../../tokens/tokens.json">공통 원본 토큰 보기</a></details><p><a href="#brand-graphics">원본 그래픽 팔레트 보기 →</a></p></article>
+<article class="page" id="page-widget-system" hidden>
+  <div class="crumb">Splup / 컴포넌트</div>
+  <h1>위젯 크기와 구성</h1>
+  <p class="desc">13개 위젯의 콘텐츠, 글자 크기, 출처와 이동 표시를 한곳에서 확인하세요. 작은 크기에서는 글자를 축소하지 않고 표시하는 정보량을 조절합니다.</p>
+  <p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/Ditto?node-id=1241-2758" target="_blank" rel="noopener">Figma 위젯 시스템 보기 ↗</a> · <a href="#grid">플래터 배치 규칙</a></p>
+  <section class="sw-music-study">
+    <h2 id="music-player">음악 위젯 · 눌러서 재생하기</h2>
+    <p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2285-11190" target="_blank" rel="noopener">Figma · CDP와 6×6·6×8 영상형 보기 ↗</a> · <a href="../../tokens/music-player.json">음악 플레이어 규격</a></p>
+    <p>CDP 형태는 음악을 가져오는 방식과 별개예요. 앨범 커버를 CD에 넣고 커버의 주요 색을 본체에 밝게 적용합니다. 금속 테두리와 중앙 허브, 은은한 반사광을 함께 보여줍니다. 재생 시안은 누르면 회전하고 다시 누르면 멈춰요.</p>
+    <p class="sw-case-note">6×6·6×8은 뮤직비디오를 표시해요. 그 외 크기에서 CD는 가로·세로 1:1로 표시하며 전체 원이 보이도록 배치해요. 중심 구멍은 외경의 12.5%, 투명 허브는 27.5%를 사용해요. <a href="https://ecma-international.org/wp-content/uploads/ECMA-130_2nd_edition_june_1996.pdf" target="_blank" rel="noopener">CD 치수 참고 ↗</a></p>
+    <p class="mp-spacing-rule">6 × 2는 곡 정보와 CD를 좌우로, 2 × 6은 CD·곡 정보·재생 표시를 위아래로 배치해요. 긴 형태의 안쪽 여백은 10px입니다. 2 × 6은 곡명 두 줄, 아티스트 한 줄, 출처 아이콘을 사용하며 하단에는 진행 시간을 표시합니다.</p><div id="music-player-lab" class="mp-lab"></div>
+    <div class="mp-motion-notes"><div><h3>재생 · 일시정지</h3><p>카드 전체를 눌러 전환해요. 다른 음악을 누르면 이전 곡은 멈춰요.</p></div><div><h3>확장 · 축소</h3><p>곡과 재생 위치를 유지해요. 6×6·6×8은 영상형으로 바뀌며 본체 색은 앨범 커버를 따릅니다.</p></div><div><h3>움직임 줄이기</h3><p>기기 설정에 맞춰 회전과 막대 움직임을 끄고 재생 상태를 글자로 보여줘요.</p></div></div>
+    <h2 id="music-album-cases">음악 · 9개 앨범 적용</h2>
+    <p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2303-10592" target="_blank" rel="noopener">Figma · 검증한 앨범 9종 보기 ↗</a> · <a href="../../tokens/music-album-cases.json">앨범별 컬러 값</a></p>
+    <p>음악 위젯은 앨범 커버가 담긴 CD와 그 앨범의 색을 닮은 본체로 구성했어요. 402px 화면 기준 정사각·가로형·세로형을 비교해보세요. CD는 항상 1:1이며, 곡명과 아티스트는 편집 가능한 텍스트로 유지합니다.</p>
+    <p class="sw-context-note">직접 제공한 커버로 만든 디자인 예시입니다. 서비스에서 내려받은 데이터나 실제 재생 상태를 뜻하지 않습니다.</p>
+    <div class="sw-album-cases"></div><h2>6×6·6×8 · 뮤직비디오</h2><p>영상 포스터는 별도로 지정하고 본체 색상은 앨범에서 가져옵니다. MV가 연결되지 않은 경우에는 앨범 커버를 표시합니다. 별도 재생 버튼과 하단 원형 버튼 줄은 사용하지 않습니다.</p><div class="sw-music-video-cases" style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start"></div>
+    <h2 id="music-service-examples">이전 서비스 연결 참고</h2><p>현재 지원 기준은 YouTube입니다. 아래 다중 서비스 화면은 이전 비교 자료입니다.</p>
+    <p>커버와 음악 정보의 구성은 유지하고, 연결한 서비스 표시와 도착 위치를 명확하게 보여줘요.</p>
+    <p class="sw-demo-label">연동 UI 데모 · API 계정 미연결 · 음악 재생 없음</p>
+    <div class="sw-service-controls"><div class="sw-service-tabs" role="group" aria-label="음악 서비스 선택"></div><label>상태 <select id="sw-service-state"><option value="ready">연결 완료 예시</option><option value="loading">불러오는 중</option><option value="auth">연결 필요</option><option value="unavailable">이용 불가</option></select></label></div>
+    <div class="sw-service-stage" aria-live="polite"></div><p class="sw-service-feedback" role="status"></p>
+  </section>
+  <h2>실제 플래터에서 보기</h2><p>음악은 앨범에서 추출한 색상, 메모는 14px 본문, 폴라로이드는 종이 여백을 사용합니다. 공통 Floating 음영은 바깥 표면에만 적용합니다.</p><div class="sw-contexts"></div><p class="sw-context-note">GIF와 기분은 별도 위젯입니다. 기분·방명록·플레이리스트는 새 구조로 제안합니다. 미디어는 기존 시안의 예시이며 GIF·영상은 정적 예시이며 음악은 눌러서 무음 모션을 확인할 수 있습니다. 실제 오디오 테스트는 위의 음악 플레이어에서 가능합니다.</p><h2>새로 정립한 위젯</h2><p>기분은 상태와 짧은 기록, 방명록은 친구의 메시지, 플레이리스트는 커버와 곡 목록에 집중합니다.</p><div class="sw-new-widgets"></div><h2>유형별 크기와 구성</h2>
+  <p>숫자는 <strong>가로 칸 × 세로 칸</strong>입니다. 화면 폭을 바꿔도 글자와 출처 영역은 일정한 크기를 유지합니다.</p>
+  <div class="sw-controls">
+    <label>위젯 종류 <select id="sw-family"></select></label>
+    <label>화면 폭 <input id="sw-viewport" type="range" min="320" max="620" step="1" value="402"><output id="sw-viewport-value" for="sw-viewport">402px</output></label>
+    <label><input id="sw-ditto" type="checkbox"> Ditto 출처 표시</label>
+  </div>
+  <div class="sw-artwork-controls"><strong>앨범에 맞춰 색상 바꾸기</strong><div class="sw-album-selector" role="group" aria-label="샘플 앨범 선택"></div><label>내 앨범 이미지 <input id="sw-album-upload" type="file" accept="image/*"></label><span id="sw-album-status" role="status"></span><label><input id="sw-long-text" type="checkbox"> 긴 질문·답변 보기</label></div>
+  <p id="sw-rule"></p><p id="sw-result" role="status" aria-live="polite"></p>
+  <div class="sw-gallery" aria-label="크기별 위젯 예시"></div>
+  <details class="mp-research"><summary>음악 배경과 서비스별 적용 기준</summary><p>앨범 선택에 따라 CD 커버와 본체 색이 함께 달라집니다. 사각 썸네일과 서비스 출처도 유지합니다.</p><ul><li><a href="https://developer.spotify.com/documentation/design" target="_blank" rel="noopener">Spotify</a>: 커버와 출처를 표시하고 Spotify 링크로 이동합니다.</li><li><a href="https://marketing.services.apple/apple-music-identity-guidelines" target="_blank" rel="noopener">Apple Music</a>: 앱 내 콘텐츠 링크는 서비스 아이콘과 전체 이름을 표시합니다. 마케팅용 공식 배지와 앱 내 출처 라벨은 구분합니다. 재생은 MusicKit 연결 후 제공합니다.</li><li><a href="https://developers.google.com/youtube/terms/developer-policies" target="_blank" rel="noopener">YouTube Music</a>: 공유된 음악 링크로 이동합니다. YouTube Data API 응답을 전용 음악 재생 API로 표시하거나 숨겨진 오디오 재생으로 연결하지 않습니다.</li></ul></details><h2>외부 서비스 배지</h2><p>높이 22px · 아이콘 14px · 글자 11px · 모서리 6px · 가장자리 여백 8px. 충분한 폭에서는 서비스명과 ↗를, 작은 카드에서는 아이콘과 ↗를 표시합니다. GIF는 파일 형식이므로 외부 이동 화살표와 구분합니다.</p><div class="sw-badge-examples"></div><div class="mp-service-badge-examples" aria-label="음악 서비스 외부 이동 표시"></div><p>음악 서비스는 22px 행 안에 서비스명과 ↗를 표시합니다. Spotify 아이콘은 최소 21px와 주변 11px 여백을 확보해요. 음악 재생형은 위젯을 눌러 재생·일시정지하고, 링크형은 위젯 전체를 눌러 서비스에서 엽니다. 링크형에는 재생 표시를 붙이지 않아요.</p><p>배지는 도착 위치를 알려주는 표시입니다. 별도 작은 버튼으로 만들지 않고 위젯 전체를 눌러 이동합니다. 사진·GIF의 Ditto 배지는 우측 상단, 글자가 있는 위젯의 Ditto 배지는 출처 영역 우측에 배치합니다. 사진·영상의 서비스 배지는 우측 하단에 배치하고, 음악의 출처는 곡명·아티스트 아래에 정렬해요.</p>
+  <h2>글자와 긴 콘텐츠</h2><p>본문 14px / 행간 20px, 제목 14px, 보조 정보 11px를 유지합니다. 질문은 120자, 답변은 500자까지 입력할 수 있으며 카드에서는 질문 최대 3줄·답변 최대 6줄까지만 보이고 나머지는 말줄임합니다. 실제 앱에서는 전체 내용을 상세 화면에서 보여주도록 설계합니다. 이 페이지는 말줄임을 확인하는 예시입니다.</p>
+  <h2>공통 사이즈 12종</h2>
+  <p>402px 화면 기준입니다. 가로 8칸, 좌우 여백 16px, 위젯 사이 간격 8px을 공유합니다. 아래 도형은 크기를 비교하기 위해 축소했습니다.</p>
+  <div class="sw-atlas"></div>
+  <h2>유형별 허용 크기</h2>
+  <p>작은 크기에서 읽기 어려운 유형은 허용 목록에서 제외했습니다. 비율을 억지로 늘리지 않고 내용 배치를 바꿉니다.</p>
+  <div style="overflow-x:auto" tabindex="0" role="region" aria-label="위젯 유형별 크기 표">
+    <table class="sw-matrix"><thead><tr><th scope="col">유형</th><th scope="col">가로 × 세로 칸</th><th scope="col">내용 배치</th></tr></thead><tbody></tbody></table>
+  </div>
+  <h2>Ditto로 가져온 위젯</h2>
+  <p>사진 위젯을 기준으로 4×4, 6×4, 4×6, 6×6, 6×8의 5개 크기를 정리했습니다. 위의 ‘Ditto 출처 표시’를 켜면 직접 비교할 수 있습니다.</p>
+  <div class="sw-notes">
+    <div><h3>출처는 하단에 고정</h3><p>높이 52px · 아바타 28px · 이름 13px · 출처 11px. 좁은 카드는 아이디와 출처를 두 줄로 나눕니다.</p></div>
+    <div><h3>아이콘은 하나의 원본</h3><p>디자인 시스템의 앱 아이콘 벡터를 사용합니다. 사진 위 배지는 32px이며, 기존 앱 아이콘과 얕은 내부 음영을 함께 유지합니다.</p></div>
+    <div><h3>배지와 액션을 구분</h3><p>출처 배지는 상태 표시입니다. 실제 Ditto 액션은 <a href="#ditto-action">로고와 문구가 있는 긴 버튼</a>을 3초간 눌러 실행합니다. 작은 배지에는 액션을 넣지 않습니다.</p></div>
+  </div>
+  <p class="desc">웹 예시와 Figma 위젯 가이드를 같은 구성으로 정리했어요. Figma 문구는 Pretendard 텍스트로 직접 수정할 수 있어요. 네이티브 앱의 허용 크기와 동작은 별도 구현 대상입니다.</p>
+  <p>참고: <a href="https://picocam.app/" target="_blank" rel="noopener">Picocam 즉석사진</a> · <a href="https://developer.apple.com/documentation/applemusicapi/artwork" target="_blank" rel="noopener">Apple Music 앨범 색상 정보</a></p>
+  <noscript>적용 예시를 보려면 JavaScript를 켜 주세요. 유형별 규격은 디자인 토큰 JSON에서도 확인할 수 있습니다.</noscript>
+</article>
+
+<footer class="docs-footer"><span>Splup · 디자인 가이드</span><a href="#roadmap">반영 상태 확인</a></footer>
+</main>
+
+<aside class="toc" id="toc">
+  <div class="toc-t">이 문서의 내용</div>
+  <ul id="tocList"></ul>
+</aside>
+</div>
+
+<script>
+  (function () {
+    var pages = ["widget-system", "profile-avatars", "profile-handles", "foundations", "components", "patterns", "resources", "overview", "colorgraphy", "color", "brand-graphics", "color-application", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "roadmap"];
+    var tocEl = document.getElementById("toc");
+    var tocList = document.getElementById("tocList");
+    var mobileToc = document.getElementById("mobileToc");
+    var mobileTocList = document.getElementById("mobileTocList");
+    var spyObs = null;
+
+    /* 전체 페이지 h2에 id 부여 + 검색 인덱스 구축 */
+    var searchIdx = [];
+    function indexPages() {
+    searchIdx = [];
+    pages.forEach(function (p) {
+      var art = document.getElementById("page-" + p);
+      if (!art) return;
+      var title = art.querySelector("h1").textContent;
+      searchIdx.push({ page: p, label: title, sub: "페이지", el: null });
+      art.querySelectorAll("h2").forEach(function (h, i) {
+        if (!h.id) {
+          var baseId = "h-" + p + "-" + i, candidate = baseId, suffix = 0;
+          while (document.getElementById(candidate)) candidate = baseId + "-" + (++suffix);
+          h.id = candidate;
+        }
+        searchIdx.push({ page: p, label: h.textContent, sub: title, el: h });
+      });
+    });
+
+    }
+    indexPages();
+
+    function buildToc(id) {
+      tocList.innerHTML = "";
+      mobileTocList.innerHTML = "";
+      mobileToc.open = false;
+      var art = document.getElementById("page-" + id);
+      var hs = art.querySelectorAll("h2");
+      hs.forEach(function (h) {
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.textContent = h.textContent;
+        a.href = "#" + h.id;
+        li.appendChild(a);
+        tocList.appendChild(li);
+        mobileTocList.appendChild(li.cloneNode(true));
+      });
+      tocEl.style.visibility = hs.length && id !== "overview" ? "visible" : "hidden";
+      mobileToc.hidden = !hs.length || id === "overview";
+      if (spyObs) spyObs.disconnect();
+      var links = [].slice.call(tocList.querySelectorAll("a"));
+      var arr = [].slice.call(hs);
+      spyObs = new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (en.isIntersecting) {
+            var i = arr.indexOf(en.target);
+            if (i > -1) links.forEach(function (l, j) { l.classList.toggle("active", j === i); });
+          }
+        });
+      }, { rootMargin: "-60px 0px -72% 0px" });
+      arr.forEach(function (h) { spyObs.observe(h); });
+    }
+
+    /* notebook 구조: 헤더 내비 = 섹션, 사이드바 = 활성 섹션의 트리만 */
+    var GROUP = {
+      "profile-avatars": "colorgraphy", "profile-handles": "components", overview: "start", roadmap: "migration", foundations: "foundations", components: "components", patterns: "brand", resources: "reference", colorgraphy: "colorgraphy",
+      color: "colorgraphy", "brand-graphics": "colorgraphy", "color-application": "colorgraphy", "ditto-action": "components", typography: "foundations", spacing: "foundations",
+      radius: "foundations", motion: "foundations", interaction: "foundations",
+      zindex: "foundations", darkmode: "foundations", grid: "brand",
+      buttons: "components", "widget-system": "components",
+      voice: "brand", writing: "brand", assets: "reference",
+      mapping: "reference", audit: "migration", backlog: "migration",
+      tokens: "reference"
+    };
+    var GROUP_HOME = { start: "overview", colorgraphy: "colorgraphy", foundations: "foundations", components: "components", brand: "patterns", reference: "resources", migration: "roadmap" };
+    var GROUP_NAME = { colorgraphy: "컬러", foundations: "기본 규칙", components: "컴포넌트", brand: "적용 방법", reference: "자료", migration: "변경 기록" };
+    pages.forEach(function (id) {
+      var group = GROUP[id], home = GROUP_HOME[group];
+      if (!home || id === home) return;
+      var art = document.getElementById("page-" + id);
+      if (!art) return;
+      var back = document.createElement("a");
+      back.className = "docs-back"; back.href = "#" + home;
+      back.textContent = "← " + GROUP_NAME[group];
+      var oldCrumb = art.querySelector(":scope > .crumb");
+      if (oldCrumb) oldCrumb.replaceWith(back); else art.insertBefore(back, art.firstChild);
+    });
+    function show(id, focusHeading) {
+      var requested = document.getElementById(id);
+      var owner = requested && requested.closest("article.page");
+      var targetHeading = owner && requested !== owner ? requested : null;
+      if (owner) id = owner.id.slice(5);
+      if (targetHeading) {
+        var ancestor = targetHeading.parentElement;
+        while (ancestor && ancestor !== owner) {
+          if (ancestor.tagName === "DETAILS") ancestor.open = true;
+          ancestor = ancestor.parentElement;
+        }
+      }
+      var dittoAlias = id === "ditto-action";
+      var multiPaletteAlias = id === "multi-palette";
+      var colorAnchor = ["color-overview", "color-roles", "color-palette"].indexOf(id) !== -1 ? id : null;
+      if (colorAnchor) id = "color";
+      if (dittoAlias) id = "color-application";
+      if (multiPaletteAlias) id = "brand-graphics";
+      if (pages.indexOf(id) === -1) id = "overview";
+      pages.forEach(function (p) {
+        var el = document.getElementById("page-" + p);
+        if (el) el.hidden = (p !== id);
+      });
+      document.querySelectorAll("[data-nav]").forEach(function (a) {
+        a.classList.toggle("active", a.getAttribute("data-nav") === id); if(a.getAttribute("data-nav") === id) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+      });
+      var g = GROUP[id];
+      document.querySelectorAll("#topNav a").forEach(function (a) {
+        a.classList.toggle("active", a.getAttribute("data-group") === g);
+        if (a.getAttribute("data-group") === g) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+      });
+      buildToc(id);
+      document.querySelector(".shell").dataset.page = id;
+      document.title = document.getElementById("page-" + id).querySelector("h1").textContent + " · Splup 디자인 가이드";
+      if (focusHeading) {
+        var focusTarget = targetHeading || document.getElementById("page-" + id).querySelector("h1");
+        focusTarget.setAttribute("tabindex", "-1");
+        focusTarget.focus({ preventScroll: true });
+      }
+      window.scrollTo(0, 0);
+      if (targetHeading) requestAnimationFrame(function () { targetHeading.scrollIntoView({ block: "start", behavior: "auto" }); });
+      if (colorAnchor) requestAnimationFrame(function () { document.getElementById(colorAnchor)?.scrollIntoView({ block: "start" }); });
+      if (dittoAlias) requestAnimationFrame(function () { document.getElementById("ditto-long-press")?.scrollIntoView({ block: "start" }); });
+      if (multiPaletteAlias) requestAnimationFrame(function () { document.getElementById("multi-palette")?.scrollIntoView({ block: "start" }); });
+    }
+    window.addEventListener("hashchange", function () { show(location.hash.slice(1), true); });
+    window.addEventListener("splup:guide-ready", function () { indexPages(); show(location.hash.slice(1)); });
+
+    /* ── 검색 (⌘K) ── */
+    var input = document.getElementById("searchInput");
+    var pop = document.getElementById("searchPop");
+    function closeSearch() {
+      pop.hidden = true;
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-activedescendant");
+    }
+    function goTo(item) {
+      closeSearch(); input.value = ""; input.blur();
+      var destination = item.el ? item.el.id : item.page;
+      if (location.hash.slice(1) !== destination) location.hash = destination;
+      else show(destination, true);
+    }
+    function selectResult(position) {
+      var items = Array.from(pop.querySelectorAll(".s-item"));
+      if (!items.length) return;
+      var selected = (position + items.length) % items.length;
+      items.forEach(function (item, i) {
+        item.classList.toggle("on", selected === i);
+        item.setAttribute("aria-selected", selected === i ? "true" : "false");
+      });
+      input.setAttribute("aria-activedescendant", items[selected].id);
+      items[selected].scrollIntoView({ block: "nearest", behavior: "auto" });
+    }
+    function renderPop(q) {
+      var ql = q.trim().toLowerCase();
+      if (!ql) { closeSearch(); return; }
+      var hits = searchIdx.filter(function (it) {
+        return it.label.toLowerCase().indexOf(ql) > -1 || it.sub.toLowerCase().indexOf(ql) > -1;
+      }).slice(0, 10);
+      pop.innerHTML = "";
+      if (!hits.length) {
+        var n = document.createElement("div");
+        n.className = "s-none"; n.textContent = "결과가 없어요 — 다른 말로 찾아보세요.";
+        pop.appendChild(n);
+      } else {
+        hits.forEach(function (it, i) {
+          var d = document.createElement("a");
+          d.className = "s-item" + (i === 0 ? " on" : "");
+          d.href = "#" + (it.el ? it.el.id : it.page);
+          d.id = "search-result-" + i;
+          d.setAttribute("role", "option");
+          d.setAttribute("aria-selected", i === 0 ? "true" : "false");
+          d.tabIndex = -1;
+          d.innerHTML = "<b></b><span></span>";
+          d.querySelector("b").textContent = it.label;
+          d.querySelector("span").textContent = it.sub;
+          d.addEventListener("click", function (ev) { ev.preventDefault(); goTo(it); });
+          pop.appendChild(d);
+        });
+      }
+      pop.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      if (hits.length) selectResult(0); else input.removeAttribute("aria-activedescendant");
+    }
+    input.addEventListener("input", function () { renderPop(input.value); });
+    input.addEventListener("focus", function () { if (input.value.trim()) renderPop(input.value); });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeSearch(); input.blur(); }
+      if ((e.key === "ArrowDown" || e.key === "ArrowUp") && !pop.hidden) {
+        e.preventDefault();
+        var results = Array.from(pop.querySelectorAll(".s-item"));
+        var current = results.findIndex(function (item) { return item.classList.contains("on"); });
+        selectResult(current + (e.key === "ArrowDown" ? 1 : -1));
+      }
+      if (e.key === "Tab") closeSearch();
+      if (e.key === "Enter") {
+        var selected = pop.querySelector(".s-item.on");
+        if (selected && !pop.hidden) { e.preventDefault(); selected.click(); }
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); input.focus(); }
+    });
+    document.addEventListener("click", function (e) {
+      if (!pop.hidden && !pop.contains(e.target) && e.target !== input) closeSearch();
+    });
+
+    show(location.hash.slice(1));
+  })();
+</script>
+
+<script>
+  /* ── Platter Grid 시뮬레이터 — GridEngine 규칙 재현 ──
+     셀: (W − 16×2 − 8×7) ÷ 8 · UNIT = CELL+8 · 8×16 · 캡 10
+     findFree(행 우선) · trySwap(동일 크기 단일 충돌) · 방향 푸시(연쇄 ≤3) · 원래 위치로 복귀 */
+  (function () {
+    var COLS = 8, ROWS = 16, GUT = 8, MARGIN = 16, CAP = 10, MAXDEPTH = 3;
+    var board = document.getElementById("simBoard");
+    if (!board) return;
+    var status = document.getElementById("simStatus");
+    var countEl = document.getElementById("simCount");
+    var slider = document.getElementById("simW");
+    var sliderV = document.getElementById("simWv");
+    var W = 390, CELL = 0, UNIT = 0;
+    var widgets = [];   // {id,x,y,w,h,color,el}
+    var seq = 0;
+    var palette = ["#AA4AF4","#FF5488","#48B5F4","#07E7B4","#FF925D","#6A99F6","#FF2CBF","#6655D2","#27E5F2","#8C2BD6"];
+
+    function radiusFor(w, h) { return Math.min(20, 12 + (Math.min(w, h) - 2) * 2); }
+    function sizePx(n) { return CELL * n + GUT * (n - 1); }
+    function posPx(c) { return MARGIN + c * UNIT; }
+    function overlaps(a, b) { return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h; }
+    function inBounds(r) { return r.x >= 0 && r.y >= 0 && r.x + r.w <= COLS && r.y + r.h <= ROWS; }
+    function say(msg) { status.textContent = msg; }
+
+    function layout() {
+      W = +slider.value; sliderV.textContent = W;
+      CELL = (W - MARGIN * 2 - GUT * (COLS - 1)) / COLS;
+      UNIT = CELL + GUT;
+      board.style.width = W + "px";
+      board.style.height = (MARGIN * 2 + CELL * ROWS + GUT * (ROWS - 1)) + "px";
+      board.querySelectorAll(".gcell").forEach(function (n) { n.remove(); });
+      for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++) {
+        var d = document.createElement("div");
+        d.className = "gcell";
+        d.style.left = posPx(c) + "px"; d.style.top = posPx(r) + "px";
+        d.style.width = CELL + "px"; d.style.height = CELL + "px";
+        board.appendChild(d);
+      }
+      widgets.forEach(render);
+    }
+    function render(wg) {
+      var el = wg.el;
+      el.style.left = posPx(wg.x) + "px";
+      el.style.top = posPx(wg.y) + "px";
+      el.style.width = sizePx(wg.w) + "px";
+      el.style.height = sizePx(wg.h) + "px";
+      el.style.borderRadius = radiusFor(wg.w, wg.h) + "px";
+      wg.lab.textContent = wg.w + "×" + wg.h;
+    }
+    function fits(wg, w, h, x, y) {
+      var rect = { x: x !== undefined ? x : wg.x, y: y !== undefined ? y : wg.y, w: w, h: h };
+      if (!inBounds(rect)) return false;
+      return !widgets.some(function (o) { return o.id !== wg.id && overlaps(rect, o); });
+    }
+    function findFree(w, h, skipId) {
+      for (var y = 0; y <= ROWS - h; y++) for (var x = 0; x <= COLS - w; x++) {
+        var rect = { x: x, y: y, w: w, h: h };
+        var hit = widgets.some(function (o) { return o.id !== skipId && overlaps(rect, o); });
+        if (!hit) return { x: x, y: y };
+      }
+      return null;
+    }
+    function updateCount() { countEl.textContent = widgets.length + "/" + CAP; }
+
+    function addWidget(w, h) {
+      if (widgets.length >= CAP) { say("플래터당 위젯은 10개까지예요 (디토 위젯 제외 카운트) — 앱에서는 안내 시트가 떠요."); return; }
+      var spot = findFree(w, h, -1);
+      if (!spot) { say("빈 자리가 없어요 — findFree(행 우선 스캔)가 슬롯을 찾지 못했습니다."); return; }
+      var wg = { id: seq++, x: spot.x, y: spot.y, w: w, h: h, color: palette[seq % palette.length] };
+      var el = document.createElement("div");
+      el.className = "widget";
+      el.style.background = wg.color;
+      var lab = document.createElement("span");
+      lab.className = "wlab";
+      el.appendChild(lab);
+      wg.el = el; wg.lab = lab;
+      board.appendChild(el);
+      widgets.push(wg);
+      render(wg); updateCount();
+      say("findFree — 행 우선 첫 빈 슬롯 (" + spot.x + ", " + spot.y + ")에 착지. 라운드 " + radiusFor(w, h) + " (크기 비례 공식).");
+      attachDrag(wg);
+      attachResize(wg);
+    }
+
+    /* 리사이즈 — 우하단 핸들 드래그. 2×2 ~ 6×8 클램프 + 러버밴드(막히면 가능한 최대 크기까지만) */
+    function attachResize(wg) {
+      var handle = document.createElement("div");
+      handle.className = "rsz";
+      wg.el.appendChild(handle);
+      var sx = 0, sy = 0, sw = 0, sh = 0, active = false;
+      handle.addEventListener("pointerdown", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        handle.setPointerCapture(e.pointerId);
+        active = true;
+        sx = e.clientX; sy = e.clientY; sw = wg.w; sh = wg.h;
+        wg.el.classList.add("rszing");
+      });
+      handle.addEventListener("pointermove", function (e) {
+        if (!active) return;
+        var cw = Math.round(sw + (e.clientX - sx) / UNIT);
+        var ch = Math.round(sh + (e.clientY - sy) / UNIT);
+        cw = Math.max(2, Math.min(6, cw));   // 폭 2~6단
+        ch = Math.max(2, Math.min(8, ch));   // 높이 2~8단
+        // 러버밴드: 목표 크기가 막히면 충돌/경계 직전의 최대 크기로 클램프
+        var w = cw, h = ch;
+        while (!fits(wg, w, h)) {
+          if (w > wg.w && (w - wg.w) >= (h - wg.h)) w--;
+          else if (h > wg.h) h--;
+          else if (w > 2) w--;
+          else if (h > 2) h--;
+          else break;
+        }
+        if (w !== wg.w || h !== wg.h) { wg.w = w; wg.h = h; render(wg); }
+      });
+      function end() {
+        if (!active) return;
+        active = false;
+        wg.el.classList.remove("rszing");
+        say("리사이즈 — " + wg.w + "×" + wg.h + " · 라운드 " + radiusFor(wg.w, wg.h) + " (크기 비례). 막히면 러버밴드 클램프.");
+      }
+      handle.addEventListener("pointerup", end);
+      handle.addEventListener("pointercancel", end);
+    }
+
+    /* 방향 우선 푸시 — 연쇄 깊이 ≤3, 전부 성공해야 커밋 */
+    function tryPush(moved, nx, ny, dir) {
+      var pos = {};
+      widgets.forEach(function (o) { pos[o.id] = { x: o.x, y: o.y }; });
+      function attempt(id, x, y, depth) {
+        if (depth > MAXDEPTH) return false;
+        var self = widgets.find(function (o) { return o.id === id; });
+        var rect = { x: x, y: y, w: self.w, h: self.h };
+        if (!inBounds(rect)) return false;
+        pos[id] = { x: x, y: y };
+        var colliders = widgets.filter(function (o) {
+          if (o.id === id) return false;
+          var r = { x: pos[o.id].x, y: pos[o.id].y, w: o.w, h: o.h };
+          return overlaps(rect, r);
+        });
+        for (var i = 0; i < colliders.length; i++) {
+          var c = colliders[i], cp = pos[c.id], tx = cp.x, ty = cp.y;
+          if (dir.dx > 0) tx = x + self.w;
+          else if (dir.dx < 0) tx = x - c.w;
+          else if (dir.dy > 0) ty = y + self.h;
+          else ty = y - c.h;
+          if (!attempt(c.id, tx, ty, depth + 1)) return false;
+        }
+        return true;
+      }
+      if (!attempt(moved.id, nx, ny, 0)) return false;
+      var chain = 0;
+      widgets.forEach(function (o) {
+        if (o.id !== moved.id && (o.x !== pos[o.id].x || o.y !== pos[o.id].y)) chain++;
+        o.x = pos[o.id].x; o.y = pos[o.id].y; render(o);
+      });
+      return chain;
+    }
+
+    function attachDrag(wg) {
+      var el = wg.el, sx = 0, sy = 0, ox = 0, oy = 0;
+      el.addEventListener("pointerdown", function (e) {
+        e.preventDefault();
+        el.setPointerCapture(e.pointerId);
+        el.classList.add("drag");
+        sx = e.clientX; sy = e.clientY;
+        ox = posPx(wg.x); oy = posPx(wg.y);
+      });
+      el.addEventListener("pointermove", function (e) {
+        if (!el.classList.contains("drag")) return;
+        el.style.left = (ox + e.clientX - sx) + "px";
+        el.style.top = (oy + e.clientY - sy) + "px";
+      });
+      el.addEventListener("pointerup", function (e) {
+        if (!el.classList.contains("drag")) return;
+        el.classList.remove("drag");
+        var dxp = e.clientX - sx, dyp = e.clientY - sy;
+        var nx = Math.round((ox + dxp - MARGIN) / UNIT);
+        var ny = Math.round((oy + dyp - MARGIN) / UNIT);
+        nx = Math.max(0, Math.min(COLS - wg.w, nx));
+        ny = Math.max(0, Math.min(ROWS - wg.h, ny));
+        if (nx === wg.x && ny === wg.y) { render(wg); say("제자리 — 이동 없음."); return; }
+        var rect = { x: nx, y: ny, w: wg.w, h: wg.h };
+        var colliders = widgets.filter(function (o) { return o.id !== wg.id && overlaps(rect, o); });
+        if (colliders.length === 0) {
+          wg.x = nx; wg.y = ny; render(wg);
+          say("빈 슬롯 착지 (" + nx + ", " + ny + ").");
+          return;
+        }
+        /* trySwap — 동일 크기 단일 충돌은 자리 교환 */
+        if (colliders.length === 1 && colliders[0].w === wg.w && colliders[0].h === wg.h) {
+          var o = colliders[0];
+          if (nx === o.x && ny === o.y) {
+            o.x = wg.x; o.y = wg.y; wg.x = nx; wg.y = ny;
+            render(o); render(wg);
+            say("trySwap — 동일 크기(" + wg.w + "×" + wg.h + ") 단일 충돌 → 자리 교환.");
+            return;
+          }
+        }
+        /* resolve — 드래그 방향 우선 푸시 */
+        var dir = Math.abs(dxp) >= Math.abs(dyp)
+          ? { dx: dxp > 0 ? 1 : -1, dy: 0 }
+          : { dx: 0, dy: dyp > 0 ? 1 : -1 };
+        var chain = tryPush(wg, nx, ny, dir);
+        if (chain === false) {
+          render(wg);
+          say("원래 위치로 복귀 — 푸시 실패 (경계 밖 또는 연쇄 깊이 3 초과).");
+        } else {
+          say("resolve — " + (dir.dx ? (dir.dx > 0 ? "→" : "←") : (dir.dy > 0 ? "↓" : "↑")) + " 방향 푸시, 연쇄 " + chain + "개 이동.");
+        }
+      });
+      el.addEventListener("pointercancel", function () { el.classList.remove("drag"); render(wg); });
+    }
+
+    document.querySelectorAll("[data-add]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var p = b.getAttribute("data-add").split(",");
+        addWidget(+p[0], +p[1]);
+      });
+    });
+    document.getElementById("simReset").addEventListener("click", function () {
+      widgets.forEach(function (o) { o.el.remove(); });
+      widgets = []; updateCount();
+      say("초기화 — 빈 플래터.");
+    });
+    slider.addEventListener("input", layout);
+
+    layout(); updateCount();
+    addWidget(4, 4); addWidget(6, 2); addWidget(2, 2);
+  })();
+</script>
+
+<script src="color-system-tokens.js"></script>
+<script src="color-system.js"></script>
+<script src="colorgraphy-tokens.js"></script>
+<script src="colorgraphy-model.js"></script>
+<script src="colorgraphy.js"></script>
+<script src="multi-palette-tokens.js"></script>
+<script src="multi-palettes.js"></script>
+<script src="ditto-hold.js"></script>
+
+<script src="visual-docs.js"></script>
+
+<script src="profile-handle-recipes.js"></script>
+<script src="profile-avatar-recipes.js"></script>
+<script src="profile-avatars.js"></script>
+<script src="profile-handles.js"></script>
+<script src="profile-colors.js"></script>
+<script src="detail-color-tokens.js"></script>
+<script src="detail-color-model.js"></script>
+<script src="detail-colors.js"></script>
+
+<script src="widget-system-tokens.js"></script>
+<script src="widget-content.js"></script>
+<script src="music-player-model.js"></script>
+<script src="music-player.js"></script><script src="music-player-expanded.js"></script>
+<script src="widget-renderer.js"></script>
+<script src="music-album-cases.js"></script>
+<script src="music-service-adapters.js"></script>
+<script src="music-api-fixtures.js"></script>
+<script src="music-cases.js"></script>
+<script src="music-player-demo.js"></script>
+<script src="widget-system.js"></script>
+
+<script src="docs-chrome.js"></script>
+<script>window.dispatchEvent(new Event("splup:guide-ready"));</script>
+</body>
+</html>

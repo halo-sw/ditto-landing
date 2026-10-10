@@ -1,0 +1,12 @@
+{
+  "source": "Figma image fills, original bytes copied without re-encoding",
+  "fileKey": "XG8Cm5nLScPoNc9NAXX1DD",
+  "referenceNodeId": "983:129072",
+  "retrievedAt": "2026-09-27",
+  "purpose": "Local Ditto design-system examples; not a global default profile or content asset",
+  "assets": [
+    { "file": "reference-photo.jpg", "nodeId": "983:129073", "sha1": "795c49287cbc13d0ac0228460ba816ef57521336", "bytes": 517920, "width": 2048, "height": 1152, "role": "reference-content" },
+    { "file": "source-avatar.jpg", "nodeId": "983:129075", "sha1": "e25896f83f79ca5585fe0c304546206933d64c0d", "bytes": 76683, "width": 736, "height": 920, "role": "sample-source-profile" },
+    { "file": "ditto-badge.png", "nodeId": "983:129077", "sha1": "870b580b5ff15bf627a9d019b4ac474d6101aa6c", "bytes": 299099, "width": 724, "height": 724, "role": "ditto-provenance-logo" }
+  ]
+}

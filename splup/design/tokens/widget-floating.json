@@ -1,0 +1,48 @@
+{
+  "name": "Ditto/Widget/Floating",
+  "version": "1.0.0",
+  "status": "design-proposal-implemented",
+  "scope": "Shared outer elevation for platter widgets; preserve content, radius, glass material and layout slots",
+  "units": "Figma canvas units / CSS px at 1x; validate native pt mapping on device",
+  "shadowColor": "#2C2F3A",
+  "effects": {
+    "pressed": {"name": "Ditto/Widget/Floating/00 · 누르는 중", "shadows": [{"y": 1, "blur": 2, "alpha": 0.06}, {"y": 1, "blur": 4, "alpha": 0.04}]},
+    "rest": {"name": "Ditto/Widget/Floating/01 · 기본", "shadows": [{"y": 2, "blur": 4, "alpha": 0.08}, {"y": 5, "blur": 14, "alpha": 0.07}]},
+    "selected": {"name": "Ditto/Widget/Floating/02 · 편집 선택", "shadows": [{"y": 3, "blur": 6, "alpha": 0.08}, {"y": 8, "blur": 20, "alpha": 0.09}]},
+    "lifted": {"name": "Ditto/Widget/Floating/03 · 집기·이동", "shadows": [{"y": 6, "blur": 12, "alpha": 0.10}, {"y": 16, "blur": 32, "alpha": 0.14}]}
+  },
+  "motion": {
+    "pressMs": 90,
+    "holdBrowseMs": 500,
+    "holdEditingMs": 180,
+    "scrollCancelDistance": 10,
+    "pressScale": 0.992,
+    "liftScale": 1.025,
+    "liftY": -6,
+    "liftMs": 160,
+    "dropMs": 220,
+    "cancelMs": 180,
+    "ease": [0.22, 1, 0.36, 1],
+    "idleAnimation": false,
+    "dragRotation": 0,
+    "dragFollowsPointer": "1:1; preserve grab offset; no lag easing",
+    "stableLayoutSlot": true,
+    "reducedMotion": "No scale, lift translation or settling animation; immediate elevation/selection feedback; direct drag remains"
+  },
+  "selection": {"color": "#8A3AB9", "width": 2, "offset": 2, "doesNotReplaceFocusRing": true},
+  "states": {
+    "rest": {"effect": "rest", "scale": 1, "y": 0},
+    "pressed": {"effect": "pressed", "scale": 0.992, "y": 0},
+    "lifted": {"effect": "lifted", "scale": 1.025, "y": -6},
+    "dragging": {"effect": "lifted", "scale": 1.025, "y": -6},
+    "selected": {"effect": "selected", "scale": 1, "y": 0},
+    "settled": {"effect": "selected", "scale": 1, "y": 0}
+  },
+  "ownership": "Only movable widgets on own editable platter can lift. Other users' platter and fixed navigation controls never enter drag/edit from this wrapper.",
+  "cancelOn": ["pre-hold movement > 10", "scroll before hold", "pointercancel", "touchcancel", "multi-touch", "Escape", "blur", "page-hidden"],
+  "placement": "Preview a target placeholder without changing layout; commit a valid drop only, otherwise restore original position. Preserve existing grid collision rules and undo.",
+  "application": ["Outer wrapper: elevation, z-order, selected outline", "Inner clipped content: original radius and material, unchanged", "Do not overwrite inner glass or Ditto button effects", "Reserve room for shadows without changing grid gap or hit area", "During drag, raise only active widget above peers and below system overlays", "Do not darken all other widgets or wiggle every item"],
+  "pending": ["Native app integration and device performance/haptics", "Dark-background and high-contrast material validation", "Figma live prototype playback verification"],
+  "sync": {"figma": "local-assets-synced; prototype connections verified, playback pending", "webPreview": "verified", "nativeApp": "pending", "libraryPublication": "not-published"},
+  "figma": {"fileKey": "XG8Cm5nLScPoNc9NAXX1DD", "pageId": "671:2", "sectionId": "1011:699", "componentSetId": "1015:818", "ledger": "output/ditto-widget-floating-2026-09-28/foundations.json"}
+}

@@ -1,0 +1,467 @@
+{
+  "version": "2026-10-02-unified",
+  "status": "design-system-and-figma-ready; native-app-integration-pending",
+  "description": "핸들 팔레트의 대표 top/bottom 및 라이프 background 3색을 그대로 공유하는 라운드 사각형 새틴 아바타. 독립 보정색을 사용하지 않음.",
+  "source": "component.profileHandle.palettes",
+  "selection": "explicit-user-choice; no-random-assignment",
+  "recommendedDefaultId": "purple-pink",
+  "geometry": {
+    "slotSize": 48,
+    "shape": "rounded-square",
+    "radius": 12,
+    "radiusRatio": 0.25,
+    "borderWidth": 0,
+    "squareExportSize": 1024,
+    "roundedExportSize": 512,
+    "resize": "width-and-height-independent; gradient covers entire bounds"
+  },
+  "material": {
+    "type": "soft-satin",
+    "noiseOpacity": 0,
+    "strokeWidth": 0,
+    "lightDirection": "upper-left",
+    "whiteBloomOpacity": 0.13,
+    "animation": "none",
+    "blurInAsset": false,
+    "figmaRendering": "editable-native-normalized-gradient-fills",
+    "rendering": "five-normalized-radial-fields-identical-in-svg-and-figma",
+    "fields": [
+      {
+        "id": "foundation",
+        "cx": 0.4,
+        "cy": 0.24,
+        "rx": 0.86,
+        "ry": 0.86,
+        "angle": 0,
+        "opacity": 1,
+        "stops": [
+          [
+            "light",
+            0,
+            1
+          ],
+          [
+            "base",
+            0.53,
+            1
+          ],
+          [
+            "shade",
+            1,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "color",
+        "cx": 0.75,
+        "cy": 0.785,
+        "rx": 0.582,
+        "ry": 0.484,
+        "angle": -22,
+        "opacity": 1,
+        "stops": [
+          [
+            "accent",
+            0,
+            1
+          ],
+          [
+            "accent",
+            0.48,
+            0.9
+          ],
+          [
+            "accent",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "depth",
+        "cx": 0.148,
+        "cy": 0.75,
+        "rx": 0.445,
+        "ry": 0.559,
+        "angle": -32,
+        "opacity": 0.64,
+        "stops": [
+          [
+            "shade",
+            0,
+            1
+          ],
+          [
+            "shade",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "silk",
+        "cx": 0.38,
+        "cy": 0.1,
+        "rx": 0.78,
+        "ry": 0.46,
+        "angle": -15,
+        "opacity": 0.3,
+        "stops": [
+          [
+            "light",
+            0,
+            1
+          ],
+          [
+            "light",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "id": "reflection",
+        "cx": 0.26,
+        "cy": 0.16,
+        "rx": 0.7,
+        "ry": 0.7,
+        "angle": 0,
+        "opacity": 0.13,
+        "stops": [
+          [
+            "white",
+            0,
+            1
+          ],
+          [
+            "white",
+            0.65,
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  "fallback": {
+    "backgroundToken": "Splup/Profile/Semantic/avatar/background",
+    "background": "#F1F2F4",
+    "darkBackground": "#F1F2F4",
+    "fallbackIconNode": "573:16607",
+    "fallbackTint": "#8B9099",
+    "iconSize": 24
+  },
+  "palettes": [
+    {
+      "id": "purple-pink",
+      "number": "01",
+      "name": "퍼플 · 핑크",
+      "handlePaletteId": "purple-pink",
+      "sourceColors": [
+        "#AA4AF4",
+        "#6655D2",
+        "#FA97E2"
+      ],
+      "surface": {
+        "base": "#B66BEC",
+        "light": "#C792ED",
+        "shade": "#9270D9",
+        "accent": "#C792ED"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/purple-pink.svg",
+        "png": "design/brand/color-system/profile-avatars/purple-pink.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/purple-pink-rounded.png"
+      },
+      "figmaComponentId": "1125:1651",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/purple-pink/representative.top",
+        "light": "component.profileHandle.palettes/purple-pink/life.background",
+        "shade": "component.profileHandle.palettes/purple-pink/representative.bottom",
+        "accent": "component.profileHandle.palettes/purple-pink/life.background"
+      }
+    },
+    {
+      "id": "deep-purple",
+      "number": "02",
+      "name": "딥 퍼플 · 바이올렛",
+      "handlePaletteId": "deep-purple",
+      "sourceColors": [
+        "#6655D2",
+        "#7841C4",
+        "#AA4AF4"
+      ],
+      "surface": {
+        "base": "#9580DE",
+        "light": "#AE99E6",
+        "shade": "#8D73CE",
+        "accent": "#AE99E6"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/deep-purple.svg",
+        "png": "design/brand/color-system/profile-avatars/deep-purple.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/deep-purple-rounded.png"
+      },
+      "figmaComponentId": "1125:1652",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/deep-purple/representative.top",
+        "light": "component.profileHandle.palettes/deep-purple/life.background",
+        "shade": "component.profileHandle.palettes/deep-purple/representative.bottom",
+        "accent": "component.profileHandle.palettes/deep-purple/life.background"
+      }
+    },
+    {
+      "id": "pink-coral",
+      "number": "03",
+      "name": "핑크 · 코랄",
+      "handlePaletteId": "pink-coral",
+      "sourceColors": [
+        "#FA97E2",
+        "#FF2CBF",
+        "#FF5488"
+      ],
+      "surface": {
+        "base": "#FA91D9",
+        "light": "#F5A5D8",
+        "shade": "#F064B3",
+        "accent": "#F5A5D8"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/pink-coral.svg",
+        "png": "design/brand/color-system/profile-avatars/pink-coral.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/pink-coral-rounded.png"
+      },
+      "figmaComponentId": "1125:1653",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/pink-coral/representative.top",
+        "light": "component.profileHandle.palettes/pink-coral/life.background",
+        "shade": "component.profileHandle.palettes/pink-coral/representative.bottom",
+        "accent": "component.profileHandle.palettes/pink-coral/life.background"
+      }
+    },
+    {
+      "id": "peach-yellow",
+      "number": "04",
+      "name": "피치 · 옐로",
+      "handlePaletteId": "peach-yellow",
+      "sourceColors": [
+        "#FF925D",
+        "#F9F871",
+        "#FA97E2"
+      ],
+      "surface": {
+        "base": "#FFA36F",
+        "light": "#FFBC87",
+        "shade": "#F68A50",
+        "accent": "#FFBC87"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/peach-yellow.svg",
+        "png": "design/brand/color-system/profile-avatars/peach-yellow.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/peach-yellow-rounded.png"
+      },
+      "figmaComponentId": "1125:1654",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/peach-yellow/representative.top",
+        "light": "component.profileHandle.palettes/peach-yellow/life.background",
+        "shade": "component.profileHandle.palettes/peach-yellow/representative.bottom",
+        "accent": "component.profileHandle.palettes/peach-yellow/life.background"
+      }
+    },
+    {
+      "id": "cyan-blue",
+      "number": "05",
+      "name": "시안 · 블루",
+      "handlePaletteId": "cyan-blue",
+      "sourceColors": [
+        "#48B5F4",
+        "#27E5F2",
+        "#398FE8"
+      ],
+      "surface": {
+        "base": "#62C3F1",
+        "light": "#89CDEE",
+        "shade": "#369FD9",
+        "accent": "#89CDEE"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/cyan-blue.svg",
+        "png": "design/brand/color-system/profile-avatars/cyan-blue.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/cyan-blue-rounded.png"
+      },
+      "figmaComponentId": "1125:1655",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/cyan-blue/representative.top",
+        "light": "component.profileHandle.palettes/cyan-blue/life.background",
+        "shade": "component.profileHandle.palettes/cyan-blue/representative.bottom",
+        "accent": "component.profileHandle.palettes/cyan-blue/life.background"
+      }
+    },
+    {
+      "id": "mint-lime",
+      "number": "06",
+      "name": "민트 · 라임",
+      "handlePaletteId": "mint-lime",
+      "sourceColors": [
+        "#07E7B4",
+        "#F9F871",
+        "#39B9CC"
+      ],
+      "surface": {
+        "base": "#38DBB1",
+        "light": "#6BDDC2",
+        "shade": "#09BA97",
+        "accent": "#6BDDC2"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/mint-lime.svg",
+        "png": "design/brand/color-system/profile-avatars/mint-lime.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/mint-lime-rounded.png"
+      },
+      "figmaComponentId": "1125:1656",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/mint-lime/representative.top",
+        "light": "component.profileHandle.palettes/mint-lime/life.background",
+        "shade": "component.profileHandle.palettes/mint-lime/representative.bottom",
+        "accent": "component.profileHandle.palettes/mint-lime/life.background"
+      }
+    },
+    {
+      "id": "coral-red",
+      "number": "07",
+      "name": "코랄 · 레드",
+      "handlePaletteId": "coral-red",
+      "sourceColors": [
+        "#FF5488",
+        "#FF925D",
+        "#FA97E2"
+      ],
+      "surface": {
+        "base": "#F77983",
+        "light": "#F39CA8",
+        "shade": "#E9576F",
+        "accent": "#F39CA8"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/coral-red.svg",
+        "png": "design/brand/color-system/profile-avatars/coral-red.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/coral-red-rounded.png"
+      },
+      "figmaComponentId": "1125:1657",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/coral-red/representative.top",
+        "light": "component.profileHandle.palettes/coral-red/life.background",
+        "shade": "component.profileHandle.palettes/coral-red/representative.bottom",
+        "accent": "component.profileHandle.palettes/coral-red/life.background"
+      }
+    },
+    {
+      "id": "gold-yellow",
+      "number": "08",
+      "name": "골드 · 옐로",
+      "handlePaletteId": "gold-yellow",
+      "sourceColors": [
+        "#F9F871",
+        "#FF925D",
+        "#F4D76C"
+      ],
+      "surface": {
+        "base": "#F4D76C",
+        "light": "#EDDA94",
+        "shade": "#DDC057",
+        "accent": "#EDDA94"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/gold-yellow.svg",
+        "png": "design/brand/color-system/profile-avatars/gold-yellow.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/gold-yellow-rounded.png"
+      },
+      "figmaComponentId": "1125:1658",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/gold-yellow/representative.top",
+        "light": "component.profileHandle.palettes/gold-yellow/life.background",
+        "shade": "component.profileHandle.palettes/gold-yellow/representative.bottom",
+        "accent": "component.profileHandle.palettes/gold-yellow/life.background"
+      }
+    },
+    {
+      "id": "lime-green",
+      "number": "09",
+      "name": "라임 · 그린",
+      "handlePaletteId": "lime-green",
+      "sourceColors": [
+        "#F9F871",
+        "#07E7B4",
+        "#ACCE48"
+      ],
+      "surface": {
+        "base": "#C8E96B",
+        "light": "#D1E796",
+        "shade": "#ACCE48",
+        "accent": "#D1E796"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/lime-green.svg",
+        "png": "design/brand/color-system/profile-avatars/lime-green.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/lime-green-rounded.png"
+      },
+      "figmaComponentId": "1125:1659",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/lime-green/representative.top",
+        "light": "component.profileHandle.palettes/lime-green/life.background",
+        "shade": "component.profileHandle.palettes/lime-green/representative.bottom",
+        "accent": "component.profileHandle.palettes/lime-green/life.background"
+      }
+    },
+    {
+      "id": "neutral-gray",
+      "number": "10",
+      "name": "뉴트럴 · 그레이",
+      "handlePaletteId": "neutral-gray",
+      "sourceColors": [
+        "#929AA9",
+        "#C2C4C8",
+        "#BDC4D0"
+      ],
+      "surface": {
+        "base": "#AEB3BF",
+        "light": "#BDC4D0",
+        "shade": "#929AA9",
+        "accent": "#BDC4D0"
+      },
+      "assets": {
+        "svg": "design/brand/color-system/profile-avatars/neutral-gray.svg",
+        "png": "design/brand/color-system/profile-avatars/neutral-gray.png",
+        "roundedPng": "design/brand/color-system/profile-avatars/neutral-gray-rounded.png"
+      },
+      "figmaComponentId": "1125:1660",
+      "surfaceAliases": {
+        "base": "component.profileHandle.palettes/neutral-gray/representative.top",
+        "light": "component.profileHandle.palettes/neutral-gray/life.background",
+        "shade": "component.profileHandle.palettes/neutral-gray/representative.bottom",
+        "accent": "component.profileHandle.palettes/neutral-gray/life.background"
+      }
+    }
+  ],
+  "figma": {
+    "fileKey": "XG8Cm5nLScPoNc9NAXX1DD",
+    "pageId": "1:166595",
+    "componentSetId": "1125:1661",
+    "reviewFrameId": "1211:128856",
+    "url": "https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1211-128856",
+    "variableCollections": [
+      "VariableCollectionId:1125:1569",
+      "VariableCollectionId:1125:1570"
+    ],
+    "integration": "Splup/ProfileHandle Avatar instance-swap property; 20 matched handle examples; library publication not performed",
+    "documentationFont": "Pretendard vector outlines (remote font unavailable); original handle text preserved",
+    "sharedColorUpdatedAt": "2026-10-02",
+    "galleryNodeId": "1126:115578"
+  },
+  "surfaceRoleMap": {
+    "base": "representative.top",
+    "light": "life.background",
+    "shade": "representative.bottom",
+    "accent": "life.background"
+  }
+}
