@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ditto.at 링크 미리보기(OG) — 고정 이미지 세트를 HTML로 그려 assets/og/ 에 저장한다.
-//   브랜드:  /assets/og-landing.png (히어로, 손대지 않음) · brand-download.png · brand-404.png
+//   브랜드:  brand-home.jpg (히어로 = /assets/og-landing.png 원본을 JPEG로, 300KB 이하) · brand-download.png · brand-404.png
 //   가이드:  guide-splup.png · guide-nav-sheets.png · guide-ditto-ds.png · guide-motion.png
 //   시안:    demo-index.jpg (assets/rooms/ 방 캡처 10장)
 // 프로필 미리보기(/og/{아이디}.jpg · /demo/{아이디}/og.jpg)는 scripts/build_site.py 의 og_image()가 그린다.
