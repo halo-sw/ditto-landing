@@ -1,202 +1,291 @@
+// Profile handle v2 (2026-10-11) — identity colours. Source of truth: design/tokens/profile-handle.json
+// = iOS DGrad.profileHandlePalettes = server profiles.handle_color keys = ditto.at platter.handle_style.
 window.SplupProfileHandles = [
   {
-    "id": "purple-pink",
-    "name": "퍼플 · 핑크",
-    "sourceColors": [
-      "#AA4AF4",
-      "#6655D2",
-      "#FA97E2"
-    ],
+    "id": "lavender",
+    "name": "라벤더",
+    "en": "Lavender",
+    "persona": "하은",
+    "personaHandle": "haeunzip",
     "representative": {
-      "top": "#B66BEC",
-      "bottom": "#9270D9",
+      "top": "#CAB7F2",
+      "bottom": "#B092ED",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#C792ED",
+      "background": "#C8B3F2",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 9.9,
+      "nameOnBottom": 7.0,
+      "subtitleAtText": 6.0
+    },
+    "avatarPaletteId": "purple-pink",
+    "legacyIds": [
+      "purple-pink",
+      "deep-purple",
+      "purple",
+      "indigo"
+    ]
   },
   {
-    "id": "deep-purple",
-    "name": "딥 퍼플 · 바이올렛",
-    "sourceColors": [
-      "#6655D2",
-      "#7841C4",
-      "#AA4AF4"
-    ],
+    "id": "slate",
+    "name": "슬레이트",
+    "en": "Slate",
+    "persona": "준",
+    "personaHandle": "junishere",
     "representative": {
-      "top": "#9580DE",
-      "bottom": "#8D73CE",
+      "top": "#A8B3BF",
+      "bottom": "#79899B",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#AE99E6",
+      "background": "#A1ADB9",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 8.4,
+      "nameOnBottom": 5.0,
+      "subtitleAtText": 4.8
+    },
+    "avatarPaletteId": "neutral-gray",
+    "legacyIds": [
+      "neutral-gray",
+      "gray",
+      "charcoal"
+    ]
   },
   {
-    "id": "pink-coral",
-    "name": "핑크 · 코랄",
-    "sourceColors": [
-      "#FA97E2",
-      "#FF2CBF",
-      "#FF5488"
-    ],
+    "id": "lime",
+    "name": "라임",
+    "en": "Lime",
+    "persona": "소라",
+    "personaHandle": "soramaybe",
     "representative": {
-      "top": "#FA91D9",
-      "bottom": "#F064B3",
+      "top": "#C5D593",
+      "bottom": "#A5BE57",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#F5A5D8",
+      "background": "#C0D289",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 11.3,
+      "nameOnBottom": 8.6,
+      "subtitleAtText": 7.0
+    },
+    "avatarPaletteId": "lime-green",
+    "legacyIds": [
+      "lime-green",
+      "green"
+    ]
   },
   {
-    "id": "peach-yellow",
-    "name": "피치 · 옐로",
-    "sourceColors": [
-      "#FF925D",
-      "#F9F871",
-      "#FA97E2"
-    ],
+    "id": "teal",
+    "name": "틸",
+    "en": "Teal",
+    "persona": "재민",
+    "personaHandle": "jaeminarchive",
     "representative": {
-      "top": "#FFA36F",
-      "bottom": "#F68A50",
+      "top": "#8FB2BD",
+      "bottom": "#5C8F9F",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#FFBC87",
+      "background": "#8DB0BC",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 7.9,
+      "nameOnBottom": 5.0,
+      "subtitleAtText": 4.7
+    },
+    "avatarPaletteId": "mint-lime",
+    "legacyIds": [
+      "mint-lime"
+    ]
   },
   {
-    "id": "cyan-blue",
-    "name": "시안 · 블루",
-    "sourceColors": [
-      "#48B5F4",
-      "#27E5F2",
-      "#398FE8"
-    ],
+    "id": "gold",
+    "name": "골드",
+    "en": "Gold",
+    "persona": "나리",
+    "personaHandle": "nariday",
     "representative": {
-      "top": "#62C3F1",
-      "bottom": "#369FD9",
+      "top": "#D5C194",
+      "bottom": "#BF9F5B",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#89CDEE",
+      "background": "#D2BC8C",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 10.1,
+      "nameOnBottom": 7.1,
+      "subtitleAtText": 6.1
+    },
+    "avatarPaletteId": "gold-yellow",
+    "legacyIds": [
+      "gold-yellow",
+      "yellow"
+    ]
   },
   {
-    "id": "mint-lime",
-    "name": "민트 · 라임",
-    "sourceColors": [
-      "#07E7B4",
-      "#F9F871",
-      "#39B9CC"
-    ],
+    "id": "coral",
+    "name": "코랄",
+    "en": "Coral",
+    "persona": "도현",
+    "personaHandle": "dohyunlinks",
     "representative": {
-      "top": "#38DBB1",
-      "bottom": "#09BA97",
+      "top": "#EDAE91",
+      "bottom": "#E07B4C",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#6BDDC2",
+      "background": "#E9A382",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 9.4,
+      "nameOnBottom": 6.1,
+      "subtitleAtText": 5.5
+    },
+    "avatarPaletteId": "peach-yellow",
+    "legacyIds": [
+      "peach-yellow",
+      "coral-red",
+      "red",
+      "orange"
+    ]
   },
   {
-    "id": "coral-red",
-    "name": "코랄 · 레드",
-    "sourceColors": [
-      "#FF5488",
-      "#FF925D",
-      "#FA97E2"
-    ],
+    "id": "pink",
+    "name": "핑크",
+    "en": "Pink",
+    "persona": "지우",
+    "personaHandle": "jiuallday",
     "representative": {
-      "top": "#F77983",
-      "bottom": "#E9576F",
+      "top": "#EEAFC7",
+      "bottom": "#E37CA2",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#F39CA8",
+      "background": "#EBA3BE",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 9.9,
+      "nameOnBottom": 6.5,
+      "subtitleAtText": 5.8
+    },
+    "avatarPaletteId": "pink-coral",
+    "legacyIds": [
+      "pink-coral"
+    ]
   },
   {
-    "id": "gold-yellow",
-    "name": "골드 · 옐로",
-    "sourceColors": [
-      "#F9F871",
-      "#FF925D",
-      "#F4D76C"
-    ],
+    "id": "sage",
+    "name": "세이지",
+    "en": "Sage",
+    "persona": "서윤",
+    "personaHandle": "seoyunpalette",
     "representative": {
-      "top": "#F4D76C",
-      "bottom": "#DDC057",
+      "top": "#B3BDA6",
+      "bottom": "#85946F",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#EDDA94",
+      "background": "#AAB49A",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 9.2,
+      "nameOnBottom": 5.5,
+      "subtitleAtText": 5.2
+    },
+    "avatarPaletteId": "lime-green",
+    "legacyIds": []
   },
   {
-    "id": "lime-green",
-    "name": "라임 · 그린",
-    "sourceColors": [
-      "#F9F871",
-      "#07E7B4",
-      "#ACCE48"
-    ],
+    "id": "mauve",
+    "name": "모브",
+    "en": "Mauve",
+    "persona": "리안",
+    "personaHandle": "rianafterdark",
     "representative": {
-      "top": "#C8E96B",
-      "bottom": "#ACCE48",
+      "top": "#B5ADBA",
+      "bottom": "#908498",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#D1E796",
+      "background": "#B2A9B7",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 8.2,
+      "nameOnBottom": 5.1,
+      "subtitleAtText": 4.8
+    },
+    "avatarPaletteId": "deep-purple",
+    "legacyIds": []
   },
   {
-    "id": "neutral-gray",
-    "name": "뉴트럴 · 그레이",
-    "sourceColors": [
-      "#929AA9",
-      "#C2C4C8",
-      "#BDC4D0"
-    ],
+    "id": "sky",
+    "name": "스카이",
+    "en": "Sky",
+    "persona": "예서",
+    "personaHandle": "yeseofilm",
     "representative": {
-      "top": "#AEB3BF",
-      "bottom": "#929AA9",
+      "top": "#ADD5E5",
+      "bottom": "#79BBD4",
       "text": "#171719",
+      "subtitleOpacity": 0.85,
       "shineOpacity": 0.18
     },
     "life": {
-      "background": "#BDC4D0",
+      "background": "#A1CFE1",
       "text": "#171719",
       "shineOpacity": 0
-    }
+    },
+    "contrast": {
+      "nameOnTop": 11.4,
+      "nameOnBottom": 8.4,
+      "subtitleAtText": 6.9
+    },
+    "avatarPaletteId": "cyan-blue",
+    "legacyIds": [
+      "cyan-blue",
+      "blue"
+    ]
   }
 ];

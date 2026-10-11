@@ -7,7 +7,7 @@ const profileHandleRecipes = window.SplupProfileHandles || window.SplupProfileAv
  let fallback = false;
  const paintAvatar = () => {
    const palette = profileHandleRecipes[selected];
-   const avatar = window.SplupProfileAvatars?.find(recipe => recipe.handlePaletteId === palette.id);
+   const avatar = window.SplupProfileAvatars?.find(recipe => recipe.handlePaletteId === (palette.avatarPaletteId || palette.id));
    if (!avatar) return;
    root.querySelectorAll('[data-handle-avatar]').forEach(image => {
      image.src = fallback ? '../../brand/color-system/profile-person-fallback.svg' : '../../../' + avatar.assets.svg;
