@@ -1,0 +1,92 @@
+/* Splup docs bar — shared behaviour for the top bar on every guide page (see docs-bar.css).
+   Theme and text size are per-viewer conveniences kept in localStorage; pages work without them. */
+(function () {
+  var root = document.documentElement;
+  var KEYS = { theme: "splup-theme", text: "splup-text" };
+  function read(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+  function write(key, value) { try { if (value) localStorage.setItem(key, value); else localStorage.removeItem(key); } catch (e) {} }
+  var savedTheme = read(KEYS.theme), savedText = read(KEYS.text);
+  if (savedTheme === "light" || savedTheme === "dark") root.dataset.theme = savedTheme;
+  if (savedText === "large") root.dataset.text = "large";
+
+  var media = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  function isDark() { return root.dataset.theme ? root.dataset.theme === "dark" : !!(media && media.matches); }
+  function emit() { window.dispatchEvent(new CustomEvent("splup:appearance", { detail: { dark: isDark(), large: root.dataset.text === "large" } })); }
+  function setTheme(theme) { root.dataset.theme = theme; write(KEYS.theme, theme); emit(); }
+  function setText(size) { if (size === "large") root.dataset.text = "large"; else delete root.dataset.text; write(KEYS.text, size === "large" ? "large" : ""); emit(); }
+  if (media && media.addEventListener) media.addEventListener("change", function () { if (!root.dataset.theme) emit(); });
+  window.SplupBar = { isDark: isDark, setTheme: setTheme, setText: setText, isLarge: function () { return root.dataset.text === "large"; } };
+
+  /* Same wordmark symbol as the guide's sprite, for pages that do not carry it. */
+  var WORDMARK = '<symbol id="wm-ditto" viewBox="0 0 370 134"><path d="M140.496 15.9557C140.496 15.9557 120.588 0.280443 77.741 0C75.1142 15.1439 70.3181 40.5535 64.7177 70.738C62.9542 43.2029 47.0902 38.4354 38.4278 40.2214C16.9782 44.6568 -7.18676 84.0886 2.00698 112.362C11.2745 140.863 52.9341 134.251 70.0377 130.76C70.0082 130.672 69.986 130.583 69.9565 130.502C69.6392 101.808 73.2695 62.1993 99.2053 37.6974C110.709 26.8339 128.779 16.7749 140.503 15.9631L140.496 15.9557ZM53.3989 115.52C49.7982 119.454 41.7481 114.133 34.554 104.775C19.7673 85.5203 20.4609 63.941 31.1746 63.8081C36.9742 63.7343 42.6778 68.1255 48.7357 86.2288C52.3069 96.9077 55.5535 113.159 53.3916 115.52H53.3989Z" fill="currentColor"></path><path d="M227.933 118.015C241.332 137.756 263.121 132.214 273.399 124.827C306.345 101.173 287.102 40.3986 240.579 40.3986C222.937 40.3986 214.083 53.3063 212.74 63.3284C225.121 65.7712 236.005 73.7417 240.454 80.9742C245.804 67.3063 250.909 63.7343 256.097 63.8008C266.81 63.941 267.083 87.2915 252.717 104.775C248.253 110.199 238.366 118.79 227.933 118.015Z" fill="currentColor"></path><path d="M109.174 37.594C110.62 39.1586 152.811 54.1254 167.14 62.1845C186.693 73.1881 162.396 55.8228 162.396 55.8228L149.328 130.605H181.425L170.512 46.8929C175.338 49.5129 191.202 54.4944 204.852 48.797C222.775 39.5055 211.877 -0.819233 109.167 37.594H109.174Z" fill="currentColor"></path><path d="M243.811 87.9409C243.811 87.9409 243.833 87.904 243.841 87.8818C243.818 87.8818 243.796 87.8818 243.774 87.8966C243.782 87.9114 243.796 87.9335 243.804 87.9483L243.811 87.9409Z" fill="currentColor"></path><path d="M189.401 102.472C187.918 99.7416 187.653 98.6568 186.376 96.2435C132.926 110.022 90.1887 90.5387 144.827 66.8486C138.511 59.6088 114.523 54.6346 94.3281 60.5977C89.4065 62.0516 88.0194 63.4833 87.8349 64.3837C85.3336 72.2066 109.115 66.0073 80.1907 130.598L189.394 102.465L189.401 102.472Z" fill="currentColor"></path><path d="M237.694 92.5239C230.242 78.1549 196.75 62.8856 168.033 60.214C164.735 59.9778 187.07 79.0184 202.262 91.5202L194.419 130.598H220.384L211.345 98.6346C221.461 109.653 234.809 110.915 238.056 104.605C239.635 101.542 240.218 97.3874 237.694 92.5239Z" fill="currentColor"></path><path d="M322.297 93.6236C320.18 95.7491 317.066 95.9041 315.516 91.8081C314.653 89.5129 312.513 84.1698 306.906 76.9594C303.895 73.0849 298.228 67.2177 294.628 60.4059C290.769 53.107 290.009 48.9742 290.621 42.7823C291.425 34.7749 299.453 24.8782 310.639 25.5646C330.259 26.7675 328.791 52.3985 328.791 52.3985C328.791 52.3985 340.427 27.9852 359.087 35.9779C369.366 40.3838 371.498 53.4686 369.1 60.4059C364.392 74.0148 346.942 79.3579 340.272 82.5683C330.222 87.3948 327.462 88.4428 322.29 93.6236H322.297Z" fill="currentColor"></path><path d="M312.44 131.55C319.775 131.55 325.721 125.602 325.721 118.266C325.721 110.929 319.775 104.982 312.44 104.982C305.105 104.982 299.158 110.929 299.158 118.266C299.158 125.602 305.105 131.55 312.44 131.55Z" fill="currentColor"></path></symbol>';
+  function init() {
+    var bar = document.querySelector("header.topbar");
+    if (!bar) return;
+    if (!document.getElementById("wm-ditto") && bar.querySelector('use[href="#wm-ditto"]')) {
+      var sprite = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      sprite.setAttribute("aria-hidden", "true"); sprite.style.display = "none";
+      sprite.innerHTML = WORDMARK;
+      document.body.insertBefore(sprite, document.body.firstChild);
+    }
+    var actions = bar.querySelector(".docs-actions");
+    if (!actions) { actions = document.createElement("div"); actions.className = "docs-actions"; bar.appendChild(actions); }
+    if (!actions.querySelector(".docs-icon-btn")) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "docs-icon-btn";
+      btn.setAttribute("aria-label", "밝은 화면과 어두운 화면 전환");
+      btn.innerHTML = '<svg class="i-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>' +
+        '<svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>';
+      btn.addEventListener("click", function () { setTheme(isDark() ? "light" : "dark"); });
+      actions.insertBefore(btn, actions.firstChild);
+    }
+    // Back: return through history when we came from the back target (keeps its scroll and hash);
+    // otherwise follow the clean-URL link.
+    bar.querySelectorAll(".tb-back").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+        try {
+          var from = new URL(document.referrer), to = new URL(a.href);
+          var clean = function (p) { return p.replace(/\/index\.html$/, "/").replace(/\.html$/, ""); };
+          if (from.origin === location.origin && clean(from.pathname) === clean(to.pathname) && history.length > 1) { e.preventDefault(); history.back(); }
+        } catch (err) {}
+      });
+    });
+    emit();
+  }
+  /* A link that is the whole content of its line (a "more" or "open" link on its own) is a control,
+     not running text: give it the 44 press area. Links inside sentences keep their line rhythm. */
+  // Only whitespace, separators, sibling links, a line break or a block box between the link and the edge of its line.
+  function alone(a, dir) {
+    for (var n = a[dir]; n; n = n[dir]) {
+      if (n.nodeType === 3) { if (/[^\s·|/,]/.test(n.textContent)) return false; continue; }
+      if (n.nodeType !== 1) continue;
+      if (n.tagName === "BR") return true;
+      if (n.tagName === "A" && n.hasAttribute("href")) continue; // a row of links: "A · B · C"
+      var d = getComputedStyle(n).display;
+      if (d === "none") continue;
+      return d.indexOf("inline") !== 0 && d !== "contents";
+    }
+    return true;
+  }
+  function markSolo(scope) {
+    var list = scope.querySelectorAll ? scope.querySelectorAll("a[href]:not(.tb-solo)") : [];
+    for (var i = 0; i < list.length; i++) {
+      var a = list[i], p = a.parentElement;
+      if (!p || a.closest("header.topbar, svg")) continue;
+      if (!a.textContent.trim() || getComputedStyle(a).display !== "inline") continue;
+      if (alone(a, "previousSibling") && alone(a, "nextSibling")) a.classList.add("tb-solo");
+    }
+  }
+  var pending = [], timer = 0;
+  function flush() { timer = 0; var nodes = pending; pending = []; nodes.forEach(function (n) { if (n.isConnected) markSolo(n.parentElement || n); }); }
+  function watch() {
+    markSolo(document);
+    new MutationObserver(function (records) {
+      records.forEach(function (r) { r.addedNodes.forEach(function (n) { if (n.nodeType === 1) pending.push(n); }); });
+      if (pending.length && !timer) timer = setTimeout(flush, 120);
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+  function start() { init(); watch(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+})();

@@ -1,0 +1,118 @@
+/* Splup docs bar — the one top bar for every guide page: the main guide, its hash sub-pages and the
+   detail pages (navigation-sheets, ditto-design-system, reference motion). Loaded last on each page.
+   Follows the app navigation spec the guide documents: 56pt content bar, 17/600 Pretendard title,
+   44pt touch targets. Large text (root data-text="large") grows the bar to 72 and the title to 23,
+   like the app's large-title sample. Classes are tb-* so page styles (.logo, .icon, header) never leak in. */
+@font-face { font-family: SplupPretendard; src: url('../../../output/ditto-organic-motion/public/fonts/PretendardVariable.ttf'); font-weight: 100 900; font-display: swap; }
+
+:root {
+  --tb-h: 56px; --tb-top: 12px; --tb-hh: calc(var(--tb-h) + var(--tb-top) * 2);
+  --tb-hit: 44px; --tb-pad: 5px; --tb-title: 17px;
+  --tb-font: SplupPretendard, "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --tb-ink: #1A1C20; --tb-ink-soft: #555D6D; --tb-focus: #6655D2;
+  --tb-glass: rgba(255,255,255,.74); --tb-edge: rgba(255,255,255,.7);
+  --tb-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 10px 30px -12px rgba(40,10,60,.28), 0 0 0 1px rgba(22,18,27,.06);
+  --tb-pill: rgba(26,28,32,.06); --tb-pill-strong: rgba(26,28,32,.1); --tb-field: #FFFFFF; --tb-line: rgba(26,28,32,.12);
+  --tb-on-bg: #161616; --tb-on-fg: #FFFFFF;
+  /* the main guide's layout offsets read --hh */
+  --hh: var(--tb-hh);
+}
+:root[data-text="large"] { --tb-h: 72px; --tb-title: 23px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --tb-ink: #EBEBEB; --tb-ink-soft: #B4B4B4; --tb-focus: #C9B8FF;
+  --tb-glass: rgba(28,24,34,.72); --tb-edge: rgba(255,255,255,.12); --tb-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 10px 30px -12px rgba(0,0,0,.6);
+  --tb-pill: rgba(255,255,255,.08); --tb-pill-strong: rgba(255,255,255,.13); --tb-field: #1A1A1A; --tb-line: rgba(255,255,255,.16);
+  --tb-on-bg: #FFFFFF; --tb-on-fg: #16121B;
+} }
+:root[data-theme="dark"] {
+  --tb-ink: #EBEBEB; --tb-ink-soft: #B4B4B4; --tb-focus: #C9B8FF;
+  --tb-glass: rgba(28,24,34,.72); --tb-edge: rgba(255,255,255,.12); --tb-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 10px 30px -12px rgba(0,0,0,.6);
+  --tb-pill: rgba(255,255,255,.08); --tb-pill-strong: rgba(255,255,255,.13); --tb-field: #1A1A1A; --tb-line: rgba(255,255,255,.16);
+  --tb-on-bg: #FFFFFF; --tb-on-fg: #16121B;
+}
+html:has(header.tb-detail) { scroll-padding-top: calc(var(--tb-hh) + 8px); }
+
+/* ── Bar: floating capsule · lead (back + logo) | nav or title | actions ── */
+header.topbar {
+  position: sticky; top: calc(var(--tb-top) + env(safe-area-inset-top, 0px)); z-index: 60;
+  box-sizing: border-box; display: grid; grid-template-columns: minmax(max-content, 1fr) minmax(0, auto) minmax(max-content, 1fr); grid-template-rows: none;
+  align-items: center; gap: 4px; width: min(calc(100% - 24px), 1120px); max-width: none; height: var(--tb-h); min-height: 0;
+  margin: var(--tb-top) auto 0; padding: 0 var(--tb-pad);
+  border-radius: 999px; border: 1px solid var(--tb-edge); background: var(--tb-glass); box-shadow: var(--tb-shadow);
+  backdrop-filter: blur(22px) saturate(1.6); -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  font-family: var(--tb-font); color: var(--tb-ink); line-height: 1.3; letter-spacing: -.01em; text-align: left;
+}
+header.topbar *, header.topbar *::before, header.topbar *::after { box-sizing: border-box; }
+header.topbar > .tb-lead, header.topbar > .top-nav, header.topbar > .tb-title, header.topbar > .docs-actions { grid-row: 1; }
+header.topbar .tb-lead { justify-self: start; display: flex; align-items: center; gap: 2px; min-width: 0; grid-column: 1; }
+header.topbar .tb-logo { display: inline-flex; align-items: center; gap: 10px; min-height: var(--tb-hit); min-width: var(--tb-hit); margin: 0; padding: 0 10px 0 13px;
+  border-radius: 999px; color: var(--tb-ink); text-decoration: none; flex: none; }
+header.topbar .tb-back + .tb-logo { padding-left: 8px; }
+header.topbar .tb-logo .wm { display: block; width: auto; height: 22px; aspect-ratio: 370 / 134; color: var(--tb-ink); flex: none; }
+header.topbar .tb-logo:hover { background: var(--tb-pill); text-decoration: none; }
+header.topbar .tb-title { display: block; margin: 0; min-width: 0; font: 600 var(--tb-title)/1.3 var(--tb-font); letter-spacing: -.01em; color: var(--tb-ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+header.topbar .tb-logo .tb-title small { display: none; }
+header.topbar > .tb-title { grid-column: 2; text-align: center; }
+
+/* Nav (main guide): 44 pills, centered */
+header.topbar .top-nav { grid-column: 2; position: static; inset: auto; display: flex; align-items: center; justify-content: center; gap: 2px; width: auto; height: auto; min-width: 0;
+  margin: 0; padding: 0; border: 0; background: none; overflow-x: auto; scrollbar-width: none; }
+header.topbar .top-nav::-webkit-scrollbar { display: none; }
+header.topbar .top-nav a { display: inline-flex; align-items: center; flex: none; height: var(--tb-hit); min-width: var(--tb-hit); justify-content: center; padding: 0 14px; border-radius: 999px;
+  font: 600 14px/1 var(--tb-font); letter-spacing: -.01em; white-space: nowrap; color: var(--tb-ink-soft); text-decoration: none; transition: color .3s ease, background-color .35s ease, box-shadow .35s ease; }
+header.topbar .top-nav a:hover { color: var(--tb-ink); background: var(--tb-pill); }
+header.topbar .top-nav a.active { color: var(--tb-on-fg); background: var(--tb-on-bg); font-weight: 700; box-shadow: 0 4px 12px -6px rgba(22,18,27,.5); }
+header.topbar .top-nav a.active::after { display: none; }
+
+/* Actions: round 44 buttons (back, theme, search) */
+header.topbar .docs-actions { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: 4px; }
+header.topbar .tb-btn, header.topbar .docs-icon-btn { display: inline-flex; align-items: center; justify-content: center; flex: none; width: var(--tb-hit); height: var(--tb-hit); padding: 0; margin: 0;
+  border: 0; border-radius: 999px; background: var(--tb-pill); color: var(--tb-ink); cursor: pointer; text-decoration: none; transition: background-color .15s ease; }
+header.topbar .tb-btn:hover, header.topbar .docs-icon-btn:hover { background: var(--tb-pill-strong); }
+header.topbar .tb-btn svg, header.topbar .docs-icon-btn svg { width: 18px; height: 18px; }
+header.topbar .docs-icon-btn .i-sun { display: none; }
+:root[data-theme="dark"] header.topbar .docs-icon-btn .i-sun { display: block; }
+:root[data-theme="dark"] header.topbar .docs-icon-btn .i-moon { display: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) header.topbar .docs-icon-btn .i-sun { display: block; } :root:not([data-theme]) header.topbar .docs-icon-btn .i-moon { display: none; } }
+
+/* Search (main guide): a 44 round button that opens into a field */
+header.topbar .top-search { position: relative; display: flex; align-items: center; margin: 0; flex: none; }
+header.topbar .top-search input { width: var(--tb-hit); height: var(--tb-hit); margin: 0; padding: 0 0 0 calc(var(--tb-hit) - 2px); border: 1px solid transparent; border-radius: 999px;
+  background: var(--tb-pill) no-repeat 13px 50% / 18px 18px; color: var(--tb-ink); font: 400 14px/1 var(--tb-font); cursor: pointer; transition: width .2s ease, background-color .15s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231A1C20' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E"); }
+:root[data-theme="dark"] header.topbar .top-search input { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EBEBEB' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E"); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) header.topbar .top-search input { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EBEBEB' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E"); } }
+header.topbar .top-search input::placeholder { color: transparent; }
+header.topbar .top-search input:hover { background-color: var(--tb-pill-strong); }
+header.topbar .top-search input:focus, header.topbar .top-search input:not(:placeholder-shown) { width: min(260px, calc(100vw - 150px)); padding-right: 16px; cursor: text; background-color: var(--tb-field); border-color: var(--tb-line); }
+header.topbar .top-search input:focus::placeholder { color: var(--tb-ink-soft); }
+header.topbar .top-search kbd { display: none; }
+header.topbar .search-pop { top: calc(var(--tb-hit) + 10px); right: 0; width: min(330px, calc(100vw - 32px)); border-radius: 14px; padding: 6px; }
+header.topbar .search-pop .s-item { display: flex; flex-direction: column; justify-content: center; min-height: var(--tb-hit); border-radius: 10px; }
+
+header.topbar a:focus-visible, header.topbar button:focus-visible, header.topbar input:focus-visible { outline: 2px solid var(--tb-focus); outline-offset: 2px; }
+
+/* ── Narrow: same 56 bar; labels give way to nav / title ── */
+@media (max-width: 1080px) { header.topbar .top-nav { justify-content: flex-start; } }
+@media (max-width: 900px) {
+  header.topbar .tb-logo .tb-title { display: none; }
+  header.topbar .tb-logo .wm { height: 20px; }
+  header.topbar .top-nav { padding: 0 8px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8px, #000 calc(100% - 16px), transparent); mask-image: linear-gradient(90deg, transparent 0, #000 8px, #000 calc(100% - 16px), transparent); }
+  header.topbar .top-nav a { padding: 0 12px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) { header.topbar .top-nav a, header.topbar .top-search input, header.topbar .tb-btn, header.topbar .docs-icon-btn { transition: none; } }
+@media (forced-colors: active) { header.topbar { border-color: CanvasText; } header.topbar .top-nav a.active { outline: 2px solid Highlight; } }
+@media print { header.topbar { position: static; box-shadow: none; } }
+
+/* ── Touch 44 floor for the guide's own controls (every page that loads this file) ──
+   Zero-specificity defaults: a page rule that already sizes a control keeps its look unless it is
+   below 44, in which case it is raised in the targeted rules after this block. min-height/min-width
+   do not apply to inline links, so links inside running text keep their line rhythm. */
+:where(body) :where(a[href], button, select, summary, [role="button"], [role="tab"], input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"])) { min-height: 44px; }
+:where(body) :where(a[href], button, select, [role="button"], [role="tab"]) { min-width: 44px; }
+:where(body) :where(summary) { box-sizing: border-box; padding-block: max(0px, calc((44px - 1lh) / 2)); }
+:where(body) :where(label:has(> input[type="checkbox"]), label:has(> input[type="radio"])) { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+:where(body) :where(button, [role="tab"], [role="button"]) { box-sizing: border-box; }
+a.tb-solo { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; vertical-align: middle; }

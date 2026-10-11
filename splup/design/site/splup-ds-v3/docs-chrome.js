@@ -1,31 +1,15 @@
-/* Docs chrome v4 — builds the section sidebar, theme toggle, cover cards and plain crumbs
+/* Docs chrome v4 — builds the section sidebar, cover cards and plain crumbs
    on top of the existing hash router. Routing itself stays in index.html. */
 (function () {
   var shell = document.querySelector(".shell");
   var topbar = document.querySelector(".topbar");
   if (!shell || !topbar) return;
 
-  /* ── Theme toggle (per-viewer convenience only) ── */
-  var root = document.documentElement;
-  try { var saved = localStorage.getItem("splup-theme"); if (saved === "light" || saved === "dark") root.dataset.theme = saved; } catch (e) {}
-  var actions = document.createElement("div");
-  actions.className = "docs-actions";
-  var themeBtn = document.createElement("button");
-  themeBtn.type = "button";
-  themeBtn.className = "docs-icon-btn";
-  themeBtn.setAttribute("aria-label", "밝은 화면과 어두운 화면 전환");
-  themeBtn.innerHTML = '<svg class="i-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/></svg>' +
-    '<svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>';
-  function isDark() { return root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; }
-  themeBtn.addEventListener("click", function () {
-    var next = isDark() ? "light" : "dark";
-    root.dataset.theme = next;
-    try { localStorage.setItem("splup-theme", next); } catch (e) {}
-  });
+  /* ── Header actions: docs-bar.js builds the shared bar (theme toggle); search joins its actions. ── */
+  var actions = topbar.querySelector(".docs-actions");
+  if (!actions) { actions = document.createElement("div"); actions.className = "docs-actions"; topbar.appendChild(actions); }
   var search = topbar.querySelector(".top-search");
-  actions.appendChild(themeBtn);
   if (search) actions.appendChild(search);
-  topbar.appendChild(actions);
 
   /* ── Sidebar: one list per header section ── */
   var SECTIONS = [

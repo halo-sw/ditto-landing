@@ -7,7 +7,7 @@
 <script>/* clean URL: hide .html / index.html in the address bar on hosted copies (same directory, so relative paths are unchanged) */(function(l){if(!/^https?:$/.test(l.protocol)||/^(localhost|127\.|\[::1\])/.test(l.hostname))return;var p=l.pathname.replace(/\/index\.html$/,"/").replace(/\.html$/,"");if(p!==l.pathname)history.replaceState(history.state,"",p+l.search+l.hash)})(location);</script>
 <meta name="description" content="디토의 화면을 함께 만드는 기준. 색과 글자부터 버튼과 위젯까지, 필요한 규칙과 실제 예시를 확인하세요.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<script>try{var t=localStorage.getItem("splup-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem("splup-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;if(localStorage.getItem("splup-text")==="large")document.documentElement.dataset.text="large"}catch(e){}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 @font-face { font-family: "LINE Seed Sans App"; src: url(./fonts/LINESeedSans_A_Rg.otf) format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
@@ -416,8 +416,9 @@
 <link rel="stylesheet" href="detail-colors.css">
 <link rel="stylesheet" href="docs-reorg.css">
 <link rel="stylesheet" href="docs-chrome.css">
+<link rel="stylesheet" href="docs-bar.css">
 <header class="topbar">
-  <a class="logo" href="#overview" aria-label="Splup 디자인 가이드 처음으로"><svg class="wm" viewBox="0 0 370 134" aria-hidden="true"><use href="#wm-ditto"/></svg><span class="logo-label">Splup <small>디자인 가이드</small></span></a>
+  <div class="tb-lead"><a class="logo tb-logo" href="#overview" aria-label="Splup 디자인 가이드 처음으로"><svg class="wm" viewBox="0 0 370 134" aria-hidden="true"><use href="#wm-ditto"/></svg><span class="logo-label tb-title">Splup <small>디자인 가이드</small></span></a></div>
   <nav class="top-nav" id="topNav" aria-label="주요 카테고리">
 <a href="#overview" data-group="start">처음으로</a><a href="#colorgraphy" data-group="colorgraphy">컬러</a><a href="#foundations" data-group="foundations">기본 규칙</a><a href="#components" data-group="components">컴포넌트</a><a href="#patterns" data-group="brand">적용 방법</a><a href="#resources" data-group="reference">자료</a><a href="#roadmap" data-group="migration">변경 기록</a></nav>
   <div class="top-search">
@@ -2035,6 +2036,7 @@
 <script src="music-player-demo.js"></script>
 <script src="widget-system.js"></script>
 
+<script src="docs-bar.js"></script>
 <script src="docs-chrome.js"></script>
 <script>window.dispatchEvent(new Event("splup:guide-ready"));</script>
 </body>

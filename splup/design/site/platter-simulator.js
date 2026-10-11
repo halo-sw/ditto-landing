@@ -162,7 +162,7 @@
   $('#sim-remove').onclick=()=>remove(selected);$('#sim-promote').onclick=()=>promote(selected);
   $('#sim-detail-close').onclick=()=>dialog.close();
   let fittedWidth=0,fittedScale=0;
-  function fit(){const nextScale=Math.min(1,stage.clientWidth/width);if(fittedWidth===width&&Math.abs(fittedScale-nextScale)<.0001)return;stop(false);scale=nextScale;fittedWidth=width;fittedScale=scale;phone.style.width=width+'px';phone.style.transform=`scale(${scale})`;stage.style.height=(800*scale)+'px';render();}
+  function fit(){const nextScale=Math.min(1,stage.clientWidth/width);if(fittedWidth===width&&Math.abs(fittedScale-nextScale)<.0001)return;stop(false);scale=nextScale;fittedWidth=width;fittedScale=scale;phone.style.width=width+'px';phone.style.transform=`scale(${scale})`;phone.style.setProperty('--sim-scale',scale);stage.style.height=(800*scale)+'px';render();}
   $('#sim-width').onchange=e=>{width=Number(e.target.value);fit();};new ResizeObserver(fit).observe(stage);
   window.addEventListener('keydown',e=>{if(e.key==='Escape'&&(active||pending))stop();});window.addEventListener('blur',()=>stop());document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
   window.DittoPlatterPreview={get state(){return {segment,editing,selected,width,scale,boards:structuredClone(boards),active:active?{id:active.id,kind:active.kind,target:active.target,valid:active.result.valid}:null,animationFrame:raf};},reset:()=>$('#sim-reset').click()};
