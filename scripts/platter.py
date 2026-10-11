@@ -77,6 +77,21 @@ def fetch_rep(get, handle, key, platter="rep"):
     return owner, out
 
 
+def fetch_people(get, widgets, key):
+    """방명록 글쓴이 아이디 → 프로필 사진 URL. 실패하면 빈 dict."""
+    handles = sorted({e["handle"] for w in widgets if w["type"] == "guestbook" for e in gb_entries(w) if e["handle"]})
+    if not handles:
+        return {}
+    hdr = {"apikey": key, "Authorization": "Bearer " + key}
+    try:
+        q = urllib.parse.quote(",".join(handles))
+        rows = json.loads(get(f"{SB}/rest/v1/profiles?select=handle,avatar_url&handle=in.({q})", hdr))
+        return {r["handle"].lower(): r["avatar_url"] for r in rows if (r.get("avatar_url") or "").startswith(SB + "/storage/")}
+    except Exception as e:
+        print(f"platter: 방명록 글쓴이를 읽지 못함 ({type(e).__name__})")
+        return {}
+
+
 def fetch_sources(get, owner, widgets, key):
     """디토 위젯 출처 — {위젯 id: {handle, avatar}}. dittos(placed_widget_id) → 원작자 프로필,
     없으면 내 친구 중 이름(from)이 같은 사람 (앱 DittoWidgetSourceInfo와 같은 규칙). 실패하면 빈 dict."""
@@ -118,6 +133,7 @@ class Media:
     def __init__(self, get, outdir: Path, owner):
         self.get, self.dir, self.owner, self.cache = get, outdir / "media", owner, {}
         self.sources = {}   # 디토 위젯 id → 원작자 {handle, avatar}
+        self.people = {}    # 아이디 → 프로필 사진 URL (방명록 글쓴이)
 
     def _save(self, data, ref, max_side=600):
         im = ImageOps.exif_transpose(Image.open(io.BytesIO(data)))
@@ -659,13 +675,40 @@ def r_nowplaying(w, W, H, m):
     return "", inner, "지금 듣는 중", f'{w.get("title") or ""} · {w.get("artist") or ""}'
 
 
+def gb_entries(w):
+    """방명록 글 — data.entries [{name, handle, message}], 앞이 최신 (앱 writeGuestbook이 0번에 넣는다)."""
+    out = []
+    for e in w.get("entries") or []:
+        if isinstance(e, dict) and str(e.get("message") or "").strip():
+            out.append({"name": str(e.get("name") or e.get("handle") or "").strip(), "handle": str(e.get("handle") or "").strip().lstrip("@").lower(),
+                        "message": str(e["message"]).strip()})
+    return out
+
+
 def r_guestbook(w, W, H, m):
-    """StandardServiceTiles.SpecialGuestbookTile — 방명록 서비스 타일. 남긴 글은 앱에만 있어 첫 안부 안내를 보여 준다."""
-    fs = 9 if W < 110 else 12
-    content = (f'<p class="gb" style="font-size:{u(fs)};line-height:{u(fs * 1.45)};padding:{u(6 if W < 110 else 10)};border-radius:{u(10)}">'
-               f'첫 안부를 기다려요.<br>짧은 한 줄을 남겨봐.</p>')
-    return (' data-dl data-msg="guestbook"', service_tile(W, H, "방명록", w.get("title") or "다녀간 마음", "첫 안부를 남겨봐", content),
-            "방명록", w.get("title"))
+    """StandardServiceTiles.SpecialGuestbookTile — 안쪽 카드에 최신 글 + 'from. 이름'(공간이 있으면 프로필), 아래 제목 ·
+    'from. 이름 · 안부 남기기'. 글이 없으면 첫 안부 안내."""
+    entries = gb_entries(w)
+    small = W < 110
+    fs = 9 if small else 12
+    pad = 6 if small else 10
+    title = w.get("title") or "다녀간 마음"
+    if not entries:
+        content = (f'<p class="gb" style="font-size:{u(fs)};line-height:{u(fs * 1.45)};padding:{u(pad)};border-radius:{u(10)}">'
+                   f'첫 안부를 기다려요.<br>짧은 한 줄을 남겨봐.</p>')
+        return (' data-dl data-msg="guestbook"', service_tile(W, H, "방명록", title, "첫 안부를 남겨봐", content), "방명록", title)
+    e = entries[0]
+    lines = 2 if H < 150 else 6 if small else 3
+    av_path = m.image(m.people.get(e["handle"]), 96)[0] if e["handle"] and m.people.get(e["handle"]) else None
+    av = (f'<img class="gb-av" src="{esc(av_path)}" alt="" style="width:{u(16)};height:{u(16)};border-radius:{u(5)}">'
+          if av_path and not small and H >= 160 else "")
+    who = (f'<span class="gb-from" style="font-size:{u(10 if small else 11)};gap:{u(4)}">{av}from. {esc(e["name"])}</span>'
+           if H >= 150 else "")
+    content = (f'<div class="gb gb-on" style="padding:{u(pad)};border-radius:{u(10)};gap:{u(4)}">'
+               f'<p style="font-size:{u(fs)};line-height:{u(fs * 1.45)};-webkit-line-clamp:{lines}">{esc(e["message"])}</p>{who}</div>')
+    sub = f'from. {e["name"]} · 안부 남기기'
+    label = f'{title}, {e["name"]}: {e["message"]}'
+    return (' data-dl data-msg="guestbook"', service_tile(W, H, "방명록", title, sub, content), "방명록", label)
 
 
 def r_collection(w, W, H, m):
@@ -772,4 +815,5 @@ def build(get, handle, outdir: Path, platter="rep"):
         shutil.rmtree(outdir / "media")
     media = Media(get, outdir, owner)
     media.sources = fetch_sources(get, owner, widgets, key)
+    media.people = fetch_people(get, widgets, key)
     return render(widgets, media), len(widgets)

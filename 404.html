@@ -300,6 +300,10 @@
   .cl-c b { font-weight: 500; color: rgba(255,255,255,.85); max-width: 92%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   /* 방명록 */
   .gb { flex: 1 1 auto; align-self: stretch; width: 100%; background: #FAF6ED; color: #443A30; font-weight: 400; overflow: hidden; word-break: keep-all; }
+  .gb-on { display: flex; flex-direction: column; justify-content: space-between; }
+  .gb-on p { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .gb-from { display: flex; align-items: center; color: #77727c; font-weight: 500; white-space: nowrap; overflow: hidden; }
+  .gb-av { flex: none; object-fit: cover; }
   @media (prefers-reduced-motion: reduce) {
     .sk > * { animation: none; }
     .w.playing .cd-rot { animation: none; }
