@@ -264,8 +264,8 @@ def _mixf(c, t):   # 화이트 쪽으로 t (0~1) — 앱 customTone과 같은 �
     return tuple(round((v / 255 + (1 - v / 255) * t) * 255) for v in c)
 
 
-def handle_style(value):
-    """profiles.handle_color → .handle 인라인 스타일 (--h-top · --h-bottom · 글자색). 앱 DGrad.profileTone(value:)과 같은 규칙."""
+def handle_tone(value):
+    """profiles.handle_color → (top, bottom, ink) hex. 앱 DGrad.profileTone(value:)과 같은 규칙 — 페이지 핸들과 링크 미리보기(OG)가 함께 쓴다."""
     v = (value or "").strip()
     if v.startswith("#") and len(v) == 7 and all(ch in "0123456789abcdefABCDEF" for ch in v[1:]):
         base = _rgb(v)
@@ -279,11 +279,14 @@ def handle_style(value):
                 while _contrast(HANDLE_INK, _mixf(_rgb(v), t)) < 4.5 and t < 1:
                     t += 0.02
                 base = _mixf(_rgb(v), t)
-        top, bottom = _hex(_mixf(base, 0.35 if dark else 0.18)), _hex(base)
-        ink = "#171719" if dark else "#FFFFFF"
-    else:
-        top, bottom, _ = HANDLE_PALETTES.get(v, HANDLE_PALETTES[HANDLE_DEFAULT])
-        ink = "#171719"
+        return _hex(_mixf(base, 0.35 if dark else 0.18)), _hex(base), "#171719" if dark else "#FFFFFF"
+    top, bottom, _ = HANDLE_PALETTES.get(v, HANDLE_PALETTES[HANDLE_DEFAULT])
+    return top, bottom, "#171719"
+
+
+def handle_style(value):
+    """profiles.handle_color → .handle 인라인 스타일 (--h-top · --h-bottom · 글자색)."""
+    top, bottom, ink = handle_tone(value)
     sub = "rgba(23,23,25,.85)" if ink == "#171719" else "rgba(255,255,255,.85)"
     return f"--h-top:{top};--h-bottom:{bottom};--h-ink:{ink};--h-sub:{sub}"
 

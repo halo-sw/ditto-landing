@@ -102,13 +102,22 @@ def profiles(key, handles=None):
     return rows
 
 
+NUNITO_URL = "https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/nunito/Nunito-Italic%5Bwght%5D.ttf"
+
+
 def font(weight, size, cache={}):
-    path = OUT.parent / f".font-{weight}.otf"
-    if weight not in cache:
+    """Pretendard {weight} (Bold·SemiBold·Medium·Regular) 또는 "Nunito900" 같은 Nunito Italic 굵기."""
+    nunito = weight.startswith("Nunito")
+    key = "NunitoItalic" if nunito else weight
+    path = OUT.parent / f".font-{key}.otf"
+    if key not in cache:
         if not path.exists():
-            path.write_bytes(get(FONT_URL.format(w=weight), timeout=60))
-        cache[weight] = str(path)
-    return ImageFont.truetype(cache[weight], size)
+            path.write_bytes(get(NUNITO_URL if nunito else FONT_URL.format(w=weight), timeout=60))
+        cache[key] = str(path)
+    f = ImageFont.truetype(cache[key], size)
+    if nunito:
+        f.set_variation_by_axes([int(weight[6:] or 800)])
+    return f
 
 
 def fit(draw, text, weight, size, max_w):
@@ -123,56 +132,174 @@ def fit(draw, text, weight, size, max_w):
     return f, text + "…"
 
 
-def og_image(name, handle, avatar_bytes, wordmark):
-    W, H = 1200, 630
-    top, bottom = (170, 182, 240), (238, 241, 251)
-    img = Image.new("RGB", (W, H))
+# ── 링크 미리보기 (OG 1200×630) — 프로필 ──
+# Splup 가이드 "OG 이미지" 규격: 핵심 내용은 가운데 1080×560 안전 영역(좌우 60 · 위아래 35) 안에.
+# 앱 ProfileHandle 카드(높이 64 · 사방 8 · R16 · 아바타 48 R12 · 이름 16/500 · 아이디 12)를 2.5배로 그리고
+# 그 사람의 profiles.handle_color(Profile handle v2) 그라디언트 · "{이름}의 플래터" · 대표 위젯 사진 3장 · 워드마크.
+OG_W, OG_H, OG_SS = 1200, 630, 2   # 2배로 그린 뒤 줄여 가장자리를 매끄럽게
+
+
+def _hexrgb(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _tint(c, t):   # 화이트 쪽으로 t
+    return tuple(round(v + (255 - v) * t) for v in c)
+
+
+def _vgrad(w, h, top, bottom):
+    g = Image.new("RGB", (1, 256))
+    for y in range(256):
+        g.putpixel((0, y), tuple(round(a + (b - a) * y / 255) for a, b in zip(top, bottom)))
+    return g.resize((w, h), Image.BILINEAR)
+
+
+def _rounded(im, r):
+    mask = Image.new("L", im.size, 0)
+    ImageDraw.Draw(mask).rounded_rectangle([0, 0, im.width - 1, im.height - 1], r, fill=255)
+    out = im.convert("RGBA")
+    out.putalpha(mask)
+    return out
+
+
+def _shadow(canvas, box, r, blur, dy, alpha):
+    from PIL import ImageFilter
+    x0, y0, x1, y1 = box
+    pad = blur * 3
+    sh = Image.new("L", (x1 - x0 + pad * 2, y1 - y0 + pad * 2), 0)
+    ImageDraw.Draw(sh).rounded_rectangle([pad, pad, pad + x1 - x0, pad + y1 - y0], r, fill=alpha)
+    sh = sh.filter(ImageFilter.GaussianBlur(blur))
+    canvas.paste(Image.new("RGB", sh.size, (40, 30, 60)), (x0 - pad, y0 - pad + dy), sh)
+
+
+def _cover(path_or_bytes, size):
+    src = io.BytesIO(path_or_bytes) if isinstance(path_or_bytes, bytes) else path_or_bytes
+    return ImageOps.fit(ImageOps.exif_transpose(Image.open(src)).convert("RGB"), size, Image.LANCZOS)
+
+
+def og_image(name, handle, avatar_bytes, wordmark, handle_color=None, thumbs=(), label=None):
+    S = OG_SS
+    W, H = OG_W * S, OG_H * S
+    top, bottom, ink = (_hexrgb(c) for c in platter.handle_tone(handle_color))
+    ink_soft = (85, 93, 109)
+    # 바탕 — 핸들 색을 아주 옅게 (위 → 아래)
+    img = _vgrad(W, H, _tint(top, .86), _tint(bottom, .70))
     d = ImageDraw.Draw(img)
-    for y in range(H):
-        t = y / (H - 1)
-        d.line([(0, y), (W, y)], fill=tuple(round(a + (b - a) * t) for a, b in zip(top, bottom)))
-    card = Image.new("RGBA", (W - 120, H - 120), (0, 0, 0, 0))
-    ImageDraw.Draw(card).rounded_rectangle([0, 0, card.width - 1, card.height - 1], 56, fill=(255, 255, 255, 236))
-    img.paste(card, (60, 60), card)
-    # 아바타 (없으면 첫 글자)
-    size, ax, ay = 280, 130, (H - 280) // 2
-    mask = Image.new("L", (size, size), 0)
-    ImageDraw.Draw(mask).ellipse([0, 0, size - 1, size - 1], fill=255)
-    av = None
+
+    # 오른쪽: 대표 위젯 사진 3장 (세로 1 + 정사각 2). 모자라면 핸들 색 타일
+    gx, gy, gw, gh, gap = 692 * S, 70 * S, 216 * S, 490 * S, 16 * S
+    cells = [(gx, gy, gw, gh), (gx + gw + gap, gy, gw, (gh - gap) // 2), (gx + gw + gap, gy + (gh + gap) // 2, gw, (gh - gap) // 2)]
+    pics = list(thumbs)[:3]
+    for i, (x, y, w, h) in enumerate(cells):
+        _shadow(img, (x, y, x + w, y + h), 28 * S, 14 * S, 6 * S, 46)
+        tile = None
+        if i < len(pics):
+            try:
+                tile = _cover(pics[i], (w, h))
+            except Exception:
+                tile = None
+        if tile is None:
+            tile = _vgrad(w, h, _tint(top, .25 + .2 * i), _tint(bottom, .1 + .2 * i))
+            heart = wordmark.crop((round(wordmark.width * .81), 0, wordmark.width, round(wordmark.height * .72)))
+            hh = round(w * .32)
+            heart = heart.resize((round(heart.width * hh / heart.height), hh), Image.LANCZOS)
+            tile.paste(Image.new("RGB", heart.size, (255, 255, 255)), ((w - heart.width) // 2, (h - hh) // 2), heart.split()[3])
+        tile = _rounded(tile, 28 * S)
+        img.paste(tile, (x, y), tile)
+
+    # 왼쪽: 주소 · "{이름}의 플래터" · 핸들 카드 · 워드마크
+    lx, max_w = 72 * S, 568 * S
+    eyebrow = label or f"ditto.at/{handle}"
+    f_eb, eyebrow = fit(d, eyebrow, "Nunito800", 28 * S, max_w)
+    d.text((lx, 74 * S), eyebrow, font=f_eb, fill=ink_soft)
+    who = name or handle
+    f_t, title = fit(d, f"{who}의 플래터", "Bold", 68 * S, max_w)
+    d.text((lx, 118 * S), title, font=f_t, fill=(23, 23, 25))
+
+    # 핸들 카드 — 앱 64pt 카드 × 2.5
+    k = 2.5 * S
+    cx, cy, cw, ch = lx, 250 * S, max_w, round(64 * k)
+    r = round(16 * k)
+    _shadow(img, (cx, cy, cx + cw, cy + ch), r, round(8 * k), round(3 * k), 30)
+    card = _vgrad(cw, ch, top, bottom).convert("RGBA")
+    sheen = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(sheen)
+    for y in range(round(ch * .22)):
+        sd.line([(0, y), (cw, y)], fill=(255, 255, 255, round(46 * (1 - y / (ch * .22)))))
+    card = Image.alpha_composite(card, sheen)
+    card = _rounded(card.convert("RGB"), r)
+    img.paste(card, (cx, cy), card)
+    pad, av = round(8 * k), round(48 * k)
+    ax, ay = cx + pad, cy + pad
+    pic = None
     if avatar_bytes:
         try:
-            av = ImageOps.fit(ImageOps.exif_transpose(Image.open(io.BytesIO(avatar_bytes))).convert("RGB"), (size, size))
+            pic = _cover(avatar_bytes, (av, av))
         except Exception:
-            av = None
-    if av is None:
-        av = Image.new("RGB", (size, size))
-        ad = ImageDraw.Draw(av)
-        for i in range(size * 2):
-            t = i / (size * 2)
-            ad.line([(i, 0), (0, i)], fill=(round(180 + (243 - 180) * t), round(108 + (159 - 108) * t), round(224 + (206 - 224) * t)))
-        f = font("Bold", 130)
-        ch = (name or handle)[:1].upper()
-        ad.text((size / 2, size / 2), ch, font=f, fill="white", anchor="mm")
-    ring = Image.new("RGBA", (size + 16, size + 16), (0, 0, 0, 0))
-    ImageDraw.Draw(ring).ellipse([0, 0, size + 15, size + 15], fill=(240, 232, 250, 255))
-    img.paste(ring, (ax - 8, ay - 8), ring)
-    img.paste(av, (ax, ay), mask)
-    # 이름 · 아이디 · 설명
-    tx, max_w = ax + size + 64, W - (ax + size + 64) - 110
-    f_name, shown = fit(d, name or handle, "Bold", 76, max_w)
-    d.text((tx, 200), shown, font=f_name, fill=(28, 28, 34))
-    f_handle, shown_h = fit(d, "@" + handle, "SemiBold", 40, max_w)
-    d.text((tx, 300), shown_h, font=f_handle, fill=(155, 75, 224))
-    d.text((tx, 372), "위젯으로 서로의 하루를 주고받는", font=font("SemiBold", 30), fill=(107, 107, 118))
-    d.text((tx, 414), "친구들의 공간, ditto!", font=font("SemiBold", 30), fill=(107, 107, 118))
-    # 워드마크 (흰색 PNG의 알파를 보라색으로)
-    wm_h = 56
+            pic = None
+    if pic is None:   # 사진이 없으면 앱처럼 #F1F2F4 위 사람 실루엣
+        pic = Image.new("RGB", (av, av), (241, 242, 244))
+        pd = ImageDraw.Draw(pic)
+        pd.ellipse([av * .34, av * .2, av * .66, av * .52], fill=(139, 144, 153))
+        pd.rounded_rectangle([av * .18, av * .58, av * .82, av * .9], round(av * .16), fill=(139, 144, 153))
+    pic = _rounded(pic, round(12 * k))
+    img.paste(pic, (ax, ay), pic)
+    # 친구 추가 버튼 44 원 #F0EDFF + 사람＋
+    bs = round(44 * k)
+    bx, by = cx + cw - pad - bs, cy + (ch - bs) // 2
+    d.ellipse([bx, by, bx + bs, by + bs], fill=(240, 237, 255))
+    g = (69, 70, 80)
+    u = bs / 44
+    d.ellipse([bx + 14.5 * u, by + 11 * u, bx + 24.5 * u, by + 21 * u], fill=g)
+    d.rounded_rectangle([bx + 11 * u, by + 23 * u, bx + 26 * u, by + 32 * u], round(4.5 * u), fill=g)
+    d.rounded_rectangle([bx + 29.6 * u, by + 21.5 * u, bx + 32.1 * u, by + 31.5 * u], round(1.25 * u), fill=g)
+    d.rounded_rectangle([bx + 25.85 * u, by + 25.25 * u, bx + 35.85 * u, by + 27.75 * u], round(1.25 * u), fill=g)
+    # 이름 16/500 · 아이디 12 (잉크 85%)
+    tx = ax + av + round(8 * k)
+    tw = bx - round(8 * k) - tx
+    ink_rgb = ink
+    sub_rgb = tuple(round(c * .85 + b * .15) for c, b in zip(ink_rgb, bottom))
+    f_n, shown = fit(d, who, "Medium", round(16 * k), tw)
+    f_h, shown_h = fit(d, "@" + handle, "Regular", round(12 * k), tw)
+    mid = cy + ch / 2
+    d.text((tx, mid - 2 * k), shown, font=f_n, fill=ink_rgb, anchor="ls")
+    d.text((tx, mid + 2 * k), shown_h, font=f_h, fill=sub_rgb, anchor="lt")
+
+    # 한 줄 소개 · 워드마크 (잉크)
+    d.text((lx, 452 * S), "위젯으로 서로의 하루를 주고받는 친구들의 공간", font=font("SemiBold", 25 * S), fill=ink_soft)
+    wm_h = 50 * S
     wm = wordmark.resize((round(wordmark.width * wm_h / wordmark.height), wm_h), Image.LANCZOS)
-    tint = Image.new("RGB", wm.size, (126, 55, 194))
-    img.paste(tint, (W - 110 - wm.width, H - 110 - wm_h + 6), wm.split()[3])
-    buf = io.BytesIO()
-    img.save(buf, "PNG", optimize=True)
+    img.paste(Image.new("RGB", wm.size, (23, 23, 25)), (lx, 510 * S), wm.split()[3])
+
+    out = img.resize((OG_W, OG_H), Image.LANCZOS)
+    # 사진이 들어가므로 JPEG (PNG는 500KB를 넘는다). 300KB 이하가 될 때까지 품질을 낮춘다
+    for q in (90, 86, 82, 78):
+        buf = io.BytesIO()
+        out.save(buf, "JPEG", quality=q, optimize=True, progressive=True, subsampling=0 if q >= 86 else 2)
+        if buf.tell() <= 300_000:
+            break
     return buf.getvalue()
+
+
+def og_thumbs(outdir, platter_html, limit=3):
+    """대표(또는 시안) 플래터에 그린 순서대로, 빌드 때 받은 위젯 사진 중 충분히 큰 것."""
+    out, seen = [], set()
+    for name in re.findall(r"media/([0-9a-f]{12}\.(?:jpg|png|webp))", platter_html or ""):
+        if name in seen:
+            continue
+        seen.add(name)
+        p = outdir / "media" / name
+        try:
+            with Image.open(p) as im:
+                if min(im.size) < 300:
+                    continue
+        except Exception:
+            continue
+        out.append(p)
+        if len(out) == limit:
+            break
+    return out
 
 
 def profile_page(fill, row, key, wordmark, outdir, url, og_path, og_url, platter_kind="rep"):
@@ -187,11 +314,12 @@ def profile_page(fill, row, key, wordmark, outdir, url, og_path, og_url, platter
             data = get(avatar, timeout=20)
         except Exception:
             avatar_ok = False
-    og_path.parent.mkdir(parents=True, exist_ok=True)
-    og_path.write_bytes(og_image(name, handle, data, wordmark))
     title = f"{name} (@{handle}) · ditto!"
     outdir.mkdir(parents=True, exist_ok=True)
     platter_html, n_widgets = platter.build(get, handle, outdir, platter_kind)
+    og_path.parent.mkdir(parents=True, exist_ok=True)
+    og_path.write_bytes(og_image(name, handle, data, wordmark, row.get("handle_color"),
+                                 og_thumbs(outdir, platter_html), url.replace("https://", "")))
     page = fill({
         "TITLE": html.escape(title), "URL": url, "OG_IMAGE": og_url,
         "NAME": html.escape(name), "HANDLE": handle, "INITIAL": html.escape(name[:1].upper()),
@@ -217,6 +345,13 @@ def demo_index(rows):
     return f"""<!DOCTYPE html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>프로필 시안 · ditto!</title><meta name="robots" content="noindex, nofollow, noimageindex">
+<meta name="description" content="실제 서버 데이터로 그린 10명의 플래터 — 프로필 시안 모음">
+<meta property="og:type" content="website"><meta property="og:site_name" content="ditto!">
+<meta property="og:url" content="{SITE}/demo/"><meta property="og:title" content="10명의 플래터 · ditto!">
+<meta property="og:description" content="실제 서버 데이터로 그린 10명의 플래터 — 프로필 시안 모음">
+<meta property="og:image" content="{SITE}/assets/og/demo-index.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="10명의 플래터 · ditto!">
+<meta name="twitter:description" content="실제 서버 데이터로 그린 10명의 플래터 — 프로필 시안 모음"><meta name="twitter:image" content="{SITE}/assets/og/demo-index.jpg">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>
@@ -256,7 +391,7 @@ def main():
     template = (ROOT / "scripts/profile.html").read_text()
     fill = lambda values: re.sub(r"\{\{(\w+)\}\}", lambda m: values.get(m.group(1), ""), template)
     # 404: 아직 빌드되지 않은 새 아이디 · /u/{아이디} 옛 주소 · 없는 페이지
-    (OUT / "404.html").write_text(fill({"TITLE": "ditto!", "URL": SITE + "/", "OG_IMAGE": SITE + "/assets/og-landing.png",
+    (OUT / "404.html").write_text(fill({"TITLE": "ditto!", "URL": SITE + "/", "OG_IMAGE": SITE + "/assets/og/brand-404.png",
                                          "PROFILE_HIDDEN": " hidden", "AVATAR_HIDDEN": " hidden", "KEY": key, "PLATTER": "",
                                          "HANDLE_STYLE": platter.handle_style(None)}))
 
@@ -269,7 +404,7 @@ def main():
             skipped += 1
             continue
         row = dict(row, handle=handle)
-        n = profile_page(fill, row, key, wordmark, OUT / handle, f"{SITE}/{handle}", OUT / "og" / f"{handle}.png", f"{SITE}/og/{handle}.png")
+        n = profile_page(fill, row, key, wordmark, OUT / handle, f"{SITE}/{handle}", OUT / "og" / f"{handle}.jpg", f"{SITE}/og/{handle}.jpg")
         if n:
             print(f"platter: @{handle} 대표 플래터 위젯 {n}개")
         built += 1
@@ -287,7 +422,7 @@ def main():
                 continue
             row = dict(row, handle=handle)
             n = profile_page(fill, row, key, wordmark, OUT / "demo" / handle, f"{SITE}/demo/{handle}",
-                             OUT / "demo" / handle / "og.png", f"{SITE}/demo/{handle}/og.png", kind)
+                             OUT / "demo" / handle / "og.jpg", f"{SITE}/demo/{handle}/og.jpg", kind)
             print(f"demo: @{handle} {kind} 플래터 위젯 {n}개")
             shown.append(row)
         (OUT / "demo").mkdir(exist_ok=True)
