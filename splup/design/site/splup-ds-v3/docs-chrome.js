@@ -100,6 +100,7 @@
     blob: function (c) { return '<path d="M118 52c30-26 92-20 104 18 12 36-12 74-52 80-44 6-86-14-86-46 0-20 14-36 34-52Z" fill="' + c[1] + '"/><circle cx="214" cy="56" r="14" fill="' + c[2] + '"/>'; },
     arrows: function (c) { return '<rect x="58" y="62" width="70" height="56" rx="14" fill="' + c[1] + '" opacity=".55"/><path d="M144 90h34m-12-12 12 12-12 12" stroke="' + c[1] + '" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="194" y="62" width="70" height="56" rx="14" fill="' + c[1] + '"/>'; },
     avatar: function (c) { return '<circle cx="160" cy="90" r="54" fill="' + c[1] + '"/><circle cx="160" cy="76" r="18" fill="' + c[0] + '"/><path d="M128 124c6-18 58-18 64 0" fill="' + c[0] + '"/><circle cx="204" cy="128" r="14" fill="' + c[2] + '" stroke="' + c[0] + '" stroke-width="4"/>'; },
+    og: function (c) { return '<rect x="74" y="34" width="172" height="90" rx="12" fill="' + c[1] + '"/><rect x="83" y="39" width="154" height="80" rx="6" fill="none" stroke="' + c[2] + '" stroke-width="2" stroke-dasharray="6 5" opacity=".7"/><rect x="74" y="134" width="120" height="10" rx="5" fill="' + c[1] + '" opacity=".8"/><rect x="74" y="152" width="80" height="8" rx="4" fill="' + c[1] + '" opacity=".55"/>'; },
     list: function (c) { return [0, 1, 2].map(function (i) { return '<circle cx="96" cy="' + (52 + i * 38) + '" r="9" fill="' + c[1] + '"/><rect x="116" y="' + (45 + i * 38) + '" width="' + (110 - i * 20) + '" height="14" rx="7" fill="' + c[1] + '" opacity=".7"/>'; }).join(""); }
   };
   var COVER = {
@@ -108,7 +109,7 @@
     zindex: ["coral", "stack"], darkmode: ["night", "halves"],
     "profile-handles": ["peri", "avatar"], buttons: ["mint", "press"], "ditto-action": ["purple", "ditto"], "widget-system": ["pink", "grid"],
     grid: ["lemon", "grid"], voice: ["coral", "bubble"], writing: ["sky", "bubble"],
-    tokens: ["night", "token"], assets: ["purple", "blob"], mapping: ["mint", "arrows"],
+    tokens: ["night", "token"], assets: ["purple", "blob"], mapping: ["mint", "arrows"], "og-images": ["sky", "og"],
     colorgraphy: ["purple", "swatches"], foundations: ["deep", "type"], components: ["pink", "grid"], patterns: ["lemon", "bubble"],
     resources: ["night", "token"], roadmap: ["mint", "list"], "navigation-sheets": ["sky", "stack"]
   };

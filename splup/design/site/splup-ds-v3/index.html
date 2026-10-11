@@ -6,6 +6,19 @@
 <title>Splup 디자인 가이드 · Ditto</title>
 <script>/* clean URL: hide .html / index.html in the address bar on hosted copies (same directory, so relative paths are unchanged) */(function(l){if(!/^https?:$/.test(l.protocol)||/^(localhost|127\.|\[::1\])/.test(l.hostname))return;var p=l.pathname.replace(/\/index\.html$/,"/").replace(/\.html$/,"");if(p!==l.pathname)history.replaceState(history.state,"",p+l.search+l.hash)})(location);</script>
 <meta name="description" content="디토의 화면을 함께 만드는 기준. 색과 글자부터 버튼과 위젯까지, 필요한 규칙과 실제 예시를 확인하세요.">
+<!-- 링크 미리보기 (Splup 가이드 › 자료 › 링크 미리보기). 이미지는 ditto-landing scripts/og_static.mjs 가 그린다 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ditto!">
+<meta property="og:url" content="https://ditto.at/splup/design/site/splup-ds-v3/">
+<meta property="og:title" content="Splup 디자인 시스템 · Ditto!">
+<meta property="og:description" content="디토의 화면을 함께 만드는 기준. 색과 글자부터 버튼과 위젯까지, 필요한 규칙과 실제 예시를 확인하세요.">
+<meta property="og:image" content="https://ditto.at/assets/og/guide-splup.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Splup 디자인 시스템 · Ditto!">
+<meta name="twitter:description" content="디토의 화면을 함께 만드는 기준. 색과 글자부터 버튼과 위젯까지, 필요한 규칙과 실제 예시를 확인하세요.">
+<meta name="twitter:image" content="https://ditto.at/assets/og/guide-splup.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script>try{var t=localStorage.getItem("splup-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;if(localStorage.getItem("splup-text")==="large")document.documentElement.dataset.text="large"}catch(e){}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -414,6 +427,7 @@
 <link rel="stylesheet" href="music-player.css"><link rel="stylesheet" href="music-player-expanded.css">
 <link rel="stylesheet" href="profile-colors.css">
 <link rel="stylesheet" href="detail-colors.css">
+<link rel="stylesheet" href="og-images.css">
 <link rel="stylesheet" href="docs-reorg.css">
 <link rel="stylesheet" href="docs-chrome.css">
 <link rel="stylesheet" href="docs-bar.css">
@@ -456,7 +470,7 @@
       <a href="#components"><span class="index-number" aria-hidden="true">03</span><span><strong>컴포넌트</strong><small>프로필, 버튼과 위젯의 모습과 동작</small></span><b aria-hidden="true">→</b></a>
       <a href="#patterns"><span class="index-number" aria-hidden="true">04</span><span><strong>적용 방법</strong><small>플래터 배치와 사용자에게 건네는 말</small></span><b aria-hidden="true">→</b></a>
       <a href="../navigation-sheets"><span class="index-number" aria-hidden="true">05</span><span><strong>상단 바와 바텀시트</strong><small>헤더 구성과 아래에서 열리는 화면의 사용 기준</small></span><b aria-hidden="true">→</b></a>
-      <a href="#resources"><span class="index-number" aria-hidden="true">06</span><span><strong>자료</strong><small>공통 설정값, 원본 파일과 기존 화면 변경 방법</small></span><b aria-hidden="true">→</b></a>
+      <a href="#resources"><span class="index-number" aria-hidden="true">06</span><span><strong>자료</strong><small>공통 설정값, 원본 파일, 링크 미리보기와 기존 화면 변경 방법</small></span><b aria-hidden="true">→</b></a>
       <a href="#roadmap"><span class="index-number" aria-hidden="true">07</span><span><strong>변경 기록</strong><small>반영된 내용과 확인이 필요한 항목</small></span><b aria-hidden="true">→</b></a>
     </div>
   </nav>
@@ -1397,7 +1411,7 @@
     <section><span class="docs-status pending">기기 검증 필요</span><h3>앱 적용 상태</h3><p>10색 프로필 설정이 소스에 연결되어 있습니다. 실제 기기 화면은 별도 검증이 필요합니다.</p></section>
   </div>
   <h2>최근 변경</h2>
-  <ol class="docs-change-list"><li><time datetime="2026-10-05">2026.10.05</time><span>문서 목록과 상단 메뉴를 정리했습니다. 제목과 설명을 쉬운 말로 바꾸고 모바일 목차, 검색, 문서 이동을 개선했습니다.</span></li><li><time datetime="2026-09-29">2026.09.29</time><span>프로필 외곽선을 정리하고 친구 상태를 사람+체크 아이콘으로 구분했습니다.</span></li><li><time datetime="2026-09-28">2026.09.28</time><span>프로필 10색과 대표·라이프 표면, 우측 액션 상태를 디자인 가이드에 반영했습니다.</span></li></ol>
+  <ol class="docs-change-list"><li><time datetime="2026-10-11">2026.10.11</time><span><a href="#og-images">OG 이미지</a> 문서를 추가했습니다. ditto.at의 모든 공개 페이지에 링크 미리보기 이미지를 두고, 프로필은 각자의 핸들 색으로 그립니다.</span></li><li><time datetime="2026-10-05">2026.10.05</time><span>문서 목록과 상단 메뉴를 정리했습니다. 제목과 설명을 쉬운 말로 바꾸고 모바일 목차, 검색, 문서 이동을 개선했습니다.</span></li><li><time datetime="2026-09-29">2026.09.29</time><span>프로필 외곽선을 정리하고 친구 상태를 사람+체크 아이콘으로 구분했습니다.</span></li><li><time datetime="2026-09-28">2026.09.28</time><span>프로필 10색과 대표·라이프 표면, 우측 액션 상태를 디자인 가이드에 반영했습니다.</span></li></ol>
   <div class="docs-related"><span>다음 단계</span><a href="#mapping">기존 화면 변경 가이드 ↗</a><a href="#audit">검토 기록 ↗</a></div>
 </article>
 
@@ -1460,8 +1474,249 @@
     <a href="#tokens"><span class="index-number">01</span><span class="index-copy"><strong>공통 설정값</strong><small>색·간격·반경의 이름과 실제 값</small></span><b aria-hidden="true">→</b></a>
     <a href="#assets"><span class="index-number">02</span><span class="index-copy"><strong>브랜드 에셋</strong><small>원본 로고·아이콘·그래픽 파일과 사용 기준</small></span><b aria-hidden="true">→</b></a>
     <a href="#mapping"><span class="index-number">03</span><span class="index-copy"><strong>변경 가이드</strong><small>기존 규격을 새 기준으로 옮기는 순서</small></span><b aria-hidden="true">→</b></a>
+    <a href="#og-images"><span class="index-number">04</span><span class="index-copy"><strong>OG 이미지</strong><small>링크 미리보기 규격과 ditto.at의 실제 이미지</small></span><b aria-hidden="true">→</b></a>
   </div>
   <div class="docs-related"><span>계속 보기</span><a href="#roadmap">반영 상태와 최근 변경 ↗</a></div>
+</article>
+<article class="page content-max og-doc" id="page-og-images" hidden>
+  <div class="crumb">자료 / <b>OG 이미지</b></div>
+  <h1>OG 이미지</h1>
+  <p class="desc">카카오톡, X, 메시지에 ditto.at 링크를 붙이면 보이는 미리보기 이미지입니다. 모든 공개 페이지에 하나씩 두고, 같은 무리끼리는 같은 틀을 씁니다. 아래 이미지는 지금 ditto.at에 올라가 있는 실제 파일입니다.</p>
+  <div class="doc-preview og-anatomy" aria-label="안전 영역 예시">
+    <div class="og-anat-frame"><img src="https://ditto.at/assets/og/guide-splup.png" width="1200" height="630" alt="안전 영역을 표시한 OG 이미지 예시" loading="lazy" decoding="async"><i class="og-safe" aria-hidden="true"></i></div>
+    <ul class="og-anat-notes"><li><b>1200 × 630</b> 전체 캔버스 (1.91 : 1)</li><li><b>1080 × 560</b> 가운데 안전 영역 — 좌우 60 · 위아래 35</li><li>점선 밖은 앱마다 잘리거나 라벨이 덮을 수 있는 자리</li></ul>
+  </div>
+
+  <h2>규격</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>항목</th><th>기준</th><th>이유</th></tr></thead>
+      <tbody>
+        <tr><td>크기</td><td class="mono">1200 × 630 (1.91 : 1)</td><td>카카오톡·X·페이스북·메시지가 공통으로 크게 보여 주는 비율</td></tr>
+        <tr><td>안전 영역</td><td class="mono">가운데 1080 × 560</td><td>카카오톡은 가로를 더 길게 잘라 위아래가, X는 왼쪽 아래 도메인 라벨과 둥근 모서리가 가장자리를 덮는다. 제목·얼굴·워드마크는 이 안에</td></tr>
+        <tr><td>글자</td><td>Pretendard 제목 60px 이상 · 본문 24px 이상, 강조 영문은 Nunito Italic</td><td>미리보기는 폭 300px 안팎으로 줄어든다 — 1/4로 줄어도 읽히는 크기</td></tr>
+        <tr><td>형식</td><td>그래픽 <b>PNG</b> · 사진이 들어가면 <b>JPEG</b> (품질 90)</td><td>사진을 PNG로 저장하면 500KB를 넘고, 팔레트로 줄이면 얼룩이 생긴다</td></tr>
+        <tr><td>용량</td><td class="mono">300KB 이하</td><td>카카오톡·X가 큰 이미지를 건너뛰거나 늦게 보여 준다</td></tr>
+        <tr><td>주소</td><td><code>https://ditto.at/…</code> 절대 주소</td><td>상대 경로는 미리보기 서버가 읽지 못한다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>필수 메타 태그</h2>
+  <p class="muted">페이지 <code>&lt;head&gt;</code>에 아래 태그를 모두 넣습니다. <code>og:url</code>은 <code>.html</code> 없는 깨끗한 주소로, 제목과 설명은 페이지마다 다르게 씁니다.</p>
+  <div class="og-code"><code>&lt;meta property="og:type" content="website"&gt;
+&lt;meta property="og:site_name" content="ditto!"&gt;
+&lt;meta property="og:url" content="https://ditto.at/splup/design/site/navigation-sheets"&gt;
+&lt;meta property="og:title" content="상단 바와 바텀시트 · Splup 디자인 가이드"&gt;
+&lt;meta property="og:description" content="56pt 상단 바, 44pt 터치 영역, …"&gt;
+&lt;meta property="og:image" content="https://ditto.at/assets/og/guide-nav-sheets.png"&gt;
+&lt;meta property="og:image:width" content="1200"&gt;
+&lt;meta property="og:image:height" content="630"&gt;
+&lt;meta name="twitter:card" content="summary_large_image"&gt;
+&lt;meta name="twitter:title" content="…"&gt;  &lt;meta name="twitter:description" content="…"&gt;
+&lt;meta name="twitter:image" content="https://ditto.at/assets/og/guide-nav-sheets.png"&gt;</code></div>
+
+  <h2>이름과 위치</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>무리</th><th>파일</th><th>만드는 곳</th></tr></thead>
+      <tbody>
+        <tr><td>브랜드</td><td><code>/assets/og-landing.png</code> (히어로) · <code>/assets/og/brand-{페이지}.png</code></td><td rowspan="3">ditto-landing <code>scripts/og_static.mjs</code> — HTML을 Playwright로 찍는다</td></tr>
+        <tr><td>가이드</td><td><code>/assets/og/guide-{페이지}.png</code></td></tr>
+        <tr><td>시안 모아 보기</td><td><code>/assets/og/demo-index.jpg</code></td></tr>
+        <tr><td>프로필</td><td><code>/og/{아이디}.jpg</code> · 시안 <code>/demo/{아이디}/og.jpg</code></td><td>ditto-landing <code>scripts/build_site.py</code> <code>og_image()</code> — 빌드 때 사람마다</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">고정 이미지는 모두 <code>/assets/og/</code> 한곳에 <b>{무리}-{페이지}</b> 이름으로 둡니다. 가이드 페이지의 메타 태그는 prj_Ditto! 원본 HTML에 있어서 다음 동기화에도 그대로 유지됩니다.</p>
+
+  <h2>브랜드</h2>
+  <p class="og-tools"><button class="og-safe-toggle" type="button" aria-pressed="false">안전 영역 표시</button><span>모든 이미지 위에 1080 × 560 점선을 겹쳐 봅니다</span></p>
+  <p class="muted">og-landing과 같은 퍼플→핑크 대각 그라디언트, 화이트 워드마크, 흐린 하트. 페이지가 하는 일을 한 문장으로 크게 씁니다.</p>
+  <div class="og-gallery">
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/assets/og-landing.png" width="1200" height="630" loading="lazy" decoding="async" alt="홈 링크 미리보기 이미지"></div>
+  <figcaption><b>홈</b><a class="og-url" href="https://ditto.at/">ditto.at/</a><code>/assets/og-landing.png</code><small>히어로 · 예전 경로 그대로</small></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/assets/og-landing.png" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>Ditto! IYKYK Place</b><span>친한 친구 15명과 각자의 방을 꾸미고, 서로의 것을 꾹 눌러 가져오며, 어느새 가까워지는 iOS 앱 Ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/assets/og-landing.png" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/assets/og/brand-download.png" width="1200" height="630" loading="lazy" decoding="async" alt="출시 알림 링크 미리보기 이미지"></div>
+  <figcaption><b>출시 알림</b><a class="og-url" href="https://ditto.at/download/">ditto.at/download/</a><code>/assets/og/brand-download.png</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/assets/og/brand-download.png" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>Ditto! 출시 알림 받기</b><span>디토가 나오면 가장 먼저 알려 드릴게요. 위젯으로 서로의 하루를 주고받는 친구들의 공간</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/assets/og/brand-download.png" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/assets/og/brand-404.png" width="1200" height="630" loading="lazy" decoding="async" alt="404 · 아직 없는 프로필 링크 링크 미리보기 이미지"></div>
+  <figcaption><b>404 · 아직 없는 프로필 링크</b><span class="og-url">ditto.at/아이디 (빌드 전)</span><code>/assets/og/brand-404.png</code><small>새 아이디는 다음 빌드 전까지 404 페이지가 프로필을 그린다</small></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/assets/og/brand-404.png" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/assets/og/brand-404.png" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+</div>
+
+  <h2>프로필</h2>
+  <p class="muted">앱 ProfileHandle 카드(높이 64 · 아바타 48 R12 · 이름 16/500 · 아이디 12)를 2.5배로 그리고, 그 사람의 <code>profiles.handle_color</code> 그라디언트를 그대로 씁니다. 바탕은 같은 색을 옅게, 오른쪽은 대표 플래터의 사진 위젯 3장입니다. 시안 계정 10명이 Profile handle v2의 10색을 하나씩 씁니다.</p>
+  <div class="og-gallery">
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/haeunzip/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="하은 · lavender 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#CAB7F2,#B092ED)" aria-hidden="true"></i>하은 · lavender</b><a class="og-url" href="https://ditto.at/demo/haeunzip">ditto.at/demo/haeunzip</a><code>/demo/haeunzip/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/haeunzip/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>하은 (@haeunzip) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/haeunzip/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/junishere/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="준 · slate 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#A8B3BF,#79899B)" aria-hidden="true"></i>준 · slate</b><a class="og-url" href="https://ditto.at/demo/junishere">ditto.at/demo/junishere</a><code>/demo/junishere/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/junishere/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>준 (@junishere) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/junishere/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/soramaybe/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="소라 · lime 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#C5D593,#A5BE57)" aria-hidden="true"></i>소라 · lime</b><a class="og-url" href="https://ditto.at/demo/soramaybe">ditto.at/demo/soramaybe</a><code>/demo/soramaybe/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/soramaybe/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>소라 (@soramaybe) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/soramaybe/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/jaeminarchive/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="재민 · teal 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#8FB2BD,#5C8F9F)" aria-hidden="true"></i>재민 · teal</b><a class="og-url" href="https://ditto.at/demo/jaeminarchive">ditto.at/demo/jaeminarchive</a><code>/demo/jaeminarchive/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/jaeminarchive/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>재민 (@jaeminarchive) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/jaeminarchive/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/nariday/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="나리 · gold 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#D5C194,#BF9F5B)" aria-hidden="true"></i>나리 · gold</b><a class="og-url" href="https://ditto.at/demo/nariday">ditto.at/demo/nariday</a><code>/demo/nariday/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/nariday/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>나리 (@nariday) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/nariday/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/dohyunlinks/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="도현 · coral 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#EDAE91,#E07B4C)" aria-hidden="true"></i>도현 · coral</b><a class="og-url" href="https://ditto.at/demo/dohyunlinks">ditto.at/demo/dohyunlinks</a><code>/demo/dohyunlinks/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/dohyunlinks/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>도현 (@dohyunlinks) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/dohyunlinks/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/jiuallday/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="지우 · pink 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#EEAFC7,#E37CA2)" aria-hidden="true"></i>지우 · pink</b><a class="og-url" href="https://ditto.at/demo/jiuallday">ditto.at/demo/jiuallday</a><code>/demo/jiuallday/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/jiuallday/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>지우 (@jiuallday) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/jiuallday/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/seoyunpalette/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="서윤 · sage 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#B3BDA6,#85946F)" aria-hidden="true"></i>서윤 · sage</b><a class="og-url" href="https://ditto.at/demo/seoyunpalette">ditto.at/demo/seoyunpalette</a><code>/demo/seoyunpalette/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/seoyunpalette/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>서윤 (@seoyunpalette) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/seoyunpalette/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/rianafterdark/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="리안 · mauve 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#B5ADBA,#908498)" aria-hidden="true"></i>리안 · mauve</b><a class="og-url" href="https://ditto.at/demo/rianafterdark">ditto.at/demo/rianafterdark</a><code>/demo/rianafterdark/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/rianafterdark/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>리안 (@rianafterdark) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/rianafterdark/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/demo/yeseofilm/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="예서 · sky 링크 미리보기 이미지"></div>
+  <figcaption><b><i class="og-sw" style="background:linear-gradient(180deg,#ADD5E5,#79BBD4)" aria-hidden="true"></i>예서 · sky</b><a class="og-url" href="https://ditto.at/demo/yeseofilm">ditto.at/demo/yeseofilm</a><code>/demo/yeseofilm/og.jpg</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/demo/yeseofilm/og.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>예서 (@yeseofilm) · ditto!</b><span>위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/demo/yeseofilm/og.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+  </div>
+
+  <h2>가이드</h2>
+  <p class="muted">Splup 문서 스킨 — 밝은 회색 바탕, 떠 있는 상단 바, 문서 표지와 같은 색·도형의 카드. 바뀌는 것은 제목·설명·주소·표지 색뿐입니다.</p>
+  <div class="og-gallery">
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/assets/og/guide-splup.png" width="1200" height="630" loading="lazy" decoding="async" alt="Splup 디자인 시스템 링크 미리보기 이미지"></div>
+  <figcaption><b>Splup 디자인 시스템</b><a class="og-url" href="https://ditto.at/splup/design/site/splup-ds-v3/">ditto.at/splup/design/site/splup-ds-v3/</a><code>/assets/og/guide-splup.png</code><small>/splup/ 진입 주소도 같은 이미지</small></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/assets/og/guide-splup.png" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>Splup 디자인 시스템 · Ditto!</b><span>디토의 화면을 함께 만드는 기준. 색과 글자부터 버튼과 위젯까지, 필요한 규칙과 실제 예시를 확인하세요.</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/assets/og/guide-splup.png" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/assets/og/guide-nav-sheets.png" width="1200" height="630" loading="lazy" decoding="async" alt="상단 바와 바텀시트 링크 미리보기 이미지"></div>
+  <figcaption><b>상단 바와 바텀시트</b><a class="og-url" href="https://ditto.at/splup/design/site/navigation-sheets">ditto.at/splup/design/site/navigation-sheets</a><code>/assets/og/guide-nav-sheets.png</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/assets/og/guide-nav-sheets.png" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>상단 바와 바텀시트 · Splup 디자인 가이드</b><span>56pt 상단 바, 44pt 터치 영역, 바텀시트가 올라오는 규칙과 실제 예시.</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/assets/og/guide-nav-sheets.png" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/assets/og/guide-ditto-ds.png" width="1200" height="630" loading="lazy" decoding="async" alt="Ditto 디자인 시스템 링크 미리보기 이미지"></div>
+  <figcaption><b>Ditto 디자인 시스템</b><a class="og-url" href="https://ditto.at/splup/design/site/ditto-design-system">ditto.at/splup/design/site/ditto-design-system</a><code>/assets/og/guide-ditto-ds.png</code><small>/splup/ditto/ 진입 주소도 같은 이미지</small></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/assets/og/guide-ditto-ds.png" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>Ditto 디자인 시스템 · Splup 디자인 가이드</b><span>버튼, 그래픽, 플래터와 위젯 반응형 규격을 한곳에서 확인하세요.</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/assets/og/guide-ditto-ds.png" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/assets/og/guide-motion.png" width="1200" height="630" loading="lazy" decoding="async" alt="그라디언트와 젤리 눌림 링크 미리보기 이미지"></div>
+  <figcaption><b>그라디언트와 젤리 눌림</b><a class="og-url" href="https://ditto.at/splup/output/ditto-reference-motion-2026-09-27/">ditto.at/splup/output/ditto-reference-motion-2026-09-27/</a><code>/assets/og/guide-motion.png</code></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/assets/og/guide-motion.png" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>그라디언트와 젤리 눌림 · Splup 디자인 가이드</b><span>선명한 그라디언트 위에서 말랑하게 눌리는 버튼 — 디토 모션 레퍼런스.</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/assets/og/guide-motion.png" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+</div>
+
+  <h2>시안 모아 보기</h2>
+  <div class="og-gallery">
+<figure class="og-card">
+  <div class="og-shot"><img src="https://ditto.at/assets/og/demo-index.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="시안 모아 보기 링크 미리보기 이미지"></div>
+  <figcaption><b>시안 모아 보기</b><a class="og-url" href="https://ditto.at/demo/">ditto.at/demo/</a><code>/assets/og/demo-index.jpg</code><small>assets/rooms/ 방 캡처 10장</small></figcaption>
+  <div class="og-mocks">
+    <div class="og-kakao" aria-label="카카오톡 미리보기 예시"><span class="og-mock-t">카카오톡</span><div class="og-bubble"><div class="og-kimg"><img src="https://ditto.at/assets/og/demo-index.jpg" alt="" loading="lazy" decoding="async"></div><div class="og-ktext"><b>10명의 플래터 · ditto!</b><span>실제 서버 데이터로 그린 10명의 플래터 — 프로필 시안 모음</span><small>ditto.at</small></div></div></div>
+    <div class="og-x" aria-label="X 미리보기 예시"><span class="og-mock-t">X</span><div class="og-xcard"><img src="https://ditto.at/assets/og/demo-index.jpg" alt="" loading="lazy" decoding="async"><span>ditto.at</span></div><small>From ditto.at</small></div>
+  </div>
+</figure>
+</div>
+
+  <h2>이렇게 써요</h2>
+  <div class="og-dd">
+    <div class="og-do"><b>이렇게</b><ul>
+      <li>제목·얼굴·워드마크는 가운데 1080 × 560 안에 둔다</li>
+      <li>프로필은 그 사람의 핸들 색 하나만 쓴다 — 앱 화면과 같은 색</li>
+      <li>실제 사용자 OG에는 <b>대표 플래터</b> 사진만 쓴다 (라이프 플래터는 시안 계정만)</li>
+      <li>이미지를 바꾸면 파일 이름을 바꾸거나 카카오 공유 디버거에서 캐시를 지운다</li>
+      <li>새 공개 페이지를 만들면 그날 OG도 함께 만든다</li>
+    </ul></div>
+    <div class="og-dont"><b>피해요</b><ul>
+      <li>가장자리에 글자 붙이기, 24px보다 작은 글자</li>
+      <li>사진이 든 이미지를 PNG로 저장하기, 300KB 넘기기</li>
+      <li><code>og:image</code>에 상대 경로 쓰기, <code>og:url</code>에 <code>.html</code> 남기기</li>
+      <li>다른 페이지 OG를 그대로 빌려 쓰기 — 링크마다 무엇인지 달라야 한다</li>
+      <li>메일 템플릿에 OG 넣기 (링크로 공유하지 않는다)</li>
+    </ul></div>
+  </div>
+
+  <script>document.querySelector("#page-og-images .og-safe-toggle").addEventListener("click", function () { var on = this.getAttribute("aria-pressed") !== "true"; this.setAttribute("aria-pressed", on); document.getElementById("page-og-images").classList.toggle("og-show-safe", on); });</script>
+  <div class="page-nav">
+    <a href="#mapping"><span class="dir">이전</span>변경 가이드</a>
+    <a class="next" href="#resources"><span class="dir">다음</span>자료 개요</a>
+  </div>
 </article>
 <article class="page content-max" id="page-profile-avatars" hidden>
   <div class="crumb">컬러 / 기본 아바타</div>
@@ -1589,7 +1844,7 @@
 
 <script>
   (function () {
-    var pages = ["widget-system", "profile-avatars", "profile-handles", "foundations", "components", "patterns", "resources", "overview", "colorgraphy", "color", "brand-graphics", "color-application", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "roadmap"];
+    var pages = ["widget-system", "profile-avatars", "profile-handles", "foundations", "components", "patterns", "resources", "overview", "colorgraphy", "color", "brand-graphics", "color-application", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "og-images", "roadmap"];
     var tocEl = document.getElementById("toc");
     var tocList = document.getElementById("tocList");
     var mobileToc = document.getElementById("mobileToc");
@@ -1658,7 +1913,7 @@
       buttons: "components", "widget-system": "components",
       voice: "brand", writing: "brand", assets: "reference",
       mapping: "reference", audit: "migration", backlog: "migration",
-      tokens: "reference"
+      tokens: "reference", "og-images": "reference"
     };
     var GROUP_HOME = { start: "overview", colorgraphy: "colorgraphy", foundations: "foundations", components: "components", brand: "patterns", reference: "resources", migration: "roadmap" };
     var GROUP_NAME = { colorgraphy: "컬러", foundations: "기본 규칙", components: "컴포넌트", brand: "적용 방법", reference: "자료", migration: "변경 기록" };
