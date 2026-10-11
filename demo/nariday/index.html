@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>나리 (@nariday) · ditto!</title>
+<meta name="description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
+<meta name="robots" content="noindex, noimageindex">
+<meta name="theme-color" content="#F3F0F7">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="ditto!">
+<meta property="og:url" content="https://ditto.at/demo/nariday">
+<meta property="og:title" content="나리 (@nariday) · ditto!">
+<meta property="og:description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
+<meta property="og:image" content="https://ditto.at/demo/nariday/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="나리 (@nariday) · ditto!">
+<meta name="twitter:description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
+<meta name="twitter:image" content="https://ditto.at/demo/nariday/og.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+  /* Splup 토큰 (앱 DesignSystem/Foundations · SplupColors.generated.swift 라이트 값). 앱 위젯은 고정 표면이라 라이트만 쓴다. */
+  :root {
+    --bg: #F3F0F7;            /* layer/basement = DT.backgroundNormal */
+    --layer: #FFFFFF;         /* layer/default */
+    --ink: #1C1722;           /* text/strong */
+    --text: #443651;          /* text/default */
+    --subtle: #6D5F7D;        /* text/subtle */
+    --border: #E7E1EE;        /* border/default = DT.lineSubtle */
+    --brand: #AA4AF4;         /* fill/brand */
+    --brand-text: #862FC6;    /* text/brand */
+    --tonal: #F2E8FF;         /* fill/brand-tonal */
+    --primary: #9D3EE4;       /* action/primary */
+    --primary-hover: #862FC6;
+    --primary-pressed: #6F26A4;
+    --neutral: #F3F0F7;       /* action/neutral */
+    --neutral-fg: #443651;
+    color-scheme: light;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--ink); min-height: 100svh; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; }
+  [hidden] { display: none !important; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--brand-text); outline-offset: 2px; }
+
+  /* 폰 폭 칼럼 — 모바일은 꽉 차게, 넓은 화면은 가운데 430 칼럼 + 은은한 브랜드 바탕 */
+  .app { position: relative; width: 100%; max-width: 430px; min-height: 100svh; margin: 0 auto; background: var(--bg); padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .app:has(#profile[hidden]) { padding-bottom: 0; }
+  @media (min-width: 560px) {
+    html, body { background: #EAE3F3 radial-gradient(1100px 700px at 15% 0%, #F2E8FF 0%, rgba(242,232,255,0) 60%) fixed, radial-gradient(900px 640px at 90% 100%, #F9EAF6 0%, rgba(249,234,246,0) 60%) fixed; background-color: #EAE3F3; }
+    .app { margin: 32px auto; min-height: calc(100svh - 64px); border-radius: 36px; overflow: hidden; box-shadow: 0 0 0 1px rgba(68,54,81,.06), 0 24px 64px rgba(68,54,81,.14); }
+  }
+
+  /* 상단 — 앱 FriendPlatterDetail.header: 56 높이 · 좌우 12 · 가운데 "{이름}의 플래터" (title/sm 17 SemiBold) */
+  .nav { position: sticky; top: 0; z-index: 20; height: 56px; padding: 0 12px; display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; background: var(--bg); }
+  .nav h1 { font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.01em; text-align: center; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 4px; }
+  .nav-btn { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+  .nav-btn:hover { background: rgba(28,23,34,.05); }
+  .nav-btn i { display: block; width: 18px; height: 18px; background: var(--ink); -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; }
+
+  /* Splup/ProfileHandle · 대표 — 높이 64 · 사방 8 · R16 · [아바타 48 R12] 8 [이름/아이디] 8 [액션 44] */
+  .handle { position: relative; display: flex; align-items: center; gap: 8px; margin: 2px 14px 12px; padding: 8px; min-height: 64px; border-radius: 16px;
+    background: linear-gradient(180deg, var(--h-top, #B66BEC) 0%, var(--h-bottom, #9270D9) 100%); box-shadow: 0 3px 8px rgba(0,0,0,.06); color: #171719; }
+  .handle::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 22%); pointer-events: none; }
+  .h-av { position: relative; flex: none; width: 48px; height: 48px; border-radius: 12px; overflow: hidden; background: #F1F2F4; display: grid; place-items: center; }
+  .h-av img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .h-fb { display: grid; place-items: center; }
+  .h-av svg { width: 24px; height: 24px; }
+  .h-labels { position: relative; flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .h-name { font-size: 16px; font-weight: 500; line-height: 1.45; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .h-sub { font-size: 12px; font-weight: 400; line-height: 1.4; color: rgba(23,23,25,.62); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* 친구 추가 가능 — 44 원 #F0EDFF + 사람+ 20 #454650 (ProfileRelation.canAdd) */
+  .h-act { position: relative; flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F0EDFF; color: #454650; display: grid; place-items: center; transition: transform .15s ease; -webkit-tap-highlight-color: transparent; }
+  .h-act:active { transform: scale(.94); }
+  .h-act svg { width: 20px; height: 20px; }
+
+  /* 대표 플래터 — 바탕 위에 바로. 좌우 마진 16 · 위 4 (Grid.margin · DDSSpace.x1) */
+  .platter { padding: 4px 16px 0; }
+  #platterEnd { height: 1px; }
+
+  /* 친구가 되는 3단계 — 이전 버전 문구·톤 그대로 (다운로드 버튼은 하단 고정 배너가 맡는다) */
+  .steps { margin: 28px 16px 0; padding: 18px 20px; border-radius: 16px; background: rgba(255,255,255,.6); list-style: none; font-size: 13.5px; font-weight: 600; color: #44444c; line-height: 2; }
+  .steps li > span { display: inline-block; width: 1.4em; color: var(--brand-text); font-weight: 700; }
+  .steps b { font-weight: 700; color: var(--ink); }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 56px; margin-top: 20px; border-radius: 12px; background: var(--primary); color: #fff; font-size: 17px; font-weight: 700; text-decoration: none; transition: background .11s ease-out; }
+  .btn:hover { background: var(--primary-hover); }
+  .foot { padding: 28px 16px calc(32px + env(safe-area-inset-bottom, 0px)); text-align: center; }
+  .foot a { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--subtle); text-decoration: none; }
+  .foot img { height: 16px; }
+
+  /* 없는 페이지 */
+  .missing { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px 64px; text-align: center; }
+  @media (min-width: 560px) { .missing { min-height: calc(100svh - 64px); } }
+  .missing img { height: 30px; margin-bottom: 24px; }
+  .missing h1 { font-size: 19px; font-weight: 700; line-height: 1.4; }
+  .missing p { margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--subtle); }
+  .missing .btn { width: auto; padding: 0 28px; }
+
+  /* 토스트 */
+  .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); z-index: 50; transform: translate(-50%, 12px); opacity: 0; padding: 12px 18px; border-radius: 12px; background: #2D2435; color: #FAF9FC; font-size: 14px; font-weight: 500; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+  .toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+  /* 하단 고정 배너 — 이전 버전 그대로 (어두운 반투명 바 · 워드마크 · 다운로드) */
+  .banner { position: fixed; z-index: 30; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: calc(100% - 32px); max-width: 398px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; text-decoration: none; background: rgba(28,20,40,.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 10px 34px rgba(40,16,60,.35); -webkit-tap-highlight-color: transparent; }
+  .banner-mark { height: 20px; }
+  .banner-text { flex: 1 1; font-size: 13px; font-weight: 600; color: #fff; text-align: left; }
+  .banner-btn { font-size: 13px; font-weight: 700; color: #fff; background: #b255d9; padding: 8px 16px; border-radius: 10px; white-space: nowrap; }
+  @media (min-width: 560px) { .banner { bottom: 48px; } }
+
+  /* 앱 다운로드 유도 모달 — 이전 버전 그대로: 아래에서 올라오는 시트(데스크톱은 가운데) · 둥근 프로필 + ditto 배지 · 검은 버튼 */
+  .dl-scrim { position: fixed; inset: 0; z-index: 40; background: rgba(22,14,34,.42); opacity: 0; transition: opacity .35s ease; }
+  .dl-scrim.on { opacity: 1; }
+  .dl { position: fixed; z-index: 41; left: 50%; bottom: 0; width: min(100%, 440px); transform: translate(-50%, 104%); transition: transform .45s cubic-bezier(.22,1,.36,1);
+    background: #fff; color: #1c1c22; border-radius: 28px 28px 0 0; padding: 12px 24px calc(24px + env(safe-area-inset-bottom, 0px)); text-align: center; box-shadow: 0 -18px 60px rgba(40,16,60,.28); }
+  .dl.on { transform: translate(-50%, 0); }
+  .dl-grab { width: 40px; height: 5px; border-radius: 3px; background: #e4dcee; margin: 0 auto 18px; }
+  .dl-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #f4f1f8; color: #44444c; font-size: 20px; line-height: 1; cursor: pointer; }
+  .dl-av { position: relative; width: 84px; height: 84px; margin: 6px auto 14px; }
+  .dl-av > span { width: 84px; height: 84px; border-radius: 84px; display: flex; align-items: center; justify-content: center; border: 3px solid #f0e8fa; background: linear-gradient(150deg, #b46ce0, #f39fce) center / cover no-repeat; color: #fff; font-size: 36px; font-weight: 700; }
+  .dl-av i { position: absolute; right: -6px; bottom: -4px; width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(135deg, #AA4AF4, #6655D2); box-shadow: 0 0 0 3px #fff; display: grid; place-items: center; }
+  .dl-av i img { width: 20px; height: auto; }
+  .dl h2 { font-size: 20px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; word-break: keep-all; }
+  .dl p { margin-top: 8px; font-size: 14px; font-weight: 500; color: #6b6b76; line-height: 1.6; word-break: keep-all; }
+  .dl-store { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 22px; height: 54px; border-radius: 14px; background: #16121B; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none; }
+  .dl-store svg { width: 20px; height: 20px; }
+  .dl-later { margin-top: 8px; width: 100%; height: 46px; border: 0; border-radius: 14px; background: none; color: #6b6b76; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
+  .dl :focus-visible, .banner:focus-visible { outline: 2px solid #9b4be0; outline-offset: 3px; }
+  @media (min-width: 640px) { .dl { bottom: 50%; border-radius: 28px; padding-bottom: 24px; transform: translate(-50%, calc(50% + 24px)); opacity: 0; transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .3s ease; } .dl.on { transform: translate(-50%, 50%); opacity: 1; } .dl-grab { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .dl, .dl-scrim, .toast { transition: none; } }
+
+  /* ───── 위젯 (scripts/platter.py) — 앱 렌더러 치수를 Grid.width 358 기준 cqw로 ───── */
+  .pl-head { font-size: 13px; font-weight: 700; color: #6b6b76; margin: 0 6px 10px; letter-spacing: -.01em; }
+  .pl { position: relative; width: 100%; container-type: inline-size; }
+  .w { position: absolute; overflow: hidden; isolation: isolate; color: #171719; -webkit-tap-highlight-color: transparent; }
+  .w.hl::after { content: ""; position: absolute; inset: 0; z-index: 9; border-radius: inherit; box-shadow: inset 0 0 0 1px #E7E1EE; pointer-events: none; }
+  .w-block { box-shadow: inset 0 0 0 1px rgba(94,96,104,.12); }
+  .w[role=button] { cursor: pointer; transition: transform .18s ease; }
+  .w[role=button]:active { transform: scale(.97); }
+  .w:focus-visible { outline: 2px solid #9b4be0; outline-offset: 2px; }
+  .w.glow { box-shadow: 0 0 16px 3px rgba(170,74,244,.30); }
+  .w .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .w .soft { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 18px rgba(255,255,255,.95), inset 1px 2px 7px rgba(255,255,255,.25); pointer-events: none; }
+  .w .grow { flex: 1 1 auto; }
+  .w svg { display: block; width: 100%; height: 100%; }
+  /* 글(블록) */
+  .bl { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .bl-main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 4px; }
+  .bl-h .bl-main { flex-direction: row; align-items: center; gap: 8px; }
+  .bl-emoji { display: flex; align-items: center; line-height: 1; }
+  .bl-text, .st-title, .ask-t, .dy-t { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
+  .bl-text { font-weight: 500; color: #171719; }
+  .bl-src { display: flex; gap: 4px; font-weight: 500; color: #70737c; }
+  .bl-src span { flex: 1 1 auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  /* 영상 */
+  .vd-shade { position: absolute; left: 0; right: 0; top: 0; height: 57%; background: linear-gradient(#111, rgba(17,17,17,0)); }
+  .vd-title { position: absolute; left: 0; right: 0; top: 0; color: #fff; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .vd-yt { position: absolute; transition: opacity .3s; }
+  .w.playing .vd-shade, .w.playing .vd-title { opacity: 0; transition: opacity .3s; }
+  .w.playing .vd-yt { opacity: 0; }
+  /* 스티커 */
+  .sk { position: absolute; transform: translate(-50%, -50%) rotate(var(--r)); font-style: normal; line-height: 1; }
+  .sk > * { display: block; animation: wob 3.2s ease-in-out var(--d) infinite; }
+  .sk img { object-fit: contain; }
+  .sk img.flat { mix-blend-mode: multiply; }
+  .sk-text { position: absolute; left: 0; right: 0; top: 45%; text-align: center; font-weight: 600; color: #b04a75; }
+  @keyframes wob { 0%, 100% { transform: rotate(0) translateY(0); } 50% { transform: rotate(5deg) translateY(-1.5%); } }
+  /* 서비스 타일 (폴라로이드 · 파파라치) */
+  .st { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .st-label { display: flex; align-items: center; justify-content: space-between; font-weight: 500; color: #77727c; }
+  .st-label svg { width: .9em; height: .9em; }
+  .st-w { flex-direction: row; align-items: center; }
+  .st-w .st-body { align-self: stretch; }
+  .st-col { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+  .st-col .st-label { font-weight: 500; }
+  .st-body { flex: 1 1 auto; min-height: 0; display: flex; }
+  .st-title { font-weight: 700; color: #232127; }
+  .st-sub { font-weight: 400; color: #77727c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pol { flex: 1 1 auto; display: flex; flex-direction: column; margin: 2px; padding: 6px 6px 0; background: #fff; box-shadow: 0 0 0 1px #ebe6ed; }
+  .pol-chin { height: 12px; flex: none; }
+  .pol-photo, .pap-photo { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; background: #eee9ee; }
+  .pol-photo img, .pap-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pol-photo.empty, .pap-photo.empty { display: grid; place-items: center; color: #918694; }
+  .pol-photo.empty i, .pap-photo.empty i { display: block; }
+  .pol-photo.empty svg, .pap-photo.empty svg { width: 100%; height: 100%; }
+  .pap { flex: 1 1 auto; display: flex; border-radius: 10px; overflow: hidden; }
+  .fl-count { position: absolute; right: 6px; bottom: 6px; padding: 2px 6px; border-radius: 8px; background: rgba(0,0,0,.45); color: #fff; font-size: 10px; font-weight: 600; }
+  /* Ask */
+  .ask { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .ask-h { flex-direction: row; align-items: center; }
+  .ask-col { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+  .ask-k { display: flex; align-items: center; justify-content: space-between; font-weight: 600; color: #70737c; }
+  .ask-k svg { width: .9em; height: .9em; }
+  .ask-artbox { flex: none; display: flex; justify-content: center; }
+  .ask-art { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+  .ask-h .ask-art { width: 100%; height: auto; }
+  .ask-t { font-weight: 700; color: #171719; letter-spacing: -.02em; }
+  .ask-q { background: #f5f0fa; color: #70737c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ask-a { color: #70737c; font-weight: 500; }
+  /* 디토 위젯 */
+  .dt-emoji, .dt-title { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.4; }
+  .dt-title { font-weight: 600; color: #1C1722; }
+  .dt-src { position: absolute; display: flex; align-items: center; background: #fff; color: #1C1722; font-weight: 500; }
+  .dt-src b { flex: 1 1 auto; min-width: 0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dt-src-n { flex-direction: column; justify-content: center; text-align: center; }
+  .dt-src-n b { flex: none; max-width: 100%; }
+  .dt-av { flex: none; display: block; background: #E7E1EE; object-fit: cover; }
+  .dt-cap { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; color: #fff; }
+  .dt-cap.on { background: linear-gradient(rgba(28,23,34,0), rgba(28,23,34,.18) 42%, rgba(28,23,34,.72)); }
+  .dt-cap b { font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .dt-cap span { display: flex; align-items: center; font-weight: 500; }
+  .dt-badge { position: absolute; z-index: 2; }
+  .dt-badge.av { filter: drop-shadow(0 2px 4px rgba(0,0,0,.12)); }
+  /* 음악 (CDP) */
+  .w-music { box-shadow: inset 0 0 0 1px #c8c9ce, inset 0 1px 6px rgba(255,255,255,.6); }
+  .cd { position: absolute; border-radius: 50%; background: #bec1c7; box-shadow: 0 0 0 1px rgba(255,255,255,.8), 0 3px 8px rgba(30,20,50,.18); }
+  .cd-rot { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: conic-gradient(from 15deg, #4c607e, #8294b5, #e5e6ed, #8396b6, #384968, #8395ac, #e2e4ee, #a2afc6, #495c7c, #7890ab, #4c607e); }
+  .cd-rot img { position: absolute; inset: 3%; width: 94%; height: 94%; border-radius: 50%; object-fit: cover; }
+  .cd-grooves { position: absolute; inset: 4.5%; border-radius: 50%; background: repeating-radial-gradient(circle, rgba(255,255,255,0) 0 3.4%, rgba(255,255,255,.05) 3.6% 3.8%); }
+  .cd-sheen { position: absolute; inset: 3%; border-radius: 50%; opacity: .22; background: conic-gradient(from 22deg, transparent 0 7.5%, rgba(255,183,205,.72) 14%, rgba(174,160,242,.8) 17%, rgba(119,210,242,.86) 20%, rgba(163,239,210,.72) 23%, transparent 29% 55%, rgba(244,161,205,.78) 63%, rgba(163,172,248,.8) 67%, rgba(115,219,221,.85) 71%, rgba(173,240,184,.6) 75%, transparent 81%); box-shadow: inset 0 0 0 1.5px rgba(46,63,90,.5); }
+  .cd-hub { position: absolute; left: 36.25%; top: 36.25%; width: 27.5%; height: 27.5%; border-radius: 50%; background: linear-gradient(135deg, #fff, #8b909b 50%, #f5f5f8); box-shadow: 0 0 0 1px #252d3c, 0 0 0 2.5px #fff; }
+  .cd-hole { position: absolute; left: 43.75%; top: 43.75%; width: 12.5%; height: 12.5%; border-radius: 50%; background: #dadcdf; box-shadow: inset 0 0 0 1px #949ba7; }
+  .w.playing .cd-rot { animation: spin 3.2s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .mu-info { position: absolute; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .mu-info.c { align-items: center; text-align: center; }
+  .mu-info b, .mu-info span { max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mu-info b { font-weight: 600; color: #1c1722; }
+  .mu-info span { font-weight: 400; color: #443651; }
+  .mu-bar { position: absolute; border-radius: 3px; background: rgba(28,23,34,.14); overflow: hidden; opacity: 0; transition: opacity .25s; }
+  .mu-bar i { display: block; height: 100%; width: 0; background: #6b5579; border-radius: inherit; }
+  .w.playing .mu-bar, .w.paused .mu-bar { opacity: 1; }
+  /* 사진 · 상태 · 글 · 그 밖 */
+  .im-title { position: absolute; left: 0; right: 0; top: 0; color: #fff; font-weight: 600; background: linear-gradient(rgba(28,23,33,.72), rgba(28,23,33,.35) 58%, rgba(28,23,33,0)); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ph { position: absolute; inset: 0; display: grid; place-items: center; color: #8a8792; }
+  .ph svg { width: 22%; height: auto; }
+  .ss { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8px; }
+  .ss-h { flex-direction: row; justify-content: flex-start; }
+  .ss span { line-height: 1.1; }
+  .ss b { font-weight: 600; color: #171719; }
+  .tx { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .tx p { max-width: 100%; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
+  .bl-text, .ask-t, .dt-title, .tx p, .md b, .dy-t, .ss b, .sk-text { white-space: pre-line; }
+  .ss .sub { font-weight: 500; opacity: .6; color: inherit; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ss b + .sub { margin-top: 0; }
+  /* 오늘의 기분 */
+  .md { position: absolute; inset: 0; display: flex; align-items: center; }
+  .md-e { flex: none; line-height: 1.2; }
+  .md-col { min-width: 0; display: flex; flex-direction: column; }
+  .md-col b { font-weight: 600; color: rgba(18,18,18,.75); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; }
+  .md-col span { font-weight: 500; color: rgba(18,18,18,.4); }
+  /* 한줄일기 */
+  .dy { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .dy-k { display: flex; justify-content: space-between; gap: 6px; font-weight: 500; color: rgba(18,18,18,.42); white-space: nowrap; min-width: 0; }
+  .dy-k span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .dy-t { font-style: italic; font-weight: 400; color: rgba(18,18,18,.75); }
+  /* D-Day */
+  .dd { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #4a3f8f; padding: 6px; }
+  .dd b { font-family: "New York", "Iowan Old Style", Georgia, "Times New Roman", serif; font-style: italic; font-weight: 700; line-height: 1.1; white-space: nowrap; }
+  .dd span { font-weight: 500; opacity: .7; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* 날씨 · GIF */
+  .wt b { font-weight: 600; color: rgba(18,18,18,.72); }
+  .wt .sub, .gf .sub { color: rgba(18,18,18,.9); opacity: .55; }
+  .gf .sub { letter-spacing: .07em; }
+  /* 음성 메모 */
+  .vo { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .vo-bars { display: flex; align-items: center; }
+  .vo-bars i { display: block; width: 3px; border-radius: 2px; background: #c98a2e; }
+  .vo-t { display: flex; align-items: center; font-weight: 500; color: #8a5d16; }
+  .vo-t i { font-style: normal; }
+  /* 지금 듣는 중 · 플레이리스트 · 콜렉션 (어두운 바탕) */
+  .np { position: absolute; inset: 0; display: flex; align-items: center; color: #fff; }
+  .np-bars { flex: none; display: flex; align-items: flex-end; }
+  .np-bars i { display: block; width: 3px; border-radius: 2px; background: #AA4AF4; transform-origin: bottom; }
+  .w.np-live .np-bars i { animation: eq 1.1s ease-in-out infinite; }
+  .np-bars i:nth-child(2) { animation-delay: -.3s; } .np-bars i:nth-child(3) { animation-delay: -.6s; } .np-bars i:nth-child(4) { animation-delay: -.15s; }
+  @keyframes eq { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.45); } }
+  .np-col { min-width: 0; display: flex; flex-direction: column; }
+  .np-col b, .np-col span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .np-col b { font-weight: 600; }
+  .np-col span { font-weight: 500; color: rgba(255,255,255,.55); }
+  .pls { position: absolute; inset: 0; display: flex; flex-direction: column; color: #fff; }
+  .pls-h { display: flex; align-items: center; font-weight: 600; }
+  .pls-h .np-bars i { width: 2.5px; }
+  .pls-r { display: flex; align-items: center; font-weight: 500; min-width: 0; }
+  .pls-r span { color: rgba(255,255,255,.35); }
+  .pls-r b { font-weight: 500; color: rgba(255,255,255,.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pls-f { font-weight: 500; color: rgba(255,255,255,.4); }
+  .cl { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .cl > p { font-weight: 500; color: rgba(255,255,255,.85); }
+  .cl-g { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .cl-c { aspect-ratio: .78; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,.1); min-width: 0; }
+  .cl-c i { font-style: normal; line-height: 1.3; }
+  .cl-c b { font-weight: 500; color: rgba(255,255,255,.85); max-width: 92%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* 방명록 */
+  .gb { flex: 1 1 auto; align-self: stretch; width: 100%; background: #FAF6ED; color: #443A30; font-weight: 400; overflow: hidden; word-break: keep-all; }
+  @media (prefers-reduced-motion: reduce) {
+    .sk > * { animation: none; }
+    .w.playing .cd-rot { animation: none; }
+    .w.np-live .np-bars i { animation: none; }
+    .w[role=button] { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="app">
+  <div id="profile">
+    <header class="nav">
+      <a class="nav-btn" href="/" aria-label="ditto! 홈으로"><i style="--m:url(/assets/platter/ic-back.png)"></i></a>
+      <h1 id="navTitle">나리의 플래터</h1>
+      <button class="nav-btn" id="shareBtn" type="button" aria-label="프로필 링크 공유"><i style="--m:url(/assets/platter/ic-share.png)"></i></button>
+    </header>
+    <section class="handle" aria-label="프로필">
+      <div class="h-av">
+        <span class="h-fb" id="avatarFallback" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5a6 6 0 0 1 2.07 11.63c2.05.27 3.6.94 4.77 1.82 1.53 1.15 2.32 2.6 2.72 3.77.3.88.08 1.74-.45 2.35-.52.6-1.3.93-2.12.93H5.01c-.82 0-1.6-.34-2.12-.93-.53-.61-.75-1.47-.45-2.35.4-1.17 1.19-2.62 2.72-3.77 1.17-.88 2.72-1.55 4.77-1.82A6 6 0 0 1 12 1.5Z" fill="#8B9099"/></svg></span>
+        <img id="avatar" src="https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/7bffb239-6346-4343-a6bf-ed58398c653b/avatar.jpg" alt="">
+      </div>
+      <div class="h-labels">
+        <p class="h-name" id="name">나리</p>
+        <p class="h-sub" id="handle">@nariday</p>
+      </div>
+      <button class="h-act" type="button" data-dl data-msg="add" aria-label="친구 추가하기"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.83 12.33c.55 0 1 .45 1 1v1.5h1.5a1 1 0 1 1 0 2h-1.5v1.5a1 1 0 1 1-2 0v-1.5h-1.5a1 1 0 1 1 0-2h1.5v-1.5c0-.55.45-1 1-1ZM10 1.08a5.17 5.17 0 0 1 2.32 9.79c.5.09.95.21 1.38.36a2.98 2.98 0 0 0-.83 1.64 2.98 2.98 0 0 0-.9 5.63H4.5c-.82 0-1.6-.34-2.11-.94-.53-.62-.74-1.5-.38-2.38.4-.99 1.13-2.14 2.42-3.03.86-.59 1.92-1.04 3.25-1.29A5.17 5.17 0 0 1 10 1.08Z" fill="currentColor"/></svg></button>
+    </section>
+    <section class="platter" id="platter" aria-label="대표 플래터"><div class="pl" style="aspect-ratio:358.0 / 678.25"><div class="w w-text hl" style="left:0.000%;top:0.000%;width:48.883%;height:12.311%;border-radius:3.352cqw;background:#f3edde" role="img" aria-label="글, 삐뚤어도
+내 컵"><div class="tx" style="padding:3.352cqw;font-size:3.631cqw;line-height:5.587cqw;color:#554632;justify-content:flex-start;align-items:flex-start;text-align:left;font-weight:500;"><p>삐뚤어도
+내 컵</p></div></div><div class="w w-image glow" style="left:51.117%;top:0.000%;width:48.883%;height:25.802%;border-radius:4.469cqw;background:#e7e4ee" role="button" tabindex="0" aria-label="사진, 삐뚤어도 내 컵" data-dl data-msg="ditto"><img class="cover" src="media/e97600c11dae.jpg" alt="" loading="lazy"><span class="soft"></span><p class="im-title" style="font-size:4.749cqw;padding:3.352cqw 3.352cqw 5.587cqw">삐뚤어도 내 컵</p><img class="dt-badge av" src="/assets/dittobadge-32.svg" alt="" style="right:2.235cqw;bottom:2.235cqw;width:6.704cqw;height:6.704cqw"></div><div class="w w-mood hl" style="left:0.000%;top:13.491%;width:48.883%;height:12.311%;border-radius:3.352cqw;background:#f1e0b1" role="img" aria-label="오늘의 기분, 조금 느슨하게"><div class="md" style="padding:0 3.911cqw;gap:2.793cqw"><span class="md-e" style="font-size:7.821cqw">🧈</span><span class="md-col" style="gap:0.838cqw"><b style="font-size:3.911cqw;line-height:5.307cqw">조금 느슨하게</b><span style="font-size:3.073cqw">오늘의 기분</span></span></div></div><div class="w w-polaroid hl" style="left:0.000%;top:26.981%;width:48.883%;height:19.056%;border-radius:3.911cqw;background:#fff" role="button" tabindex="0" aria-label="폴라로이드, 우리 첫 컵" data-dl><div class="st" style="padding:3.352cqw;gap:1.676cqw"><div class="st-body"><div class="pol"><div class="pol-photo"><img src="media/78122164a40d.jpg" alt="" loading="lazy"></div><div class="pol-chin"></div></div></div><div class="st-title" style="font-size:4.749cqw;-webkit-line-clamp:1">폴라로이드</div></div></div><div class="w w-guestbook hl" style="left:51.117%;top:26.981%;width:48.883%;height:25.802%;border-radius:4.469cqw;background:#f3edde" role="button" tabindex="0" aria-label="방명록, 컵은 아직 굽는 중" data-dl data-msg="guestbook"><div class="st" style="padding:3.352cqw;gap:1.676cqw"><div class="st-label" style="font-size:2.793cqw">방명록<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7l4-4M4 3h3v3" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="st-body"><p class="gb" style="font-size:3.352cqw;line-height:4.860cqw;padding:2.793cqw;border-radius:2.793cqw">첫 안부를 기다려요.<br>짧은 한 줄을 남겨봐.</p></div><div class="st-title" style="font-size:4.749cqw;-webkit-line-clamp:1">컵은 아직 굽는 중</div><div class="st-sub" style="font-size:2.793cqw">첫 안부를 남겨봐</div></div></div><div class="w w-image glow" style="left:0.000%;top:47.217%;width:36.103%;height:25.802%;border-radius:3.911cqw;background:#e7e4ee" role="button" tabindex="0" aria-label="사진, 내일 것도 샀는데" data-dl data-msg="ditto"><img class="cover" src="media/f2ce40405f5d.jpg" alt="" loading="lazy"><span class="soft"></span><p class="im-title" style="font-size:3.911cqw;padding:3.352cqw 3.352cqw 5.587cqw">내일 것도 샀는데</p><img class="dt-badge av" src="/assets/dittobadge-32.svg" alt="" style="right:2.235cqw;bottom:2.235cqw;width:6.704cqw;height:6.704cqw"></div><div class="w w-voice hl" style="left:51.117%;top:53.962%;width:23.324%;height:12.311%;border-radius:3.352cqw;background:#f1e0b1" role="button" tabindex="0" aria-label="음성 메모, 0:08" data-dl data-msg="voice"><div class="vo" style="gap:2.235cqw"><span class="vo-bars" style="gap:0.698cqw"><i style="height:1.676cqw"></i><i style="height:3.352cqw"></i><i style="height:5.028cqw"></i><i style="height:2.514cqw"></i><i style="height:4.190cqw"></i><i style="height:1.955cqw"></i><i style="height:3.631cqw"></i><i style="height:2.793cqw"></i></span><span class="vo-t" style="font-size:3.073cqw;gap:1.397cqw"><i>▶</i>0:08</span></div></div><div class="w w-dday hl" style="left:76.676%;top:53.962%;width:23.324%;height:12.311%;border-radius:3.352cqw;background:#f3edde" role="img" aria-label="D-Day, 컵 찾는 날 D-2"><div class="dd" style="gap:1.117cqw"><b data-dday="1791860400000" data-fs="7.263" style="font-size:7.263cqw">D-2</b><span style="font-size:3.073cqw">컵 찾는 날</span></div></div><div class="w w-ditto hl" style="left:51.117%;top:67.453%;width:48.883%;height:19.056%;border-radius:3.911cqw;background:#e9d8f5" role="button" tabindex="0" aria-label="디토 위젯, from. @haeunzip" data-dl data-msg="ditto"><span class="dt-emoji" style="height:26.047cqw;font-size:15.163cqw">💬</span><span class="dt-src" style="left:2.235cqw;bottom:2.235cqw;width:30.168cqw;height:7.821cqw;padding:0 1.676cqw;gap:1.676cqw;border-radius:2.235cqw;font-size:3.352cqw;line-height:4.469cqw"><img class="dt-av" src="media/8691825c3d5e.jpg" alt="" style="width:5.587cqw;height:5.587cqw;border-radius:1.862cqw"><b>@haeunzip</b></span><img class="dt-badge" src="/assets/dittobadge-32.svg" alt="" style="top:2.235cqw;right:2.235cqw;width:6.704cqw;height:6.704cqw"></div><div class="w w-image glow" style="left:0.000%;top:74.198%;width:48.883%;height:25.802%;border-radius:4.469cqw;background:#e7e4ee" role="button" tabindex="0" aria-label="사진, 오늘의 조각 붙이기" data-dl data-msg="ditto"><img class="cover" src="media/94a803555749.jpg" alt="" loading="lazy"><span class="soft"></span><p class="im-title" style="font-size:4.749cqw;padding:3.352cqw 3.352cqw 5.587cqw">오늘의 조각 붙이기</p><img class="dt-badge av" src="/assets/dittobadge-32.svg" alt="" style="right:2.235cqw;bottom:2.235cqw;width:6.704cqw;height:6.704cqw"></div><div class="w w-text hl" style="left:51.117%;top:87.689%;width:48.883%;height:12.311%;border-radius:3.352cqw;background:#f1e0b1" role="img" aria-label="글, 천천히
+만들어도 돼"><div class="tx" style="padding:3.352cqw;font-size:3.631cqw;line-height:5.587cqw;color:#554632;justify-content:flex-start;align-items:flex-start;text-align:left;font-weight:500;"><p>천천히
+만들어도 돼</p></div></div></div></section><div id="platterEnd" aria-hidden="true"></div>
+    <ol class="steps" aria-label="친구가 되는 방법">
+      <li><span>1</span>ditto! 앱을 설치해요</li>
+      <li><span>2</span><b id="stepHandle">@nariday</b> 님을 친구로 추가해요</li>
+      <li><span>3</span>서로의 플래터를 구경해요</li>
+    </ol>
+    <footer class="foot"><a href="/"><img src="/assets/wordmark.svg" alt="ditto!"><span>위젯으로 서로의 하루를 주고받는 친구들의 공간</span></a></footer>
+  </div>
+  <section class="missing" id="missing" hidden>
+    <img src="/assets/wordmark.svg" alt="ditto!">
+    <h1>페이지를 찾을 수 없어요</h1>
+    <p>주소가 바뀌었거나 없는 페이지예요.</p>
+    <a class="btn" href="/">ditto! 홈으로</a>
+  </section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<a class="banner" id="banner" href="/download/" data-dl><img class="banner-mark" src="/email/wordmark-white.png" alt="ditto!"><span class="banner-text">앱에서 더 자세히 보기</span><span class="banner-btn">다운로드</span></a>
+<div class="dl-scrim" id="dlScrim" hidden></div>
+<section class="dl" id="dl" role="dialog" aria-modal="true" aria-labelledby="dlTitle" aria-describedby="dlDesc" hidden>
+  <div class="dl-grab" aria-hidden="true"></div>
+  <button class="dl-x" id="dlClose" type="button" aria-label="닫기">×</button>
+  <div class="dl-av" aria-hidden="true"><span id="dlAvatar"></span><i><img src="/email/wordmark-white.png" alt=""></i></div>
+  <h2 id="dlTitle"><span id="dlName"></span>님의 플래터는<br>ditto! 앱에서 볼 수 있어요</h2>
+  <p id="dlDesc">앱을 받으면 바로 친구로 추가하고, 서로의 위젯을 구경할 수 있어요.</p>
+  <a class="dl-store" id="dlStore" href="/download/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span id="dlStoreLabel">App Store에서 받기</span></a>
+  <button class="dl-later" id="dlLater" type="button">웹에서 먼저 둘러볼게요</button>
+</section>
+<script>
+(function () {
+  // 앱 다운로드 유도 모달. 출시 후 APP_STORE_URL만 채우면 App Store로 바로 연결된다. 비어 있으면 출시 알림 신청(/download/)으로 보낸다.
+  var APP_STORE_URL = "";
+  var $ = function (id) { return document.getElementById(id); };
+  var dl = $("dl"), scrim = $("dlScrim"), lastFocus = null, shown = false;
+  $("dlStore").href = APP_STORE_URL || "/download/";
+  $("dlStoreLabel").textContent = APP_STORE_URL ? "App Store에서 받기" : "출시 알림 받기";
+  if (!APP_STORE_URL) $("dlDesc").textContent = "곧 App Store에 나와요. 출시 알림을 받으면 가장 먼저 친구로 추가할 수 있어요.";
+  function sync() {
+    var name = $("name").textContent || "";
+    [].forEach.call(document.querySelectorAll("#dl .js-name"), function (e) { e.textContent = name; });
+    [].forEach.call(document.querySelectorAll("#dl .js-handle"), function (e) { e.textContent = $("handle").textContent; });
+    if ($("dlName")) $("dlName").textContent = name;
+    var src = $("avatar").hidden ? "" : $("avatar").currentSrc;
+    var box = $("dlAvatar");
+    box.textContent = ""; box.style.backgroundImage = "";
+    if (src) { box.style.backgroundImage = "url(" + JSON.stringify(src) + ")"; } else { box.textContent = (name || "").charAt(0).toUpperCase(); }
+  }
+  // 위젯을 눌러 띄울 때는 그 위젯에 맞는 문구로 바꾼다 (앱이 있어야 하는 동작)
+  var MSG = {
+    add: ['<span class="js-name"></span>님을 친구로 추가하려면<br>ditto! 앱이 필요해요', "앱을 받고 아이디로 찾으면 바로 친구 신청할 수 있어요."],
+    ask: ["질문은 ditto! 앱에서<br>익명으로 남길 수 있어요", "앱을 받고 친구로 추가하면 바로 질문을 남길 수 있어요."],
+    ditto: ["마음에 드는 위젯은<br>앱에서 디토할 수 있어요", "디토하면 친구의 위젯이 내 플래터에도 놓여요."],
+    video: ["영상은 ditto! 앱에서<br>볼 수 있어요", "앱을 받고 친구로 추가하면 플래터의 영상을 바로 볼 수 있어요."],
+    voice: ["음성 메모는 ditto! 앱에서<br>들을 수 있어요", "앱을 받고 친구로 추가하면 친구가 남긴 목소리를 바로 들을 수 있어요."],
+    guestbook: ["방명록은 ditto! 앱에서<br>남길 수 있어요", "앱을 받고 친구로 추가하면 바로 안부를 남길 수 있어요."]
+  };
+  var baseTitle = $("dlTitle").innerHTML, baseDesc = $("dlDesc").textContent;
+  function open(kind) {
+    if ($("profile").hidden || !dl.hidden) return;
+    var m = MSG[kind];
+    $("dlTitle").innerHTML = m ? m[0] : baseTitle;
+    $("dlDesc").textContent = m ? m[1] : baseDesc;
+    if (window.dittoPauseAll) window.dittoPauseAll();
+    sync(); lastFocus = document.activeElement; shown = true;
+    scrim.hidden = false; dl.hidden = false;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { scrim.classList.add("on"); dl.classList.add("on"); $("dlStore").focus(); }); });
+  }
+  function close() {
+    scrim.classList.remove("on"); dl.classList.remove("on");
+    setTimeout(function () { scrim.hidden = true; dl.hidden = true; }, 450);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  $("dlClose").addEventListener("click", close);
+  $("dlLater").addEventListener("click", close);
+  scrim.addEventListener("click", close);
+  document.addEventListener("keydown", function (e) {
+    if (dl.hidden) return;
+    if (e.key === "Escape") { close(); return; }
+    if (e.key === "Tab") {
+      var f = [$("dlClose"), $("dlStore"), $("dlLater")], i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+  [].forEach.call(document.querySelectorAll("[data-dl]"), function (a) { a.addEventListener("click", function (e) { e.preventDefault(); open(a.getAttribute("data-msg")); }); });
+  window.dittoOpenDownload = open;
+  // 공유 — 시스템 공유창, 안 되면 링크 복사
+  var toast = $("toast"), tt = 0;
+  function say(t) { toast.textContent = t; toast.classList.add("on"); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove("on"); }, 1800); }
+  var shareBtn = $("shareBtn");
+  if (shareBtn) shareBtn.addEventListener("click", function () {
+    var url = location.origin + location.pathname, title = document.title;
+    if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { say("링크를 복사했어요"); }, function () { say(url); });
+    else say(url);
+  });
+  // 자동으로 한 번 띄운다. 플래터가 있으면 플래터를 먼저 보게 한다:
+  // 플래터 끝까지 내려 본 뒤 잠시 후, 아니면 9초 뒤. 음악·영상을 듣는 중이면 끝날 때까지 미룬다.
+  var end = $("platterEnd");
+  function auto() {
+    if (shown) return;
+    if (document.querySelector(".w.playing")) { setTimeout(auto, 3000); return; }
+    open();
+  }
+  if (!end) { setTimeout(auto, 1400); return; }
+  setTimeout(auto, 9000);
+  // 플래터가 첫 화면에 다 들어와도 바로 띄우지 않는다 — 직접 스크롤해 끝을 본 경우에만 조금 앞당긴다.
+  var seen = false;
+  function check() {
+    if (seen || window.scrollY < 40 || end.getBoundingClientRect().top > window.innerHeight) return;
+    seen = true; window.removeEventListener("scroll", check);
+    setTimeout(auto, 1500);
+  }
+  window.addEventListener("scroll", check, { passive: true });
+})();
+</script>
+<script>
+(function () {
+  // 플래터 위젯 — 웹에서 되는 것만: 음악 30초 미리듣기 · 영상 재생 · 사진 넘겨 보기. 나머지는 앱 안내(data-dl).
+  var tiles = document.querySelectorAll(".pl .w");
+  if (!tiles.length) return;
+  // D-Day는 보는 날 기준으로 다시 센다 (빌드 날짜가 아니라)
+  [].forEach.call(document.querySelectorAll("[data-dday]"), function (b) {
+    var d = new Date(+b.getAttribute("data-dday")), now = new Date();
+    var n = Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 864e5);
+    b.textContent = n > 0 ? "D-" + n : n === 0 ? "D-DAY" : (n < -365 ? "1년+" : "D+" + (-n));
+    b.style.fontSize = b.textContent.length > 4 ? (parseFloat(b.dataset.fs) * 0.8) + "cqw" : b.dataset.fs + "cqw";
+  });
+  var current = null;
+  function stop(t) {
+    if (!t) return;
+    var a = t.querySelector("audio, video");
+    if (a && !a.paused) a.pause();
+  }
+  window.dittoPauseAll = function () { stop(current); };
+  function media(t) {
+    var a = t.querySelector("audio, video");
+    if (!a.dataset.bound) {
+      a.dataset.bound = "1";
+      var bar = t.querySelector(".mu-bar i");
+      a.addEventListener("playing", function () { t.classList.add("playing"); t.classList.remove("paused"); });
+      a.addEventListener("pause", function () { t.classList.remove("playing"); if (!a.ended) t.classList.add("paused"); });
+      a.addEventListener("ended", function () { t.classList.remove("playing", "paused"); if (bar) bar.style.width = "0"; a.currentTime = 0; });
+      a.addEventListener("error", function () { t.classList.remove("playing", "paused"); if (window.dittoOpenDownload) window.dittoOpenDownload(); });
+      if (bar) a.addEventListener("timeupdate", function () { if (a.duration) bar.style.width = (a.currentTime / a.duration * 100) + "%"; });
+    }
+    return a;
+  }
+  function toggle(t) {
+    var a = media(t);
+    if (!a.paused) { a.pause(); return; }
+    if (current && current !== t) stop(current);
+    current = t;
+    if (a.tagName === "VIDEO") a.muted = false;   // 누른 뒤에만 소리
+    var p = a.play();
+    if (p && p.catch) p.catch(function () { if (a.tagName === "VIDEO") { a.muted = true; a.play().catch(function () {}); } });
+  }
+  function flip(t) {
+    var imgs = t.querySelectorAll(".pol-photo img, .pap-photo img");
+    if (imgs.length < 2) return;
+    var i = 0;
+    for (; i < imgs.length; i++) if (!imgs[i].hidden) break;
+    imgs[i % imgs.length].hidden = true;
+    var n = (i + 1) % imgs.length;
+    imgs[n].hidden = false;
+    var c = t.querySelector(".fl-count");
+    if (c) c.textContent = (n + 1) + "/" + imgs.length;
+  }
+  [].forEach.call(tiles, function (t) {
+    var act = t.getAttribute("data-act");
+    if (act === "music" || act === "video") t.setAttribute("aria-pressed", "false");
+    if (act) t.addEventListener("click", function () {
+      if (act === "flip") flip(t); else toggle(t);
+    });
+    if (act === "music" || act === "video") {
+      var a = t.querySelector("audio, video");
+      a.addEventListener("play", function () { t.setAttribute("aria-pressed", "true"); });
+      a.addEventListener("pause", function () { t.setAttribute("aria-pressed", "false"); });
+    }
+    t.addEventListener("keydown", function (e) {
+      if (t.getAttribute("role") !== "button") return;
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t.click(); }
+    });
+  });
+  document.addEventListener("visibilitychange", function () { if (document.hidden) stop(current); });
+})();
+</script>
+<script>
+(function () {
+  // 미리 만든 페이지는 내용이 이미 채워져 있다. 404 페이지(아직 빌드 전인 새 아이디)일 때만 주소에서 아이디를 읽어 불러온다.
+  var SB = "https://lisqekczixwzshmpewzq.supabase.co", KEY = "sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf";
+  var $ = function (id) { return document.getElementById(id); };
+  var prebuilt = "nariday" !== "";
+  var seg = location.pathname.split("/").filter(Boolean);
+  if (!prebuilt && seg[0] === "u" && seg[1]) { location.replace("/" + seg[1].toLowerCase() + location.search); return; }
+  var handle = prebuilt ? "nariday" : (seg.length === 1 ? decodeURIComponent(seg[0]).replace(/^@/, "") : "");
+  if (!/^[A-Za-z0-9_.]{1,30}$/.test(handle)) { $("missing").hidden = false; document.title = "ditto!"; return; }
+  if (!prebuilt && handle !== handle.toLowerCase()) { location.replace("/" + handle.toLowerCase()); return; }
+  var show = function (name, avatar) {
+    $("name").textContent = name || handle;
+    $("navTitle").textContent = (name || handle) + "의 플래터";
+    $("handle").textContent = "@" + handle;
+    $("stepHandle").textContent = "@" + handle;
+    if (avatar && /^https:\/\//.test(avatar)) {
+      var img = $("avatar");
+      img.onload = function () { img.hidden = false; $("avatarFallback").hidden = true; };
+      img.onerror = function () { img.hidden = true; $("avatarFallback").hidden = false; };
+      if (img.getAttribute("src") !== avatar) img.src = avatar;
+    }
+    document.title = (name || handle) + " (@" + handle + ") · ditto!";
+  };
+  // 공유하지 않은 아이디는 보여 주지 않는다 (미리 만든 페이지 = 공유한 사람).
+  if (!prebuilt) { $("missing").hidden = false; document.title = "ditto!"; return; }
+  fetch(SB + "/rest/v1/profiles?select=nickname,handle,avatar_url&handle=ilike." + encodeURIComponent(handle.replace(/[_%]/g, "\\$&")) + "&limit=1", { headers: { apikey: KEY } })
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (rows) { if (rows && rows[0]) show(rows[0].nickname, rows[0].avatar_url); })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>

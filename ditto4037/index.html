@@ -51,7 +51,8 @@
   :focus-visible { outline: 2px solid var(--brand-text); outline-offset: 2px; }
 
   /* 폰 폭 칼럼 — 모바일은 꽉 차게, 넓은 화면은 가운데 430 칼럼 + 은은한 브랜드 바탕 */
-  .app { position: relative; width: 100%; max-width: 430px; min-height: 100svh; margin: 0 auto; background: var(--bg); }
+  .app { position: relative; width: 100%; max-width: 430px; min-height: 100svh; margin: 0 auto; background: var(--bg); padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .app:has(#profile[hidden]) { padding-bottom: 0; }
   @media (min-width: 560px) {
     html, body { background: #EAE3F3 radial-gradient(1100px 700px at 15% 0%, #F2E8FF 0%, rgba(242,232,255,0) 60%) fixed, radial-gradient(900px 640px at 90% 100%, #F9EAF6 0%, rgba(249,234,246,0) 60%) fixed; background-color: #EAE3F3; }
     .app { margin: 32px auto; min-height: calc(100svh - 64px); border-radius: 36px; overflow: hidden; box-shadow: 0 0 0 1px rgba(68,54,81,.06), 0 24px 64px rgba(68,54,81,.14); }
@@ -84,20 +85,12 @@
   .platter { padding: 4px 16px 0; }
   #platterEnd { height: 1px; }
 
-  /* 흐름 속 안내 (고정 배너 대신) */
-  .join { margin: 32px 16px 0; padding: 20px 20px 16px; border-radius: 16px; background: var(--layer); box-shadow: 0 1px 1.5px rgba(0,0,0,.06); }
-  .join-k { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--brand-text); }
-  .join-k img { width: 24px; height: 24px; border-radius: 7px; }
-  .join-t { margin-top: 10px; font-size: 19px; font-weight: 700; line-height: 1.4; letter-spacing: -0.02em; color: var(--ink); word-break: keep-all; }
-  .join-d { margin-top: 6px; font-size: 14px; font-weight: 400; line-height: 1.5; color: var(--subtle); word-break: keep-all; }
-  .steps { margin-top: 16px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .steps li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--text); }
-  .steps li > span:first-child { flex: none; width: 22px; height: 22px; border-radius: 8px; background: var(--tonal); color: var(--brand-text); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
-  .steps b { font-weight: 600; color: var(--ink); }
+  /* 친구가 되는 3단계 — 이전 버전 문구·톤 그대로 (다운로드 버튼은 하단 고정 배너가 맡는다) */
+  .steps { margin: 28px 16px 0; padding: 18px 20px; border-radius: 16px; background: rgba(255,255,255,.6); list-style: none; font-size: 13.5px; font-weight: 600; color: #44444c; line-height: 2; }
+  .steps li > span { display: inline-block; width: 1.4em; color: var(--brand-text); font-weight: 700; }
+  .steps b { font-weight: 700; color: var(--ink); }
   .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 56px; margin-top: 20px; border-radius: 12px; background: var(--primary); color: #fff; font-size: 17px; font-weight: 700; text-decoration: none; transition: background .11s ease-out; }
   .btn:hover { background: var(--primary-hover); }
-  .btn:active { background: var(--primary-pressed); }
-  .btn-note { margin-top: 10px; font-size: 12px; line-height: 1.4; color: var(--subtle); text-align: center; }
   .foot { padding: 28px 16px calc(32px + env(safe-area-inset-bottom, 0px)); text-align: center; }
   .foot a { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--subtle); text-decoration: none; }
   .foot img { height: 16px; }
@@ -111,30 +104,35 @@
   .missing .btn { width: auto; padding: 0 28px; }
 
   /* 토스트 */
-  .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 50; transform: translate(-50%, 12px); opacity: 0; padding: 12px 18px; border-radius: 12px; background: #2D2435; color: #FAF9FC; font-size: 14px; font-weight: 500; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+  .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); z-index: 50; transform: translate(-50%, 12px); opacity: 0; padding: 12px 18px; border-radius: 12px; background: #2D2435; color: #FAF9FC; font-size: 14px; font-weight: 500; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
   .toast.on { opacity: 1; transform: translate(-50%, 0); }
 
-  /* 앱 다운로드 유도 모달 — 시트(모바일) · 다이얼로그(넓은 화면). Splup 시트: R24 · layer/modal · e3 그림자 */
-  .dl-scrim { position: fixed; inset: 0; z-index: 40; background: rgba(28,23,34,.42); opacity: 0; transition: opacity .35s ease; }
+  /* 하단 고정 배너 — 이전 버전 그대로 (어두운 반투명 바 · 워드마크 · 다운로드) */
+  .banner { position: fixed; z-index: 30; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: calc(100% - 32px); max-width: 398px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; text-decoration: none; background: rgba(28,20,40,.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 10px 34px rgba(40,16,60,.35); -webkit-tap-highlight-color: transparent; }
+  .banner-mark { height: 20px; }
+  .banner-text { flex: 1 1; font-size: 13px; font-weight: 600; color: #fff; text-align: left; }
+  .banner-btn { font-size: 13px; font-weight: 700; color: #fff; background: #b255d9; padding: 8px 16px; border-radius: 10px; white-space: nowrap; }
+  @media (min-width: 560px) { .banner { bottom: 48px; } }
+
+  /* 앱 다운로드 유도 모달 — 이전 버전 그대로: 아래에서 올라오는 시트(데스크톱은 가운데) · 둥근 프로필 + ditto 배지 · 검은 버튼 */
+  .dl-scrim { position: fixed; inset: 0; z-index: 40; background: rgba(22,14,34,.42); opacity: 0; transition: opacity .35s ease; }
   .dl-scrim.on { opacity: 1; }
-  .dl { position: fixed; z-index: 41; left: 50%; bottom: 0; width: min(100%, 430px); transform: translate(-50%, 104%); transition: transform .45s cubic-bezier(.22,1,.36,1);
-    background: var(--layer); color: var(--ink); border-radius: 24px 24px 0 0; padding: 12px 20px calc(20px + env(safe-area-inset-bottom, 0px)); text-align: center; box-shadow: 0 -12px 32px rgba(0,0,0,.14); }
+  .dl { position: fixed; z-index: 41; left: 50%; bottom: 0; width: min(100%, 440px); transform: translate(-50%, 104%); transition: transform .45s cubic-bezier(.22,1,.36,1);
+    background: #fff; color: #1c1c22; border-radius: 28px 28px 0 0; padding: 12px 24px calc(24px + env(safe-area-inset-bottom, 0px)); text-align: center; box-shadow: 0 -18px 60px rgba(40,16,60,.28); }
   .dl.on { transform: translate(-50%, 0); }
-  .dl-grab { width: 36px; height: 5px; border-radius: 3px; background: var(--border); margin: 0 auto 18px; }
-  .dl-x { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--subtle); }
-  .dl-x:hover { background: var(--neutral); }
-  .dl-x svg { width: 18px; height: 18px; }
-  .dl-av { position: relative; width: 72px; height: 72px; margin: 6px auto 16px; }
-  .dl-av > span { width: 72px; height: 72px; border-radius: 18px; display: grid; place-items: center; background: #F1F2F4 center / cover no-repeat; }
-  .dl-av > span svg { width: 36px; height: 36px; }
-  .dl-av i { position: absolute; right: -8px; bottom: -6px; width: 30px; height: 30px; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 3px var(--layer); }
-  .dl-av i img { width: 100%; height: 100%; display: block; }
-  .dl h2 { font-size: 19px; font-weight: 700; line-height: 1.4; letter-spacing: -0.02em; word-break: keep-all; }
-  .dl p { margin-top: 8px; font-size: 14px; font-weight: 400; color: var(--subtle); line-height: 1.5; word-break: keep-all; }
-  .dl .btn svg { width: 20px; height: 20px; }
-  .dl-later { margin-top: 8px; width: 100%; min-height: 48px; border-radius: 12px; color: var(--subtle); font-size: 15px; font-weight: 600; }
-  .dl-later:hover { background: var(--neutral); }
-  @media (min-width: 560px) { .dl { bottom: 50%; width: 400px; border-radius: 24px; padding: 28px 24px 20px; transform: translate(-50%, calc(50% + 24px)); opacity: 0; transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .3s ease; } .dl.on { transform: translate(-50%, 50%); opacity: 1; } .dl-grab { display: none; } }
+  .dl-grab { width: 40px; height: 5px; border-radius: 3px; background: #e4dcee; margin: 0 auto 18px; }
+  .dl-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #f4f1f8; color: #44444c; font-size: 20px; line-height: 1; cursor: pointer; }
+  .dl-av { position: relative; width: 84px; height: 84px; margin: 6px auto 14px; }
+  .dl-av > span { width: 84px; height: 84px; border-radius: 84px; display: flex; align-items: center; justify-content: center; border: 3px solid #f0e8fa; background: linear-gradient(150deg, #b46ce0, #f39fce) center / cover no-repeat; color: #fff; font-size: 36px; font-weight: 700; }
+  .dl-av i { position: absolute; right: -6px; bottom: -4px; width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(135deg, #AA4AF4, #6655D2); box-shadow: 0 0 0 3px #fff; display: grid; place-items: center; }
+  .dl-av i img { width: 20px; height: auto; }
+  .dl h2 { font-size: 20px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; word-break: keep-all; }
+  .dl p { margin-top: 8px; font-size: 14px; font-weight: 500; color: #6b6b76; line-height: 1.6; word-break: keep-all; }
+  .dl-store { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 22px; height: 54px; border-radius: 14px; background: #16121B; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none; }
+  .dl-store svg { width: 20px; height: 20px; }
+  .dl-later { margin-top: 8px; width: 100%; height: 46px; border: 0; border-radius: 14px; background: none; color: #6b6b76; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
+  .dl :focus-visible, .banner:focus-visible { outline: 2px solid #9b4be0; outline-offset: 3px; }
+  @media (min-width: 640px) { .dl { bottom: 50%; border-radius: 28px; padding-bottom: 24px; transform: translate(-50%, calc(50% + 24px)); opacity: 0; transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .3s ease; } .dl.on { transform: translate(-50%, 50%); opacity: 1; } .dl-grab { display: none; } }
   @media (prefers-reduced-motion: reduce) { .dl, .dl-scrim, .toast { transition: none; } }
 
   /* ───── 위젯 (scripts/platter.py) — 앱 렌더러 치수를 Grid.width 358 기준 cqw로 ───── */
@@ -156,7 +154,7 @@
   .bl-main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 4px; }
   .bl-h .bl-main { flex-direction: row; align-items: center; gap: 8px; }
   .bl-emoji { display: flex; align-items: center; line-height: 1; }
-  .bl-text, .st-title, .ask-t, .tx { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
+  .bl-text, .st-title, .ask-t, .dy-t { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
   .bl-text { font-weight: 500; color: #171719; }
   .bl-src { display: flex; gap: 4px; font-weight: 500; color: #70737c; }
   .bl-src span { flex: 1 1 auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -212,7 +210,7 @@
   .dt-src b { flex: 1 1 auto; min-width: 0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .dt-src-n { flex-direction: column; justify-content: center; text-align: center; }
   .dt-src-n b { flex: none; max-width: 100%; }
-  .dt-av { flex: none; display: block; background: #E7E1EE; }
+  .dt-av { flex: none; display: block; background: #E7E1EE; object-fit: cover; }
   .dt-cap { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; color: #fff; }
   .dt-cap.on { background: linear-gradient(rgba(28,23,34,0), rgba(28,23,34,.18) 42%, rgba(28,23,34,.72)); }
   .dt-cap b { font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -245,11 +243,67 @@
   .ss { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8px; }
   .ss-h { flex-direction: row; justify-content: flex-start; }
   .ss span { line-height: 1.1; }
-  .ss b { font-weight: 700; color: #171719; }
-  .tx { position: absolute; inset: 0; color: rgba(18,18,18,.72); font-weight: 500; }
+  .ss b { font-weight: 600; color: #171719; }
+  .tx { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .tx p { max-width: 100%; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
+  .bl-text, .ask-t, .dt-title, .tx p, .md b, .dy-t, .ss b, .sk-text { white-space: pre-line; }
+  .ss .sub { font-weight: 500; opacity: .6; color: inherit; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ss b + .sub { margin-top: 0; }
+  /* 오늘의 기분 */
+  .md { position: absolute; inset: 0; display: flex; align-items: center; }
+  .md-e { flex: none; line-height: 1.2; }
+  .md-col { min-width: 0; display: flex; flex-direction: column; }
+  .md-col b { font-weight: 600; color: rgba(18,18,18,.75); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; }
+  .md-col span { font-weight: 500; color: rgba(18,18,18,.4); }
+  /* 한줄일기 */
+  .dy { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .dy-k { display: flex; justify-content: space-between; gap: 6px; font-weight: 500; color: rgba(18,18,18,.42); white-space: nowrap; min-width: 0; }
+  .dy-k span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .dy-t { font-style: italic; font-weight: 400; color: rgba(18,18,18,.75); }
+  /* D-Day */
+  .dd { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #4a3f8f; padding: 6px; }
+  .dd b { font-family: "New York", "Iowan Old Style", Georgia, "Times New Roman", serif; font-style: italic; font-weight: 700; line-height: 1.1; white-space: nowrap; }
+  .dd span { font-weight: 500; opacity: .7; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* 날씨 · GIF */
+  .wt b { font-weight: 600; color: rgba(18,18,18,.72); }
+  .wt .sub, .gf .sub { color: rgba(18,18,18,.9); opacity: .55; }
+  .gf .sub { letter-spacing: .07em; }
+  /* 음성 메모 */
+  .vo { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .vo-bars { display: flex; align-items: center; }
+  .vo-bars i { display: block; width: 3px; border-radius: 2px; background: #c98a2e; }
+  .vo-t { display: flex; align-items: center; font-weight: 500; color: #8a5d16; }
+  .vo-t i { font-style: normal; }
+  /* 지금 듣는 중 · 플레이리스트 · 콜렉션 (어두운 바탕) */
+  .np { position: absolute; inset: 0; display: flex; align-items: center; color: #fff; }
+  .np-bars { flex: none; display: flex; align-items: flex-end; }
+  .np-bars i { display: block; width: 3px; border-radius: 2px; background: #AA4AF4; transform-origin: bottom; }
+  .w.np-live .np-bars i { animation: eq 1.1s ease-in-out infinite; }
+  .np-bars i:nth-child(2) { animation-delay: -.3s; } .np-bars i:nth-child(3) { animation-delay: -.6s; } .np-bars i:nth-child(4) { animation-delay: -.15s; }
+  @keyframes eq { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.45); } }
+  .np-col { min-width: 0; display: flex; flex-direction: column; }
+  .np-col b, .np-col span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .np-col b { font-weight: 600; }
+  .np-col span { font-weight: 500; color: rgba(255,255,255,.55); }
+  .pls { position: absolute; inset: 0; display: flex; flex-direction: column; color: #fff; }
+  .pls-h { display: flex; align-items: center; font-weight: 600; }
+  .pls-h .np-bars i { width: 2.5px; }
+  .pls-r { display: flex; align-items: center; font-weight: 500; min-width: 0; }
+  .pls-r span { color: rgba(255,255,255,.35); }
+  .pls-r b { font-weight: 500; color: rgba(255,255,255,.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pls-f { font-weight: 500; color: rgba(255,255,255,.4); }
+  .cl { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .cl > p { font-weight: 500; color: rgba(255,255,255,.85); }
+  .cl-g { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .cl-c { aspect-ratio: .78; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,.1); min-width: 0; }
+  .cl-c i { font-style: normal; line-height: 1.3; }
+  .cl-c b { font-weight: 500; color: rgba(255,255,255,.85); max-width: 92%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* 방명록 */
+  .gb { flex: 1 1 auto; align-self: stretch; width: 100%; background: #FAF6ED; color: #443A30; font-weight: 400; overflow: hidden; word-break: keep-all; }
   @media (prefers-reduced-motion: reduce) {
     .sk > * { animation: none; }
     .w.playing .cd-rot { animation: none; }
+    .w.np-live .np-bars i { animation: none; }
     .w[role=button] { transition: none; }
   }
 </style>
@@ -274,18 +328,11 @@
       <button class="h-act" type="button" data-dl data-msg="add" aria-label="친구 추가하기"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.83 12.33c.55 0 1 .45 1 1v1.5h1.5a1 1 0 1 1 0 2h-1.5v1.5a1 1 0 1 1-2 0v-1.5h-1.5a1 1 0 1 1 0-2h1.5v-1.5c0-.55.45-1 1-1ZM10 1.08a5.17 5.17 0 0 1 2.32 9.79c.5.09.95.21 1.38.36a2.98 2.98 0 0 0-.83 1.64 2.98 2.98 0 0 0-.9 5.63H4.5c-.82 0-1.6-.34-2.11-.94-.53-.62-.74-1.5-.38-2.38.4-.99 1.13-2.14 2.42-3.03.86-.59 1.92-1.04 3.25-1.29A5.17 5.17 0 0 1 10 1.08Z" fill="currentColor"/></svg></button>
     </section>
     <section class="platter" id="platter" aria-label="대표 플래터"><div class="pl" style="aspect-ratio:358.0 / 678.25"><div class="w w-block hl" style="left:0.000%;top:0.000%;width:36.103%;height:32.547%;border-radius:3.911cqw;background:rgba(112,115,124,.08)" role="img" aria-label="글, 우히히히"><div class="bl" style="padding:3.352cqw;gap:2.235cqw"><div class="bl-main"><span class="bl-emoji" style="font-size:6.704cqw;height:8.939cqw">💭</span><p class="bl-text" style="font-size:3.911cqw;line-height:5.587cqw;-webkit-line-clamp:6">우히히히</p></div><p class="bl-src" style="font-size:3.352cqw;line-height:4.469cqw"><span>나의 아카이브 함</span>›</p></div></div><div class="w w-video hl" style="left:38.338%;top:0.000%;width:61.662%;height:25.802%;border-radius:4.469cqw;background:linear-gradient(225deg,#3a4a63,#24304a 50%,#161d2e)" role="button" tabindex="0" aria-label="영상, ㅇㅇㄹ" data-dl data-msg="video"><div class="vd-shade"></div><p class="vd-title" style="font-size:4.749cqw;line-height:6.704cqw;padding:3.911cqw 4.469cqw 0">ㅇㅇㄹ</p><span class="vd-yt" style="width:5.587cqw;height:4.022cqw;right:3.911cqw;bottom:3.352cqw"><svg viewBox="0 0 20 14.4" aria-hidden="true"><rect width="20" height="14.4" rx="5.6" fill="#f00"/><path d="M8.4 4.4v5.6l4.6-2.8z" fill="#fff"/></svg></span></div><div class="w w-sticker hl" style="left:51.117%;top:26.981%;width:48.883%;height:25.802%;border-radius:4.469cqw;background:#fef4f7" role="img" aria-label="스티커"><i class="sk" style="left:8.25%;top:8.00%;--r:-18.9deg;--d:0.37s"><span style="font-size:8.101cqw">🔥</span></i><i class="sk" style="left:84.91%;top:22.95%;--r:-1.7deg;--d:0.74s"><span style="font-size:9.497cqw">⭐️</span></i><i class="sk" style="left:43.68%;top:32.97%;--r:-17.0deg;--d:1.11s"><span style="font-size:6.704cqw">🍀</span></i><i class="sk" style="left:13.48%;top:8.00%;--r:2.0deg;--d:1.48s"><span style="font-size:8.101cqw">🔥</span></i><i class="sk" style="left:54.32%;top:18.25%;--r:12.0deg;--d:1.85s"><span style="font-size:9.497cqw">🍀</span></i><i class="sk" style="left:6.00%;top:26.80%;--r:-0.1deg;--d:2.22s"><span style="font-size:6.704cqw">🍀</span></i><i class="sk" style="left:16.64%;top:31.61%;--r:-2.2deg;--d:0.19s"><span style="font-size:8.101cqw">🍀</span></i><i class="sk" style="left:15.73%;top:9.39%;--r:-2.3deg;--d:0.56s"><span style="font-size:9.497cqw">🍀</span></i><i class="sk" style="left:88.35%;top:8.00%;--r:14.5deg;--d:0.93s"><span style="font-size:6.704cqw">🍀</span></i><i class="sk" style="left:10.23%;top:37.30%;--r:10.5deg;--d:1.30s"><span style="font-size:8.101cqw">💖</span></i><i class="sk" style="left:17.89%;top:8.00%;--r:10.6deg;--d:1.67s"><span style="font-size:9.497cqw">💖</span></i><i class="sk" style="left:77.25%;top:8.14%;--r:8.2deg;--d:2.04s"><span style="font-size:6.704cqw">🔥</span></i><i class="sk" style="left:15.08%;top:40.29%;--r:-19.8deg;--d:0.01s"><span style="font-size:8.101cqw">⭐️</span></i><i class="sk" style="left:15.49%;top:21.59%;--r:7.8deg;--d:0.38s"><span style="font-size:9.497cqw">🔥</span></i><i class="sk" style="left:65.85%;top:61.93%;--r:-16.9deg;--d:0.75s"><span style="font-size:6.704cqw">🔥</span></i><i class="sk" style="left:21.32%;top:19.33%;--r:1.2deg;--d:1.86s"><span style="font-size:6.704cqw">🌈</span></i><i class="sk" style="left:15.28%;top:8.00%;--r:9.4deg;--d:2.23s"><img class="flat" src="media/d0da8d135da6.jpg" alt="" style="width:9.046cqw;height:9.046cqw"></i><i class="sk" style="left:9.03%;top:15.67%;--r:-11.9deg;--d:0.20s"><img src="media/134389809098.png" alt="" style="width:8.890cqw;height:8.890cqw"></i><i class="sk" style="left:10.31%;top:8.00%;--r:18.6deg;--d:0.57s"><img class="flat" src="media/15452dce54bb.jpg" alt="" style="width:9.829cqw;height:9.829cqw"></i><i class="sk" style="left:21.80%;top:8.00%;--r:11.7deg;--d:0.94s"><img class="flat" src="media/15452dce54bb.jpg" alt="" style="width:10.515cqw;height:10.515cqw"></i><i class="sk" style="left:23.21%;top:25.21%;--r:-7.8deg;--d:1.31s"><img src="media/949c0f7dfe95.png" alt="" style="width:8.823cqw;height:8.823cqw"></i></div><div class="w w-polaroid hl" style="left:0.000%;top:40.472%;width:36.103%;height:25.802%;border-radius:3.911cqw;background:#fff" role="button" tabindex="0" aria-label="폴라로이드" data-dl><div class="st" style="padding:3.352cqw;gap:1.676cqw"><div class="st-label" style="font-size:2.793cqw">폴라로이드<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7l4-4M4 3h3v3" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="st-body"><div class="pol"><div class="pol-photo empty"><i style="width:5.587cqw;height:5.587cqw"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2l1.4-2h6.2l1.4 2h2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></i></div><div class="pol-chin"></div></div></div><div class="st-title" style="font-size:3.631cqw;-webkit-line-clamp:1">첫 장을 남겨봐</div><div class="st-sub" style="font-size:2.793cqw">한 장의 순간</div></div></div><div class="w w-ditto hl" style="left:51.117%;top:53.962%;width:48.883%;height:19.056%;border-radius:3.911cqw;background:#e9d8f5" role="button" tabindex="0" aria-label="디토 위젯, from. 유나" data-dl data-msg="ditto"><img class="cover" src="media/d03b944e8734.jpg" alt="" loading="lazy"><span class="soft"></span><span class="dt-src" style="left:2.235cqw;bottom:2.235cqw;width:30.168cqw;height:7.821cqw;padding:0 1.676cqw;gap:1.676cqw;border-radius:2.235cqw;font-size:3.352cqw;line-height:4.469cqw"><i class="dt-av" style="width:5.587cqw;height:5.587cqw;border-radius:1.862cqw"></i><b>유나</b></span><img class="dt-badge" src="/assets/dittobadge-32.svg" alt="" style="top:2.235cqw;right:2.235cqw;width:6.704cqw;height:6.704cqw"></div><div class="w w-ask hl" style="left:0.000%;top:67.453%;width:48.883%;height:25.802%;border-radius:4.469cqw;background:#fff" role="button" tabindex="0" aria-label="Ask, 뭐든 물어봐" data-dl data-msg="ask"><div class="ask" style="padding:3.177cqw;gap:1.397cqw"><p class="ask-k" style="font-size:2.793cqw"><span>ASK</span><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 7l4-4M4 3h3v3" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></p><div class="ask-artbox" style="height:18.575cqw"><img class="ask-art" src="/assets/platter/ask-mailbox.png" alt=""></div><p class="ask-t" style="font-size:5.622cqw;-webkit-line-clamp:1">뭐든 물어봐</p><span class="grow"></span><p class="ask-q" style="font-size:3.073cqw;padding:1.676cqw 1.955cqw;border-radius:2.235cqw">첫 질문을 남겨봐</p></div></div><div class="w w-music" style="left:63.897%;top:74.198%;width:36.103%;height:25.802%;border-radius:6.704cqw;background:linear-gradient(135deg,#e4d4d0 0%,#dac3bd 48%,#b7b9bf 100%)" role="button" tabindex="0" aria-label="음악, Anti-Hero · Taylor Swift" data-act="music"><span class="cd" style="left:5.096cqw;top:3.241cqw;width:25.913cqw;height:25.913cqw"><span class="cd-rot"><img src="media/58685c6824f4.jpg" alt="" loading="lazy"><span class="cd-grooves"></span></span><span class="cd-sheen"></span><span class="cd-hub"></span><span class="cd-hole"></span></span><span class="mu-info c" style="left:3.239cqw;top:31.328cqw;width:29.625cqw"><b style="font-size:3.352cqw;line-height:5.028cqw">Anti-Hero</b><span style="font-size:2.793cqw;line-height:3.911cqw">Taylor Swift</span></span><audio preload="none" src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1d/56/2a/1d562a07-dc5f-a9c0-1f36-2051a8c14eb7/mzaf_7214829135431340590.plus.aac.p.m4a"></audio><span class="mu-bar" style="left:3.911cqw;right:3.911cqw;bottom:2.514cqw;height:0.838cqw"><i></i></span></div></div></section><div id="platterEnd" aria-hidden="true"></div>
-    <section class="join" id="banner">
-      <p class="join-k"><img src="/assets/icon-purple-plain.jpg" alt="">ditto! 앱에서 더 자세히 보기</p>
-      <h2 class="join-t"><span id="joinName">지우</span>님과 친구가 되어 보세요</h2>
-      <p class="join-d">친구가 되면 서로의 플래터를 구경하고, 마음에 드는 위젯을 디토할 수 있어요.</p>
-      <ol class="steps">
-        <li><span>1</span>ditto! 앱을 설치해요</li>
-        <li><span>2</span><p><b id="stepHandle">@ditto4037</b> 님을 친구로 추가해요</p></li>
-        <li><span>3</span>서로의 플래터를 구경해요</li>
-      </ol>
-      <a class="btn" href="/download/" data-dl>ditto! 앱에서 열기</a>
-      <p class="btn-note">앱이 있으면 바로 열리고, 없으면 App Store로 안내해요.</p>
-    </section>
+    <ol class="steps" aria-label="친구가 되는 방법">
+      <li><span>1</span>ditto! 앱을 설치해요</li>
+      <li><span>2</span><b id="stepHandle">@ditto4037</b> 님을 친구로 추가해요</li>
+      <li><span>3</span>서로의 플래터를 구경해요</li>
+    </ol>
     <footer class="foot"><a href="/"><img src="/assets/wordmark.svg" alt="ditto!"><span>위젯으로 서로의 하루를 주고받는 친구들의 공간</span></a></footer>
   </div>
   <section class="missing" id="missing" hidden>
@@ -296,14 +343,15 @@
   </section>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<a class="banner" id="banner" href="/download/" data-dl><img class="banner-mark" src="/email/wordmark-white.png" alt="ditto!"><span class="banner-text">앱에서 더 자세히 보기</span><span class="banner-btn">다운로드</span></a>
 <div class="dl-scrim" id="dlScrim" hidden></div>
 <section class="dl" id="dl" role="dialog" aria-modal="true" aria-labelledby="dlTitle" aria-describedby="dlDesc" hidden>
   <div class="dl-grab" aria-hidden="true"></div>
-  <button class="dl-x" id="dlClose" type="button" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-  <div class="dl-av" aria-hidden="true"><span id="dlAvatar"></span><i><img src="/assets/icon-purple-plain.jpg" alt=""></i></div>
+  <button class="dl-x" id="dlClose" type="button" aria-label="닫기">×</button>
+  <div class="dl-av" aria-hidden="true"><span id="dlAvatar"></span><i><img src="/email/wordmark-white.png" alt=""></i></div>
   <h2 id="dlTitle"><span id="dlName"></span>님의 플래터는<br>ditto! 앱에서 볼 수 있어요</h2>
   <p id="dlDesc">앱을 받으면 바로 친구로 추가하고, 서로의 위젯을 구경할 수 있어요.</p>
-  <a class="btn" id="dlStore" href="/download/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span id="dlStoreLabel">App Store에서 받기</span></a>
+  <a class="dl-store" id="dlStore" href="/download/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span id="dlStoreLabel">App Store에서 받기</span></a>
   <button class="dl-later" id="dlLater" type="button">웹에서 먼저 둘러볼게요</button>
 </section>
 <script>
@@ -322,18 +370,19 @@
     if ($("dlName")) $("dlName").textContent = name;
     var src = $("avatar").hidden ? "" : $("avatar").currentSrc;
     var box = $("dlAvatar");
-    box.innerHTML = ""; box.style.backgroundImage = "";
-    if (src) { box.style.backgroundImage = "url(" + JSON.stringify(src) + ")"; } else { box.innerHTML = $("avatarFallback").outerHTML.replace(/ id="[^"]*"/, "").replace(/ hidden=""/, ""); }
+    box.textContent = ""; box.style.backgroundImage = "";
+    if (src) { box.style.backgroundImage = "url(" + JSON.stringify(src) + ")"; } else { box.textContent = (name || "").charAt(0).toUpperCase(); }
   }
   // 위젯을 눌러 띄울 때는 그 위젯에 맞는 문구로 바꾼다 (앱이 있어야 하는 동작)
   var MSG = {
     add: ['<span class="js-name"></span>님을 친구로 추가하려면<br>ditto! 앱이 필요해요', "앱을 받고 아이디로 찾으면 바로 친구 신청할 수 있어요."],
     ask: ["질문은 ditto! 앱에서<br>익명으로 남길 수 있어요", "앱을 받고 친구로 추가하면 바로 질문을 남길 수 있어요."],
     ditto: ["마음에 드는 위젯은<br>앱에서 디토할 수 있어요", "디토하면 친구의 위젯이 내 플래터에도 놓여요."],
-    video: ["영상은 ditto! 앱에서<br>볼 수 있어요", "앱을 받고 친구로 추가하면 플래터의 영상을 바로 볼 수 있어요."]
+    video: ["영상은 ditto! 앱에서<br>볼 수 있어요", "앱을 받고 친구로 추가하면 플래터의 영상을 바로 볼 수 있어요."],
+    voice: ["음성 메모는 ditto! 앱에서<br>들을 수 있어요", "앱을 받고 친구로 추가하면 친구가 남긴 목소리를 바로 들을 수 있어요."],
+    guestbook: ["방명록은 ditto! 앱에서<br>남길 수 있어요", "앱을 받고 친구로 추가하면 바로 안부를 남길 수 있어요."]
   };
   var baseTitle = $("dlTitle").innerHTML, baseDesc = $("dlDesc").textContent;
-  if (document.getElementById("platter")) baseTitle = '<span id="dlName"></span>님의 위젯을 디토하고<br>내 플래터도 만들어 보세요';
   function open(kind) {
     if ($("profile").hidden || !dl.hidden) return;
     var m = MSG[kind];
@@ -398,6 +447,13 @@
   // 플래터 위젯 — 웹에서 되는 것만: 음악 30초 미리듣기 · 영상 재생 · 사진 넘겨 보기. 나머지는 앱 안내(data-dl).
   var tiles = document.querySelectorAll(".pl .w");
   if (!tiles.length) return;
+  // D-Day는 보는 날 기준으로 다시 센다 (빌드 날짜가 아니라)
+  [].forEach.call(document.querySelectorAll("[data-dday]"), function (b) {
+    var d = new Date(+b.getAttribute("data-dday")), now = new Date();
+    var n = Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 864e5);
+    b.textContent = n > 0 ? "D-" + n : n === 0 ? "D-DAY" : (n < -365 ? "1년+" : "D+" + (-n));
+    b.style.fontSize = b.textContent.length > 4 ? (parseFloat(b.dataset.fs) * 0.8) + "cqw" : b.dataset.fs + "cqw";
+  });
   var current = null;
   function stop(t) {
     if (!t) return;
@@ -471,7 +527,6 @@
   var show = function (name, avatar) {
     $("name").textContent = name || handle;
     $("navTitle").textContent = (name || handle) + "의 플래터";
-    $("joinName").textContent = name || handle;
     $("handle").textContent = "@" + handle;
     $("stepHandle").textContent = "@" + handle;
     if (avatar && /^https:\/\//.test(avatar)) {
@@ -486,7 +541,7 @@
   if (!prebuilt) { $("missing").hidden = false; document.title = "ditto!"; return; }
   fetch(SB + "/rest/v1/profiles?select=nickname,handle,avatar_url&handle=ilike." + encodeURIComponent(handle.replace(/[_%]/g, "\\$&")) + "&limit=1", { headers: { apikey: KEY } })
     .then(function (r) { return r.ok ? r.json() : []; })
-    .then(function (rows) { if (rows && rows[0]) show(rows[0].nickname, rows[0].avatar_url); else if (!prebuilt) { $("profile").hidden = true; $("banner").hidden = true; $("missing").hidden = false; document.title = "ditto!"; } })
+    .then(function (rows) { if (rows && rows[0]) show(rows[0].nickname, rows[0].avatar_url); })
     .catch(function () {});
 })();
 </script>

@@ -6,6 +6,7 @@
   · 친구 플래터(Views/FriendPlatterDetail.swift)처럼: 디토 불가 위젯은 1px 테두리(#E7E1EE),
     디토 가능 위젯은 뒤 후광 + 우하단 DittoBadge 24.
   · 대표(rep) 플래터만, priv 위젯은 빼고 그린다. 라이프 플래터는 페이지에도 미디어에도 넣지 않는다.
+    예외: scripts/demo-profiles.txt 에 `아이디  platter=life` 로 적은 시안 계정만 /demo/{아이디}/ 에 라이프 플래터를 대표 자리에 그린다.
   · 이미지는 빌드 때 받아 {아이디}/media/ 에 600px 이내로 저장한다 (핫링크 의존 없음, 음악 커버만 실패 시 핫링크).
 
 위젯 테이블은 RLS로 막혀 있어 SUPABASE_SERVICE_ROLE_KEY가 있을 때만 그린다. 없으면 빈 문자열.
@@ -44,18 +45,20 @@ def size_px(w):
 
 # ───────────────────────── 데이터 ─────────────────────────
 
-def fetch_rep(get, handle, key):
-    """대표 플래터 위젯 (priv 제외, 그리드 밖·겹침은 버림). 실패하면 None."""
+def fetch_rep(get, handle, key, platter="rep"):
+    """플래터 위젯 (priv 제외, 그리드 밖·겹침은 버림). 기본은 대표(rep). 실패하면 예외."""
+    if platter not in ("rep", "life"):
+        raise ValueError(platter)
     hdr = {"apikey": key, "Authorization": "Bearer " + key}
     rows = json.loads(get(f"{SB}/rest/v1/profiles?select=user_id&handle=eq.{urllib.parse.quote(handle)}", hdr))
     if not rows:
         return None, []
     owner = rows[0]["user_id"]
-    ws = json.loads(get(f"{SB}/rest/v1/widgets?select=id,platter,type,data&owner_id=eq.{owner}&platter=eq.rep", hdr))
+    ws = json.loads(get(f"{SB}/rest/v1/widgets?select=id,platter,type,data&owner_id=eq.{owner}&platter=eq.{platter}", hdr))
     out, taken = [], set()
     for r in ws:
         d = dict(r.get("data") or {})
-        if r.get("platter") != "rep" or d.get("priv") is True:
+        if r.get("platter") != platter or d.get("priv") is True:
             continue
         d["type"] = r.get("type") or d.get("type") or ""
         try:
@@ -74,11 +77,47 @@ def fetch_rep(get, handle, key):
     return owner, out
 
 
+def fetch_sources(get, owner, widgets, key):
+    """디토 위젯 출처 — {위젯 id: {handle, avatar}}. dittos(placed_widget_id) → 원작자 프로필,
+    없으면 내 친구 중 이름(from)이 같은 사람 (앱 DittoWidgetSourceInfo와 같은 규칙). 실패하면 빈 dict."""
+    hdr = {"apikey": key, "Authorization": "Bearer " + key}
+    dw = [w for w in widgets if w["type"] == "ditto" and w.get("from")]
+    if not dw:
+        return {}
+    out = {}
+    try:
+        ids = ",".join(urllib.parse.quote(f'"{w["id"]}"') for w in dw)
+        links = json.loads(get(f"{SB}/rest/v1/dittos?select=placed_widget_id,source_owner_id&placed_widget_id=in.({ids})", hdr))
+        by_owner = {l["placed_widget_id"]: l["source_owner_id"] for l in links if l.get("source_owner_id")}
+        friends = json.loads(get(f"{SB}/rest/v1/friendships?select=friend_id,nickname&owner_id=eq.{owner}", hdr)) if owner else []
+        uids = sorted(set(by_owner.values()) | {f["friend_id"] for f in friends if f.get("friend_id")})
+        profs = {}
+        for i in range(0, len(uids), 80):
+            q = ",".join(uids[i:i + 80])
+            for p in json.loads(get(f"{SB}/rest/v1/profiles?select=user_id,handle,nickname,avatar_url&user_id=in.({q})", hdr)):
+                profs[p["user_id"]] = p
+        for w in dw:
+            p = profs.get(by_owner.get(w["id"]))
+            if not p:
+                name = w["from"].strip()
+                for f in friends:
+                    fp = profs.get(f.get("friend_id"))
+                    if fp and name in ((f.get("nickname") or "").strip(), (fp.get("nickname") or "").strip()):
+                        p = fp
+                        break
+            if p and p.get("handle"):
+                out[w["id"]] = {"handle": p["handle"], "avatar": p.get("avatar_url") or ""}
+    except Exception as e:
+        print(f"platter: 디토 출처를 읽지 못함 ({type(e).__name__})")
+    return out
+
+
 class Media:
     """위젯 이미지 → {아이디}/media/ 의 로컬 파일 (상대 경로). 못 구하면 None."""
 
     def __init__(self, get, outdir: Path, owner):
         self.get, self.dir, self.owner, self.cache = get, outdir / "media", owner, {}
+        self.sources = {}   # 디토 위젯 id → 원작자 {handle, avatar}
 
     def _save(self, data, ref, max_side=600):
         im = ImageOps.exif_transpose(Image.open(io.BytesIO(data)))
@@ -399,12 +438,20 @@ def r_ditto(w, W, H, m):
         fs = 17 if min(W, H) >= 120 else 14
         media = (f'<span class="dt-title" style="height:{u(media_h)};font-size:{u(fs)};padding:0 {u(inset + 4)}">'
                  f'{esc(w.get("title") or "디토 위젯")}</span>')
-    handle = frm or ""
+    src = m.sources.get(w.get("id")) or {}
+    handle = ("@" + src["handle"]) if src.get("handle") else frm
+    av_path = m.image(src.get("avatar"), 96)[0] if src.get("avatar") else None
+
+    def avatar_html(av):
+        st = f'width:{u(av)};height:{u(av)};border-radius:{u(av / 3)}'
+        if av_path:
+            return f'<img class="dt-av" src="{esc(av_path)}" alt="" style="{st}">'
+        return f'<i class="dt-av" style="{st}"></i>'
     chip = ""
     if handle and kind in ("text", "compact", "standard", "narrow"):
         std = kind == "standard"
         av = 24 if std else 20
-        avatar = f'<i class="dt-av" style="width:{u(av)};height:{u(av)};border-radius:{u(av / 3)}"></i>'
+        avatar = avatar_html(av)
         if kind == "text":
             chip = (f'<span class="dt-src" style="left:{u(inset)};bottom:{u(inset)};width:{u(min(70, W - inset * 2))};height:{u(24)};'
                     f'padding:0 {u(6)};border-radius:{u(8)};font-size:{u(12)};line-height:{u(16)}"><b>{esc(handle)}</b></span>')
@@ -419,9 +466,9 @@ def r_ditto(w, W, H, m):
         cap = (w.get("polCaption") or w.get("title") or "").strip()
         chip = (f'<span class="dt-cap{" on" if photo else ""}" style="padding:{u(24)} {u(16)} {u(12)};gap:{u(8)}">'
                 + (f'<b style="font-size:{u(17)};line-height:{u(24)}">{esc(cap)}</b>' if cap else "")
-                + f'<span style="gap:{u(8)};font-size:{u(14)};line-height:{u(20)}"><i class="dt-av" style="width:{u(24)};height:{u(24)};border-radius:{u(8)}"></i>{esc(handle)}</span></span>')
+                + f'<span style="gap:{u(8)};font-size:{u(14)};line-height:{u(20)}">{avatar_html(24)}{esc(handle)}</span></span>')
     b = BADGE.format(f"top:{u(inset)};right:{u(inset)};width:{u(badge)};height:{u(badge)}") if frm else ""
-    return ' data-dl data-msg="ditto"', media + chip + b, "디토 위젯", f"from. {frm}" if frm else ""
+    return ' data-dl data-msg="ditto"', media + chip + b, "디토 위젯", f"from. {handle}" if handle else ""
 
 
 def r_music(w, W, H, m):
@@ -486,17 +533,161 @@ def r_image(w, W, H, m):
     return "", inner, "사진", title
 
 
-def r_status(w, W, H, m):
-    e, label = esc(w.get("emoji")), esc(w.get("label") or w.get("text"))
-    if w["w"] > w["h"]:
-        inner = f'<div class="ss ss-h" style="padding:0 {u(14)};gap:{u(9)}"><span style="font-size:{u(26)}">{e}</span><b style="font-size:{u(15)}">{label}</b></div>'
-    else:
-        inner = f'<div class="ss" style="gap:{u(6)}"><span style="font-size:{u(34)}">{e}</span><b style="font-size:{u(13)}">{label}</b></div>'
-    return "", inner, "상태", w.get("label") or w.get("text")
+def _style(w):
+    return w.get("style") if isinstance(w.get("style"), dict) else {}
+
+
+def _fg(w, default):
+    fg = _style(w).get("fg")
+    return fg if isinstance(fg, str) and fg.startswith("#") and len(fg) in (4, 7) else default
 
 
 def r_text(w, W, H, m):
-    return "", f'<p class="tx" style="padding:{u(12)};font-size:{u(13)};line-height:{u(20)}">{esc(w.get("text"))}</p>', "글", w.get("text")
+    """WidgetContent.textView — 13 Medium · 줄간 0.55 · 여백 12 · style(fg·굵게·기울임·밑줄·취소선·정렬·위치)."""
+    st = _style(w)
+    deco = " ".join(x for x, k in (("underline", "underline"), ("line-through", "strike")) if st.get(k))
+    pos = {"tl": ("flex-start", "flex-start"), "tc": ("flex-start", "center"), "tr": ("flex-start", "flex-end"),
+           "ml": ("center", "flex-start"), "mc": ("center", "center"), "mr": ("center", "flex-end"),
+           "bl": ("flex-end", "flex-start"), "bc": ("flex-end", "center"), "br": ("flex-end", "flex-end")}.get(st.get("pos"), ("flex-start", "flex-start"))
+    align = {"center": "center", "right": "right"}.get(st.get("align"), "left")
+    css = (f"padding:{u(12)};font-size:{u(13)};line-height:{u(20)};color:{_fg(w, 'rgba(18,18,18,.72)')};"
+           f"justify-content:{pos[0]};align-items:{pos[1]};text-align:{align};"
+           f"font-weight:{700 if st.get('bold') else 500};{'font-style:italic;' if st.get('italic') else ''}"
+           f"{'text-decoration:' + deco + ';' if deco else ''}")
+    return "", f'<div class="tx" style="{css}"><p>{esc(w.get("text"))}</p></div>', "글", w.get("text")
+
+
+def r_status(w, W, H, m):
+    """WidgetContent.statusView — 넓으면 가로(이모지 22 · 라벨 16 SemiBold), 아니면 세로(이모지 28 · 라벨 13 SemiBold)."""
+    e, label = esc(w.get("emoji")), esc(w.get("label") or w.get("text"))
+    color = _fg(w, "#171719")
+    if w["w"] > w["h"]:
+        inner = (f'<div class="ss ss-h" style="padding:0 {u(14)};gap:{u(9)}"><span style="font-size:{u(22)}">{e}</span>'
+                 f'<b style="font-size:{u(16)};color:{color}">{label}</b></div>')
+    else:
+        inner = (f'<div class="ss" style="gap:{u(6)}"><span style="font-size:{u(28)}">{e}</span>'
+                 f'<b style="font-size:{u(13)};color:{color}">{label}</b></div>')
+    return "", inner, "상태", w.get("label") or w.get("text")
+
+
+def r_mood(w, W, H, m):
+    """WidgetContent.moodView — 이모지 28 · 본문 14 SemiBold(2줄) · '오늘의 기분' 11."""
+    text = (w.get("text") or "").strip()
+    inner = (f'<div class="md" style="padding:0 {u(14)};gap:{u(10)}"><span class="md-e" style="font-size:{u(28)}">{esc(w.get("emoji") or "😊")}</span>'
+             f'<span class="md-col" style="gap:{u(3)}"><b style="font-size:{u(14)};line-height:{u(19)}">{esc(text or "오늘 기분을 남겨보세요")}</b>'
+             f'<span style="font-size:{u(11)}">오늘의 기분</span></span></div>')
+    return "", inner, "오늘의 기분", text
+
+
+def r_diary(w, W, H, m):
+    """WidgetContent.diaryView — '한줄일기' 11 · 본문 14 기울임(줄간 4). 제목(날짜)이 있으면 오른쪽에."""
+    text = (w.get("text") or "").strip()
+    date = (w.get("title") or "").strip()
+    head = f'<p class="dy-k" style="font-size:{u(11)}"><span>한줄일기</span>{f"<span>{esc(date)}</span>" if date else ""}</p>'
+    lines = max(1, int((H - 24 - 20) // 25))
+    inner = (f'<div class="dy" style="padding:{u(12)};gap:{u(6)}">{head}'
+             f'<p class="dy-t" style="font-size:{u(14)};line-height:{u(25)};-webkit-line-clamp:{lines}">{esc(text or "오늘을 한 줄로 남겨보세요")}</p></div>')
+    return "", inner, "한줄일기", text
+
+
+def _apple_date(v):
+    """앱 Date(기준 2001-01-01 UTC 초) → unix ms. 숫자가 아니면 None."""
+    try:
+        return int((float(v) + 978307200) * 1000)
+    except (TypeError, ValueError):
+        return None
+
+
+def r_dday(w, W, H, m):
+    """WidgetContent.ddayView — 'D-n' 26 Bold 세리프 이탤릭 #4a3f8f · 제목 11. 날짜 차이는 보는 날 기준으로 다시 센다(data-dday)."""
+    ms = _apple_date(w.get("date"))
+    label = "D-DAY"
+    if ms is not None:
+        import datetime
+        kst = datetime.timezone(datetime.timedelta(hours=9))
+        d = datetime.datetime.fromtimestamp(ms / 1000, kst).date()
+        n = (d - datetime.datetime.now(kst).date()).days
+        label = f"D-{n}" if n > 0 else "D-DAY" if n == 0 else ("1년+" if n < -365 else f"D+{-n}")
+    fs = 26 if len(label) <= 4 else 21   # 'D-DAY'·'D+123'은 2칸 폭에 한 줄로
+    attr = f' data-dday="{ms}" data-fs="{26 * 100 / DESIGN_W:.3f}"' if ms is not None else ""
+    inner = (f'<div class="dd" style="gap:{u(4)}"><b{attr} style="font-size:{u(fs)}">{label}</b>'
+             f'<span style="font-size:{u(11)}">{esc(w.get("title"))}</span></div>')
+    return "", inner, "D-Day", f'{w.get("title") or ""} {label}'
+
+
+def r_place(w, W, H, m):
+    """WidgetContent.placeView — 📍 22 · 동네 이름 13 SemiBold #1f5c4d · 아래 줄 11 (제목, 없으면 '동네')."""
+    color = _fg(w, "#1f5c4d")
+    inner = (f'<div class="ss" style="gap:{u(4)};color:{color}"><span style="font-size:{u(22)}">📍</span>'
+             f'<b style="font-size:{u(13)};color:inherit">{esc(w.get("label"))}</b>'
+             f'<span class="sub" style="font-size:{u(11)}">{esc(w.get("title") or "동네")}</span></div>')
+    return "", inner, "동네", w.get("label")
+
+
+def r_weather(w, W, H, m):
+    """WidgetContent.weatherView — 이모지 28 · 제목 16 SemiBold · 라벨 11."""
+    inner = (f'<div class="ss wt" style="gap:{u(3)}"><span style="font-size:{u(28)}">{esc(w.get("emoji") or "☀️")}</span>'
+             f'<b style="font-size:{u(16)}">{esc(w.get("title"))}</b>'
+             f'<span class="sub" style="font-size:{u(11)}">{esc(w.get("label"))}</span></div>')
+    return "", inner, "날씨", f'{w.get("title") or ""} {w.get("label") or ""}'
+
+
+def r_voice(w, W, H, m):
+    """WidgetContent.voiceView — 막대 8개 #c98a2e · ▶ 길이 11 #8a5d16. 녹음 파일은 앱에만 있어 재생은 앱 안내."""
+    bars = "".join(f'<i style="height:{u(h)}"></i>' for h in (6, 12, 18, 9, 15, 7, 13, 10))
+    inner = (f'<div class="vo" style="gap:{u(8)}"><span class="vo-bars" style="gap:{u(2.5)}">{bars}</span>'
+             f'<span class="vo-t" style="font-size:{u(11)};gap:{u(5)}"><i>▶</i>{esc(w.get("label") or "0:12")}</span></div>')
+    return ' data-dl data-msg="voice"', inner, "음성 메모", w.get("label")
+
+
+def r_gif(w, W, H, m):
+    """WidgetContent.gifView — 이미지가 있으면 그 이미지, 없으면 이모지 28 + 'GIF' 11."""
+    path, _ = m.image(w.get("img"))
+    if path:
+        return "", f'<img class="cover" src="{esc(path)}" alt="" loading="lazy">', "GIF", w.get("title")
+    inner = (f'<div class="ss gf" style="gap:{u(5)}"><span style="font-size:{u(28)}">{esc(w.get("emoji"))}</span>'
+             f'<span class="sub" style="font-size:{u(11)}">GIF</span></div>')
+    return "", inner, "GIF", w.get("title")
+
+
+def r_nowplaying(w, W, H, m):
+    """WidgetContent.nowplayingView — 보라 막대 4개 · 제목 14 SemiBold 흰색 · '아티스트 · 지금 듣는 중' 11."""
+    bars = "".join(f'<i style="height:{u(h)}"></i>' for h in (9, 15, 6, 12))
+    inner = (f'<div class="np" style="padding:0 {u(14)};gap:{u(11)}"><span class="np-bars" style="gap:{u(2.5)};height:{u(16)}">{bars}</span>'
+             f'<span class="np-col" style="gap:{u(3)}"><b style="font-size:{u(14)};line-height:{u(19)}">{esc(w.get("title"))}</b>'
+             f'<span style="font-size:{u(11)}">{esc(w.get("artist"))} · 지금 듣는 중</span></span></div>')
+    return "", inner, "지금 듣는 중", f'{w.get("title") or ""} · {w.get("artist") or ""}'
+
+
+def r_guestbook(w, W, H, m):
+    """StandardServiceTiles.SpecialGuestbookTile — 방명록 서비스 타일. 남긴 글은 앱에만 있어 첫 안부 안내를 보여 준다."""
+    fs = 9 if W < 110 else 12
+    content = (f'<p class="gb" style="font-size:{u(fs)};line-height:{u(fs * 1.45)};padding:{u(6 if W < 110 else 10)};border-radius:{u(10)}">'
+               f'첫 안부를 기다려요.<br>짧은 한 줄을 남겨봐.</p>')
+    return (' data-dl data-msg="guestbook"', service_tile(W, H, "방명록", w.get("title") or "다녀간 마음", "첫 안부를 남겨봐", content),
+            "방명록", w.get("title"))
+
+
+def r_collection(w, W, H, m):
+    """WidgetContent.collectionView — 제목 11 · 3열 카드(이모지 + 이름)."""
+    titles = [t for t in (w.get("text") or "").split("\n") if t.strip()][:6]
+    emojis = ["🎬", "📀", "📚", "🍿", "🎞", "📖"]
+    cards = "".join(f'<span class="cl-c" style="border-radius:{u(7)};gap:{u(2)}"><i style="font-size:{u(17)}">{emojis[i % 6]}</i>'
+                    f'<b style="font-size:{u(11)}">{esc(t)}</b></span>' for i, t in enumerate(titles))
+    inner = (f'<div class="cl" style="padding:{u(12)};gap:{u(7)}"><p style="font-size:{u(11)}">{esc(w.get("title") or "취향 콜렉션")}</p>'
+             f'<div class="cl-g" style="gap:{u(5)}">{cards}</div></div>')
+    return "", inner, "취향 콜렉션", w.get("title")
+
+
+def r_playlist(w, W, H, m):
+    """WidgetContent.playlistView — 보라 막대 + 제목 13 SemiBold · 번호 곡 3개 11 · '탭해서 듣기'."""
+    songs = [t for t in (w.get("text") or "").split("\n") if t.strip()][:3]
+    bars = "".join(f'<i style="height:{u(h)}"></i>' for h in (8, 13, 6))
+    rows = "".join(f'<p class="pls-r" style="font-size:{u(11)};gap:{u(7)}"><span>{i + 1}</span><b>{esc(t)}</b></p>' for i, t in enumerate(songs))
+    inner = (f'<div class="pls" style="padding:{u(12)};gap:{u(8)}"><p class="pls-h" style="gap:{u(5)};font-size:{u(13)}">'
+             f'<span class="np-bars" style="gap:{u(2)};height:{u(13)}">{bars}</span><b>{esc(w.get("title") or "플레이리스트")}</b></p>'
+             f'{rows}<span class="grow"></span><p class="pls-f" style="font-size:{u(11)}">탭해서 듣기</p></div>')
+    return ' data-dl', inner, "플레이리스트", w.get("title")
 
 
 TYPE_NAMES = {"gif": "GIF", "social": "소셜", "guestbook": "방명록", "diary": "일기", "dday": "디데이", "nowplaying": "지금 듣는 곡",
@@ -516,10 +707,15 @@ def r_generic(w, W, H, m):
 
 
 RENDER = {"block": r_block, "video": r_video, "sticker": r_sticker, "polaroid": r_polaroid, "paparazzi": r_paparazzi,
-          "ask": r_ask, "ditto": r_ditto, "music": r_music, "image": r_image, "status": r_status, "mood": r_status, "text": r_text}
+          "ask": r_ask, "ditto": r_ditto, "music": r_music, "image": r_image, "status": r_status, "mood": r_mood, "text": r_text,
+          "diary": r_diary, "dday": r_dday, "place": r_place, "weather": r_weather, "voice": r_voice, "gif": r_gif,
+          "nowplaying": r_nowplaying, "guestbook": r_guestbook, "collection": r_collection, "playlist": r_playlist}
+# 기본 바탕 (AppState.widgetBg) — style.bg가 있으면 그것이 먼저
 BG = {"block": "rgba(112,115,124,.08)", "video": "linear-gradient(225deg,#3a4a63,#24304a 50%,#161d2e)", "sticker": "#fef4f7",
       "polaroid": "#fff", "paparazzi": "#fff", "ask": "#fff", "ditto": "#e9d8f5", "image": "#e7e4ee", "status": "#fff",
-      "mood": "#fff3c4", "text": "#f3eefb", "guestbook": "#fff", "qna": "#fff"}
+      "mood": "#f1e3a7", "text": "#f3eefb", "guestbook": "#fff", "qna": "#fff", "diary": "#d7e39d", "dday": "#d9d4f9",
+      "nowplaying": "#141317", "place": "#b8e9df", "weather": "linear-gradient(#d7effe,#d1e2fd 33%,#bfcdf6 68%,#a0c6f1 84%,#d8e7f9)",
+      "voice": "#fdf1d7", "gif": "#f1e3a7", "collection": "#1d1e24", "playlist": "#17181d"}
 
 
 def render(widgets, media):
@@ -553,23 +749,27 @@ def render(widgets, media):
         role = f' role="button" tabindex="0" aria-label="{esc(name)}"' if interactive else f' role="img" aria-label="{esc(name)}"'
         pos = (f"left:{w['col'] * UNIT / DESIGN_W * 100:.3f}%;top:{w['row'] * UNIT / grid_h * 100:.3f}%;"
                f"width:{W / DESIGN_W * 100:.3f}%;height:{H / grid_h * 100:.3f}%;border-radius:{u(radius(w))};{bg}")
-        tiles.append(f'<div class="w w-{esc(w["type"])}{state}" style="{pos}"{role}{attrs}>{inner}</div>')
+        live = " np-live" if w["type"] == "nowplaying" else ""
+        tiles.append(f'<div class="w w-{esc(w["type"])}{state}{live}" style="{pos}"{role}{attrs}>{inner}</div>')
     # 앱 친구 플래터처럼 바탕(DT.backgroundNormal) 위에 바로 놓는다 — 별도 컨테이너·제목 없음
     return (f'<section class="platter" id="platter" aria-label="대표 플래터">'
             f'<div class="pl" style="aspect-ratio:{DESIGN_W} / {grid_h:.2f}">{"".join(tiles)}</div></section>'
             f'<div id="platterEnd" aria-hidden="true"></div>')
 
 
-def build(get, handle, outdir: Path):
-    """빌드 진입점 — (html, 그린 위젯 수). 서비스 키가 없거나 실패하면 ("", 0)."""
+def build(get, handle, outdir: Path, platter="rep"):
+    """빌드 진입점 — (html, 그린 위젯 수). 서비스 키가 없거나 실패하면 ("", 0).
+    platter="life"는 scripts/demo-profiles.txt 시안 계정에만 쓴다 (build_site.py가 목록으로 제한)."""
     key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
     if not key:
         return "", 0
     try:
-        owner, widgets = fetch_rep(get, handle, key)
+        owner, widgets = fetch_rep(get, handle, key, platter)
     except Exception as e:
         print(f"platter: {handle} 위젯을 읽지 못함 ({type(e).__name__})")
         return "", 0
     if (outdir / "media").exists():
         shutil.rmtree(outdir / "media")
-    return render(widgets, Media(get, outdir, owner)), len(widgets)
+    media = Media(get, outdir, owner)
+    media.sources = fetch_sources(get, owner, widgets, key)
+    return render(widgets, media), len(widgets)

@@ -9,6 +9,9 @@ GitHub Actions(.github/workflows/pages.yml)가 주기적으로 실행해 GitHub 
 프로필 페이지는 git에 커밋하지 않고 배포 산출물에만 들어간다. (예시 @ditto4037은 커밋해 둔다)
 
 대표 플래터: SUPABASE_SERVICE_ROLE_KEY가 있으면 대표(rep) 플래터를 페이지에 그린다 (scripts/platter.py).
+
+시안: scripts/demo-profiles.txt 의 계정(`아이디  platter=life`)은 /demo/{아이디}/ 에 그 플래터를 대표 자리에 그린다.
+실제 사용자는 이 목록에 넣지 않는다 — 라이프 플래터는 목록에 적힌 시안 계정에서만 공개된다. /demo/ 는 목록 페이지.
 위젯 테이블은 RLS로 막혀 있어 공개 키로는 읽을 수 없다. 키가 없으면 플래터 없이 프로필만 만든다.
 
   python3 scripts/build_site.py _site            # 전체
@@ -57,6 +60,23 @@ def listed_handles():
     return handles
 
 
+def demo_profiles():
+    """scripts/demo-profiles.txt → [(아이디, 플래터)]. 플래터는 rep 또는 life."""
+    out = []
+    listed = ROOT / "scripts/demo-profiles.txt"
+    if listed.exists():
+        for line in listed.read_text().splitlines():
+            parts = line.split("#", 1)[0].split()
+            if not parts:
+                continue
+            handle = parts[0].lstrip("@").lower()
+            opts = dict(x.split("=", 1) for x in parts[1:] if "=" in x)
+            plat = opts.get("platter", "rep")
+            if HANDLE_RE.match(handle) and plat in ("rep", "life"):
+                out.append((handle, plat))
+    return out
+
+
 def shared_handles(key):
     handles = listed_handles()
     try:
@@ -73,8 +93,8 @@ def shared_handles(key):
     return sorted(h for h in handles if HANDLE_RE.match(h))
 
 
-def profiles(key):
-    handles = shared_handles(key)
+def profiles(key, handles=None):
+    handles = shared_handles(key) if handles is None else handles
     rows = []
     for i in range(0, len(handles), 100):
         chunk = ",".join(handles[i:i + 100])
@@ -155,20 +175,82 @@ def og_image(name, handle, avatar_bytes, wordmark):
     return buf.getvalue()
 
 
+def profile_page(fill, row, key, wordmark, outdir, url, og_path, og_url, platter_kind="rep"):
+    """프로필 한 장 — outdir/index.html (+ media/) 과 og_path 미리보기 이미지. 그린 위젯 수를 돌려준다."""
+    handle = row["handle"]
+    name = (row.get("nickname") or "").strip() or handle
+    avatar = row.get("avatar_url") or ""
+    avatar_ok = avatar.startswith(SB + "/storage/")
+    data = None
+    if avatar_ok:
+        try:
+            data = get(avatar, timeout=20)
+        except Exception:
+            avatar_ok = False
+    og_path.parent.mkdir(parents=True, exist_ok=True)
+    og_path.write_bytes(og_image(name, handle, data, wordmark))
+    title = f"{name} (@{handle}) · ditto!"
+    outdir.mkdir(parents=True, exist_ok=True)
+    platter_html, n_widgets = platter.build(get, handle, outdir, platter_kind)
+    page = fill({
+        "TITLE": html.escape(title), "URL": url, "OG_IMAGE": og_url,
+        "NAME": html.escape(name), "HANDLE": handle, "INITIAL": html.escape(name[:1].upper()),
+        "AVATAR": html.escape(avatar) if avatar_ok else "",
+        "AVATAR_HIDDEN": "" if avatar_ok else " hidden", "FALLBACK_HIDDEN": " hidden" if avatar_ok else "", "KEY": key,
+        "PLATTER": platter_html, "WRAP_CLASS": " has-platter" if platter_html else "",
+    })
+    (outdir / "index.html").write_text(page)
+    return n_widgets
+
+
+def demo_index(rows):
+    """/demo/ — 시안 프로필 목록 (noindex)."""
+    items = []
+    for r in rows:
+        av = r.get("avatar_url") or ""
+        style = f' style="background-image:url({html.escape(av)})"' if av.startswith(SB + "/storage/") else ""
+        name = html.escape((r.get("nickname") or r["handle"]).strip())
+        items.append(f'<li><a href="/demo/{r["handle"]}/"><span class="av"{style}></span>'
+                     f'<span class="t"><b>{name}</b><i>@{r["handle"]}</i></span><em>›</em></a></li>')
+    items = "".join(items)
+    return f"""<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로필 시안 · ditto!</title><meta name="robots" content="noindex, nofollow, noimageindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+*{{margin:0;padding:0;box-sizing:border-box}}
+body{{font-family:"Pretendard Variable",Pretendard,-apple-system,sans-serif;background:#F3F0F7;color:#1C1722;-webkit-font-smoothing:antialiased}}
+main{{max-width:430px;margin:0 auto;padding:32px 16px 48px}}
+h1{{font-size:22px;font-weight:700;letter-spacing:-.02em}}
+p{{margin-top:6px;font-size:14px;line-height:1.5;color:#6D5F7D;word-break:keep-all}}
+ul{{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:8px}}
+a{{display:flex;align-items:center;gap:12px;padding:10px 14px 10px 10px;border-radius:16px;background:#fff;text-decoration:none;color:inherit;box-shadow:0 1px 1.5px rgba(0,0,0,.06)}}
+.av{{flex:none;width:48px;height:48px;border-radius:12px;background:#E7E1EE center/cover no-repeat}}
+.t{{flex:1;display:flex;flex-direction:column;gap:2px}} .t b{{font-size:16px;font-weight:600}} .t i{{font-style:normal;font-size:12px;color:#6D5F7D}}
+em{{font-style:normal;color:#6D5F7D;font-size:18px}}
+</style></head><body><main>
+<h1>프로필 시안</h1>
+<p>실제 서버 데이터로 그린 프로필 페이지예요. 시안 계정의 플래터를 대표 플래터 자리에 보여 줘요.</p>
+<ul>{items}</ul>
+</main></body></html>
+"""
+
+
 def main():
     key = public_key()
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
     reserved = set()
-    # 목록 파일에 있는 아이디 폴더(커밋해 둔 예시 프로필)는 저장소 경로가 아니라 다시 만드는 산출물이다.
-    generated = {h for h in listed_handles() if (ROOT / h / "index.html").exists()}
+    # 목록 파일에 있는 아이디 폴더(커밋해 둔 예시 프로필)와 /demo/ 는 저장소 경로가 아니라 다시 만드는 산출물이다.
+    generated = {h for h in listed_handles() if (ROOT / h / "index.html").exists()} | {"demo"}
     for p in ROOT.iterdir():
         if p.name in SKIP or p.name in generated:
             continue
         reserved.add(p.name.lower())
         (shutil.copytree if p.is_dir() else shutil.copy2)(p, OUT / p.name)
-    reserved |= {"u", "og", "404.html", "index.html", "robots.txt", "sitemap.xml", "favicon.ico"}
+    reserved |= {"u", "og", "demo", "404.html", "index.html", "robots.txt", "sitemap.xml", "favicon.ico"}
 
     template = (ROOT / "scripts/profile.html").read_text()
     fill = lambda values: re.sub(r"\{\{(\w+)\}\}", lambda m: values.get(m.group(1), ""), template)
@@ -184,31 +266,31 @@ def main():
         if not HANDLE_RE.match(handle) or handle in reserved:
             skipped += 1
             continue
-        name = (row.get("nickname") or "").strip() or handle
-        avatar = row.get("avatar_url") or ""
-        avatar_ok = avatar.startswith(SB + "/storage/")
-        data = None
-        if avatar_ok:
-            try:
-                data = get(avatar, timeout=20)
-            except Exception:
-                avatar_ok = False
-        (OUT / "og" / f"{handle}.png").write_bytes(og_image(name, handle, data, wordmark))
-        title = f"{name} (@{handle}) · ditto!"
-        (OUT / handle).mkdir()
-        platter_html, n_widgets = platter.build(get, handle, OUT / handle)
-        if n_widgets:
-            print(f"platter: @{handle} 대표 플래터 위젯 {n_widgets}개")
-        page = fill({
-            "TITLE": html.escape(title), "URL": f"{SITE}/{handle}", "OG_IMAGE": f"{SITE}/og/{handle}.png",
-            "NAME": html.escape(name), "HANDLE": handle, "INITIAL": html.escape(name[:1].upper()),
-            "AVATAR": html.escape(avatar) if avatar_ok else "",
-            "AVATAR_HIDDEN": "" if avatar_ok else " hidden", "FALLBACK_HIDDEN": " hidden" if avatar_ok else "", "KEY": key,
-            "PLATTER": platter_html, "WRAP_CLASS": " has-platter" if platter_html else "",
-        })
-        (OUT / handle / "index.html").write_text(page)
+        row = dict(row, handle=handle)
+        n = profile_page(fill, row, key, wordmark, OUT / handle, f"{SITE}/{handle}", OUT / "og" / f"{handle}.png", f"{SITE}/og/{handle}.png")
+        if n:
+            print(f"platter: @{handle} 대표 플래터 위젯 {n}개")
         built += 1
-    print(f"site: {OUT} · profiles built {built} · skipped {skipped}")
+
+    # 시안 — 목록에 적힌 계정만, 적힌 플래터로
+    demos = demo_profiles()
+    if demos:
+        plat = dict(demos)
+        rows = {(r.get("handle") or "").lower(): r for r in profiles(key, sorted(plat))}
+        shown = []
+        for handle, kind in demos:
+            row = rows.get(handle)
+            if not row:
+                print(f"demo: @{handle} 프로필 없음")
+                continue
+            row = dict(row, handle=handle)
+            n = profile_page(fill, row, key, wordmark, OUT / "demo" / handle, f"{SITE}/demo/{handle}",
+                             OUT / "demo" / handle / "og.png", f"{SITE}/demo/{handle}/og.png", kind)
+            print(f"demo: @{handle} {kind} 플래터 위젯 {n}개")
+            shown.append(row)
+        (OUT / "demo").mkdir(exist_ok=True)
+        (OUT / "demo" / "index.html").write_text(demo_index(shown))
+    print(f"site: {OUT} · profiles built {built} · skipped {skipped} · demo {len(demos)}")
 
 
 if __name__ == "__main__":

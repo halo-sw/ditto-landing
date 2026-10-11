@@ -1,0 +1,14 @@
+# ditto.at/demo/{아이디} 프로필 시안 — 실제 서버 데이터로 그린다 (scripts/build_site.py).
+# 형식: 아이디  platter=rep|life
+# platter=life 는 이 목록에 적힌 시안(페르소나) 계정만 가능하다. 실제 사용자는 절대 넣지 않는다 —
+# 공개 프로필은 대표(rep) 플래터만 보여 준다는 원칙이 실제 사용자에게는 그대로 유지된다.
+haeunzip       platter=life   # 하은
+jaeminarchive  platter=life   # 재민
+soramaybe      platter=life   # 소라
+junishere      platter=life   # 준
+nariday        platter=life   # 나리
+dohyunlinks    platter=life   # 도현
+jiuallday      platter=life   # 지우
+seoyunpalette  platter=life   # 서윤
+rianafterdark  platter=life   # 리안
+yeseofilm      platter=life   # 예서
