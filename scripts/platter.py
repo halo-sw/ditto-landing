@@ -238,6 +238,56 @@ def _mix(c, t):
     return tuple(round(v * (1 - t) + 255 * t) for v in c)
 
 
+# ── 프로필 핸들 색 (Profile handle v2 · iOS DGrad.profileHandlePalettes · profiles.handle_color) ──
+# 한 사람 = 한 색. 서버 값(프리셋 키 또는 #RRGGBB)을 앱과 같은 그라디언트로 그린다. 값이 없을 때만 기본(라벤더).
+HANDLE_INK = (0x17, 0x17, 0x19)
+HANDLE_PALETTES = {   # id: (top, bottom, life) — 이름(잉크 16/500)이 두 스톱 모두에서 ≥ 4.5:1
+    "lavender": ("#CAB7F2", "#B092ED", "#C8B3F2"), "slate": ("#A8B3BF", "#79899B", "#A1ADB9"),
+    "lime": ("#C5D593", "#A5BE57", "#C0D289"), "teal": ("#8FB2BD", "#5C8F9F", "#8DB0BC"),
+    "gold": ("#D5C194", "#BF9F5B", "#D2BC8C"), "coral": ("#EDAE91", "#E07B4C", "#E9A382"),
+    "pink": ("#EEAFC7", "#E37CA2", "#EBA3BE"), "sage": ("#B3BDA6", "#85946F", "#AAB49A"),
+    "mauve": ("#B5ADBA", "#908498", "#B2A9B7"), "sky": ("#ADD5E5", "#79BBD4", "#A1CFE1"),
+}
+HANDLE_DEFAULT = "lavender"
+
+
+def _hex(c):
+    return "#%02X%02X%02X" % tuple(c)
+
+
+def _rgb(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _mixf(c, t):   # 화이트 쪽으로 t (0~1) — 앱 customTone과 같은 실수 블렌드
+    return tuple(round((v / 255 + (1 - v / 255) * t) * 255) for v in c)
+
+
+def handle_style(value):
+    """profiles.handle_color → .handle 인라인 스타일 (--h-top · --h-bottom · 글자색). 앱 DGrad.profileTone(value:)과 같은 규칙."""
+    v = (value or "").strip()
+    if v.startswith("#") and len(v) == 7 and all(ch in "0123456789abcdefABCDEF" for ch in v[1:]):
+        base = _rgb(v)
+        white = (255, 255, 255)
+        dark = True
+        if _contrast(HANDLE_INK, base) < 4.5:
+            if _contrast(white, _mixf(base, 0.18)) >= 4.5:
+                dark = False
+            else:
+                t = 0.0
+                while _contrast(HANDLE_INK, _mixf(_rgb(v), t)) < 4.5 and t < 1:
+                    t += 0.02
+                base = _mixf(_rgb(v), t)
+        top, bottom = _hex(_mixf(base, 0.35 if dark else 0.18)), _hex(base)
+        ink = "#171719" if dark else "#FFFFFF"
+    else:
+        top, bottom, _ = HANDLE_PALETTES.get(v, HANDLE_PALETTES[HANDLE_DEFAULT])
+        ink = "#171719"
+    sub = "rgba(23,23,25,.85)" if ink == "#171719" else "rgba(255,255,255,.85)"
+    return f"--h-top:{top};--h-bottom:{bottom};--h-ink:{ink};--h-sub:{sub}"
+
+
 def music_palette(im):
     keys = [(160, 160, 160)] * 2
     if im is not None:

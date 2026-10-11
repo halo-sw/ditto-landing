@@ -98,7 +98,7 @@ def profiles(key, handles=None):
     rows = []
     for i in range(0, len(handles), 100):
         chunk = ",".join(handles[i:i + 100])
-        rows += json.loads(get(f"{SB}/rest/v1/profiles?select=handle,nickname,avatar_url&handle=in.({urllib.parse.quote(chunk)})", {"apikey": key}))
+        rows += json.loads(get(f"{SB}/rest/v1/profiles?select=handle,nickname,avatar_url,handle_color&handle=in.({urllib.parse.quote(chunk)})", {"apikey": key}))
     return rows
 
 
@@ -198,6 +198,7 @@ def profile_page(fill, row, key, wordmark, outdir, url, og_path, og_url, platter
         "AVATAR": html.escape(avatar) if avatar_ok else "",
         "AVATAR_HIDDEN": "" if avatar_ok else " hidden", "FALLBACK_HIDDEN": " hidden" if avatar_ok else "", "KEY": key,
         "PLATTER": platter_html, "WRAP_CLASS": " has-platter" if platter_html else "",
+        "HANDLE_STYLE": platter.handle_style(row.get("handle_color")),   # 앱과 같은 핸들 색 (profiles.handle_color)
     })
     (outdir / "index.html").write_text(page)
     return n_widgets
@@ -256,7 +257,8 @@ def main():
     fill = lambda values: re.sub(r"\{\{(\w+)\}\}", lambda m: values.get(m.group(1), ""), template)
     # 404: 아직 빌드되지 않은 새 아이디 · /u/{아이디} 옛 주소 · 없는 페이지
     (OUT / "404.html").write_text(fill({"TITLE": "ditto!", "URL": SITE + "/", "OG_IMAGE": SITE + "/assets/og-landing.png",
-                                         "PROFILE_HIDDEN": " hidden", "AVATAR_HIDDEN": " hidden", "KEY": key, "PLATTER": ""}))
+                                         "PROFILE_HIDDEN": " hidden", "AVATAR_HIDDEN": " hidden", "KEY": key, "PLATTER": "",
+                                         "HANDLE_STYLE": platter.handle_style(None)}))
 
     wordmark = Image.open(ROOT / "email/wordmark-white.png").convert("RGBA")
     (OUT / "og").mkdir(exist_ok=True)

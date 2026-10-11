@@ -67,7 +67,8 @@
 
   /* Splup/ProfileHandle · 대표 — 높이 64 · 사방 8 · R16 · [아바타 48 R12] 8 [이름/아이디] 8 [액션 44] */
   .handle { position: relative; display: flex; align-items: center; gap: 8px; margin: 2px 14px 12px; padding: 8px; min-height: 64px; border-radius: 16px;
-    background: linear-gradient(180deg, var(--h-top, #B66BEC) 0%, var(--h-bottom, #9270D9) 100%); box-shadow: 0 3px 8px rgba(0,0,0,.06); color: #171719; }
+    background: linear-gradient(180deg, var(--h-top, #CAB7F2) 0%, var(--h-bottom, #B092ED) 100%); box-shadow: 0 3px 8px rgba(0,0,0,.06); color: var(--h-ink, #171719); }
+  /* 핸들 색 = 그 사람의 profiles.handle_color (Profile handle v2, 앱과 같은 10색 · 커스텀 hex). 빌드가 --h-* 를 채운다 */
   .handle::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 22%); pointer-events: none; }
   .h-av { position: relative; flex: none; width: 48px; height: 48px; border-radius: 12px; overflow: hidden; background: #F1F2F4; display: grid; place-items: center; }
   .h-av img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -75,7 +76,7 @@
   .h-av svg { width: 24px; height: 24px; }
   .h-labels { position: relative; flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
   .h-name { font-size: 16px; font-weight: 500; line-height: 1.45; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .h-sub { font-size: 12px; font-weight: 400; line-height: 1.4; color: rgba(23,23,25,.62); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .h-sub { font-size: 12px; font-weight: 400; line-height: 1.4; color: var(--h-sub, rgba(23,23,25,.85)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   /* 친구 추가 가능 — 44 원 #F0EDFF + 사람+ 20 #454650 (ProfileRelation.canAdd) */
   .h-act { position: relative; flex: none; width: 44px; height: 44px; border-radius: 50%; background: #F0EDFF; color: #454650; display: grid; place-items: center; transition: transform .15s ease; -webkit-tap-highlight-color: transparent; }
   .h-act:active { transform: scale(.94); }
@@ -320,7 +321,7 @@
       <h1 id="navTitle">도현의 플래터</h1>
       <button class="nav-btn" id="shareBtn" type="button" aria-label="프로필 링크 공유"><i style="--m:url(/assets/platter/ic-share.png)"></i></button>
     </header>
-    <section class="handle" aria-label="프로필">
+    <section class="handle" aria-label="프로필" style="--h-top:#EDAE91;--h-bottom:#E07B4C;--h-ink:#171719;--h-sub:rgba(23,23,25,.85)">
       <div class="h-av">
         <span class="h-fb" id="avatarFallback" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5a6 6 0 0 1 2.07 11.63c2.05.27 3.6.94 4.77 1.82 1.53 1.15 2.32 2.6 2.72 3.77.3.88.08 1.74-.45 2.35-.52.6-1.3.93-2.12.93H5.01c-.82 0-1.6-.34-2.12-.93-.53-.61-.75-1.47-.45-2.35.4-1.17 1.19-2.62 2.72-3.77 1.17-.88 2.72-1.55 4.77-1.82A6 6 0 0 1 12 1.5Z" fill="#8B9099"/></svg></span>
         <img id="avatar" src="https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/5dd3e385-8c88-4640-b6fb-da84aaa76e2d/avatar.jpg" alt="">
