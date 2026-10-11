@@ -998,96 +998,106 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
   .tw .tset.on .tf,.tw .tset.on .stkc{animation:none}
 }
 
-/* ---------- 5.4 rooms: one room at a time ---------- */
-@property --rmp{syntax:'<percentage>';inherits:false;initial-value:100%}
-.rm{margin-top:clamp(28px,4vw,52px)}
-.rm-track{position:relative;list-style:none;margin:0;padding:0;display:flex;gap:16px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:rgba(138,63,184,.3) transparent;border-radius:var(--r-lg)}
-.rm-track:focus-visible{outline:3px solid var(--violet);outline-offset:6px}
-.rm-slide{--c:#BDA6EB;--c2:#AB8FEB;--tint:color-mix(in srgb,var(--c2) 42%,var(--ink));position:relative;flex:0 0 88%;min-width:0;scroll-snap-align:start;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);grid-template-areas:"phone head" "phone body";grid-template-rows:1fr 1fr;column-gap:clamp(32px,5vw,96px);padding:clamp(36px,4.2vw,60px) clamp(28px,5vw,96px);border-radius:var(--r-lg);overflow:hidden;isolation:isolate;
-  background:
-    radial-gradient(48% 62% at 26% 34%,color-mix(in srgb,var(--c) 62%,transparent),transparent 72%),
-    radial-gradient(40% 52% at 34% 96%,color-mix(in srgb,var(--c2) 40%,transparent),transparent 72%),
-    radial-gradient(36% 48% at 96% 0%,rgba(250,151,226,.16),transparent 72%),
-    linear-gradient(155deg,color-mix(in srgb,var(--c) 16%,#FFFFFF),#FFFFFF 58%,color-mix(in srgb,var(--c) 10%,#FFFFFF));
-  box-shadow:inset 0 0 0 1px var(--line)}
-.rm-phone{grid-area:phone;justify-self:center;align-self:center;margin:0;width:clamp(236px,21vw,296px);padding:8px;border-radius:var(--r-lg);background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.85),0 0 0 1px rgba(22,18,27,.05),0 46px 70px -46px color-mix(in srgb,var(--c2) 80%,#2A0D40),0 18px 30px -26px rgba(70,20,100,.35)}
-.rm-scr{aspect-ratio:600/1218;overflow:hidden;border-radius:var(--r-md);background:#F6F6F8}
-.rm-scr img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 59%}
-.rm-head{grid-area:head;align-self:end;min-width:0}
-.rm-body{grid-area:body;align-self:start;min-width:0;padding-top:26px}
-.rm-no{margin:0;font:italic 800 13px/1 var(--round);letter-spacing:.08em;color:var(--mute)}
-.rm-no b{font-weight:900;color:var(--tint)}
-.rm-name{margin:14px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px}
-.rm-name .en{font:italic 900 clamp(56px,6.2vw,92px)/.92 var(--round);letter-spacing:-.025em;color:var(--tint);padding-right:.08em}
-.rm-name .ko{font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--ink-2)}
-.rm-title{margin:20px 0 0;font-size:clamp(24px,2.3vw,32px);font-weight:700;letter-spacing:-.035em;line-height:1.3;color:var(--ink)}
-.rm-who{margin:6px 0 0;font-size:15px;color:var(--mute)}
-.rm-q{margin:0;padding-left:18px;border-left:2px solid color-mix(in srgb,var(--c2) 70%,#FFFFFF);max-width:26em}
-.rm-q p{margin:0;font-size:clamp(16px,1.3vw,18px);line-height:1.6;color:var(--ink-2)}
-.rm-from{display:inline-flex;align-items:center;gap:12px;margin:24px 0 0;padding:8px 20px 8px 8px;max-width:100%;border-radius:999px;background:rgba(255,255,255,.7);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.95),0 12px 26px -20px rgba(70,20,100,.5)}
-.rm-from img{flex:0 0 40px;width:40px;height:40px;border-radius:50%;object-fit:cover}
-.rm-from span{min-width:0;line-height:1.35}
-.rm-from small{display:block;font-size:12px;font-weight:600;color:var(--violet-d)}
-.rm-from b{display:block;font-size:14px;font-weight:600;letter-spacing:-.02em;color:var(--ink)}
-.rm-from q{quotes:"“" "”";font-weight:500;color:var(--ink-2)}
-.rm-bar{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;margin-top:22px}
-.rm-pick{position:relative;display:flex;gap:12px;padding:6px}
-.rm-pick[hidden]{display:none}
-.rm-pick button{position:relative;flex:0 0 auto;width:46px;height:46px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer;opacity:.5;filter:saturate(.55);transition:opacity .35s ease,filter .35s ease,transform .45s var(--ease)}
-.rm-pick button img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line)}
-.rm-pick button::after{content:"";position:absolute;inset:-5px;border-radius:50%;opacity:0;background:conic-gradient(var(--violet-d) var(--rmp),rgba(138,63,184,.16) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));transition:opacity .35s ease}
-.rm-pick button:hover{opacity:.9;filter:none;transform:translateY(-2px)}
-.rm-pick button[aria-pressed="true"]{opacity:1;filter:none}
-.rm-pick button[aria-pressed="true"]::after{opacity:1}
-.rm-pick button:focus-visible{outline:2px solid var(--violet-d);outline-offset:8px}
-.rm.is-auto .rm-pick button[aria-pressed="true"]::after{animation:rmp 7s linear both}
-.rm.is-auto:hover .rm-pick button::after,.rm.is-auto:focus-within .rm-pick button::after{animation-play-state:paused}
-@keyframes rmp{from{--rmp:0%}to{--rmp:100%}}
-.rm-cap{margin:0;font-size:13px;color:var(--mute)}
-.rm-cap .m-cap{display:none}
+/* ---------- 5.4 rooms: centered opener + 3D fanned collection (iPhone 17 frames) + persona overview ---------- */
+@property --rc{syntax:'<color>';inherits:true;initial-value:#BDA6EB}
+/* iPhone 17 screen = 402 x 874 pt (1 : 2.174). Display corner ~55pt = 13.7% of width on device;
+   here deliberately subtler: screen 7% of its width, frame = screen radius + thin bezel. */
+.rm{--rc:#BDA6EB;--pw:clamp(160px,min(17vw,29svh),244px);--bz:calc(var(--pw) * .012);--sr:calc((var(--pw) - var(--bz) * 2) * .07);
+  position:relative;isolation:isolate;padding:clamp(56px,7vw,104px) 0 clamp(48px,6vw,88px);transition:--rc .9s var(--ease)}
+/* soft full-bleed backdrop (body clips x-overflow) */
+.rm::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:calc(50% - 50vw);right:calc(50% - 50vw);pointer-events:none;
+  background:radial-gradient(60% 46% at 50% 58%,color-mix(in srgb,var(--rc) 30%,transparent),transparent 74%),linear-gradient(180deg,rgba(245,242,248,0),var(--bg-2) 16%,var(--bg-2) 84%,rgba(245,242,248,0))}
+/* centered opener */
+.rm-open{max-width:40em;margin:0 auto clamp(28px,4vw,52px);text-align:center}
+.rm-open .lab{justify-content:center}
+.rm-open .h-l{margin-top:14px;font-size:clamp(32px,4.2vw,60px);line-height:1.18}
+.rm-open .lead{margin:16px auto 0;max-width:30em;text-wrap:balance}
+/* stage: no-JS / reduced motion = horizontal scroll strip */
+.rm-fan{position:relative;margin-inline:calc(var(--gut) * -1)}
+.rm-track{list-style:none;margin:0;padding:8px var(--gut) 18px;display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:rgba(138,63,184,.3) transparent}
+.rm-card{--c:#BDA6EB;--c2:#AB8FEB;flex:0 0 auto;width:var(--pw);scroll-snap-align:center;min-width:0}
+.rm-ph{display:block;width:100%;padding:var(--bz);border:0;margin:0;font:inherit;color:inherit;cursor:pointer;position:relative;border-radius:calc(var(--sr) + var(--bz));background:#1B1720;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 0 0 1px rgba(22,18,27,.1),0 36px 56px -34px color-mix(in srgb,var(--c2) 75%,#2A0D40),0 14px 24px -20px rgba(70,20,100,.35)}
+.rm-scr{display:block;aspect-ratio:402/874;overflow:hidden;border-radius:var(--sr);background:#F3F0F7}
+.rm-scr img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.rm-ph .dim{position:absolute;inset:0;border-radius:inherit;background:#4A2266;opacity:0;pointer-events:none}
+.rm-ph:focus-visible{outline:3px solid var(--violet-d);outline-offset:5px}
+/* persona overview (inside each card without JS, gathered below the fan with JS) */
+.rm-pf{margin-top:14px;padding:18px 18px 16px;border-radius:var(--r-lg);background:#FFFFFF;box-shadow:0 0 0 1px var(--line),0 18px 36px -28px rgba(70,20,100,.35);font-size:14px;line-height:1.6;color:var(--ink-2);text-align:left}
+.rm-pf-top{display:flex;align-items:center;gap:14px;min-width:0}
+.rm-pf-av{flex:0 0 auto;width:56px;height:56px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px color-mix(in srgb,var(--c2) 55%,#FFFFFF)}
+.rm-pf-id{min-width:0;flex:1 1 auto}
+.rm-pf-name{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;font-size:19px;font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1.25}
+.rm-pf-name .en{font:italic 900 15px/1 var(--round);letter-spacing:-.01em;color:color-mix(in srgb,var(--c2) 60%,var(--ink))}
+.rm-pf-sub{margin:3px 0 0;font-size:13px;color:var(--mute);overflow-wrap:anywhere}
+.rm-pf-tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none}
+.rm-pf-tags li{padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;line-height:1.5;color:var(--ink-2);background:var(--bg-2)}
+.rm-pf-tags li:first-child{color:color-mix(in srgb,var(--c2) 45%,var(--ink));background:color-mix(in srgb,var(--c) 26%,#FFFFFF)}
+.rm-pf-tags b{font:italic 900 12px/1 var(--round);letter-spacing:.01em;margin-right:6px}
+.rm-pf-q{margin:14px 0 0;font-size:clamp(17px,1.5vw,20px);font-weight:600;letter-spacing:-.025em;line-height:1.45;color:var(--ink)}
+.rm-pf-rel{margin:12px 0 0;font-size:13.5px;color:var(--ink-2)}
+.rm-pf-rel small{display:inline-block;margin-right:8px;font-size:11.5px;font-weight:700;color:var(--violet-d)}
+.rm-pf-dl{margin:16px 0 0;display:grid;gap:12px}
+.rm-pf-dl div{padding:12px 14px;border-radius:14px;background:var(--bg-2)}
+.rm-pf-dl dt{font-size:12px;font-weight:700;letter-spacing:-.01em;color:var(--violet-d)}
+.rm-pf-dl dd{margin:3px 0 0;font-size:14px;line-height:1.6;color:var(--ink)}
+.rm-pf-dl dd strong{display:block;margin-bottom:2px;font-size:15px;font-weight:700;letter-spacing:-.02em}
+.rm-pf-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:14px}
+.rm-pf-from{display:inline-flex;align-items:center;gap:8px;min-width:0;max-width:100%;margin:0;padding:4px 12px 4px 4px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,#FFFFFF);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c2) 26%,transparent)}
+.rm-pf-from img{flex:0 0 auto;width:26px;height:26px;border-radius:50%;object-fit:cover}
+.rm-pf-from span{min-width:0;font-size:12.5px;line-height:1.35;color:var(--ink)}
+.rm-pf-from small{font-size:11.5px;font-weight:600;color:var(--violet-d);margin-right:6px}
+.rm-pf-from q{quotes:"“" "”";color:var(--ink-2)}
+.rm-pf-go{font-size:13px;font-weight:600;color:var(--violet-d);text-decoration:none;white-space:nowrap}
+.rm-pf-go:hover{text-decoration:underline;text-underline-offset:3px}
+.rm-prof,.rm-ctl{display:none}
+.rm:not(.is-js) .rm-card{width:min(84vw,340px)}
+.rm:not(.is-js) .rm-ph{width:min(100%,var(--pw));margin-inline:auto}
+.rm:not(.is-js) .rm-pf-from{border-radius:16px}
+
+/* ===== JS: 3D cover-flow fan ===== */
+.rm.is-js .rm-prof{display:grid;position:relative;width:min(100%,900px);margin:clamp(18px,2vw,26px) auto 0}
+.rm.is-js .rm-prof .rm-pf{grid-area:1/1;margin:0;padding:clamp(18px,2.2vw,28px);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .45s ease,transform .6s var(--ease),visibility 0s linear .45s}
+.rm.is-js .rm-prof .rm-pf.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .55s ease .08s,transform .7s var(--ease) .08s,visibility 0s}
+.rm.is-js .rm-ctl{display:flex;justify-content:center;gap:10px;margin-top:16px}
+.rm-ctl button{width:40px;height:40px;border:0;border-radius:50%;padding:0;cursor:pointer;background:#FFFFFF;color:var(--ink);font:700 18px/1 var(--kr);box-shadow:0 0 0 1px var(--line),0 8px 18px -12px rgba(70,20,100,.45);transition:transform .3s var(--ease),box-shadow .3s ease}
+.rm-ctl button:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(138,63,184,.3),0 10px 20px -12px rgba(70,20,100,.55)}
+.rm-ctl button:focus-visible{outline:3px solid var(--violet-d);outline-offset:3px}
+.rm.is-3d .rm-fan{height:calc(var(--pw) * 2.2 + 44px);overflow:hidden;perspective:1600px;perspective-origin:50% 40%;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;
+  background:radial-gradient(34% 58% at 50% 46%,color-mix(in srgb,var(--rc) 46%,transparent),transparent 72%)}
+.rm.is-3d .rm-fan.is-drag{cursor:grabbing}
+.rm.is-3d .rm-track{position:absolute;inset:0;display:block;overflow:visible;padding:0;transform-style:preserve-3d;pointer-events:none}
+.rm.is-3d .rm-card{pointer-events:auto}
+.rm.is-3d .rm-card{--o:0;--a:0;position:absolute;left:50%;top:14px;margin-left:calc(var(--pw) / -2);transform-style:preserve-3d;
+  transform:translateX(calc(clamp(-1,var(--o),1) * var(--pw) * .9 + (var(--o) - clamp(-1,var(--o),1)) * var(--pw) * .52)) translateZ(calc(var(--a) * -150px)) rotateY(calc(clamp(-1,var(--o),1) * -36deg));
+  opacity:calc(1 - max(var(--a) - 2.6,0))}
+.rm.is-3d .rm-ph{cursor:inherit}
+.rm.is-3d .rm-ph .dim{opacity:calc(min(var(--a),2.4) * .13)}
+.rm.is-3d .rm-card .rm-pf{display:none}
+/* reduced motion: flat strip, no 3D */
+.rm.is-flat .rm-card .rm-pf{display:none}
+.rm.is-flat .rm-ph[aria-pressed="true"]{box-shadow:0 0 0 3px var(--violet),0 14px 24px -20px rgba(70,20,100,.35)}
+.rm.is-flat .rm-ph[aria-pressed="false"] .dim{opacity:.12}
+/* wide: two-column persona card */
 @media (min-width:761px){
-  .rm.is-js .rm-track{display:grid;overflow:visible;scroll-snap-type:none}
-  .rm.is-js .rm-slide{grid-area:1/1;opacity:0;visibility:hidden;z-index:0;transition:opacity .75s var(--ease),visibility 0s linear .75s}
-  .rm.is-js .rm-slide.is-on{opacity:1;visibility:visible;z-index:2;transition:opacity .75s var(--ease),visibility 0s}
-  .rm.is-js .rm-slide.is-prev{opacity:1;visibility:visible;z-index:1;transition:none}
-  .rm.is-js .rm-slide>*{transition:opacity .5s ease,transform .9s var(--ease)}
-  .rm.is-js .rm-slide.is-prev>*{opacity:0;transition:opacity .3s ease}
-  .rm.is-js .rm-slide:not(.is-on) .rm-phone{transform:translateY(18px) scale(.985)}
-  .rm.is-js .rm-slide:not(.is-on) .rm-head{transform:translateX(14px)}
-  .rm.is-js .rm-slide:not(.is-on) .rm-body{transform:translateX(22px)}
-  .rm.is-js .rm-slide.is-on .rm-head{transition-delay:.06s}
-  .rm.is-js .rm-slide.is-on .rm-body{transition-delay:.12s}
-}
-@media (max-width:1000px) and (min-width:761px){
-  .rm-slide{column-gap:36px;padding-inline:36px}
-  .rm-name .en{font-size:52px}
+  .rm.is-js .rm-pf{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);column-gap:clamp(24px,3vw,40px);align-items:start}
+  .rm.is-js .rm-pf-l{grid-column:1}
+  .rm.is-js .rm-pf-dl{grid-column:2;grid-row:1 / span 2;margin-top:0}
+  .rm.is-js .rm-pf-foot{grid-column:1;align-self:end}
 }
 @media (max-width:760px){
-  .rm-track{gap:var(--gut);margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);scroll-padding-inline:var(--gut);scrollbar-width:none}
-  .rm-track::-webkit-scrollbar{display:none}
-  .rm-slide{flex:0 0 100%;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;grid-template-areas:"head" "phone" "body";row-gap:22px;padding:26px 20px 24px;
-    background:
-      radial-gradient(80% 42% at 50% 50%,color-mix(in srgb,var(--c) 58%,transparent),transparent 72%),
-      radial-gradient(70% 30% at 50% 100%,color-mix(in srgb,var(--c2) 34%,transparent),transparent 72%),
-      linear-gradient(170deg,color-mix(in srgb,var(--c) 16%,#FFFFFF),#FFFFFF 46%,color-mix(in srgb,var(--c) 10%,#FFFFFF))}
-  .rm-phone{width:min(56vw,224px)}
-  .rm-head,.rm-body{align-self:auto}
-  .rm-body{padding-top:0}
-  .rm-name{margin-top:10px}
-  .rm-name .en{font-size:46px}
-  .rm-title{margin-top:12px;font-size:22px}
-  .rm-who{font-size:14px}
-  .rm-q p{font-size:15px}
-  .rm-from{margin-top:16px}
-  .rm-bar{flex-direction:column;align-items:stretch;margin-top:14px}
-  .rm-pick{overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gut) * -1);padding:14px var(--gut);gap:12px}
-  .rm-pick button:focus-visible{outline-offset:5px}
-  .rm-pick::-webkit-scrollbar{display:none}
-  .rm-pick button{width:44px;height:44px}
-  .rm-cap .m-cap{display:inline}
+  .rm{--pw:min(46vw,200px)}
+  .rm.is-js .rm-prof{width:auto;margin-inline:calc(16px - var(--gut))}
+  .rm-open{text-align:center}
+  .rm-pf-name{font-size:18px}
+  .rm-pf-from{border-radius:16px}
+}
+@media (max-width:420px){
+  .rm-pf{padding:16px 14px 14px}
+  .rm-pf-from{align-items:flex-start;padding:6px 12px 6px 6px}
 }
 @media (prefers-reduced-motion:reduce){
-  .rm.is-js .rm-slide,.rm.is-js .rm-slide>*{transition:none!important;transform:none!important}
+  .rm,.rm.is-js .rm-prof .rm-pf,.rm-ctl button{transition:none!important;transform:none!important}
 }
 </style>
 
@@ -1098,6 +1108,7 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
       <li><a href="#verbs" data-s="verbs,background,insight">Why</a></li>
       <li><a href="#concept" data-s="concept,s-platter,s-ditto,s-freq">Concept</a></li>
       <li><a href="#widgets" data-s="widgets">Widgets</a></li>
+      <li><a href="#wx-rooms" data-s="wx-rooms">Rooms</a></li>
       <li><a href="#tour" data-s="tour">Tour</a></li>
       <li><a href="#ditto" data-s="ditto">Try it</a></li>
       <li><a href="#frequency" data-s="frequency">Frequency</a></li>
@@ -1525,147 +1536,188 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
     </div>
 
     <div class="wx-part" id="wx-rooms">
-      <div class="wx-ph">
-        <span class="lab"><b>5.4</b>Rooms</span>
-        <div><h3 class="h-l">내 취향에, <mark>네 조각 하나.</mark></h3><p class="lead">같은 위젯으로 꾸며도 방은 사람만큼 달라요. 방마다 친구에게서 디토해 온 조각이 하나씩 놓여 있어요.</p></div>
-      </div>
       <div class="rm" data-rm>
-        <ol class="rm-track" tabindex="0" aria-label="열 명의 방">
-        <li class="rm-slide is-on" id="room-haeun" style="--c:#BDA6EB;--c2:#AB8FEB">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-01-haeun.webp" alt="도서관 사진 옆에 짧은 첫 인사와 기분, 나리와 찍은 사진, 나리에게서 가져온 문장, 첫 방명록이 놓인 하은의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>01</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Haeun</span><span class="ko">하은</span></h4>
-            <p class="rm-title">일단 한 장부터</p>
-            <p class="rm-who">19 · 대학 새내기</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“친구가 찍어준 건 올릴 수 있겠어.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-nari.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>나리의 문장 <q>천천히 만들어도 돼</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-jun" style="--c:#919FAD;--c2:#738698">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-02-jun.webp" alt="캠퍼스 사진과 가입 인사, 지금 듣는 노래, 재민에게서 가져온 기차 일기, 카페 사진이 놓인 준의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>02</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Jun</span><span class="ko">준</span></h4>
-            <p class="rm-title">일단 들어와 봄</p>
-            <p class="rm-who">21 · 복학한 대학생</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“이거 그냥 사진 붙이면 되는 거지?”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-jaemin.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>재민의 한 줄 일기 <q>돌아오는 기차에서는 말을 조금 덜 했다.</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-sora" style="--c:#B4C779;--c2:#A4BC53">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-03-sora.webp" alt="피크닉 폴라로이드, 말차 셀카, 지우에게서 가져온 노래, 꽃 시장 사진, 친구 스티커가 놓인 소라의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>03</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Sora</span><span class="ko">소라</span></h4>
-            <p class="rm-title">별일 없어도 모여</p>
-            <p class="rm-who">22 · 시각디자인 전공</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“사진 보내는 대신 여기 붙여둘게.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-jiu.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>지우의 노래 <q>LOVE ATTACK</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-jaemin" style="--c:#6794A3;--c2:#3D798A">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-04-jaemin.webp" alt="바다 셀카와 여행 날짜, 기차 일기, 날씨, 기차 사진과 그날 들은 노래, 도현의 방명록이 놓인 재민의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>04</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Jaemin</span><span class="ko">재민</span></h4>
-            <p class="rm-title">토요일의 잔상</p>
-            <p class="rm-who">27 · 개발자</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“그날 들었던 노래까지 남겨두고 싶어.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-dohyun.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>도현의 문장 <q>금요일, 한 자리 더</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-nari" style="--c:#C9B17C;--c2:#BB9E5A">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-05-nari.webp" alt="도예 사진과 공방 폴라로이드, 하은의 방명록, 빵집과 방 사진, 하은에게서 가져온 첫 인사가 놓인 나리의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>05</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Nari</span><span class="ko">나리</span></h4>
-            <p class="rm-title">삐뚤어도 내 컵</p>
-            <p class="rm-who">23 · 문구 브랜드 주니어</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“예쁜 건 같이 만들면 더 기억나.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-haeun.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>하은의 문장 <q>일단 한 장부터</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-dohyun" style="--c:#E09673;--c2:#E07A4F">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-06-dohyun.webp" alt="단체 셀카와 열린 초대 문장, 카페 사진, 친구 스티커, 생일 사진, 러닝 사진, 재민의 노래가 놓인 도현의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>06</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Dohyun</span><span class="ko">도현</span></h4>
-            <p class="rm-title">금요일, 한 자리 더</p>
-            <p class="rm-who">23 · 경영학 전공 · 인턴</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“너희 둘 분명 얘기 잘 통할 듯.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-jaemin.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>재민의 노래 <q>주저하는 연인들을 위해</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-jiu" style="--c:#E698B5;--c2:#E67DA3">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-07-jiu.webp" alt="플래시 사진과 생일 폴라로이드, 오늘의 기분, 연습실 사진, 소라에게서 가져온 문장, 노래와 친구 스티커가 놓인 지우의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>07</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Jiu</span><span class="ko">지우</span></h4>
-            <p class="rm-title">한 번 더, 같이</p>
-            <p class="rm-who">22 · 영상 전공 · 댄스 동아리</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“오늘 사진은 내가 다 올림.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-sora.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>소라의 문장 <q>별일 없어도 모여</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-seoyun" style="--c:#9CA88C;--c2:#85936F">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-08-seoyun.webp" alt="전시 사진과 올리브빛 책 컬렉션, 플레이리스트, 예서와의 셀카, 레코드 사진이 놓인 서윤의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>08</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Seoyun</span><span class="ko">서윤</span></h4>
-            <p class="rm-title">이번 주는 올리브</p>
-            <p class="rm-who">22 · 미디어학 전공</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“프로필을 보면 이번 주 내가 보였으면.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-yeseo.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>예서의 문장 <q>빛 좋은 날을 모아</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-rian" style="--c:#93889A;--c2:#776A83">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-09-rian.webp" alt="세로 음악 위젯과 레코드숍 사진, 밤 사진과 일기, 서윤과의 폴라로이드, 계단 사진이 놓인 리안의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>09</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Rian</span><span class="ko">리안</span></h4>
-            <p class="rm-title">AFTER TEN</p>
-            <p class="rm-who">21 · 패션 전공</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“내가 좋아하는 장면만 모아둘래.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-seoyun.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>서윤의 문장 <q>이번 주는 올리브</q></b></span></p>
-          </div>
-        </li>
-        <li class="rm-slide" id="room-yeseo" style="--c:#95C7DA;--c2:#79BBD3">
-          <figure class="rm-phone"><div class="rm-scr"><img src="assets/room-10-yeseo.webp" alt="카메라를 든 사진, 빛에 관한 문장, 서점 사진, 비 오는 날 사진, 리안과의 셀카가 놓인 예서의 플래터" loading="lazy" decoding="async" width="600" height="1323"></div></figure>
-          <div class="rm-head">
-            <p class="rm-no"><b>10</b> / 10</p>
-            <h4 class="rm-name"><span class="en" lang="en">Yeseo</span><span class="ko">예서</span></h4>
-            <p class="rm-title">빛 좋은 날을 모아</p>
-            <p class="rm-who">24 · 콘텐츠 디자이너</p>
-          </div>
-          <div class="rm-body">
-            <blockquote class="rm-q"><p>“사진 한 장에 그날 공기가 남으면 좋겠어.”</p></blockquote>
-            <p class="rm-from"><img src="assets/rav-rian.webp" alt="" width="40" height="40" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small><b>리안의 노래 <q>Snooze</q></b></span></p>
-          </div>
-        </li>
-        </ol>
-        <div class="rm-bar">
-          <div class="rm-pick" role="group" aria-label="방 고르기" hidden><button type="button" aria-pressed="true" aria-controls="room-haeun" tabindex="0" style="--c:#AB8FEB"><img src="assets/rav-haeun.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">하은의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-jun" tabindex="-1" style="--c:#738698"><img src="assets/rav-jun.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">준의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-sora" tabindex="-1" style="--c:#A4BC53"><img src="assets/rav-sora.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">소라의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-jaemin" tabindex="-1" style="--c:#3D798A"><img src="assets/rav-jaemin.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">재민의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-nari" tabindex="-1" style="--c:#BB9E5A"><img src="assets/rav-nari.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">나리의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-dohyun" tabindex="-1" style="--c:#E07A4F"><img src="assets/rav-dohyun.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">도현의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-jiu" tabindex="-1" style="--c:#E67DA3"><img src="assets/rav-jiu.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">지우의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-seoyun" tabindex="-1" style="--c:#85936F"><img src="assets/rav-seoyun.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">서윤의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-rian" tabindex="-1" style="--c:#776A83"><img src="assets/rav-rian.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">리안의 방</span></button><button type="button" aria-pressed="false" aria-controls="room-yeseo" tabindex="-1" style="--c:#79BBD3"><img src="assets/rav-yeseo.webp" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="sr">예서의 방</span></button></div>
-          <p class="rm-cap">열 명의 방 · 위젯 118개<span class="m-cap"> · 옆으로 밀어 둘러보세요</span></p>
+        <header class="rm-open">
+          <span class="lab"><b>5.4</b>Rooms</span>
+          <h3 class="h-l">내 취향에, <mark>네 조각 하나.</mark></h3>
+          <p class="lead">같은 위젯으로 꾸며도 방은 사람만큼 달라요. 방마다 친구에게서 디토해 온 조각이 하나씩 놓여 있어요.</p>
+        </header>
+        <div class="rm-fan" role="group" aria-roledescription="carousel" aria-label="친구들의 방. 좌우 화살표 키로 넘길 수 있어요.">
+          <ol class="rm-track">
+          <li class="rm-card" id="room-haeun" style="--c:#BDA6EB;--c2:#AB8FEB">
+            <button type="button" class="rm-ph" aria-pressed="true" aria-label="하은의 방, 일단 한 장부터"><span class="rm-scr"><img src="assets/rooms/room-01-haeun.webp" alt="하은의 플래터 첫 화면. 창가 자리 사진, “일단 한 장부터” 문장, 조금 익숙해지는 중이라는 기분, 나리와 찍은 사진, 나리에게서 디토한 말풍선이 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="하은의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-haeun.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">하은<span class="en" lang="en">Haeun</span></p><p class="rm-pf-sub">@haeunzip · 19 · 대학 새내기</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Observer</b>처음 들어온 유저</li><li>가입 2일 차</li></ul>
+                <p class="rm-pf-q">“친구가 찍어준 건 올릴 수 있겠어.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>나리와는 말수가 적어도 편해요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>조심스럽지만 호기심이 많아요. 마음에 드는 사진을 오래 골라요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>한 장을 올린 뒤에도 계속 꾸밀 수 있다는 자신감을 얻고 싶어요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>일단 한 장부터</strong>첫 업로드는 나리와 함께. 아직 낯선 공간이라 친구가 남긴 문장부터 가져다 뒀어요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-nari.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>나리의 문장 <q>천천히 만들어도 돼</q></span></p><a class="rm-pf-go" href="/demo/haeunzip/">하은의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-jun" style="--c:#919FAD;--c2:#738698">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="준의 방, 일단 들어와 봄"><span class="rm-scr"><img src="assets/rooms/room-02-jun.webp" alt="준의 플래터 첫 화면. 복학 4일차 사진, 초대받고 일단 왔다는 문장, 가입 D+7, 공강 상태, 바다 사진, 지금 듣는 라디오, 재민에게서 디토한 한 줄 일기가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="준의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-jun.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">준<span class="en" lang="en">Jun</span></p><p class="rm-pf-sub">@junishere · 21 · 복학한 대학생</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Observer</b>처음 들어온 유저</li><li>가입 5일 차</li></ul>
+                <p class="rm-pf-q">“이거 그냥 사진 붙이면 되는 거지?”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>재민과 도현에게 초대받아 들어왔어요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>낯선 서비스엔 담백하게 다가가요. 꾸미기보다 친구와의 약속을 먼저 기억해요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>근황을 길게 설명하지 않고도 친구에게 ‘요즘 이렇게 지내’를 전하고 싶어요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>일단 들어와 봄</strong>재민이 보내 준 기차 여행 기록이 첫 저장이에요. 공강 사진 몇 장으로 느슨하게 시작했어요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-jaemin.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>재민의 한 줄 일기 <q>돌아오는 기차에서는 말을 조금 덜 했다.</q></span></p><a class="rm-pf-go" href="/demo/junishere/">준의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-sora" style="--c:#B4C779;--c2:#A4BC53">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="소라의 방, 별일 없어도 모여"><span class="rm-scr"><img src="assets/rooms/room-03-sora.webp" alt="소라의 플래터 첫 화면. 폴라로이드, 말차 셀카, “별일 없어도 모여” 문장, 지우에게서 디토한 노래, 지우의 방명록이 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="소라의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-sora.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">소라<span class="en" lang="en">Sora</span></p><p class="rm-pf-sub">@soramaybe · 22 · 시각디자인 전공</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>친구들과 적극적으로 쓰는 유저</li><li>가입 38일 차</li></ul>
+                <p class="rm-pf-q">“사진 보내는 대신 여기 붙여둘게.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>지우와 수업 사이 시간을 자주 보내고, 나리의 공방에도 관심이 있어요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>먼저 연락하고 작은 만남을 제안해요. 잘 꾸민 결과보다 대화가 이어지는 순간을 좋아해요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>사진을 보내고 끝내지 않고, 다음에 같이 할 일을 자연스럽게 정하고 싶어요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>별일 없어도 모여</strong>말차 한 잔, 꽃 한 송이, 지우가 틀던 노래. 사소한 취향이 다음 만남의 핑계가 돼요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-jiu.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>지우의 노래 <q>Perfect Night</q></span></p><a class="rm-pf-go" href="/demo/soramaybe/">소라의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-jaemin" style="--c:#6794A3;--c2:#3D798A">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="재민의 방, 토요일의 잔상"><span class="rm-scr"><img src="assets/rooms/room-04-jaemin.webp" alt="재민의 플래터 첫 화면. 바다 보러 간 토요일 사진, D+15, 카메라 사진, 기차 한 줄 일기, 동해 장소, 날씨, 창가 사진, 잔나비 노래, 도현의 방명록이 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="재민의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-jaemin.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">재민<span class="en" lang="en">Jaemin</span></p><p class="rm-pf-sub">@jaeminarchive · 27 · 개발자</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Archivist</b>친구들과 적극적으로 쓰는 유저</li><li>가입 104일 차</li></ul>
+                <p class="rm-pf-q">“그날 들었던 노래까지 남겨두고 싶어.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>도현의 즉흥 모임에 따라가고, 준의 다음 여행 제안을 오래 기억해요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>조용히 관찰하고 장면의 순서를 기억해요. 사진을 보면 그날의 소리와 대화까지 떠올려요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>사람·장소·음악을 한 묶음의 기억으로 남기고 싶어요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>토요일의 잔상</strong>도현과 다녀온 바다. 돌아오는 기차의 노래와 날씨까지 한 날짜 아래 모아 뒀어요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-dohyun.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>도현의 문장 <q>금요일, 한 자리 더</q></span></p><a class="rm-pf-go" href="/demo/jaeminarchive/">재민의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-nari" style="--c:#C9B17C;--c2:#BB9E5A">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="나리의 방, 삐뚤어도 내 컵"><span class="rm-scr"><img src="assets/rooms/room-05-nari.webp" alt="나리의 플래터 첫 화면. “삐뚤어도 내 컵” 문장과 도자기 사진, 조금 느슨한 기분, 폴라로이드, 하은의 방명록, 음성 메모가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="나리의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-nari.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">나리<span class="en" lang="en">Nari</span></p><p class="rm-pf-sub">@nariday · 23 · 문구 브랜드 주니어</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Archivist</b>친구들과 적극적으로 쓰는 유저</li><li>가입 62일 차</li></ul>
+                <p class="rm-pf-q">“예쁜 건 같이 만들면 더 기억나.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>하은이 처음 사진을 올릴 때 곁에 있었고, 소라와는 다음 공방 수업을 이야기해요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>작은 물건과 손으로 만든 것에 애착이 있어요. 완벽한 사진보다 과정이 보이는 컷을 남겨요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>취미가 물건 수집이 아니라 친구와 함께한 시간으로 보이길 바라요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>삐뚤어도 내 컵</strong>하은과 만든 첫 컵, 돌아오는 길에 산 빵. 손으로 만든 것과 사람의 말을 같이 모았어요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-haeun.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>하은의 문장 <q>일단 한 장부터</q></span></p><a class="rm-pf-go" href="/demo/nariday/">나리의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-dohyun" style="--c:#E09673;--c2:#E07A4F">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="도현의 방, 금요일, 한 자리 더"><span class="rm-scr"><img src="assets/rooms/room-06-dohyun.webp" alt="도현의 플래터 첫 화면. 오늘 처음 만난 셋 사진, 같이 놀자 상태, “금요일, 한 자리 더” 문장, 준의 방명록, 동네 장소, 날씨가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="도현의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-dohyun.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">도현<span class="en" lang="en">Dohyun</span></p><p class="rm-pf-sub">@dohyunlinks · 23 · 경영학 전공·인턴</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>진짜 인싸 유저</li><li>가입 143일 차</li></ul>
+                <p class="rm-pf-q">“너희 둘 분명 얘기 잘 통할 듯.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>준과 재민을 같은 자리로 연결하고, 지우의 연습실 모임에도 얼굴을 비춰요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>사람의 관심사를 빨리 기억하고 서로 맞는 친구를 소개해요. 자리 만드는 데 주저함이 없어요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>친구의 친구도 편하게 들어와 다음 만남을 잡을 수 있는 공간을 원해요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>금요일, 한 자리 더</strong>사진 속엔 늘 누군가 있어요. 여행에서 가져온 노래와 친구들의 흔적이 다음 모임의 초대장이 돼요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-jaemin.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>재민의 노래 <q>주저하는 연인들을 위해</q></span></p><a class="rm-pf-go" href="/demo/dohyunlinks/">도현의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-jiu" style="--c:#E698B5;--c2:#E67DA3">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="지우의 방, 한 번 더, 같이"><span class="rm-scr"><img src="assets/rooms/room-07-jiu.webp" alt="지우의 플래터 첫 화면. 연습실 사진, 폴라로이드, 텐션 과다 기분, 소라에게서 디토한 말풍선, 음성 메모, 꽃 사진이 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="지우의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-jiu.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">지우<span class="en" lang="en">Jiu</span></p><p class="rm-pf-sub">@jiuallday · 22 · 영상 전공·댄스 동아리</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>진짜 인싸 유저</li><li>가입 89일 차</li></ul>
+                <p class="rm-pf-q">“오늘 사진은 내가 다 올림.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>소라·나리와 자주 만나고, 도현을 통해 새로운 친구도 만나요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>생각보다 행동이 빨라요. 친구를 모으고 그날 가장 웃긴 컷을 바로 골라요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>사진을 올리면 친구들이 각자 기억하는 장면을 덧붙여 주길 바라요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>한 번 더, 같이</strong>연습실에서 생일 파티까지. 춤추던 리듬 그대로 친구들의 사진·축하·노래를 꽉 채웠어요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-sora.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>소라의 문장 <q>별일 없어도 모여</q></span></p><a class="rm-pf-go" href="/demo/jiuallday/">지우의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-seoyun" style="--c:#9CA88C;--c2:#85936F">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="서윤의 방, 이번 주는 올리브"><span class="rm-scr"><img src="assets/rooms/room-08-seoyun.webp" alt="서윤의 플래터 첫 화면. 이번 주 수집한 빛 사진, 작은 책장 컬렉션, 수집 중 상태, 전시 플레이리스트, 벽 색 사진, 날씨가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="서윤의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-seoyun.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">서윤<span class="en" lang="en">Seoyun</span></p><p class="rm-pf-sub">@seoyunpalette · 22 · 미디어학 전공</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Curator</b>나만의 세계관이 확실한 유저</li><li>가입 76일 차</li></ul>
+                <p class="rm-pf-q">“프로필을 보면 이번 주 내가 보였으면.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>예서와 사진을 찍으러 나가지만, 혼자 보는 장면도 충분히 남겨요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>지금 끌리는 색과 소재를 자세히 봐요. 자기표현을 고정하기보다 주기적으로 바꿔요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>프로필을 열면 이번 주 고른 색과 분위기가 보이길 바라요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>이번 주는 올리브</strong>사진의 색, 책의 종이, 레코드의 질감. 예서와 발견한 빛을 이번 주의 취향으로 편집했어요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-yeseo.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>예서의 문장 <q>빛 좋은 날을 모아</q></span></p><a class="rm-pf-go" href="/demo/seoyunpalette/">서윤의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-rian" style="--c:#93889A;--c2:#776A83">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="리안의 방, AFTER TEN"><span class="rm-scr"><img src="assets/rooms/room-09-rian.webp" alt="리안의 플래터 첫 화면. SZA 노래, 심야 취향 사진, “낮보다 밤이 편해” 문장, 밤 10시 사진, 귀가 중 한 줄 일기, 음성 메모가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="리안의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-rian.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">리안<span class="en" lang="en">Rian</span></p><p class="rm-pf-sub">@rianafterdark · 21 · 패션 전공</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Curator</b>나만의 세계관이 확실한 유저</li><li>가입 51일 차</li></ul>
+                <p class="rm-pf-q">“내가 좋아하는 장면만 모아둘래.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>서윤과 함께 레코드를 고르지만, 좋아하는 곡은 서로 달라요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>취향이 분명하고 사진의 어둠도 지우지 않아요. 마음에 들지 않는 유행은 따라가지 않아요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>차콜·보라·플래시의 반복으로 자기 분위기를 한눈에 보여 주고 싶어요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>AFTER TEN</strong>밤에 더 선명해지는 취향. 검은 레코드와 플래시 사진 사이에 서윤의 올리브색 한 조각을 뒀어요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-seoyun.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>서윤의 문장 <q>이번 주는 올리브</q></span></p><a class="rm-pf-go" href="/demo/rianafterdark/">리안의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          <li class="rm-card" id="room-yeseo" style="--c:#95C7DA;--c2:#79BBD3">
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="예서의 방, 빛 좋은 날을 모아"><span class="rm-scr"><img src="assets/rooms/room-10-yeseo.webp" alt="예서의 플래터 첫 화면. 디카 사진, “빛 좋은 날을 모아” 문장, 서점과 흐린 날 사진, 폴라로이드, 카메라 스티커, 리안에게서 디토한 노래가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <article class="rm-pf" aria-label="예서의 페르소나">
+              <div class="rm-pf-l">
+                <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-yeseo.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">예서<span class="en" lang="en">Yeseo</span></p><p class="rm-pf-sub">@yeseofilm · 24 · 콘텐츠 디자이너</p></div></div>
+                <ul class="rm-pf-tags"><li><b lang="en">Curator / Archivist</b>나만의 세계관이 확실한 유저</li><li>가입 118일 차</li></ul>
+                <p class="rm-pf-q">“사진 한 장에 그날 공기가 남으면 좋겠어.”</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>리안의 사진을 찍어 주고, 리안이 찍어 준 장면엔 짧은 감상을 남겨요.</p>
+              </div>
+              <dl class="rm-pf-dl">
+                <div><dt>이런 사람이에요</dt><dd>빛이 바뀌는 순간을 놓치지 않아요. 찍는 손과 찍힌 사람을 모두 기억하고 싶어 해요.</dd></div>
+                <div><dt>왜 Ditto를 쓰나요</dt><dd>사람과 날씨, 그날의 공기가 한 화면에서 이어지길 바라요.</dd></div>
+                <div><dt>방을 이렇게 꾸민 이유</dt><dd><strong>빛 좋은 날을 모아</strong>핑크 카메라, 비 오는 창, 친구의 얼굴. 예쁜 장면보다 그때의 온도를 모으는 사진 일기예요.</dd></div>
+              </dl>
+              <div class="rm-pf-foot"><p class="rm-pf-from"><img src="assets/rooms/rav-rian.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><small>디토로 가져온 조각</small>리안의 노래 <q>Snooze</q></span></p><a class="rm-pf-go" href="/demo/yeseofilm/">예서의 플래터 보기 ↗</a></div>
+            </article>
+          </li>
+          </ol>
         </div>
+        <div class="rm-prof" aria-live="off"></div>
+        <div class="rm-ctl"><button type="button" class="rm-prev" aria-label="이전 방">←</button><button type="button" class="rm-next" aria-label="다음 방">→</button></div>
       </div>
     </div>
   </div>
@@ -2369,70 +2421,115 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
 })();
 </script>
 <script>
-/* 5.4 Rooms: one room at a time (desktop crossfade, mobile swipe). Without JS the track is a scroll-snap strip. */
+/* 5.4 Rooms: 3D fanned collection (drag / arrows / click / gentle auto-advance) + profile overview below.
+   Without JS: a horizontal scroll strip, each card carrying its own profile. Reduced motion: flat strip, no 3D, no auto. */
 (function () {
   var rm = document.querySelector('[data-rm]'); if (!rm) return;
-  var track = rm.querySelector('.rm-track'), pick = rm.querySelector('.rm-pick');
-  var slides = [].slice.call(track.children), btns = [].slice.call(pick.querySelectorAll('button'));
-  var n = slides.length, cur = 0, prevT = 0;
-  var mqStack = matchMedia('(min-width:761px)'), mqRM = matchMedia('(prefers-reduced-motion:reduce)');
-  rm.classList.add('is-js'); pick.hidden = false;
-  var stacked = function () { return mqStack.matches; };
-  function mark(i, focusBtn) {
-    btns.forEach(function (b, k) { var on = k === i; b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
-    var b = btns[i];
-    if (pick.scrollWidth > pick.clientWidth) pick.scrollTo({ left: b.offsetLeft - (pick.clientWidth - b.offsetWidth) / 2, behavior: mqRM.matches ? 'auto' : 'smooth' });
-    if (focusBtn) b.focus({ preventScroll: true });
-  }
-  function go(i, opts) {
-    opts = opts || {}; i = (i + n) % n;
-    if (stacked()) {
-      if (i !== cur) {
-        var old = slides[cur]; clearTimeout(prevT);
-        slides.forEach(function (s) { s.classList.remove('is-prev'); });
-        if (!mqRM.matches) { old.classList.add('is-prev'); prevT = setTimeout(function () { old.classList.remove('is-prev'); }, 800); }
-        old.classList.remove('is-on'); slides[i].classList.add('is-on');
-      }
-    } else {
-      slides.forEach(function (s, k) { s.classList.toggle('is-on', k === i); });
-      track.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: mqRM.matches ? 'auto' : 'smooth' });
+  var fan = rm.querySelector('.rm-fan'), track = rm.querySelector('.rm-track'), prof = rm.querySelector('.rm-prof');
+  var cards = [].slice.call(track.children), n = cards.length;
+  var btns = cards.map(function (c) { return c.querySelector('.rm-ph'); });
+  var pfs = cards.map(function (c) { var p = c.querySelector('.rm-pf'); p.setAttribute('style', c.getAttribute('style')); prof.appendChild(p); return p; });
+  var mqRM = matchMedia('(prefers-reduced-motion:reduce)');
+  var pos = 0, target = 0, drag = null, moved = false, idleAt = performance.now(), hold = false, vis = false, raf = 0, shown = -1, flat = false;
+  var AUTO = 4600;
+  rm.classList.add('is-js');
+  var wrapD = function (d) { d = ((d % n) + n) % n; return d > n / 2 ? d - n : d; };
+  var idx = function (p) { return ((Math.round(p) % n) + n) % n; };
+  var gapPx = function () { return (btns[0].offsetWidth || 200) * .9; };
+
+  function select(i, focus) {
+    if (i !== shown) {
+      shown = i;
+      btns.forEach(function (b, k) { var on = k === i; b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
+      pfs.forEach(function (p, k) { var on = k === i; p.classList.toggle('is-on', on); p.setAttribute('aria-hidden', on ? 'false' : 'true'); });
+      rm.style.setProperty('--rc', getComputedStyle(cards[i]).getPropertyValue('--c').trim() || '#BDA6EB');
     }
-    cur = i; mark(i, opts.focus);
+    if (focus) btns[i].focus({ preventScroll: true });
   }
-  function user() { rm.classList.remove('is-auto'); auto = false; }
-  btns.forEach(function (b, k) { b.addEventListener('click', function () { user(); go(k); }); });
-  pick.addEventListener('keydown', function (e) {
-    var d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-    if (d) { e.preventDefault(); user(); go(cur + d, { focus: true }); }
-    else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); user(); go(e.key === 'Home' ? 0 : n - 1, { focus: true }); }
+  function render() {
+    cards.forEach(function (c, i) {
+      var o = wrapD(i - pos), a = Math.abs(o);
+      c.style.setProperty('--o', o.toFixed(4)); c.style.setProperty('--a', a.toFixed(4));
+      c.style.zIndex = 100 - Math.round(a * 10); c.style.visibility = a > 3.6 ? 'hidden' : 'visible';
+    });
+    select(idx(drag ? pos : target));
+  }
+  function frame(t) {
+    raf = 0;
+    if (!drag && !hold && vis && !document.hidden && t - idleAt > AUTO) { target = Math.round(target) + 1; idleAt = t; }
+    var k = drag ? .35 : .085; pos += (target - pos) * k;
+    if (Math.abs(target - pos) < .0005) pos = target;
+    render();
+    if (vis && !flat) raf = requestAnimationFrame(frame);
+  }
+  function kick() { if (!raf && !flat) raf = requestAnimationFrame(frame); }
+  function go(i, focus) {
+    if (flat) {
+      select(i, focus);
+      track.scrollTo({ left: cards[i].offsetLeft - (track.clientWidth - cards[i].offsetWidth) / 2, behavior: 'auto' });
+      return;
+    }
+    target = pos + wrapD(i - pos); idleAt = performance.now(); kick();
+    select(i, focus);
+  }
+  function step(d, focus) { go(idx((flat ? shown : Math.round(target)) + d), focus); }
+
+  /* pointer drag (3D mode only) */
+  fan.addEventListener('pointerdown', function (e) {
+    if (flat || e.button !== 0) return;
+    drag = { x: e.clientX, t0: target, id: e.pointerId }; moved = false; kick();
   });
-  track.addEventListener('keydown', function (e) {
-    if (!stacked()) return;
+  addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    var dx = e.clientX - drag.x;
+    if (!moved && Math.abs(dx) > 6) { moved = true; fan.classList.add('is-drag'); }
+    if (moved) target = drag.t0 - dx / gapPx();
+  });
+  function end() { if (!drag) return; drag = null; fan.classList.remove('is-drag'); target = Math.round(target); idleAt = performance.now(); kick(); }
+  addEventListener('pointerup', end); addEventListener('pointercancel', end);
+  fan.addEventListener('dragstart', function (e) { e.preventDefault(); });
+  btns.forEach(function (b, i) { b.addEventListener('click', function (e) { if (moved) { e.preventDefault(); moved = false; return; } go(i); }); });
+  fan.addEventListener('keydown', function (e) {
     var d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-    if (d) { e.preventDefault(); user(); go(cur + d); }
+    if (d) { e.preventDefault(); step(d, true); }
+    else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); go(e.key === 'Home' ? 0 : n - 1, true); }
   });
-  /* swipe mode: follow the scroll position */
-  var raf = 0;
+  rm.querySelector('.rm-prev').addEventListener('click', function () { step(-1); });
+  rm.querySelector('.rm-next').addEventListener('click', function () { step(1); });
+
+  /* pause on hover / focus; auto-advance only while in view */
+  rm.addEventListener('mouseenter', function () { hold = true; });
+  rm.addEventListener('mouseleave', function () { hold = rm.contains(document.activeElement); idleAt = performance.now(); });
+  rm.addEventListener('focusin', function () { hold = true; prof.setAttribute('aria-live', 'polite'); });
+  rm.addEventListener('focusout', function (e) { if (!rm.contains(e.relatedTarget)) { hold = false; idleAt = performance.now(); prof.setAttribute('aria-live', 'off'); } });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { vis = es[0].isIntersecting; if (vis) { idleAt = performance.now(); kick(); } }, { threshold: 0.35 }).observe(fan);
+  } else vis = true;
+  document.addEventListener('visibilitychange', function () { idleAt = performance.now(); kick(); });
+
+  /* flat strip (reduced motion): follow scroll position too */
+  var sraf = 0;
   track.addEventListener('scroll', function () {
-    if (stacked() || raf) return;
-    raf = requestAnimationFrame(function () {
-      raf = 0;
-      var w = slides[1].offsetLeft - slides[0].offsetLeft, i = Math.max(0, Math.min(n - 1, Math.round(track.scrollLeft / w)));
-      if (i !== cur) { cur = i; slides.forEach(function (s, k) { s.classList.toggle('is-on', k === i); }); mark(i); }
+    if (!flat || sraf) return;
+    sraf = requestAnimationFrame(function () {
+      sraf = 0;
+      var mid = track.scrollLeft + track.clientWidth / 2, best = 0, bd = 1e9;
+      cards.forEach(function (c, k) { var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < bd) { bd = d; best = k; } });
+      if (track.scrollLeft > 2 && track.scrollLeft < track.scrollWidth - track.clientWidth - 2) select(best);
     });
   }, { passive: true });
-  track.addEventListener('touchstart', user, { passive: true });
-  track.addEventListener('wheel', function (e) { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) user(); }, { passive: true });
-  mqStack.addEventListener('change', function () { slides.forEach(function (s) { s.classList.remove('is-prev'); }); go(cur); });
-  /* slow auto-advance while in view; the active avatar ring is the timer; hover/focus pauses it (CSS) */
-  var auto = !mqRM.matches;
-  pick.addEventListener('animationend', function (e) { if (e.animationName === 'rmp' && rm.classList.contains('is-auto')) go(cur + 1); });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) {
-      es.forEach(function (en) { rm.classList.toggle('is-auto', auto && !mqRM.matches && en.isIntersecting); });
-    }, { threshold: 0.55 }).observe(rm);
+
+  function mode() {
+    flat = mqRM.matches;
+    rm.classList.toggle('is-3d', !flat); rm.classList.toggle('is-flat', flat);
+    var cur = shown < 0 ? 0 : shown;
+    cards.forEach(function (c) { c.style.removeProperty('--o'); c.style.removeProperty('--a'); c.style.zIndex = ''; c.style.visibility = ''; });
+    if (flat) { cancelAnimationFrame(raf); raf = 0; select(cur); }
+    else { pos = target = cur; render(); kick(); }
   }
-  mqRM.addEventListener('change', function () { if (mqRM.matches) user(); });
+  mqRM.addEventListener('change', mode);
+  prof.setAttribute('aria-live', 'off');
+  mode();
 })();
 </script>
 
