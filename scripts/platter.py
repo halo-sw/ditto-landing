@@ -74,7 +74,31 @@ def fetch_rep(get, handle, key, platter="rep"):
         d.update(col=c, row=rw, w=w, h=h, id=str(r.get("id") or d.get("id") or ""))
         out.append(d)
     out.sort(key=lambda d: (d["row"], d["col"]))
+    attach_guestbook(get, hdr, owner, out)
     return owner, out
+
+
+def attach_guestbook(get, hdr, owner, widgets):
+    """방명록 글 = public.guestbook_entries (owner_id, widget_id) 최신순 → 위젯의 entries [{name, handle, message}].
+    위젯 JSON의 옛 data.entries는 쓰지 않는다 (20261010235900_guestbook 에서 테이블로 옮김). 실패하면 빈 목록."""
+    gbs = [w for w in widgets if w["type"] == "guestbook"]
+    for w in gbs:
+        w["entries"] = []
+    if not gbs:
+        return
+    try:
+        ids = ",".join(urllib.parse.quote(f'"{w["id"]}"') for w in gbs)
+        rows = json.loads(get(f"{SB}/rest/v1/guestbook_entries?select=widget_id,author_name,author_handle,message"
+                              f"&owner_id=eq.{owner}&widget_id=in.({ids})&order=created_at.desc&limit=200", hdr))
+    except Exception as e:
+        print(f"platter: 방명록 글을 읽지 못함 ({type(e).__name__})")
+        return
+    by_id = {w["id"]: w for w in gbs}
+    for r in rows:
+        w = by_id.get(r.get("widget_id"))
+        if w is not None:
+            w["entries"].append({"name": r.get("author_name") or r.get("author_handle") or "",
+                                 "handle": r.get("author_handle") or "", "message": r.get("message") or ""})
 
 
 def fetch_people(get, widgets, key):
@@ -676,7 +700,7 @@ def r_nowplaying(w, W, H, m):
 
 
 def gb_entries(w):
-    """방명록 글 — data.entries [{name, handle, message}], 앞이 최신 (앱 writeGuestbook이 0번에 넣는다)."""
+    """방명록 글 — attach_guestbook이 채운 entries [{name, handle, message}], 앞이 최신 (guestbook_entries.created_at desc)."""
     out = []
     for e in w.get("entries") or []:
         if isinstance(e, dict) and str(e.get("message") or "").strip():
