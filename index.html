@@ -843,22 +843,29 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
 .wx-ph .lab{padding-top:.5em}
 .wx-ph .lead{margin-top:12px}
 @media (max-width:760px){.wx-ph{grid-template-columns:1fr}.wx-ph .lab{padding-top:0}}
-.types{list-style:none;padding:0;margin:clamp(28px,3vw,40px) 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.ty{display:flex;gap:14px;align-items:flex-start;padding:18px 18px 20px;border-radius:var(--r-md);background:var(--bg-2)}
-.ty .ic{flex:0 0 auto;width:56px;height:56px;border-radius:14px;box-shadow:0 12px 22px -12px rgba(40,10,60,.55);transform:rotate(-5deg);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
-.ty:nth-child(even) .ic{transform:rotate(5deg)}
-.ty:hover .ic{transform:rotate(0) scale(1.08)}
-.ic.css{display:grid;place-items:center;font-size:24px;line-height:1}
-.ic.tx{background:linear-gradient(140deg,#DDE6FF,#EBDDFB);color:#4F3F72;font:800 21px/1 var(--kr);letter-spacing:-.04em}
-.ic.gf{background:linear-gradient(180deg,#4C3A6E,#1D1530)}
-.ty b{display:block;font-size:17px;letter-spacing:-.02em;line-height:1.35}
-.ty b i{font:italic 800 12.5px var(--round);color:var(--violet-d);margin-left:6px;letter-spacing:.01em}
-.ty p{margin-top:4px;font-size:14px;line-height:1.55;color:var(--ink-2)}
-.minis{margin-top:30px}
-.minis ul{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-wrap:wrap;gap:10px}
-.minis li:nth-child(3n+1){--r:-2deg}.minis li:nth-child(3n+2){--r:1.5deg}.minis li:nth-child(3n){--r:-1deg}
-@media (max-width:1000px){.types{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.ty{flex-direction:column;gap:10px;padding:14px 14px 16px}.ty .ic{width:46px;height:46px;border-radius:12px}.ty b{font-size:16px}.ty b i{display:block;margin:2px 0 0}.ty p{font-size:13.5px}.minis .stkc{font-size:14px;padding:8px 13px 8px 10px}}
+.wtabs{display:none;gap:4px;padding:4px;margin-top:clamp(28px,3vw,40px);border-radius:var(--r-md);background:var(--bg-3);max-width:100%;width:max-content}
+.js .wtabs{display:flex}
+.wtabs button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:112px;min-height:44px;padding:0 16px;border:0;border-radius:10px;background:none;font:700 15px/1 var(--kr);letter-spacing:-.02em;color:var(--mute);cursor:pointer;transition:background .3s ease,color .3s ease,box-shadow .3s ease}
+.wtabs button small{font:italic 900 11px var(--round);letter-spacing:.04em;opacity:.8}
+.wtabs button[aria-selected="true"]{background:#FFFFFF;color:var(--ink);box-shadow:0 6px 16px -10px rgba(40,10,60,.4)}
+.wtabs button[aria-selected="true"] small{color:var(--violet-d);opacity:1}
+.wtabs button:focus-visible{outline-offset:-2px}
+.wgrp{margin-top:clamp(28px,3vw,40px);border-radius:var(--r-sm)}
+.js .wgrp{margin-top:20px}
+.wgrp:focus-visible{outline-offset:6px}
+.wgh h4{font-size:19px;font-weight:700;letter-spacing:-.03em;line-height:1.35}
+.wgh p{margin-top:2px;font-size:15px;line-height:1.55;color:var(--ink-2)}
+.js .wgh h4{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.js .wgh p{margin-top:0}
+.wcards{list-style:none;padding:0;margin:16px 0 0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px 14px}
+.wcd{min-width:0}
+.wcd img{display:block;width:100%;height:auto;aspect-ratio:1;border-radius:16px;background:var(--bg-2);box-shadow:0 16px 30px -20px rgba(40,10,60,.5)}
+.wcd b{display:block;margin-top:12px;font-size:16px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.wcd p{margin-top:3px;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+@media (prefers-reduced-motion:no-preference){.wcd img{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}.wcd:hover img{transform:translateY(-3px) rotate(-1.5deg)}.wcd:nth-child(even):hover img{transform:translateY(-3px) rotate(1.5deg)}}
+@media (max-width:1100px){.wcards{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:760px){.wcards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.wtabs{width:auto}.wtabs button{flex:1;min-width:0;padding:0 6px}.wtabs button small{display:none}.wcards{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.wcd b{margin-top:10px;font-size:15.5px}.wcd p{font-size:13px}}
 
 .wx-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:clamp(28px,3vw,40px);align-items:start}
 .wcardx{border-radius:var(--r-lg);background:var(--bg-2);padding:clamp(18px,2.4vw,32px)}
@@ -1399,30 +1406,46 @@ a.stkc:hover{transform:rotate(0deg) translateY(-2px);box-shadow:0 0 0 1px rgba(2
     <div class="wx-part" id="wx-what">
       <div class="wx-ph">
         <span class="lab"><b>5.1</b>What</span>
-        <div><h3 class="h-l">붙일 수 있는 것들</h3><p class="lead">위젯 추가 시트에서 고르면 바로 붙어요. 기본 위젯은 여덟 가지예요.</p></div>
+        <div><h3 class="h-l">붙일 수 있는 것들</h3><p class="lead">위젯 추가에서 기본, 기록, 함께, 미디어 네 갈래로 골라 붙여요. 고르면 바로 플래터에 붙어요.</p></div>
       </div>
-      <ul class="types">
-        <li class="ty rv"><img class="ic" src="assets/dock-1.png" alt="" width="205" height="205" loading="lazy"><div><b>이미지<i>Image</i></b><p>사진 한 장으로 추억을 나눠요.</p></div></li>
-        <li class="ty rv"><img class="ic" src="assets/dock-2.png" alt="" width="205" height="205" loading="lazy"><div><b>상태<i>Status</i></b><p>이모지 하나로 지금 기분을 알려요.</p></div></li>
-        <li class="ty rv"><img class="ic" src="assets/dock-3.png" alt="" width="205" height="205" loading="lazy"><div><b>음악<i>Music</i></b><p>요즘 듣는 노래를 담아요. 누르면 재생돼요.</p></div></li>
-        <li class="ty rv"><span class="ic css tx" aria-hidden="true">Aa</span><div><b>텍스트<i>Text</i></b><p>생각이나 한 줄 메모를 가볍게 남겨요.</p></div></li>
-        <li class="ty rv"><img class="ic" src="assets/dock-4.png" alt="" width="205" height="205" loading="lazy"><div><b>블록<i>Block</i></b><p>길게 쓴 글을 하이라이트로 짧게 보여줘요.</p></div></li>
-        <li class="ty rv"><img class="ic" src="assets/dock-5.png" alt="" width="205" height="205" loading="lazy"><div><b>소셜<i>Social</i></b><p>내 SNS 계정을 플래터에 이어 붙여요.</p></div></li>
-        <li class="ty rv"><img class="ic" src="assets/dock-6.png" alt="" width="205" height="205" loading="lazy"><div><b>영상<i>Video</i></b><p>짧은 영상으로 일상을 전해요.</p></div></li>
-        <li class="ty rv"><span class="ic css gf" aria-hidden="true">✨</span><div><b>GIF<i>GIF</i></b><p>움직이는 반짝임으로 생기를 더해요.</p></div></li>
-      </ul>
-      <div class="minis">
-        <p class="h-s">매일 쌓이는 작은 위젯도 있어요</p>
-        <ul>
-          <li class="stkc"><span class="e" aria-hidden="true">😊</span>오늘의 기분</li>
-          <li class="stkc"><span class="e" aria-hidden="true">✏️</span>한줄일기</li>
-          <li class="stkc"><span class="e" aria-hidden="true">📅</span>D-Day</li>
-          <li class="stkc"><span class="e" aria-hidden="true">📖</span>방명록</li>
-          <li class="stkc"><span class="e" aria-hidden="true">🎵</span>플레이리스트</li>
-          <li class="stkc"><span class="e" aria-hidden="true">💌</span>스티커 보드</li>
-          <li class="stkc"><span class="e" aria-hidden="true">❓</span>문답</li>
-          <li class="stkc"><span class="e" aria-hidden="true">🔐</span>비밀게시글</li>
-          <li class="stkc"><span class="e" aria-hidden="true">📸</span>폴라로이드</li>
+      <div class="wtabs" role="tablist" aria-label="위젯 갈래">
+        <button type="button" role="tab" id="wt-basic" aria-selected="true" aria-controls="wg-basic">기본<small>Basics</small></button>
+        <button type="button" role="tab" id="wt-record" aria-selected="false" aria-controls="wg-record" tabindex="-1">기록<small>Daily</small></button>
+        <button type="button" role="tab" id="wt-together" aria-selected="false" aria-controls="wg-together" tabindex="-1">함께<small>Together</small></button>
+        <button type="button" role="tab" id="wt-media" aria-selected="false" aria-controls="wg-media" tabindex="-1">미디어<small>Media</small></button>
+      </div>
+      <div class="wgrp" id="wg-basic" role="tabpanel" aria-labelledby="wt-basic" tabindex="0">
+        <div class="wgh"><h4>기본</h4><p>나를 보여주는 기본 위젯</p></div>
+        <ul class="wcards">
+          <li class="wcd"><img src="assets/wa-social.webp" alt="" width="320" height="320" loading="lazy"><b>소셜</b><p>여러 SNS 계정을 프로필에 연결해요</p></li>
+          <li class="wcd"><img src="assets/wa-status.webp" alt="" width="320" height="320" loading="lazy"><b>상태</b><p>이모지나 한 줄로 지금 기분·상태를 나눠요</p></li>
+          <li class="wcd"><img src="assets/wa-text.webp" alt="" width="320" height="320" loading="lazy"><b>텍스트</b><p>한 줄 메모를 가볍게 남겨요</p></li>
+          <li class="wcd"><img src="assets/wa-image.webp" alt="" width="320" height="320" loading="lazy"><b>이미지</b><p>사진으로 추억을 나눠요</p></li>
+          <li class="wcd"><img src="assets/wa-music.webp" alt="" width="320" height="320" loading="lazy"><b>음악</b><p>요즘 자주 듣는 노래를 담아요</p></li>
+          <li class="wcd"><img src="assets/wa-video.webp" alt="" width="320" height="320" loading="lazy"><b>영상</b><p>짧은 영상으로 일상을 전해요</p></li>
+        </ul>
+      </div>
+      <div class="wgrp" id="wg-record" role="tabpanel" aria-labelledby="wt-record" tabindex="0">
+        <div class="wgh"><h4>기록</h4><p>매일이 쌓이는 작은 기록</p></div>
+        <ul class="wcards">
+          <li class="wcd"><img src="assets/wa-todo.webp" alt="" width="320" height="320" loading="lazy"><b>To-do</b><p>카테고리별 할 일과 이번 주 기록</p></li>
+          <li class="wcd"><img src="assets/wa-dday.webp" alt="" width="320" height="320" loading="lazy"><b>D-Day</b><p>기다리는 날까지 함께 세요</p></li>
+          <li class="wcd"><img src="assets/wa-post.webp" alt="" width="320" height="320" loading="lazy"><b>포스트</b><p>블로그 글을 쓰고 플래터에 카드로 보여줘요</p></li>
+        </ul>
+      </div>
+      <div class="wgrp" id="wg-together" role="tabpanel" aria-labelledby="wt-together" tabindex="0">
+        <div class="wgh"><h4>함께</h4><p>친구와 주고받으며 채워지는 위젯</p></div>
+        <ul class="wcards">
+          <li class="wcd"><img src="assets/wa-guestbook.webp" alt="" width="320" height="320" loading="lazy"><b>방명록</b><p>친구가 남긴 안부에 답글을 달아요</p></li>
+          <li class="wcd"><img src="assets/wa-sticker.webp" alt="" width="320" height="320" loading="lazy"><b>스티커 보드</b><p>친구들이 스티커를 붙여줘요</p></li>
+          <li class="wcd"><img src="assets/wa-together.webp" alt="" width="320" height="320" loading="lazy"><b>Together</b><p>친구를 태그하고 같이 찍은 네 컷을 올려요</p></li>
+        </ul>
+      </div>
+      <div class="wgrp" id="wg-media" role="tabpanel" aria-labelledby="wt-media" tabindex="0">
+        <div class="wgh"><h4>미디어</h4><p>좋아하는 것을 모아 보여줘요</p></div>
+        <ul class="wcards">
+          <li class="wcd"><img src="assets/wa-gif.webp" alt="" width="320" height="320" loading="lazy"><b>GIF</b><p>움직이는 반짝임을 더해요</p></li>
+          <li class="wcd"><img src="assets/wa-playlist.webp" alt="" width="320" height="320" loading="lazy"><b>플레이리스트</b><p>곡을 모아 들려줘요</p></li>
         </ul>
       </div>
     </div>
