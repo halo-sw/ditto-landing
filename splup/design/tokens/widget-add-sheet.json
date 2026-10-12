@@ -3,7 +3,7 @@
   "name": "widget-add-sheet",
   "version": "2026-10-12",
   "source": ["DittoPrototype/Views/AddWidgetSheet.swift", "DittoPrototype/Views/PlatterAddSheet.swift", "DittoPrototype/Views/PlatterGridBoard.swift", "DittoPrototype/Model/GridEngine.swift"],
-  "launchSet": "WType.launchSet — the four groups below are exactly the launch widgets; same list as ditto.at",
+  "launchSet": "WType.launchSet — the four groups below are exactly the launch widgets; same list as ditto.place",
   "groups": [
     { "id": "basic", "title": "기본", "subtitle": "나를 보여주는 기본 위젯", "items": [
       { "type": "social", "name": "소셜", "caption": "여러 SNS 계정을 프로필에 연결해요" },

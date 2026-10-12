@@ -10,6 +10,7 @@
           { "/": "/assets/*", "exclude": true },
           { "/": "/email*", "exclude": true },
           { "/": "/og/*", "exclude": true },
+          { "/": "/i/*" },
           { "/": "/*/*", "exclude": true },
           { "/": "/*" }
         ]

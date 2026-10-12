@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script>
+// 초대장 [디토 앱에서 열기] = ditto.place/i/{코드} — 앱이 있으면 유니버설 링크로 앱이 열려 여기까지 오지 않는다.
+// 여기 왔다면 앱이 없는 것: 초대장(i.ditto.place)으로 돌려보내며 '앱 받기' 안내를 켠다.
+(function () { var m = location.pathname.match(/^\/i\/([A-Za-z0-9]{6})\/?$/); if (!m) return;
+  var q = new URLSearchParams(location.search); q.set("noapp", "1");
+  location.replace("https://i.ditto.place/" + m[1].toUpperCase() + "?" + q.toString()); })();
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ditto!</title>
@@ -11,16 +18,16 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="ditto!">
-<meta property="og:url" content="https://ditto.at/">
+<meta property="og:url" content="https://ditto.place/">
 <meta property="og:title" content="ditto!">
 <meta property="og:description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
-<meta property="og:image" content="https://ditto.at/assets/og/brand-404.png">
+<meta property="og:image" content="https://ditto.place/assets/og/brand-404.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ditto!">
 <meta name="twitter:description" content="위젯으로 서로의 하루를 주고받는 친구들의 공간, ditto!">
-<meta name="twitter:image" content="https://ditto.at/assets/og/brand-404.png">
+<meta name="twitter:image" content="https://ditto.place/assets/og/brand-404.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>

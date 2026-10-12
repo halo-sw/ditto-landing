@@ -1,2 +1,2 @@
-# ditto.at/{아이디} 프로필 페이지를 만들 아이디 (공유한 사람만). 앱 공유 기록(profile_shares)과 합쳐진다.
+# ditto.place/{아이디} 프로필 페이지를 만들 아이디 (공유한 사람만). 앱 공유 기록(profile_shares)과 합쳐진다.
 ditto4037  # 예시

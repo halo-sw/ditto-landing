@@ -19,7 +19,7 @@
 
 ## 이미지 호스팅
 
-이미지는 `https://ditto.at/email/` 에 호스팅됨 (ditto-landing 리포 `/email` 폴더):
+이미지는 `https://ditto.place/email/` 에 호스팅됨 (ditto-landing 리포 `/email` 폴더):
 - `wordmark-white.png` — 헤더 워드마크
 - `phone.png` — 앱 미리보기
 - `hero.png` — OG 카드(예비)

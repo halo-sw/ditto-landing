@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ditto.at 빌드: 저장소 파일 + 공유한 사용자의 프로필 페이지(ditto.at/{아이디}) + 링크 미리보기 이미지.
+"""ditto.place 빌드: 저장소 파일 + 공유한 사용자의 프로필 페이지(ditto.place/{아이디}) + 링크 미리보기 이미지.
 
 프로필 페이지는 프로필 링크를 공유한 사람 것만 만든다. 공유 목록은
   1) Supabase public.profile_shares (앱에서 공유할 때 기록, 테이블이 있으면)
@@ -26,7 +26,7 @@ import platter  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "_site").resolve()
-SITE = "https://ditto.at"
+SITE = "https://ditto.place"
 SB = "https://lisqekczixwzshmpewzq.supabase.co"
 FONT_URL = "https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/public/static/Pretendard-{w}.otf"
 HANDLE_RE = re.compile(r"^[a-z0-9_.]{1,30}$")
@@ -210,7 +210,7 @@ def og_image(name, handle, avatar_bytes, wordmark, handle_color=None, thumbs=(),
 
     # 왼쪽: 주소 · "{이름}의 플래터" · 핸들 카드 · 워드마크
     lx, max_w = 72 * S, 568 * S
-    eyebrow = label or f"ditto.at/{handle}"
+    eyebrow = label or f"ditto.place/{handle}"
     f_eb, eyebrow = fit(d, eyebrow, "Nunito800", 28 * S, max_w)
     d.text((lx, 74 * S), eyebrow, font=f_eb, fill=ink_soft)
     who = name or handle

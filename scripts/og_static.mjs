@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// ditto.at 링크 미리보기(OG) — 고정 이미지 세트를 HTML로 그려 assets/og/ 에 저장한다.
+// ditto.place 링크 미리보기(OG) — 고정 이미지 세트를 HTML로 그려 assets/og/ 에 저장한다.
 //   브랜드:  brand-home.jpg (히어로 = /assets/og-landing.png 원본을 JPEG로, 300KB 이하) · brand-download.png · brand-404.png
 //   가이드:  guide-splup.png · guide-nav-sheets.png · guide-ditto-ds.png · guide-motion.png
 //   시안:    demo-index.jpg (assets/rooms/ 방 캡처 10장)
@@ -53,7 +53,7 @@ const ICON = dataUrl('apple-touch-icon.png', 'image/png');
 const pages = {
   'brand-download': () => `<body style="${BRAND_BG}">
   ${heart(600, 40, 110, .32)}${heart(1080, 470, 70, .25)}
-  ${brandLeft('ditto.at/download', '출시 알림 받기', '디토가 나오면 가장 먼저<br>알려 드릴게요')}
+  ${brandLeft('ditto.place/download', '출시 알림 받기', '디토가 나오면 가장 먼저<br>알려 드릴게요')}
   <div style="position:absolute;left:676px;top:150px;width:440px;display:flex;flex-direction:column;gap:16px">
     ${[['지금', '디토가 나왔어요! 💌', '친구들과 서로의 하루를 주고받아 보세요'], ['내일', '친구 15명 모으기', '먼저 온 친구에게 링크를 보내요']].map(([t, a, b], i) => `
     <div style="display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:30px;background:rgba(255,255,255,${i ? .5 : .82});box-shadow:0 18px 40px -16px rgba(70,20,110,.35);backdrop-filter:blur(20px);transform:scale(${i ? .94 : 1});transform-origin:top center;opacity:${i ? .9 : 1}">
@@ -70,7 +70,7 @@ const pages = {
 
   'brand-404': () => `<body style="${BRAND_BG}">
   ${heart(560, 30, 120, .3)}${heart(1090, 480, 64, .22)}
-  ${brandLeft('ditto.at', '친구가 보낸<br>디토 링크예요', '열어서 친구의 플래터를 구경해요')}
+  ${brandLeft('ditto.place', '친구가 보낸<br>디토 링크예요', '열어서 친구의 플래터를 구경해요')}
   <div style="position:absolute;left:676px;top:120px;width:440px;height:390px">
     <div style="position:absolute;inset:70px 0 0 30px;display:grid;grid-template-columns:1fr 1fr;gap:14px;transform:rotate(3deg);opacity:.9">
       ${['#F6E7FF', '#FFE3F1', '#EDE4FF', '#FFF0F7'].map((c, i) => `<div style="border-radius:26px;background:${c};box-shadow:0 14px 30px -14px rgba(70,20,110,.35);height:${i % 3 ? 140 : 160}px"></div>`).join('')}
@@ -92,10 +92,10 @@ const MOTIF = { // docs-chrome.js 표지 모티프와 같은 도형 (320×180)
   press: c => `<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F9F871"/><stop offset=".5" stop-color="#FA97E2"/><stop offset="1" stop-color="#6A99F6"/></linearGradient></defs><rect x="70" y="50" width="180" height="80" rx="40" fill="url(#g)"/><rect x="88" y="62" width="144" height="18" rx="9" fill="#fff" opacity=".35"/><ellipse cx="160" cy="146" rx="70" ry="7" fill="${c[2]}" opacity=".18"/>`,
 };
 const GUIDE = {
-  'guide-splup': ['Splup 디자인 시스템', '색과 글자부터 버튼과 위젯까지,<br>디토 화면을 만드는 기준', 'ditto.at/splup', 'purple', 'swatches'],
-  'guide-nav-sheets': ['상단 바와 바텀시트', '56pt 상단 바, 44pt 터치 영역,<br>시트가 올라오는 규칙', 'ditto.at/splup › 상단 바와 바텀시트', 'sky', 'sheets'],
-  'guide-ditto-ds': ['Ditto 디자인 시스템', '버튼, 그래픽, 플래터와<br>위젯 반응형 규격', 'ditto.at/splup/ditto', 'pink', 'grid'],
-  'guide-motion': ['그라디언트와 젤리 눌림', '선명한 그라디언트 위에서<br>말랑하게 눌리는 버튼', 'ditto.at/splup › 그라디언트와 젤리 눌림', 'deep', 'press'],
+  'guide-splup': ['Splup 디자인 시스템', '색과 글자부터 버튼과 위젯까지,<br>디토 화면을 만드는 기준', 'ditto.place/splup', 'purple', 'swatches'],
+  'guide-nav-sheets': ['상단 바와 바텀시트', '56pt 상단 바, 44pt 터치 영역,<br>시트가 올라오는 규칙', 'ditto.place/splup › 상단 바와 바텀시트', 'sky', 'sheets'],
+  'guide-ditto-ds': ['Ditto 디자인 시스템', '버튼, 그래픽, 플래터와<br>위젯 반응형 규격', 'ditto.place/splup/ditto', 'pink', 'grid'],
+  'guide-motion': ['그라디언트와 젤리 눌림', '선명한 그라디언트 위에서<br>말랑하게 눌리는 버튼', 'ditto.place/splup › 그라디언트와 젤리 눌림', 'deep', 'press'],
 };
 for (const [id, [title, sub, where, tone, motif]] of Object.entries(GUIDE)) {
   const c = TONES[tone];
@@ -124,7 +124,7 @@ pages['demo-index'] = () => {
   const col = (i) => rooms.slice(i * 2, i * 2 + 2).map(f => `<div style="width:130px;height:252px;border-radius:18px;overflow:hidden;background:#fff center top/100% auto no-repeat url(${dataUrl('assets/rooms/' + f, 'image/webp')});box-shadow:0 14px 30px -14px rgba(50,20,80,.4),0 0 0 1px rgba(22,18,27,.05)"></div>`).join('');
   return `<body style="background:linear-gradient(180deg,#F6F2FB,#ECE5F5)">
   <div style="position:absolute;left:84px;top:0;bottom:0;width:330px;display:flex;flex-direction:column;justify-content:center">
-    <p class="en" style="font-size:24px;color:#8A3FB8">ditto.at/demo</p>
+    <p class="en" style="font-size:24px;color:#8A3FB8">ditto.place/demo</p>
     <h1 style="margin-top:10px;font-size:76px;line-height:1.1;font-weight:800;color:#16121B">10명의<br>플래터</h1>
     <p style="margin-top:22px;font-size:28px;line-height:1.45;font-weight:600;color:#6D5F7D">실제 서버 데이터로 그린<br>프로필 시안 모음</p>
     <div style="margin-top:44px">${wm(60, '#16121B')}</div>

@@ -1,5 +1,5 @@
 // Profile handle v2 (2026-10-11) — identity colours. Source of truth: design/tokens/profile-handle.json
-// = iOS DGrad.profileHandlePalettes = server profiles.handle_color keys = ditto.at platter.handle_style.
+// = iOS DGrad.profileHandlePalettes = server profiles.handle_color keys = ditto.place platter.handle_style.
 window.SplupProfileHandles = [
   {
     "id": "lavender",
