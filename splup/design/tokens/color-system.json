@@ -145,11 +145,11 @@
       "Dark": "#B2A7BF"
     },
     "icon/default": {
-      "Light": "#443651",
+      "Light": "#6D5F7D",
       "Dark": "#E7E1EE"
     },
     "icon/subtle": {
-      "Light": "#6D5F7D",
+      "Light": "#897B99",
       "Dark": "#B2A7BF"
     },
     "icon/disabled": {
