@@ -391,9 +391,20 @@ def main():
     template = (ROOT / "scripts/profile.html").read_text()
     fill = lambda values: re.sub(r"\{\{(\w+)\}\}", lambda m: values.get(m.group(1), ""), template)
     # 404: 아직 빌드되지 않은 새 아이디 · /u/{아이디} 옛 주소 · 없는 페이지
-    (OUT / "404.html").write_text(fill({"TITLE": "ditto!", "URL": SITE + "/", "OG_IMAGE": SITE + "/assets/og/brand-404.png",
-                                         "PROFILE_HIDDEN": " hidden", "AVATAR_HIDDEN": " hidden", "KEY": key, "PLATTER": "",
-                                         "HANDLE_STYLE": platter.handle_style(None)}))
+    # /i/{코드} = 초대장 [디토 앱에서 열기]. 앱이 있으면 유니버설 링크로 열려 여기 오지 않으니, 여기 왔다면 앱이 없는 것 →
+    # 초대장(i.ditto.place)으로 돌려보내며 '앱 받기' 안내를 켠다.
+    invite_redirect = """<script>
+// 초대장 [디토 앱에서 열기] = ditto.place/i/{코드} — 앱이 있으면 유니버설 링크로 앱이 열려 여기까지 오지 않는다.
+// 여기 왔다면 앱이 없는 것: 초대장(i.ditto.place)으로 돌려보내며 '앱 받기' 안내를 켠다.
+(function () { var m = location.pathname.match(/^\\/i\\/([A-Za-z0-9]{6})\\/?$/); if (!m) return;
+  var q = new URLSearchParams(location.search); q.set("noapp", "1");
+  location.replace("https://i.ditto.place/" + m[1].toUpperCase() + "?" + q.toString()); })();
+</script>
+"""
+    page404 = fill({"TITLE": "ditto!", "URL": SITE + "/", "OG_IMAGE": SITE + "/assets/og/brand-404.png",
+                    "PROFILE_HIDDEN": " hidden", "AVATAR_HIDDEN": " hidden", "KEY": key, "PLATTER": "",
+                    "HANDLE_STYLE": platter.handle_style(None)})
+    (OUT / "404.html").write_text(page404.replace("<head>\n", "<head>\n" + invite_redirect, 1))
 
     wordmark = Image.open(ROOT / "email/wordmark-white.png").convert("RGBA")
     (OUT / "og").mkdir(exist_ok=True)
