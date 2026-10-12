@@ -1,0 +1,52 @@
+/* 위젯 카탈로그 · To-do · 디토 허용 문서 (2026-10-12) — 앱 실제 캡처와 규격 표 */
+.wa-note{padding:14px 18px;border-left:3px solid var(--accent);background:var(--accent-bg);border-radius:0 10px 10px 0;font-size:14px;line-height:1.6;margin:20px 0}
+.wa-shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(190px,100%),1fr));gap:24px 18px;margin:20px 0 32px}
+.wa-shots.wide{grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr))}
+.wa-shots figure{margin:0;min-width:0}
+.wa-shots img{display:block;width:100%;max-width:260px;height:auto;border-radius:20px;border:1px solid var(--hairline);background:var(--surface-soft)}
+.wa-shots.wide img{max-width:420px;border-radius:14px}
+.wa-shots figcaption{margin-top:10px;font-size:13px;line-height:1.5;color:var(--ink-soft);overflow-wrap:anywhere}
+.wa-shots figcaption b{display:block;color:var(--ink);font-size:14px;margin-bottom:2px}
+.wa-catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:16px;margin:20px 0 32px}
+.wa-group{padding:18px 18px 8px;background:var(--surface-soft);border:1px solid var(--hairline);border-radius:14px;min-width:0}
+.wa-group h3{margin:0;font-size:16px}
+.wa-group>p{margin:4px 0 12px;font-size:13px;color:var(--ink-soft)}
+.wa-group ul{list-style:none;margin:0;padding:0}
+.wa-group li{padding:10px 0;border-top:1px solid var(--hairline);font-size:13px;line-height:1.5;color:var(--ink-soft);overflow-wrap:anywhere}
+.wa-group li b{display:block;color:var(--ink);font-size:14px}
+.wa-group.locked{opacity:.85}
+.wa-tag{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:600;background:var(--accent-bg);color:var(--accent-text);vertical-align:2px}
+.wa-steps{display:grid;gap:0;margin:20px 0 28px;padding:0;list-style:none;counter-reset:wa}
+.wa-steps li{counter-increment:wa;position:relative;padding:12px 0 12px 44px;border-top:1px solid var(--hairline);font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.wa-steps li::before{content:counter(wa);position:absolute;left:0;top:12px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent-bg);color:var(--accent-text);font-size:13px;font-weight:700}
+.wa-steps li b{display:block}
+.wa-steps li span{color:var(--ink-soft);font-size:13px}
+.wa-swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(150px,100%),1fr));gap:12px;margin:20px 0 28px}
+.wa-swatch{border:1px solid var(--hairline);border-radius:12px;overflow:hidden;background:#fff;color:#171719;min-width:0}
+.wa-swatch .wa-sw-top{display:flex;align-items:center;gap:10px;padding:14px}
+.wa-swatch .wa-box{width:22px;height:22px;border-radius:6.6px;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800;flex-shrink:0}
+.wa-swatch .wa-chip{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:600}
+.wa-swatch dl{margin:0;padding:10px 14px 12px;border-top:1px solid #EEEDF2;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:11px}
+.wa-swatch dt{color:#77727C}.wa-swatch dd{margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.wa-dd{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:16px;margin:20px 0 28px}
+.wa-dd>div{padding:18px;border-radius:14px;background:var(--surface-soft);border-top:3px solid #2EB67D;min-width:0}
+.wa-dd>div.no{border-top-color:#E5484D}
+.wa-dd h3{margin:0 0 6px;font-size:15px}
+.wa-dd p,.wa-dd li{font-size:13px;line-height:1.6;color:var(--ink-soft)}
+.wa-dd ul{margin:6px 0 0;padding-left:18px}
+.wa-glow{display:flex;flex-wrap:wrap;gap:40px;align-items:center;justify-content:center;padding:36px 16px;margin:20px 0;background:var(--surface-soft);border:1px solid var(--hairline);border-radius:14px}
+.wa-glow figure{margin:0;display:grid;justify-items:center;gap:14px;font-size:12px;color:var(--ink-soft)}
+.wa-glow .wa-w{position:relative;width:110px;height:110px;border-radius:16px;background:#F4EFD9;display:grid;place-items:center;font-size:34px;isolation:isolate}
+.wa-glow .wa-w::before,.wa-glow .wa-w::after{content:"";position:absolute;inset:-3px;border-radius:19px;z-index:-1;pointer-events:none}
+.wa-glow .wa-w.on::before{background:linear-gradient(135deg,#C588FF,#AA4AF4,#6655D2);filter:blur(9px);animation:wa-breathe 2.8s ease-in-out infinite}
+.wa-glow .wa-w.on::after{background:linear-gradient(180deg,#AA4AF4,#C588FF,#6655D2);filter:blur(4px);opacity:.55;animation:wa-breathe 2.8s ease-in-out infinite}
+@keyframes wa-breathe{0%,100%{opacity:.30;transform:scale(1)}50%{opacity:.52;transform:scale(1.015)}}
+@media(prefers-reduced-motion:reduce){.wa-glow .wa-w.on::before,.wa-glow .wa-w.on::after{animation:none}.wa-glow .wa-w.on::before{opacity:.41}}
+.wa-anchor{scroll-margin-top:100px}
+.wa-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(150px,100%),1fr));gap:20px 12px;margin:12px 0 28px}
+.wa-cards figure{margin:0;min-width:0}
+.wa-cards img{display:block;width:100%;height:auto;aspect-ratio:1;border-radius:16px;background:var(--surface-soft)}
+.wa-cards figcaption{margin-top:10px;font-size:12px;line-height:1.4;color:var(--ink-soft);overflow-wrap:anywhere}
+.wa-cards figcaption b{display:block;color:var(--ink);font-size:16px;font-weight:600;margin-bottom:4px}
+.wa-sub{font-size:14px;font-weight:400;color:var(--ink-soft);margin-left:6px}
+.wa-note ul{margin:6px 0 0;padding-left:18px}

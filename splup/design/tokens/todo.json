@@ -1,0 +1,42 @@
+{
+  "$schema": "splup-token/v1",
+  "name": "todo",
+  "version": "2026-10-12",
+  "source": ["DittoPrototype/Model/TodoModel.swift", "DittoPrototype/Views/TodoWidget.swift", "DittoPrototype/DesignSystem/Elements/WidgetFrame.swift"],
+  "spec": "W-13 · 2026-10-11 redesign. No completion rate, N/M or progress bar (§2.6). Not dittoable. Completions are not posted to the feed.",
+  "limits": { "categories": 5, "categoryNameChars": 8, "items": 20, "itemChars": 30, "subtitleChars": 24, "looseSectionName": "할 일" },
+  "categoryColors": {
+    "order": ["pink", "blue", "green", "cocoa", "purple"],
+    "pink":   { "name": "핑크",   "fill": "#F0589F", "chipBg": "#FFEAF3", "chipInk": "#C93A7E", "chipInkDark": "#FF9CCB" },
+    "blue":   { "name": "블루",   "fill": "#3D8BF2", "chipBg": "#E8F1FF", "chipInk": "#2465C4", "chipInkDark": "#8DBBFF" },
+    "green":  { "name": "그린",   "fill": "#2EB67D", "chipBg": "#E3F7EC", "chipInk": "#18815A", "chipInkDark": "#7FDDB2" },
+    "cocoa":  { "name": "코코아", "fill": "#A2704C", "chipBg": "#F5EBE3", "chipInk": "#7E5235", "chipInkDark": "#D9AE8E" },
+    "purple": { "name": "퍼플",   "fill": "#AA4AF4", "chipBg": "#F2E8FF", "chipInk": "#862FC6", "chipInkDark": "#D6AEFF" },
+    "chipBgDark": "fill at 24% opacity",
+    "defaultKey": "follows the current app icon family: pink→pink, peach→cocoa, cyan→blue, mint→green, purple/deepPurple→purple",
+    "nextKey": "first colour not yet used"
+  },
+  "ink": { "strong": "#171719", "neutral": "#46474C", "assistive": "#989BA2", "emptyBox": "#EEEDF2", "sunday": "#E5484D", "saturday": "#3D7BEA" },
+  "checkbox": {
+    "size": 22, "tileSize": 13, "radiusRatio": 0.3, "checkScale": 0.5,
+    "onFill": "category fill", "offFill": "fill.subtle (tile: #EEEDF2)", "checkColor": "#FFFFFF",
+    "pop": { "keyframes": [0.8, 1.14, 1.0], "durations": [0.08, 0.14, 0.22] }, "reduceMotion": "no scale"
+  },
+  "weekStrip": {
+    "days": "일–토", "badgeSize": 34, "dayNumberCircle": 30, "selectedRadius": 14,
+    "badgeScale": { "1": 0.74, "2": 0.62, "3": 0.56, "4": 0.52 }, "maxBadges": 4, "badgeRing": "surface, max(1, size×0.045)",
+    "states": {
+      "empty": "rounded square, 80% of badge size, fill.subtle",
+      "done": "one check badge per category colour completed that day, overlapped",
+      "today": "date on black circle with inverse text",
+      "selected": "bg.subtle + border.strong, tap again to clear the filter",
+      "future": "empty badge at 55%, disabled"
+    }
+  },
+  "tile": {
+    "sizes": ["6x2", "4x3", "3x4", "4x4"], "padding": 12, "compactBelowHeight": 150,
+    "compact": { "sizes": ["6x2", "4x3"], "miniStripHeight": 32, "nextItemsFromHeight": 110, "twoItemsFromHeight": 125 },
+    "large": { "sizes": ["3x4", "4x4"], "chipHeight": 18, "chipText": "10/600", "rowHeight": 16, "rowGap": 6, "stripFromHeight": 160 },
+    "emptyCopy": "할 일을 적어보세요", "allDoneCopy": "오늘 할 일을 다 했어요 ✨"
+  }
+}

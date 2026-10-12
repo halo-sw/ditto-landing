@@ -1,0 +1,32 @@
+{
+  "$schema": "splup-token/v1",
+  "name": "widget-ditto",
+  "version": "2026-10-12",
+  "source": ["DittoPrototype/DesignSystem/Components/DittoAvailabilityBadge.swift", "DittoPrototype/DesignSystem/Components/DittoBeam.swift", "DittoPrototype/Views/Overlays.swift", "DittoPrototype/Views/WidgetDetailParts.swift"],
+  "dittoable": { "rule": "type != ditto && type != sticker && type != todo, and owner allow == true", "notDittoable": ["ditto", "sticker", "todo"], "allowDefault": false },
+  "ownerAllowLimit": { "max": 3, "scope": "대표 + 라이프, dittoable types only, the widget being edited excluded", "toast": "디토 허용은 3개까지예요. 다른 위젯의 허용을 먼저 꺼 주세요.", "composerTypes": ["image", "gif"] },
+  "receiverLifeSlots": { "max": 3, "whenFull": "replace flow, not a refusal" },
+  "lockedAfterDitto": "allow && count > 0 → content edit locked",
+  "glow": {
+    "placement": "behind the widget, hit-testing passes", "spread": 3, "radius": "widget radius + 3",
+    "colors": "DittoBrandFamily.current.fluid (3 stops)",
+    "layers": [ { "gradient": "topLeading→bottomTrailing", "blur": 9 }, { "gradient": "top→bottom [c1,c0,c2]", "blur": 4, "opacity": 0.55 } ],
+    "breathe": { "period": 2.8, "opacity": [0.30, 0.52], "scale": [1.0, 1.015], "curve": "sine" },
+    "rotation": "none (removed 2026-10-09)", "reduceMotion": "static at mid value"
+  },
+  "badge": {
+    "available": { "size": 24, "anchor": "bottomTrailing", "inset": 8, "shadow": "0 2 4 #000 12%", "tap": "opens the ditto sheet", "a11y": "디토 가능 · 꾹 눌러 가져오기" },
+    "collected": { "size": 24, "anchor": "topTrailing", "inset": 8, "glow": false, "tap": "none", "a11y": "이미 디토한 위젯" },
+    "unavailable": "nothing"
+  },
+  "friendWidgetSheet": {
+    "order": ["header (leading close · title)", "preview 140", "title", "source", "state area"],
+    "states": {
+      "available":   { "title": "디토", "copy": "3초간 꾸욱 누르면 담겨요. 떼면 취소돼요.", "fullCopy": "라이프 디토 3칸이 가득 찼어요. 3초간 꾸욱 누르면 바꿀 디토를 골라요.", "controls": ["어디에 둘까요? 대표/라이프", "DittoHoldButton"] },
+      "collected":   { "title": "이미 담은 위젯", "copy": "이미 내 플래터에 담은 위젯이에요.", "action": "내 디토 보기" },
+      "unavailable": { "title": "가져올 수 없음", "copy": "{이름}님이 이 위젯의 디토를 허용하지 않았어요.", "copyDitto": "{이름}님도 디토로 가져온 위젯이라 다시 디토할 수 없어요." },
+      "gone":        { "title": "볼 수 없는 위젯", "copy": "원본 위젯을 더 이상 볼 수 없어요." }
+    },
+    "todo": "read-only To-do sheet instead"
+  }
+}

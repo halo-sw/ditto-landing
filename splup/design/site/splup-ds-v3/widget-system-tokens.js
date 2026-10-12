@@ -304,17 +304,15 @@ window.SplupWidgetSystem = {
     },
     {
       "id": "todo",
-      "name": "할 일 · 목록",
+      "name": "To-do",
       "profile": "list",
       "sizes": [
         "3x4",
-        "4x3",
         "4x4",
-        "4x6",
-        "6x4",
-        "6x8"
+        "4x3",
+        "6x2"
       ],
-      "rule": "화이트 표면, 16px 체크박스, 28px 행 간격. 작은 카드에서는 추가 항목 수를 표시합니다.",
+      "rule": "흰 표면 · 카테고리 5색 · 체크 칸 22(타일 13). 작은 크기(6×2·4×3)는 미니 주간 스트립과 다음 할 일, 큰 크기(3×4·4×4)는 카테고리 칩과 체크 행. 완료율·N/M은 쓰지 않아요. 앱 규격: tokens/todo.json",
       "minContentHeight": 112
     },
     {
@@ -422,7 +420,7 @@ window.SplupWidgetSystem = {
   "counts": {
     "commonSizes": 12,
     "contentFamilies": 13,
-    "contentVariants": 91,
+    "contentVariants": 89,
     "dittoVariants": 5,
     "badgeVariants": 2,
     "newFamilies": 3,
@@ -517,5 +515,9 @@ window.SplupWidgetSystem = {
     },
     "variantCount": 36,
     "iconsSourceId": "573:3222"
+  },
+  "radiusOverrides": {
+    "music": 24,
+    "note": "음악(CDP)은 모든 크기 24 · Grid.radius(w)"
   }
 };

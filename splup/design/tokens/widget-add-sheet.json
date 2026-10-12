@@ -1,0 +1,49 @@
+{
+  "$schema": "splup-token/v1",
+  "name": "widget-add-sheet",
+  "version": "2026-10-12",
+  "source": ["DittoPrototype/Views/AddWidgetSheet.swift", "DittoPrototype/Views/PlatterAddSheet.swift", "DittoPrototype/Views/PlatterGridBoard.swift", "DittoPrototype/Model/GridEngine.swift"],
+  "launchSet": "WType.launchSet — the four groups below are exactly the launch widgets; same list as ditto.at",
+  "groups": [
+    { "id": "basic", "title": "기본", "subtitle": "나를 보여주는 기본 위젯", "items": [
+      { "type": "social", "name": "소셜", "caption": "여러 SNS 계정을 프로필에 연결해요" },
+      { "type": "status", "name": "상태", "caption": "이모지나 한 줄로 지금 기분·상태를 나눠요" },
+      { "type": "text", "name": "텍스트", "caption": "한 줄 메모를 가볍게 남겨요" },
+      { "type": "image", "name": "이미지", "caption": "사진으로 추억을 나눠요" },
+      { "type": "music", "name": "음악", "caption": "요즘 자주 듣는 노래를 담아요" },
+      { "type": "video", "name": "영상", "caption": "짧은 영상으로 일상을 전해요" } ] },
+    { "id": "record", "title": "기록", "subtitle": "매일이 쌓이는 작은 기록", "items": [
+      { "type": "todo", "name": "To-do", "caption": "카테고리별 할 일과 이번 주 기록" },
+      { "type": "dday", "name": "D-Day", "caption": "기다리는 날까지 함께 세요" },
+      { "type": "block", "name": "포스트", "caption": "블로그 글을 쓰고 플래터에 카드로 보여줘요" } ] },
+    { "id": "together", "title": "함께", "subtitle": "친구와 주고받으며 채워지는 위젯", "items": [
+      { "type": "guestbook", "name": "방명록", "caption": "친구가 남긴 안부에 답글을 달아요" },
+      { "type": "sticker", "name": "스티커 보드", "caption": "친구들이 스티커를 붙여줘요" },
+      { "type": "together", "name": "Together", "caption": "친구를 태그하고 같이 찍은 네 컷을 올려요" } ] },
+    { "id": "media", "title": "미디어", "subtitle": "좋아하는 것을 모아 보여줘요", "items": [
+      { "type": "gif", "name": "GIF", "caption": "움직이는 반짝임을 더해요" },
+      { "type": "playlist", "name": "플레이리스트", "caption": "곡을 모아 들려줘요" } ] }
+  ],
+  "soonGroup": { "title": "곧 열려요", "subtitle": "준비 중인 위젯이에요 — 열리면 알려드릴게요", "card": "grayscale, 45% opacity, lock badge 22 (black 55%)", "toast": "{이름}은(는) 곧 열려요" },
+  "sheet": {
+    "chips": { "height": 34, "touch": 44, "paddingX": 16, "gap": 8, "text": "14/600", "selected": "selection bg/fg", "idle": "layer.basement / unselected fg", "syncThreshold": 0.35 },
+    "sectionHeader": { "title": "17/600", "subtitle": "14/400 text.subtle", "gapBetweenSections": 32 },
+    "grid": { "columns": 2, "columnGap": 12, "rowGap": 20, "gutter": 16 },
+    "card": { "preview": "1:1, radius 16", "livePreviewScale": 0.78, "name": "16/600, 1 line", "caption": "12/400 text.subtle, 1 line, min scale 0.85" }
+  },
+  "composer": {
+    "order": ["nav '{종류} 위젯 추가'", "pinned live preview (max 176)", "내용", "크기", "옵션", "sticky CTA '위젯 추가'"],
+    "groupGap": 24, "groupLabel": "14/600",
+    "options": { "image|gif": "디토 가능하도록 허용 (default off, limit 3)" },
+    "cta": { "height": 60, "paddingX": 16, "topHairline": "0.5pt border.default 60%", "disabledUntil": "required content present", "editTitle": "수정 완료" },
+    "edit": { "title": "{종류} 위젯 수정", "close": "trailing", "noSizeOrPreview": true, "dirtyConfirm": "변경사항을 저장하지 않고 닫을까요?" },
+    "nextBuild": "size chips move above the preview; no fixed-size types except To-do and Together"
+  },
+  "editChrome": {
+    "delete": { "anchor": "topTrailing, 8 above", "size": 30, "icon": 16 },
+    "edit": { "anchor": "bottomLeading inset 12", "height": 32, "radius": 6, "label": "수정 (icon only at 2 columns)" },
+    "resize": { "anchor": "bottomTrailing", "size": 30, "touch": 44 },
+    "removed": "대표로 ↑ promote label (2026-10-11)"
+  },
+  "radius": { "rule": "min(20, 12 + (min(w,h) − 2) × 2)", "music": 24, "appliesTo": "body, preview, ditto glow, selection border — Grid.radius(w)" }
+}
