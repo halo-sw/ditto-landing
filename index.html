@@ -279,6 +279,7 @@ p{text-wrap:pretty}
 .qcard summary{min-height:0}}
 /* ---------- close + footer (Dia-style rising gradient columns) ---------- */
 .close{position:relative;text-align:center;color:var(--ink);background:var(--bg);padding-block:clamp(96px,12vw,168px) clamp(40px,5vw,72px)}
+.close .emo{font-size:clamp(22px,2.2vw,28px);letter-spacing:.06em}
 .close h2{margin-top:10px;font-size:clamp(46px,8.4vw,128px);line-height:.98;letter-spacing:-.02em;background:linear-gradient(100deg,#6655D2 0%,#AA4AF4 38%,#B46CE0 62%,#FA97E2 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:.06em .08em .1em}
 .close p.t{margin:18px auto 0;max-width:30em;color:var(--ink-2);font-weight:500}
 .close .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
@@ -485,6 +486,10 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .wx-ph .lab{padding-top:0}}
 /* music widget: 24pt radius in the app, ~27pt as captured (26px on the 1x crop) → mask in CSS too so nothing shows behind the corners */
 @keyframes swap{from{transform:scale(.9);opacity:.4}to{transform:none;opacity:1}}
+.slots{position:absolute;left:8%;right:8%;top:22%;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.slots > *{aspect-ratio:1;border-radius:16px;position:relative}
+.slots img{width:100%;height:100%;object-fit:cover;border-radius:16px}
+.slots svg{position:absolute;right:-6px;top:-6px;width:26px;height:26px}
 /* ---------- tour: bigger copy, rebalanced ---------- */
 /* ---------- frequency: journey strip inside ---------- */
 /* ---------- qa: rule numbers folded into answers ---------- */
@@ -1246,12 +1251,10 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .close{overflow:clip;padding-top:clamp(64px,8vw,120px)}
 .cl-glow{position:absolute;left:50%;top:46%;width:min(980px,120vw);aspect-ratio:2;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(170,74,244,.20),rgba(250,151,226,.12) 55%,transparent);filter:blur(30px);pointer-events:none}
 .close .wrap{position:relative}
-.cl-avs{position:relative;display:inline-flex;align-items:center;padding-right:10px}
-.cl-avs img{width:clamp(38px,3.4vw,48px);height:clamp(38px,3.4vw,48px);margin-left:-12px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--bg),0 8px 16px -10px rgba(60,20,90,.6)}
-.cl-avs img:first-child{margin-left:0}
-.cl-badge{position:absolute;right:-18px;top:-14px;width:34px;height:34px;rotate:12deg;filter:drop-shadow(0 6px 10px rgba(90,30,140,.4))}
-@media (prefers-reduced-motion:no-preference){.cl-avs img{animation:clIn .7s var(--ease) both;animation-timeline:view();animation-range:entry 10% entry 60%}}
-@keyframes clIn{from{opacity:0;transform:translateX(calc(var(--i) * -6px)) scale(.7)}to{opacity:1;transform:none}}
+.close .emo{display:inline-flex;gap:clamp(6px,.8vw,12px);font-size:clamp(28px,3vw,40px);line-height:1}
+.close .emo span{display:inline-block;width:1.25em;text-align:center}
+.close .emo span.is-flip{animation:emoFlip .36s var(--ease)}
+@keyframes emoFlip{50%{transform:translateY(-.35em) scale(.6);opacity:0}}
 /* footer: softer bars (reads as a glow, not stairs) */
 .foot-glow .dg-row{filter:blur(calc((50cqw + var(--bleed)) / 22))}
 .foot-glow .grain{z-index:1;opacity:.3}
@@ -1955,7 +1958,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 <section class="close" id="close" aria-labelledby="close-h">
   <span class="cl-glow" aria-hidden="true"></span>
   <div class="wrap">
-    <div class="cl-avs" role="img" aria-label="지우, 소라, 하은, 나리, 재민, 도현, 서윤, 리안, 예서, 준. 열 명의 친구"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy" style="--i:0"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy" style="--i:1"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy" style="--i:2"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy" style="--i:3"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy" style="--i:4"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy" style="--i:5"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy" style="--i:6"><img src="assets/rooms/rav-rian.webp" alt="" width="144" height="144" loading="lazy" style="--i:7"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy" style="--i:8"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy" style="--i:9"><svg class="cl-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></div>
+    <p class="emo" id="emo" aria-hidden="true"><span>🎧</span><span>🍓</span><span>📸</span><span>🌙</span><span>🛼</span></p>
     <h2 class="close-h" id="close-h">통하면, <span class="ch-d">디토.</span></h2>
     <p class="t">친한 친구들과 만드는 우리만의 공간. 마음에 드는 조각은 꾹 눌러, 나도.</p>
     <div class="row"><a class="btn" href="/download/">출시알림 받기 <span class="ar" aria-hidden="true">→</span></a></div>
@@ -2426,6 +2429,25 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     let raf = 0, x = 0, y = 0;
     hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); x = (e.clientX - r.left) / r.width - .5; y = (e.clientY - r.top) / r.height - .5; if (!raf) raf = requestAnimationFrame(() => { raf = 0; dev.style.setProperty('--mx', x.toFixed(3)); dev.style.setProperty('--my', y.toFixed(3)); }); }, { passive: true });
     hero.addEventListener('pointerleave', () => { dev.style.setProperty('--mx', 0); dev.style.setProperty('--my', 0); });
+  })();
+  /* ---- close: five emoji drawn from a wide pool, reshuffled slot by slot ---- */
+  (function(){
+    const row = document.getElementById('emo'); if (!row) return;
+    const POOL = ['🎧','🍓','📸','🌙','🛼','🧃','🍙','🌷','🎂','🎤','🪩','🧸','🐈','🐶','🦋','🌊','⛺️','🚲','🚃','🎞️','📼','💿','🎹','🎸','🥁','🧋','🍜','🥐','🍰','🍦','🍉','🍋','🌻','🍀','🌈','☁️','❄️','🔥','✨','⭐️','🪐','🌍','🗺️','🏝️','🎡','🎢','🎠','🛹','🏀','🎳','🎮','🕹️','🧩','🎨','🖍️','📚','✏️','📝','💌','🎁','🎈','🕯️','🪴','🌵','🍄','🐻','🐰','🐧','🦦','🐳','🍑','🫧','🧶','🪞','💅','👟','🧢','🕶️','💍','🫶','🤝','🙌','😎','🥹','🤭','😴','🥳','🤍','💜','🩷'];
+    const slots = [...row.children];
+    const pick = n => { const a = POOL.slice(); for (let k = a.length - 1; k > 0; k--) { const r = Math.floor(Math.random() * (k + 1)); [a[k], a[r]] = [a[r], a[k]]; } return a.slice(0, n); };
+    pick(slots.length).forEach((e, k) => slots[k].textContent = e);
+    if (reduce) return;
+    let vis = false, k = 0;
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { vis = es[0].isIntersecting; }).observe(row);
+    setInterval(() => {
+      if (!vis || document.hidden) return;
+      const s = slots[k % slots.length]; k++;
+      const shown = slots.map(x => x.textContent);
+      let e; do { e = POOL[Math.floor(Math.random() * POOL.length)]; } while (shown.includes(e));
+      s.classList.remove('is-flip'); void s.offsetWidth; s.classList.add('is-flip');
+      setTimeout(() => { s.textContent = e; }, 180);
+    }, 900);
   })();
 })();
 </script>
