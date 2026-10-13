@@ -198,10 +198,17 @@ p{text-wrap:pretty}
 .scene + .scene{padding-top:clamp(24px,3vw,48px)}
 .scene:last-of-type{padding-bottom:var(--sec)}
 .scene .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,6vw,110px);align-items:center}
+.scene.flip .media{order:2}
+.media{position:relative;padding-bottom:6%}
+.media .phone{--pw:clamp(150px,13.5vw,214px);position:absolute;right:0;bottom:0;transform:translateY(calc((var(--p,.5) - .5) * -40px)) rotate(calc(3deg - (var(--p,.5) - .5) * 4deg))}
+.scene.flip .media .phone{right:auto;left:0;transform:translateY(calc((var(--p,.5) - .5) * -40px)) rotate(calc(-3deg + (var(--p,.5) - .5) * 4deg))}
 .scene .en{font-size:clamp(30px,3.4vw,52px);color:var(--violet-d);display:block}
 .scene h3{margin-top:14px}
 .scene .lead{margin-top:16px}
-@media (max-width:860px){.scene .wrap{grid-template-columns:1fr;gap:28px}}
+@media (max-width:860px){.scene .wrap{grid-template-columns:1fr;gap:28px}
+.scene.flip .media{order:0}
+.scene .media{order:2}
+.media .phone{--pw:min(34vw,150px)}}
 /* ---------- tour (sticky) ---------- */
 /* ---------- hold demo (mirrors DittoHoldButton + DittoFluidFill + DittoSuccessView) ---------- */
 .demo{background:var(--night);color:var(--on-dark);overflow:hidden;overflow:clip}
@@ -272,7 +279,6 @@ p{text-wrap:pretty}
 .qcard summary{min-height:0}}
 /* ---------- close + footer (Dia-style rising gradient columns) ---------- */
 .close{position:relative;text-align:center;color:var(--ink);background:var(--bg);padding-block:clamp(96px,12vw,168px) clamp(40px,5vw,72px)}
-.close .emo{font-size:clamp(22px,2.2vw,28px);letter-spacing:.06em}
 .close h2{margin-top:10px;font-size:clamp(46px,8.4vw,128px);line-height:.98;letter-spacing:-.02em;background:linear-gradient(100deg,#6655D2 0%,#AA4AF4 38%,#B46CE0 62%,#FA97E2 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding:.06em .08em .1em}
 .close p.t{margin:18px auto 0;max-width:30em;color:var(--ink-2);font-weight:500}
 .close .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
@@ -315,6 +321,8 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 /* ---------- hero room ---------- */
 .room{position:relative;z-index:2;flex:1 1 auto;width:100%;min-height:220px;margin-top:clamp(16px,3.4svh,40px);--bw:clamp(300px,34vw,520px);--u:calc(var(--bw) / 390);
   -webkit-mask-image:linear-gradient(180deg,#000 52%,transparent 93%);mask-image:linear-gradient(180deg,#000 52%,transparent 93%)}
+.board{position:absolute;left:50%;top:0;width:var(--bw);margin-left:calc(var(--bw) / -2);padding:calc(var(--u)*12) calc(var(--u)*16) calc(var(--u)*16);border-radius:calc(var(--u)*36);background:rgba(246,242,251,.95);text-align:left;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 50px 90px -40px rgba(90,20,120,.55),0 20px 40px -24px rgba(90,20,120,.35);transform:translate3d(calc(var(--mx,0) * -4px),calc(var(--my,0) * -4px),0);transition:transform .9s var(--ease)}
 .dots{background-image:radial-gradient(circle,rgba(138,63,184,.22) 0 1.4px,transparent 1.9px);background-size:calc(var(--u)*45.75) calc(var(--u)*45.75);background-position:calc(var(--u)*-4) calc(var(--u)*-4)}
 @media (max-width:860px){.room{--bw:min(calc(100vw - 64px),340px);margin-top:clamp(14px,2.4svh,24px)}}
 /* ---------- verbs: mini living scenes ---------- */
@@ -1091,10 +1099,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .wc-tab[aria-selected="true"]{background:var(--ink);color:#FFFFFF}
 .wc-tab[aria-selected="true"] small{color:var(--g3)}
 .wc-tab:focus-visible{outline:3px solid var(--violet-d);outline-offset:1px}
-.wc-p{margin-top:clamp(18px,2vw,24px)}
-.wc-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:17px;font-weight:700;letter-spacing:-.02em}
-.wc-h small{font-size:13.5px;font-weight:500;color:var(--mute)}
-.wcat.is-js .wc-h{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .wc-grid{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1.2vw,16px)}
 .wcat.is-js .wc-grid{margin-top:0}
 .wc-i{display:flex;flex-direction:column;min-width:0}
@@ -1102,8 +1106,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .wc-art img{width:100%;height:100%;object-fit:cover}
 .wc-i b{margin-top:10px;font-size:15px;font-weight:700;letter-spacing:-.02em}
 .wc-i > span:last-child{margin-top:3px;font-size:13px;line-height:1.5;color:var(--mute);word-break:keep-all}
-@media (prefers-reduced-motion:no-preference){.wcat.is-js .wc-p:not([hidden]) .wc-i{animation:wcIn .5s var(--ease) both;animation-delay:calc(var(--k,0) * 45ms)}}
-@keyframes wcIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .wc-note{margin-top:12px;font-size:13px;color:var(--mute)}
 .wc-sub{margin-top:clamp(40px,5vw,64px);font-size:clamp(19px,1.6vw,22px);font-weight:700;letter-spacing:-.03em}
 .wx-part#wx-samples .cr{margin-top:clamp(16px,2vw,24px)}
@@ -1181,6 +1183,79 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .fq-tabbar svg{width:calc(var(--u)*22);height:calc(var(--u)*22);margin-bottom:calc(var(--u)*2);fill:currentColor}
 /* the hidden attribute always wins (no-JS / reduced-motion controls) */
 [hidden]{display:none!important}
+/* =================== v22 (2026-10-13): polish pass =================== */
+/* film grain over the gradient fields */
+.grain{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.22;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px}
+.hero{overflow:clip}
+.hero-in{position:relative;z-index:1}
+/* hero: real widgets drifting around the phone */
+.hero-dev{position:relative;--mx:0;--my:0}
+.hf{position:absolute;z-index:3;display:block;border-radius:16px;pointer-events:none;box-shadow:0 22px 40px -20px rgba(70,20,110,.55),0 0 0 1px rgba(255,255,255,.5);transition:translate .9s cubic-bezier(.2,.7,.2,1)}
+.hf img{display:block;width:100%;height:auto;border-radius:inherit}
+.hf1{width:150px;left:-112px;top:21%;rotate:-7deg;translate:calc(var(--mx) * -26px) calc(var(--my) * -18px)}
+.hf2{width:80px;right:-58px;top:4%;rotate:8deg;border-radius:14px;translate:calc(var(--mx) * 30px) calc(var(--my) * 22px)}
+.hf3{width:120px;right:-78px;bottom:12%;rotate:5deg;translate:calc(var(--mx) * 22px) calc(var(--my) * -24px)}
+@media (prefers-reduced-motion:no-preference){.hf img{animation:hfBob 6s ease-in-out infinite}
+.hf2 img{animation-duration:7.2s;animation-delay:-2s}
+.hf3 img{animation-duration:6.6s;animation-delay:-4s}}
+@keyframes hfBob{50%{transform:translateY(-10px)}}
+@media (max-width:1100px){.hf1{left:-56px;width:124px}
+.hf2{right:-22px;top:2%;width:68px}
+.hf3{right:-30px;width:104px}}
+@media (max-width:860px){.hf{display:none}}
+/* reveals: a little focus pull on the way in */
+@keyframes rv{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* 5.1 catalog: one board, group spotlight */
+.wc-title small{font:italic 900 13px/1 var(--round);color:var(--mute)}
+.wcat .wc-grid,.wcat.is-js .wc-grid{margin-top:clamp(18px,2vw,26px);grid-template-columns:repeat(7,minmax(0,1fr))}
+.wc-g{display:block;margin-top:10px;font:italic 800 11px/1 var(--round);letter-spacing:.02em;color:var(--violet-d)}
+.wc-i b{margin-top:4px}
+.wc-art{transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.wc-i:hover .wc-art{transform:translateY(-4px) rotate(-1.5deg);box-shadow:0 22px 30px -18px rgba(60,20,90,.55)}
+.wc-i{transition:opacity .45s ease,filter .45s ease}
+.wc-tab[aria-pressed="true"]{background:var(--ink);color:#FFFFFF}
+.wc-tab[aria-pressed="true"] small{color:var(--g3)}
+.wc-i.is-dim{opacity:.3;filter:grayscale(.85)}
+@media (prefers-reduced-motion:no-preference){.wcat.is-js[data-g]:not([data-g="all"]) .wc-i:not(.is-dim) .wc-art{animation:wcPop .5s var(--ease) both;animation-delay:calc(var(--n,0) * 50ms)}}
+@keyframes wcPop{from{transform:translateY(8px) scale(.94)}to{transform:none}}
+@media (max-width:1100px){.wcat .wc-grid,.wcat.is-js .wc-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (max-width:760px){.wcat .wc-grid,.wcat.is-js .wc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.wc-i > span:last-child{display:none}}
+@media (max-width:520px){.wc-tab{flex:0 0 auto}}
+/* 5.3 rooms: the quote carries the left column */
+@media (min-width:761px){.rm-pf-q{font-size:clamp(21px,2vw,28px);line-height:1.38;letter-spacing:-.035em}}
+/* ribbon: the lines friends actually left, on two crossing bands */
+.rib{position:relative;overflow:clip;padding:clamp(56px,7vw,96px) 0 clamp(24px,3vw,40px);background:var(--bg)}
+.rb-band{position:relative;display:flex;overflow:hidden;padding:14px 0;white-space:nowrap}
+.rb-1{z-index:2;rotate:-2.4deg;margin-inline:-4vw;background:linear-gradient(100deg,#6655D2,#AA4AF4 45%,#E57FD4);color:#FFFFFF;box-shadow:0 24px 44px -26px rgba(90,30,140,.7)}
+.rb-2{z-index:1;rotate:1.6deg;margin:-6px -4vw 0;background:#F1EBFA;color:var(--ink-2)}
+.rb-t{display:flex;align-items:center;gap:22px;padding-right:22px;flex:0 0 auto}
+.rb-i{display:inline-flex;align-items:center;gap:10px;font:700 clamp(17px,1.6vw,22px)/1 var(--kr);letter-spacing:-.03em}
+.rb-i img{width:34px;height:34px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.rb-i b{font:italic 900 .78em/1 var(--round);letter-spacing:.01em;opacity:.78}
+.rb-s{width:9px;height:9px;flex:0 0 auto;border-radius:50%;background:currentColor;opacity:.45}
+.rb-2 .rb-i{font-size:clamp(15px,1.3vw,18px)}
+.rb-2 .rb-i img{width:28px;height:28px;box-shadow:none}
+@media (prefers-reduced-motion:no-preference){.rb-1 .rb-t{animation:rbL 64s linear infinite}
+.rb-2 .rb-t{animation:rbR 78s linear infinite}
+.rib:hover .rb-t{animation-play-state:paused}}
+@keyframes rbL{to{transform:translateX(-50%)}}
+@keyframes rbR{from{transform:translateX(-50%)}to{transform:none}}
+.rb-band > .rb-t{min-width:max-content}
+/* close: ten friends instead of emoji, a soft glow behind the line */
+.close{overflow:clip;padding-top:clamp(64px,8vw,120px)}
+.cl-glow{position:absolute;left:50%;top:46%;width:min(980px,120vw);aspect-ratio:2;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(170,74,244,.20),rgba(250,151,226,.12) 55%,transparent);filter:blur(30px);pointer-events:none}
+.close .wrap{position:relative}
+.cl-avs{position:relative;display:inline-flex;align-items:center;padding-right:10px}
+.cl-avs img{width:clamp(38px,3.4vw,48px);height:clamp(38px,3.4vw,48px);margin-left:-12px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--bg),0 8px 16px -10px rgba(60,20,90,.6)}
+.cl-avs img:first-child{margin-left:0}
+.cl-badge{position:absolute;right:-18px;top:-14px;width:34px;height:34px;rotate:12deg;filter:drop-shadow(0 6px 10px rgba(90,30,140,.4))}
+@media (prefers-reduced-motion:no-preference){.cl-avs img{animation:clIn .7s var(--ease) both;animation-timeline:view();animation-range:entry 10% entry 60%}}
+@keyframes clIn{from{opacity:0;transform:translateX(calc(var(--i) * -6px)) scale(.7)}to{opacity:1;transform:none}}
+/* footer: softer bars (reads as a glow, not stairs) */
+.foot-glow .dg-row{filter:blur(calc((50cqw + var(--bleed)) / 22))}
+.foot-glow .grain{z-index:1;opacity:.3}
+.foot-end{z-index:2}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -1211,7 +1286,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
   </svg>
 
 <section class="hero" id="top" aria-labelledby="hero-h">
-  <span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span>
+  <span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span><span class="grain" aria-hidden="true"></span>
   <div class="hero-in">
     <div class="hero-ui">
       <p class="hero-eyebrow" aria-hidden="true"><span id="type">Ditto!</span><span class="cur">_</span></p>
@@ -1221,6 +1296,9 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     </div>
 
     <figure class="hero-dev">
+      <span class="hf hf1" aria-hidden="true"><img src="assets/ws-sticker.webp" alt="" width="543" height="402"></span>
+      <span class="hf hf2" aria-hidden="true"><img src="assets/ws-dday.webp" alt="" width="258" height="258"></span>
+      <span class="hf hf3" aria-hidden="true"><img src="assets/ws-music.webp" alt="" width="543" height="543"></span>
       <div class="phone shadowed hero-phone">
         <div class="scr">
           <img src="assets/hero-jiu.webp" alt="지우(@jiuallday)의 플래터 화면. ‘연습보다 수다가 길어’ 사진, 소라·나리와 찍은 ‘우리 너무 시끄러웠나’ 사진, 🎀 오늘 텐션 과다 상태, 연습실 GIF, ‘마지막 한 번만 5회째’ 사진, 소라에게서 디토한 💬 위젯, D-1 다시 모이는 날, 🎤 타일, ‘오늘 꽃 담당 나’ 사진, Perfect Night 음악 위젯이 붙어 있어요" width="804" height="1748" fetchpriority="high">
@@ -1585,14 +1663,14 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 
     <div class="wx-part" id="wx-samples">
       <div class="wcat" id="wcat">
-        <div class="wc-top"><p class="wc-title"><span class="wc-plus" aria-hidden="true">+</span>위젯 추가하기</p><div class="wc-tabs" role="tablist" aria-label="위젯 갈래"><button type="button" role="tab" class="wc-tab" id="wct-basic" aria-selected="true" aria-controls="wcp-basic" tabindex="0" hidden>기본<small>6</small></button><button type="button" role="tab" class="wc-tab" id="wct-record" aria-selected="false" aria-controls="wcp-record" tabindex="-1" hidden>기록<small>3</small></button><button type="button" role="tab" class="wc-tab" id="wct-together" aria-selected="false" aria-controls="wcp-together" tabindex="-1" hidden>함께<small>3</small></button><button type="button" role="tab" class="wc-tab" id="wct-media" aria-selected="false" aria-controls="wcp-media" tabindex="-1" hidden>미디어<small>2</small></button></div></div>
-        <section class="wc-p" id="wcp-basic" role="tabpanel" aria-labelledby="wct-basic"><h4 class="wc-h">기본<small>나를 보여주는 기본 위젯</small></h4><ul class="wc-grid"><li class="wc-i"><span class="wc-art"><img src="assets/wa-social.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>소셜</b><span>여러 SNS 계정을 프로필에 연결해요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-status.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>상태</b><span>이모지나 한 줄로 지금 기분·상태를 나눠요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-text.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>텍스트</b><span>한 줄 메모를 가볍게 남겨요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-image.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>이미지</b><span>사진으로 추억을 나눠요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-music.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>음악</b><span>요즘 자주 듣는 노래를 담아요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-video.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>영상</b><span>짧은 영상으로 일상을 전해요</span></li></ul></section><section class="wc-p" id="wcp-record" role="tabpanel" aria-labelledby="wct-record"><h4 class="wc-h">기록<small>매일이 쌓이는 작은 기록</small></h4><ul class="wc-grid"><li class="wc-i"><span class="wc-art"><img src="assets/wa-todo.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>To-do</b><span>카테고리별 할 일과 이번 주 기록</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-dday.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>D-Day</b><span>기다리는 날까지 함께 세요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-post.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>포스트</b><span>블로그 글을 쓰고 플래터에 카드로 보여줘요</span></li></ul></section><section class="wc-p" id="wcp-together" role="tabpanel" aria-labelledby="wct-together"><h4 class="wc-h">함께<small>친구와 주고받으며 채워지는 위젯</small></h4><ul class="wc-grid"><li class="wc-i"><span class="wc-art"><img src="assets/wa-guestbook.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>방명록</b><span>친구가 남긴 안부에 답글을 달아요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-sticker.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>스티커 보드</b><span>친구들이 스티커를 붙여줘요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-together.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>Together</b><span>친구를 태그하고 같이 찍은 네 컷을 올려요</span></li></ul></section><section class="wc-p" id="wcp-media" role="tabpanel" aria-labelledby="wct-media"><h4 class="wc-h">미디어<small>좋아하는 것을 모아 보여줘요</small></h4><ul class="wc-grid"><li class="wc-i"><span class="wc-art"><img src="assets/wa-gif.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>GIF</b><span>움직이는 반짝임을 더해요</span></li><li class="wc-i"><span class="wc-art"><img src="assets/wa-playlist.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><b>플레이리스트</b><span>곡을 모아 들려줘요</span></li></ul></section>
+        <div class="wc-top"><p class="wc-title"><span class="wc-plus" aria-hidden="true">+</span>위젯 추가하기 <small>14</small></p><div class="wc-tabs" role="group" aria-label="갈래별로 비춰 보기" hidden><button type="button" class="wc-tab" data-g="all" aria-pressed="true">전체<small>14</small></button><button type="button" class="wc-tab" data-g="basic" aria-pressed="false">기본<small>6</small></button><button type="button" class="wc-tab" data-g="record" aria-pressed="false">기록<small>3</small></button><button type="button" class="wc-tab" data-g="together" aria-pressed="false">함께<small>3</small></button><button type="button" class="wc-tab" data-g="media" aria-pressed="false">미디어<small>2</small></button></div></div>
+        <ul class="wc-grid" id="wcGrid"><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-social.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>소셜</b><span>여러 SNS 계정을 프로필에 연결해요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-status.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>상태</b><span>이모지나 한 줄로 지금 기분·상태를 나눠요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-text.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>텍스트</b><span>한 줄 메모를 가볍게 남겨요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-image.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>이미지</b><span>사진으로 추억을 나눠요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-music.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>음악</b><span>요즘 자주 듣는 노래를 담아요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-video.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>영상</b><span>짧은 영상으로 일상을 전해요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-todo.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>To-do</b><span>카테고리별 할 일과 이번 주 기록</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-dday.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>D-Day</b><span>기다리는 날까지 함께 세요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-post.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>포스트</b><span>블로그 글을 쓰고 플래터에 카드로 보여줘요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/ws-guestbook.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>방명록</b><span>친구가 남긴 안부에 답글을 달아요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/ws-sticker.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>스티커 보드</b><span>친구들이 스티커를 붙여줘요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-together.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>Together</b><span>친구를 태그하고 같이 찍은 네 컷을 올려요</span></li><li class="wc-i" data-g="media"><span class="wc-art"><img src="assets/wa-gif.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">미디어</em><b>GIF</b><span>움직이는 반짝임을 더해요</span></li><li class="wc-i" data-g="media"><span class="wc-art"><img src="assets/wa-playlist.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">미디어</em><b>플레이리스트</b><span>곡을 모아 들려줘요</span></li></ul>
       </div>
-      <p class="wc-note">지금 앱의 위젯 추가 화면과 같은 구성이에요. ‘곧 열려요’ 위젯은 뺐어요.</p>
+      <p class="wc-note">지금 앱의 위젯 추가 화면과 같은 구성이에요. 갈래를 누르면 그 위젯들만 비춰요. ‘곧 열려요’ 위젯은 뺐어요.</p>
       <h3 class="wc-sub">친구들 플래터에 실제로 붙은 모습</h3>
       <div class="cr" data-cr>
         <ol class="cr-track" tabindex="0" aria-label="친구들 플래터에 붙은 위젯">
-          <li class="cr-card ws" style="--bg:#E6E2F6"><div class="ws-m"><img src="assets/ws-status.webp" alt="새싹 이모지와 ‘조금 익숙해지는 중’ 상태 위젯" width="543" height="258" loading="lazy" style="--w:181"></div><p><b>상태.</b> 이모지나 한 줄로 지금 기분·상태를 나눠요. <small>하은의 방</small></p></li>
+          <li class="cr-card ws" style="--bg:#F4E1EC"><div class="ws-m"><img src="assets/hw-status.webp" alt="리본 이모지와 ‘오늘 텐션 과다’가 적힌 상태 위젯" width="543" height="258" loading="lazy" style="--w:181"></div><p><b>상태.</b> 이모지나 한 줄로 지금 기분·상태를 나눠요. <small>지우의 방</small></p></li>
           <li class="cr-card ws" style="--bg:#EFE9DC"><div class="ws-m"><img src="assets/ws-diary.webp" alt="‘돌아오는 기차에서는 말을 조금 덜 했다. 창밖이 좋아서.’ 텍스트 위젯" width="402" height="543" loading="lazy" style="--w:134"></div><p><b>텍스트.</b> 한 줄 메모를 가볍게 남겨요. <small>재민의 방</small></p></li>
           <li class="cr-card ws" style="--bg:#E4ECEE"><div class="ws-m"><img src="assets/ws-image.webp" alt="‘창가 쪽은 내 자리’ 사진 위젯" width="543" height="543" loading="lazy" style="--w:181"></div><p><b>이미지.</b> 사진으로 추억을 나눠요. <small>하은의 방</small></p></li>
           <li class="cr-card ws" style="--bg:#F4ECD7"><div class="ws-m"><img src="assets/ws-music.webp" alt="잔나비 ‘주저하는 연인들을 위해’ 음악 위젯" width="543" height="543" loading="lazy" style="--w:181"></div><p><b>음악.</b> 요즘 자주 듣는 노래를 담아요. <small>재민의 방</small></p></li>
@@ -1869,9 +1947,15 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
   </div>
 </section>
 
+<div class="rib" aria-hidden="true">
+  <div class="rb-band rb-1"><div class="rb-t"><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎀 오늘 텐션 과다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>별일 없어도 모여</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>창가 쪽은 내 자리</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>천천히 만들어도 돼</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>금요일, 한 자리 더</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>빛 좋은 날을 모아</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>돌아오는 기차에서는 말을 조금 덜 했다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>D-1 다시 모이는 날</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>이번 주는 올리브</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>일단 한 장부터</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎀 오늘 텐션 과다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>별일 없어도 모여</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>창가 쪽은 내 자리</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>천천히 만들어도 돼</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>금요일, 한 자리 더</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>빛 좋은 날을 모아</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>돌아오는 기차에서는 말을 조금 덜 했다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>D-1 다시 모이는 날</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>이번 주는 올리브</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>일단 한 장부터</span><i class="rb-s"></i></div></div>
+  <div class="rb-band rb-2"><div class="rb-t"><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>돌아오는 기차에서는 말을 조금 덜 했다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>빛 좋은 날을 모아</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>금요일, 한 자리 더</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>천천히 만들어도 돼</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>창가 쪽은 내 자리</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>별일 없어도 모여</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎀 오늘 텐션 과다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>일단 한 장부터</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>이번 주는 올리브</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>D-1 다시 모이는 날</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>돌아오는 기차에서는 말을 조금 덜 했다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>빛 좋은 날을 모아</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>금요일, 한 자리 더</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>천천히 만들어도 돼</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>창가 쪽은 내 자리</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>별일 없어도 모여</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎀 오늘 텐션 과다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>일단 한 장부터</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>이번 주는 올리브</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>D-1 다시 모이는 날</span><i class="rb-s"></i></div></div>
+</div>
+
 <section class="close" id="close" aria-labelledby="close-h">
+  <span class="cl-glow" aria-hidden="true"></span>
   <div class="wrap">
-    <p class="emo" role="img" aria-label="불타는 하트, 빵, 지구, 하얀 하트, 별">❤️‍🔥🍞🌎🤍⭐️</p>
+    <div class="cl-avs" role="img" aria-label="지우, 소라, 하은, 나리, 재민, 도현, 서윤, 리안, 예서, 준. 열 명의 친구"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy" style="--i:0"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy" style="--i:1"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy" style="--i:2"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy" style="--i:3"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy" style="--i:4"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy" style="--i:5"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy" style="--i:6"><img src="assets/rooms/rav-rian.webp" alt="" width="144" height="144" loading="lazy" style="--i:7"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy" style="--i:8"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy" style="--i:9"><svg class="cl-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></div>
     <h2 class="close-h" id="close-h">통하면, <span class="ch-d">디토.</span></h2>
     <p class="t">친한 친구들과 만드는 우리만의 공간. 마음에 드는 조각은 꾹 눌러, 나도.</p>
     <div class="row"><a class="btn" href="/download/">출시알림 받기 <span class="ar" aria-hidden="true">→</span></a></div>
@@ -1887,7 +1971,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <ul class="foot-ext"><li><a href="/splup/">Guide</a></li><li><a href="/">ditto.place</a></li></ul>
     </nav>
   </div></div>
-  <div class="foot-glow">
+  <div class="foot-glow"><span class="grain" aria-hidden="true"></span>
     <div class="dg" id="dg" aria-hidden="true"><div class="dg-row"><i style="--s:1.000"></i><i style="--s:1.302"></i><i style="--s:1.605"></i><i style="--s:1.907"></i><i style="--s:2.209"></i><i style="--s:2.512"></i><i style="--s:2.209"></i><i style="--s:1.907"></i><i style="--s:1.605"></i><i style="--s:1.302"></i><i style="--s:1.000"></i></div></div>
     <div class="wrap foot-end">
       <img class="foot-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134" loading="lazy">
@@ -2174,15 +2258,19 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     set(false);
   });
 
-  /* ---- 5.1 widget catalog: tabs like the app's section chips ---- */
+  /* ---- 5.1 widget catalog: all 14 stay on the board; a chip spotlights one group ---- */
   (function(){
     const cat = document.getElementById('wcat'); if (!cat) return;
-    const tabs = [...cat.querySelectorAll('.wc-tab')], panes = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
-    cat.classList.add('is-js'); tabs.forEach(t => t.hidden = false);
-    panes.forEach(p => [...p.querySelectorAll('.wc-i')].forEach((li, k) => li.style.setProperty('--k', k)));
-    function sel(i, focus){ tabs.forEach((t, k) => { const on = k === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; panes[k].hidden = !on; }); if (focus) tabs[i].focus(); }
-    tabs.forEach((t, k) => { t.addEventListener('click', () => sel(k)); t.addEventListener('keydown', e => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (d){ e.preventDefault(); sel((k + d + tabs.length) % tabs.length, true); } else if (e.key === 'Home' || e.key === 'End'){ e.preventDefault(); sel(e.key === 'Home' ? 0 : tabs.length - 1, true); } }); });
-    sel(0);
+    const bar = cat.querySelector('.wc-tabs'), chips = [...bar.querySelectorAll('.wc-tab')], items = [...cat.querySelectorAll('.wc-i')];
+    cat.classList.add('is-js'); bar.hidden = false;
+    items.forEach((li, k) => li.style.setProperty('--k', k));
+    function sel(g){
+      chips.forEach(c => c.setAttribute('aria-pressed', c.dataset.g === g ? 'true' : 'false'));
+      cat.dataset.g = g; let n = 0;
+      items.forEach(li => { const on = g === 'all' || li.dataset.g === g; li.classList.toggle('is-dim', !on); if (on) li.style.setProperty('--n', n++); });
+    }
+    chips.forEach(c => c.addEventListener('click', () => sel(c.dataset.g)));
+    sel('all');
   })();
 
   /* ---- 07 Q&A: equal cards; the answer keeps its room while closed so nothing jumps ---- */
@@ -2331,6 +2419,13 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) { on = false; } else if (glow.getBoundingClientRect().top < innerHeight && glow.getBoundingClientRect().bottom > 0) { on = true; if (!raf) { last = 0; raf = requestAnimationFrame(frame); } }
     });
+  })();
+  /* ---- hero: the floating widgets lean toward the pointer ---- */
+  (function(){
+    const hero = document.getElementById('top'), dev = hero && hero.querySelector('.hero-dev'); if (!dev || reduce || !matchMedia('(pointer: fine)').matches) return;
+    let raf = 0, x = 0, y = 0;
+    hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); x = (e.clientX - r.left) / r.width - .5; y = (e.clientY - r.top) / r.height - .5; if (!raf) raf = requestAnimationFrame(() => { raf = 0; dev.style.setProperty('--mx', x.toFixed(3)); dev.style.setProperty('--my', y.toFixed(3)); }); }, { passive: true });
+    hero.addEventListener('pointerleave', () => { dev.style.setProperty('--mx', 0); dev.style.setProperty('--my', 0); });
   })();
 })();
 </script>
