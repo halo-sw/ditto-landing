@@ -860,10 +860,9 @@ def render(widgets, media):
         available = w.get("allow") is True and w["type"] != "ditto"
         if available and " data-act" not in attrs:
             attrs = ' data-dl data-msg="ditto"'
-        # 가능 = 뒤 후광 + 우하단 DittoBadge 24 · 불가 = 1px 테두리 (음악은 자체 테두리)
+        # 가능 = 뒤 후광만 · 불가 = 1px 테두리 (음악은 자체 테두리)
+        # DittoBadge(디토 마크)는 디토해 온 위젯의 표시라 가능 상태에는 붙이지 않는다 (Figma 1247:2764 'Ditto widget / shared source and badge')
         state = " glow" if available else (" hl" if w["type"] != "music" else "")
-        if available:
-            inner += BADGE.format(f"right:{u(8)};bottom:{u(8)};width:{u(24)};height:{u(24)}").replace('class="dt-badge"', 'class="dt-badge av"')
         name = f"{kind}{', ' + str(label) if label else ''}"
         interactive = bool(attrs)
         role = f' role="button" tabindex="0" aria-label="{esc(name)}"' if interactive else f' role="img" aria-label="{esc(name)}"'
