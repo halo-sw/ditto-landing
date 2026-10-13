@@ -1301,6 +1301,13 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .cm-tw.t2{animation-delay:.8s}
 .cm-tw.t3{animation-delay:1.6s}}
 @keyframes cmTw{0%,100%{opacity:0;transform:scale(.3) rotate(0)}45%{opacity:1;transform:scale(1) rotate(45deg)}60%{opacity:0;transform:scale(.4) rotate(90deg)}}
+/* liquid-chrome canvas (WebGL) replaces the CSS sticker when available; thickness = stacked shadows in the palette's deep tone */
+.cm-gl{position:absolute;left:-12%;top:-12%;width:124%;height:124%;display:none;pointer-events:none;
+  filter:drop-shadow(0 .012em 0 color-mix(in srgb,var(--mcd) 70%,#000)) drop-shadow(0 .012em 0 color-mix(in srgb,var(--mcd) 60%,#000)) drop-shadow(0 .012em 0 color-mix(in srgb,var(--mcd) 50%,#000)) drop-shadow(0 .07em .08em color-mix(in srgb,var(--mcd) 40%,transparent))}
+.ch-mark.gl .cm-gl{display:block}
+.ch-mark.gl .cm-spin{display:none}
+@media (prefers-reduced-motion:no-preference){.ch-mark.gl .cm-gl{animation:cmGlWob 5s ease-in-out infinite}}
+@keyframes cmGlWob{0%,100%{transform:perspective(6em) rotateY(-14deg) rotateZ(-4deg) translateY(0)}50%{transform:perspective(6em) rotateY(14deg) rotateZ(3deg) translateY(-.03em)}}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -1536,21 +1543,21 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <div class="people">
       <article class="pc" id="pc-haeun" aria-labelledby="pc-haeun-n">
         <div class="pc-in">
-          <figure class="pc-face pc-front person"><img src="assets/tp-haeun.webp" alt="도서관 창가 자리에서 이어폰을 끼고 노트를 넘기는 하은" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-haeun-n">하은</h4><div class="role">19 · 대학 새내기 · 처음 들어온 유저</div><q>낮이랑 밤 사진 한 장씩.</q></figcaption></figure>
+          <figure class="pc-face pc-front person"><img src="assets/tp-haeun.webp" alt="책이 가득한 카페에서 턱을 괴고 책을 읽는 하은" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-haeun-n">하은</h4><div class="role">19 · 대학 새내기 · 처음 들어온 유저</div><q>낮이랑 밤 사진 한 장씩.</q></figcaption></figure>
           <div class="pc-face pc-back" id="pc-haeun-b"><p class="pc-bk"><span class="disp">하은</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“대학 새내기예요. 조심스러운데, 구경하는 건 좋아해요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“모르는 사람이 많이 보는 곳보다, 몇 명이 찾아오는 방이 좋아서요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“낮이랑 밤 사진 한 장씩. 책도 음악도 조금씩 같이 둬요.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어요?</dt><dd>“나리가 한 말, ‘삐뚤어도 손에 맞는 내 컵’. 첫 사진을 같이 올려 줬거든요.”</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-haeun-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">하은 인터뷰 뒤집어 보기</span></button>
       </article>
       <article class="pc" id="pc-jiu" aria-labelledby="pc-jiu-n">
         <div class="pc-in">
-          <figure class="pc-face pc-front person"><img src="assets/tp-jiu.webp" alt="햇살 드는 골목에서 꽃다발을 안고 돌아보며 웃는 지우" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-jiu-n">지우</h4><div class="role">22 · 영상 전공·댄스 동아리 · 진짜 인싸 유저</div><q>오늘 사진은 내가 다 올림.</q></figcaption></figure>
+          <figure class="pc-face pc-front person"><img src="assets/tp-jiu.webp" alt="밤거리 보도에 쪼그려 앉아 헤드폰을 걸고 웃는 지우" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-jiu-n">지우</h4><div class="role">22 · 영상 전공·댄스 동아리 · 진짜 인싸 유저</div><q>오늘 사진은 내가 다 올림.</q></figcaption></figure>
           <div class="pc-face pc-back" id="pc-jiu-b"><p class="pc-bk"><span class="disp">지우</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이야?</dt><dd>“영상 전공에 댄스 동아리. 연습실엔 늘 마지막까지 있어.”</dd></div><div><dt>Q. 왜 Ditto를 써?</dt><dd>“오늘 사진은 내가 다 올림. 다들 기억하는 장면 덧붙여 줘!”</dd></div><div><dt>Q. 방은 어떻게 써?</dt><dd>“연습실에서 생일까지 계속 재생. 제일 많이 붙은 말은 ‘한 번 더’.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어?</dt><dd>“소라가 한 ‘각자 좋아하는 간식 하나’. 목요일 20시에 또 모여.”</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-jiu-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">지우 인터뷰 뒤집어 보기</span></button>
       </article>
       <article class="pc" id="pc-seoyun" aria-labelledby="pc-seoyun-n">
         <div class="pc-in">
-          <figure class="pc-face pc-front person"><img src="assets/tp-seoyun.webp" alt="맑은 날 강가 난간에서 카메라로 사진을 찍는 서윤" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-seoyun-n">서윤</h4><div class="role">22 · 미디어학 전공 · 세계관이 확실한 유저</div><q>프로필을 보면 이번 주 내가 보였으면.</q></figcaption></figure>
+          <figure class="pc-face pc-front person"><img src="assets/tp-seoyun.webp" alt="노란 은행잎이 깔린 나무 아래 앉아 있는 서윤" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-seoyun-n">서윤</h4><div class="role">22 · 미디어학 전공 · 세계관이 확실한 유저</div><q>프로필을 보면 이번 주 내가 보였으면.</q></figcaption></figure>
           <div class="pc-face pc-back" id="pc-seoyun-b"><p class="pc-bk"><span class="disp">서윤</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“미디어학 전공이에요. 지금 끌리는 색이랑 소재를 오래 봐요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“프로필을 보면 이번 주의 내가 보였으면 해서요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“초록을 모으는 순서예요. 빛, 기록, 그리고 다음 전시.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어요?</dt><dd>“예서의 ‘오늘 빛은 조금 흐린 쪽’. 같이 빛 찾으러 나가는 친구라서요.”</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-seoyun-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">서윤 인터뷰 뒤집어 보기</span></button>
@@ -1982,7 +1989,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
   <span class="cl-glow" aria-hidden="true"></span>
   <div class="wrap">
     <p class="emo" id="emo" aria-hidden="true"><span>🎧</span><span>🍓</span><span>📸</span><span>🌙</span><span>🛼</span></p>
-    <h2 class="close-h" id="close-h">통하면, <span class="ch-mark" role="img" aria-label="Ditto!"><span class="cm-shadow" aria-hidden="true"></span><span class="cm-tw t1" aria-hidden="true"></span><span class="cm-tw t2" aria-hidden="true"></span><span class="cm-tw t3" aria-hidden="true"></span><span class="cm-spin"><span class="cm-3d"><span class="cm-sl" style="--z:1"></span><span class="cm-sl" style="--z:2"></span><span class="cm-sl" style="--z:3"></span><span class="cm-sl" style="--z:4"></span><span class="cm-sl" style="--z:5"></span><span class="cm-sl" style="--z:6"></span><span class="cm-sl" style="--z:7"></span><span class="cm-sl" style="--z:8"></span><span class="cm-sl" style="--z:9"></span><span class="cm-sl" style="--z:10"></span><span class="cm-sl" style="--z:11"></span><span class="cm-sl" style="--z:12"></span><span class="cm-face"></span><span class="cm-holo"></span><span class="cm-gloss"></span><span class="cm-hi"></span></span></span></span></h2>
+    <h2 class="close-h" id="close-h">통하면, <span class="ch-mark" role="img" aria-label="Ditto!"><span class="cm-shadow" aria-hidden="true"></span><canvas class="cm-gl" aria-hidden="true"></canvas><span class="cm-tw t1" aria-hidden="true"></span><span class="cm-tw t2" aria-hidden="true"></span><span class="cm-tw t3" aria-hidden="true"></span><span class="cm-spin"><span class="cm-3d"><span class="cm-sl" style="--z:1"></span><span class="cm-sl" style="--z:2"></span><span class="cm-sl" style="--z:3"></span><span class="cm-sl" style="--z:4"></span><span class="cm-sl" style="--z:5"></span><span class="cm-sl" style="--z:6"></span><span class="cm-sl" style="--z:7"></span><span class="cm-sl" style="--z:8"></span><span class="cm-sl" style="--z:9"></span><span class="cm-sl" style="--z:10"></span><span class="cm-sl" style="--z:11"></span><span class="cm-sl" style="--z:12"></span><span class="cm-face"></span><span class="cm-holo"></span><span class="cm-gloss"></span><span class="cm-hi"></span></span></span></span></h2>
     <p class="t">친한 친구들과 만드는 우리만의 공간. 마음에 드는 조각은 꾹 눌러, 나도.</p>
     <div class="row"><a class="btn" href="/download/">출시알림 받기 <span class="ar" aria-hidden="true">→</span></a></div>
   </div>
@@ -2471,6 +2478,81 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       s.classList.remove('is-flip'); void s.offsetWidth; s.classList.add('is-flip');
       setTimeout(() => { s.textContent = e; }, 180);
     }, 900);
+  })();
+  /* ---- close: the D! mark in liquid chrome (WebGL) — a puffy bevel from the blurred mark, a studio environment
+     with iridescent bands in the current jelly palette, a moving key light. Falls back to the CSS sticker. ---- */
+  (function(){
+    const box = document.querySelector('.ch-mark'), cv = box && box.querySelector('.cm-gl'), sym = document.getElementById('mk');
+    if (!cv || !sym) return;
+    const gl = cv.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: true });
+    if (!gl) return;
+    const PAD = .12, TW = 640, TH = Math.round(TW * (204 / 214 + PAD * 2) / (1 + PAD * 2));
+    const VS = 'attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
+    const FS = `precision highp float;varying vec2 v;uniform sampler2D M;uniform vec2 px;uniform float t;uniform vec3 c1,c2,c3;uniform vec2 tilt;
+float H(vec2 q){return texture2D(M,q).g;}
+vec3 env(vec3 r){
+  float y=r.y, x=r.x;
+  vec3 sky=mix(mix(c1,vec3(1.),.35),vec3(1.),smoothstep(.15,.9,y));
+  vec3 gnd=mix(c3*.22,mix(c2,c3,.5)*.9,smoothstep(-.9,-.05,y));
+  vec3 e=mix(gnd,sky,smoothstep(-.06,.06,y));
+  float b=.5+.5*sin(x*4.2+y*6.+t*.9); e=mix(e,mix(c1,c2,b)*1.15,.28*(1.-abs(y)));
+  e+=vec3(1.)*smoothstep(.985,1.,.5+.5*sin(x*10.+t*1.4))*.9*smoothstep(-.2,.6,y);
+  e+=vec3(1.)*smoothstep(.97,1.,.5+.5*sin(y*14.-t*.8))*.35;
+  return e;}
+void main(){
+  vec4 m=texture2D(M,v); float a=m.r; if(a<.004){gl_FragColor=vec4(0.);return;}
+  float h=H(v);
+  float dx=H(v+vec2(px.x,0.))-H(v-vec2(px.x,0.)), dy=H(v+vec2(0.,px.y))-H(v-vec2(0.,px.y));
+  vec3 n=normalize(vec3(-dx*5.5,-dy*5.5,1.)+vec3((v-.5)*vec2(.35,.3),0.));
+  float cx=cos(tilt.x),sx=sin(tilt.x),cy=cos(tilt.y),sy=sin(tilt.y);
+  n.xz=mat2(cx,-sx,sx,cx)*n.xz; n.yz=mat2(cy,-sy,sy,cy)*n.yz;
+  vec3 r=reflect(vec3(0.,0.,-1.),n);
+  vec3 col=env(r);
+  vec3 L=normalize(vec3(cos(t*.6)*.7,.65+.2*sin(t*.45),.75));
+  col+=pow(max(dot(reflect(-L,n),vec3(0.,0.,1.)),0.),70.)*1.4;
+  col+=pow(1.-max(n.z,0.),3.)*mix(c1,vec3(1.),.4)*.7;
+  col*=.82+.18*smoothstep(0.,1.,h);
+  gl_FragColor=vec4(col*a,a);}`;
+    function sh(type, src){ const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; }
+    const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS); if (!vs || !fs) return;
+    const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr); if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+    gl.useProgram(pr);
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const U = n => gl.getUniformLocation(pr, n);
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214 204">' + sym.innerHTML.replace(/currentColor/g, '#000') + '</svg>';
+    const img = new Image();
+    img.onload = () => {
+      const W = TW, Hh = TH, mw = W / (1 + PAD * 2), mh = mw * 204 / 214, ox = (W - mw) / 2, oy = (Hh - mh) / 2;
+      const a = document.createElement('canvas'); a.width = W; a.height = Hh; const ca = a.getContext('2d'); ca.drawImage(img, ox, oy, mw, mh);
+      const bl = document.createElement('canvas'); bl.width = W; bl.height = Hh; const cb = bl.getContext('2d'); cb.filter = 'blur(' + (W * .028) + 'px)'; cb.drawImage(img, ox, oy, mw, mh);
+      const A = ca.getImageData(0, 0, W, Hh).data, Bd = cb.getImageData(0, 0, W, Hh).data, out = new Uint8Array(W * Hh * 4);
+      for (let i = 0; i < W * Hh; i++){ out[i*4] = A[i*4+3]; out[i*4+1] = Bd[i*4+3]; out[i*4+3] = 255; }
+      const tx = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tx); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, W, Hh, 0, gl.RGBA, gl.UNSIGNED_BYTE, out);
+      [gl.TEXTURE_MIN_FILTER, gl.TEXTURE_MAG_FILTER].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.LINEAR));
+      [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.CLAMP_TO_EDGE));
+      gl.uniform2f(U('px'), 2 / W, 2 / Hh);
+      box.classList.add('gl'); start();
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    const col = s => { const m = s.match(/[\d.]+/g); if (!m) return [.67,.29,.96]; if (s.trim()[0] === '#') return [0,0,0]; return [m[0]/255, m[1]/255, m[2]/255]; };
+    const hex = s => { s = s.trim(); if (s[0] !== '#') return col(s); const n = parseInt(s.slice(1), 16); return [(n>>16&255)/255, (n>>8&255)/255, (n&255)/255]; };
+    let raf = 0, vis = false, t0 = performance.now();
+    function size(){ const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); const w = Math.round(r.width * d), h = Math.round(r.height * d); if (cv.width !== w || cv.height !== h){ cv.width = w; cv.height = h; } gl.viewport(0, 0, cv.width, cv.height); }
+    function frame(now){
+      raf = 0; size();
+      const cs = getComputedStyle(box), t = (now - t0) / 1000;
+      gl.uniform3fv(U('c1'), hex(cs.getPropertyValue('--mc1'))); gl.uniform3fv(U('c2'), hex(cs.getPropertyValue('--mc2'))); gl.uniform3fv(U('c3'), hex(cs.getPropertyValue('--mcd')));
+      gl.uniform1f(U('t'), t); gl.uniform2f(U('tilt'), reduce ? -.25 : Math.sin(t * .8) * .45, reduce ? .12 : Math.sin(t * .55 + 1) * .22);
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (vis && !reduce) raf = requestAnimationFrame(frame);
+    }
+    function start(){
+      if (!('IntersectionObserver' in window)) { vis = true; raf = requestAnimationFrame(frame); return; }
+      new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(frame); }).observe(box);
+      raf = requestAnimationFrame(frame);
+    }
   })();
 })();
 </script>
