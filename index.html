@@ -486,10 +486,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .wx-ph .lab{padding-top:0}}
 /* music widget: 24pt radius in the app, ~27pt as captured (26px on the 1x crop) → mask in CSS too so nothing shows behind the corners */
 @keyframes swap{from{transform:scale(.9);opacity:.4}to{transform:none;opacity:1}}
-.slots{position:absolute;left:8%;right:8%;top:22%;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.slots > *{aspect-ratio:1;border-radius:16px;position:relative}
-.slots img{width:100%;height:100%;object-fit:cover;border-radius:16px}
-.slots svg{position:absolute;right:-6px;top:-6px;width:26px;height:26px}
 /* ---------- tour: bigger copy, rebalanced ---------- */
 /* ---------- frequency: journey strip inside ---------- */
 /* ---------- qa: rule numbers folded into answers ---------- */
@@ -1201,32 +1197,27 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 @media (max-width:520px){.wc-tab{flex:0 0 auto}}
 /* 5.3 rooms: the quote carries the left column */
 @media (min-width:761px){.rm-pf-q{font-size:clamp(21px,2vw,28px);line-height:1.38;letter-spacing:-.035em}}
-/* ribbon: the lines friends actually left, on two crossing bands */
-.rib{position:relative;overflow:clip;padding:clamp(56px,7vw,96px) 0 clamp(24px,3vw,40px);background:var(--bg)}
-.rb-band{position:relative;display:flex;overflow:hidden;padding:14px 0;white-space:nowrap}
-.rb-1{z-index:2;rotate:-2.4deg;margin-inline:-4vw;background:linear-gradient(100deg,#6655D2,#AA4AF4 45%,#E57FD4);color:#FFFFFF;box-shadow:0 24px 44px -26px rgba(90,30,140,.7)}
-.rb-2{z-index:1;rotate:1.6deg;margin:-6px -4vw 0;background:#F1EBFA;color:var(--ink-2)}
-.rb-t{display:flex;align-items:center;gap:22px;padding-right:22px;flex:0 0 auto}
-.rb-i{display:inline-flex;align-items:center;gap:10px;font:700 clamp(17px,1.6vw,22px)/1 var(--kr);letter-spacing:-.03em}
-.rb-i img{width:34px;height:34px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
-.rb-i b{font:italic 900 .78em/1 var(--round);letter-spacing:.01em;opacity:.78}
-.rb-s{width:9px;height:9px;flex:0 0 auto;border-radius:50%;background:currentColor;opacity:.45}
-.rb-2 .rb-i{font-size:clamp(15px,1.3vw,18px)}
-.rb-2 .rb-i img{width:28px;height:28px;box-shadow:none}
-@media (prefers-reduced-motion:no-preference){.rb-1 .rb-t{animation:rbL 64s linear infinite}
-.rb-2 .rb-t{animation:rbR 78s linear infinite}
-.rib:hover .rb-t{animation-play-state:paused}}
-@keyframes rbL{to{transform:translateX(-50%)}}
-@keyframes rbR{from{transform:translateX(-50%)}to{transform:none}}
-.rb-band > .rb-t{min-width:max-content}
+/* conveyor belt: every sample widget on the 10 platters, at their real relative sizes, riding two belts */
+.belt{--k:.62;position:relative;overflow:clip;padding:clamp(48px,6vw,88px) 0 clamp(16px,2vw,28px);background:var(--bg);display:grid;gap:clamp(18px,2.2vw,30px)}
+.bt-row{position:relative;display:flex;overflow:hidden;padding:0 0 14px}
+.bt-row::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;border-radius:7px;background:repeating-linear-gradient(90deg,#E6DDF3 0 18px,#EFE8F8 18px 36px);box-shadow:inset 0 2px 3px rgba(80,40,120,.12),0 6px 14px -8px rgba(80,40,120,.35)}
+.bt-t{display:flex;align-items:flex-end;gap:clamp(12px,1.4vw,20px);padding-right:clamp(12px,1.4vw,20px);flex:0 0 auto;min-width:max-content}
+.bt-w{display:block;width:calc(var(--w) * var(--k) * 1px);height:auto;filter:drop-shadow(0 10px 12px rgba(70,20,110,.22));transition:transform .35s var(--ease)}
+.bt-w:hover{transform:translateY(-6px) rotate(-2deg)}
+@media (max-width:760px){.belt{--k:.46}}
+@media (prefers-reduced-motion:no-preference){.bt-1 .bt-t{animation:btL 120s linear infinite}
+.bt-2 .bt-t{animation:btR 140s linear infinite}
+.bt-1::after{animation:btTread .9s linear infinite}
+.bt-2::after{animation:btTread .9s linear infinite reverse}
+.belt:hover .bt-t,.belt:hover .bt-row::after{animation-play-state:paused}}
+@keyframes btL{to{transform:translateX(-50%)}}
+@keyframes btR{from{transform:translateX(-50%)}to{transform:none}}
+@keyframes btTread{to{background-position:-36px 0}}
 /* close: ten friends instead of emoji, a soft glow behind the line */
 .close{overflow:clip;padding-top:clamp(64px,8vw,120px)}
 .cl-glow{position:absolute;left:50%;top:46%;width:min(980px,120vw);aspect-ratio:2;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(170,74,244,.20),rgba(250,151,226,.12) 55%,transparent);filter:blur(30px);pointer-events:none}
 .close .wrap{position:relative}
 .close .emo{display:inline-flex;gap:clamp(6px,.8vw,12px);font-size:clamp(28px,3vw,40px);line-height:1}
-.close .emo span{display:inline-block;width:1.25em;text-align:center}
-.close .emo span.is-flip{animation:emoFlip .36s var(--ease)}
-@keyframes emoFlip{50%{transform:translateY(-.35em) scale(.6);opacity:0}}
 /* footer: softer bars (reads as a glow, not stairs) */
 .foot-glow .dg-row{filter:blur(calc((50cqw + var(--bleed)) / 22))}
 .foot-glow .grain{z-index:1;opacity:.3}
@@ -1257,57 +1248,30 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .dp-glow.beam::before{content:none}
 .wpop-m img{border-radius:0!important}
 .wpop-m img{box-shadow:none;filter:drop-shadow(0 22px 26px rgba(70,20,100,.35))}
-/* close: the D! mark as a glossy holographic sticker — real thickness (12 slices in 3D), a slow turn, a light sweep and a holo sheen.
-   Jelly palettes from the app (DittoJellyPalette) take turns every few seconds. */
+/* close: smaller "통하면," next to the full-size D! mark */
+.close h2.close-h{display:flex;align-items:center;justify-content:center;gap:.12em}
+.ch-t{font-size:.62em;letter-spacing:-.045em}
+.close h2.close-h .ch-mark{vertical-align:middle;margin-left:0}
+/* close: D! mark in the invite card's material (soft diffuse light, gentle highlight, a drop in the palette's deep tone) */
 @property --mc1{syntax:'<color>';inherits:true;initial-value:#AA4AF4}
 @property --mc2{syntax:'<color>';inherits:true;initial-value:#6655D2}
 @property --mcd{syntax:'<color>';inherits:true;initial-value:#5B2BB8}
-@property --ha{syntax:'<angle>';inherits:true;initial-value:0deg}
-.ch-mark{--mk-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 214 204'%3E%3Cpath fill='%23000' d='M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z'/%3E%3Cpath fill='%23000' d='M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z'/%3E%3Ccircle fill='%23000' cx='141.594' cy='187.204' r='16.75'/%3E%3C/svg%3E");--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#5B2BB8;position:relative;display:inline-block;width:1.06em;height:1.01em;margin-left:.06em;vertical-align:-.1em;perspective:6em;filter:none;transform:none}
-.cm-spin,.cm-3d{position:absolute;inset:0;transform-style:preserve-3d}
-.cm-3d{transform:rotateY(-18deg) rotateX(8deg) rotateZ(-4deg)}
-.cm-3d > span{position:absolute;inset:0;-webkit-mask:var(--mk-mask) center/contain no-repeat;mask:var(--mk-mask) center/contain no-repeat;backface-visibility:visible}
-.cm-sl{transform:translateZ(calc(var(--z) * -.013em));background:linear-gradient(160deg,color-mix(in srgb,var(--mcd) 88%,#FFFFFF) 0%,var(--mcd) 45%,color-mix(in srgb,var(--mcd) 62%,#000) 100%)}
-.cm-sl:first-child{background:color-mix(in srgb,var(--mc1) 50%,#FFFFFF)}
-.cm-face{transform:translateZ(.002em);background:radial-gradient(70% 60% at 28% 22%,color-mix(in srgb,var(--mc1) 55%,#FFFFFF) 0%,var(--mc1) 42%,var(--mc2) 100%)}
-.cm-holo{transform:translateZ(.004em);background:conic-gradient(from var(--ha) at 40% 55%,#FF9AD5,#9FD8FF,#B6FFCF,#FFF3A0,#FFB0F2,#A9B8FF,#FF9AD5);opacity:.32}
-.cm-gloss{transform:translateZ(.006em);background:linear-gradient(112deg,rgba(255,255,255,0) 36%,rgba(255,255,255,1) 45%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 58%) 160% 0/260% 100% no-repeat;opacity:.85}
-.cm-hi{transform:translateZ(.007em);background:radial-gradient(38% 26% at 30% 20%,rgba(255,255,255,.9),rgba(255,255,255,0) 70%),linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 40%,rgba(0,0,0,.1));opacity:.9}
-.cm-shadow{position:absolute;left:12%;right:8%;bottom:-.08em;height:.16em;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--mcd) 55%,transparent),transparent);filter:blur(.04em);transform:translateZ(-1em)}
-@media (prefers-reduced-motion:no-preference){.ch-mark{animation:cmCycle 15s ease-in-out infinite}
-.cm-spin{animation:cmSpin 9s cubic-bezier(.6,0,.25,1) infinite}
-.cm-3d{animation:cmWob 3.2s ease-in-out infinite alternate}
-.cm-holo{animation:cmHolo 6s linear infinite}
-.cm-gloss{animation:cmGloss 3.2s ease-in-out infinite}
-.cm-shadow{animation:cmShade 3.2s ease-in-out infinite alternate}}
-@keyframes cmCycle{
-  0%,16%{--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#5B2BB8}
-  20%,36%{--mc1:#FA97E2;--mc2:#FF2CBF;--mcd:#C4198C}
-  40%,56%{--mc1:#FF925D;--mc2:#F9C85A;--mcd:#D0602C}
-  60%,76%{--mc1:#48B5F4;--mc2:#27E5F2;--mcd:#1F79B8}
-  80%,96%{--mc1:#07E7B4;--mc2:#B8F06A;--mcd:#06977A}
-  100%{--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#5B2BB8}
-}
-@keyframes cmSpin{0%,62%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
-@keyframes cmWob{from{transform:rotateY(-24deg) rotateX(10deg) rotateZ(-6deg) translateY(0)}to{transform:rotateY(20deg) rotateX(-4deg) rotateZ(3deg) translateY(-.035em)}}
-@keyframes cmHolo{to{--ha:360deg}}
-@keyframes cmGloss{0%,30%{background-position:160% 0}75%,100%{background-position:-60% 0}}
-@keyframes cmShade{from{transform:scaleX(1);opacity:1}to{transform:scaleX(.82);opacity:.7}}
-.cm-tw{position:absolute;width:.16em;height:.16em;background:#FFFFFF;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);filter:drop-shadow(0 0 .03em rgba(255,255,255,.9)) drop-shadow(0 0 .06em var(--mc1));opacity:0;transform:scale(.3)}
-.cm-tw.t1{left:-.06em;top:.1em}
-.cm-tw.t2{right:-.02em;top:-.04em;width:.11em;height:.11em}
-.cm-tw.t3{right:.1em;bottom:.12em;width:.09em;height:.09em}
-@media (prefers-reduced-motion:no-preference){.cm-tw{animation:cmTw 2.4s ease-in-out infinite}
-.cm-tw.t2{animation-delay:.8s}
-.cm-tw.t3{animation-delay:1.6s}}
-@keyframes cmTw{0%,100%{opacity:0;transform:scale(.3) rotate(0)}45%{opacity:1;transform:scale(1) rotate(45deg)}60%{opacity:0;transform:scale(.4) rotate(90deg)}}
-/* liquid-chrome canvas (WebGL) replaces the CSS sticker when available; thickness = stacked shadows in the palette's deep tone */
-.cm-gl{position:absolute;left:-12%;top:-12%;width:124%;height:124%;display:none;pointer-events:none;
-  filter:drop-shadow(0 .012em 0 color-mix(in srgb,var(--mcd) 70%,#000)) drop-shadow(0 .012em 0 color-mix(in srgb,var(--mcd) 60%,#000)) drop-shadow(0 .012em 0 color-mix(in srgb,var(--mcd) 50%,#000)) drop-shadow(0 .07em .08em color-mix(in srgb,var(--mcd) 40%,transparent))}
-.ch-mark.gl .cm-gl{display:block}
-.ch-mark.gl .cm-spin{display:none}
-@media (prefers-reduced-motion:no-preference){.ch-mark.gl .cm-gl{animation:cmGlWob 5s ease-in-out infinite}}
-@keyframes cmGlWob{0%,100%{transform:perspective(6em) rotateY(-14deg) rotateZ(-4deg) translateY(0)}50%{transform:perspective(6em) rotateY(14deg) rotateZ(3deg) translateY(-.03em)}}
+.close h2.close-h .ch-mark{--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#5B2BB8;transition:--mc1 .5s ease,--mc2 .5s ease,--mcd .5s ease;position:relative;display:inline-block;width:1.06em;height:1.01em;margin:0;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;font:inherit;color:inherit}
+.ch-mark:focus-visible{outline:3px solid var(--violet-d);outline-offset:6px;border-radius:.2em}
+.cm-svg{position:absolute;left:-14%;top:-14.7%;width:128%;height:134.3%;overflow:visible}
+.cm-tint{flood-color:var(--mcd)}
+@keyframes cmHit{30%{transform:scale(.88) rotate(-6deg)}100%{transform:none}}
+.ch-mark.hit .cm-svg{animation:cmHit .55s cubic-bezier(.3,1.6,.5,1)}
+@media (prefers-reduced-motion:no-preference){.cm-svg{animation:cmFloat 4s ease-in-out infinite}
+.ch-mark.hit .cm-svg{animation:cmHit .55s cubic-bezier(.3,1.6,.5,1),cmFloat 4s ease-in-out .55s infinite}
+.ch-mark:hover .cm-svg{transform:scale(1.04)}}
+@keyframes cmFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-.03em) rotate(2deg)}}
+/* emoji slot reels — press D! and they roll, each landing a beat after the last */
+.close .emo{display:inline-flex;gap:clamp(6px,.8vw,12px);font-size:clamp(28px,3vw,40px);line-height:1}
+.reel{display:inline-block;width:1.25em;height:1.2em;overflow:hidden;text-align:center;-webkit-mask:linear-gradient(transparent,#000 20%,#000 80%,transparent);mask:linear-gradient(transparent,#000 20%,#000 80%,transparent)}
+.rl{display:block;line-height:1.2em}
+.rl.strip{transition:transform 1s cubic-bezier(.2,.85,.25,1.04)}
+.rl.strip i{display:block;font-style:normal;height:1.2em;line-height:1.2em}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -1541,19 +1505,19 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <h3 class="h-l">넓은 피드 대신 <mark>친구와 함께 노는 방</mark>이 편한 사람들을 위한 공간이에요.</h3>
       <p class="lead">소중한 친구가 있는데, 더 많은 사람들이 필요할까요? 지금 그 일부와 더 자주, 오래 닿고 싶어해요.</p>
       <div class="people">
-      <article class="pc" id="pc-haeun" aria-labelledby="pc-haeun-n">
+      <article class="pc" id="pc-jaemin" aria-labelledby="pc-jaemin-n">
         <div class="pc-in">
-          <figure class="pc-face pc-front person"><img src="assets/tp-haeun.webp" alt="책이 가득한 카페에서 턱을 괴고 책을 읽는 하은" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-haeun-n">하은</h4><div class="role">19 · 대학 새내기 · 처음 들어온 유저</div><q>낮이랑 밤 사진 한 장씩.</q></figcaption></figure>
-          <div class="pc-face pc-back" id="pc-haeun-b"><p class="pc-bk"><span class="disp">하은</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“대학 새내기예요. 조심스러운데, 구경하는 건 좋아해요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“모르는 사람이 많이 보는 곳보다, 몇 명이 찾아오는 방이 좋아서요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“낮이랑 밤 사진 한 장씩. 책도 음악도 조금씩 같이 둬요.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어요?</dt><dd>“나리가 한 말, ‘삐뚤어도 손에 맞는 내 컵’. 첫 사진을 같이 올려 줬거든요.”</dd></div></dl></div>
+          <figure class="pc-face pc-front person"><img src="assets/tp-jaemin.webp" alt="기차 창가 자리에서 창밖을 내다보는 재민" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-jaemin-n">재민</h4><div class="role">27 · 개발자 · 기록을 오래 정리하는 유저</div><q>그날 들었던 노래까지 남겨두고 싶어.</q></figcaption></figure>
+          <div class="pc-face pc-back" id="pc-jaemin-b"><p class="pc-bk"><span class="disp">재민</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“개발자예요. 만난 직후보다 며칠 뒤에 차분히 정리하는 편이에요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“그날 들었던 노래까지 남겨두고 싶어서요. 사진만 있으면 그날이 반쯤만 남거든요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“인화하기 전의 여행이요. 기차 창밖, 다시 간 바다, 그날 들은 HANRORO까지 한 판에.”</dd></div><div><dt>Q. 친구와는 어떻게 이어져요?</dt><dd>“도현의 즉흥 모임엔 늘 따라가요. 흔들린 컷도 보내 주기로 했어요.”</dd></div></dl></div>
         </div>
-        <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-haeun-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">하은 인터뷰 뒤집어 보기</span></button>
+        <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-jaemin-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">재민 인터뷰 뒤집어 보기</span></button>
       </article>
-      <article class="pc" id="pc-jiu" aria-labelledby="pc-jiu-n">
+      <article class="pc" id="pc-sora" aria-labelledby="pc-sora-n">
         <div class="pc-in">
-          <figure class="pc-face pc-front person"><img src="assets/tp-jiu.webp" alt="밤거리 보도에 쪼그려 앉아 헤드폰을 걸고 웃는 지우" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-jiu-n">지우</h4><div class="role">22 · 영상 전공·댄스 동아리 · 진짜 인싸 유저</div><q>오늘 사진은 내가 다 올림.</q></figcaption></figure>
-          <div class="pc-face pc-back" id="pc-jiu-b"><p class="pc-bk"><span class="disp">지우</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이야?</dt><dd>“영상 전공에 댄스 동아리. 연습실엔 늘 마지막까지 있어.”</dd></div><div><dt>Q. 왜 Ditto를 써?</dt><dd>“오늘 사진은 내가 다 올림. 다들 기억하는 장면 덧붙여 줘!”</dd></div><div><dt>Q. 방은 어떻게 써?</dt><dd>“연습실에서 생일까지 계속 재생. 제일 많이 붙은 말은 ‘한 번 더’.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어?</dt><dd>“소라가 한 ‘각자 좋아하는 간식 하나’. 목요일 20시에 또 모여.”</dd></div></dl></div>
+          <figure class="pc-face pc-front person"><img src="assets/tp-sora.webp" alt="꽃시장에서 꽃을 고르며 웃는 소라" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-sora-n">소라</h4><div class="role">22 · 시각디자인 전공 · 친구들과 적극적으로 쓰는 유저</div><q>사진 보내는 대신 여기 붙여둘게.</q></figcaption></figure>
+          <div class="pc-face pc-back" id="pc-sora-b"><p class="pc-bk"><span class="disp">소라</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이야?</dt><dd>“시각디자인 전공. 먼저 연락하고 작은 약속을 잡는 쪽이야.”</dd></div><div><dt>Q. 왜 Ditto를 써?</dt><dd>“사진 보내는 대신 여기 붙여둘게. 다음 약속도 여기서 잡고.”</dd></div><div><dt>Q. 방은 어떻게 써?</dt><dd>“우리 다음엔 여기서. 소풍 사진 옆에 ‘🍒 돗자리 챙겨 둠’.”</dd></div><div><dt>Q. 친구와는 어떻게 이어져?</dt><dd>“지우랑 수업 사이에 자주 만나. ‘각자 좋아하는 간식 하나’도 내가 정한 규칙이야.”</dd></div></dl></div>
         </div>
-        <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-jiu-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">지우 인터뷰 뒤집어 보기</span></button>
+        <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-sora-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">소라 인터뷰 뒤집어 보기</span></button>
       </article>
       <article class="pc" id="pc-seoyun" aria-labelledby="pc-seoyun-n">
         <div class="pc-in">
@@ -1980,17 +1944,17 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
   </div>
 </section>
 
-<div class="rib" aria-hidden="true">
-  <div class="rb-band rb-1"><div class="rb-t"><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎂 초는 내가</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>🧺 각자 좋아하는 간식 하나</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>🫧 여긴 조금 천천히 채울래</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>☕ 삐뚤어도 손에 맞는 내 컵</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>🍕 늦어도 와, 자리 비워둘게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>📷 오늘 빛은 조금 흐린 쪽</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>📸 흔들린 컷도 보내 줄게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🪩 목 20시</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>🌿 이 초록은 저장</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b>🥐 공강 한 시간은 커피로</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎂 초는 내가</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>🧺 각자 좋아하는 간식 하나</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>🫧 여긴 조금 천천히 채울래</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>☕ 삐뚤어도 손에 맞는 내 컵</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>🍕 늦어도 와, 자리 비워둘게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>📷 오늘 빛은 조금 흐린 쪽</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>📸 흔들린 컷도 보내 줄게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🪩 목 20시</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>🌿 이 초록은 저장</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b>🥐 공강 한 시간은 커피로</span><i class="rb-s"></i></div></div>
-  <div class="rb-band rb-2"><div class="rb-t"><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>📷 오늘 빛은 조금 흐린 쪽</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>📸 흔들린 컷도 보내 줄게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🪩 목 20시</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>🌿 이 초록은 저장</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b>🥐 공강 한 시간은 커피로</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎂 초는 내가</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>🧺 각자 좋아하는 간식 하나</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>🫧 여긴 조금 천천히 채울래</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>☕ 삐뚤어도 손에 맞는 내 컵</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>🍕 늦어도 와, 자리 비워둘게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>📷 오늘 빛은 조금 흐린 쪽</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>📸 흔들린 컷도 보내 줄게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🪩 목 20시</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>🌿 이 초록은 저장</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b>🥐 공강 한 시간은 커피로</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎂 초는 내가</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>🧺 각자 좋아하는 간식 하나</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>🫧 여긴 조금 천천히 채울래</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>☕ 삐뚤어도 손에 맞는 내 컵</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>🍕 늦어도 와, 자리 비워둘게</span><i class="rb-s"></i></div></div>
+<div class="belt" role="img" aria-label="샘플 친구 10명의 플래터에 붙은 위젯 77개가 컨베이어 벨트처럼 흘러가요. 사진, 텍스트, 상태, 음악, 영상, 포스트, 방명록, To-do">
+  <div class="bt-row bt-1"><div class="bt-t"><img class="bt-w" src="assets/bw-haeu-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-0.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-0.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-jiua-0.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-rian-0.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-1.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-rian-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-2.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-2.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-rian-2.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-3.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-jiua-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-rian-3.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-4.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-4.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-4.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-4.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-rian-4.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-5.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-rian-5.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-6.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-8.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-9.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-0.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-0.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-jiua-0.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-rian-0.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-1.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-rian-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-2.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-2.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-rian-2.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-3.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-jiua-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-rian-3.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-4.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-4.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-4.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-4.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-rian-4.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-5.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-rian-5.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-6.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-8.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-9.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"></div></div>
+  <div class="bt-row bt-2"><div class="bt-t"><img class="bt-w" src="assets/bw-juni-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-0.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-0.webp" alt="" width="385" height="120" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-seoy-0.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-1.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-seoy-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-2.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-2.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-seoy-2.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-3.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-3.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-dohy-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-seoy-3.webp" alt="" width="188" height="188" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-yese-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-4.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-4.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-4.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-4.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-4.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-5.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-dohy-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-6.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-nari-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-6.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-yese-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-8.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-0.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-0.webp" alt="" width="385" height="120" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-seoy-0.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-1.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-seoy-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-2.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-2.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-seoy-2.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-3.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-3.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-dohy-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-seoy-3.webp" alt="" width="188" height="188" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-yese-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-4.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-4.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-4.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-4.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-4.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-5.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-dohy-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-6.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-nari-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-6.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-yese-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-8.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"></div></div>
 </div>
 
 <section class="close" id="close" aria-labelledby="close-h">
   <span class="cl-glow" aria-hidden="true"></span>
   <div class="wrap">
-    <p class="emo" id="emo" aria-hidden="true"><span>🎧</span><span>🍓</span><span>📸</span><span>🌙</span><span>🛼</span></p>
-    <h2 class="close-h" id="close-h">통하면, <span class="ch-mark" role="img" aria-label="Ditto!"><span class="cm-shadow" aria-hidden="true"></span><canvas class="cm-gl" aria-hidden="true"></canvas><span class="cm-tw t1" aria-hidden="true"></span><span class="cm-tw t2" aria-hidden="true"></span><span class="cm-tw t3" aria-hidden="true"></span><span class="cm-spin"><span class="cm-3d"><span class="cm-sl" style="--z:1"></span><span class="cm-sl" style="--z:2"></span><span class="cm-sl" style="--z:3"></span><span class="cm-sl" style="--z:4"></span><span class="cm-sl" style="--z:5"></span><span class="cm-sl" style="--z:6"></span><span class="cm-sl" style="--z:7"></span><span class="cm-sl" style="--z:8"></span><span class="cm-sl" style="--z:9"></span><span class="cm-sl" style="--z:10"></span><span class="cm-sl" style="--z:11"></span><span class="cm-sl" style="--z:12"></span><span class="cm-face"></span><span class="cm-holo"></span><span class="cm-gloss"></span><span class="cm-hi"></span></span></span></span></h2>
-    <p class="t">친한 친구들과 만드는 우리만의 공간. 마음에 드는 조각은 꾹 눌러, 나도.</p>
+    <p class="emo" id="emo" aria-hidden="true"><span class="reel"><span class="rl">🎧</span></span><span class="reel"><span class="rl">🍓</span></span><span class="reel"><span class="rl">📸</span></span><span class="reel"><span class="rl">🌙</span></span><span class="reel"><span class="rl">🛼</span></span></p>
+    <h2 class="close-h" id="close-h"><span class="ch-t">통하면,</span> <button type="button" class="ch-mark" id="chMark" aria-label="Ditto! — 누르면 색이 바뀌고 위 이모지가 돌아가요"><svg class="cm-svg" viewBox="-30 -30 274 274" aria-hidden="true" focusable="false"><defs><linearGradient id="cmFill" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" style="stop-color:var(--mc1)"/><stop offset=".36" style="stop-color:var(--mc1)"/><stop offset="1" style="stop-color:var(--mc2)"/></linearGradient><filter id="cmLit" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="6.1" result="h"/><feDiffuseLighting in="h" surfaceScale="9.2" diffuseConstant="1.1" lighting-color="#fff" result="d"><feDistantLight class="cm-lt" azimuth="235" elevation="52"/></feDiffuseLighting><feColorMatrix in="d" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -.62 0 0 0 .55" result="sa"/><feFlood class="cm-tint" flood-opacity="1"/><feComposite in2="sa" operator="in" result="shade"/><feComposite in="shade" in2="SourceGraphic" operator="over" result="body"/><feSpecularLighting in="h" surfaceScale="9.2" specularConstant=".9" specularExponent="30" lighting-color="#fff" result="sp"><feDistantLight class="cm-lt" azimuth="235" elevation="58"/></feSpecularLighting><feComposite in="body" in2="sp" operator="arithmetic" k2="1" k3=".45" result="lit"/><feComposite in="lit" in2="SourceAlpha" operator="in" result="mark"/><feGaussianBlur in="SourceAlpha" stdDeviation="7.1" result="sb"/><feOffset in="sb" dy="7.1" result="so"/><feFlood class="cm-tint" flood-opacity=".3"/><feComposite in2="so" operator="in" result="drop"/><feMerge><feMergeNode in="drop"/><feMergeNode in="mark"/></feMerge></filter></defs><g filter="url(#cmLit)"><path fill="url(#cmFill)" d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path fill="url(#cmFill)" d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle fill="url(#cmFill)" cx="141.594" cy="187.204" r="16.75"/></g></svg></button></h2>
+    <p class="t">친한 친구와 만들어나가는 우리만의 공간. 마음에 드는 조각을 꾹 눌러봐!</p>
     <div class="row"><a class="btn" href="/download/">출시알림 받기 <span class="ar" aria-hidden="true">→</span></a></div>
   </div>
 </section>
@@ -2460,99 +2424,39 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     hero.addEventListener('pointermove', e => { const r = hero.getBoundingClientRect(); x = (e.clientX - r.left) / r.width - .5; y = (e.clientY - r.top) / r.height - .5; if (!raf) raf = requestAnimationFrame(() => { raf = 0; dev.style.setProperty('--mx', x.toFixed(3)); dev.style.setProperty('--my', y.toFixed(3)); }); }, { passive: true });
     hero.addEventListener('pointerleave', () => { dev.style.setProperty('--mx', 0); dev.style.setProperty('--my', 0); });
   })();
-  /* ---- close: five emoji drawn from a wide pool, reshuffled slot by slot ---- */
+  /* ---- close: the D! mark (invite-card material: SVG lighting) — the light drifts slowly; pressing it spins the emoji reels ---- */
   (function(){
-    const row = document.getElementById('emo'); if (!row) return;
+    const btn = document.getElementById('chMark'), row = document.getElementById('emo'); if (!btn || !row) return;
     const POOL = ['🎧','🍓','📸','🌙','🛼','🧃','🍙','🌷','🎂','🎤','🪩','🧸','🐈','🐶','🦋','🌊','⛺️','🚲','🚃','🎞️','📼','💿','🎹','🎸','🥁','🧋','🍜','🥐','🍰','🍦','🍉','🍋','🌻','🍀','🌈','☁️','❄️','🔥','✨','⭐️','🪐','🌍','🗺️','🏝️','🎡','🎢','🎠','🛹','🏀','🎳','🎮','🕹️','🧩','🎨','🖍️','📚','✏️','📝','💌','🎁','🎈','🕯️','🪴','🌵','🍄','🐻','🐰','🐧','🦦','🐳','🍑','🫧','🧶','🪞','💅','👟','🧢','🕶️','💍','🫶','🤝','🙌','😎','🥹','🤭','😴','🥳','🤍','💜','🩷'];
-    const slots = [...row.children];
-    const pick = n => { const a = POOL.slice(); for (let k = a.length - 1; k > 0; k--) { const r = Math.floor(Math.random() * (k + 1)); [a[k], a[r]] = [a[r], a[k]]; } return a.slice(0, n); };
-    pick(slots.length).forEach((e, k) => slots[k].textContent = e);
+    const lts = [...btn.querySelectorAll('.cm-lt')], reels = [...row.querySelectorAll('.reel')];
+    const pick = () => POOL[Math.floor(Math.random() * POOL.length)];
+    const draw = n => { const a = POOL.slice(); for (let k = a.length - 1; k > 0; k--) { const r = Math.floor(Math.random() * (k + 1)); [a[k], a[r]] = [a[r], a[k]]; } return a.slice(0, n); };
+    const settle = (r, e) => { const s = document.createElement('span'); s.className = 'rl'; s.textContent = e; r.replaceChildren(s); };
+    draw(reels.length).forEach((e, k) => settle(reels[k], e));
+    let spinning = 0;
+    function spin(){
+      if (spinning) return;
+      const land = draw(reels.length);
+      btn.classList.remove('hit'); void btn.offsetWidth; btn.classList.add('hit');
+      if (reduce) { reels.forEach((r, k) => settle(r, land[k])); return; }
+      spinning = reels.length;
+      reels.forEach((r, k) => {
+        const cells = [r.textContent]; for (let i = 0, n = 14 + k * 4; i < n; i++) cells.push(pick()); cells.push(land[k]);
+        const strip = document.createElement('span'); strip.className = 'rl strip'; strip.style.transitionDuration = (0.9 + k * 0.22) + 's';
+        strip.innerHTML = cells.map(c => '<i>' + c + '</i>').join(''); r.replaceChildren(strip);
+        requestAnimationFrame(() => requestAnimationFrame(() => { strip.style.transform = 'translateY(' + (-(cells.length - 1) * 100 / cells.length) + '%)'; }));
+        strip.addEventListener('transitionend', () => { settle(r, land[k]); spinning--; }, { once: true });
+      });
+    }
+    // each press also moves to the next jelly palette (DittoJellyPalette)
+    const PAL = [['#AA4AF4','#6655D2','#5B2BB8'],['#FA97E2','#FF2CBF','#C4198C'],['#FF925D','#F9C85A','#D0602C'],['#48B5F4','#27E5F2','#1F79B8'],['#07E7B4','#B8F06A','#06977A']];
+    let pi = 0;
+    function recolor(){ pi = (pi + 1) % PAL.length; const [a, b, d] = PAL[pi]; btn.style.setProperty('--mc1', a); btn.style.setProperty('--mc2', b); btn.style.setProperty('--mcd', d); }
+    btn.addEventListener('click', () => { recolor(); spin(); });
     if (reduce) return;
-    let vis = false, k = 0;
-    if ('IntersectionObserver' in window) new IntersectionObserver(es => { vis = es[0].isIntersecting; }).observe(row);
-    setInterval(() => {
-      if (!vis || document.hidden) return;
-      const s = slots[k % slots.length]; k++;
-      const shown = slots.map(x => x.textContent);
-      let e; do { e = POOL[Math.floor(Math.random() * POOL.length)]; } while (shown.includes(e));
-      s.classList.remove('is-flip'); void s.offsetWidth; s.classList.add('is-flip');
-      setTimeout(() => { s.textContent = e; }, 180);
-    }, 900);
-  })();
-  /* ---- close: the D! mark in liquid chrome (WebGL) — a puffy bevel from the blurred mark, a studio environment
-     with iridescent bands in the current jelly palette, a moving key light. Falls back to the CSS sticker. ---- */
-  (function(){
-    const box = document.querySelector('.ch-mark'), cv = box && box.querySelector('.cm-gl'), sym = document.getElementById('mk');
-    if (!cv || !sym) return;
-    const gl = cv.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: true });
-    if (!gl) return;
-    const PAD = .12, TW = 640, TH = Math.round(TW * (204 / 214 + PAD * 2) / (1 + PAD * 2));
-    const VS = 'attribute vec2 p;varying vec2 v;void main(){v=p*.5+.5;gl_Position=vec4(p,0.,1.);}';
-    const FS = `precision highp float;varying vec2 v;uniform sampler2D M;uniform vec2 px;uniform float t;uniform vec3 c1,c2,c3;uniform vec2 tilt;
-float H(vec2 q){return texture2D(M,q).g;}
-vec3 env(vec3 r){
-  float y=r.y, x=r.x;
-  vec3 sky=mix(mix(c1,vec3(1.),.35),vec3(1.),smoothstep(.15,.9,y));
-  vec3 gnd=mix(c3*.22,mix(c2,c3,.5)*.9,smoothstep(-.9,-.05,y));
-  vec3 e=mix(gnd,sky,smoothstep(-.06,.06,y));
-  float b=.5+.5*sin(x*4.2+y*6.+t*.9); e=mix(e,mix(c1,c2,b)*1.15,.28*(1.-abs(y)));
-  e+=vec3(1.)*smoothstep(.985,1.,.5+.5*sin(x*10.+t*1.4))*.9*smoothstep(-.2,.6,y);
-  e+=vec3(1.)*smoothstep(.97,1.,.5+.5*sin(y*14.-t*.8))*.35;
-  return e;}
-void main(){
-  vec4 m=texture2D(M,v); float a=m.r; if(a<.004){gl_FragColor=vec4(0.);return;}
-  float h=H(v);
-  float dx=H(v+vec2(px.x,0.))-H(v-vec2(px.x,0.)), dy=H(v+vec2(0.,px.y))-H(v-vec2(0.,px.y));
-  vec3 n=normalize(vec3(-dx*5.5,-dy*5.5,1.)+vec3((v-.5)*vec2(.35,.3),0.));
-  float cx=cos(tilt.x),sx=sin(tilt.x),cy=cos(tilt.y),sy=sin(tilt.y);
-  n.xz=mat2(cx,-sx,sx,cx)*n.xz; n.yz=mat2(cy,-sy,sy,cy)*n.yz;
-  vec3 r=reflect(vec3(0.,0.,-1.),n);
-  vec3 col=env(r);
-  vec3 L=normalize(vec3(cos(t*.6)*.7,.65+.2*sin(t*.45),.75));
-  col+=pow(max(dot(reflect(-L,n),vec3(0.,0.,1.)),0.),70.)*1.4;
-  col+=pow(1.-max(n.z,0.),3.)*mix(c1,vec3(1.),.4)*.7;
-  col*=.82+.18*smoothstep(0.,1.,h);
-  gl_FragColor=vec4(col*a,a);}`;
-    function sh(type, src){ const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; }
-    const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS); if (!vs || !fs) return;
-    const pr = gl.createProgram(); gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr); if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
-    gl.useProgram(pr);
-    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const U = n => gl.getUniformLocation(pr, n);
-    const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214 204">' + sym.innerHTML.replace(/currentColor/g, '#000') + '</svg>';
-    const img = new Image();
-    img.onload = () => {
-      const W = TW, Hh = TH, mw = W / (1 + PAD * 2), mh = mw * 204 / 214, ox = (W - mw) / 2, oy = (Hh - mh) / 2;
-      const a = document.createElement('canvas'); a.width = W; a.height = Hh; const ca = a.getContext('2d'); ca.drawImage(img, ox, oy, mw, mh);
-      const bl = document.createElement('canvas'); bl.width = W; bl.height = Hh; const cb = bl.getContext('2d'); cb.filter = 'blur(' + (W * .028) + 'px)'; cb.drawImage(img, ox, oy, mw, mh);
-      const A = ca.getImageData(0, 0, W, Hh).data, Bd = cb.getImageData(0, 0, W, Hh).data, out = new Uint8Array(W * Hh * 4);
-      for (let i = 0; i < W * Hh; i++){ out[i*4] = A[i*4+3]; out[i*4+1] = Bd[i*4+3]; out[i*4+3] = 255; }
-      const tx = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tx); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, W, Hh, 0, gl.RGBA, gl.UNSIGNED_BYTE, out);
-      [gl.TEXTURE_MIN_FILTER, gl.TEXTURE_MAG_FILTER].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.LINEAR));
-      [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.CLAMP_TO_EDGE));
-      gl.uniform2f(U('px'), 2 / W, 2 / Hh);
-      box.classList.add('gl'); start();
-    };
-    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-    const col = s => { const m = s.match(/[\d.]+/g); if (!m) return [.67,.29,.96]; if (s.trim()[0] === '#') return [0,0,0]; return [m[0]/255, m[1]/255, m[2]/255]; };
-    const hex = s => { s = s.trim(); if (s[0] !== '#') return col(s); const n = parseInt(s.slice(1), 16); return [(n>>16&255)/255, (n>>8&255)/255, (n&255)/255]; };
-    let raf = 0, vis = false, t0 = performance.now();
-    function size(){ const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); const w = Math.round(r.width * d), h = Math.round(r.height * d); if (cv.width !== w || cv.height !== h){ cv.width = w; cv.height = h; } gl.viewport(0, 0, cv.width, cv.height); }
-    function frame(now){
-      raf = 0; size();
-      const cs = getComputedStyle(box), t = (now - t0) / 1000;
-      gl.uniform3fv(U('c1'), hex(cs.getPropertyValue('--mc1'))); gl.uniform3fv(U('c2'), hex(cs.getPropertyValue('--mc2'))); gl.uniform3fv(U('c3'), hex(cs.getPropertyValue('--mcd')));
-      gl.uniform1f(U('t'), t); gl.uniform2f(U('tilt'), reduce ? -.25 : Math.sin(t * .8) * .45, reduce ? .12 : Math.sin(t * .55 + 1) * .22);
-      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      if (vis && !reduce) raf = requestAnimationFrame(frame);
-    }
-    function start(){
-      if (!('IntersectionObserver' in window)) { vis = true; raf = requestAnimationFrame(frame); return; }
-      new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(frame); }).observe(box);
-      raf = requestAnimationFrame(frame);
-    }
+    let raf = 0, vis = false; const t0 = performance.now();
+    function frame(now){ raf = 0; const az = 235 + Math.sin((now - t0) / 1000 * .6) * 40; lts.forEach(l => l.setAttribute('azimuth', az.toFixed(1))); if (vis) raf = requestAnimationFrame(frame); }
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(frame); }).observe(btn);
   })();
 })();
 </script>
