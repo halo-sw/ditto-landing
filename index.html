@@ -1246,27 +1246,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .dp-dw .dp-c1{right:-6px;top:-44px}
 .dp-dw .dp-c2{left:-10px;bottom:-44px}
 .rm-pf-tags .tg-dt{color:var(--violet-d);background:color-mix(in srgb,var(--violet-d) 10%,#FFFFFF)}
-/* close: the D! mark — jelly palettes take turns every few seconds, extruded like the app's jelly badge */
-@property --mc1{syntax:'<color>';inherits:true;initial-value:#AA4AF4}
-@property --mc2{syntax:'<color>';inherits:true;initial-value:#6655D2}
-@property --mcd{syntax:'<color>';inherits:true;initial-value:#4B2A9E}
-.ch-mark{--mk-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 214 204'%3E%3Cpath fill='%23000' d='M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z'/%3E%3Cpath fill='%23000' d='M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z'/%3E%3Ccircle fill='%23000' cx='141.594' cy='187.204' r='16.75'/%3E%3C/svg%3E");--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#4B2A9E;position:relative;display:inline-block;width:1.06em;height:1.01em;margin-left:.04em;vertical-align:-.1em;
-  filter:drop-shadow(0 .014em 0 var(--mcd)) drop-shadow(0 .014em 0 var(--mcd)) drop-shadow(0 .014em 0 var(--mcd)) drop-shadow(0 .016em 0 color-mix(in srgb,var(--mcd) 80%,#000)) drop-shadow(0 .09em .1em color-mix(in srgb,var(--mcd) 45%,transparent));
-  transform:rotate(-4deg);transform-origin:50% 70%}
-.ch-mark > span{position:absolute;inset:0;-webkit-mask:var(--mk-mask) center/contain no-repeat;mask:var(--mk-mask) center/contain no-repeat}
-.cm-face{background:linear-gradient(140deg,var(--mc1) 0%,var(--mc1) 34%,var(--mc2) 100%)}
-.cm-hi{background:radial-gradient(55% 42% at 30% 18%,rgba(255,255,255,.85),rgba(255,255,255,0) 70%),linear-gradient(180deg,rgba(255,255,255,.4) 0%,rgba(255,255,255,0) 42%,rgba(0,0,0,.14) 100%);mix-blend-mode:soft-light}
-@media (prefers-reduced-motion:no-preference){.ch-mark{animation:cmCycle 18s ease-in-out infinite,cmBob 3.6s ease-in-out infinite}}
-@keyframes cmCycle{
-  0%,13%{--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#4B2A9E}
-  17%,30%{--mc1:#FA97E2;--mc2:#FF2CBF;--mcd:#B3157F}
-  34%,47%{--mc1:#FF925D;--mc2:#F9F871;--mcd:#C0582A}
-  51%,63%{--mc1:#48B5F4;--mc2:#27E5F2;--mcd:#1E6FA8}
-  67%,80%{--mc1:#07E7B4;--mc2:#F9F871;--mcd:#078A6C}
-  84%,96%{--mc1:#6655D2;--mc2:#2C2F3A;--mcd:#1D1B2E}
-  100%{--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#4B2A9E}
-}
-@keyframes cmBob{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(3deg) translateY(-.04em)}}
 /* widget crops carry their own rounded alpha — containers follow the alpha (no square backgrounds, rings or box shadows behind corners) */
 .wcat .wc-art{border-radius:18%;background:transparent}
 .hf{box-shadow:none;border-radius:0;filter:drop-shadow(0 18px 22px rgba(70,20,110,.32))}
@@ -1278,6 +1257,50 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .dp-glow.beam::before{content:none}
 .wpop-m img{border-radius:0!important}
 .wpop-m img{box-shadow:none;filter:drop-shadow(0 22px 26px rgba(70,20,100,.35))}
+/* close: the D! mark as a glossy holographic sticker — real thickness (12 slices in 3D), a slow turn, a light sweep and a holo sheen.
+   Jelly palettes from the app (DittoJellyPalette) take turns every few seconds. */
+@property --mc1{syntax:'<color>';inherits:true;initial-value:#AA4AF4}
+@property --mc2{syntax:'<color>';inherits:true;initial-value:#6655D2}
+@property --mcd{syntax:'<color>';inherits:true;initial-value:#5B2BB8}
+@property --ha{syntax:'<angle>';inherits:true;initial-value:0deg}
+.ch-mark{--mk-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 214 204'%3E%3Cpath fill='%23000' d='M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z'/%3E%3Cpath fill='%23000' d='M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z'/%3E%3Ccircle fill='%23000' cx='141.594' cy='187.204' r='16.75'/%3E%3C/svg%3E");--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#5B2BB8;position:relative;display:inline-block;width:1.06em;height:1.01em;margin-left:.06em;vertical-align:-.1em;perspective:6em;filter:none;transform:none}
+.cm-spin,.cm-3d{position:absolute;inset:0;transform-style:preserve-3d}
+.cm-3d{transform:rotateY(-18deg) rotateX(8deg) rotateZ(-4deg)}
+.cm-3d > span{position:absolute;inset:0;-webkit-mask:var(--mk-mask) center/contain no-repeat;mask:var(--mk-mask) center/contain no-repeat;backface-visibility:visible}
+.cm-sl{transform:translateZ(calc(var(--z) * -.013em));background:linear-gradient(160deg,color-mix(in srgb,var(--mcd) 88%,#FFFFFF) 0%,var(--mcd) 45%,color-mix(in srgb,var(--mcd) 62%,#000) 100%)}
+.cm-sl:first-child{background:color-mix(in srgb,var(--mc1) 50%,#FFFFFF)}
+.cm-face{transform:translateZ(.002em);background:radial-gradient(70% 60% at 28% 22%,color-mix(in srgb,var(--mc1) 55%,#FFFFFF) 0%,var(--mc1) 42%,var(--mc2) 100%)}
+.cm-holo{transform:translateZ(.004em);background:conic-gradient(from var(--ha) at 40% 55%,#FF9AD5,#9FD8FF,#B6FFCF,#FFF3A0,#FFB0F2,#A9B8FF,#FF9AD5);opacity:.32}
+.cm-gloss{transform:translateZ(.006em);background:linear-gradient(112deg,rgba(255,255,255,0) 36%,rgba(255,255,255,1) 45%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 58%) 160% 0/260% 100% no-repeat;opacity:.85}
+.cm-hi{transform:translateZ(.007em);background:radial-gradient(38% 26% at 30% 20%,rgba(255,255,255,.9),rgba(255,255,255,0) 70%),linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 40%,rgba(0,0,0,.1));opacity:.9}
+.cm-shadow{position:absolute;left:12%;right:8%;bottom:-.08em;height:.16em;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--mcd) 55%,transparent),transparent);filter:blur(.04em);transform:translateZ(-1em)}
+@media (prefers-reduced-motion:no-preference){.ch-mark{animation:cmCycle 15s ease-in-out infinite}
+.cm-spin{animation:cmSpin 9s cubic-bezier(.6,0,.25,1) infinite}
+.cm-3d{animation:cmWob 3.2s ease-in-out infinite alternate}
+.cm-holo{animation:cmHolo 6s linear infinite}
+.cm-gloss{animation:cmGloss 3.2s ease-in-out infinite}
+.cm-shadow{animation:cmShade 3.2s ease-in-out infinite alternate}}
+@keyframes cmCycle{
+  0%,16%{--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#5B2BB8}
+  20%,36%{--mc1:#FA97E2;--mc2:#FF2CBF;--mcd:#C4198C}
+  40%,56%{--mc1:#FF925D;--mc2:#F9C85A;--mcd:#D0602C}
+  60%,76%{--mc1:#48B5F4;--mc2:#27E5F2;--mcd:#1F79B8}
+  80%,96%{--mc1:#07E7B4;--mc2:#B8F06A;--mcd:#06977A}
+  100%{--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#5B2BB8}
+}
+@keyframes cmSpin{0%,62%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+@keyframes cmWob{from{transform:rotateY(-24deg) rotateX(10deg) rotateZ(-6deg) translateY(0)}to{transform:rotateY(20deg) rotateX(-4deg) rotateZ(3deg) translateY(-.035em)}}
+@keyframes cmHolo{to{--ha:360deg}}
+@keyframes cmGloss{0%,30%{background-position:160% 0}75%,100%{background-position:-60% 0}}
+@keyframes cmShade{from{transform:scaleX(1);opacity:1}to{transform:scaleX(.82);opacity:.7}}
+.cm-tw{position:absolute;width:.16em;height:.16em;background:#FFFFFF;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);filter:drop-shadow(0 0 .03em rgba(255,255,255,.9)) drop-shadow(0 0 .06em var(--mc1));opacity:0;transform:scale(.3)}
+.cm-tw.t1{left:-.06em;top:.1em}
+.cm-tw.t2{right:-.02em;top:-.04em;width:.11em;height:.11em}
+.cm-tw.t3{right:.1em;bottom:.12em;width:.09em;height:.09em}
+@media (prefers-reduced-motion:no-preference){.cm-tw{animation:cmTw 2.4s ease-in-out infinite}
+.cm-tw.t2{animation-delay:.8s}
+.cm-tw.t3{animation-delay:1.6s}}
+@keyframes cmTw{0%,100%{opacity:0;transform:scale(.3) rotate(0)}45%{opacity:1;transform:scale(1) rotate(45deg)}60%{opacity:0;transform:scale(.4) rotate(90deg)}}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -1959,7 +1982,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
   <span class="cl-glow" aria-hidden="true"></span>
   <div class="wrap">
     <p class="emo" id="emo" aria-hidden="true"><span>🎧</span><span>🍓</span><span>📸</span><span>🌙</span><span>🛼</span></p>
-    <h2 class="close-h" id="close-h">통하면, <span class="ch-mark" role="img" aria-label="Ditto!"><span class="cm-face"></span><span class="cm-hi"></span></span></h2>
+    <h2 class="close-h" id="close-h">통하면, <span class="ch-mark" role="img" aria-label="Ditto!"><span class="cm-shadow" aria-hidden="true"></span><span class="cm-tw t1" aria-hidden="true"></span><span class="cm-tw t2" aria-hidden="true"></span><span class="cm-tw t3" aria-hidden="true"></span><span class="cm-spin"><span class="cm-3d"><span class="cm-sl" style="--z:1"></span><span class="cm-sl" style="--z:2"></span><span class="cm-sl" style="--z:3"></span><span class="cm-sl" style="--z:4"></span><span class="cm-sl" style="--z:5"></span><span class="cm-sl" style="--z:6"></span><span class="cm-sl" style="--z:7"></span><span class="cm-sl" style="--z:8"></span><span class="cm-sl" style="--z:9"></span><span class="cm-sl" style="--z:10"></span><span class="cm-sl" style="--z:11"></span><span class="cm-sl" style="--z:12"></span><span class="cm-face"></span><span class="cm-holo"></span><span class="cm-gloss"></span><span class="cm-hi"></span></span></span></span></h2>
     <p class="t">친한 친구들과 만드는 우리만의 공간. 마음에 드는 조각은 꾹 눌러, 나도.</p>
     <div class="row"><a class="btn" href="/download/">출시알림 받기 <span class="ar" aria-hidden="true">→</span></a></div>
   </div>
