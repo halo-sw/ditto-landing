@@ -1267,6 +1267,17 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
   100%{--mc1:#AA4AF4;--mc2:#6655D2;--mcd:#4B2A9E}
 }
 @keyframes cmBob{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(3deg) translateY(-.04em)}}
+/* widget crops carry their own rounded alpha — containers follow the alpha (no square backgrounds, rings or box shadows behind corners) */
+.wcat .wc-art{border-radius:18%;background:transparent}
+.hf{box-shadow:none;border-radius:0;filter:drop-shadow(0 18px 22px rgba(70,20,110,.32))}
+.hf img{border-radius:0}
+.bs-card.bs-ph{border-radius:0;box-shadow:none;filter:drop-shadow(0 18px 24px rgba(70,20,100,.4))}
+.tw-ph,.phone .ma .dt-thumb.tw-ph,.phone .ma .dt-big .tw-ph,.mui.dp-done .dt-big .tw-ph{border-radius:0;box-shadow:none;filter:drop-shadow(0 12px 16px rgba(46,30,70,.35))}
+.dw-card > img{border-radius:0;box-shadow:none;filter:drop-shadow(0 18px 24px rgba(60,20,90,.4))}
+.dp-glow img{border-radius:0;filter:drop-shadow(0 0 3px rgba(255,255,255,.95)) drop-shadow(0 0 16px rgba(170,74,244,.6)) drop-shadow(0 0 30px rgba(250,151,226,.35))}
+.dp-glow.beam::before{content:none}
+.wpop-m img{border-radius:0!important}
+.wpop-m img{box-shadow:none;filter:drop-shadow(0 22px 26px rgba(70,20,100,.35))}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
