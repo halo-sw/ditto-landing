@@ -692,30 +692,13 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .bs-fr{--tx:clamp(120px,12vw,170px)}
 .bs-line{position:absolute;z-index:1;top:calc(50% - 12px);left:calc(50% - clamp(120px,12vw,170px));right:calc(50% - clamp(120px,12vw,170px));height:3px;border-radius:2px;background:linear-gradient(90deg,#AA4AF4,#FA97E2);box-shadow:0 0 12px rgba(170,74,244,.6);transform-origin:center;transition:transform .8s var(--ease) .15s}
 .bs-tag{position:absolute;z-index:4;left:50%;bottom:6px;transform:translateX(-50%);padding:6px 12px;border-radius:999px;background:var(--night);color:#FFFFFF;font-size:13px;font-weight:700;white-space:nowrap;transition:opacity .4s ease .5s,transform .5s var(--ease) .5s}
-.bs-fx{position:absolute;inset:0;z-index:5;pointer-events:none;display:none}
-.bs-fx i{position:absolute;left:50%;top:46%;width:30px;height:30px;margin:-15px 0 0 -15px;display:grid;place-items:center;font-style:normal;font-size:22px;line-height:1;opacity:0}
-.bs-fx i.w{border-radius:8px;background:center/cover var(--img);box-shadow:0 6px 12px -6px rgba(70,20,100,.5)}
-.bs-fx i.mk{background:center/contain no-repeat url(assets/dittobadge-32.svg)}
-.bs-fx i:nth-child(1){--x:-150px;--y:-96px;--r:-18deg}
-.bs-fx i:nth-child(2){--x:-60px;--y:-120px;--r:12deg}
-.bs-fx i:nth-child(3){--x:40px;--y:-118px;--r:-10deg}
-.bs-fx i:nth-child(4){--x:128px;--y:-92px;--r:16deg}
-.bs-fx i:nth-child(5){--x:178px;--y:-30px;--r:-8deg}
-.bs-fx i:nth-child(6){--x:150px;--y:70px;--r:20deg}
-.bs-fx i:nth-child(7){--x:60px;--y:104px;--r:-14deg}
-.bs-fx i:nth-child(8){--x:-48px;--y:110px;--r:10deg}
-.bs-fx i:nth-child(9){--x:-140px;--y:72px;--r:-20deg}
-.bs-fx i:nth-child(10){--x:-186px;--y:-20px;--r:8deg}
 /* JS: hidden until the hold completes; no JS: the finished state is shown */
 .js .burst:not(.on) .bs-av{opacity:0;transform:translateX(0) scale(.4)}
 .js .burst:not(.on) .bs-line{transform:scaleX(0)}
 .js .burst:not(.on) .bs-tag{opacity:0;transform:translate(-50%,8px)}
 .js .burst:not(.on) .bs-badge{opacity:0;transform:scale(.2)}
 .bs-badge{transition:transform .55s cubic-bezier(.34,1.7,.5,1) .1s,opacity .2s ease .1s}
-@media (prefers-reduced-motion:no-preference){.js .burst.on .bs-fx{display:block}
-.js .burst.on .bs-fx i{animation:bsFly 1.3s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--k,0) * 30ms)}
-.js .burst.on .bs-w{animation:bsPop .7s cubic-bezier(.3,1.6,.5,1) both}}
-@keyframes bsFly{0%{opacity:0;transform:scale(.3)}15%{opacity:1}70%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1.05)}}
+@media (prefers-reduced-motion:no-preference){.js .burst.on .bs-w{animation:bsPop .7s cubic-bezier(.3,1.6,.5,1) both}}
 @keyframes bsPop{0%{transform:none}35%{transform:scale(1.1) rotate(-3deg)}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){.bs-av,.bs-line,.bs-tag,.bs-badge{transition:opacity .2s linear!important}}
 .insight .hb-wrap{margin-top:16px}
@@ -797,8 +780,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .dto-from{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
 .dto-from img{flex:0 0 auto;width:26px;height:26px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #FFFFFF}
 .dto-from b{color:var(--ink)}
-.dto-why{margin:8px 0 0;font-size:14px;line-height:1.6;color:var(--ink)}
-.dto-why small{display:block;font-size:11.5px;font-weight:700;color:var(--violet-d);margin-bottom:1px}
 .rm-pf-room strong{display:block;margin-bottom:2px;font-size:15px;font-weight:700;letter-spacing:-.02em}
 /* ---------- misc ---------- */
 .close .t{max-width:30em;margin-inline:auto}
@@ -836,7 +817,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .ma-ind i:nth-child(3){height:calc(var(--u)*16)}
 .dmw{display:block;color:var(--ink-a);overflow:visible}
 /* 소라's text widget, drawn (no baked-in badges) */
-.tw-sora{display:block;text-align:left;border-radius:calc(var(--u)*22);background:#DDEBC1;color:#2E3A21;font-weight:600;font-size:calc(var(--u)*19);line-height:1.5;letter-spacing:-.03em;padding:calc(var(--u)*20) calc(var(--u)*22)}
 /* ---------- 04 concept: coded scenes ---------- */
 .cx-stage{position:relative}
 .cx-fig .phone{--pw:clamp(230px,20vw,280px)}
@@ -866,7 +846,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 @keyframes paBob{from{translate:0 0}to{translate:0 calc(var(--u)*-8)}}
 /* ditto: glowing widget → sheet → 3 s fill → 디토 완료 */
 .phone .ma .dt-bg{position:absolute;left:0;top:calc(var(--u)*40);width:100%;height:auto}
-.dt-glow{position:absolute;z-index:2;left:4.06%;top:calc(var(--u)*40 + 69.84cqw);width:44.84%;height:21.1cqw;border-radius:calc(var(--u)*14);box-shadow:0 0 0 calc(var(--u)*3) rgba(255,255,255,.9),0 0 calc(var(--u)*22) calc(var(--u)*6) rgba(170,74,244,.75);opacity:0}
+.dt-glow{position:absolute;z-index:2;left:3.98%;top:calc(var(--u)*40 + 69.65cqw);width:33.33%;height:45.02cqw;border-radius:calc(var(--u)*14);box-shadow:0 0 0 calc(var(--u)*3) rgba(255,255,255,.9),0 0 calc(var(--u)*22) calc(var(--u)*6) rgba(170,74,244,.75);opacity:0}
 .dt-sheet{transform:translateY(105%)}
 .dt-thumb{width:calc(var(--u)*120);margin:0 auto;font-size:calc(var(--u)*13);padding:calc(var(--u)*13) calc(var(--u)*14);border-radius:calc(var(--u)*14);box-shadow:0 10px 20px -12px rgba(46,58,33,.6)}
 .dt-h{display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*6);margin-top:calc(var(--u)*14);font-size:calc(var(--u)*17);font-weight:700}
@@ -889,7 +869,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .ma.dt.holding .dt-lbl .l2{display:inline}
 .dt-done{position:absolute;inset:0;z-index:7;display:flex;flex-direction:column;align-items:center;padding:calc(var(--u)*120) calc(var(--u)*22) 0;text-align:center;background:radial-gradient(90% 46% at 50% 26%,#EBD7FB,#FFFFFF 70%)}
 .dt-big{position:relative;display:block;width:calc(var(--u)*230);transform-origin:50% 60%}
-.dt-big .tw-sora{font-size:calc(var(--u)*30);padding:calc(var(--u)*28) calc(var(--u)*28) calc(var(--u)*64);border-radius:calc(var(--u)*30);box-shadow:0 30px 50px -26px rgba(46,58,33,.6)}
 .dt-badge{position:absolute;top:calc(var(--u)*-14);right:calc(var(--u)*-14);width:calc(var(--u)*50);height:calc(var(--u)*50);filter:drop-shadow(0 6px 10px rgba(77,69,97,.35))}
 .dt-k{margin-top:calc(var(--u)*30);font-size:calc(var(--u)*13);font-weight:700;color:var(--brand-t)}
 .dt-t{margin-top:calc(var(--u)*6);font-size:calc(var(--u)*22);font-weight:700}
@@ -1126,7 +1105,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .dp-sheet .dt-h{margin-top:calc(var(--u)*12)}
 .mui.dp-done{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--u)*20);background:radial-gradient(90% 50% at 50% 30%,#EBD7FB,rgba(255,255,255,0) 72%)}
 .dp-done .dt-big{width:calc(var(--u)*170)}
-.dp-done .dt-big .tw-sora{font-size:calc(var(--u)*24);padding:calc(var(--u)*22) calc(var(--u)*22) calc(var(--u)*48)}
 .dp-done .dt-k{margin-top:calc(var(--u)*22)}
 /* ---------- 5.3 rooms: profile area follows the active card (no tall empty gap) ---------- */
 .rm.is-js .rm-prof .rm-pf:not(.is-on){position:absolute;left:0;right:0;top:0}
@@ -1259,6 +1237,21 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .foot-glow .dg-row{filter:blur(calc((50cqw + var(--bleed)) / 22))}
 .foot-glow .grain{z-index:1;opacity:.3}
 .foot-end{z-index:2}
+/* =================== v23 (2026-10-13): R23 sample platters · photos are what's open for ditto =================== */
+.bs-card.bs-ph{display:block;width:100%;height:auto;aspect-ratio:1;padding:0;object-fit:cover;background:none}
+.tw-ph{display:block;width:100%;height:auto;border-radius:calc(var(--u)*18);box-shadow:0 14px 26px -14px rgba(46,30,70,.6)}
+.phone .ma .dt-thumb.tw-ph,.dt-thumb.tw-ph{width:calc(var(--u)*84);padding:0;border-radius:calc(var(--u)*12)}
+.phone .ma .dt-big .tw-ph,.dt-big .tw-ph{width:calc(var(--u)*150);margin:0 auto;border-radius:calc(var(--u)*24)}
+.dp-done .phone .ma .dt-big .tw-ph,.dt-big .tw-ph{width:calc(var(--u)*110)}
+.dp-dw{width:min(170px,56%)}
+.dw-card{position:relative;display:block}
+.dw-card > img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:0 26px 44px -26px rgba(60,20,90,.55),0 0 0 3px #FFFFFF}
+.dw-chip{position:absolute;left:8px;bottom:8px;display:inline-flex;align-items:center;gap:5px;padding:3px 9px 3px 3px;border-radius:999px;background:rgba(255,255,255,.92);font-size:11px;font-weight:700;color:var(--ink);box-shadow:0 4px 10px -6px rgba(0,0,0,.5)}
+.dw-chip img{width:18px;height:18px;border-radius:50%;object-fit:cover}
+.dw-badge{position:absolute;right:-8px;top:-8px;width:28px;height:28px;filter:drop-shadow(0 6px 10px rgba(90,30,140,.4))}
+.dp-dw .dp-c1{right:-6px;top:-44px}
+.dp-dw .dp-c2{left:-10px;bottom:-44px}
+.rm-pf-tags .tg-dt{color:var(--violet-d);background:color-mix(in srgb,var(--violet-d) 10%,#FFFFFF)}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -1299,18 +1292,18 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     </div>
 
     <figure class="hero-dev">
-      <span class="hf hf1" aria-hidden="true"><img src="assets/ws-sticker.webp" alt="" width="543" height="402"></span>
-      <span class="hf hf2" aria-hidden="true"><img src="assets/ws-dday.webp" alt="" width="258" height="258"></span>
-      <span class="hf hf3" aria-hidden="true"><img src="assets/ws-music.webp" alt="" width="543" height="543"></span>
+      <span class="hf hf1" aria-hidden="true"><img src="assets/ws-status.webp" alt="" width="543" height="258"></span>
+      <span class="hf hf2" aria-hidden="true"><img src="assets/ws-video.webp" alt="" width="543" height="402"></span>
+      <span class="hf hf3" aria-hidden="true"><img src="assets/ws-music.webp" alt="" width="543" height="402"></span>
       <div class="phone shadowed hero-phone">
         <div class="scr">
-          <img src="assets/hero-jiu.webp" alt="지우(@jiuallday)의 플래터 화면. ‘연습보다 수다가 길어’ 사진, 소라·나리와 찍은 ‘우리 너무 시끄러웠나’ 사진, 🎀 오늘 텐션 과다 상태, 연습실 GIF, ‘마지막 한 번만 5회째’ 사진, 소라에게서 디토한 💬 위젯, D-1 다시 모이는 날, 🎤 타일, ‘오늘 꽃 담당 나’ 사진, Perfect Night 음악 위젯이 붙어 있어요" width="804" height="1748" fetchpriority="high">
-          <button type="button" class="hs" popovertarget="wp-photo" style="left:27.612%;top:22.082%;width:68.408%;height:20.709%"><span class="sr">이미지 위젯 크게 보기</span></button>
-          <button type="button" class="hs" popovertarget="wp-status" style="left:27.612%;top:43.707%;width:45.025%;height:9.840%"><span class="sr">상태 위젯 크게 보기</span></button>
-          <button type="button" class="hs" popovertarget="wp-gif" style="left:74.627%;top:43.707%;width:21.393%;height:9.840%"><span class="sr">GIF 위젯 크게 보기</span></button>
-          <button type="button" class="hs hs-hint" popovertarget="wp-ditto" style="left:50.995%;top:54.577%;width:45.025%;height:15.332%"><span class="sr">디토 위젯 크게 보기</span></button>
-          <button type="button" class="hs" popovertarget="wp-dday" style="left:50.995%;top:70.824%;width:21.393%;height:9.840%"><span class="sr">D-Day 위젯 크게 보기</span></button>
-          <button type="button" class="hs" popovertarget="wp-music" style="left:50.995%;top:81.579%;width:45.025%;height:15.332%"><span class="sr">음악 위젯 크게 보기</span></button>
+          <img src="assets/hero-jiu.webp" alt="지우(@jiuallday)의 플래터 화면. 소라·나리와 촛불 앞에 모인 ‘🎂 초는 내가’ 사진, 🪩 목 20시, 🎀🪩💿 상태, 연습실 ‘🩰 한 번 더’ 사진, BLACKPINK GO 음악, 소라의 말을 적어 둔 ‘🧺 각자 좋아하는 간식 하나’, ‘GO · 연출 참고’ 영상이 붙어 있어요. 사진 세 장이 은은하게 빛나요" width="804" height="1748" fetchpriority="high">
+          <button type="button" class="hs" popovertarget="wp-photo" style="left:3.98%;top:15.789%;width:68.408%;height:20.709%"><span class="sr">이미지 위젯 크게 보기</span></button>
+          <button type="button" class="hs" popovertarget="wp-status" style="left:74.627%;top:26.659%;width:21.393%;height:9.84%"><span class="sr">상태 위젯 크게 보기</span></button>
+          <button type="button" class="hs hs-hint" popovertarget="wp-dance" style="left:3.98%;top:37.414%;width:33.333%;height:20.709%"><span class="sr">이미지 위젯 크게 보기</span></button>
+          <button type="button" class="hs" popovertarget="wp-music" style="left:39.303%;top:37.414%;width:45.025%;height:15.332%"><span class="sr">음악 위젯 크게 보기</span></button>
+          <button type="button" class="hs" popovertarget="wp-text" style="left:50.995%;top:75.286%;width:45.025%;height:9.84%"><span class="sr">텍스트 위젯 크게 보기</span></button>
+          <button type="button" class="hs" popovertarget="wp-video" style="left:3.98%;top:80.664%;width:45.025%;height:15.332%"><span class="sr">영상 위젯 크게 보기</span></button>
         </div>
       </div>
       <figcaption class="hero-cap"><span class="hc-dot" aria-hidden="true"></span>지우의 실제 플래터예요 · 위젯을 눌러 보세요</figcaption>
@@ -1319,45 +1312,45 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 
   <div class="wpop" id="wp-photo" popover role="dialog" aria-labelledby="wp-photo-t">
     <button type="button" class="wpop-x" popovertarget="wp-photo" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-photo.webp" alt="‘우리 너무 시끄러웠나’ 제목이 얹힌 지우·소라·나리의 사진 위젯" width="720" height="474" loading="lazy" style="--w:275;--rr:14"></div>
+    <div class="wpop-m"><img src="assets/hw-photo.webp" alt="촛불 앞에 모인 지우·소라·나리의 ‘🎂 초는 내가’ 사진 위젯" width="720" height="474" loading="lazy" style="--w:275;--rr:14"></div>
     <p class="wpop-k">이미지 · 지우·소라·나리</p>
-    <h2 class="wpop-t" id="wp-photo-t">셋이 너무 시끄러웠던 생일 밤.</h2>
-    <p class="wpop-d">모임이 끝나면 사진은 지우가 다 올려요. 뒤에서 은은하게 빛나는 건 디토를 허용했다는 표시라, 친구가 꾹 눌러 가져갈 수 있어요.</p>
+    <h2 class="wpop-t" id="wp-photo-t">🎂 초는 내가.</h2>
+    <p class="wpop-d">생일 케이크 초는 늘 지우 담당이에요. 뒤에서 은은하게 빛나는 건 디토를 열어 둔 사진이라는 표시라, 친구가 꾹 눌러 가져갈 수 있어요.</p>
   </div>
   <div class="wpop" id="wp-status" popover role="dialog" aria-labelledby="wp-status-t">
     <button type="button" class="wpop-x" popovertarget="wp-status" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-status.webp" alt="리본 이모지와 ‘오늘 텐션 과다’가 적힌 상태 위젯" width="543" height="258" loading="lazy" style="--w:181;--rr:13"></div>
+    <div class="wpop-m"><img src="assets/hw-status.webp" alt="리본, 미러볼, CD 이모지가 놓인 보라색 상태 위젯" width="258" height="258" loading="lazy" style="--w:86;--rr:12"></div>
     <p class="wpop-k">상태</p>
-    <h2 class="wpop-t" id="wp-status-t">🎀 오늘 텐션 과다.</h2>
-    <p class="wpop-d">이모지와 한 줄이면 돼요. 말하지 않아도 친구들이 오늘의 지우를 알아봐요.</p>
+    <h2 class="wpop-t" id="wp-status-t">🎀🪩💿</h2>
+    <p class="wpop-d">이모지 세 개면 돼요. 리본, 미러볼, CD — 말하지 않아도 오늘 지우가 어떤 기분인지 친구들이 알아봐요.</p>
   </div>
-  <div class="wpop" id="wp-gif" popover role="dialog" aria-labelledby="wp-gif-t">
-    <button type="button" class="wpop-x" popovertarget="wp-gif" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-gif.webp" alt="연습실 거울 앞에서 카메라를 든 지우의 GIF 위젯" width="258" height="258" loading="lazy" style="--w:86;--rr:12"></div>
-    <p class="wpop-k">GIF</p>
-    <h2 class="wpop-t" id="wp-gif-t">연습실 거울 앞, 움직이는 한 컷.</h2>
-    <p class="wpop-d">연습실엔 늘 마지막까지 남는 지우라서요. 작은 칸 하나로도 방에 리듬이 생겨요.</p>
-  </div>
-  <div class="wpop" id="wp-ditto" popover role="dialog" aria-labelledby="wp-ditto-t">
-    <button type="button" class="wpop-x" popovertarget="wp-ditto" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-ditto.webp" alt="말풍선 이모지와 @soramaybe 출처 칩, 디토 배지가 붙은 디토 위젯. 소라의 텍스트 ‘별일 없어도 모여’를 가져온 거예요" width="543" height="402" loading="lazy" style="--w:181;--rr:14"></div>
-    <p class="wpop-k">디토 · 소라에게서</p>
-    <h2 class="wpop-t" id="wp-ditto-t">소라의 한마디, ‘별일 없어도 모여’.</h2>
-    <p class="wpop-d">소라 방의 텍스트 위젯을 지우가 디토해 왔어요. 왼쪽 아래 칩이 누구에게서 왔는지, 오른쪽 위 배지가 디토했다는 표시예요.</p>
-  </div>
-  <div class="wpop" id="wp-dday" popover role="dialog" aria-labelledby="wp-dday-t">
-    <button type="button" class="wpop-x" popovertarget="wp-dday" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-dday.webp" alt="‘D-1 다시 모이는 날’ D-Day 위젯" width="258" height="258" loading="lazy" style="--w:86;--rr:12"></div>
-    <p class="wpop-k">D-Day</p>
-    <h2 class="wpop-t" id="wp-dday-t">D-1, 다시 모이는 날.</h2>
-    <p class="wpop-d">다음 모임이 방 한쪽에서 하루씩 가까워져요. 이제 하루 남았어요.</p>
+  <div class="wpop" id="wp-dance" popover role="dialog" aria-labelledby="wp-dance-t">
+    <button type="button" class="wpop-x" popovertarget="wp-dance" popovertargetaction="hide" aria-label="닫기">✕</button>
+    <div class="wpop-m"><img src="assets/hw-dance.webp" alt="연습실 거울 앞에서 휴대폰을 든 지우의 ‘🩰 한 번 더’ 사진 위젯" width="402" height="543" loading="lazy" style="--w:134;--rr:12"></div>
+    <p class="wpop-k">이미지 · 디토 열림</p>
+    <h2 class="wpop-t" id="wp-dance-t">🩰 한 번 더.</h2>
+    <p class="wpop-d">연습실엔 늘 마지막까지 남는 지우라서요. 이 사진도 빛나고 있어서 친구가 디토할 수 있어요. 지우가 디토를 열어 둔 사진은 세 장이에요.</p>
   </div>
   <div class="wpop" id="wp-music" popover role="dialog" aria-labelledby="wp-music-t">
     <button type="button" class="wpop-x" popovertarget="wp-music" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-music.webp" alt="LE SSERAFIM ‘Perfect Night’ CD가 놓인 음악 위젯" width="543" height="402" loading="lazy" style="--w:181;--rr:14"></div>
+    <div class="wpop-m"><img src="assets/hw-music.webp" alt="BLACKPINK ‘GO’ CD가 놓인 음악 위젯" width="543" height="402" loading="lazy" style="--w:181;--rr:14"></div>
     <p class="wpop-k">음악</p>
-    <h2 class="wpop-t" id="wp-music-t">Perfect Night · LE SSERAFIM</h2>
-    <p class="wpop-d">지우가 요즘 트는 노래예요. 소라도 이 위젯을 디토해 갔어요. 누르면 재생되고 CD가 돌아요.</p>
+    <h2 class="wpop-t" id="wp-music-t">GO · BLACKPINK</h2>
+    <p class="wpop-d">지우가 요즘 트는 노래예요. 누르면 재생되고 CD가 돌아요.</p>
+  </div>
+  <div class="wpop" id="wp-text" popover role="dialog" aria-labelledby="wp-text-t">
+    <button type="button" class="wpop-x" popovertarget="wp-text" popovertargetaction="hide" aria-label="닫기">✕</button>
+    <div class="wpop-m"><img src="assets/hw-text.webp" alt="‘🧺 각자 좋아하는 간식 하나’ 텍스트 위젯" width="543" height="258" loading="lazy" style="--w:181;--rr:14"></div>
+    <p class="wpop-k">텍스트 · 소라의 말</p>
+    <h2 class="wpop-t" id="wp-text-t">🧺 각자 좋아하는 간식 하나.</h2>
+    <p class="wpop-d">소라가 한 말을 지우가 직접 옮겨 적어 둔 메모예요. 디토로 가져온 게 아니라, 다음 모임의 규칙처럼 붙여 뒀어요.</p>
+  </div>
+  <div class="wpop" id="wp-video" popover role="dialog" aria-labelledby="wp-video-t">
+    <button type="button" class="wpop-x" popovertarget="wp-video" popovertargetaction="hide" aria-label="닫기">✕</button>
+    <div class="wpop-m"><img src="assets/hw-video.webp" alt="‘GO · 연출 참고’ 유튜브 영상 위젯" width="543" height="402" loading="lazy" style="--w:181;--rr:14"></div>
+    <p class="wpop-k">영상</p>
+    <h2 class="wpop-t" id="wp-video-t">🪩 GO · 연출 참고.</h2>
+    <p class="wpop-d">다음 무대 연출을 고를 때 보는 영상이에요. 누르면 플래터 위에서 바로 재생돼요.</p>
   </div>
 </section>
 
@@ -1496,22 +1489,22 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <div class="people">
       <article class="pc" id="pc-haeun" aria-labelledby="pc-haeun-n">
         <div class="pc-in">
-          <figure class="pc-face pc-front person"><img src="assets/tp-haeun.webp" alt="도서관 창가 자리에서 이어폰을 끼고 노트를 넘기는 하은" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-haeun-n">하은</h4><div class="role">19 · 대학 새내기 · 처음 들어온 유저</div><q>친구가 찍어준 건 올릴 수 있겠어.</q></figcaption></figure>
-          <div class="pc-face pc-back" id="pc-haeun-b"><p class="pc-bk"><span class="disp">하은</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“대학 새내기예요. 조심스러운데, 구경하는 건 좋아해요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“친구가 찍어 준 건 올릴 수 있겠더라고요. 일단 한 장부터.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“창가 자리 한 장, 나리랑 찍은 한 장. 밤에 하나씩 올려요.”</dd></div><div><dt>Q. 뭘, 왜 디토했어요?</dt><dd>“나리의 ‘천천히 만들어도 돼’요. 첫 업로드를 같이 해 줬거든요.”</dd></div></dl></div>
+          <figure class="pc-face pc-front person"><img src="assets/tp-haeun.webp" alt="도서관 창가 자리에서 이어폰을 끼고 노트를 넘기는 하은" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-haeun-n">하은</h4><div class="role">19 · 대학 새내기 · 처음 들어온 유저</div><q>낮이랑 밤 사진 한 장씩.</q></figcaption></figure>
+          <div class="pc-face pc-back" id="pc-haeun-b"><p class="pc-bk"><span class="disp">하은</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“대학 새내기예요. 조심스러운데, 구경하는 건 좋아해요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“모르는 사람이 많이 보는 곳보다, 몇 명이 찾아오는 방이 좋아서요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“낮이랑 밤 사진 한 장씩. 책도 음악도 조금씩 같이 둬요.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어요?</dt><dd>“나리가 한 말, ‘삐뚤어도 손에 맞는 내 컵’. 첫 사진을 같이 올려 줬거든요.”</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-haeun-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">하은 인터뷰 뒤집어 보기</span></button>
       </article>
       <article class="pc" id="pc-jiu" aria-labelledby="pc-jiu-n">
         <div class="pc-in">
           <figure class="pc-face pc-front person"><img src="assets/tp-jiu.webp" alt="햇살 드는 골목에서 꽃다발을 안고 돌아보며 웃는 지우" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-jiu-n">지우</h4><div class="role">22 · 영상 전공·댄스 동아리 · 진짜 인싸 유저</div><q>오늘 사진은 내가 다 올림.</q></figcaption></figure>
-          <div class="pc-face pc-back" id="pc-jiu-b"><p class="pc-bk"><span class="disp">지우</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이야?</dt><dd>“영상 전공에 댄스 동아리. 연습실엔 늘 마지막까지 있어.”</dd></div><div><dt>Q. 왜 Ditto를 써?</dt><dd>“오늘 사진은 내가 다 올림. 다들 기억하는 장면 덧붙여 줘!”</dd></div><div><dt>Q. 방은 어떻게 써?</dt><dd>“연습실부터 생일까지 그대로 붙여. ‘마지막 한 번만’이 벌써 5회째.”</dd></div><div><dt>Q. 뭘, 왜 디토했어?</dt><dd>“소라의 ‘별일 없어도 모여’. 그 말대로 D-1, 또 모여.”</dd></div></dl></div>
+          <div class="pc-face pc-back" id="pc-jiu-b"><p class="pc-bk"><span class="disp">지우</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이야?</dt><dd>“영상 전공에 댄스 동아리. 연습실엔 늘 마지막까지 있어.”</dd></div><div><dt>Q. 왜 Ditto를 써?</dt><dd>“오늘 사진은 내가 다 올림. 다들 기억하는 장면 덧붙여 줘!”</dd></div><div><dt>Q. 방은 어떻게 써?</dt><dd>“연습실에서 생일까지 계속 재생. 제일 많이 붙은 말은 ‘한 번 더’.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어?</dt><dd>“소라가 한 ‘각자 좋아하는 간식 하나’. 목요일 20시에 또 모여.”</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-jiu-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">지우 인터뷰 뒤집어 보기</span></button>
       </article>
       <article class="pc" id="pc-seoyun" aria-labelledby="pc-seoyun-n">
         <div class="pc-in">
           <figure class="pc-face pc-front person"><img src="assets/tp-seoyun.webp" alt="맑은 날 강가 난간에서 카메라로 사진을 찍는 서윤" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-seoyun-n">서윤</h4><div class="role">22 · 미디어학 전공 · 세계관이 확실한 유저</div><q>프로필을 보면 이번 주 내가 보였으면.</q></figcaption></figure>
-          <div class="pc-face pc-back" id="pc-seoyun-b"><p class="pc-bk"><span class="disp">서윤</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“미디어학 전공이에요. 지금 끌리는 색이랑 소재를 오래 봐요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“프로필을 보면 이번 주의 내가 보였으면 해서요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“이번 주는 올리브. 빛, 벽 색, 레코드 질감을 모아 편집해요.”</dd></div><div><dt>Q. 뭘, 왜 디토했어요?</dt><dd>“예서의 ‘빛 좋은 날을 모아’. 같이 빛 찾으러 나가는 친구라서요.”</dd></div></dl></div>
+          <div class="pc-face pc-back" id="pc-seoyun-b"><p class="pc-bk"><span class="disp">서윤</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“미디어학 전공이에요. 지금 끌리는 색이랑 소재를 오래 봐요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“프로필을 보면 이번 주의 내가 보였으면 해서요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“초록을 모으는 순서예요. 빛, 기록, 그리고 다음 전시.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어요?</dt><dd>“예서의 ‘오늘 빛은 조금 흐린 쪽’. 같이 빛 찾으러 나가는 친구라서요.”</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-seoyun-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">서윤 인터뷰 뒤집어 보기</span></button>
       </article>
@@ -1534,9 +1527,8 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
           <span class="bs-line" aria-hidden="true"></span>
           <span class="bs-av bs-me"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b></span>
           <span class="bs-av bs-fr"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b></span>
-          <figure class="bs-w" id="bsW"><p class="bs-card" role="img" aria-label="재민의 한 줄 일기 위젯. 돌아오는 기차에서는 말을 조금 덜 했다. 창밖이 좋아서.">돌아오는 기차에서는 말을 조금 덜 했다. 창밖이 좋아서.</p><svg class="bs-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></figure>
+          <figure class="bs-w" id="bsW"><img class="bs-card bs-ph" src="assets/ws-image.webp" alt="재민의 ‘🚃 창밖 저장’ 사진 위젯" width="543" height="543"><svg class="bs-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></figure>
           <span class="bs-tag" aria-hidden="true">같은 조각 +1</span>
-          <span class="bs-fx" aria-hidden="true"><i>❤️</i><i>🤍</i><i class="w" style="--img:url(assets/hw-dday.webp)"></i><i>💜</i><i class="mk"></i><i>❤️‍🔥</i><i class="w" style="--img:url(assets/hw-gif.webp)"></i><i>⭐️</i><i class="mk"></i><i>💗</i></span>
         </div>
         <div class="hb-wrap" id="hbWrap">
           <span class="hb-glow" aria-hidden="true"></span>
@@ -1547,7 +1539,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
             <span class="hb-lbl"><svg aria-hidden="true"><use href="#mk"/></svg><span id="holdText">꾹 눌러 디토하기</span></span>
           </button>
         </div>
-        <p class="hold-note" id="holdNote" role="status">준이 재민의 한 줄 일기를 디토하는 순간이에요. 3초 동안 꾹 눌러 보세요. 키보드는 스페이스나 엔터를 누르고 있으면 돼요.</p>
+        <p class="hold-note" id="holdNote" role="status">준이 재민의 ‘🚃 창밖 저장’ 사진을 디토하는 순간이에요. 3초 동안 꾹 눌러 보세요. 키보드는 스페이스나 엔터를 누르고 있으면 돼요.</p>
       </div>
     </div>
   </div>
@@ -1569,7 +1561,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
           </li>
           <li class="cx-item">
             <button type="button" class="cx-pill" id="cx-b1" aria-expanded="true" aria-controls="cx-d1"><span class="pl" aria-hidden="true"></span>디토</button>
-            <div class="cx-card" id="cx-d1"><p><b>꾹 눌러, 나도.</b> 친구 방에서 빛나는 위젯을 골라 대표와 라이프 중 둘 곳을 정하고, 3초 동안 꾹 누르면 내 플래터로 와요. 누구에게서 왔는지 그대로 남아요.</p></div>
+            <div class="cx-card" id="cx-d1"><p><b>꾹 눌러, 나도.</b> 친구 방에서 빛나는 사진을 골라 대표와 라이프 중 둘 곳을 정하고, 3초 동안 꾹 누르면 내 플래터로 와요. 누구에게서 왔는지 그대로 남아요.</p></div>
           </li>
           <li class="cx-item">
             <button type="button" class="cx-pill" id="cx-b2" aria-expanded="true" aria-controls="cx-d2"><span class="pl" aria-hidden="true"></span>주파수</button>
@@ -1578,37 +1570,37 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
         </ul>
       </div>
       <div class="cx-stage" id="cxStage">
-        <figure class="cx-fig is-on"><div class="phone shadowed"><div class="ma pa" data-anim="platter" role="img" aria-label="지우의 위젯 열 개가 작게 옹기종기 모였다가, 하나씩 제자리를 찾아 지우의 플래터가 완성돼요">
-          <img class="pa-head" src="assets/pa-head.webp" alt="" width="804" height="376">
-<span class="pa-slot" style="left:27.612%;top:22.082%;width:68.408%;height:20.709%;--i:0"></span>
-<span class="pa-slot" style="left:4.104%;top:22.082%;width:21.144%;height:31.350%;--i:1"></span>
-<span class="pa-slot" style="left:27.612%;top:43.707%;width:44.776%;height:9.725%;--i:2"></span>
-<span class="pa-slot" style="left:74.627%;top:43.707%;width:21.393%;height:9.725%;--i:3"></span>
-<span class="pa-slot" style="left:50.995%;top:54.577%;width:45.025%;height:15.217%;--i:4"></span>
-<span class="pa-slot" style="left:4.104%;top:54.577%;width:44.900%;height:20.709%;--i:5"></span>
-<span class="pa-slot" style="left:50.995%;top:70.824%;width:21.393%;height:9.840%;--i:6"></span>
-<span class="pa-slot" style="left:74.627%;top:70.824%;width:21.393%;height:9.840%;--i:7"></span>
-<span class="pa-slot" style="left:50.995%;top:81.579%;width:45.025%;height:15.332%;--i:8"></span>
-<span class="pa-slot" style="left:4.104%;top:76.316%;width:44.900%;height:14.989%;--i:9"></span>
-<span class="pa-t pa-loud" style="left:27.612%;top:22.082%;width:68.408%;height:20.709%;--i:0;--hx:-7.82;--hy:21.48;--hr:4;--sx:14.18;--sy:-14.52;--sr:10"><img src="assets/pa-loud.webp" alt="" width="550" height="362" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-talk" style="left:4.104%;top:22.082%;width:21.144%;height:31.350%;--i:1;--hx:18.32;--hy:23.91;--hr:-6;--sx:-2.68;--sy:-22.09;--sr:-14"><img src="assets/pa-talk.webp" alt="" width="170" height="548" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-status" style="left:27.612%;top:43.707%;width:44.776%;height:9.725%;--i:2;--hx:14.00;--hy:4.40;--hr:-5;--sx:-20.00;--sy:-13.60;--sr:9"><img src="assets/pa-status.webp" alt="" width="360" height="170" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-gif" style="left:74.627%;top:43.707%;width:21.393%;height:9.725%;--i:3;--hx:-41.32;--hy:10.40;--hr:8;--sx:0.68;--sy:-1.60;--sr:-12"><img src="assets/pa-gif.webp" alt="" width="172" height="170" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-sora" style="left:50.995%;top:54.577%;width:45.025%;height:15.217%;--i:4;--hx:-11.51;--hy:-9.20;--hr:-4;--sx:-3.51;--sy:14.80;--sr:-9"><img src="assets/pa-sora.webp" alt="" width="362" height="266" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-last" style="left:4.104%;top:54.577%;width:44.900%;height:20.709%;--i:5;--hx:9.45;--hy:-13.17;--hr:3;--sx:-10.55;--sy:-1.17;--sr:7"><img src="assets/pa-last.webp" alt="" width="361" height="362" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-dday" style="left:50.995%;top:70.824%;width:21.393%;height:9.840%;--i:6;--hx:-9.69;--hy:-26.68;--hr:6;--sx:-21.69;--sy:17.32;--sr:14"><img src="assets/pa-dday.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-mic" style="left:74.627%;top:70.824%;width:21.393%;height:9.840%;--i:7;--hx:-57.32;--hy:-22.68;--hr:-8;--sx:2.68;--sy:21.32;--sr:12"><img src="assets/pa-mic.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-music" style="left:50.995%;top:81.579%;width:45.025%;height:15.332%;--i:8;--hx:-24.51;--hy:-84.03;--hr:-3;--sx:-13.51;--sy:-74.03;--sr:8"><img src="assets/pa-music.webp" alt="" width="362" height="268" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-flower" style="left:4.104%;top:76.316%;width:44.900%;height:14.989%;--i:9;--hx:44.45;--hy:-40.21;--hr:5;--sx:-4.55;--sy:13.79;--sr:-10"><img src="assets/pa-flower.webp" alt="" width="361" height="262" loading="lazy" decoding="async"></span>
+        <figure class="cx-fig is-on"><div class="phone shadowed"><div class="ma pa" data-anim="platter" role="img" aria-label="지우의 위젯 열 개가 작게 옹기종기 모였다가, 하나씩 제자리를 찾아 지우의 플래터가 완성돼요. 사진 세 장은 디토할 수 있게 빛나요">
+          <img class="pa-head" src="assets/pa-head.webp" alt="" width="804" height="268">
+<span class="pa-slot" style="left:3.980%;top:15.789%;width:68.408%;height:20.709%;--i:0"></span>
+<span class="pa-slot" style="left:3.980%;top:37.414%;width:33.333%;height:20.709%;--i:1"></span>
+<span class="pa-slot" style="left:74.627%;top:15.789%;width:21.393%;height:9.840%;--i:2"></span>
+<span class="pa-slot" style="left:74.627%;top:26.659%;width:21.393%;height:9.840%;--i:3"></span>
+<span class="pa-slot" style="left:50.995%;top:75.286%;width:45.025%;height:9.840%;--i:4"></span>
+<span class="pa-slot" style="left:39.303%;top:53.661%;width:33.333%;height:20.709%;--i:5"></span>
+<span class="pa-slot" style="left:3.980%;top:80.664%;width:45.025%;height:15.332%;--i:6"></span>
+<span class="pa-slot" style="left:50.995%;top:86.156%;width:45.025%;height:13.844%;--i:7"></span>
+<span class="pa-slot" style="left:39.303%;top:37.414%;width:45.025%;height:15.332%;--i:8"></span>
+<span class="pa-slot" style="left:3.980%;top:59.039%;width:33.333%;height:20.709%;--i:9"></span>
+<span class="pa-t pa-cake" style="left:3.980%;top:15.789%;width:68.408%;height:20.709%;--i:0;--hx:15.82;--hy:35.16;--hr:4;--sx:37.82;--sy:-0.84;--sr:10"><img src="assets/pa-cake.webp" alt="" width="550" height="362" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-dance" style="left:3.980%;top:37.414%;width:33.333%;height:20.709%;--i:1;--hx:12.35;--hy:2.14;--hr:-6;--sx:-8.65;--sy:-43.86;--sr:-14"><img src="assets/pa-dance.webp" alt="" width="268" height="362" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-day" style="left:74.627%;top:15.789%;width:21.393%;height:9.840%;--i:2;--hx:-21.32;--hy:64.98;--hr:-5;--sx:-55.32;--sy:46.98;--sr:9"><img src="assets/pa-day.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-status" style="left:74.627%;top:26.659%;width:21.393%;height:9.840%;--i:3;--hx:-41.32;--hy:47.34;--hr:8;--sx:0.68;--sy:35.34;--sr:-12"><img src="assets/pa-status.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-sora" style="left:50.995%;top:75.286%;width:45.025%;height:9.840%;--i:4;--hx:-11.51;--hy:-48.38;--hr:-4;--sx:-3.51;--sy:-24.38;--sr:-9"><img src="assets/pa-sora.webp" alt="" width="362" height="172" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-flash" style="left:39.303%;top:53.661%;width:33.333%;height:20.709%;--i:5;--hx:-19.97;--hy:-11.18;--hr:3;--sx:-39.97;--sy:0.82;--sr:7"><img src="assets/pa-flash.webp" alt="" width="268" height="362" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-video" style="left:3.980%;top:80.664%;width:45.025%;height:15.332%;--i:6;--hx:25.51;--hy:-54.04;--hr:6;--sx:13.51;--sy:-10.04;--sr:14"><img src="assets/pa-video.webp" alt="" width="362" height="268" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-guest" style="left:50.995%;top:86.156%;width:45.025%;height:13.844%;--i:7;--hx:-45.51;--hy:-60.36;--hr:-8;--sx:14.49;--sy:-16.36;--sr:12"><img src="assets/pa-guest.webp" alt="" width="362" height="242" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-music" style="left:39.303%;top:37.414%;width:45.025%;height:15.332%;--i:8;--hx:-12.82;--hy:11.99;--hr:-3;--sx:-1.82;--sy:21.99;--sr:8"><img src="assets/pa-music.webp" alt="" width="362" height="268" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-flowers" style="left:3.980%;top:59.039%;width:33.333%;height:20.709%;--i:9;--hx:50.35;--hy:-8.87;--hr:5;--sx:1.35;--sy:45.13;--sr:-10"><img src="assets/pa-flowers.webp" alt="" width="268" height="362" loading="lazy" decoding="async"></span>
           <span class="pa-chip"><b>+</b>위젯 추가하기</span>
         </div></div></figure>
-        <figure class="cx-fig"><div class="phone shadowed"><div class="ma dt" data-anim="ditto" role="img" aria-label="지우가 소라의 플래터에서 빛나는 ‘별일 없어도 모여’ 위젯을 꾹 눌러요. 라이프에 두기로 하고 디토 버튼을 3초 누르면 보랏빛이 차오르고, 디토 완료 화면이 떠요">
+        <figure class="cx-fig"><div class="phone shadowed"><div class="ma dt" data-anim="ditto" role="img" aria-label="지우가 소라의 플래터에서 빛나는 ‘🧺 간식 부자’ 사진을 꾹 눌러요. 라이프에 두기로 하고 디토 버튼을 3초 누르면 보랏빛이 차오르고, 디토 완료 화면이 떠요">
           <img class="dt-bg" src="assets/rooms/room-03-sora.webp" alt="" width="640" height="1392" loading="lazy">
           <span class="dt-glow"></span>
           <span class="ma-dim"></span>
           <div class="ma-sheet dt-sheet">
             <span class="ma-grab"></span>
-            <span class="tw-sora dt-thumb">별일 없어도<br>모여</span>
+            <img class="tw-ph dt-thumb" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy">
             <p class="dt-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>내 플래터로 가져오기</p>
             <p class="dt-sub"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">소라님의 위젯 · 주파수가 번지는 중</p>
             <p class="dt-q">어디에 둘까요?</p>
@@ -1616,9 +1608,9 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
             <div class="dt-btn"><span class="dt-fill"></span><span class="dt-lbl"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg><b class="l1">꾹 눌러 디토하기</b><b class="l2">계속 누르세요</b></span></div>
           </div>
           <div class="dt-done">
-            <span class="dt-big"><span class="tw-sora">별일 없어도<br>모여</span><svg class="dt-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span>
+            <span class="dt-big"><img class="tw-ph" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><svg class="dt-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span>
             <p class="dt-k">디토 완료</p>
-            <p class="dt-t">별일 없어도 모여</p>
+            <p class="dt-t">🧺 간식 부자</p>
             <p class="dt-d">라이프 플래터에 자리를 내줬어요</p>
             <p class="dt-date">10월 13일에 가져옴</p>
             <span class="dt-from"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>소라에게서 가져옴</span>
@@ -1641,7 +1633,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
           <div class="fq-row"><img class="ma-av" src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><span><b>서윤</b><small>내 위젯 2개를 디토했어요</small></span><svg class="dmw " viewBox="0 0 80 36" data-s="0.67" aria-hidden="true" focusable="false"><g fill-opacity=".13"><circle cx="2.4" cy="2.0" r="0.57"/><circle cx="2.4" cy="6.0" r="0.85"/><circle cx="2.4" cy="10.0" r="1.13"/><circle cx="2.4" cy="14.0" r="1.40"/><circle cx="2.4" cy="18.0" r="1.68"/><circle cx="2.4" cy="22.0" r="1.40"/><circle cx="2.4" cy="26.0" r="1.13"/><circle cx="2.4" cy="30.0" r="0.85"/><circle cx="2.4" cy="34.0" r="0.57"/><circle cx="7.1" cy="2.0" r="0.57"/><circle cx="7.1" cy="6.0" r="0.85"/><circle cx="7.1" cy="10.0" r="1.13"/><circle cx="7.1" cy="14.0" r="1.40"/><circle cx="7.1" cy="18.0" r="1.68"/><circle cx="7.1" cy="22.0" r="1.40"/><circle cx="7.1" cy="26.0" r="1.13"/><circle cx="7.1" cy="30.0" r="0.85"/><circle cx="7.1" cy="34.0" r="0.57"/><circle cx="11.8" cy="2.0" r="0.57"/><circle cx="11.8" cy="6.0" r="0.85"/><circle cx="11.8" cy="10.0" r="1.13"/><circle cx="11.8" cy="14.0" r="1.40"/><circle cx="11.8" cy="22.0" r="1.40"/><circle cx="11.8" cy="26.0" r="1.13"/><circle cx="11.8" cy="30.0" r="0.85"/><circle cx="11.8" cy="34.0" r="0.57"/><circle cx="16.5" cy="2.0" r="0.57"/><circle cx="16.5" cy="6.0" r="0.85"/><circle cx="16.5" cy="10.0" r="1.13"/><circle cx="16.5" cy="14.0" r="1.40"/><circle cx="16.5" cy="22.0" r="1.40"/><circle cx="16.5" cy="26.0" r="1.13"/><circle cx="16.5" cy="30.0" r="0.85"/><circle cx="16.5" cy="34.0" r="0.57"/><circle cx="21.2" cy="2.0" r="0.57"/><circle cx="21.2" cy="6.0" r="0.85"/><circle cx="21.2" cy="30.0" r="0.85"/><circle cx="21.2" cy="34.0" r="0.57"/><circle cx="25.9" cy="2.0" r="0.57"/><circle cx="25.9" cy="6.0" r="0.85"/><circle cx="25.9" cy="10.0" r="1.13"/><circle cx="25.9" cy="14.0" r="1.40"/><circle cx="25.9" cy="22.0" r="1.40"/><circle cx="25.9" cy="26.0" r="1.13"/><circle cx="25.9" cy="30.0" r="0.85"/><circle cx="25.9" cy="34.0" r="0.57"/><circle cx="30.6" cy="2.0" r="0.57"/><circle cx="30.6" cy="6.0" r="0.85"/><circle cx="30.6" cy="10.0" r="1.13"/><circle cx="30.6" cy="26.0" r="1.13"/><circle cx="30.6" cy="30.0" r="0.85"/><circle cx="30.6" cy="34.0" r="0.57"/><circle cx="35.3" cy="2.0" r="0.57"/><circle cx="35.3" cy="6.0" r="0.85"/><circle cx="35.3" cy="10.0" r="1.13"/><circle cx="35.3" cy="14.0" r="1.40"/><circle cx="35.3" cy="22.0" r="1.40"/><circle cx="35.3" cy="26.0" r="1.13"/><circle cx="35.3" cy="30.0" r="0.85"/><circle cx="35.3" cy="34.0" r="0.57"/><circle cx="40.0" cy="2.0" r="0.57"/><circle cx="40.0" cy="34.0" r="0.57"/><circle cx="44.7" cy="2.0" r="0.57"/><circle cx="44.7" cy="6.0" r="0.85"/><circle cx="44.7" cy="10.0" r="1.13"/><circle cx="44.7" cy="14.0" r="1.40"/><circle cx="44.7" cy="22.0" r="1.40"/><circle cx="44.7" cy="26.0" r="1.13"/><circle cx="44.7" cy="30.0" r="0.85"/><circle cx="44.7" cy="34.0" r="0.57"/><circle cx="49.4" cy="2.0" r="0.57"/><circle cx="49.4" cy="6.0" r="0.85"/><circle cx="49.4" cy="10.0" r="1.13"/><circle cx="49.4" cy="26.0" r="1.13"/><circle cx="49.4" cy="30.0" r="0.85"/><circle cx="49.4" cy="34.0" r="0.57"/><circle cx="54.1" cy="2.0" r="0.57"/><circle cx="54.1" cy="6.0" r="0.85"/><circle cx="54.1" cy="10.0" r="1.13"/><circle cx="54.1" cy="14.0" r="1.40"/><circle cx="54.1" cy="22.0" r="1.40"/><circle cx="54.1" cy="26.0" r="1.13"/><circle cx="54.1" cy="30.0" r="0.85"/><circle cx="54.1" cy="34.0" r="0.57"/><circle cx="58.8" cy="2.0" r="0.57"/><circle cx="58.8" cy="6.0" r="0.85"/><circle cx="58.8" cy="30.0" r="0.85"/><circle cx="58.8" cy="34.0" r="0.57"/><circle cx="63.5" cy="2.0" r="0.57"/><circle cx="63.5" cy="6.0" r="0.85"/><circle cx="63.5" cy="10.0" r="1.13"/><circle cx="63.5" cy="14.0" r="1.40"/><circle cx="63.5" cy="22.0" r="1.40"/><circle cx="63.5" cy="26.0" r="1.13"/><circle cx="63.5" cy="30.0" r="0.85"/><circle cx="63.5" cy="34.0" r="0.57"/><circle cx="68.2" cy="2.0" r="0.57"/><circle cx="68.2" cy="6.0" r="0.85"/><circle cx="68.2" cy="10.0" r="1.13"/><circle cx="68.2" cy="14.0" r="1.40"/><circle cx="68.2" cy="22.0" r="1.40"/><circle cx="68.2" cy="26.0" r="1.13"/><circle cx="68.2" cy="30.0" r="0.85"/><circle cx="68.2" cy="34.0" r="0.57"/><circle cx="72.9" cy="2.0" r="0.57"/><circle cx="72.9" cy="6.0" r="0.85"/><circle cx="72.9" cy="10.0" r="1.13"/><circle cx="72.9" cy="14.0" r="1.40"/><circle cx="72.9" cy="18.0" r="1.68"/><circle cx="72.9" cy="22.0" r="1.40"/><circle cx="72.9" cy="26.0" r="1.13"/><circle cx="72.9" cy="30.0" r="0.85"/><circle cx="72.9" cy="34.0" r="0.57"/><circle cx="77.6" cy="2.0" r="0.57"/><circle cx="77.6" cy="6.0" r="0.85"/><circle cx="77.6" cy="10.0" r="1.13"/><circle cx="77.6" cy="14.0" r="1.40"/><circle cx="77.6" cy="18.0" r="1.68"/><circle cx="77.6" cy="22.0" r="1.40"/><circle cx="77.6" cy="26.0" r="1.13"/><circle cx="77.6" cy="30.0" r="0.85"/><circle cx="77.6" cy="34.0" r="0.57"/></g><g><circle class="d" fill-opacity="0.80" cx="11.8" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="16.5" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="25.9" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="30.6" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="30.6" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="30.6" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="35.3" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="6.0" r="0.85"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="30.0" r="0.85"/><circle class="d" fill-opacity="0.80" cx="44.7" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="49.4" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="49.4" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="49.4" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="54.1" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="63.5" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="68.2" cy="18.0" r="1.68"/></g></svg></div>
           <div class="fq-row"><img class="ma-av" src="assets/rooms/rav-rian.webp" alt="" width="144" height="144" loading="lazy"><span><b>리안</b><small>내 위젯 1개를 디토했어요</small></span><svg class="dmw " viewBox="0 0 80 36" data-s="0.33" aria-hidden="true" focusable="false"><g fill-opacity=".13"><circle cx="2.4" cy="2.0" r="0.57"/><circle cx="2.4" cy="6.0" r="0.85"/><circle cx="2.4" cy="10.0" r="1.13"/><circle cx="2.4" cy="14.0" r="1.40"/><circle cx="2.4" cy="18.0" r="1.68"/><circle cx="2.4" cy="22.0" r="1.40"/><circle cx="2.4" cy="26.0" r="1.13"/><circle cx="2.4" cy="30.0" r="0.85"/><circle cx="2.4" cy="34.0" r="0.57"/><circle cx="7.1" cy="2.0" r="0.57"/><circle cx="7.1" cy="6.0" r="0.85"/><circle cx="7.1" cy="10.0" r="1.13"/><circle cx="7.1" cy="14.0" r="1.40"/><circle cx="7.1" cy="18.0" r="1.68"/><circle cx="7.1" cy="22.0" r="1.40"/><circle cx="7.1" cy="26.0" r="1.13"/><circle cx="7.1" cy="30.0" r="0.85"/><circle cx="7.1" cy="34.0" r="0.57"/><circle cx="11.8" cy="2.0" r="0.57"/><circle cx="11.8" cy="6.0" r="0.85"/><circle cx="11.8" cy="10.0" r="1.13"/><circle cx="11.8" cy="14.0" r="1.40"/><circle cx="11.8" cy="22.0" r="1.40"/><circle cx="11.8" cy="26.0" r="1.13"/><circle cx="11.8" cy="30.0" r="0.85"/><circle cx="11.8" cy="34.0" r="0.57"/><circle cx="16.5" cy="2.0" r="0.57"/><circle cx="16.5" cy="6.0" r="0.85"/><circle cx="16.5" cy="10.0" r="1.13"/><circle cx="16.5" cy="14.0" r="1.40"/><circle cx="16.5" cy="22.0" r="1.40"/><circle cx="16.5" cy="26.0" r="1.13"/><circle cx="16.5" cy="30.0" r="0.85"/><circle cx="16.5" cy="34.0" r="0.57"/><circle cx="21.2" cy="2.0" r="0.57"/><circle cx="21.2" cy="6.0" r="0.85"/><circle cx="21.2" cy="30.0" r="0.85"/><circle cx="21.2" cy="34.0" r="0.57"/><circle cx="25.9" cy="2.0" r="0.57"/><circle cx="25.9" cy="6.0" r="0.85"/><circle cx="25.9" cy="10.0" r="1.13"/><circle cx="25.9" cy="14.0" r="1.40"/><circle cx="25.9" cy="22.0" r="1.40"/><circle cx="25.9" cy="26.0" r="1.13"/><circle cx="25.9" cy="30.0" r="0.85"/><circle cx="25.9" cy="34.0" r="0.57"/><circle cx="30.6" cy="2.0" r="0.57"/><circle cx="30.6" cy="6.0" r="0.85"/><circle cx="30.6" cy="10.0" r="1.13"/><circle cx="30.6" cy="26.0" r="1.13"/><circle cx="30.6" cy="30.0" r="0.85"/><circle cx="30.6" cy="34.0" r="0.57"/><circle cx="35.3" cy="2.0" r="0.57"/><circle cx="35.3" cy="6.0" r="0.85"/><circle cx="35.3" cy="10.0" r="1.13"/><circle cx="35.3" cy="14.0" r="1.40"/><circle cx="35.3" cy="22.0" r="1.40"/><circle cx="35.3" cy="26.0" r="1.13"/><circle cx="35.3" cy="30.0" r="0.85"/><circle cx="35.3" cy="34.0" r="0.57"/><circle cx="40.0" cy="2.0" r="0.57"/><circle cx="40.0" cy="34.0" r="0.57"/><circle cx="44.7" cy="2.0" r="0.57"/><circle cx="44.7" cy="6.0" r="0.85"/><circle cx="44.7" cy="10.0" r="1.13"/><circle cx="44.7" cy="14.0" r="1.40"/><circle cx="44.7" cy="22.0" r="1.40"/><circle cx="44.7" cy="26.0" r="1.13"/><circle cx="44.7" cy="30.0" r="0.85"/><circle cx="44.7" cy="34.0" r="0.57"/><circle cx="49.4" cy="2.0" r="0.57"/><circle cx="49.4" cy="6.0" r="0.85"/><circle cx="49.4" cy="10.0" r="1.13"/><circle cx="49.4" cy="26.0" r="1.13"/><circle cx="49.4" cy="30.0" r="0.85"/><circle cx="49.4" cy="34.0" r="0.57"/><circle cx="54.1" cy="2.0" r="0.57"/><circle cx="54.1" cy="6.0" r="0.85"/><circle cx="54.1" cy="10.0" r="1.13"/><circle cx="54.1" cy="14.0" r="1.40"/><circle cx="54.1" cy="22.0" r="1.40"/><circle cx="54.1" cy="26.0" r="1.13"/><circle cx="54.1" cy="30.0" r="0.85"/><circle cx="54.1" cy="34.0" r="0.57"/><circle cx="58.8" cy="2.0" r="0.57"/><circle cx="58.8" cy="6.0" r="0.85"/><circle cx="58.8" cy="30.0" r="0.85"/><circle cx="58.8" cy="34.0" r="0.57"/><circle cx="63.5" cy="2.0" r="0.57"/><circle cx="63.5" cy="6.0" r="0.85"/><circle cx="63.5" cy="10.0" r="1.13"/><circle cx="63.5" cy="14.0" r="1.40"/><circle cx="63.5" cy="22.0" r="1.40"/><circle cx="63.5" cy="26.0" r="1.13"/><circle cx="63.5" cy="30.0" r="0.85"/><circle cx="63.5" cy="34.0" r="0.57"/><circle cx="68.2" cy="2.0" r="0.57"/><circle cx="68.2" cy="6.0" r="0.85"/><circle cx="68.2" cy="10.0" r="1.13"/><circle cx="68.2" cy="14.0" r="1.40"/><circle cx="68.2" cy="22.0" r="1.40"/><circle cx="68.2" cy="26.0" r="1.13"/><circle cx="68.2" cy="30.0" r="0.85"/><circle cx="68.2" cy="34.0" r="0.57"/><circle cx="72.9" cy="2.0" r="0.57"/><circle cx="72.9" cy="6.0" r="0.85"/><circle cx="72.9" cy="10.0" r="1.13"/><circle cx="72.9" cy="14.0" r="1.40"/><circle cx="72.9" cy="18.0" r="1.68"/><circle cx="72.9" cy="22.0" r="1.40"/><circle cx="72.9" cy="26.0" r="1.13"/><circle cx="72.9" cy="30.0" r="0.85"/><circle cx="72.9" cy="34.0" r="0.57"/><circle cx="77.6" cy="2.0" r="0.57"/><circle cx="77.6" cy="6.0" r="0.85"/><circle cx="77.6" cy="10.0" r="1.13"/><circle cx="77.6" cy="14.0" r="1.40"/><circle cx="77.6" cy="18.0" r="1.68"/><circle cx="77.6" cy="22.0" r="1.40"/><circle cx="77.6" cy="26.0" r="1.13"/><circle cx="77.6" cy="30.0" r="0.85"/><circle cx="77.6" cy="34.0" r="0.57"/></g><g><circle class="d" fill-opacity="0.65" cx="11.8" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="16.5" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="21.2" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.65" cx="21.2" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="21.2" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="21.2" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="21.2" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.65" cx="25.9" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="30.6" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="30.6" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="30.6" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="35.3" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="40.0" cy="6.0" r="0.85"/><circle class="d" fill-opacity="0.65" cx="40.0" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.65" cx="40.0" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="40.0" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="40.0" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="40.0" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.65" cx="40.0" cy="30.0" r="0.85"/><circle class="d" fill-opacity="0.65" cx="44.7" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="49.4" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="49.4" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="49.4" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="54.1" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="58.8" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.65" cx="58.8" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="58.8" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="58.8" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.65" cx="58.8" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.65" cx="63.5" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.65" cx="68.2" cy="18.0" r="1.68"/></g></svg></div>
           <p class="fq-sec">주파수 확산 경로<i>?</i></p>
-          <div class="fq-spread"><p class="fq-ph">오늘 꽃 담당 나<small>2시간 전</small></p><div class="fq-chain"><span><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">소라</span><span class="fq-pw"><img src="assets/pa-flower.webp" alt="" width="361" height="262" loading="lazy"></span><span><i class="fq-far"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg></i>그 너머 +1</span></div></div>
+          <div class="fq-spread"><p class="fq-ph">🩰 한 번 더<small>2시간 전</small></p><div class="fq-chain"><span><img class="ma-av" src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy">지우</span><span class="fq-pw"><img src="assets/pa-dance.webp" alt="" width="268" height="362" loading="lazy"></span><span><i class="fq-far"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg></i>그 너머 +1</span></div></div>
           <div class="fq-tabbar"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg>홈</span><span class="on"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>Ditto!</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg>친구</span></div>
           <span class="ma-dim"></span>
           <div class="ma-sheet fr-sheet"><span class="ma-grab"></span><p class="fr-t">친구 신청</p><img class="ma-av sq" src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><p class="fr-nm">하은</p><span class="ma-field fr-letter"><span class="ph">편지를 쓰면 수락할 확률이 높아져요.</span><span class="tx" data-t="창가 사진 보고 반했어 🫶">창가 사진 보고 반했어 🫶</span></span><p class="fr-pair">지우 💌 하은</p><span class="ma-field fr-nick"><span class="ph">애칭 정하기</span><span class="tx" data-t="창가 친구">창가 친구</span></span><p class="fr-note">‘수락’을 하면 해당 친구와 있는 글을 공유할 수 있어요.</p><span class="ma-btn">친구 신청하기</span><span class="ma-link">다음에 할게요</span></div>
@@ -1673,16 +1665,15 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <h3 class="wc-sub">친구들 플래터에 실제로 붙은 모습</h3>
       <div class="cr" data-cr>
         <ol class="cr-track" tabindex="0" aria-label="친구들 플래터에 붙은 위젯">
-          <li class="cr-card ws" style="--bg:#F4E1EC"><div class="ws-m"><img src="assets/hw-status.webp" alt="리본 이모지와 ‘오늘 텐션 과다’가 적힌 상태 위젯" width="543" height="258" loading="lazy" style="--w:181"></div><p><b>상태.</b> 이모지나 한 줄로 지금 기분·상태를 나눠요. <small>지우의 방</small></p></li>
-          <li class="cr-card ws" style="--bg:#EFE9DC"><div class="ws-m"><img src="assets/ws-diary.webp" alt="‘돌아오는 기차에서는 말을 조금 덜 했다. 창밖이 좋아서.’ 텍스트 위젯" width="402" height="543" loading="lazy" style="--w:134"></div><p><b>텍스트.</b> 한 줄 메모를 가볍게 남겨요. <small>재민의 방</small></p></li>
-          <li class="cr-card ws" style="--bg:#E4ECEE"><div class="ws-m"><img src="assets/ws-image.webp" alt="‘창가 쪽은 내 자리’ 사진 위젯" width="543" height="543" loading="lazy" style="--w:181"></div><p><b>이미지.</b> 사진으로 추억을 나눠요. <small>하은의 방</small></p></li>
-          <li class="cr-card ws" style="--bg:#F4ECD7"><div class="ws-m"><img src="assets/ws-music.webp" alt="잔나비 ‘주저하는 연인들을 위해’ 음악 위젯" width="543" height="543" loading="lazy" style="--w:181"></div><p><b>음악.</b> 요즘 자주 듣는 노래를 담아요. <small>재민의 방</small></p></li>
-          <li class="cr-card ws" style="--bg:#ECEBEA"><div class="ws-m"><img src="assets/ws-dday.webp" alt="‘D-3 다음 피크닉’ D-Day 위젯" width="258" height="258" loading="lazy" style="--w:86"></div><p><b>D-Day.</b> 기다리는 날까지 함께 세요. <small>소라의 방</small></p></li>
-          <li class="cr-card ws" style="--bg:#F1EDE2"><div class="ws-m"><img src="assets/ws-guestbook.webp" alt="도현이 ‘창문 쪽 양보한 거 기억해’라고 남긴 방명록 위젯" width="543" height="543" loading="lazy" style="--w:181"></div><p><b>방명록.</b> 친구가 남긴 안부에 답글을 달아요. <small>준의 방</small></p></li>
-          <li class="cr-card ws" style="--bg:#F7E3EC"><div class="ws-m"><img src="assets/ws-sticker.webp" alt="체리, 튤립, 네잎클로버 스티커가 붙은 ‘친구들이 놓고 간 것’ 스티커 보드" width="543" height="402" loading="lazy" style="--w:181"></div><p><b>스티커 보드.</b> 친구들이 스티커를 붙여줘요. <small>소라의 방</small></p></li>
-          <li class="cr-card ws" style="--bg:#E9E3F3"><div class="ws-m"><img src="assets/hw-gif.webp" alt="연습실 거울 앞에서 카메라를 든 지우의 GIF 위젯" width="258" height="258" loading="lazy" style="--w:86"></div><p><b>GIF.</b> 움직이는 반짝임을 더해요. <small>지우의 방</small></p></li>
-          <li class="cr-card ws" style="--bg:#E3E8DC"><div class="ws-m"><img src="assets/ws-playlist.webp" alt="‘전시 보고 나서’ 플레이리스트 위젯" width="543" height="543" loading="lazy" style="--w:181"></div><p><b>플레이리스트.</b> 곡을 모아 들려줘요. <small>서윤의 방</small></p></li>
-          <li class="cr-card ws ws-pl" style="--bg:#DCE3D3"><div class="ws-m"><img src="assets/rooms/room-08-seoyun.webp" alt="서윤의 플래터. 이번 주 수집한 빛 사진, 작은 책장, 플레이리스트, 벽 색 사진이 모여 있어요" width="640" height="1392" loading="lazy"></div><p><b>그리고 플래터.</b> 조각이 모이면 그 사람만의 방이 돼요.</p></li>
+          <li class="cr-card ws" style="--bg:#F4E1EC"><div class="ws-m"><img src="assets/ws-status.webp" alt="리본 대신 체리 이모지와 ‘돗자리 챙겨 둠’이 적힌 한 줄 상태 위젯" width="543" height="258" loading="lazy" style="--w:181"></div><p><b>상태.</b> 이모지나 한 줄로 지금 기분·상태를 나눠요. <small>소라의 방</small></p></li>
+          <li class="cr-card ws" style="--bg:#EFE9DC"><div class="ws-m"><img src="assets/ws-text.webp" alt="‘🍕 늦어도 와, 자리 비워둘게’ 텍스트 위젯" width="560" height="175" loading="lazy" style="--w:275"></div><p><b>텍스트.</b> 한 줄 메모를 가볍게 남겨요. <small>도현의 방</small></p></li>
+          <li class="cr-card ws" style="--bg:#E4ECEE"><div class="ws-m"><img src="assets/ws-image.webp" alt="‘🚃 창밖 저장’ 사진 위젯. 은은하게 빛나서 디토할 수 있어요" width="543" height="543" loading="lazy" style="--w:181"></div><p><b>이미지.</b> 사진으로 추억을 나눠요. 빛나는 사진은 디토할 수 있어요. <small>재민의 방</small></p></li>
+          <li class="cr-card ws" style="--bg:#E6ECF4"><div class="ws-m"><img src="assets/ws-music.webp" alt="HANRORO ‘You and I’ 음악 위젯" width="543" height="402" loading="lazy" style="--w:181"></div><p><b>음악.</b> 요즘 자주 듣는 노래를 담아요. <small>재민의 방</small></p></li>
+          <li class="cr-card ws" style="--bg:#F4ECD7"><div class="ws-m"><img src="assets/ws-video.webp" alt="‘🥐 쉬는 날 빵집 투어’ 영상 위젯" width="543" height="402" loading="lazy" style="--w:181"></div><p><b>영상.</b> 짧은 영상으로 일상을 전해요. <small>나리의 방</small></p></li>
+          <li class="cr-card ws" style="--bg:#ECEBEA"><div class="ws-m"><img src="assets/ws-post.webp" alt="‘돌아오는 기차에서 🚃’ 포스트 위젯. 최신 글 첫 줄이 보여요" width="560" height="369" loading="lazy" style="--w:275"></div><p><b>포스트.</b> 블로그 글을 쓰고 플래터에 카드로 보여줘요. <small>재민의 방</small></p></li>
+          <li class="cr-card ws" style="--bg:#F1EDE2"><div class="ws-m"><img src="assets/ws-guestbook.webp" alt="준이 ‘퇴근하고 바로 갈게, 7시 반’이라고 남긴 방명록 위젯" width="543" height="543" loading="lazy" style="--w:181"></div><p><b>방명록.</b> 친구가 남긴 안부에 답글을 달아요. <small>도현의 방</small></p></li>
+          <li class="cr-card ws" style="--bg:#EEE8FA"><div class="ws-m"><img src="assets/ws-todo.webp" alt="‘📚 이번 주 작은 일’ To-do 위젯" width="543" height="402" loading="lazy" style="--w:181"></div><p><b>To-do.</b> 카테고리별 할 일과 이번 주 기록. <small>하은의 방</small></p></li>
+          <li class="cr-card ws ws-pl" style="--bg:#DCE3D3"><div class="ws-m"><img src="assets/rooms/room-08-seoyun.webp" alt="서윤의 플래터. 초록을 모으는 사진들, ‘🌿 이 초록은 저장’, Laufey ‘How I Get’, ‘안 걸린 벽도’ 포스트가 모여 있어요" width="640" height="1392" loading="lazy"></div><p><b>그리고 플래터.</b> 조각이 모이면 그 사람만의 방이 돼요.</p></li>
         </ol>
         <div class="cr-ctl" hidden><button type="button" class="cr-prev" aria-label="이전 위젯">←</button><button type="button" class="cr-next" aria-label="다음 위젯">→</button></div>
       </div>
@@ -1691,14 +1682,14 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     <div class="wx-part" id="wx-ditto">
       <div class="wx-ph">
         <span class="lab"><b>5.2</b>Ditto</span>
-        <div><h3 class="h-l">친구 위젯이 <mark>빛나면</mark>, 디토할 수 있어요</h3><p class="lead">가져온 조각에는 누구에게서 왔는지가 그대로 붙어 있어요.</p></div>
+        <div><h3 class="h-l">친구 사진이 <mark>빛나면</mark>, 디토할 수 있어요</h3><p class="lead">가져온 조각에는 누구에게서 왔는지가 그대로 붙어 있어요.</p></div>
       </div>
       <div class="cr" data-cr>
         <ol class="cr-track" tabindex="0" aria-label="디토 과정">
-          <li class="cr-card dp" style="--bg:#F6F2E6"><div class="dp-m"><span class="dp-glow beam"><img src="assets/wd-glow.webp" alt="뒤에서 은은하게 빛나는 나리의 텍스트 위젯 ‘천천히 만들어도 돼’" width="543" height="258" loading="lazy"></span></div><p><b><span class="vc-n">1</span>빛나는 위젯.</b> 주인이 디토를 허용한 위젯은 뒤에서 은은하게 빛나요. 빛이 없으면 구경만 해요.</p></li>
-          <li class="cr-card dp" style="--bg:#EFE7FA"><div class="dp-m dp-ui"><div class="mui dp-sheet" role="img" aria-label="디토 시트. 소라의 ‘별일 없어도 모여’를 라이프에 두기로 고르고, 디토 버튼이 보랏빛으로 절반쯤 차오른 상태"><span class="ma-grab"></span><span class="tw-sora dt-thumb">별일 없어도<br>모여</span><p class="dt-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>내 플래터로 가져오기</p><p class="dt-q">어디에 둘까요?</p><div class="dt-seg"><span>대표</span><span class="on">라이프</span></div><div class="dt-btn half"><span class="dt-fill"></span><span class="dt-lbl"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg><b class="l2">계속 누르세요</b></span></div></div></div><p><b><span class="vc-n">2</span>꾹 눌러 가져오기.</b> 어디에 둘지 고르고 3초 동안 누르면 보랏빛이 차올라요. 중간에 떼면 취소돼요.</p></li>
-          <li class="cr-card dp" style="--bg:#F1E9F8"><div class="dp-m"><figure class="dp-anno"><img src="assets/wd-ditto.webp" alt="하은의 플래터에 놓인 디토 위젯. 왼쪽 아래 @nariday 출처 칩, 오른쪽 위 디토 배지" width="543" height="402" loading="lazy"><span class="dp-c dp-c1">디토 배지</span><span class="dp-c dp-c2">출처 칩 · 나리</span></figure></div><p><b><span class="vc-n">3</span>출처가 남아요.</b> 가져온 위젯엔 누구에게서 왔는지 칩과 디토 배지가 붙고, 친구에게도 알림이 가요.</p></li>
-          <li class="cr-card dp" style="--bg:#F4ECFA"><div class="dp-m dp-ui"><div class="mui dp-done" role="img" aria-label="디토 완료 화면. ‘별일 없어도 모여’, 라이프 플래터에 자리를 내줬어요, 소라에게서 가져옴"><span class="dt-big"><span class="tw-sora">별일 없어도<br>모여</span><svg class="dt-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span><p class="dt-k">디토 완료</p><p class="dt-t">별일 없어도 모여</p><p class="dt-d">라이프 플래터에 자리를 내줬어요</p><span class="dt-from"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>소라에게서 가져옴</span></div></div><p><b><span class="vc-n">4</span>내 방 한쪽에.</b> 디토가 끝나면 고른 플래터에 자리를 내줘요.</p></li>
+          <li class="cr-card dp" style="--bg:#F6F2E6"><div class="dp-m"><span class="dp-glow beam"><img src="assets/wd-glow.webp" alt="뒤에서 은은하게 빛나는 나리의 ‘🫖 내 첫 컵’ 사진 위젯" width="462" height="603" loading="lazy"></span></div><p><b><span class="vc-n">1</span>빛나는 사진.</b> 주인이 디토를 열어 둔 사진은 뒤에서 은은하게 빛나요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</p></li>
+          <li class="cr-card dp" style="--bg:#EFE7FA"><div class="dp-m dp-ui"><div class="mui dp-sheet" role="img" aria-label="디토 시트. 소라의 ‘🧺 간식 부자’ 사진을 라이프에 두기로 고르고, 디토 버튼이 보랏빛으로 절반쯤 차오른 상태"><span class="ma-grab"></span><img class="tw-ph dt-thumb" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><p class="dt-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>내 플래터로 가져오기</p><p class="dt-q">어디에 둘까요?</p><div class="dt-seg"><span>대표</span><span class="on">라이프</span></div><div class="dt-btn half"><span class="dt-fill"></span><span class="dt-lbl"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg><b class="l2">계속 누르세요</b></span></div></div></div><p><b><span class="vc-n">2</span>꾹 눌러 가져오기.</b> 어디에 둘지 고르고 3초 동안 누르면 보랏빛이 차올라요. 중간에 떼면 취소돼요.</p></li>
+          <li class="cr-card dp" style="--bg:#F1E9F8"><div class="dp-m"><figure class="dp-anno dp-dw" role="img" aria-label="지우의 플래터에 놓인 디토 위젯. 소라의 ‘🧺 간식 부자’ 사진, 왼쪽 아래 @soramaybe 출처 칩, 오른쪽 위 디토 배지"><span class="dw-card"><img src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><span class="dw-chip"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">@soramaybe</span><svg class="dw-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span><span class="dp-c dp-c1">디토 배지</span><span class="dp-c dp-c2">출처 칩 · 소라</span></figure></div><p><b><span class="vc-n">3</span>출처가 남아요.</b> 가져온 사진엔 누구에게서 왔는지 칩과 디토 배지가 붙고, 친구에게도 알림이 가요.</p></li>
+          <li class="cr-card dp" style="--bg:#F4ECFA"><div class="dp-m dp-ui"><div class="mui dp-done" role="img" aria-label="디토 완료 화면. ‘🧺 간식 부자’, 라이프 플래터에 자리를 내줬어요, 소라에게서 가져옴"><span class="dt-big"><img class="tw-ph" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><svg class="dt-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span><p class="dt-k">디토 완료</p><p class="dt-t">🧺 간식 부자</p><p class="dt-d">라이프 플래터에 자리를 내줬어요</p><span class="dt-from"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>소라에게서 가져옴</span></div></div><p><b><span class="vc-n">4</span>내 방 한쪽에.</b> 디토가 끝나면 고른 플래터에 자리를 내줘요.</p></li>
         </ol>
         <div class="cr-ctl" hidden><button type="button" class="cr-prev" aria-label="이전 단계">←</button><button type="button" class="cr-next" aria-label="다음 단계">→</button></div>
       </div>
@@ -1709,176 +1700,176 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
         <header class="rm-open">
           <span class="lab"><b>5.3</b>Rooms</span>
           <h3 class="h-l">내 취향에, <mark>네 조각 하나.</mark></h3>
-          <p class="lead">같은 위젯으로 꾸며도 방은 사람만큼 달라요. 방마다 친구에게서 디토해 온 조각이 하나씩 있어요. 무엇을, 누구에게서, 왜 가져왔는지 함께 적었어요.</p>
+          <p class="lead">같은 위젯으로 꾸며도 방은 사람만큼 달라요. 은은하게 빛나는 사진이 디토할 수 있는 조각이에요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</p>
         </header>
         <div class="rm-fan" role="group" aria-roledescription="carousel" aria-label="친구들의 방. 좌우 화살표 키로 넘길 수 있어요.">
           <ol class="rm-track">
           <li class="rm-card" id="room-haeun" style="--c:#CAB7F2;--c2:#B092ED">
-            <button type="button" class="rm-ph" aria-pressed="true" aria-label="하은의 방, 일단 한 장부터"><span class="rm-scr"><img src="assets/rooms/room-01-haeun.webp" alt="하은의 플래터 첫 화면. 창가 자리 사진, “일단 한 장부터” 문장, 조금 익숙해지는 중이라는 기분, 나리와 찍은 사진, 나리에게서 디토한 말풍선이 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="true" aria-label="하은의 방, 조금씩 보이는 나"><span class="rm-scr"><img src="assets/rooms/room-01-haeun.webp" alt="하은의 플래터 첫 화면. ‘☕ 삐뚤어도 손에 맞는 내 컵’, ‘📚 이번 주 작은 일’, ‘1111’, ‘🍮 책 덮고 한 편’, ‘🫧 여긴 조금 천천히 채울래’ 등이 붙어 있고, 은은하게 빛나는 사진 2장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="하은의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-haeun.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">하은<span class="en" lang="en">Haeun</span></p><p class="rm-pf-sub">@haeunzip · 19 · 대학 새내기</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Observer</b>처음 들어온 유저</li><li>가입 2일 차</li></ul>
-                <p class="rm-pf-q">“친구가 찍어준 건 올릴 수 있겠어.”</p>
+                <ul class="rm-pf-tags"><li><b lang="en">Observer</b>처음 들어온 유저</li><li>가입 2일 차</li><li class="tg-dt">디토 열린 사진 2장</li></ul>
+                <p class="rm-pf-q">“낮이랑 밤 사진 한 장씩. 책도 음악도 조금씩 같이 둘래.”</p>
                 <p class="rm-pf-rel"><small>친구 사이</small>나리와는 말수가 적어도 편해요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>조심스럽지만 호기심이 많아요. 마음에 드는 사진을 오래 골라요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>일단 한 장부터</strong>첫 업로드는 나리와 함께였어요. 한 장을 올린 뒤에도 계속 꾸밀 수 있다는 자신감을 얻고 싶어서 써요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">텍스트 위젯</span><q>천천히 만들어도 돼</q></p><p class="dto-from"><img src="assets/rooms/rav-nari.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>나리</b>(@nariday)의 방에서 · 서로 디토한 사이</span></p><p class="dto-why"><small>왜 가져왔을까</small>아직 낯선 방이라 첫 사진을 같이 올려 준 친구의 말부터 곁에 둔 것 같아요. 천천히 해도 된다는 말이 첫 업로드에 꽤 힘이 됐을 거예요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>조금씩 보이는 나</strong>책 읽던 오후에 작은 안부 하나. 모르는 사람이 많이 보는 공간보다 몇 명의 친구가 찾아오는 공간이 좋아요.</dd></div>
+                <div class="rm-pf-dto"><dt>친구의 말을 적어 둔 메모</dt><dd><p class="dto-what"><span class="dto-k">텍스트</span><q>☕ 삐뚤어도 손에 맞는 내 컵</q></p><p class="dto-from"><img src="assets/rooms/rav-nari.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>나리</b>(@nariday)의 말 · 디토가 아니라 직접 옮겨 적었어요</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/haeunzip/">하은의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-jun" style="--c:#A8B3BF;--c2:#79899B">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="준의 방, 일단 들어와 봄"><span class="rm-scr"><img src="assets/rooms/room-02-jun.webp" alt="준의 플래터 첫 화면. 복학 4일차 사진, 초대받고 일단 왔다는 문장, 가입 D+7, 공강 상태, 바다 사진, 지금 듣는 라디오, 재민에게서 디토한 한 줄 일기가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="준의 방, 공강에 남긴 네 컷"><span class="rm-scr"><img src="assets/rooms/room-02-jun.webp" alt="준의 플래터 첫 화면. ‘📸 흔들린 컷도 보내 줄게’, ‘🥐 공강 한 시간은 커피로’, ‘You Just Wanna Have Fun’ 등이 붙어 있고, 은은하게 빛나는 사진 3장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="준의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-jun.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">준<span class="en" lang="en">Jun</span></p><p class="rm-pf-sub">@junishere · 21 · 복학한 대학생</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Observer</b>처음 들어온 유저</li><li>가입 5일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Observer</b>처음 들어온 유저</li><li>가입 5일 차</li><li class="tg-dt">디토 열린 사진 3장</li></ul>
                 <p class="rm-pf-q">“이거 그냥 사진 붙이면 되는 거지?”</p>
                 <p class="rm-pf-rel"><small>친구 사이</small>재민과 도현에게 초대받아 들어왔어요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>낯선 서비스엔 담백하게 다가가요. 꾸미기보다 친구와의 약속을 먼저 기억해요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>일단 들어와 봄</strong>공강 사진 몇 장으로 느슨하게 시작했어요. 근황을 길게 설명하지 않고도 ‘요즘 이렇게 지내’를 전하고 싶어요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">텍스트 · 한 줄 일기 위젯</span><q>돌아오는 기차에서는 말을 조금 덜 했다. 창밖이 좋아서.</q></p><p class="dto-from"><img src="assets/rooms/rav-jaemin.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>재민</b>(@jaeminarchive)의 방에서 · 준을 초대한 친구</span></p><p class="dto-why"><small>왜 가져왔을까</small>준의 첫 저장이에요. ‘다음 주말, 기차 타러 갈 사람.’이라고 적어 둔 걸 보면, 재민의 기차 이야기가 다음 여행의 핑계가 된 것 같아요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>공강에 남긴 네 컷</strong>말은 짧게, 음악은 길게. 친한 친구가 먼저 반응하면 다시 방문해요.</dd></div>
+                <div class="rm-pf-dto"><dt>친구의 말을 적어 둔 메모</dt><dd><p class="dto-what"><span class="dto-k">텍스트</span><q>📸 흔들린 컷도 보내 줄게</q></p><p class="dto-from"><img src="assets/rooms/rav-jaemin.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>재민</b>(@jaeminarchive)의 말 · 디토가 아니라 직접 옮겨 적었어요</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/junishere/">준의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-sora" style="--c:#C5D593;--c2:#A5BE57">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="소라의 방, 별일 없어도 모여"><span class="rm-scr"><img src="assets/rooms/room-03-sora.webp" alt="소라의 플래터 첫 화면. 폴라로이드, 말차 셀카, “별일 없어도 모여” 문장, 지우에게서 디토한 노래, 지우의 방명록이 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="소라의 방, 우리 다음엔 여기서"><span class="rm-scr"><img src="assets/rooms/room-03-sora.webp" alt="소라의 플래터 첫 화면. ‘BLACKHOLE’, ‘🫶 같은 표정’, ‘🧺 간식 부자’, ‘🧺 각자 좋아하는 간식 하나’, ‘🛍️ 다음엔 이 마켓 가자’ 등이 붙어 있고, 은은하게 빛나는 사진 3장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="소라의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-sora.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">소라<span class="en" lang="en">Sora</span></p><p class="rm-pf-sub">@soramaybe · 22 · 시각디자인 전공</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>친구들과 적극적으로 쓰는 유저</li><li>가입 38일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>친구들과 적극적으로 쓰는 유저</li><li>가입 38일 차</li><li class="tg-dt">디토 열린 사진 3장</li></ul>
                 <p class="rm-pf-q">“사진 보내는 대신 여기 붙여둘게.”</p>
                 <p class="rm-pf-rel"><small>친구 사이</small>지우와 수업 사이 시간을 자주 보내고, 나리의 공방에도 관심이 있어요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>먼저 연락하고 작은 만남을 제안해요. 잘 꾸민 결과보다 대화가 이어지는 순간을 좋아해요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>별일 없어도 모여</strong>말차 한 잔, 꽃 한 송이 같은 사소한 취향이 다음 만남의 핑계가 돼요. 사진을 보내고 끝내지 않고 다음에 같이 할 일을 정하고 싶어요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">음악 위젯</span><q>Perfect Night</q></p><p class="dto-from"><img src="assets/rooms/rav-jiu.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>지우</b>(@jiuallday)의 방에서 · 서로 디토한 사이</span></p><p class="dto-why"><small>왜 가져왔을까</small>지우 플래터의 Perfect Night를 가져왔어요. 지우가 요즘 트는 노래라서, 소라에겐 ‘또 모이자’는 말에 가까워 보여요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>우리 다음엔 여기서</strong>소풍 사진 옆에서 다음 약속 잡기. 한 그룹에만 머물지 않아요.</dd></div>
+                <div class="rm-pf-dto"><dt>요즘 붙여 둔 노래</dt><dd><p class="dto-what"><span class="dto-k">음악</span><q>BLACKHOLE</q></p><p class="dto-from"><span>IVE · 약속이 있는 날 바로 사진을 붙이고 방명록을 자주 확인해요.</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/soramaybe/">소라의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-jaemin" style="--c:#8FB2BD;--c2:#5C8F9F">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="재민의 방, 토요일의 잔상"><span class="rm-scr"><img src="assets/rooms/room-04-jaemin.webp" alt="재민의 플래터 첫 화면. 바다 보러 간 토요일 사진, D+15, 카메라 사진, 기차 한 줄 일기, 동해 장소, 날씨, 창가 사진, 잔나비 노래, 도현의 방명록이 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="재민의 방, 인화하기 전의 여행"><span class="rm-scr"><img src="assets/rooms/room-04-jaemin.webp" alt="재민의 플래터 첫 화면. ‘🌊 다시 바다’, ‘돌아오는 기차에서 🚃’, ‘You and I’, ‘🚃 창밖 저장’, ‘📸 흔들린 컷도 보내 줄게’ 등이 붙어 있고, 은은하게 빛나는 사진 2장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="재민의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-jaemin.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">재민<span class="en" lang="en">Jaemin</span></p><p class="rm-pf-sub">@jaeminarchive · 27 · 개발자</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Archivist</b>친구들과 적극적으로 쓰는 유저</li><li>가입 104일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Archivist</b>친구들과 적극적으로 쓰는 유저</li><li>가입 104일 차</li><li class="tg-dt">디토 열린 사진 2장</li></ul>
                 <p class="rm-pf-q">“그날 들었던 노래까지 남겨두고 싶어.”</p>
-                <p class="rm-pf-rel"><small>친구 사이</small>도현의 즉흥 모임에 따라가고, 준의 다음 여행 제안을 오래 기억해요.</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>도현의 즉흥 모임에 따라가고 준의 다음 여행 제안을 오래 기억해요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>조용히 관찰하고 장면의 순서를 기억해요. 사진을 보면 그날의 소리와 대화까지 떠올려요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>토요일의 잔상</strong>도현과 다녀온 바다, 돌아오는 기차의 노래와 날씨까지 한 날짜 아래 모아요. 사람·장소·음악을 한 묶음의 기억으로 남기고 싶어요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">텍스트 위젯</span><q>금요일, 한 자리 더</q></p><p class="dto-from"><img src="assets/rooms/rav-dohyun.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>도현</b>(@dohyunlinks)의 방에서 · 서로 디토한 사이</span></p><p class="dto-why"><small>왜 가져왔을까</small>도현의 즉흥 모임에 늘 따라가는 쪽이라, 다음 자리를 잊지 않으려고 초대장 같은 문장을 들여놓은 것 같아요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>인화하기 전의 여행</strong>흔들린 컷도 보내 주기로 했다. </dd></div>
+                <div class="rm-pf-dto"><dt>요즘 붙여 둔 노래</dt><dd><p class="dto-what"><span class="dto-k">음악</span><q>You and I</q></p><p class="dto-from"><span>HANRORO · 만난 직후보다 며칠 뒤 차분히 정리해요.</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/jaeminarchive/">재민의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-nari" style="--c:#D5C194;--c2:#BF9F5B">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="나리의 방, 삐뚤어도 내 컵"><span class="rm-scr"><img src="assets/rooms/room-05-nari.webp" alt="나리의 플래터 첫 화면. “삐뚤어도 내 컵” 문장과 도자기 사진, 조금 느슨한 기분, 폴라로이드, 하은의 방명록, 음성 메모가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="나리의 방, 아직 마르지 않은 하루"><span class="rm-scr"><img src="assets/rooms/room-05-nari.webp" alt="나리의 플래터 첫 화면. ‘🫧 여긴 조금 천천히 채울래’, ‘Memories’, ‘☕ 삐뚤어도 손에 맞는 내 컵’, ‘🥐 쉬는 날 빵집 투어’, ‘🫖 내 첫 컵’ 등이 붙어 있고, 은은하게 빛나는 사진 3장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="나리의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-nari.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">나리<span class="en" lang="en">Nari</span></p><p class="rm-pf-sub">@nariday · 23 · 문구 브랜드 주니어</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Archivist</b>친구들과 적극적으로 쓰는 유저</li><li>가입 62일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Archivist</b>친구들과 적극적으로 쓰는 유저</li><li>가입 62일 차</li><li class="tg-dt">디토 열린 사진 3장</li></ul>
                 <p class="rm-pf-q">“예쁜 건 같이 만들면 더 기억나.”</p>
-                <p class="rm-pf-rel"><small>친구 사이</small>하은이 처음 사진을 올릴 때 곁에 있었고, 소라와는 다음 공방 수업을 이야기해요.</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>하은이 처음 사진을 올릴 때 곁에 있고, 소라와는 다음 공방 수업을 이야기해요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>작은 물건과 손으로 만든 것에 애착이 있어요. 완벽한 사진보다 과정이 보이는 컷을 남겨요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>삐뚤어도 내 컵</strong>하은과 만든 첫 컵, 돌아오는 길에 산 빵. 취미가 물건 수집이 아니라 친구와 함께한 시간으로 보이길 바라요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">텍스트 위젯</span><q>일단 한 장부터</q></p><p class="dto-from"><img src="assets/rooms/rav-haeun.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>하은</b>(@haeunzip)의 방에서 · 서로 디토한 사이</span></p><p class="dto-why"><small>왜 가져왔을까</small>하은이 처음 사진을 올릴 때 곁에 있었으니까요. 친구의 첫걸음을 내 방에도 기념처럼 남겨 둔 것 같아요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>아직 마르지 않은 하루</strong>서툰 컵과 느린 오후. </dd></div>
+                <div class="rm-pf-dto"><dt>친구의 말을 적어 둔 메모</dt><dd><p class="dto-what"><span class="dto-k">텍스트</span><q>🫧 여긴 조금 천천히 채울래</q></p><p class="dto-from"><img src="assets/rooms/rav-haeun.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>하은</b>(@haeunzip)의 말 · 디토가 아니라 직접 옮겨 적었어요</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/nariday/">나리의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-dohyun" style="--c:#EDAE91;--c2:#E07B4C">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="도현의 방, 금요일, 한 자리 더"><span class="rm-scr"><img src="assets/rooms/room-06-dohyun.webp" alt="도현의 플래터 첫 화면. 오늘 처음 만난 셋 사진, 같이 놀자 상태, “금요일, 한 자리 더” 문장, 준의 방명록, 동네 장소, 날씨가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="도현의 방, 늦게 와도 네 자리"><span class="rm-scr"><img src="assets/rooms/room-06-dohyun.webp" alt="도현의 플래터 첫 화면. ‘I Just Might’, ‘📸 금요일 한 컷’, ‘🍕 늦어도 와, 자리 비워둘게’, ‘🎂 생일 기록’ 등이 붙어 있고, 은은하게 빛나는 사진 3장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="도현의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-dohyun.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">도현<span class="en" lang="en">Dohyun</span></p><p class="rm-pf-sub">@dohyunlinks · 23 · 경영학 전공·인턴</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>진짜 인싸 유저</li><li>가입 143일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>진짜 인싸 유저</li><li>가입 143일 차</li><li class="tg-dt">디토 열린 사진 3장</li></ul>
                 <p class="rm-pf-q">“너희 둘 분명 얘기 잘 통할 듯.”</p>
-                <p class="rm-pf-rel"><small>친구 사이</small>준과 재민을 같은 자리로 연결하고, 지우의 연습실 모임에도 얼굴을 비춰요.</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>준·재민을 같은 자리로 연결하고 지우의 연습실 모임에도 얼굴을 비춰요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>사람의 관심사를 빨리 기억하고 서로 맞는 친구를 소개해요. 자리 만드는 데 주저함이 없어요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>금요일, 한 자리 더</strong>사진 속엔 늘 누군가 있어요. 친구의 친구도 편하게 들어와 다음 만남을 잡을 수 있는 공간을 원해요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">음악 위젯</span><q>주저하는 연인들을 위해</q></p><p class="dto-from"><img src="assets/rooms/rav-jaemin.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>재민</b>(@jaeminarchive)의 방에서 · 서로 디토한 사이</span></p><p class="dto-why"><small>왜 가져왔을까</small>같이 다녀온 바다에서 돌아오는 길의 노래 같아요. 도현에겐 다음 모임 초대장의 배경음이 된 것 같아요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>늦게 와도 네 자리</strong>금요일 저녁에 이어지는 얼굴들. </dd></div>
+                <div class="rm-pf-dto"><dt>요즘 붙여 둔 노래</dt><dd><p class="dto-what"><span class="dto-k">음악</span><q>I Just Might</q></p><p class="dto-from"><span>Bruno Mars · 만남 직후 셀카를 올리고 방명록에서 다음 시간을 정해요.</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/dohyunlinks/">도현의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-jiu" style="--c:#EEAFC7;--c2:#E37CA2">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="지우의 방, 한 번 더, 같이"><span class="rm-scr"><img src="assets/rooms/room-07-jiu.webp" alt="지우의 플래터 첫 화면. 연습실 사진, 폴라로이드, 텐션 과다 기분, 소라에게서 디토한 말풍선, 음성 메모, 꽃 사진이 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="지우의 방, 오늘도 한 번 더"><span class="rm-scr"><img src="assets/rooms/room-07-jiu.webp" alt="지우의 플래터 첫 화면. ‘🎂 초는 내가’, ‘🩰 한 번 더’, ‘🪩 목 20시’, ‘🧺 각자 좋아하는 간식 하나’, ‘GO’ 등이 붙어 있고, 은은하게 빛나는 사진 3장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="지우의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-jiu.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">지우<span class="en" lang="en">Jiu</span></p><p class="rm-pf-sub">@jiuallday · 22 · 영상 전공·댄스 동아리</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>진짜 인싸 유저</li><li>가입 89일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Connector</b>진짜 인싸 유저</li><li>가입 89일 차</li><li class="tg-dt">디토 열린 사진 3장</li></ul>
                 <p class="rm-pf-q">“오늘 사진은 내가 다 올림.”</p>
-                <p class="rm-pf-rel"><small>친구 사이</small>소라·나리와 자주 만나고, 도현을 통해 새로운 친구도 만나요.</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>소라·나리와 자주 만나고 도현을 통해 새로운 친구도 만나요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>생각보다 행동이 빨라요. 친구를 모으고 그날 가장 웃긴 컷을 바로 골라요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>한 번 더, 같이</strong>연습실에서 생일 파티까지, 친구들의 사진·축하·노래로 꽉 채웠어요. 올린 사진에 친구들이 각자 기억하는 장면을 덧붙여 주길 바라요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">텍스트 · 💬 위젯</span><q>별일 없어도 모여</q></p><p class="dto-from"><img src="assets/rooms/rav-sora.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>소라</b>(@soramaybe)의 방에서 · 서로 디토한 사이</span></p><p class="dto-why"><small>왜 가져왔을까</small>친구를 모으는 건 늘 지우인데, 그 말을 소라가 먼저 써 줬어요. 플래터에선 💬 카드로 보이고, 바로 아래 D-1 ‘다시 모이는 날’이 그 말을 이어받아요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>오늘도 한 번 더</strong>연습실에서 생일까지 계속 재생. </dd></div>
+                <div class="rm-pf-dto"><dt>친구의 말을 적어 둔 메모</dt><dd><p class="dto-what"><span class="dto-k">텍스트</span><q>🧺 각자 좋아하는 간식 하나</q></p><p class="dto-from"><img src="assets/rooms/rav-sora.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>소라</b>(@soramaybe)의 말 · 디토가 아니라 직접 옮겨 적었어요</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/jiuallday/">지우의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-seoyun" style="--c:#B3BDA6;--c2:#85946F">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="서윤의 방, 이번 주는 올리브"><span class="rm-scr"><img src="assets/rooms/room-08-seoyun.webp" alt="서윤의 플래터 첫 화면. 이번 주 수집한 빛 사진, 작은 책장 컬렉션, 수집 중 상태, 전시 플레이리스트, 벽 색 사진, 날씨가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="서윤의 방, 초록을 모으는 순서"><span class="rm-scr"><img src="assets/rooms/room-08-seoyun.webp" alt="서윤의 플래터 첫 화면. ‘📷 오늘 빛은 조금 흐린 쪽’, ‘🌿 이 초록은 저장’, ‘🪞 여백까지 마음에 들어’, ‘How I Get’, ‘안 걸린 벽도 🪞’ 등이 붙어 있고, 은은하게 빛나는 사진 3장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="서윤의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-seoyun.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">서윤<span class="en" lang="en">Seoyun</span></p><p class="rm-pf-sub">@seoyunpalette · 22 · 미디어학 전공</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Curator</b>나만의 세계관이 확실한 유저</li><li>가입 76일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Curator</b>나만의 세계관이 확실한 유저</li><li>가입 76일 차</li><li class="tg-dt">디토 열린 사진 3장</li></ul>
                 <p class="rm-pf-q">“프로필을 보면 이번 주 내가 보였으면.”</p>
-                <p class="rm-pf-rel"><small>친구 사이</small>예서와 사진을 찍으러 나가지만, 혼자 보는 장면도 충분히 남겨요.</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>예서와 사진을 찍으러 나가지만 혼자 보는 장면도 충분히 남겨요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>지금 끌리는 색과 소재를 자세히 봐요. 자기표현을 고정하기보다 주기적으로 바꿔요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>이번 주는 올리브</strong>사진의 색, 책의 종이, 레코드의 질감을 이번 주의 취향으로 편집해요. 프로필을 열면 이번 주의 분위기가 보이길 바라요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">텍스트 위젯</span><q>빛 좋은 날을 모아</q></p><p class="dto-from"><img src="assets/rooms/rav-yeseo.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>예서</b>(@yeseofilm)의 방에서 · 같이 사진 찍으러 나가는 친구</span></p><p class="dto-why"><small>왜 가져왔을까</small>예서와 나간 날 발견한 빛을 모으는 중이라, 예서의 문장이 이번 주 제목처럼 어울렸던 것 같아요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>초록을 모으는 순서</strong>빛, 기록, 다음 전시. </dd></div>
+                <div class="rm-pf-dto"><dt>친구의 말을 적어 둔 메모</dt><dd><p class="dto-what"><span class="dto-k">텍스트</span><q>📷 오늘 빛은 조금 흐린 쪽</q></p><p class="dto-from"><img src="assets/rooms/rav-yeseo.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>예서</b>(@yeseofilm)의 말 · 디토가 아니라 직접 옮겨 적었어요</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/seoyunpalette/">서윤의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-rian" style="--c:#B5ADBA;--c2:#908498">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="리안의 방, AFTER TEN"><span class="rm-scr"><img src="assets/rooms/room-09-rian.webp" alt="리안의 플래터 첫 화면. SZA 노래, 심야 취향 사진, “낮보다 밤이 편해” 문장, 밤 10시 사진, 귀가 중 한 줄 일기, 음성 메모가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="리안의 방, 01:24, 아직 안 자"><span class="rm-scr"><img src="assets/rooms/room-09-rian.webp" alt="리안의 플래터 첫 화면. ‘🪞 여백까지 마음에 들어’, ‘🌙 밤의 골목’, ‘곡이 끝난 뒤 🌙’, ‘Aperture’ 등이 붙어 있고, 은은하게 빛나는 사진 3장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="리안의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-rian.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">리안<span class="en" lang="en">Rian</span></p><p class="rm-pf-sub">@rianafterdark · 21 · 패션 전공</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Curator</b>나만의 세계관이 확실한 유저</li><li>가입 51일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Curator</b>나만의 세계관이 확실한 유저</li><li>가입 121일 차</li><li class="tg-dt">디토 열린 사진 3장</li></ul>
                 <p class="rm-pf-q">“내가 좋아하는 장면만 모아둘래.”</p>
-                <p class="rm-pf-rel"><small>친구 사이</small>서윤과 함께 레코드를 고르지만, 좋아하는 곡은 서로 달라요.</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>서윤과 함께 레코드를 고르고도 좋아하는 곡은 서로 달라요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>취향이 분명하고 사진의 어둠도 지우지 않아요. 마음에 들지 않는 유행은 따라가지 않아요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>AFTER TEN</strong>밤에 더 선명해지는 취향이에요. 차콜·보라·플래시의 반복으로 자기 분위기를 한눈에 보여 주고 싶어요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">텍스트 위젯</span><q>이번 주는 올리브</q></p><p class="dto-from"><img src="assets/rooms/rav-seoyun.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>서윤</b>(@seoyunpalette)의 방에서 · 레코드를 같이 고르는 친구</span></p><p class="dto-why"><small>왜 가져왔을까</small>좋아하는 곡은 서로 달라도, 다른 취향 하나쯤 곁에 두고 싶었던 것 같아요. 검은 레코드와 플래시 사진 사이에서 혼자 올리브색이에요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>01:24, 아직 안 자</strong>한 곡에서 시작하는 밤의 기록. </dd></div>
+                <div class="rm-pf-dto"><dt>친구의 말을 적어 둔 메모</dt><dd><p class="dto-what"><span class="dto-k">텍스트</span><q>🪞 여백까지 마음에 들어</q></p><p class="dto-from"><img src="assets/rooms/rav-seoyun.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>서윤</b>(@seoyunpalette)의 말 · 디토가 아니라 직접 옮겨 적었어요</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/rianafterdark/">리안의 플래터 보기 ↗</a></div>
             </article>
           </li>
           <li class="rm-card" id="room-yeseo" style="--c:#ADD5E5;--c2:#79BBD4">
-            <button type="button" class="rm-ph" aria-pressed="false" aria-label="예서의 방, 빛 좋은 날을 모아"><span class="rm-scr"><img src="assets/rooms/room-10-yeseo.webp" alt="예서의 플래터 첫 화면. 디카 사진, “빛 좋은 날을 모아” 문장, 서점과 흐린 날 사진, 폴라로이드, 카메라 스티커, 리안에게서 디토한 노래가 보여요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
+            <button type="button" class="rm-ph" aria-pressed="false" aria-label="예서의 방, 흐린 날도 한 롤"><span class="rm-scr"><img src="assets/rooms/room-10-yeseo.webp" alt="예서의 플래터 첫 화면. ‘🎞️ 이번 주’, ‘📷 흐린 날’, ‘🫧 같이 본 빛’, ‘All I Did Was Dream of You (feat. The Marías)’, ‘📷 오늘 빛은 조금 흐린 쪽’ 등이 붙어 있고, 은은하게 빛나는 사진 3장은 디토할 수 있어요." loading="lazy" decoding="async" draggable="false" width="640" height="1392"></span><span class="dim"></span></button>
             <article class="rm-pf" aria-label="예서의 페르소나">
               <div class="rm-pf-l">
                 <div class="rm-pf-top"><img class="rm-pf-av" src="assets/rooms/rav-yeseo.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><div class="rm-pf-id"><p class="rm-pf-name">예서<span class="en" lang="en">Yeseo</span></p><p class="rm-pf-sub">@yeseofilm · 24 · 콘텐츠 디자이너</p></div></div>
-                <ul class="rm-pf-tags"><li><b lang="en">Curator / Archivist</b>나만의 세계관이 확실한 유저</li><li>가입 118일 차</li></ul>
+                <ul class="rm-pf-tags"><li><b lang="en">Curator / Archivist</b>나만의 세계관이 확실한 유저</li><li>가입 118일 차</li><li class="tg-dt">디토 열린 사진 3장</li></ul>
                 <p class="rm-pf-q">“사진 한 장에 그날 공기가 남으면 좋겠어.”</p>
-                <p class="rm-pf-rel"><small>친구 사이</small>리안의 사진을 찍어 주고, 리안이 찍어 준 장면엔 짧은 감상을 남겨요.</p>
+                <p class="rm-pf-rel"><small>친구 사이</small>리안의 사진을 찍어 주고, 자신도 리안이 찍어 준 장면에 짧은 감상을 남겨요.</p>
               </div>
               <dl class="rm-pf-dl">
                 <div><dt>이런 사람이에요</dt><dd>빛이 바뀌는 순간을 놓치지 않아요. 찍는 손과 찍힌 사람을 모두 기억하고 싶어 해요.</dd></div>
-                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>빛 좋은 날을 모아</strong>예쁜 장면보다 그때의 온도를 모으는 사진 일기예요. 사람과 날씨, 그날의 공기가 한 화면에서 이어지길 바라요.</dd></div>
-                <div class="rm-pf-dto"><dt>디토로 가져온 조각</dt><dd><p class="dto-what"><span class="dto-k">음악 위젯</span><q>Snooze</q></p><p class="dto-from"><img src="assets/rooms/rav-rian.webp" alt="" width="26" height="26" loading="lazy" decoding="async"><span><b>리안</b>(@rianafterdark)의 방에서 · 사진을 찍어 주는 친구</span></p><p class="dto-why"><small>왜 가져왔을까</small>리안을 찍어 주는 사이라, 리안의 밤 취향이 담긴 노래 하나를 사진 일기 옆에 붙여 둔 것 같아요.</p></dd></div>
+                <div class="rm-pf-room"><dt>이 방과 Ditto</dt><dd><strong>흐린 날도 한 롤</strong>사진보다 먼저 남은 빛. </dd></div>
+                <div class="rm-pf-dto"><dt>요즘 붙여 둔 노래</dt><dd><p class="dto-what"><span class="dto-k">음악</span><q>All I Did Was Dream of You (feat. The Marías)</q></p><p class="dto-from"><span>beabadoobee · 사진을 바로 올리기보다 한 주의 필름처럼 고른다.</span></p></dd></div>
               </dl>
               <div class="rm-pf-foot"><a class="rm-pf-go" href="/demo/yeseofilm/">예서의 플래터 보기 ↗</a></div>
             </article>
@@ -1899,13 +1890,13 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <div><h2 class="h-xl" id="fr-h">서로 디토하다 보면,<br><mark>친구가 돼요.</mark></h2><p class="lead">친구 신청은 아무 때나 열리지 않아요. 앱에서 실제로 거치는 다섯 걸음이에요.</p></div>
     </div>
     <ol class="fsteps" tabindex="0" aria-label="친구가 되는 다섯 걸음">
-      <li class="fs rv"><div class="fs-m"><div class="mui fs1" role="img" aria-label="지우와 하은 사이에 위젯이 오가요. 하은은 지우의 GIF를, 지우는 하은의 창가 사진을 디토했어요">
+      <li class="fs rv"><div class="fs-m"><div class="mui fs1" role="img" aria-label="지우와 하은 사이에 사진이 오가요. 하은은 지우의 ‘🩰 한 번 더’ 사진을, 지우는 하은의 창가 사진을 디토했어요">
         <span class="f1-p a"><img class="ma-av" src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b></span>
         <span class="f1-p b"><img class="ma-av" src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b></span>
-        <span class="f1-lane l1"><i></i><span class="f1-w"><img src="assets/hw-gif.webp" alt="" width="258" height="258" loading="lazy"><svg viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span></span>
-        <span class="f1-lane l2"><i></i><span class="f1-w"><img src="assets/ws-image.webp" alt="" width="543" height="543" loading="lazy"><svg viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span></span>
+        <span class="f1-lane l1"><i></i><span class="f1-w"><img src="assets/ws-jiu.webp" alt="" width="402" height="543" loading="lazy"><svg viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span></span>
+        <span class="f1-lane l2"><i></i><span class="f1-w"><img src="assets/ws-haeun.webp" alt="" width="543" height="825" loading="lazy"><svg viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span></span>
         <span class="f1-c">디토가 오가는 중</span>
-      </div></div><span class="fs-n">01</span><h3>디토가 오가요</h3><p>친구의 친구 위젯을 디토하거나, 그 사람이 내 위젯을 디토해 가면 서로의 주파수에 잡혀요.</p></li>
+      </div></div><span class="fs-n">01</span><h3>디토가 오가요</h3><p>친구의 친구 사진을 디토하거나, 그 사람이 내 사진을 디토해 가면 서로의 주파수에 잡혀요.</p></li>
       <li class="fs rv"><div class="fs-m"><div class="mui fs2" role="img" aria-label="내 주변 주파수 목록. 하은은 내 위젯 2개를, 리안은 1개를 디토했고 각자의 점 파형이 깜빡여요">
         <p class="fq-sec">내 주변 주파수</p>
         <div class="fq-row"><img class="ma-av" src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><span><b>하은</b><small>내 위젯 2개를 디토했어요</small></span><svg class="dmw " viewBox="0 0 80 36" data-s="0.67" aria-hidden="true" focusable="false"><g fill-opacity=".13"><circle cx="2.4" cy="2.0" r="0.57"/><circle cx="2.4" cy="6.0" r="0.85"/><circle cx="2.4" cy="10.0" r="1.13"/><circle cx="2.4" cy="14.0" r="1.40"/><circle cx="2.4" cy="18.0" r="1.68"/><circle cx="2.4" cy="22.0" r="1.40"/><circle cx="2.4" cy="26.0" r="1.13"/><circle cx="2.4" cy="30.0" r="0.85"/><circle cx="2.4" cy="34.0" r="0.57"/><circle cx="7.1" cy="2.0" r="0.57"/><circle cx="7.1" cy="6.0" r="0.85"/><circle cx="7.1" cy="10.0" r="1.13"/><circle cx="7.1" cy="14.0" r="1.40"/><circle cx="7.1" cy="18.0" r="1.68"/><circle cx="7.1" cy="22.0" r="1.40"/><circle cx="7.1" cy="26.0" r="1.13"/><circle cx="7.1" cy="30.0" r="0.85"/><circle cx="7.1" cy="34.0" r="0.57"/><circle cx="11.8" cy="2.0" r="0.57"/><circle cx="11.8" cy="6.0" r="0.85"/><circle cx="11.8" cy="10.0" r="1.13"/><circle cx="11.8" cy="14.0" r="1.40"/><circle cx="11.8" cy="22.0" r="1.40"/><circle cx="11.8" cy="26.0" r="1.13"/><circle cx="11.8" cy="30.0" r="0.85"/><circle cx="11.8" cy="34.0" r="0.57"/><circle cx="16.5" cy="2.0" r="0.57"/><circle cx="16.5" cy="6.0" r="0.85"/><circle cx="16.5" cy="10.0" r="1.13"/><circle cx="16.5" cy="14.0" r="1.40"/><circle cx="16.5" cy="22.0" r="1.40"/><circle cx="16.5" cy="26.0" r="1.13"/><circle cx="16.5" cy="30.0" r="0.85"/><circle cx="16.5" cy="34.0" r="0.57"/><circle cx="21.2" cy="2.0" r="0.57"/><circle cx="21.2" cy="6.0" r="0.85"/><circle cx="21.2" cy="30.0" r="0.85"/><circle cx="21.2" cy="34.0" r="0.57"/><circle cx="25.9" cy="2.0" r="0.57"/><circle cx="25.9" cy="6.0" r="0.85"/><circle cx="25.9" cy="10.0" r="1.13"/><circle cx="25.9" cy="14.0" r="1.40"/><circle cx="25.9" cy="22.0" r="1.40"/><circle cx="25.9" cy="26.0" r="1.13"/><circle cx="25.9" cy="30.0" r="0.85"/><circle cx="25.9" cy="34.0" r="0.57"/><circle cx="30.6" cy="2.0" r="0.57"/><circle cx="30.6" cy="6.0" r="0.85"/><circle cx="30.6" cy="10.0" r="1.13"/><circle cx="30.6" cy="26.0" r="1.13"/><circle cx="30.6" cy="30.0" r="0.85"/><circle cx="30.6" cy="34.0" r="0.57"/><circle cx="35.3" cy="2.0" r="0.57"/><circle cx="35.3" cy="6.0" r="0.85"/><circle cx="35.3" cy="10.0" r="1.13"/><circle cx="35.3" cy="14.0" r="1.40"/><circle cx="35.3" cy="22.0" r="1.40"/><circle cx="35.3" cy="26.0" r="1.13"/><circle cx="35.3" cy="30.0" r="0.85"/><circle cx="35.3" cy="34.0" r="0.57"/><circle cx="40.0" cy="2.0" r="0.57"/><circle cx="40.0" cy="34.0" r="0.57"/><circle cx="44.7" cy="2.0" r="0.57"/><circle cx="44.7" cy="6.0" r="0.85"/><circle cx="44.7" cy="10.0" r="1.13"/><circle cx="44.7" cy="14.0" r="1.40"/><circle cx="44.7" cy="22.0" r="1.40"/><circle cx="44.7" cy="26.0" r="1.13"/><circle cx="44.7" cy="30.0" r="0.85"/><circle cx="44.7" cy="34.0" r="0.57"/><circle cx="49.4" cy="2.0" r="0.57"/><circle cx="49.4" cy="6.0" r="0.85"/><circle cx="49.4" cy="10.0" r="1.13"/><circle cx="49.4" cy="26.0" r="1.13"/><circle cx="49.4" cy="30.0" r="0.85"/><circle cx="49.4" cy="34.0" r="0.57"/><circle cx="54.1" cy="2.0" r="0.57"/><circle cx="54.1" cy="6.0" r="0.85"/><circle cx="54.1" cy="10.0" r="1.13"/><circle cx="54.1" cy="14.0" r="1.40"/><circle cx="54.1" cy="22.0" r="1.40"/><circle cx="54.1" cy="26.0" r="1.13"/><circle cx="54.1" cy="30.0" r="0.85"/><circle cx="54.1" cy="34.0" r="0.57"/><circle cx="58.8" cy="2.0" r="0.57"/><circle cx="58.8" cy="6.0" r="0.85"/><circle cx="58.8" cy="30.0" r="0.85"/><circle cx="58.8" cy="34.0" r="0.57"/><circle cx="63.5" cy="2.0" r="0.57"/><circle cx="63.5" cy="6.0" r="0.85"/><circle cx="63.5" cy="10.0" r="1.13"/><circle cx="63.5" cy="14.0" r="1.40"/><circle cx="63.5" cy="22.0" r="1.40"/><circle cx="63.5" cy="26.0" r="1.13"/><circle cx="63.5" cy="30.0" r="0.85"/><circle cx="63.5" cy="34.0" r="0.57"/><circle cx="68.2" cy="2.0" r="0.57"/><circle cx="68.2" cy="6.0" r="0.85"/><circle cx="68.2" cy="10.0" r="1.13"/><circle cx="68.2" cy="14.0" r="1.40"/><circle cx="68.2" cy="22.0" r="1.40"/><circle cx="68.2" cy="26.0" r="1.13"/><circle cx="68.2" cy="30.0" r="0.85"/><circle cx="68.2" cy="34.0" r="0.57"/><circle cx="72.9" cy="2.0" r="0.57"/><circle cx="72.9" cy="6.0" r="0.85"/><circle cx="72.9" cy="10.0" r="1.13"/><circle cx="72.9" cy="14.0" r="1.40"/><circle cx="72.9" cy="18.0" r="1.68"/><circle cx="72.9" cy="22.0" r="1.40"/><circle cx="72.9" cy="26.0" r="1.13"/><circle cx="72.9" cy="30.0" r="0.85"/><circle cx="72.9" cy="34.0" r="0.57"/><circle cx="77.6" cy="2.0" r="0.57"/><circle cx="77.6" cy="6.0" r="0.85"/><circle cx="77.6" cy="10.0" r="1.13"/><circle cx="77.6" cy="14.0" r="1.40"/><circle cx="77.6" cy="18.0" r="1.68"/><circle cx="77.6" cy="22.0" r="1.40"/><circle cx="77.6" cy="26.0" r="1.13"/><circle cx="77.6" cy="30.0" r="0.85"/><circle cx="77.6" cy="34.0" r="0.57"/></g><g><circle class="d" fill-opacity="0.80" cx="11.8" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="16.5" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="21.2" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="25.9" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="30.6" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="30.6" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="30.6" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="35.3" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="6.0" r="0.85"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="40.0" cy="30.0" r="0.85"/><circle class="d" fill-opacity="0.80" cx="44.7" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="49.4" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="49.4" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="49.4" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="54.1" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="10.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="14.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="22.0" r="1.40"/><circle class="d" fill-opacity="0.80" cx="58.8" cy="26.0" r="1.13"/><circle class="d" fill-opacity="0.80" cx="63.5" cy="18.0" r="1.68"/><circle class="d" fill-opacity="0.80" cx="68.2" cy="18.0" r="1.68"/></g></svg></div>
@@ -1951,8 +1942,8 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 </section>
 
 <div class="rib" aria-hidden="true">
-  <div class="rb-band rb-1"><div class="rb-t"><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎀 오늘 텐션 과다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>별일 없어도 모여</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>창가 쪽은 내 자리</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>천천히 만들어도 돼</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>금요일, 한 자리 더</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>빛 좋은 날을 모아</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>돌아오는 기차에서는 말을 조금 덜 했다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>D-1 다시 모이는 날</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>이번 주는 올리브</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>일단 한 장부터</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎀 오늘 텐션 과다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>별일 없어도 모여</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>창가 쪽은 내 자리</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>천천히 만들어도 돼</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>금요일, 한 자리 더</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>빛 좋은 날을 모아</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>돌아오는 기차에서는 말을 조금 덜 했다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>D-1 다시 모이는 날</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>이번 주는 올리브</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>일단 한 장부터</span><i class="rb-s"></i></div></div>
-  <div class="rb-band rb-2"><div class="rb-t"><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>돌아오는 기차에서는 말을 조금 덜 했다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>빛 좋은 날을 모아</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>금요일, 한 자리 더</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>천천히 만들어도 돼</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>창가 쪽은 내 자리</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>별일 없어도 모여</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎀 오늘 텐션 과다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>일단 한 장부터</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>이번 주는 올리브</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>D-1 다시 모이는 날</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>돌아오는 기차에서는 말을 조금 덜 했다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>빛 좋은 날을 모아</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>금요일, 한 자리 더</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>천천히 만들어도 돼</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>창가 쪽은 내 자리</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>별일 없어도 모여</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎀 오늘 텐션 과다</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>일단 한 장부터</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>이번 주는 올리브</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>D-1 다시 모이는 날</span><i class="rb-s"></i></div></div>
+  <div class="rb-band rb-1"><div class="rb-t"><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎂 초는 내가</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>🧺 각자 좋아하는 간식 하나</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>🫧 여긴 조금 천천히 채울래</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>☕ 삐뚤어도 손에 맞는 내 컵</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>🍕 늦어도 와, 자리 비워둘게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>📷 오늘 빛은 조금 흐린 쪽</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>📸 흔들린 컷도 보내 줄게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🪩 목 20시</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>🌿 이 초록은 저장</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b>🥐 공강 한 시간은 커피로</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎂 초는 내가</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>🧺 각자 좋아하는 간식 하나</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>🫧 여긴 조금 천천히 채울래</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>☕ 삐뚤어도 손에 맞는 내 컵</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>🍕 늦어도 와, 자리 비워둘게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>📷 오늘 빛은 조금 흐린 쪽</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>📸 흔들린 컷도 보내 줄게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🪩 목 20시</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>🌿 이 초록은 저장</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b>🥐 공강 한 시간은 커피로</span><i class="rb-s"></i></div></div>
+  <div class="rb-band rb-2"><div class="rb-t"><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>📷 오늘 빛은 조금 흐린 쪽</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>📸 흔들린 컷도 보내 줄게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🪩 목 20시</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>🌿 이 초록은 저장</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b>🥐 공강 한 시간은 커피로</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎂 초는 내가</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>🧺 각자 좋아하는 간식 하나</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>🫧 여긴 조금 천천히 채울래</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>☕ 삐뚤어도 손에 맞는 내 컵</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>🍕 늦어도 와, 자리 비워둘게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-yeseo.webp" alt="" width="144" height="144" loading="lazy"><b>예서</b>📷 오늘 빛은 조금 흐린 쪽</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b>📸 흔들린 컷도 보내 줄게</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🪩 목 20시</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-seoyun.webp" alt="" width="144" height="144" loading="lazy"><b>서윤</b>🌿 이 초록은 저장</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b>🥐 공강 한 시간은 커피로</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b>🎂 초는 내가</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><b>소라</b>🧺 각자 좋아하는 간식 하나</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b>🫧 여긴 조금 천천히 채울래</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-nari.webp" alt="" width="144" height="144" loading="lazy"><b>나리</b>☕ 삐뚤어도 손에 맞는 내 컵</span><i class="rb-s"></i><span class="rb-i"><img src="assets/rooms/rav-dohyun.webp" alt="" width="144" height="144" loading="lazy"><b>도현</b>🍕 늦어도 와, 자리 비워둘게</span><i class="rb-s"></i></div></div>
 </div>
 
 <section class="close" id="close" aria-labelledby="close-h">
