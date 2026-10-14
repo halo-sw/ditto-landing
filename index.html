@@ -205,6 +205,8 @@ p{text-wrap:pretty}
 .scene .en{font-size:clamp(30px,3.4vw,52px);color:var(--violet-d);display:block}
 .scene h3{margin-top:14px}
 .scene .lead{margin-top:16px}
+.scene .rule{display:flex;align-items:baseline;gap:12px;margin-top:28px;padding-top:18px;border-top:1px solid rgba(22,18,27,.14);font-size:14.5px;font-weight:700;color:var(--ink-2)}
+.scene .rule b{font-family:var(--round);font-style:italic;font-weight:900;font-size:clamp(34px,3vw,44px);line-height:1;color:var(--ink)}
 @media (max-width:860px){.scene .wrap{grid-template-columns:1fr;gap:28px}
 .scene.flip .media{order:0}
 .scene .media{order:2}
@@ -241,6 +243,12 @@ p{text-wrap:pretty}
 .hb:focus-visible{outline:2px solid var(--g3);outline-offset:4px;border-radius:12px}
 .hold-note{display:block;margin-top:12px;min-height:3em;font-size:14px;color:var(--on-dark-2);text-align:center}
 /* success sheet */
+.holo{--tx:0;--ty:0;--v:1;position:relative;width:min(230px,62%);margin-top:4px;border-radius:20px;touch-action:none;cursor:grab;
+  transform:perspective(720px) rotateX(calc(var(--ty) * -12deg)) rotateY(calc(var(--tx) * 14deg + (1 - var(--v)) * -540deg)) scale(calc(.55 + .45 * var(--v)));
+  box-shadow:calc(var(--tx) * -10px) calc(18px - var(--ty) * 6px) 52px -8px rgba(111,38,164,.32)}
+.holo img{width:100%;height:auto;aspect-ratio:4/3.2;object-fit:cover;border-radius:inherit}
+.holo .sh{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+.holo .spot{position:absolute;inset:-10%;mix-blend-mode:soft-light;background:radial-gradient(closest-side,rgba(255,255,255,.45),transparent);transform:translate(calc(var(--tx) * -35%),calc(var(--ty) * -35%))}
 @media (max-width:860px){.demo .wrap{grid-template-columns:1fr}}
 /* ---------- frequency ---------- */
 .freq{padding-block:var(--sec);background:linear-gradient(180deg,#FFFFFF 0%,#F7F1FB 100%)}
@@ -249,6 +257,8 @@ p{text-wrap:pretty}
 .pk b{padding:4px 9px;border-radius:999px;font-size:12px;font-weight:700}
 /* ---------- frequency: how it works (정책서 §2–§7 · 기획서 §5.16) ---------- */
 /* friend request sheet — Figma 11:108999 (디토_최종) */
+.scene .more{display:inline-flex;gap:6px;margin-top:16px;font-size:14.5px;font-weight:700;color:var(--violet-d);text-decoration:none}
+.scene .more:hover{text-decoration:underline;text-underline-offset:3px}
 /* ---------- journey (diagram + segmented tabs) ---------- */
 .seg{display:inline-flex;gap:4px;padding:5px;border-radius:var(--r-md);background:var(--bg-3);margin-top:clamp(32px,4vw,52px);max-width:100%}
 .seg button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:150px;border:0;background:none;padding:10px 16px 11px;border-radius:10px;font:700 15px/1.3 var(--kr);letter-spacing:-.02em;color:var(--mute);cursor:pointer;text-align:left;transition:background .3s ease,color .3s ease,box-shadow .3s ease}
@@ -325,6 +335,14 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .board{position:absolute;left:50%;top:0;width:var(--bw);margin-left:calc(var(--bw) / -2);padding:calc(var(--u)*12) calc(var(--u)*16) calc(var(--u)*16);border-radius:calc(var(--u)*36);background:rgba(246,242,251,.95);text-align:left;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 50px 90px -40px rgba(90,20,120,.55),0 20px 40px -24px rgba(90,20,120,.35);transform:translate3d(calc(var(--mx,0) * -4px),calc(var(--my,0) * -4px),0);transition:transform .9s var(--ease)}
 .dots{background-image:radial-gradient(circle,rgba(138,63,184,.22) 0 1.4px,transparent 1.9px);background-size:calc(var(--u)*45.75) calc(var(--u)*45.75);background-position:calc(var(--u)*-4) calc(var(--u)*-4)}
+.stk{position:relative;min-width:0}
+.stk img{width:100%;height:100%;filter:drop-shadow(0 4px 8px rgba(70,30,110,.14))}
+@media (prefers-reduced-motion:no-preference){.room .stk{animation:settle 1.2s var(--ease) both;animation-delay:var(--d,0s)}
+.room .stk.pop{animation:pop .8s cubic-bezier(.3,1.6,.5,1) both}
+.stk.pop::after{content:"";position:absolute;inset:-5px;border-radius:calc(var(--u)*22);box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px rgba(178,85,217,.75);animation:ring 1.4s ease-out both;pointer-events:none}}
+@keyframes settle{0%{opacity:0;transform:translate(var(--dx,0px),var(--dy,-80px)) rotate(var(--r,-8deg)) scale(1.16)}30%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes pop{0%{transform:none}35%{transform:translateY(-8px) scale(1.08) rotate(-2deg)}100%{transform:none}}
+@keyframes ring{0%,55%{opacity:1}100%{opacity:0}}
 @media (max-width:860px){.room{--bw:min(calc(100vw - 64px),340px);margin-top:clamp(14px,2.4svh,24px)}}
 /* ---------- verbs: mini living scenes ---------- */
 .cube{position:relative;width:min(100%,480px);aspect-ratio:1;justify-self:center;border-radius:var(--r-lg);overflow:hidden;isolation:isolate;box-shadow:0 40px 80px -40px rgba(90,30,120,.45);container-type:inline-size}
@@ -486,9 +504,13 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .wx-ph .lab{padding-top:0}}
 /* music widget: 24pt radius in the app, ~27pt as captured (26px on the 1x crop) → mask in CSS too so nothing shows behind the corners */
 @keyframes swap{from{transform:scale(.9);opacity:.4}to{transform:none;opacity:1}}
+@keyframes tap{0%,100%{transform:none}8%,80%{transform:translateY(5px) scale(.94)}}
 /* ---------- tour: bigger copy, rebalanced ---------- */
 /* ---------- frequency: journey strip inside ---------- */
 /* ---------- qa: rule numbers folded into answers ---------- */
+.qcard .big{display:block;margin-top:8px;font:italic 900 clamp(40px,3.6vw,56px)/1 var(--round);letter-spacing:-.03em;background:linear-gradient(180deg,var(--violet-d),var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.qcard[open] .big{background:linear-gradient(180deg,#FFFFFF,var(--g3));-webkit-background-clip:text;background-clip:text}
+.qcard .big small{font-size:.38em;letter-spacing:0}
 /* ---------- tour: per-step widget sets around the phone ---------- */
 /* ---------- 5.4 rooms: centered opener + 3D fanned collection (iPhone 17 frames) + persona overview ---------- */
 @property --rc{syntax:'<color>';inherits:true;initial-value:#CAB7F2}
@@ -1198,21 +1220,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 /* 5.3 rooms: the quote carries the left column */
 @media (min-width:761px){.rm-pf-q{font-size:clamp(21px,2vw,28px);line-height:1.38;letter-spacing:-.035em}}
 /* conveyor belt: every sample widget on the 10 platters, at their real relative sizes, riding two belts */
-.belt{--k:.62;position:relative;overflow:clip;padding:clamp(48px,6vw,88px) 0 clamp(16px,2vw,28px);background:var(--bg);display:grid;gap:clamp(18px,2.2vw,30px)}
-.bt-row{position:relative;display:flex;overflow:hidden;padding:0 0 14px}
-.bt-row::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;border-radius:7px;background:repeating-linear-gradient(90deg,#E6DDF3 0 18px,#EFE8F8 18px 36px);box-shadow:inset 0 2px 3px rgba(80,40,120,.12),0 6px 14px -8px rgba(80,40,120,.35)}
-.bt-t{display:flex;align-items:flex-end;gap:clamp(12px,1.4vw,20px);padding-right:clamp(12px,1.4vw,20px);flex:0 0 auto;min-width:max-content}
-.bt-w{display:block;width:calc(var(--w) * var(--k) * 1px);height:auto;filter:drop-shadow(0 10px 12px rgba(70,20,110,.22));transition:transform .35s var(--ease)}
-.bt-w:hover{transform:translateY(-6px) rotate(-2deg)}
-@media (max-width:760px){.belt{--k:.46}}
-@media (prefers-reduced-motion:no-preference){.bt-1 .bt-t{animation:btL 120s linear infinite}
-.bt-2 .bt-t{animation:btR 140s linear infinite}
-.bt-1::after{animation:btTread .9s linear infinite}
-.bt-2::after{animation:btTread .9s linear infinite reverse}
-.belt:hover .bt-t,.belt:hover .bt-row::after{animation-play-state:paused}}
-@keyframes btL{to{transform:translateX(-50%)}}
-@keyframes btR{from{transform:translateX(-50%)}to{transform:none}}
-@keyframes btTread{to{background-position:-36px 0}}
 /* close: ten friends instead of emoji, a soft glow behind the line */
 .close{overflow:clip;padding-top:clamp(64px,8vw,120px)}
 .cl-glow{position:absolute;left:50%;top:46%;width:min(980px,120vw);aspect-ratio:2;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(170,74,244,.20),rgba(250,151,226,.12) 55%,transparent);filter:blur(30px);pointer-events:none}
@@ -1272,6 +1279,577 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .rl{display:block;line-height:1.2em}
 .rl.strip{transition:transform 1s cubic-bezier(.2,.85,.25,1.04)}
 .rl.strip i{display:block;font-style:normal;height:1.2em;line-height:1.2em}
+/* =================== Invite (under the closing line): launch ticket machine — the card prints downward out of the slot =================== */
+.play{padding-block:clamp(56px,7vw,96px) 0;background:var(--bg)}
+.tm{--tm-a:#AA4AF4;--tm-b:#FA97E2;max-width:1040px;margin:clamp(40px,5vw,64px) auto 0;display:grid;grid-template-columns:minmax(0,520px) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:start;text-align:left}
+.tm-mach{position:relative;width:100%}
+.tm-body{position:relative;z-index:2;padding:22px 24px 20px;border-radius:34px;background:linear-gradient(170deg,#FFFFFF 0%,color-mix(in srgb,var(--tm-a) 12%,#F2ECF8) 100%);box-shadow:inset 0 2px 0 #FFFFFF,inset 0 -8px 16px color-mix(in srgb,var(--tm-a) 12%,transparent),0 30px 50px -30px color-mix(in srgb,var(--tm-a) 60%,#1a0f2a),0 12px 22px -16px rgba(22,18,27,.3);transition:background .5s ease}
+.tm-top{display:flex;justify-content:space-between;align-items:center}
+.tm-brand{font:italic 900 20px/1 var(--round);letter-spacing:.04em;color:color-mix(in srgb,var(--tm-a) 50%,#2A1A3A)}
+.tm-brand i{font-style:inherit;color:var(--tm-a)}
+.tm-led{width:12px;height:12px;border-radius:50%;background:#C9C1D3;box-shadow:inset 0 -2px 3px rgba(0,0,0,.2)}
+.tm-mach.busy .tm-led{background:#FFB020;box-shadow:0 0 12px 3px rgba(255,176,32,.6)}
+.tm-mach.ready .tm-led,.tm-mach.full .tm-led{background:#07E7B4;box-shadow:0 0 12px 3px rgba(7,231,180,.55)}
+.tm-screen{display:grid;grid-template-columns:auto 1fr;align-items:end;gap:2px 10px;margin-top:16px;padding:18px 22px 16px;border-radius:20px;background:#1D1A24;box-shadow:inset 0 3px 10px rgba(0,0,0,.65),0 1px 0 #FFFFFF}
+.tm-sk{grid-column:1 / -1;font:700 13.5px/1 var(--kr);color:rgba(243,238,250,.6)}
+.tm-left{font:italic 900 clamp(48px,6vw,72px)/1 var(--round);letter-spacing:-.01em;color:#FFFFFF;text-shadow:0 0 18px color-mix(in srgb,var(--tm-a) 70%,transparent);font-variant-numeric:tabular-nums}
+.tm-of{font:italic 900 20px/1.6 var(--round);color:rgba(243,238,250,.5)}
+.tm-bar{grid-column:1 / -1;height:6px;margin-top:10px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+.tm-bar i{display:block;height:100%;width:100%;border-radius:inherit;background:linear-gradient(90deg,var(--tm-a),var(--tm-b));transition:width .8s var(--ease)}
+.tm-slot{height:16px;margin:20px 10px 0;border-radius:999px;background:linear-gradient(180deg,#0B0910,#2B2533);box-shadow:inset 0 4px 6px rgba(0,0,0,.85),0 1px 0 #FFFFFF}
+.tm-feed{position:relative;z-index:1;margin:-26px 38px 0;padding-top:0;min-height:120px;overflow:hidden;perspective:1100px}
+.tm-mach.full .tm-feed{overflow:visible}
+.tm-idle{margin:44px 0 0;text-align:center;font-size:14.5px;line-height:1.6;color:var(--mute)}
+.tm-idle b{color:var(--ink-2)}
+.tk{--rx:0deg;--ry:0deg;--hx:30%;--hy:20%;position:relative;width:100%;aspect-ratio:3/2;container-type:inline-size;cursor:pointer;transform:translateY(-104%);outline:none}
+.tm-mach.out .tk{animation:tkFeed 2.2s cubic-bezier(.3,.7,.3,1) forwards}
+.tm-mach.full .tk{animation:none;transform:none}
+@keyframes tkFeed{0%{transform:translateY(-104%)}16%{transform:translateY(-90%)}24%{transform:translateY(-88%)}42%{transform:translateY(-70%)}50%{transform:translateY(-68%)}68%{transform:translateY(-50%)}76%{transform:translateY(-48%)}100%{transform:translateY(-40%)}}
+@media (prefers-reduced-motion:no-preference){.tm-mach.busy .tm-body{animation:tmShake .16s linear 13}}
+@keyframes tmShake{0%,100%{transform:none}25%{transform:translate(-1.5px,1px) rotate(-.25deg)}75%{transform:translate(1.5px,-1px) rotate(.25deg)}}
+.tk-in{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.tk.flip .tk-in{transform:rotateX(var(--rx)) rotateY(calc(180deg + var(--ry)))}
+.tk-face{position:absolute;inset:0;overflow:hidden;border-radius:4cqw;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#FBF8FF;box-shadow:0 26px 46px -22px rgba(60,20,90,.5),0 8px 16px -10px rgba(22,18,27,.25)}
+.tk-front{display:flex}
+.tk-gr{position:relative;width:46%;height:100%;overflow:hidden}
+.tk-gr svg{position:absolute;inset:0;width:100%;height:100%}
+.tk-gr::after{content:"";position:absolute;top:0;bottom:0;right:0;border-right:.35cqw dashed rgba(255,255,255,.75)}
+.tk-stub{flex:1;min-width:0;display:flex;flex-direction:column;padding:5cqw 4.6cqw 4.4cqw;text-align:left;color:var(--ink)}
+.tk-name{margin:0;font:800 6.2cqw/1.15 var(--kr);letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tk-id{margin:.8cqw 0 0;font:italic 900 3.2cqw/1.2 var(--round);color:var(--violet-d);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tk-meta{margin-top:auto!important;display:flex;gap:6cqw;margin:0;padding-top:2cqw;border-top:.25cqw dashed rgba(138,130,146,.45)}
+.tk-meta dt{font:italic 900 2.5cqw/1.2 var(--round);color:var(--violet-d)}
+.tk-meta dd{margin:.4cqw 0 0;font:800 3.8cqw/1.2 var(--round)}
+.tk-meta dd.code{letter-spacing:.08em}
+.tk:not(.issued) #tkNo{color:var(--mute);font-size:3.1cqw}
+.tk-holo{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color-dodge;opacity:.36;background:linear-gradient(115deg,rgba(255,255,255,0) 18%,rgba(255,154,213,.85) 32%,rgba(159,216,255,.85) 44%,rgba(182,255,207,.8) 55%,rgba(255,243,160,.8) 66%,rgba(255,255,255,0) 82%) var(--hx) var(--hy)/300% 300%;transition:background-position .25s ease-out}
+.tk-glare{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;background:radial-gradient(circle at var(--hx) var(--hy),rgba(255,255,255,.8),rgba(255,255,255,0) 46%);opacity:.45}
+.tk-stamp{position:absolute;right:4.4cqw;top:4.4cqw;padding:.8cqw 2cqw;border:.5cqw solid #D6336C;border-radius:1.4cqw;color:#D6336C;font:italic 900 3cqw/1 var(--round);letter-spacing:.1em;transform:rotate(-12deg);opacity:0}
+.tk.issued .tk-stamp{opacity:.85}
+.tk.issued.stamp .tk-stamp{animation:tkStamp .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes tkStamp{from{transform:rotate(-12deg) scale(2.2);opacity:0}to{transform:rotate(-12deg) scale(1);opacity:.85}}
+.tk-back{transform:rotateY(180deg);display:grid;place-items:center;background:linear-gradient(140deg,color-mix(in srgb,var(--tm-a) 14%,#FFFFFF),color-mix(in srgb,var(--tm-b) 18%,#FFFFFF))}
+.tk-back img{width:52%;height:auto;opacity:.85;filter:drop-shadow(-.2cqw -.26cqw 0 rgba(255,255,255,.95)) drop-shadow(.25cqw .33cqw .4cqw rgba(90,20,120,.28))}
+.tk-k{position:absolute;left:5cqw;top:4.6cqw;font:italic 900 2.8cqw/1 var(--round);color:var(--violet-d)}
+.tk-bn{position:absolute;right:5cqw;top:4.6cqw;font:800 2.6cqw/1 var(--round);color:var(--mute)}
+.tm-ctl{display:grid;gap:26px;margin:0;padding:clamp(20px,2.6vw,30px);border-radius:28px;background:#F3F0F7}
+.tm-f{display:grid;gap:10px;min-width:0}
+.tm-k{display:block;font:italic 900 14px/1 var(--round);color:var(--violet-d)}
+.tm-in,.tm-id{height:54px;border-radius:16px;background:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(22,18,27,.08)}
+.tm-in{width:100%;padding:0 18px;border:0;outline:none;font:700 17px/1 var(--kr);letter-spacing:-.02em;color:var(--ink)}
+.tm-in:focus-visible,.tm-id:focus-within{box-shadow:inset 0 0 0 2px var(--violet-d)}
+.tm-in.bad{box-shadow:inset 0 0 0 2px #D6336C}
+.tm-id{display:flex;align-items:center;padding:0 18px}
+.tm-at{font:italic 900 19px/1 var(--round);color:var(--mute);margin-right:4px}
+#tmName{flex:1;min-width:0;height:100%;border:0;background:none;outline:none;font:800 19px/1 var(--round);color:var(--ink)}
+.tm-in:disabled,#tmName:disabled{color:var(--violet-d)}
+.tm-hint{font-size:13px;line-height:1.4;color:var(--mute)}
+.tm-hint[data-s="ok"]{color:#0A9E77;font-weight:700}
+.tm-hint[data-s="taken"],.tm-hint[data-s="invalid"],.tm-hint[data-s="reserved"]{color:#D6336C;font-weight:600}
+.tm-dot:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px}
+.tm-sw{display:flex;flex-wrap:wrap;gap:12px}
+.tm-dot{width:38px;height:38px;border:0;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:inset 0 0 0 2px rgba(255,255,255,.7);cursor:pointer;transition:transform .2s var(--ease)}
+.tm-dot[aria-checked="true"]{box-shadow:0 0 0 3px #FFFFFF,0 0 0 5px var(--ink);transform:scale(1.05)}
+.tm-go-row{display:grid;gap:10px}
+.tm-draw{justify-self:start}
+.tm-draw:disabled{opacity:.6;cursor:default}
+.tm-rule{margin:0;font-size:13px;line-height:1.6;color:var(--mute)}
+@media (max-width:900px){.tm{grid-template-columns:1fr}
+.tm-mach{max-width:520px;justify-self:center}
+.tm-draw{justify-self:stretch}}
+.tc{max-width:1040px;margin:24px auto 0;padding:clamp(20px,2.6vw,30px);border-radius:24px;background:#FFFFFF;box-shadow:0 0 0 1px rgba(22,18,27,.06),0 18px 36px -28px rgba(60,20,90,.5);text-align:left}
+.tc-t{font-size:clamp(18px,1.6vw,21px);font-weight:700;letter-spacing:-.03em}
+.tc-d{margin-top:6px;font-size:15px;line-height:1.65;color:var(--ink-2)}
+#tcEmail{flex:1 1 260px;height:52px;padding:0 18px;border:0;border-radius:999px;background:#F3F0F7;font:600 16px/1 var(--kr);color:var(--ink);outline:none}
+#tcEmail:focus-visible{box-shadow:inset 0 0 0 2px var(--violet-d)}
+.tc-ok{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:13px;line-height:1.55;color:var(--ink-2);cursor:pointer}
+.tc-ok input{width:18px;height:18px;margin-top:1px;accent-color:#8A3FB8;flex:none}
+.tc-err{min-height:1.4em;margin-top:8px;font-size:13.5px;font-weight:600;color:#D6336C}
+.tc-link{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px}
+.tc-link code{padding:12px 16px;border-radius:14px;background:#F3F0F7;font:800 15px/1 var(--round);color:var(--violet-d);overflow-wrap:anywhere}
+.tm-idle{position:absolute;inset:0 0 18%;display:grid;place-items:center;margin:0;text-align:center;font-size:14px;line-height:1.6;color:rgba(243,238,250,.55);transition:opacity .4s ease}
+.tm-idle b{color:rgba(243,238,250,.9)}
+.tm-mach.up .tm-idle{opacity:0}
+/* claim popup — opens when the ticket is out */
+.tmd{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px}
+.tmd-bg{position:absolute;inset:0;background:rgba(22,18,27,.38);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .25s ease}
+.tmd-p{position:relative;width:min(460px,100%);max-height:calc(100svh - 32px);overflow:auto;padding:28px 26px 24px;border-radius:28px;background:#FFFFFF;text-align:left;box-shadow:0 40px 90px -30px rgba(40,10,60,.55),0 0 0 1px rgba(22,18,27,.06);opacity:0;transform:translateY(18px) scale(.96);transition:opacity .25s ease,transform .35s cubic-bezier(.3,1.4,.5,1)}
+.tmd.on .tmd-bg{opacity:1}
+.tmd.on .tmd-p{opacity:1;transform:none}
+.tmd-x{position:absolute;top:14px;right:14px;width:40px;height:40px;border:0;border-radius:50%;background:#F3F0F7;color:var(--ink);font-size:15px;cursor:pointer}
+.tmd-k{font:italic 900 14px/1 var(--round);color:var(--violet-d)}
+.tmd-t{margin-top:10px;font-size:23px;font-weight:800;letter-spacing:-.035em;line-height:1.3}
+.tmd-d{margin-top:8px;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+.tmd #tcEmail{display:block;width:100%;margin-top:18px}
+.tmd-b{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.tmd-b .btn{flex:1 1 auto;justify-content:center}
+@media (prefers-reduced-motion:reduce){.tmd-bg,.tmd-p{transition:none}}
+/* declined ticket effects — a fixed layer over the ticket, so nothing gets clipped or scrolls */
+@property --bn{syntax:'<percentage>';inherits:true;initial-value:0%}
+.fx-lay{position:fixed;z-index:120;pointer-events:none;--bn:0%}
+.tk.fx-tk{position:absolute;inset:0;width:100%;height:100%;transform:none;animation:none}
+.tm-idle b{color:var(--violet-d)}
+/* public-display toggles in the claim popup */
+.tc-wall{display:grid;gap:8px;margin-top:12px;padding:12px 14px;border-radius:16px;background:#F7F4FA}
+.tc-sw{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer}
+.tc-sw small{margin-left:4px;font-weight:500;color:var(--mute)}
+.tc-sw input{position:absolute;opacity:0;width:1px;height:1px}
+.tc-tg{position:relative;flex:none;width:38px;height:22px;border-radius:999px;background:#D9D2E3;transition:background .2s}
+.tc-tg::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .25s var(--ease)}
+.tc-sw input:checked + .tc-tg{background:#8A3FB8}
+.tc-sw input:checked + .tc-tg::after{transform:translateX(16px)}
+.tc-sw input:focus-visible + .tc-tg{outline:3px solid var(--violet-d);outline-offset:2px}
+.tc-sw.off{opacity:.45;cursor:default}
+/* 1,000-seat chart */
+.smap{position:relative;max-width:1040px;margin:clamp(40px,5vw,64px) auto 0;padding:clamp(22px,3vw,40px);border-radius:32px;background:#16131C;color:#F3EEFA;text-align:left;box-shadow:0 30px 60px -36px rgba(40,10,60,.7)}
+.smap-k{font:italic 900 14px/1 var(--round);color:#C9A6F7}
+.smap-t{margin-top:8px;font-size:clamp(24px,2.6vw,34px);font-weight:800;letter-spacing:-.04em;color:#FFFFFF}
+.smap-d{margin-top:8px;font-size:14.5px;line-height:1.65;color:rgba(243,238,250,.65)}
+.smap-flap{display:flex;align-items:center;gap:12px;margin-top:20px;padding:10px 12px;border-radius:14px;background:#0C0A10;box-shadow:inset 0 2px 6px rgba(0,0,0,.7);overflow:hidden}
+.smap-fk{flex:none;padding:5px 8px;border-radius:6px;background:#FF5488;font:italic 900 11px/1 var(--round);letter-spacing:.08em;color:#FFFFFF}
+.smap-ft{display:flex;min-width:0;overflow:hidden;white-space:nowrap;font:800 15px/1 var(--round);color:#FFE9A8;letter-spacing:.02em}
+.smap-ft .fl{display:inline-block;min-width:.62em;padding:3px 1px;margin-right:1px;border-radius:3px;background:linear-gradient(180deg,#221D2B 50%,#1A1622 50%);text-align:center;transform-origin:50% 50%}
+@media (prefers-reduced-motion:no-preference){.smap-ft .fl{animation:flFlip .38s cubic-bezier(.3,.7,.3,1) both}}
+@keyframes flFlip{0%{transform:rotateX(90deg);opacity:0}60%{transform:rotateX(-12deg);opacity:1}100%{transform:none}}
+.smap-grid{position:relative;display:grid;grid-template-columns:repeat(40,minmax(0,1fr));gap:clamp(3px,.4vw,5px);margin-top:22px}
+.seat{display:block;aspect-ratio:1;border-radius:30%;background:rgba(255,255,255,.08);font-style:normal}
+.seat.on{background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 8px -1px color-mix(in srgb,var(--a) 70%,transparent);cursor:pointer;transition:transform .2s var(--ease)}
+.seat.on.ph{box-shadow:0 0 0 1.5px #FFFFFF inset,0 0 8px -1px color-mix(in srgb,var(--a) 70%,transparent)}
+.seat.on:hover,.seat.on:focus-visible{transform:scale(1.7);z-index:2;outline:none;position:relative}
+.seat.me{position:relative;z-index:1;outline:2px solid #FFFFFF;outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.seat.me{animation:stMe 1.6s ease-in-out infinite}
+.seat.pop{animation:stPop .7s cubic-bezier(.3,1.8,.5,1)}}
+@keyframes stMe{50%{outline-offset:5px;outline-color:rgba(255,255,255,.4)}}
+@keyframes stPop{from{transform:scale(3);filter:brightness(2)}to{transform:none}}
+.smap-leg{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;font-size:13px;color:rgba(243,238,250,.7)}
+.smap-leg span{display:inline-flex;align-items:center;gap:7px}
+.smap-leg b{font:italic 900 13px/1 var(--round);color:#FFFFFF}
+.smap-leg .seat{width:12px;height:12px;border-radius:30%;background:rgba(255,255,255,.12)}
+.smap-leg .seat.on{background:linear-gradient(135deg,#AA4AF4,#FA97E2)}
+.smap-leg .seat.me{background:transparent;outline:2px solid #FFFFFF;outline-offset:1px}
+.smap-tip{position:absolute;z-index:5;display:flex;align-items:center;gap:8px;padding:8px 12px 8px 8px;border-radius:14px;background:#FFFFFF;color:var(--ink);transform:translate(-50%,calc(-100% - 10px));pointer-events:none;white-space:nowrap;box-shadow:0 14px 30px -14px rgba(0,0,0,.6)}
+.smap-tip img{width:30px;height:38px;border-radius:7px;object-fit:cover}
+.smap-tip span{display:grid;gap:2px}
+.smap-tip b{font:italic 900 11px/1 var(--round);color:var(--violet-d)}
+.smap-tip em{font-style:normal;font-size:14px;font-weight:700}
+.smap-tip small{font:800 11.5px/1 var(--round);color:var(--mute)}
+@media (max-width:760px){.smap-grid{grid-template-columns:repeat(25,minmax(0,1fr));gap:3px}
+.smap{border-radius:24px}
+.smap-ft{font-size:13px}}
+/* seat card — a real printed ticket: fixed radius, perforated divider with punched notches, paper grain, holo sheen */
+.sv{position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:16px}
+.sv-bg{position:absolute;inset:0;background:rgba(12,10,16,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .25s}
+.sv-card{position:relative;width:min(520px,100%);perspective:1200px;opacity:0;transform:translateY(30px) scale(.8) rotate(-4deg);transition:opacity .25s,transform .5s cubic-bezier(.3,1.5,.5,1)}
+.sv.on .sv-bg{opacity:1}
+.sv.on .sv-card{opacity:1;transform:none}
+.svt{--rx:0deg;--ry:0deg;--hx:30%;--hy:20%;--notch:14px;position:relative;display:flex;aspect-ratio:16/9;border-radius:18px;background:#FBF8FF;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  -webkit-mask:radial-gradient(circle var(--notch) at 42% 0,transparent 98%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--notch) at 42% 100%,transparent 98%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle var(--notch) at 42% 0,transparent 98%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--notch) at 42% 100%,transparent 98%,#000) bottom/100% 51% no-repeat;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.45)) drop-shadow(0 4px 6px rgba(0,0,0,.2))}
+.svt::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.svt-gr{position:relative;width:42%;overflow:hidden}
+.svt-gr svg{position:absolute;inset:0;width:100%;height:100%}
+.svt-gr::after{content:"";position:absolute;top:var(--notch);bottom:var(--notch);right:0;border-right:2px dashed rgba(255,255,255,.85)}
+.svt-stub{flex:1;min-width:0;display:flex;flex-direction:column;padding:22px 22px 18px 24px;text-align:left;color:var(--ink)}
+.svt-k{font:italic 900 12px/1 var(--round);color:var(--violet-d)}
+.svt-name{margin-top:12px;font:800 28px/1.15 var(--kr);letter-spacing:-.035em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.svt-id{margin-top:4px;font:italic 900 15px/1.2 var(--round);color:var(--violet-d)}
+.svt-note{margin-top:12px;padding:8px 12px;border-radius:12px 12px 12px 4px;background:color-mix(in srgb,var(--a) 14%,#FFFFFF);font:600 14px/1.45 var(--kr);letter-spacing:-.02em;color:var(--ink)}
+.svt-meta{display:flex;gap:26px;margin:auto 0 0;padding-top:12px;border-top:1.5px dashed rgba(138,130,146,.45)}
+.svt-meta dt{font:italic 900 11px/1.2 var(--round);color:var(--violet-d)}
+.svt-meta dd{margin:3px 0 0;font:800 16px/1.2 var(--round);letter-spacing:.02em}
+.svt-me{position:absolute;right:16px;top:16px;padding:5px 10px;border-radius:999px;background:#16121B;color:#FFFFFF;font:800 12px/1 var(--kr)}
+.svt-holo{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color-dodge;opacity:.3;background:linear-gradient(115deg,rgba(255,255,255,0) 20%,rgba(255,154,213,.85) 34%,rgba(159,216,255,.85) 46%,rgba(182,255,207,.8) 57%,rgba(255,243,160,.8) 68%,rgba(255,255,255,0) 82%) var(--hx) var(--hy)/300% 300%}
+.sv-x{position:absolute;top:-14px;right:-14px;z-index:2;width:40px;height:40px;border:0;border-radius:50%;background:#FFFFFF;color:var(--ink);font-size:15px;cursor:pointer;box-shadow:0 8px 20px -8px rgba(0,0,0,.5)}
+@media (max-width:520px){.svt{aspect-ratio:auto;min-height:220px}
+.svt-name{font-size:22px}
+.svt-stub{padding:18px 16px 14px 18px}}
+/* my ticket drops into its seat */
+.tk-note{margin:2.4cqw 0 0;padding:1.6cqw 2.4cqw;border-radius:2.4cqw 2.4cqw 2.4cqw .8cqw;background:color-mix(in srgb,var(--tm-a) 13%,#FFFFFF);font:600 3.2cqw/1.4 var(--kr);letter-spacing:-.02em;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tk-stamp{font:800 2.9cqw/1 var(--kr);letter-spacing:0}
+.tm-note-in{position:relative;display:block}
+.tm-note-in .tm-in{padding-right:64px}
+.tm-len{position:absolute;right:16px;top:50%;transform:translateY(-50%);font:800 12px/1 var(--round);color:var(--mute)}
+.tm-k small{margin-left:4px;font:600 12px/1 var(--kr);color:var(--mute)}
+.tm-sw{display:grid;grid-template-columns:repeat(7,36px);gap:10px}
+.tm-dot{width:36px;height:36px}
+/* the ticket comes out of the slot: the feed sits on top of the machine and is clipped at the slot's middle */
+.tm-feed{z-index:3;margin-top:-28px}
+.tm-feed::before{content:"";position:absolute;left:-6px;right:-6px;top:0;height:10px;z-index:4;border-radius:0 0 50% 50%;background:linear-gradient(180deg,rgba(11,9,16,.85),rgba(11,9,16,0));pointer-events:none}
+.tm-mach:not(.out) .tm-feed::before{display:none}
+.tm-idle{position:relative;z-index:0;margin-top:56px}
+/* pull to tear: the print stops half way out; drag it down (with resistance) to rip it off */
+.tm-mach.ready .tk{animation:none;transform:translateY(calc(-40% + var(--pull,0px))) rotate(var(--tilt,0deg));transition:transform .5s cubic-bezier(.3,1.5,.5,1);cursor:grab;touch-action:none}
+.tm-mach.ready .tk.drag{transition:none;cursor:grabbing}
+.tm-mach.ready .tk-front{box-shadow:0 30px 40px -24px rgba(60,20,90,.55)}
+@media (prefers-reduced-motion:no-preference){.tm-mach.ready .tk:not(.drag){animation:tkNudge 2.4s ease-in-out .6s infinite}}
+@keyframes tkNudge{0%,70%,100%{transform:translateY(-40%)}80%{transform:translateY(-36%)}90%{transform:translateY(-39%)}}
+.tm-pull{position:relative;z-index:4;display:flex;justify-content:center;align-items:center;gap:8px;margin:12px 0 0;font:700 14.5px/1 var(--kr);color:var(--ink-2)}
+.tm-pull-ar{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#FFFFFF;font-size:14px}
+@media (prefers-reduced-motion:no-preference){.tm-pull-ar{animation:pullAr 1.2s ease-in-out infinite}}
+@keyframes pullAr{50%{transform:translateY(5px)}}
+.tm-pull-btn{height:30px;padding:0 12px;border:0;border-radius:999px;background:#F3F0F7;font:700 12.5px/1 var(--kr);color:var(--ink-2);cursor:pointer}
+.tk-ghost{position:fixed;z-index:105;margin:0;transform:none;animation:none;pointer-events:none}
+.tk-ghost .tk-in{transform:none}
+/* popup: the torn ticket lands enlarged on top, with a two-step guide */
+.tmd-p{width:min(540px,100%)}
+.tmd-stage{position:relative;margin:4px 0 22px}
+.tmd-slot{width:100%;aspect-ratio:3/2}
+.tk.tk-big{width:100%;transform:none;animation:none;cursor:default}
+.tk.tk-big .tk-in{transform:none}
+.tmd-g{position:absolute;display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;background:#16121B;color:#FFFFFF;font:700 12.5px/1.2 var(--kr);white-space:nowrap;box-shadow:0 10px 20px -10px rgba(0,0,0,.6);opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .45s cubic-bezier(.3,1.6,.5,1)}
+.tmd-g b{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#FA97E2;color:#16121B;font:italic 900 11px/1 var(--round)}
+.tmd-g em{font-style:normal;color:#FFC6EE}
+.tmd-g::before{content:"";position:absolute;top:-6px;width:12px;height:12px;background:#16121B;transform:rotate(45deg)}
+.tmd-g.g1{left:44%;bottom:-16px}
+.tmd-g.g1::before{left:22px}
+.tmd-g.g2{right:-6px;bottom:-56px}
+.tmd-g.g2::before{left:50%}
+.tmd.guide .tmd-g{opacity:1;transform:none}
+.tmd.guide .tmd-g.g2{transition-delay:.25s}
+.tmd.guide .tmd-ask{margin-top:44px}
+.tmd-ask{transition:margin .3s ease}
+.tmd.leaving .tmd-slot{visibility:hidden}
+@media (max-width:520px){.tmd-g{font-size:11.5px}
+.tmd-g.g1{left:auto;right:30%;bottom:-14px}
+.tmd-g.g2{right:0;bottom:-50px}}
+/* random palette */
+.tm-rand{display:grid;place-items:center;font-size:17px;background:conic-gradient(#AA4AF4,#FA97E2,#FF925D,#F9F871,#07E7B4,#48B5F4,#6655D2,#AA4AF4)!important}
+.tm-rand.spin{animation:randSpin .5s linear infinite}
+@keyframes randSpin{to{transform:rotate(360deg)}}
+.tm-sw{grid-template-columns:repeat(8,36px)}
+@media (max-width:420px){.tm-sw{grid-template-columns:repeat(5,36px)}}
+.tm-mach{container-type:inline-size}
+.tm-mach.ready .tm-pull{margin-top:calc((100cqw - 76px) * -.2667 + 14px)}
+.tm-mach.ready .tm-feed{margin-bottom:0}
+.tm-mach.retract .tk{animation:tkBack .36s cubic-bezier(.5,0,.8,.4) forwards;transition:none}
+@keyframes tkBack{to{transform:translateY(-104%)}}
+.tmd-re{display:flex;align-items:baseline;gap:8px;margin:14px auto 0;padding:6px 10px;border:0;border-radius:999px;background:none;font:700 14px/1.2 var(--kr);color:var(--violet-d);cursor:pointer}
+.tmd-re small{font-weight:500;font-size:12px;color:var(--mute)}
+.tmd-re:hover{background:#F3F0F7}
+.tmd-re:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px}
+/* the print is clipped only at the slot line (top) — sides and bottom stay free while it hangs out */
+.tm-feed{overflow:visible;clip-path:inset(0 -80px -400px -80px)}
+.tm-mach.full .tm-feed{clip-path:none}
+/* popup: the close button sits above the ticket, never on it; the big ticket flips on tap */
+.tmd-p{padding-top:56px}
+.tmd-x{top:12px;right:12px;z-index:3}
+.tmd-slot{cursor:pointer;perspective:1200px}
+.tk.tk-big.flip .tk-in{transform:rotateY(180deg)}
+.tk.tk-big .tk-in{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.tmd.flipped .tmd-g{opacity:0}
+.tmd-stage::after{content:"눌러서 뒷면 보기";position:absolute;right:4px;top:-26px;font:600 12px/1 var(--kr);color:var(--mute)}
+/* standard consent */
+.tc-agree{margin-top:12px;padding:12px 14px;border-radius:16px;background:#F7F4FA}
+.tc-agree .tc-ok{margin-top:0;font-size:14px;color:var(--ink)}
+.tc-agree .tc-ok b{color:var(--violet-d)}
+.tc-pol{margin-top:8px;font-size:12.5px;line-height:1.6;color:var(--ink-2)}
+.tc-pol summary{cursor:pointer;font-weight:700;color:var(--mute);list-style:none}
+.tc-pol summary::-webkit-details-marker{display:none}
+.tc-pol summary::after{content:" ▾"}
+.tc-pol[open] summary::after{content:" ▴"}
+.tc-pol dl{display:grid;gap:6px;margin:8px 0 6px}
+.tc-pol dl div{display:grid;grid-template-columns:64px 1fr;gap:8px}
+.tc-pol dt{font-weight:700;color:var(--ink)}
+.tc-pol dd{margin:0}
+/* discard effects */
+.fx-dust{position:absolute;left:-40px;top:-100px;pointer-events:none}
+.fx-dust-src{position:absolute;inset:0}
+.fx-shred .fx-strip{position:absolute;inset:0;animation:fxStrip 1.35s cubic-bezier(.45,0,.75,.6) forwards;animation-delay:calc(var(--i) * 18ms)}
+@keyframes fxStrip{0%{transform:none}22%{transform:translateX(var(--dx)) translateY(6px)}100%{transform:translate(calc(var(--dx) * 2.2),var(--dy)) rotate(var(--rz));opacity:0}}
+.fx-fold .tk.fx-tk{transform-origin:50% 50%;animation:fxFold 1.4s cubic-bezier(.5,0,.6,1) forwards}
+@keyframes fxFold{0%{transform:none}28%{transform:perspective(800px) rotateX(78deg) scale(.92)}45%{transform:perspective(800px) rotateX(78deg) rotateZ(-14deg) scale(.6)}100%{transform:perspective(800px) translate(55vw,-85vh) rotateX(78deg) rotateZ(-36deg) scale(.25);opacity:0}}
+.tmd-re{position:absolute;left:14px;top:14px;margin:0;z-index:3}
+.tmd-re small{display:none}
+/* ---- ticket one-liner: open or time capsule ---- */
+.tm-seg{display:inline-flex;gap:4px;padding:4px;margin-bottom:8px;border-radius:999px;background:#EEE9F4}
+.tm-seg-b{border:0;border-radius:999px;padding:7px 14px;background:none;font:700 13px/1 var(--kr);color:var(--mute);cursor:pointer}
+.tm-seg-b[aria-checked="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(22,18,27,.12)}
+.tm-seg-b:focus-visible{outline:3px solid var(--violet-d);outline-offset:1px}
+.tk-note.cap{font-style:normal;font-weight:700;color:var(--violet-d);background:repeating-linear-gradient(-45deg,#F1EAFB 0 8px,#EAE0F8 8px 16px)}
+.svt-note.cap{font-style:normal;font-weight:700}
+/* ---- sticker board ---- */
+.sb{padding:clamp(22px,4vw,40px);border-radius:36px;background:#F4F1F8}
+.sb-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.sb-k{margin:0;font:italic 900 15px/1 var(--en);color:var(--violet-d)}
+.sb-t{margin:8px 0 6px;font:800 clamp(24px,3vw,34px)/1.2 var(--kr);letter-spacing:-.02em;color:var(--ink)}
+.sb-c{margin:0;font:500 15px/1.6 var(--kr);color:var(--ink-2);max-width:560px}
+.sb-c span{font-weight:700;color:var(--violet-d)}
+.sb-make{margin-top:20px;padding:20px;border-radius:28px;background:#fff;box-shadow:0 10px 30px -18px rgba(22,18,27,.3)}
+.sb-tabs{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:#F1EDF6}
+.sb-tab{border:0;border-radius:999px;padding:9px 18px;background:none;font:700 14px/1 var(--kr);color:var(--mute);cursor:pointer}
+.sb-tab[aria-selected="true"]{background:var(--ink);color:#fff}
+.sb-mk{display:grid;grid-template-columns:240px 1fr;gap:24px;margin-top:16px;align-items:center}
+.sb-prev{position:relative;display:grid;place-items:center;min-height:220px;border-radius:24px;background:radial-gradient(#E4DDEC 1.2px,transparent 1.3px) 0 0/18px 18px,#FAF8FC}
+.sb-prev .sbs{position:relative;left:auto;top:auto;transform:rotate(-4deg)}
+.sb-ph0{font:600 13px/1.5 var(--kr);color:var(--mute);text-align:center}
+.sb-ctl{display:grid;gap:12px}
+.sb-in{position:relative;display:block}
+.sb-in .tm-in{width:100%;padding-right:60px}
+.sb-in .tm-len{position:absolute;right:14px;top:50%;transform:translateY(-50%)}
+.sb-cols{display:flex;gap:10px;flex-wrap:wrap}
+.sb-cl{width:32px;height:32px;border-radius:50%;border:3px solid #fff;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 0 1px #E2DBEA;cursor:pointer}
+.sb-cl[aria-checked="true"]{box-shadow:0 0 0 2px var(--ink)}
+.sb-pbtn{display:flex;gap:8px;flex-wrap:wrap}
+.sb-file{position:relative;overflow:hidden;cursor:pointer}
+.sb-file input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.sb-cam{position:relative;width:min(100%,280px);aspect-ratio:1;border-radius:24px;overflow:hidden;background:#16121B}
+.sb-cam video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.sb-shut{position:absolute;left:50%;bottom:14px;width:56px;height:56px;margin-left:-28px;border-radius:50%;border:4px solid #fff;background:rgba(255,255,255,.35);cursor:pointer}
+.sb-shut:active{transform:scale(.92)}
+.sb-note{margin:0;font:500 12.5px/1.5 var(--kr);color:var(--mute)}
+.sb-err{margin:0;min-height:1em;font:600 13px/1.4 var(--kr);color:#D7265B}
+#sbPost{justify-self:start}
+.sb-wrap{margin-top:22px;border-radius:28px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin}
+.sb-board{position:relative;min-width:960px;height:640px;border-radius:28px;overflow:hidden;background:radial-gradient(#DCD3E6 1.4px,transparent 1.5px) 0 0/22px 22px,linear-gradient(160deg,#FFFFFF,#F7F2FC);box-shadow:inset 0 0 0 1px #E6DFEE}
+.sb-empty{position:absolute;inset:0;display:grid;place-items:center;margin:0;font:600 15px/1.4 var(--kr);color:var(--mute)}
+.sb-tip{margin:12px 0 0;font:500 13px/1.4 var(--kr);color:var(--mute);text-align:center}
+.sbs{position:absolute;transform:translate(-50%,-50%) rotate(calc(var(--r,0deg) + var(--sw,0deg)));cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;filter:drop-shadow(0 2px 2px rgba(22,18,27,.18)) drop-shadow(0 6px 10px rgba(22,18,27,.10));transition:filter .2s,transform .25s cubic-bezier(.2,.9,.3,1.3)}
+.sbs:focus-visible{outline:3px solid var(--violet-d);outline-offset:6px;border-radius:20px}
+.sbs.peel{cursor:grabbing;transform:translate(-50%,-50%) rotate(calc(var(--r,0deg) + var(--sw,0deg))) scale(1.08);filter:drop-shadow(0 10px 8px rgba(22,18,27,.16)) drop-shadow(0 26px 30px rgba(22,18,27,.18));transition:filter .2s,transform .12s}
+.sbs.stuck{animation:sbStick .38s cubic-bezier(.3,1.6,.5,1)}
+@keyframes sbStick{0%{scale:1.06}60%{scale:.97}100%{scale:1}}
+.sbs.pop{animation:sbPop .8s cubic-bezier(.2,1.4,.4,1)}
+@keyframes sbPop{0%{scale:.2;opacity:0}60%{scale:1.12;opacity:1}100%{scale:1}}
+/* text sticker: die-cut bubble with a thick white edge */
+.sbs-tx{display:block;max-width:230px;padding:14px 20px;border:5px solid #fff;border-radius:26px;background:linear-gradient(135deg,var(--a),var(--b));font:800 18px/1.3 var(--kr);letter-spacing:-.01em;color:#fff;text-shadow:0 1px 2px rgba(22,18,27,.25);word-break:keep-all;overflow-wrap:anywhere;text-align:center;position:relative;overflow:hidden}
+.sbs-tx::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.45) 45%,transparent 60%);transform:translateX(-120%);transition:transform .7s}
+.sbs:hover .sbs-tx::after,.sbs.peel .sbs-tx::after{transform:translateX(120%)}
+.sbs-tx.lt{color:#3A2A00;text-shadow:none}
+/* photo sticker */
+.sbs.ph .sbs-f{display:flex;flex-direction:column;align-items:center;padding:6px 6px 8px;border-radius:22px;background:#fff}
+.sbs-ph{display:block;width:132px;height:132px;border-radius:16px;overflow:hidden;background:#EEE}
+.sbs-ph img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.sbs-cap{max-width:132px;margin-top:6px;font:700 13px/1.3 var(--kr);color:var(--ink);text-align:center;word-break:keep-all}
+@media (max-width:720px){.sb-mk{grid-template-columns:1fr}
+.sb-prev{min-height:180px}
+.sb-board{height:560px}}
+@media (prefers-reduced-motion:reduce){.sbs,.sbs.peel{transition:none}
+.sbs.pop,.sbs.stuck{animation:none}}
+/* sticker pack: glossy 3D die-cut with a holographic rim (baked into the image) + a moving gloss sheen */
+.sb-pack{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:6px;max-height:248px;overflow-y:auto;padding:4px}
+.sb-pk{display:grid;place-items:center;aspect-ratio:1;border:0;border-radius:16px;background:#F6F3F9;cursor:pointer;transition:transform .15s}
+.sb-pk img{width:82%;height:82%;object-fit:contain}
+.sb-pk:hover{transform:scale(1.08) rotate(-4deg)}
+.sb-pk[aria-checked="true"]{background:#EADCFB;box-shadow:inset 0 0 0 2px var(--violet-d)}
+.sbs.pk{width:118px}
+.sbs-pk{display:block;width:100%;height:auto;pointer-events:none}
+.sbs-gl{position:absolute;inset:0;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.75) 47%,rgba(190,240,255,.5) 52%,transparent 62%) -120% 0/250% 100% no-repeat;pointer-events:none;transition:background-position .8s}
+.sbs.pk:hover .sbs-gl,.sbs.pk.peel .sbs-gl{background-position:220% 0}
+.sb-prev .sbs.pk{width:150px}
+.sb-prev .sbs-gl{animation:sbGloss 2.6s ease-in-out infinite}
+@keyframes sbGloss{0%,30%{background-position:-120% 0}70%,100%{background-position:220% 0}}
+/* holographic rim on handmade stickers too */
+.sbs{isolation:isolate}
+.sbs:not(.pk) .sbs-f::before{content:"";position:absolute;inset:-3px;border-radius:29px;background:conic-gradient(from 40deg,#FFD6F5,#C9E9FF,#D9FFE9,#FFF4C2,#E6D4FF,#FFD6F5);z-index:-1}
+.sbs.ph .sbs-f::before{border-radius:25px}
+@media (prefers-reduced-motion:reduce){.sb-prev .sbs-gl{animation:none}}
+.smap-grid .seat[hidden]{display:none}
+.seat.opening{animation:seatOpen .6s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes seatOpen{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:none}}
+.smap-more{margin:14px 0 0;padding:12px 16px;border-radius:16px;border:1px dashed rgba(255,255,255,.18);font:500 14px/1.5 var(--kr);color:rgba(255,255,255,.62);text-align:center}
+.smap-more b{color:#fff;font-weight:700}
+@media (prefers-reduced-motion:reduce){.seat.opening{animation:none}}
+.sb-tab{white-space:nowrap}
+@media (max-width:420px){.sb-tab{padding:9px 12px;font-size:13px}}
+.sbs-f{position:relative;isolation:isolate}
+.sbs.pk .sbs-f{width:100%}
+.sbs-flap{position:absolute;inset:0;pointer-events:none;filter:drop-shadow(-1px -1px 1px rgba(22,18,27,.10)) drop-shadow(-3px -4px 5px rgba(22,18,27,.16))}
+.sbs-bk{position:absolute;left:0;top:0;width:100%;transform-origin:0 0;visibility:hidden;filter:brightness(0) invert(.97)}
+.sbs-bk::before{display:none}
+.sbs.peeling{transform:translate(-50%,-50%) rotate(var(--r,0deg)) scale(1.02);transition:transform .15s}
+.sbs.peel{transition:filter .2s,transform .2s cubic-bezier(.2,.9,.3,1.3)}
+.sbs.stuck{animation:sbSlap .42s cubic-bezier(.3,1.5,.5,1)}
+@keyframes sbSlap{0%{scale:1.08}35%{scale:.94 .97}70%{scale:1.02}100%{scale:1}}
+.sbs-ghost{position:absolute;transform:translate(-50%,-50%) rotate(var(--r));border-radius:24px;border:2px dashed rgba(138,63,184,.0);background:rgba(138,63,184,.0);pointer-events:none;transition:border-color .25s,background .25s;z-index:0}
+.sbs-ghost.on{border-color:rgba(138,63,184,.28);background:rgba(138,63,184,.05)}
+.sbs.pk:hover .sbs-gl{background-position:220% 0}
+.sb-board{user-select:none;-webkit-user-select:none}
+/* ---- sticker maker v3: rows with even spacing, chips for pack group / shape / font ---- */
+.sb-ctl{gap:16px}
+.sb-pane{display:grid;gap:14px}
+.sb-pane[hidden]{display:none}
+.sb-row{display:grid;grid-template-columns:52px 1fr;align-items:center;gap:12px}
+.sb-lb{font:700 13px/1 var(--kr);color:var(--mute)}
+.sb-chips{display:flex;flex-wrap:wrap;gap:6px}
+.sb-chip{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border:1px solid #E4DDEC;border-radius:999px;background:#fff;font:600 14px/1 var(--kr);color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.sb-chip:hover{border-color:#CFC3DD}
+.sb-chip[aria-checked="true"],.sb-chip[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.sb-chip:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px}
+.sb-cols{gap:8px}
+#sbPost{margin-top:2px}
+.sb-err:empty{display:none}
+.sb-ico{display:inline-block;width:16px;height:11px;border:2px solid currentColor;border-radius:6px;opacity:.75}
+.ico-pill{border-radius:99px}
+.ico-label{border-radius:2px}
+.ico-tape{border-style:dashed;border-radius:1px}
+.ico-note{width:12px;height:12px;border-radius:1px 1px 5px 1px}
+.ico-circle{width:13px;height:13px;border-radius:50%}
+.ico-bubble{border-radius:5px 5px 5px 0}
+/* fonts */
+.fn-base{font-family:var(--kr)}
+.fn-jua{font-family:'Jua',var(--kr);font-weight:400}
+.fn-gaegu{font-family:'Gaegu',var(--kr);font-weight:700}
+.fn-pen{font-family:'Nanum Pen Script',var(--kr);font-weight:400}
+.fn-black{font-family:'Black Han Sans',var(--kr);font-weight:400}
+.fn-dohyeon{font-family:'Do Hyeon',var(--kr);font-weight:400}
+.fn-gamja{font-family:'Gamja Flower',var(--kr);font-weight:400}
+.sb-fnt.fn-pen,.sb-fnt.fn-gamja,.sb-fnt.fn-gaegu{font-size:17px}
+.sbs-tx.fn-pen{font-size:26px;line-height:1.1}
+.sbs-tx.fn-gaegu,.sbs-tx.fn-gamja{font-size:21px}
+.sbs-tx.fn-black,.sbs-tx.fn-dohyeon,.sbs-tx.fn-jua{font-size:20px;letter-spacing:0}
+/* shapes */
+.sbs-tx.sh-bubble{border-radius:24px 24px 24px 6px;overflow:visible}
+.sbs-tx.sh-bubble::before{content:"";position:absolute;left:14px;bottom:-17px;width:20px;height:20px;background:var(--b);border:5px solid #fff;border-top:0;border-right:0;border-radius:0 0 0 4px;transform:skewY(-40deg);z-index:-1}
+.sbs-tx.sh-label{border-radius:10px;padding:12px 18px;outline:2px dashed rgba(255,255,255,.7);outline-offset:-10px}
+.sbs-tx.sh-tape{border:0;border-radius:2px;padding:12px 26px;background:repeating-linear-gradient(-45deg,color-mix(in srgb,var(--a) 75%,#fff) 0 8px,color-mix(in srgb,var(--a) 55%,#fff) 8px 16px);color:#16121B;text-shadow:none;opacity:.94;-webkit-mask:linear-gradient(#000 0 0) center/calc(100% - 12px) 100% no-repeat,conic-gradient(from -45deg at left,#000 90deg,#0000 0) left/6px 12px repeat-y,conic-gradient(from 135deg at right,#000 90deg,#0000 0) right/6px 12px repeat-y;mask:linear-gradient(#000 0 0) center/calc(100% - 12px) 100% no-repeat,conic-gradient(from -45deg at left,#000 90deg,#0000 0) left/6px 12px repeat-y,conic-gradient(from 135deg at right,#000 90deg,#0000 0) right/6px 12px repeat-y}
+.sbs:has(.sh-tape) .sbs-f::before,.sbs:has(.sh-note) .sbs-f::before,.sbs:has(.sh-circle) .sbs-f::before{display:none}
+.sbs-tx.sh-note{width:150px;min-height:136px;display:flex;align-items:center;justify-content:center;border:0;border-radius:2px 2px 18px 2px;padding:20px 16px;background:linear-gradient(170deg,color-mix(in srgb,var(--a) 45%,#fff),color-mix(in srgb,var(--a) 62%,#fff));color:#16121B;text-shadow:none;box-shadow:inset 0 -14px 18px -14px rgba(22,18,27,.18)}
+.sbs-tx.sh-circle{width:138px;height:138px;display:grid;place-items:center;padding:16px;border-radius:50%;border-width:6px;box-shadow:0 0 0 3px rgba(255,255,255,.0)}
+.sbs-tx.sh-circle span{display:block}
+.sbs:has(.sh-circle) .sbs-f::before{display:block;inset:-3px;border-radius:50%}
+.sbs-tx.sh-bubble::after{display:none}
+.sbs.pk.gl{width:104px}
+.sb-prev .sbs.pk.gl{width:132px}
+/* ---- board surface: brushed aluminium (laptop lid) or cork ---- */
+.sb-board{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.003 .8' numOctaves='2' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .52 0 0 0 0 .56 0 0 0 .9 -.32'/%3E%3C/filter%3E%3Crect width='400' height='200' filter='url(%23b)'/%3E%3C/svg%3E") 0 0/400px 200px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='1' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .4 0 0 0 0 .45 0 0 0 -2 1.06'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E") 0 0/160px 160px,radial-gradient(120% 90% at 18% 0%,rgba(255,255,255,.75),transparent 55%),linear-gradient(135deg,#E8EAED 0%,#D2D5DA 48%,#E2E4E7 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(22,18,27,.08),inset 0 -18px 40px -30px rgba(22,18,27,.35)}
+.sb-board[data-skin="cork"]{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='1' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .93 0 0 0 0 .8 0 0 0 -3.2 1.6'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23m)'/%3E%3C/svg%3E") 0 0/180px 180px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .30 0 0 0 0 .18 0 0 0 0 .08 0 0 0 -2.6 1.55'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/240px 240px,radial-gradient(130% 100% at 50% 40%,transparent 55%,rgba(70,40,12,.28)),linear-gradient(160deg,#D2A473,#C08D5C);box-shadow:inset 0 0 0 10px #E8DCCB,inset 0 0 0 11px rgba(70,40,12,.25),inset 0 3px 14px 10px rgba(70,40,12,.25)}
+.sb-prev{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.003 .8' numOctaves='2' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .52 0 0 0 0 .56 0 0 0 .9 -.32'/%3E%3C/filter%3E%3Crect width='400' height='200' filter='url(%23b)'/%3E%3C/svg%3E") 0 0/400px 200px,linear-gradient(135deg,#ECEEF0,#D9DCE0)}
+.sb-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.sb-foot .sb-tip{margin:0;text-align:left}
+.sb-skin{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:#EEE9F4}
+.sb-skin button{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;padding:7px 12px;background:none;font:700 13px/1 var(--kr);color:var(--mute);cursor:pointer}
+.sb-skin button i{width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(22,18,27,.15)}
+.sb-skin .sk-metal i{background:linear-gradient(135deg,#F2F3F5,#B9BDC3)}
+.sb-skin .sk-cork i{background:radial-gradient(#8B5A2B 20%,transparent 22%) 0 0/4px 4px,#C8996A}
+.sb-skin button[aria-checked="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(22,18,27,.12)}
+.sb-skin button:focus-visible{outline:3px solid var(--violet-d);outline-offset:1px}
+/* ---- speech bubble: one continuous shape, tail drawn as white edge + fill so it joins the body ---- */
+.sbs-tx.sh-bubble{border-radius:22px;overflow:visible}
+.sbs-tx.sh-bubble::before{content:"";position:absolute;left:20px;bottom:-19px;width:30px;height:24px;background:#fff;clip-path:polygon(0 0,100% 0,14% 100%);transform:none;border:0;border-radius:0;z-index:-1}
+.sbs-tx.sh-bubble::after{content:"";display:block;position:absolute;left:26px;bottom:-9px;width:19px;height:14px;background:color-mix(in srgb,var(--a) 62%,var(--b));clip-path:polygon(0 0,100% 0,8% 100%);transform:none;transition:none}
+.sbs:has(.sh-bubble) .sbs-f::before{display:none}
+.sbs-bk .sbs-tx.sh-bubble::after{background:#fff}
+/* ---- peel & carry ---- */
+.sbs-bk{filter:brightness(0) invert(.9)}
+.sbs.peeling{transform:translate(-50%,-50%) rotate(var(--r,0deg));transition:none}
+.sbs.peel{transform:translate(-50%,-50%) perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) rotate(calc(var(--r,0deg) + var(--sw,0deg))) scale(1.06);filter:drop-shadow(0 6px 6px rgba(22,18,27,.14)) drop-shadow(0 22px 26px rgba(22,18,27,.2));transition:filter .25s,transform .18s cubic-bezier(.2,.8,.2,1)}
+.sbs.stuck{animation:sbSettle .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes sbSettle{0%{scale:1.05;filter:drop-shadow(0 8px 10px rgba(22,18,27,.2))}100%{scale:1}}
+.sbs-ghost{position:absolute;transform:translate(-50%,-50%) rotate(var(--r));pointer-events:none;z-index:0;border:0;background:none;border-radius:0;filter:brightness(0);opacity:0;transition:opacity .9s ease-out}
+.sbs-ghost.on{opacity:.09}
+.sbs-ghost.fade{opacity:0;transition-delay:.15s}
+.sbs-ghost .sbs-f::before,.sbs-ghost .sbs-gl{display:none}
+.sbs:hover .sbs-tx.sh-bubble::after,.sbs.peel .sbs-tx.sh-bubble::after{transform:none}
+.sb-pack{max-height:300px}
+.sb-cnt{margin:0}
+/* ---- sticker finishes: one overlay layer (.sbs-fin) clipped to the sticker's own shape ---- */
+.sbs-fin{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1}
+.sbs-tx{isolation:isolate}
+.sbs-ph{position:relative;isolation:isolate}
+.sbs.pk .sbs-f{isolation:isolate}
+.sbs.pk .sbs-fin{-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.sbs-bk .sbs-fin{display:none}
+/* gloss: a soft highlight from the top-left */
+.fin-gloss .sbs-fin{background:linear-gradient(150deg,rgba(255,255,255,.38),rgba(255,255,255,0) 38%)}
+/* holographic: rainbow foil that drifts */
+.fin-holo .sbs-fin{background:linear-gradient(115deg,#ff8ad8,#ffe27a,#7df0c8,#8fd3ff,#c77dff,#ff8ad8) 0 0/300% 300%;mix-blend-mode:color-dodge;opacity:.55;animation:finHolo 6s linear infinite}
+.fin-holo .sbs-f::after{content:"";position:absolute;inset:0;pointer-events:none}
+@keyframes finHolo{to{background-position:300% 300%}}
+/* glitter: fine sparkles that twinkle */
+.fin-glitter .sbs-fin{background:radial-gradient(circle,#fff 0 1px,transparent 1.6px) 0 0/9px 9px,radial-gradient(circle,rgba(255,240,180,.95) 0 .8px,transparent 1.4px) 4px 5px/7px 7px,radial-gradient(circle,rgba(200,170,255,.9) 0 1px,transparent 1.6px) 2px 1px/13px 11px;mix-blend-mode:screen;opacity:.75;animation:finTwinkle 1.6s steps(3) infinite}
+@keyframes finTwinkle{0%{opacity:.45}50%{opacity:.9}100%{opacity:.6}}
+/* matte paper: muted colour, paper grain, softer shadow */
+.fin-matte .sbs-f{filter:saturate(.82) contrast(.96) brightness(1.02)}
+.fin-matte .sbs-fin{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .42 0 0 0 0 .38 0 0 0 -1.6 1.1'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23p)'/%3E%3C/svg%3E") 0 0/120px 120px;mix-blend-mode:multiply;opacity:.55}
+.sbs.fin-matte{filter:drop-shadow(0 1px 1px rgba(22,18,27,.16)) drop-shadow(0 3px 5px rgba(22,18,27,.08))}
+.fin-matte .sbs-gl{display:none}
+/* clear vinyl: see-through with a glassy edge light */
+.fin-clear .sbs-f{opacity:.8}
+.fin-clear .sbs-fin{background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,0) 30%,rgba(255,255,255,0) 70%,rgba(255,255,255,.35))}
+.sbs.fin-clear{filter:drop-shadow(0 1px 1px rgba(22,18,27,.12)) drop-shadow(0 4px 6px rgba(22,18,27,.08))}
+/* puffy: pillowy highlight and shade, a little more lift */
+.fin-puffy .sbs-fin{background:radial-gradient(90% 70% at 30% 22%,rgba(255,255,255,.55),rgba(255,255,255,0) 55%),radial-gradient(110% 90% at 70% 85%,rgba(22,18,27,.22),rgba(22,18,27,0) 55%);mix-blend-mode:soft-light;opacity:1}
+.sbs.fin-puffy{filter:drop-shadow(0 3px 3px rgba(22,18,27,.2)) drop-shadow(0 10px 14px rgba(22,18,27,.16))}
+/* chip swatches */
+.sb-sw{display:inline-block;width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(22,18,27,.15);background:#E9E2F2}
+.sb-sw.fin-gloss{background:linear-gradient(150deg,#fff,#C9B6EA)}
+.sb-sw.fin-holo{background:conic-gradient(#ff8ad8,#ffe27a,#7df0c8,#8fd3ff,#c77dff,#ff8ad8)}
+.sb-sw.fin-glitter{background:radial-gradient(circle,#fff 0 1px,transparent 1.5px) 0 0/4px 4px,#C9A8F5}
+.sb-sw.fin-matte{background:#D8CFC4}
+.sb-sw.fin-clear{background:rgba(201,182,234,.35);box-shadow:inset 0 0 0 1.5px rgba(138,63,184,.4)}
+.sb-sw.fin-puffy{background:radial-gradient(circle at 35% 30%,#fff,#E7A9DA 60%,#C77DBF)}
+.sb-finrow{padding-bottom:12px;border-bottom:1px dashed #E6DFEE}
+@media (prefers-reduced-motion:reduce){.fin-holo .sbs-fin,.fin-glitter .sbs-fin{animation:none}}
+.fin-holo .sbs-fin{mix-blend-mode:overlay;opacity:.7;background:linear-gradient(115deg,#ff6fcf,#ffe066,#5ff0c0,#6fc3ff,#b26bff,#ff6fcf) 0 0/300% 300%}
+.fin-glitter .sbs-fin{background:radial-gradient(circle,#fff 0 .9px,transparent 1.4px) 0 0/12px 12px,radial-gradient(circle,rgba(255,240,180,.95) 0 .7px,transparent 1.2px) 5px 6px/9px 10px,radial-gradient(circle,rgba(210,180,255,.9) 0 .9px,transparent 1.4px) 2px 3px/17px 14px;opacity:.55}
+.ph.fin-glitter .sbs-fin{opacity:.35}
+.fin-clear .sbs-f{opacity:.72}
+/* ---- size: every transform carries the sticker's own scale ---- */
+.sbs{transform:translate(-50%,-50%) rotate(calc(var(--r,0deg) + var(--sw,0deg))) scale(var(--s,1))}
+.sbs.peeling{transform:translate(-50%,-50%) rotate(var(--r,0deg)) scale(var(--s,1))}
+.sbs.peel{transform:translate(-50%,-50%) perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) rotate(calc(var(--r,0deg) + var(--sw,0deg))) scale(calc(var(--s,1) * 1.06))}
+.sbs:not(.mine){cursor:default}
+.sbs.mine{cursor:grab}
+.sbs.nope{animation:sbNope .4s ease}
+@keyframes sbNope{25%{translate:-3px 0}50%{translate:3px 0}75%{translate:-2px 0}}
+.sbs.bye{transition:transform .5s cubic-bezier(.5,0,.75,0),opacity .5s;transform:translate(-50%,-140%) rotate(calc(var(--r,0deg) - 18deg)) scale(calc(var(--s,1) * .7));opacity:0;pointer-events:none}
+.sbs-ghost{transform:translate(-50%,-50%) rotate(var(--r)) scale(var(--s,1))}
+/* ---- selection box (reference: thin frame, rotate knob on a stem, resize knob at the corner) ---- */
+.sbs-sel{position:absolute;z-index:100001;transform:translate(-50%,-50%) rotate(var(--r,0deg));border:1.5px solid rgba(255,255,255,.95);border-radius:6px;box-shadow:0 0 0 1px rgba(22,18,27,.18),0 2px 10px rgba(22,18,27,.12);pointer-events:none}
+.sbs-sel[hidden]{display:none}
+.sel-stem{position:absolute;left:50%;top:-30px;width:1.5px;height:30px;margin-left:-.75px;background:rgba(255,255,255,.95);box-shadow:0 0 0 .5px rgba(22,18,27,.18)}
+.sel-rot,.sel-size{position:absolute;width:22px;height:22px;margin:-11px 0 0 -11px;padding:0;border:0;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(22,18,27,.35),inset 0 0 0 1px rgba(22,18,27,.12);pointer-events:auto;touch-action:none}
+.sel-rot{left:50%;top:-30px;cursor:grab}
+.sel-rot::after{content:"";position:absolute;inset:6px;border:1.5px solid #8A8292;border-radius:50%;border-top-color:transparent}
+.sel-size{left:100%;top:100%;cursor:nwse-resize}
+.sel-size::after{content:"";position:absolute;inset:7px;border-right:1.5px solid #8A8292;border-bottom:1.5px solid #8A8292}
+.sel-del{position:absolute;right:-12px;top:-12px;width:24px;height:24px;padding:0;border:0;border-radius:50%;background:#16121B;color:#fff;font:700 11px/24px var(--kr);box-shadow:0 1px 4px rgba(22,18,27,.35);cursor:pointer;pointer-events:auto}
+.sel-rot:focus-visible,.sel-size:focus-visible,.sel-del:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px}
+.sb-hint{position:absolute;z-index:100002;margin:0;transform:translate(-50%,-150%);padding:7px 12px;border-radius:999px;background:rgba(22,18,27,.86);color:#fff;font:600 12.5px/1 var(--kr);white-space:nowrap;pointer-events:none}
+.sb-hint[hidden]{display:none}
+/* ---- depth: a clear glossy coat over the whole surface (like a phone case), with a bevelled rim ---- */
+.sb-coat{position:absolute;inset:0;z-index:100000;border-radius:inherit;pointer-events:none;
+  background:
+    linear-gradient(102deg,transparent 8%,rgba(255,255,255,.34) 13%,rgba(255,255,255,.08) 17%,transparent 22%),
+    linear-gradient(102deg,transparent 56%,rgba(255,255,255,.16) 60%,transparent 66%),
+    radial-gradient(120% 60% at 50% -12%,rgba(255,255,255,.42),transparent 55%),
+    linear-gradient(180deg,transparent 78%,rgba(22,18,27,.10));
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.85),inset 0 -2px 0 rgba(22,18,27,.10),inset 3px 0 6px -3px rgba(255,255,255,.7),inset -3px 0 6px -3px rgba(22,18,27,.12),inset 0 0 0 1px rgba(255,255,255,.35);
+  mix-blend-mode:screen}
+.sb-board[data-skin="cork"] .sb-coat{opacity:.45}
+.sb-board{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+/* ---- maker folds open/closed ---- */
+.sb-make{display:grid;grid-template-rows:0fr;margin-top:0;padding:0 20px;opacity:0;transition:grid-template-rows .45s cubic-bezier(.2,.8,.2,1),opacity .3s,margin-top .45s cubic-bezier(.2,.8,.2,1),padding .45s cubic-bezier(.2,.8,.2,1)}
+.sb-make.open{grid-template-rows:1fr;margin-top:20px;padding:20px;opacity:1}
+.sb-make-in{min-height:0;overflow:hidden}
+.sb-make-body{transform:translateY(-10px);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.sb-make.open .sb-make-body{transform:none}
+.sb-fold{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:16px;padding:10px;border:0;border-top:1px dashed #E6DFEE;background:none;font:700 13px/1 var(--kr);color:var(--mute);cursor:pointer}
+.sb-fold:hover{color:var(--ink)}
+.sb-fold:focus-visible{outline:3px solid var(--violet-d);outline-offset:-3px;border-radius:12px}
+@media (prefers-reduced-motion:reduce){.sb-make,.sb-make-body{transition:none}}
+/* ---- text sticker edge: an outline that follows the whole silhouette (body + tail), drawn with stacked drop-shadows ---- */
+.sbs .sbs-tx{border:0;padding:16px 22px;box-shadow:none}
+.sbs .sbs-tx.sh-circle{padding:20px}
+.sbs .sbs-tx.sh-note{padding:20px 16px}
+.sbs:not(.ph):not(.pk) .sbs-f::before{display:none}
+.sbs.edge-white .sbs-f:not(.sbs-bk){filter:var(--ff,) drop-shadow(2.6px 0 0 #fff) drop-shadow(-2.6px 0 0 #fff) drop-shadow(0 2.6px 0 #fff) drop-shadow(0 -2.6px 0 #fff) drop-shadow(0 0 .6px rgba(22,18,27,.18))}
+.sbs.edge-thin .sbs-f:not(.sbs-bk){filter:var(--ff,) drop-shadow(1.1px 0 0 #fff) drop-shadow(-1.1px 0 0 #fff) drop-shadow(0 1.1px 0 #fff) drop-shadow(0 -1.1px 0 #fff)}
+.sbs.edge-none .sbs-f:not(.sbs-bk){filter:var(--ff,none)}
+.fin-matte{--ff:saturate(.82) contrast(.96) brightness(1.02)}
+/* speech bubble: body and tail are one piece in the same colour */
+.sbs-tx.sh-bubble{border-radius:22px;overflow:visible}
+.sbs-tx.sh-bubble::before{content:"";position:absolute;left:18px;bottom:-15px;width:24px;height:18px;border:0;border-radius:0;transform:none;z-index:0;background:color-mix(in srgb,var(--a) 62%,var(--b));clip-path:polygon(0 0,100% 0,6% 100%)}
+.sbs-tx.sh-bubble::after{display:none}
+.sbs-tx.sh-bubble.lt::before{background:color-mix(in srgb,var(--a) 62%,var(--b))}
+/* chip icons */
+.sb-eico{display:inline-block;width:14px;height:10px;border-radius:4px;background:#C9A8F5}
+.sb-eico.edge-white{box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(22,18,27,.18)}
+.sb-eico.edge-thin{box-shadow:0 0 0 1.5px #fff,0 0 0 2.5px rgba(22,18,27,.18)}
+.sb-eico.edge-none{box-shadow:none}
+.sb-make{grid-template-columns:minmax(0,1fr)}
+.sb-make-in{min-width:0}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -1284,11 +1862,12 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <li><a href="#widgets" data-s="widgets">Widgets</a></li>
       <li><a href="#wx-rooms" data-s="wx-rooms">Rooms</a></li>
       <li><a href="#friends" data-s="friends">Friends</a></li>
-      <li><a href="#qa" data-s="qa,close">Q&amp;A</a></li>
+      <li><a href="#qa" data-s="qa,play">Q&amp;A</a></li>
+      <li><a href="#tm" data-s="close">Invite</a></li>
       <li><a href="/splup/">Guide</a></li>
     </ul>
   </nav>
-  <a class="cta" href="/download/">출시알림 <span class="ar2" aria-hidden="true">↗</span></a>
+  <a class="cta" href="#tm">초대장 받기 <span class="ar2" aria-hidden="true">↓</span></a>
 </header>
 
 <main>
@@ -1308,7 +1887,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <p class="hero-eyebrow" aria-hidden="true"><span id="type">Ditto!</span><span class="cur">_</span></p>
       <h1 id="hero-h"><span class="h1-k">우리만의 공간</span> <img class="h1-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"></h1>
       <p class="lead">내 공간을 꾸미고 친구들과 공유하세요.<br class="d-only"> 그리고 친구 것도 같이 가져와서 함께 나눠요.</p>
-      <div class="row"><a class="btn" href="/download/">출시알림 받기 <span class="ar" aria-hidden="true">→</span></a><a class="btn line" href="#verbs">둘러보기</a></div>
+      <div class="row"><a class="btn" href="#tm">초대장 받기 <span class="ar" aria-hidden="true">→</span></a><a class="btn line" href="#verbs">둘러보기</a></div>
     </div>
 
     <figure class="hero-dev">
@@ -1944,27 +2523,198 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
   </div>
 </section>
 
-<div class="belt" role="img" aria-label="샘플 친구 10명의 플래터에 붙은 위젯 77개가 컨베이어 벨트처럼 흘러가요. 사진, 텍스트, 상태, 음악, 영상, 포스트, 방명록, To-do">
-  <div class="bt-row bt-1"><div class="bt-t"><img class="bt-w" src="assets/bw-haeu-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-0.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-0.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-jiua-0.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-rian-0.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-1.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-rian-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-2.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-2.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-rian-2.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-3.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-jiua-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-rian-3.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-4.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-4.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-4.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-4.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-rian-4.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-5.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-rian-5.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-6.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-8.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-9.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-0.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-0.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-jiua-0.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-rian-0.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-1.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-rian-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-2.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-2.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-rian-2.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-3.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-jiua-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-rian-3.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-4.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-4.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-4.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-4.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-rian-4.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-nari-5.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-rian-5.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-haeu-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-6.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-sora-8.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-9.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"></div></div>
-  <div class="bt-row bt-2"><div class="bt-t"><img class="bt-w" src="assets/bw-juni-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-0.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-0.webp" alt="" width="385" height="120" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-seoy-0.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-1.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-seoy-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-2.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-2.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-seoy-2.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-3.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-3.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-dohy-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-seoy-3.webp" alt="" width="188" height="188" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-yese-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-4.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-4.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-4.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-4.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-4.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-5.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-dohy-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-6.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-nari-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-6.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-yese-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-8.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-0.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-0.webp" alt="" width="385" height="120" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-seoy-0.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-0.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-1.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-seoy-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-1.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-2.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-2.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-seoy-2.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-2.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-juni-3.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-3.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-dohy-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-seoy-3.webp" alt="" width="188" height="188" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-yese-3.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-4.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-4.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-dohy-4.webp" alt="" width="253" height="253" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-4.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-4.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jaem-5.webp" alt="" width="385" height="253" loading="lazy" decoding="async" style="--w:275"><img class="bt-w" src="assets/bw-dohy-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-seoy-5.webp" alt="" width="253" height="385" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-5.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-juni-6.webp" alt="" width="120" height="120" loading="lazy" decoding="async" style="--w:86"><img class="bt-w" src="assets/bw-nari-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-6.webp" alt="" width="188" height="253" loading="lazy" decoding="async" style="--w:134"><img class="bt-w" src="assets/bw-yese-6.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-nari-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-7.webp" alt="" width="253" height="120" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-yese-7.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"><img class="bt-w" src="assets/bw-jiua-8.webp" alt="" width="253" height="188" loading="lazy" decoding="async" style="--w:181"></div></div>
-</div>
-
 <section class="close" id="close" aria-labelledby="close-h">
   <span class="cl-glow" aria-hidden="true"></span>
   <div class="wrap">
     <p class="emo" id="emo" aria-hidden="true"><span class="reel"><span class="rl">🎧</span></span><span class="reel"><span class="rl">🍓</span></span><span class="reel"><span class="rl">📸</span></span><span class="reel"><span class="rl">🌙</span></span><span class="reel"><span class="rl">🛼</span></span></p>
     <h2 class="close-h" id="close-h"><span class="ch-t">통하면,</span> <button type="button" class="ch-mark" id="chMark" aria-label="Ditto! — 누르면 색이 바뀌고 위 이모지가 돌아가요"><svg class="cm-svg" viewBox="-30 -30 274 274" aria-hidden="true" focusable="false"><defs><linearGradient id="cmFill" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" style="stop-color:var(--mc1)"/><stop offset=".36" style="stop-color:var(--mc1)"/><stop offset="1" style="stop-color:var(--mc2)"/></linearGradient><filter id="cmLit" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="6.1" result="h"/><feDiffuseLighting in="h" surfaceScale="9.2" diffuseConstant="1.1" lighting-color="#fff" result="d"><feDistantLight class="cm-lt" azimuth="235" elevation="52"/></feDiffuseLighting><feColorMatrix in="d" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -.62 0 0 0 .55" result="sa"/><feFlood class="cm-tint" flood-opacity="1"/><feComposite in2="sa" operator="in" result="shade"/><feComposite in="shade" in2="SourceGraphic" operator="over" result="body"/><feSpecularLighting in="h" surfaceScale="9.2" specularConstant=".9" specularExponent="30" lighting-color="#fff" result="sp"><feDistantLight class="cm-lt" azimuth="235" elevation="58"/></feSpecularLighting><feComposite in="body" in2="sp" operator="arithmetic" k2="1" k3=".45" result="lit"/><feComposite in="lit" in2="SourceAlpha" operator="in" result="mark"/><feGaussianBlur in="SourceAlpha" stdDeviation="7.1" result="sb"/><feOffset in="sb" dy="7.1" result="so"/><feFlood class="cm-tint" flood-opacity=".3"/><feComposite in2="so" operator="in" result="drop"/><feMerge><feMergeNode in="drop"/><feMergeNode in="mark"/></feMerge></filter></defs><g filter="url(#cmLit)"><path fill="url(#cmFill)" d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path fill="url(#cmFill)" d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle fill="url(#cmFill)" cx="141.594" cy="187.204" r="16.75"/></g></svg></button></h2>
     <p class="t">친한 친구와 만들어나가는 우리만의 공간. 마음에 드는 조각을 꾹 눌러봐!</p>
-    <div class="row"><a class="btn" href="/download/">출시알림 받기 <span class="ar" aria-hidden="true">→</span></a></div>
+    <div class="tm" id="tm">
+      <div class="tm-mach" id="tmMach">
+        <div class="tm-body">
+          <div class="tm-top"><span class="tm-brand">TICKET<i>_</i></span><span class="tm-led" id="tmLed" aria-hidden="true"></span></div>
+          <div class="tm-screen" aria-live="polite"><span class="tm-sk">남은 초대장</span><b class="tm-left" id="tmLeft">—</b><span class="tm-of">/ 1,000</span><span class="tm-bar"><i id="tmBar"></i></span></div>
+          <div class="tm-slot" aria-hidden="true"></div>
+        </div>
+        <div class="tm-feed">
+          <p class="tm-idle" id="tmIdle">이름과 아이디를 적고<br><b>초대장 뽑기</b>를 눌러 보세요</p>
+          <div class="tk" id="tk" role="button" tabindex="-1" aria-label="초대장 — 눌러서 뒤집기" hidden>
+            <div class="tk-in">
+              <div class="tk-face tk-front">
+                <div class="tk-gr" aria-hidden="true"><svg id="tkG"></svg></div>
+                <div class="tk-stub">
+                  <p class="tk-name" id="tkName">이름</p>
+                  <p class="tk-id" id="tkId">@myroom</p>
+                  <p class="tk-note" id="tkNote" hidden></p>
+                  <dl class="tk-meta"><div><dt>No.</dt><dd id="tkNo">미발급</dd></div><div><dt>Code</dt><dd class="code" id="tkCode">------</dd></div></dl>
+                </div>
+                <span class="tk-holo"></span><span class="tk-glare"></span>
+                <span class="tk-stamp" id="tkStamp" aria-hidden="true">좌석 예약됨</span>
+              </div>
+              <div class="tk-face tk-back" aria-hidden="true"><img src="assets/wordmark.svg" alt="" width="370" height="134"><span class="tk-k">Invitation_</span><span class="tk-bn" id="tkBackNo"></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="tm-pull" id="tmPull" hidden><span class="tm-pull-ar" aria-hidden="true">↓</span> 아래로 당겨 뜯어 가세요 <button type="button" class="tm-pull-btn" id="tmPullBtn">눌러서 받기</button></p>
+      </div>
+
+      <form class="tm-ctl" id="tmForm" novalidate onsubmit="return false">
+        <div class="tm-f"><label class="tm-k" for="tmDisp">이름</label><input class="tm-in" id="tmDisp" type="text" maxlength="10" placeholder="초대장에 적힐 이름" autocomplete="nickname"></div>
+        <div class="tm-f"><label class="tm-k" for="tmName">아이디</label>
+          <span class="tm-id"><span class="tm-at" aria-hidden="true">@</span><input id="tmName" type="text" inputmode="latin" maxlength="16" placeholder="myroom" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="tmIdHint"></span>
+          <span class="tm-hint" id="tmIdHint" aria-live="polite">영문 소문자 3–16자. 앱에서 쓸 아이디예요.</span></div>
+        <div class="tm-f"><label class="tm-k" for="tmNote">한마디 <small>선택</small></label>
+          <div class="tm-seg" id="tmSeg" role="radiogroup" aria-label="한마디 종류">
+            <button type="button" role="radio" class="tm-seg-b" data-m="open" aria-checked="true">좌석에 공개</button>
+            <button type="button" role="radio" class="tm-seg-b" data-m="capsule" aria-checked="false">🔒 타임캡슐</button>
+          </div>
+          <span class="tm-note-in"><input class="tm-in" id="tmNote" type="text" maxlength="30" placeholder="좌석에 남길 한마디 (30자)" autocomplete="off"><span class="tm-len" id="tmNoteLen">0/30</span></span>
+          <span class="tm-hint" id="tmNoteHint">좌석표에서 누구나 볼 수 있어요.</span></div>
+        <div class="tm-f"><span class="tm-k">색</span><div class="tm-sw" id="tmSw" role="radiogroup" aria-label="초대장 색"></div></div>
+        <div class="tm-go-row"><button type="button" class="btn tm-draw" id="tmGo">초대장 뽑기 <span class="ar" aria-hidden="true">→</span></button>
+          <p class="tm-rule" id="tmRule">뽑은 초대장은 이메일을 남겨야 내 것이 돼요. 발급 전에는 이름, 한마디, 색을 바꿔 몇 번이든 다시 뽑을 수 있고, 발급은 한 사람당 한 장이에요.</p></div>
+      </form>
+    </div>
+
+    <div class="tc" id="tc" hidden>
+      <div class="tc-done" id="tcDone" hidden>
+        <p class="tc-t" id="tcDoneT">초대장 <b id="tcNo">No. 0001</b>이 발급됐어요.</p>
+        <p class="tc-d" id="tcDoneD">이 링크로 언제든 내 초대장을 다시 볼 수 있어요. 앱에서 코드 <b id="tcCode2">------</b>를 넣고 가입하면 <b id="tcId2"></b>가 그대로 내 아이디가 되고, 이 링크는 그때 닫혀요.</p>
+        <div class="tc-link"><code id="tcLink">ditto.place/?t=------</code><button type="button" class="btn line" id="tcCopy">링크 복사</button><button type="button" class="btn line" id="tmSave">이미지로 저장</button></div>
+      </div>
+    </div>
+
+    <div class="smap" id="smap">
+      <div class="smap-head">
+        <p class="smap-k">Seat map_</p>
+        <h3 class="smap-t">1,000석 좌석표</h3>
+        <p class="smap-d">초대장을 받은 자리마다 그 사람이 고른 색으로 불이 켜져요. 자리는 100석씩 열리고, 거의 다 차면 다음 줄이 열려요.</p>
+      </div>
+      <div class="smap-flap" aria-live="polite"><span class="smap-fk">NOW</span><span class="smap-ft" id="smapFlap">—</span></div>
+      <div class="smap-grid" id="smapGrid" role="group" aria-label="1,000석 좌석표"></div>
+      <p class="smap-more" id="smapMore" aria-live="polite"></p>
+      <div class="smap-leg" aria-hidden="true"><span><i class="seat on"></i>받은 자리 <b id="smapIssued">0</b></span><span><i class="seat"></i>남은 자리 <b id="smapLeft">1,000</b></span><span><i class="seat me"></i>내 자리</span></div>
+      <div class="smap-tip" id="smapTip" hidden></div>
+    </div>
+  </div>
+</section>
+
+<section class="play" id="play" aria-label="스티커 보드">
+  <div class="wrap">
+    <div class="sb" id="sb">
+      <div class="sb-head">
+        <div>
+          <p class="sb-k">Sticker board_</p>
+          <h3 class="sb-t">디토를 기다리는 스티커 보드</h3>
+          <p class="sb-c">스티커 팩에서 고르거나, 글씨나 사진으로 직접 만들어 붙여요. 붙은 스티커는 누구나 떼어서 옮길 수 있어요. <span id="sbCount" aria-live="polite"></span></p>
+        </div>
+        <button type="button" class="btn sb-open" id="sbOpen" aria-expanded="false" aria-controls="sbMake">스티커 만들기 <span class="ar" aria-hidden="true">+</span></button>
+      </div>
+      <div class="sb-make" id="sbMake" inert aria-hidden="true">
+        <div class="sb-make-in"><div class="sb-make-body">
+        <div class="sb-tabs" role="tablist" aria-label="스티커 종류">
+          <button type="button" role="tab" class="sb-tab" data-k="pack" aria-selected="true">✨ 스티커 팩</button>
+          <button type="button" role="tab" class="sb-tab" data-k="text" aria-selected="false">Aa 글씨</button>
+          <button type="button" role="tab" class="sb-tab" data-k="photo" aria-selected="false">📷 사진</button>
+        </div>
+        <div class="sb-mk">
+          <div class="sb-prev" id="sbPrev" aria-hidden="true"></div>
+          <div class="sb-ctl">
+            <div class="sb-row sb-finrow"><span class="sb-lb">재질</span><div class="sb-chips" id="sbFin" role="radiogroup" aria-label="스티커 재질"></div></div>
+            <div class="sb-pane" data-k="pack">
+              <p class="sb-note sb-cnt">스티커 100개 중에서 마음에 드는 걸 골라요.</p>
+              <div class="sb-pack" id="sbPack" role="radiogroup" aria-label="스티커 팩"></div>
+              
+            </div>
+            <div class="sb-pane" data-k="text" hidden>
+              <span class="sb-in"><input class="tm-in" id="sbText" type="text" maxlength="40" placeholder="스티커에 적을 말 (40자)" autocomplete="off"><span class="tm-len" id="sbLen">0/40</span></span>
+              <div class="sb-row"><span class="sb-lb">모양</span><div class="sb-chips" id="sbShapes" role="radiogroup" aria-label="스티커 모양"></div></div>
+              <div class="sb-row"><span class="sb-lb">테두리</span><div class="sb-chips" id="sbEdges" role="radiogroup" aria-label="테두리"></div></div>
+              <div class="sb-row"><span class="sb-lb">글씨체</span><div class="sb-chips" id="sbFonts" role="radiogroup" aria-label="글씨체"></div></div>
+              <div class="sb-row"><span class="sb-lb">색</span><div class="sb-cols" id="sbCols" role="radiogroup" aria-label="스티커 색"></div></div>
+            </div>
+            <div class="sb-pane" data-k="photo" hidden>
+              <div class="sb-cam" id="sbCam" hidden><video id="sbVid" playsinline muted></video><button type="button" class="sb-shut" id="sbShut" aria-label="찍기"></button></div>
+              <div class="sb-pbtn">
+                <button type="button" class="btn line" id="sbCamOn">카메라로 찍기</button>
+                <label class="btn line sb-file">사진 고르기<input type="file" id="sbFile" accept="image/*"></label>
+              </div>
+              <span class="sb-in"><input class="tm-in" id="sbCap" type="text" maxlength="20" placeholder="사진 아래 한 줄 (선택, 20자)" autocomplete="off"></span>
+              <p class="sb-note">사진은 작게 줄여 보드에 올라가요. 얼굴이나 개인정보가 담긴 사진은 조심해 주세요.</p>
+            </div>
+            <p class="sb-err" id="sbErr" aria-live="assertive"></p>
+            <button type="button" class="btn" id="sbPost">보드에 붙이기</button>
+          </div>
+        </div>
+      
+          <button type="button" class="sb-fold" id="sbFold" aria-controls="sbMake">접기 <span aria-hidden="true">▴</span></button>
+        </div></div>
+      </div>
+      <div class="sb-wrap" id="sbWrap">
+        <div class="sb-board" id="sbBoard"><i class="sb-coat" aria-hidden="true"></i><p class="sb-empty" id="sbEmpty">아직 비어 있어요. 첫 스티커를 붙여 주세요.</p></div>
+      </div>
+      <div class="sb-foot">
+        <p class="sb-tip">내가 붙인 스티커는 모서리를 당겨 떼고 옮길 수 있어요. 누르면 돌리기·크기·떼어 버리기가 나와요.</p>
+        <div class="sb-skin" id="sbSkin" role="radiogroup" aria-label="보드 질감">
+          <button type="button" role="radio" class="sk-metal" data-s="metal" aria-checked="true"><i aria-hidden="true"></i>알루미늄</button>
+          <button type="button" role="radio" class="sk-cork" data-s="cork" aria-checked="false"><i aria-hidden="true"></i>코르크</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 </main>
+<div class="sv" id="sv" hidden>
+  <div class="sv-bg" id="svBg"></div>
+  <div class="sv-card" id="svCard" role="dialog" aria-modal="true" aria-label="좌석의 초대장"></div>
+</div>
+<div class="tmd" id="tmd" hidden>
+  <div class="tmd-bg" id="tmdBg"></div>
+  <div class="tmd-p" role="dialog" aria-modal="true" aria-labelledby="tmdT">
+    <button type="button" class="tmd-x" id="tmdX" aria-label="버리기">✕</button>
+    <div class="tmd-stage" id="tmdStage" aria-hidden="true">
+      <div class="tmd-slot" id="tmdSlot"></div>
+      <span class="tmd-g g1" id="tmdG1"><b>1</b>이메일을 남기면 여기에 <em>좌석 번호</em>가 찍혀요</span>
+      <span class="tmd-g g2" id="tmdG2"><b>2</b>앱에서 쓸 <em>초대 코드</em>도 함께 나와요</span>
+    </div>
+    <div class="tmd-ask" id="tmdAsk">
+      <p class="tmd-k">Ticket printed_</p>
+      <h2 class="tmd-t" id="tmdT">이 초대장, 내 걸로 할까요?</h2>
+      <p class="tmd-d">이메일을 남기면 번호와 코드가 발급되고 <b id="tmdId">@아이디</b>가 예약돼요. 출시하는 날 이 메일로 초대 링크를 보내 드려요.</p>
+      <input id="tcEmail" type="email" placeholder="email@example.com" autocomplete="email" inputmode="email" aria-label="이메일">
+      <div class="tc-agree">
+        <label class="tc-ok"><input type="checkbox" id="tcConsent"> <span><b>[필수]</b> 개인정보 수집 및 이용에 동의합니다</span></label>
+        <details class="tc-pol"><summary>내용 보기</summary>
+          <dl>
+            <div><dt>수집 항목</dt><dd>이메일, 아이디, 이름, 한마디</dd></div>
+            <div><dt>이용 목적</dt><dd>출시 초대 메일 발송, 아이디 예약, 초대장과 좌석표 표시</dd></div>
+            <div><dt>보유 기간</dt><dd>서비스 출시 후 3개월까지 보관하고 지체 없이 파기합니다. 요청하면 언제든 삭제해요.</dd></div>
+          </dl>
+          <p>동의를 거부할 수 있으며, 거부하면 초대장 발급이 제한돼요. 초대장 링크를 가진 사람은 이름, 아이디, 한마디를 볼 수 있어요.</p>
+        </details>
+      </div>
+      <div class="tc-wall">
+        <label class="tc-sw"><input type="checkbox" id="tcWall" checked><span class="tc-tg" aria-hidden="true"></span><span>좌석표에 내 초대장 보이기 <small>이름, 아이디, 한마디</small></span></label>
+      </div>
+      <p class="tc-err" id="tcErr" aria-live="assertive"></p>
+      <div class="tmd-b"><button type="button" class="btn" id="tcGo">초대장 받기</button><button type="button" class="btn line" id="tmdNo">괜찮아요, 버릴게요</button></div>
+      <button type="button" class="tmd-re" id="tmdRe">↻ 다시 뽑기 <small>지금 초대장은 버리고 새로 인쇄해요</small></button>
+    </div>
+    <div class="tmd-ok" id="tmdOk" hidden>
+      <p class="tmd-k">Issued_</p>
+      <h2 class="tmd-t">초대장 <b id="tmdNo2">No. 0001</b> 발급!</h2>
+      <p class="tmd-d">링크로 언제든 다시 볼 수 있어요. 앱에서 코드 <b id="tmdCode">------</b>로 가입하면 링크는 닫혀요.</p>
+      <div class="tmd-b"><button type="button" class="btn" id="tmdDone">좋아요</button></div>
+    </div>
+  </div>
+</div>
+
 
 <footer class="foot" id="foot">
   <div class="wrap"><div class="foot-top">
     <p class="foot-brand"><img src="assets/wordmark.svg" alt="Ditto!" width="66" height="24" loading="lazy"><span>우리만의 공간</span></p>
     <nav class="foot-nav" aria-label="푸터">
-      <ul class="foot-links"><li><a href="#verbs">Why</a></li><li><a href="#solution">Solution</a></li><li><a href="#concept">Concept</a></li><li><a href="#widgets">Widgets</a></li><li><a href="#wx-rooms">Rooms</a></li><li><a href="#friends">Friends</a></li><li><a href="#qa">Q&amp;A</a></li></ul>
+      <ul class="foot-links"><li><a href="#verbs">Why</a></li><li><a href="#solution">Solution</a></li><li><a href="#concept">Concept</a></li><li><a href="#widgets">Widgets</a></li><li><a href="#wx-rooms">Rooms</a></li><li><a href="#friends">Friends</a></li><li><a href="#qa">Q&amp;A</a></li><li><a href="#tm">Invite</a></li></ul>
       <ul class="foot-ext"><li><a href="/splup/">Guide</a></li><li><a href="/">ditto.place</a></li></ul>
     </nav>
   </div></div>
@@ -2457,6 +3207,620 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     let raf = 0, vis = false; const t0 = performance.now();
     function frame(now){ raf = 0; const az = 235 + Math.sin((now - t0) / 1000 * .6) * 40; lts.forEach(l => l.setAttribute('azimuth', az.toFixed(1))); if (vis) raf = requestAnimationFrame(frame); }
     if ('IntersectionObserver' in window) new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis && !raf) raf = requestAnimationFrame(frame); }).observe(btn);
+  })();
+  /* ---- 08 Invite · launch ticket machine. Drawing is a preview (nothing stored); an email + consent issues it on the
+     server (claim_launch_ticket): No. 1..1000, invite code, reserved ID. Same card as i.ditto.place. ---- */
+  const SB = 'https://lisqekczixwzshmpewzq.supabase.co', SBKEY = 'sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf';
+  const rpc = (fn, body) => fetch(SB + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: SBKEY, Authorization: 'Bearer ' + SBKEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) })
+    .then(r => r.json().then(d => { if (!r.ok) { const er = new Error((d && d.message) || r.status); er.code = d && d.code; throw er; } return d; }));
+  (function(){
+    const mach = document.getElementById('tmMach'); if (!mach) return;
+    const $ = id => document.getElementById(id), tm = $('tm');
+    const PAL = {
+      'purple-pink': { n: '퍼플 · 핑크', c: ['#AA4AF4', '#6655D2', '#FA97E2'], base: '#EBD5FC' },
+      'deep-purple': { n: '딥 퍼플', c: ['#6655D2', '#7841C4', '#AA4AF4'], base: '#DCD8F5' },
+      'pink-coral': { n: '핑크 · 코랄', c: ['#FA97E2', '#FF2CBF', '#FF5488'], base: '#FEE7F8' },
+      'peach-yellow': { n: '피치 · 옐로', c: ['#FF925D', '#F9F871', '#FA97E2'], base: '#FFE6DA' },
+      'cyan-blue': { n: '시안 · 블루', c: ['#48B5F4', '#27E5F2', '#398FE8'], base: '#D5EEFC' },
+      'mint-lime': { n: '민트 · 라임', c: ['#07E7B4', '#F9F871', '#39B9CC'], base: '#C6F9EE' },
+      'lavender-sky': { n: '라벤더 · 하늘', c: ['#B9A8FF', '#7FB7FF', '#E6C8FF'], base: '#E8E6FF' },
+      'sunset': { n: '선셋', c: ['#FF7A59', '#FF4F9A', '#FFC36B'], base: '#FFE3DA' },
+      'ocean': { n: '오션', c: ['#2F6BFF', '#22C1EE', '#7B5CFF'], base: '#D9E6FF' },
+      'berry': { n: '베리', c: ['#D63AF9', '#8C2FD6', '#FF5FA2'], base: '#F6DDFB' },
+      'lemon-mint': { n: '레몬 · 민트', c: ['#F7E35A', '#5EE2B5', '#FFB86B'], base: '#FBF6CF' },
+      'rose-gold': { n: '로즈 골드', c: ['#F4A6B8', '#E07A8F', '#FFD6A5'], base: '#FCE6EA' },
+      'aurora': { n: '오로라', c: ['#6EE7C8', '#8B5CF6', '#60A5FA'], base: '#DDF5F0' },
+      'midnight': { n: '미드나잇', c: ['#3B2A8C', '#1E3A8A', '#9D4EDD'], base: '#D7D3EE' }
+    };
+    const FIELDS = [{ c: [.38, .18], r: [.93, .9], o: .94 }, { c: [.08, .72], r: [.94, .92], o: .9 }, { c: [.9, .76], r: [1.02, .98], o: .9 }];
+    const markPaths = (document.getElementById('mk') || {}).innerHTML || '';
+    const lum = h => { const n = parseInt(h.slice(1), 16); return .2126 * (n >> 16) + .7152 * (n >> 8 & 255) + .0722 * (n & 255); };
+    function glow(key, W, H, uid){
+      const p = PAL[key], s = Math.min(W, H), L = s * .42, tint = p.c.slice().sort((a, b) => lum(a) - lum(b))[0];
+      let d = `<filter id="${uid}b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${s * .1}"/></filter><filter id="${uid}r" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${s * .05}"/></filter>`;
+      d += `<linearGradient id="${uid}v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".34"/><stop offset=".24" stop-color="#fff" stop-opacity=".12"/><stop offset=".62" stop-color="#fff" stop-opacity="0"/></linearGradient>`;
+      let f = '';
+      FIELDS.forEach((F, j) => {
+        d += `<radialGradient id="${uid}c${j}" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(${F.c[0] * W} ${F.c[1] * H}) scale(${F.r[0] * W} ${F.r[1] * H})"><stop offset="0" stop-color="${p.c[j]}"/><stop offset=".52" stop-color="${p.c[j]}" stop-opacity=".38"/><stop offset="1" stop-color="${p.c[j]}" stop-opacity="0"/></radialGradient>`;
+        f += `<rect x="${-.3 * W}" y="${-.3 * H}" width="${W * 1.6}" height="${H * 1.6}" fill="url(#${uid}c${j})" opacity="${F.o}"/>`;
+      });
+      d += `<linearGradient id="${uid}mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#FBF6FF"/><stop offset="1" stop-color="#EFE3FF"/></linearGradient>`;
+      d += `<filter id="${uid}m" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="${L * .03}" result="h"/><feDiffuseLighting in="h" surfaceScale="${L * .045}" diffuseConstant="1.1" lighting-color="#fff" result="dl"><feDistantLight azimuth="235" elevation="52"/></feDiffuseLighting><feColorMatrix in="dl" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -.62 0 0 0 .55" result="sa"/><feFlood flood-color="${tint}"/><feComposite in2="sa" operator="in" result="sh"/><feComposite in="sh" in2="SourceGraphic" operator="over" result="bd"/><feSpecularLighting in="h" surfaceScale="${L * .045}" specularConstant=".9" specularExponent="30" lighting-color="#fff" result="sp"><feDistantLight azimuth="235" elevation="58"/></feSpecularLighting><feComposite in="bd" in2="sp" operator="arithmetic" k2="1" k3=".45" result="lit"/><feComposite in="lit" in2="SourceAlpha" operator="in" result="mk"/><feGaussianBlur in="SourceAlpha" stdDeviation="${L * .035}" result="sb"/><feOffset in="sb" dy="${L * .035}" result="so"/><feFlood flood-color="${tint}" flood-opacity=".3"/><feComposite in2="so" operator="in" result="dr"/><feMerge><feMergeNode in="dr"/><feMergeNode in="mk"/></feMerge></filter>`;
+      const k = L / 214, mx = (W - L) / 2, my = (H - 204 * k) / 2;
+      return `<defs>${d}</defs><rect width="${W}" height="${H}" fill="${p.base}"/><g filter="url(#${uid}b)">${f}</g><rect width="${W}" height="${H}" fill="url(#${uid}v)"/><rect width="${W}" height="${H}" fill="none" stroke="#fff" stroke-width="${s * .11}" opacity=".68" filter="url(#${uid}r)"/><g filter="url(#${uid}m)"><g transform="translate(${mx} ${my}) scale(${k})">${markPaths.replace(/currentColor/g, `url(#${uid}mg)`)}</g></g>`;
+    }
+    const pad = n => String(n).padStart(4, '0');
+    const AV = '<svg viewBox="0 0 24 24"><path d="M12 2.5a5.2 5.2 0 1 1 0 10.4 5.2 5.2 0 0 1 0-10.4ZM3.5 22c.5-4.3 4-7 8.5-7s8 2.7 8.5 7Z"/></svg>';
+    let pal = 'purple-pink', idState = 'empty', drawn = false, mine = null, seq = 0, viewing = null;
+    try { mine = JSON.parse(localStorage.getItem('ditto.ticket2') || 'null'); } catch (e) {}
+    const idIn = $('tmName'), dispIn = $('tmDisp'), hint = $('tmIdHint'), go = $('tmGo'), tk = $('tk'), tc = $('tc'), sw = $('tmSw');
+    sw.innerHTML = Object.keys(PAL).map((k, i) => `<button type="button" role="radio" class="tm-dot" aria-checked="${i === 0}" data-k="${k}" aria-label="${PAL[k].n}" style="--a:${PAL[k].c[0]};--b:${PAL[k].c[2]}"></button>`).join('');
+    const setPal = k => { pal = k; sw.querySelectorAll('.tm-dot').forEach(x => x.setAttribute('aria-checked', x.dataset.k === k)); tm.style.setProperty('--tm-a', PAL[k].c[0]); tm.style.setProperty('--tm-b', PAL[k].c[2]); };
+    sw.insertAdjacentHTML('beforeend', '<button type="button" class="tm-dot tm-rand" id="tmRand" aria-label="색 랜덤으로 고르기">🎲</button>');
+    sw.addEventListener('click', e => { const b = e.target.closest('.tm-dot'); if (!b || mine || b.id === 'tmRand') return; setPal(b.dataset.k); });
+    $('tmRand').addEventListener('click', () => {
+      if (mine) return; const keys = Object.keys(PAL), rb = $('tmRand'); let n = reduce ? 0 : 12, last = pal;
+      rb.classList.add('spin');
+      const step = () => { let k; do { k = keys[Math.floor(Math.random() * keys.length)]; } while (k === last); last = k; setPal(k); if (n-- > 0) setTimeout(step, 50 + (12 - n) * 9); else rb.classList.remove('spin'); };
+      step();
+    });
+    // remaining
+    function stats(){ rpc('launch_ticket_stats').then(r => { const s = r[0] || r, left = Math.max(0, s.total - s.issued); $('tmLeft').textContent = left.toLocaleString(); $('tmBar').style.width = (left / s.total * 100) + '%'; if (left <= 0 && !mine) { go.disabled = true; go.textContent = '1,000장이 모두 나갔어요'; $('tmRule').textContent = '준비한 초대장이 모두 나갔어요. 다음 소식으로 찾아올게요.'; } }).catch(() => { $('tmLeft').textContent = '—'; }); }
+    // ID (app rule a-z 3–16) with a live availability check
+    let idTimer = 0;
+    const H = { empty: '영문 소문자 3–16자. 앱에서 쓸 아이디예요.', invalid: '영문 소문자만, 3–16자로 적어 주세요.', reserved: '쓸 수 없는 아이디예요. 다른 걸로 골라 주세요.', taken: '이미 누가 쓰고 있어요. 다른 아이디를 골라 주세요.', ok: '쓸 수 있는 아이디예요!', checking: '확인하는 중…', offline: '지금은 확인할 수 없어요. 그래도 뽑아 볼 수 있어요.' };
+    const setHint = s => { idState = s; hint.textContent = H[s]; hint.dataset.s = s; };
+    idIn.addEventListener('input', () => {
+      const v = idIn.value.toLowerCase().replace(/[^a-z]/g, '').slice(0, 16); if (v !== idIn.value) idIn.value = v;
+      clearTimeout(idTimer); if (!v) return setHint('empty'); if (v.length < 3) return setHint('invalid');
+      setHint('checking'); const my = ++seq;
+      idTimer = setTimeout(() => rpc('launch_ticket_nickname_ok', { p_nickname: v }).then(s => { if (my === seq) setHint(s); }).catch(() => { if (my === seq) setHint('offline'); }), 350);
+    });
+    // one-liner on the ticket (optional, ≤30)
+    // one-liner: shown on the seat, or sealed as a time capsule until launch day
+    const noteIn = $('tmNote'); let capsule = false;
+    const noteMax = () => capsule ? 60 : 30;
+    noteIn.addEventListener('input', () => { $('tmNoteLen').textContent = noteIn.value.length + '/' + noteMax(); });
+    $('tmSeg').addEventListener('click', e => {
+      const b = e.target.closest('.tm-seg-b'); if (!b || noteIn.disabled) return; capsule = b.dataset.m === 'capsule';
+      $('tmSeg').querySelectorAll('.tm-seg-b').forEach(x => x.setAttribute('aria-checked', x === b));
+      noteIn.maxLength = noteMax(); if (noteIn.value.length > noteMax()) noteIn.value = noteIn.value.slice(0, noteMax());
+      noteIn.placeholder = capsule ? '출시 날 나에게 보낼 메시지 (60자)' : '좌석에 남길 한마디 (30자)';
+      $('tmNoteHint').textContent = capsule ? '봉인돼서 아무도 못 봐요. 출시 날 초대 메일에 담아 보내 드려요.' : '좌석표에서 누구나 볼 수 있어요.';
+      $('tmNoteLen').textContent = noteIn.value.length + '/' + noteMax(); if (drawn && !mine) paint();
+    });
+    // ticket face
+    function paint(t){
+      const name = t ? t.name : (dispIn.value.trim() || '이름'), id = t ? t.nickname : (idIn.value || 'myroom'), nt = t ? t.note : noteIn.value.trim(), p = t ? t.palette : pal;
+      $('tkName').textContent = name; $('tkId').textContent = '@' + id;
+      const cap = t ? t.capsule : capsule;
+      $('tkNote').textContent = nt ? (cap ? '🔒 출시 날 열리는 타임캡슐' : nt) : ''; $('tkNote').hidden = !nt; $('tkNote').classList.toggle('cap', !!(nt && cap));
+      $('tkNo').textContent = t && t.no ? pad(t.no) : '미발급'; $('tkCode').textContent = t && t.code ? t.code : '------'; $('tkBackNo').textContent = t && t.no ? 'No. ' + pad(t.no) : '';
+      $('tkG').setAttribute('viewBox', '0 0 300 333'); $('tkG').setAttribute('preserveAspectRatio', 'xMidYMid slice'); $('tkG').innerHTML = glow(p, 300, 333, 'tg' + Math.random().toString(36).slice(2, 7));
+      tk.classList.toggle('issued', !!(t && t.no));
+    }
+    function feed(){
+      tk.hidden = false; tk.style.visibility = ''; tk.style.removeProperty('--pull'); $('tmIdle').hidden = true; tk.classList.remove('flip', 'stamp', 'tear');
+      mach.classList.remove('out', 'ready', 'full'); void tk.offsetWidth; mach.classList.add('out', 'busy'); go.disabled = true;
+      setTimeout(() => { mach.classList.remove('busy'); mach.classList.add('ready'); go.disabled = false; go.innerHTML = REDRAW; tk.tabIndex = 0; $('tmPull').hidden = false; tk.setAttribute('aria-label', '초대장 — 아래로 당겨 뜯기'); }, reduce ? 30 : 2300);
+    }
+    // drag down with a little resistance; past ~30% of the ticket it tears off and zooms to the popup
+    let drag = null;
+    tk.addEventListener('pointerdown', e => { if (!mach.classList.contains('ready')) return; drag = { y: e.clientY, x: e.clientX, h: tk.offsetHeight, p: 0 }; tk.setPointerCapture(e.pointerId); tk.classList.add('drag'); });
+    tk.addEventListener('pointermove', e => { if (!drag) return; const dy = Math.max(0, e.clientY - drag.y); drag.p = Math.min(drag.h * .62, dy * .72); tk.style.setProperty('--pull', drag.p + 'px'); tk.style.setProperty('--tilt', Math.max(-3, Math.min(3, (e.clientX - drag.x) / 40)) + 'deg'); });
+    const endDrag = () => { if (!drag) return; const far = drag.p > drag.h * .3; tk.classList.remove('drag'); drag = null; if (far) tear(); else { tk.style.setProperty('--pull', '0px'); tk.style.setProperty('--tilt', '0deg'); } };
+    tk.addEventListener('pointerup', endDrag); tk.addEventListener('pointercancel', endDrag);
+    $('tmPullBtn').addEventListener('click', () => { if (mach.classList.contains('ready')) tear(); });
+    tk.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') && mach.classList.contains('ready')) { e.preventDefault(); tear(); } }, true);
+    function tear(){
+      mach.classList.remove('ready'); $('tmPull').hidden = true;
+      const r = tk.getBoundingClientRect();
+      const ghost = tk.cloneNode(true); ghost.removeAttribute('id'); ghost.querySelectorAll('[id]').forEach(n => n.removeAttribute('id'));
+      ghost.className = 'tk tk-ghost'; ghost.hidden = false; ghost.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`;
+      document.body.appendChild(ghost); tk.style.visibility = 'hidden';
+      $('tmIdle').hidden = false; $('tmIdle').innerHTML = '뽑은 초대장을 확인하고 있어요.';
+      ask(ghost, r);
+    }
+    const REDRAW = '다시 뽑기 <span class="ar" aria-hidden="true">↻</span>';
+    go.addEventListener('click', () => {
+      if (mine || mach.classList.contains('busy')) return;
+      if (!dispIn.value.trim()) { dispIn.focus(); dispIn.classList.add('bad'); setTimeout(() => dispIn.classList.remove('bad'), 900); return; }
+      if (idState !== 'ok' && idState !== 'offline') { idIn.focus(); setHint(idIn.value.length < 3 ? 'invalid' : idState === 'checking' ? 'checking' : idState); return; }
+      $('tmdId').textContent = '@' + idIn.value; $('tcErr').textContent = ''; viewing = null;
+      // a ticket already sticking out goes back into the slot first, then a fresh one prints with the current inputs
+      if (mach.classList.contains('ready') && !reduce) { go.disabled = true; mach.classList.add('retract'); setTimeout(() => { mach.classList.remove('retract'); drawn = true; paint(); feed(); }, 380); }
+      else { drawn = true; paint(); feed(); }
+    });
+    const flip = () => { if (!tk.hidden && mach.classList.contains('full')) tk.classList.toggle('flip'); };
+    tk.addEventListener('click', flip); tk.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+    if (!reduce && matchMedia('(pointer: fine)').matches) {
+      tk.addEventListener('pointermove', e => { const r = tk.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height; tk.style.setProperty('--rx', ((.5 - y) * 12).toFixed(2) + 'deg'); tk.style.setProperty('--ry', ((x - .5) * 16).toFixed(2) + 'deg'); tk.style.setProperty('--hx', (x * 100).toFixed(1) + '%'); tk.style.setProperty('--hy', (y * 100).toFixed(1) + '%'); });
+      tk.addEventListener('pointerleave', () => { tk.style.setProperty('--rx', '0deg'); tk.style.setProperty('--ry', '0deg'); });
+    }
+    // issue
+    const ERR = { 'note length': '한마디는 30자까지예요.', 'no links': '한마디에 링크는 넣을 수 없어요.', 'consent required': '동의에 체크해 주세요.', 'invalid email': '이메일 주소를 다시 확인해 주세요.', 'email used': '이 이메일로 이미 받은 초대장이 있어요.', 'nickname taken': '방금 누가 이 아이디를 가져갔어요. 다른 아이디로 다시 뽑아 주세요.', 'nickname invalid': '아이디는 영문 소문자 3–16자예요.', 'nickname reserved': '쓸 수 없는 아이디예요.', 'name length': '이름은 10자까지예요.', 'blocked words': '이름이나 한마디를 고운 말로 바꿔 주세요.', 'bad photo': '사진을 다시 찍어 주세요.', 'slow down': '잠깐 쉬었다가 다시 해 주세요.', 'sold out': '1,000장이 모두 나갔어요.' };
+    const linkOf = code => location.origin.replace(/\/$/, '') + location.pathname + '?t=' + code;
+    function lockForm(t){ dispIn.value = t.name; idIn.value = t.nickname; [dispIn, idIn].forEach(x => x.disabled = true); setHint('ok'); hint.textContent = '이 아이디는 내 거예요.'; go.disabled = true; go.textContent = `내 초대장 No. ${pad(t.no)}`; noteIn.value = t.capsule ? '🔒 봉인된 타임캡슐' : (t.note || ''); noteIn.disabled = true; setPal(t.palette); $('tmRule').textContent = '한 사람당 한 장이에요. 링크로 언제든 다시 볼 수 있어요.'; }
+    function done(t, stamp){
+      mine = t; try { localStorage.setItem('ditto.ticket2', JSON.stringify(t)); } catch (e) {}
+      paint(t); tk.hidden = false; tk.style.visibility = ''; tk.style.removeProperty('--pull'); $('tmIdle').hidden = true; $('tmPull').hidden = true; mach.classList.remove('ready', 'busy'); mach.classList.add('out', 'full'); if (stamp) tk.classList.add('stamp');
+      $('tcNo').textContent = 'No. ' + pad(t.no); $('tcCode2').textContent = t.code; $('tcId2').textContent = '@' + t.nickname; $('tcLink').textContent = linkOf(t.code).replace(/^https?:\/\//, '');
+      tc.hidden = false; $('tcDone').hidden = false; lockForm(t); stats();
+    }
+    $('tcGo').addEventListener('click', () => {
+      const email = $('tcEmail').value.trim(), err = $('tcErr');
+      if (!$('tcConsent').checked) { err.textContent = ERR['consent required']; return; }
+      if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email)) { err.textContent = ERR['invalid email']; return; }
+      err.textContent = ''; const btn = $('tcGo'); btn.disabled = true; btn.textContent = '발급하는 중…';
+      const name = dispIn.value.trim();
+      rpc('claim_launch_ticket', { p_nickname: idIn.value, p_name: name, p_email: email, p_palette: pal, p_note: noteIn.value.trim() || null, p_consent: true, p_wall: $('tcWall').checked, p_capsule: capsule }).then(r => {
+        const row = r[0] || r; done({ no: row.no, code: row.code, nickname: row.nickname, name, palette: pal, note: noteIn.value.trim() || null, capsule: capsule && !!noteIn.value.trim(), created_at: new Date().toISOString() }, true);
+        { const fresh = tk.cloneNode(true); fresh.removeAttribute('id'); fresh.querySelectorAll('[id]').forEach(n => n.removeAttribute('id')); fresh.className = 'tk tk-big issued stamp'; fresh.hidden = false; fresh.style.visibility = ''; slot.replaceChildren(fresh); md.classList.remove('guide'); }
+        $('tmdNo2').textContent = 'No. ' + pad(row.no); $('tmdCode').textContent = row.code; $('tmdAsk').hidden = true; $('tmdOk').hidden = false; $('tmdDone').focus();
+      }).catch(e => { err.textContent = ERR[e.message] || '지금은 발급할 수 없어요. 잠시 뒤 다시 해 주세요.'; btn.disabled = false; btn.textContent = '초대장 받기'; if (e.message === 'sold out') stats(); });
+    });
+    $('tcCopy').addEventListener('click', () => { const l = 'https://' + $('tcLink').textContent; (navigator.clipboard ? navigator.clipboard.writeText(l) : Promise.reject()).then(() => { $('tcCopy').textContent = '복사했어요'; setTimeout(() => $('tcCopy').textContent = '링크 복사', 1600); }).catch(() => prompt('초대장 링크', l)); });
+    function ticketSVG(t, W, H2){
+      W = W || 1200; H2 = H2 || 760; const gw = Math.round(W * .517), sx = W / 1200, esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+      const ff = "Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif", x0 = gw + 56 * sx, f = n => (n * sx).toFixed(1);
+      t = t.capsule && t.note ? Object.assign({}, t, { note: '🔒 출시 날 열리는 타임캡슐' }) : t;
+      const nt = t.note ? `<rect x="${x0}" y="${f(420)}" width="${W - x0 - 56 * sx}" height="${f(76)}" rx="${f(20)}" fill="#F1EAFB"/><text x="${x0 + 24 * sx}" y="${f(469)}" font-family="${ff}" font-size="${f(30)}" font-weight="600" fill="#16121B">${esc('“' + t.note + '”')}</text>` : '';
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H2}" viewBox="0 0 ${W} ${H2}"><defs><clipPath id="cl"><rect width="${W}" height="${H2}" rx="${f(48)}"/></clipPath><clipPath id="cg"><rect width="${gw}" height="${H2}"/></clipPath></defs><g clip-path="url(#cl)"><rect width="${W}" height="${H2}" fill="#FBF8FF"/><g clip-path="url(#cg)"><svg width="${gw}" height="${H2}" viewBox="0 0 300 333" preserveAspectRatio="xMidYMid slice">${glow(t.palette, 300, 333, 'px' + Math.random().toString(36).slice(2, 6))}</svg></g><line x1="${gw}" y1="0" x2="${gw}" y2="${H2}" stroke="#fff" stroke-width="${f(4)}" stroke-dasharray="${f(14)} ${f(12)}"/>${nt}`
+        + `<g font-family="${ff}" fill="#16121B"><text x="${x0}" y="${f(150)}" font-size="${f(64)}" font-weight="800">${esc(t.name || '')}</text><text x="${x0}" y="${f(206)}" font-size="${f(32)}" font-weight="700" fill="#8A3FB8">@${esc(t.nickname || '')}</text>`
+        + `<text x="${x0}" y="${f(560)}" font-size="${f(26)}" font-style="italic" font-weight="900" fill="#8A3FB8">No.</text><text x="${x0}" y="${f(604)}" font-size="${f(40)}" font-weight="800">${t.no ? pad(t.no) : '미발급'}</text><text x="${x0 + 220 * sx}" y="${f(560)}" font-size="${f(26)}" font-style="italic" font-weight="900" fill="#8A3FB8">Code</text><text x="${x0 + 220 * sx}" y="${f(604)}" font-size="${f(40)}" font-weight="800" letter-spacing="${f(4)}">${esc(t.code || '------')}</text>`
+        + `<line x1="${x0}" y1="${f(640)}" x2="${W - 56 * sx}" y2="${f(640)}" stroke="#8A8292" stroke-opacity=".45" stroke-width="${f(3)}" stroke-dasharray="${f(10)} ${f(8)}"/>${t.code ? `<text x="${x0}" y="${f(696)}" font-size="${f(26)}" font-weight="700" fill="#8A3FB8">ditto.place/?t=${esc(t.code)}</text>` : ''}</g></g></svg>`;
+    }
+    const preview = () => ({ name: dispIn.value.trim() || '이름', nickname: idIn.value || 'myroom', note: noteIn.value.trim() ? (capsule ? '🔒 출시 날 열리는 타임캡슐' : noteIn.value.trim()) : null, palette: pal });
+    $('tmSave').addEventListener('click', () => {
+      const t = mine || viewing; if (!t) return;
+      const W = 1200, H2 = 760, svg = ticketSVG(t, W, H2);
+      const img = new Image();
+      img.onload = () => { const c = document.createElement('canvas'); c.width = W; c.height = H2; c.getContext('2d').drawImage(img, 0, 0); c.toBlob(bl => { const a = document.createElement('a'); a.href = URL.createObjectURL(bl); a.download = 'ditto-invite-' + pad(t.no) + '.png'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); }, 'image/png'); };
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    });
+    // ── claim popup: the printed ticket asks for an email; declining destroys it (burn · poof · fly away, at random) ──
+    const md = $('tmd');
+    let lastFocus = null;
+    const slot = $('tmdSlot');
+    slot.addEventListener('click', () => { const big = slot.firstElementChild; if (big) { big.classList.toggle('flip'); md.classList.toggle('flipped', big.classList.contains('flip')); } });
+    function ask(ghost, from){
+      $('tmdAsk').hidden = false; $('tmdOk').hidden = true; $('tcErr').textContent = ''; $('tcGo').disabled = false; $('tcGo').textContent = '초대장 받기';
+      lastFocus = document.activeElement; md.hidden = false; md.classList.remove('guide'); slot.replaceChildren();
+      requestAnimationFrame(() => {
+        md.classList.add('on');
+        const to = slot.getBoundingClientRect();
+        const done_ = () => { ghost.className = 'tk tk-big'; ghost.style.cssText = ''; slot.replaceChildren(ghost); md.classList.add('guide'); $('tcEmail').focus({ preventScroll: true }); };
+        if (reduce || !ghost) { if (ghost) done_(); return; }
+        const sx = to.width / from.width, dx = to.left - from.left, dy = to.top - from.top;
+        ghost.style.transition = 'transform .75s cubic-bezier(.3,1.25,.4,1)'; ghost.style.transformOrigin = '0 0';
+        requestAnimationFrame(() => { ghost.style.transform = `translate(${dx}px,${dy}px) scale(${sx}) rotate(0deg)`; });
+        setTimeout(done_, 780);
+      });
+    }
+    function closeMd(){ md.classList.remove('on'); setTimeout(() => { md.hidden = true; }, reduce ? 0 : 260); }
+    function decline(){
+      if (md.hidden || !$('tmdOk').hidden) { closeMd(); return; }
+      const big = slot.firstElementChild, r = big ? big.getBoundingClientRect() : null;
+      md.classList.add('leaving'); closeMd(); setTimeout(() => md.classList.remove('leaving'), 300);
+      destroy(big, r);
+    }
+    $('tmdRe').addEventListener('click', () => {
+      md.classList.add('leaving'); closeMd(); setTimeout(() => md.classList.remove('leaving'), 300); slot.replaceChildren();
+      mach.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      setTimeout(() => { drawn = true; paint(); feed(); }, reduce ? 0 : 420);
+    });
+    $('tmdNo').addEventListener('click', decline); $('tmdX').addEventListener('click', decline); $('tmdBg').addEventListener('click', decline);
+    $('tmdDone').addEventListener('click', () => { closeMd(); if (mine) setTimeout(() => seats.land(mine.no), reduce ? 0 : 300); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !md.hidden) decline(); });
+    function reset(msg){ tk.hidden = true; tk.style.visibility = ''; tk.classList.remove('flip'); mach.classList.remove('out', 'ready', 'full'); $('tmPull').hidden = true; drawn = false; go.disabled = false; go.innerHTML = '초대장 뽑기 <span class="ar" aria-hidden="true">→</span>'; const idle = $('tmIdle'); idle.hidden = false; idle.innerHTML = msg; }
+    function destroy(src, rect){
+      const el = src || tk, r = rect || el.getBoundingClientRect();
+      const kinds = ['dust', 'shred', 'fold'], kind = kinds[Math.floor(Math.random() * kinds.length)];
+      const MSG = '초대장을 버렸어요.<br><b>다시 뽑아 볼래요?</b>';
+      const lay = document.createElement('div'); lay.className = 'fx-lay'; lay.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`;
+      document.body.appendChild(lay);
+      const clone = () => { const g = el.cloneNode(true); g.removeAttribute('id'); g.querySelectorAll('[id]').forEach(n => n.removeAttribute('id')); g.hidden = false; g.className = 'tk fx-tk'; g.style.cssText = ''; g.classList.remove('flip'); return g; };
+      const end = () => { lay.remove(); tk.style.visibility = ''; reset(MSG); };
+      if (src) src.remove(); else tk.style.visibility = 'hidden';
+      if (reduce) { end(); return; }
+      if (kind === 'shred') {
+        // paper-shredder strips: the card is cut into vertical strips that part, flutter and drop
+        lay.classList.add('fx-shred'); const N = 14;
+        for (let i = 0; i < N; i++) { const s = document.createElement('div'); s.className = 'fx-strip'; const a = i / N * 100, b = (N - i - 1) / N * 100;
+          s.style.clipPath = `inset(0 ${b.toFixed(2)}% 0 ${a.toFixed(2)}%)`; s.style.setProperty('--i', i); s.style.setProperty('--dx', ((i - N / 2) * (4 + Math.random() * 3)).toFixed(1) + 'px'); s.style.setProperty('--rz', ((Math.random() - .5) * 26).toFixed(1) + 'deg'); s.style.setProperty('--dy', (r.height * (1.1 + Math.random() * .6)).toFixed(0) + 'px');
+          s.appendChild(clone()); lay.appendChild(s); }
+        setTimeout(end, 1500); return;
+      }
+      if (kind === 'fold') {
+        // folds in half, then glides away like a paper plane
+        lay.classList.add('fx-fold'); lay.appendChild(clone()); setTimeout(end, 1500); return;
+      }
+      // dust: the card turns into particles that blow away left → right (disintegrate / “vanish”)
+      const dpr = Math.min(2, devicePixelRatio || 1), cw = Math.round(r.width), ch = Math.round(r.height);
+      const cv = document.createElement('canvas'); cv.width = Math.round((cw + 260) * dpr); cv.height = Math.round((ch + 200) * dpr); cv.className = 'fx-dust'; cv.style.width = (cw + 260) + 'px'; cv.style.height = (ch + 200) + 'px'; lay.appendChild(cv);
+      const g = clone(); g.classList.add('fx-dust-src'); lay.appendChild(g);
+      const ctx = cv.getContext('2d'), img = new Image();
+      const t = (mine && !src) ? mine : preview();
+      img.onload = () => {
+        const off = document.createElement('canvas'); off.width = cw; off.height = ch; const oc = off.getContext('2d'); oc.drawImage(img, 0, 0, cw, ch);
+        const d = oc.getImageData(0, 0, cw, ch).data, P = [], step = cw > 420 ? 3 : 2;
+        for (let y = 0; y < ch; y += step) for (let x = 0; x < cw; x += step) { const o = (y * cw + x) * 4; if (d[o + 3] > 30) P.push({ x, y, c: `rgb(${d[o]},${d[o + 1]},${d[o + 2]})`, vx: 0, vy: 0, a: 1, on: false, s: step }); }
+        g.remove(); const t0 = performance.now(), sweep = 900, ox = 40, oy = 100;
+        (function frame(now){
+          const el2 = now - t0, edge = cw * Math.min(1, el2 / sweep) * 1.15 - 30; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, cw + 260, ch + 200);
+          let alive = 0;
+          for (const p of P) {
+            if (!p.on && p.x + (Math.sin(p.y * .05) * 18) < edge) { p.on = true; p.vx = 1 + Math.random() * 3.2; p.vy = -.6 - Math.random() * 1.6; }
+            if (p.on) { p.x += p.vx; p.y += p.vy; p.vx *= .985; p.vy -= .01; p.a -= .014 + Math.random() * .01; }
+            if (p.a <= 0) continue; alive++;
+            ctx.globalAlpha = p.a; ctx.fillStyle = p.c; ctx.fillRect(p.x + ox - 40 + 40, p.y + oy - 100 + 100, p.on ? p.s * .8 : p.s, p.on ? p.s * .8 : p.s);
+          }
+          if (alive && el2 < 3200) requestAnimationFrame(frame); else end();
+        })(t0);
+      };
+      img.onerror = end;
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(ticketSVG(t, cw, ch));
+    }
+
+    // ── 1,000-seat chart: every issued seat lights up in its colour; name/ID/note only when the owner allowed it ──
+    const seats = (function(){
+      const grid = $('smapGrid'), tip = $('smapTip'), flap = $('smapFlap'), sv = $('sv'), card = $('svCard'); if (!grid) return { land(){} };
+      const N = 1000, STEP = 100, ROOM = 20, byNo = new Map(); let rows = [], cells = [], loaded = false, timer = 0, flapI = 0, flapT = 0, shown = 0;
+      // seats open 100 at a time: the next block opens once fewer than 20 empty seats are left in the open ones (49 → 100, 81 → 200 …)
+      const openFor = (n, top) => Math.min(N, Math.max(STEP, Math.ceil((Math.max(n, top) + ROOM) / STEP) * STEP));
+      function reveal(n){
+        if (n === shown) return; const prev = shown; shown = n;
+        cells.forEach((s, i) => { const on = i < n; s.hidden = !on; if (on && i >= prev && prev && !reduce) { s.classList.add('opening'); s.style.animationDelay = ((i - prev) * 4) + 'ms'; setTimeout(() => s.classList.remove('opening'), 900 + (i - prev) * 4); } });
+        grid.setAttribute('aria-label', `좌석표 ${N.toLocaleString()}석 중 ${n.toLocaleString()}석 공개`);
+      }
+      const frag = document.createDocumentFragment();
+      for (let i = 1; i <= N; i++) { const s = document.createElement('i'); s.className = 'seat'; s.dataset.no = i; frag.appendChild(s); cells.push(s); }
+      grid.appendChild(frag);
+      const ymd = t => { const d = new Date(t); return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`; };
+      const ago = t => { const m = Math.max(0, Math.round((Date.now() - new Date(t)) / 60000)); return m < 1 ? '방금' : m < 60 ? m + '분 전' : m < 1440 ? Math.round(m / 60) + '시간 전' : Math.round(m / 1440) + '일 전'; };
+      function paintSeat(r, isNew){
+        const s = cells[r.no - 1]; if (!s) return; const p = PAL[r.palette] || PAL['purple-pink'];
+        s.classList.add('on'); s.style.setProperty('--a', p.c[0]); s.style.setProperty('--b', p.c[2]);
+        s.tabIndex = 0; s.setAttribute('role', 'button'); s.setAttribute('aria-label', `No. ${pad(r.no)}${r.name ? ' ' + r.name + ' @' + r.nickname : ''}`);
+        if (r.note || r.capsule) s.classList.add('nt'); if (isNew && !reduce) { s.classList.remove('pop'); void s.offsetWidth; s.classList.add('pop'); }
+        if (mine && mine.no === r.no) s.classList.add('me');
+      }
+      function setFlap(txt){
+        flap.innerHTML = ''; [...txt].forEach((ch, i) => { const c = document.createElement('span'); c.className = 'fl'; c.textContent = ch === ' ' ? ' ' : ch; c.style.animationDelay = (i * 22) + 'ms'; flap.appendChild(c); });
+      }
+      function cycle(){
+        const pub = rows.filter(r => r.name).slice(-6).reverse(); if (!pub.length) { setFlap(rows.length ? `No.${pad(rows[rows.length - 1].no)} 발급` : '첫 자리를 기다리는 중'); return; }
+        const r = pub[flapI++ % pub.length]; setFlap(`No.${pad(r.no)}  ${r.name}  @${r.nickname}  ${ago(r.created_at)}`);
+      }
+      function render(list){
+        const fresh = loaded ? list.filter(r => !byNo.has(r.no)) : [];
+        list.forEach(r => { byNo.set(r.no, r); paintSeat(r, fresh.includes(r)); });
+        rows = list; $('smapIssued').textContent = list.length.toLocaleString(); $('smapLeft').textContent = (N - list.length).toLocaleString();
+        const top = list.reduce((m, r) => Math.max(m, r.no), 0), open = openFor(list.length, top); reveal(open);
+        $('smapMore').innerHTML = open >= N ? `<b>1,000석</b>이 모두 열렸어요` : `지금 <b>${open.toLocaleString()}석</b> 공개 중 · <b>${Math.max(1, open - ROOM + 1 - Math.max(list.length, top))}석</b> 더 차면 다음 ${STEP}석이 열려요`;
+        if (fresh.length) { flapI = 0; cycle(); }
+        if (!loaded) { loaded = true; cycle(); clearInterval(flapT); flapT = setInterval(cycle, 3400); }
+      }
+      const load = () => rpc('launch_ticket_wall').then(render).catch(() => { setFlap('좌석표를 불러오지 못했어요'); });
+      let vis = false;
+      const poll = () => { clearTimeout(timer); if (vis && !document.hidden) load().finally(() => { timer = setTimeout(poll, 15000); }); };
+      if ('IntersectionObserver' in window) new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) poll(); }, { rootMargin: '200px' }).observe(grid); else { vis = true; poll(); }
+      // hover tip
+      const esc = s => String(s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+      const tipOf = r => `<span><b>No. ${pad(r.no)}</b>${r.name ? `<em>${esc(r.name)} <small>@${r.nickname}</small></em>${r.note ? `<q>${esc(r.note)}</q>` : r.capsule ? '<q>🔒 출시 날 열려요</q>' : ''}` : '<small>비공개 초대장</small>'}</span>`;
+      grid.addEventListener('pointerover', e => { const s = e.target.closest('.seat.on'); if (!s) { tip.hidden = true; return; } const r = byNo.get(+s.dataset.no); tip.innerHTML = tipOf(r); tip.hidden = false; const g = $('smap').getBoundingClientRect(), b = s.getBoundingClientRect(); tip.style.left = Math.min(g.width - 90, Math.max(90, b.left - g.left + b.width / 2)) + 'px'; tip.style.top = (b.top - g.top) + 'px'; });
+      grid.addEventListener('pointerleave', () => { tip.hidden = true; });
+      // seat card
+      function open(no){
+        const r = byNo.get(no); if (!r) return; tip.hidden = true;
+        const own = mine && mine.no === no, name = own ? mine.name : r.name, nick = own ? mine.nickname : r.nickname, nt = own ? mine.note : r.note, p = PAL[r.palette] || PAL['purple-pink'];
+        card.style.setProperty('--a', p.c[0]); card.style.setProperty('--b', p.c[2]);
+        card.innerHTML = `<div class="svt"><div class="svt-gr"><svg viewBox="0 0 300 333" preserveAspectRatio="xMidYMid slice">${glow(r.palette, 300, 333, 'sv' + no)}</svg></div><div class="svt-stub"><p class="svt-k">Invitation_</p><p class="svt-name">${name ? esc(name) : '비공개'}</p><p class="svt-id">${nick ? '@' + nick : '이름을 숨긴 초대장'}</p>${(own ? mine.capsule : r.capsule) ? '<p class="svt-note cap">🔒 출시 날 열리는 타임캡슐</p>' : nt ? `<p class="svt-note">“${esc(nt)}”</p>` : ''}<dl class="svt-meta"><div><dt>Seat</dt><dd>No. ${pad(no)}</dd></div><div><dt>Date</dt><dd>${ymd(r.created_at)}</dd></div></dl></div>${own ? '<span class="svt-me">내 자리</span>' : ''}<span class="svt-holo"></span></div><button type="button" class="sv-x" aria-label="닫기">✕</button>`;
+        const svt = card.querySelector('.svt');
+        if (!reduce && matchMedia('(pointer: fine)').matches) svt.addEventListener('pointermove', e => { const b = svt.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height; svt.style.setProperty('--rx', ((.5 - y) * 10).toFixed(2) + 'deg'); svt.style.setProperty('--ry', ((x - .5) * 14).toFixed(2) + 'deg'); svt.style.setProperty('--hx', (x * 100).toFixed(0) + '%'); svt.style.setProperty('--hy', (y * 100).toFixed(0) + '%'); });
+        sv.hidden = false; requestAnimationFrame(() => sv.classList.add('on')); card.querySelector('.sv-x').focus();
+      }
+      const close = () => { sv.classList.remove('on'); setTimeout(() => sv.hidden = true, reduce ? 0 : 250); };
+      grid.addEventListener('click', e => { const s = e.target.closest('.seat.on'); if (s) open(+s.dataset.no); });
+      grid.addEventListener('keydown', e => { const s = e.target.closest('.seat.on'); if (s && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(+s.dataset.no); } });
+      $('svBg').addEventListener('click', close); card.addEventListener('click', e => { if (e.target.closest('.sv-x')) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sv.hidden) close(); });
+      // my new ticket drops into its seat
+      function land(no){
+        const s = cells[no - 1]; if (!s) return;
+        byNo.set(no, Object.assign({ no, palette: mine.palette, name: mine.name, nickname: mine.nickname, note: mine.note, capsule: mine.capsule, created_at: mine.created_at || new Date().toISOString() }, byNo.get(no) || {}));
+        $('smap').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+        setTimeout(() => {
+          const b = s.getBoundingClientRect(), p = PAL[mine.palette] || PAL['purple-pink'];
+          const chip = document.createElement('div'); chip.className = 'sc-drop'; chip.style.cssText = `left:${b.left + b.width / 2}px;top:${b.top + b.height / 2}px;--a:${p.c[0]};--b:${p.c[2]}`;
+          chip.innerHTML = `<span>No. ${pad(no)}</span>`; document.body.appendChild(chip);
+          setTimeout(() => { chip.remove(); paintSeat(byNo.get(no), true); s.classList.add('me'); s.focus({ preventScroll: true }); load(); }, reduce ? 0 : 900);
+        }, reduce ? 0 : 650);
+      }
+      return { land, mark(no){ const s = cells[no - 1]; if (s) s.classList.add('me'); } };
+    })();
+
+    // a ticket link (?t=CODE) opens that ticket; once the code is used in the app the link closes
+    function openLink(code){
+      rpc('get_launch_ticket', { p_code: code }).then(r => {
+        const t = r[0]; tc.hidden = false; $('tcDone').hidden = false;
+        const own = mine && mine.code === code.toUpperCase();
+        if (!t) { $('tcDoneT').textContent = '찾을 수 없는 초대장이에요.'; $('tcDoneD').textContent = '링크를 다시 확인해 주세요.'; document.querySelector('.tc-link').hidden = true; return; }
+        if (t.status === 'redeemed' || t.status === 'released') { $('tcDoneT').innerHTML = `초대장 <b>No. ${pad(t.no)}</b>은 이미 사용됐어요.`; $('tcDoneD').textContent = '앱에서 이 코드로 가입을 마쳐서, 링크가 닫혔어요.'; document.querySelector('.tc-link').hidden = true; return; }
+        const v = { no: t.no, code: code.toUpperCase(), nickname: t.nickname, name: t.name, palette: t.palette, note: t.note, capsule: t.capsule, created_at: t.created_at };
+        if (own) { done(Object.assign({}, mine, v)); } else { viewing = v; paint(v); tk.hidden = false; $('tmIdle').hidden = true; mach.classList.add('out'); $('tcDoneT').innerHTML = `<b>${t.name}</b>님의 초대장 No. ${pad(t.no)}`; $('tcDoneD').innerHTML = `@${t.nickname} · 링크를 가진 사람만 볼 수 있어요. 나도 한 장 뽑으려면 위에서 이름과 아이디를 적어 보세요.`; $('tcLink').textContent = linkOf(v.code).replace(/^https?:\/\//, ''); }
+      }).catch(() => {});
+    }
+    let started = false;
+    const boot = () => { if (started) return; started = true; stats(); const q = new URLSearchParams(location.search).get('t'); if (q && /^[A-Za-z0-9]{6}$/.test(q)) openLink(q); else if (mine) done(mine); };
+    if (new URLSearchParams(location.search).get('t')) { boot(); setTimeout(() => tm.scrollIntoView({ block: 'start' }), 300); }
+    else if ('IntersectionObserver' in window) new IntersectionObserver(es => { if (es[0].isIntersecting) boot(); }, { rootMargin: '400px' }).observe(mach); else boot();
+  })();
+
+  /* ---- 08 Invite · sticker board: text or photo stickers on one big shared board; anyone can peel one off and move it
+     (post_board_sticker filters words/links + rate-limits; move_board_sticker saves the new spot and brings it to the front) ---- */
+  (function(){
+    const board = document.getElementById('sbBoard'); if (!board) return;
+    const $ = id => document.getElementById(id);
+    const COLS = { purple: ['#C77DFF', '#7B2FF7'], pink: ['#FF8AD8', '#F43F9E'], peach: ['#FFC48A', '#FF7A59'], sky: ['#8FD3FF', '#3B82F6'], mint: ['#7DF0C8', '#14B8A6'], lemon: ['#FFF07A', '#FFB800'], night: ['#4B3B8F', '#16121B'] };
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const GROUPS = { all: ["ai-076", "ai-rx037", "ai-044", "ai-038", "ai-rx025", "ai-028", "ai-rx001", "ai-001", "ai-162", "ai-rx043", "ai-130", "ai-018", "ai-116", "ai-036", "ai-165", "ai-002", "ai-090", "ai-rx019", "ai-062", "ai-rx026", "ai-042", "ai-026", "ai-rx009", "ai-rx044", "ai-168", "ai-rx017", "ai-086", "ai-rx041", "ai-160", "ai-rx010", "ai-079", "ai-rx035", "ai-088", "ai-rx031", "ai-rx047", "ai-rx022", "ai-110", "ai-107", "ai-041", "ai-rx007", "ai-064", "ai-125", "ai-149", "ai-rx015", "ai-rx045", "ai-030", "ai-rx027", "ai-084", "ai-057", "ai-049", "ai-011", "ai-034", "ai-037", "ai-164", "ai-061", "ai-019", "ai-069", "ai-103", "ai-132", "ai-rx042", "ai-017", "ai-rx006", "ai-085", "ai-024", "ai-rx048", "ai-074", "ai-050", "ai-rx039", "ai-rx034", "ai-043", "ai-rx005", "ai-rx038", "ai-rx008", "ai-029", "ai-101", "ai-032", "ai-051", "ai-128", "ai-008", "ai-000", "ai-rx016", "ai-rx004", "ai-136", "ai-108", "ai-rx040", "ai-rx002", "ai-053", "ai-rx046", "ai-rx036", "ai-rx020", "ai-020", "ai-056", "ai-048", "ai-016", "ai-022", "ai-134", "ai-rx003", "ai-rx012", "ai-rx049", "ai-067"] }, NAMES = {"ai-076": "체리", "ai-rx037": "검은 타자기", "ai-044": "젤리 곰", "ai-038": "풍선 강아지", "ai-rx025": "필름 네거티브", "ai-028": "검은 고양이", "ai-rx001": "투명 카세트 테이프", "ai-001": "크롬 하트", "ai-162": "캔들", "ai-rx043": "레드 클래식 자동차", "ai-130": "선글라스", "ai-018": "얼음 큐브", "ai-116": "픽셀 하트", "ai-036": "새싹", "ai-165": "몬스테라", "ai-002": "퍼 하트", "ai-090": "옷핀", "ai-rx019": "미니 쇼핑 카트", "ai-062": "해바라기", "ai-rx026": "LED 탁상시계", "ai-042": "크롬 달", "ai-026": "딸기", "ai-rx009": "브라운관 TV", "ai-rx044": "빨간 금속 스테이플러", "ai-168": "향수", "ai-rx017": "핑크 주사위", "ai-086": "비행기", "ai-rx041": "모텔 키택", "ai-160": "젖소 하트", "ai-rx010": "플로피 디스크", "ai-079": "마카롱", "ai-rx035": "검볼 자판기", "ai-088": "보석 하트", "ai-rx031": "핑크 투명 디지털 기기", "ai-rx047": "화이트 롤러스케이트", "ai-rx022": "빈티지 주크박스", "ai-110": "해파리", "ai-107": "아이스크림", "ai-041": "빨간 하트", "ai-rx007": "LP 레코드", "ai-064": "금붕어", "ai-125": "레몬", "ai-149": "팬케이크", "ai-rx015": "파란 유선전화기", "ai-rx045": "쌍종 알람시계", "ai-030": "돌고래", "ai-rx027": "버튼식 휴대전화", "ai-084": "야구공", "ai-057": "크루아상", "ai-049": "눈꽃", "ai-011": "핑크 리본", "ai-034": "물방울", "ai-037": "아이스 커피", "ai-164": "선물 상자", "ai-061": "러브레터", "ai-019": "고양이 발바닥", "ai-069": "고무 오리", "ai-103": "수박", "ai-rx042": "지구본 키링", "ai-017": "구름 폴라로이드", "ai-rx006": "즉석사진 묶음", "ai-085": "벚꽃", "ai-024": "종이비행기", "ai-rx048": "투명 CD 케이스", "ai-074": "버섯", "ai-050": "클립", "ai-rx039": "레트로 잡지 더미", "ai-rx034": "유선 헤드폰", "ai-043": "행성", "ai-rx005": "반투명 블루 컴퓨터", "ai-rx038": "레트로 붐박스", "ai-rx008": "미러 디스코볼", "ai-029": "홀로 하트", "ai-101": "흰 토끼", "ai-032": "튤립", "ai-051": "유리 하트", "ai-128": "바인더 클립", "ai-008": "네잎클로버", "ai-000": "아기 고양이", "ai-rx016": "당구 에이트볼", "ai-rx004": "핑크 폴더폰", "ai-136": "판다", "ai-108": "버블티", "ai-rx040": "노랑 스마일 핀", "ai-rx002": "홀로그램 CD", "ai-053": "곰인형", "ai-rx046": "투명 아크릴 체어", "ai-rx036": "미니 턴테이블", "ai-rx020": "레인보우 즉석카메라", "ai-020": "유리 날개", "ai-056": "데이지", "ai-048": "조개껍데기", "ai-016": "강아지", "ai-022": "열쇠", "ai-134": "컵케이크", "ai-rx003": "베이지 CRT 컴퓨터", "ai-rx012": "VHS 비디오테이프", "ai-rx049": "레트로 스노우글로브", "ai-067": "젖소", "ai-132": "흰 풍선"}, LEGACY = ["ai-003", "ai-004", "ai-005", "ai-006", "ai-007", "ai-009", "ai-010", "ai-012", "ai-013", "ai-014", "ai-015", "ai-021", "ai-023", "ai-025", "ai-027", "ai-031", "ai-033", "ai-035", "ai-039", "ai-040", "ai-045", "ai-046", "ai-047", "ai-052", "ai-054", "ai-058", "ai-059", "ai-060", "ai-063", "ai-065", "ai-066", "ai-068", "ai-070", "ai-071", "ai-072", "ai-073", "ai-077", "ai-078", "ai-080", "ai-081", "ai-082", "ai-083", "ai-087", "ai-089", "ai-091", "ai-093", "ai-094", "ai-095", "ai-096", "ai-097", "ai-098", "ai-099", "ai-100", "ai-102", "ai-105", "ai-106", "ai-109", "ai-112", "ai-113", "ai-114", "ai-115", "ai-117", "ai-118", "ai-119", "ai-121", "ai-122", "ai-123", "ai-124", "ai-126", "ai-127", "ai-129", "ai-131", "ai-133", "ai-135", "ai-137", "ai-138", "ai-139", "ai-140", "ai-141", "ai-142", "ai-144", "ai-145", "ai-146", "ai-147", "ai-148", "ai-150", "ai-151", "ai-152", "ai-153", "ai-154", "ai-156", "ai-158", "ai-159", "ai-161", "ai-163", "ai-166", "ai-167", "ai-169", "ai-rx011", "ai-rx013", "ai-rx014", "ai-rx018", "ai-rx021", "ai-rx023", "ai-rx024", "ai-rx028", "ai-rx029", "ai-rx030", "ai-rx032", "ai-rx033", "ai-rx050", "bubbles", "butterfly", "camera_with_flash", "cat_face", "cherry_blossom", "crescent_moon", "disguised_face", "fire", "four_leaf_clover", "ghost", "glowing_star", "hatching_chick", "headphone", "love_letter", "mirror_ball", "musical_notes", "om-1f308", "om-1f319", "om-1f31f", "om-1f337", "om-1f338", "om-1f33c", "om-1f340", "om-1f344", "om-1f352", "om-1f353", "om-1f366", "om-1f36d", "om-1f370", "om-1f37f", "om-1f380", "om-1f381", "om-1f382", "om-1f388", "om-1f3a7", "om-1f3b5", "om-1f425", "om-1f427", "om-1f430", "om-1f431", "om-1f436", "om-1f43b", "om-1f48b", "om-1f48c", "om-1f496", "om-1f49d", "om-1f4ab", "om-1f4ac", "om-1f4ad", "om-1f4f7", "om-1f984", "om-1f98b", "om-1f9c1", "om-1f9cb", "om-2601", "om-2615", "om-2728", "om-2b50", "party_popper", "peach", "rainbow", "ribbon", "rocket", "rt-admit", "rt-bff", "rt-dday", "rt-happy", "rt-hello", "rt-hi", "rt-jjin", "rt-love", "rt-miss", "rt-new", "rt-ok", "rt-seeyou", "rt-sparkle", "rt-sunny", "rt-urikkiri", "rt-wow", "shortcake", "smiling_face_with_hearts", "sparkles", "sparkling_heart", "star-struck", "strawberry", "teddy_bear"], PACK = [].concat(...Object.values(GROUPS), LEGACY), packSrc = k => 'assets/stk/' + k + '.webp';
+    const els = new Map(); let pack = GROUPS.all[0], grp = 'all', finish = 'gloss', edge = 'white', kind = 'pack', color = 'purple', font = 'base', shape = 'pill', photo = null, stream = null, dragging = null;
+    const W = () => board.clientWidth, H = () => board.clientHeight;
+    // text sticker styles — literal class names so the CSS pruner keeps them
+    const SHAPES = { pill: '알약', bubble: '말풍선', label: '라벨', tape: '테이프', note: '메모지', circle: '동그라미' };
+    const FONTS = { base: ['기본', ''], jua: ['동글', 'Jua'], gaegu: ['손글씨', 'Gaegu:wght@700'], pen: ['펜글씨', 'Nanum+Pen+Script'], black: ['굵게', 'Black+Han+Sans'], dohyeon: ['도현', 'Do+Hyeon'], gamja: ['감자꽃', 'Gamja+Flower'] };
+    const EDGE = { white: '흰 테두리', thin: '얇게', none: '없음' };
+    const EDGE_CLS = { white: 'edge-white', thin: 'edge-thin', none: 'edge-none' };
+    const FINISH = { gloss: '유광', holo: '홀로그램', glitter: '글리터', matte: '매트 종이', clear: '투명 비닐', puffy: '말랑 퍼피' };
+    const FIN_CLS = { gloss: 'fin-gloss', holo: 'fin-holo', glitter: 'fin-glitter', matte: 'fin-matte', clear: 'fin-clear', puffy: 'fin-puffy' };
+    const SHAPE_CLS = 'sh-pill sh-bubble sh-label sh-tape sh-note sh-circle fn-base fn-jua fn-gaegu fn-pen fn-black fn-dohyeon fn-gamja ico-pill ico-bubble ico-label ico-tape ico-note ico-circle';
+    let fontsOn = false;
+    function needFont(fn){ if (fontsOn || fn === 'base') return; fontsOn = true; const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?' + Object.values(FONTS).map(f => f[1]).filter(Boolean).map(f => 'family=' + f).join('&') + '&display=swap'; document.head.appendChild(l); }
+    function face(s){
+      if (s.kind === 'pack') return `<img class="sbs-pk" src="${packSrc(s.body)}" alt="" draggable="false"><i class="sbs-fin" style="--m:url(${packSrc(s.body)})"></i><span class="sbs-gl" style="--m:url(${packSrc(s.body)})"></span>`;
+      if (s.kind === 'photo') return `<span class="sbs-ph"><img src="${s.photo}" alt="" draggable="false"><i class="sbs-fin"></i></span>${s.body ? `<span class="sbs-cap">${esc(s.body)}</span>` : ''}`;
+      const c = COLS[s.color] || COLS.purple;
+      const sh = SHAPES[s.shape] ? s.shape : 'pill', fn = FONTS[s.font] ? s.font : 'base'; needFont(fn);
+      return `<span class="sbs-tx sh-${sh} fn-${fn}${s.color === 'lemon' ? ' lt' : ''}" style="--a:${c[0]};--b:${c[1]}">${sh === 'circle' ? `<span>${esc(s.body)}</span>` : esc(s.body)}<i class="sbs-fin"></i></span>`;
+    }
+    const shell = s => `<div class="sbs-f">${face(s)}</div><div class="sbs-flap" aria-hidden="true"><div class="sbs-f sbs-bk">${face(s)}</div></div>`;
+    // peel: the part of the sticker within distance t of corner c (measured along the inward normal n) folds back over the line;
+    // the fold follows the pull direction, the white backing is mirrored across it and casts a soft shadow onto the face
+    function clipHalf(poly, c, n, t, keep){
+      const out = [], f = q => ((q[0] - c[0]) * n[0] + (q[1] - c[1]) * n[1] - t) * (keep ? 1 : -1);
+      poly.forEach((q, i) => { const p = poly[(i + poly.length - 1) % poly.length], fq = f(q), fp = f(p);
+        if (fq >= 0) { if (fp < 0) out.push(cross(p, q, fp, fq)); out.push(q); } else if (fp >= 0) out.push(cross(p, q, fp, fq)); });
+      return out;
+    }
+    const cross = (p, q, fp, fq) => { const k = fp / (fp - fq); return [p[0] + (q[0] - p[0]) * k, p[1] + (q[1] - p[1]) * k]; };
+    const poly = a => 'polygon(' + a.map(q => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(',') + ')';
+    function curl(el, t){
+      const f = el.firstElementChild, bk = el.querySelector('.sbs-bk'), fl = el.querySelector('.sbs-flap'); if (!f || !bk) return;
+      if (t < .6 || !el._c) { f.style.clipPath = ''; bk.style.visibility = 'hidden'; return; }
+      const Wd = f.offsetWidth, Ht = f.offsetHeight, R = [[0, 0], [Wd, 0], [Wd, Ht], [0, Ht]], c = el._c, n = el._n;
+      const kept = clipHalf(R, c, n, t, true), peeled = clipHalf(R, c, n, t, false); if (kept.length < 3 || peeled.length < 3) return;
+      f.style.clipPath = poly(kept);
+      const ux = -n[1], uy = n[0], P0 = [c[0] + n[0] * t, c[1] + n[1] * t];
+      const a = ux * ux - uy * uy, b = 2 * ux * uy, d = -a, ex = P0[0] - (a * P0[0] + b * P0[1]), ey = P0[1] - (b * P0[0] + d * P0[1]);
+      bk.style.transform = `matrix(${a},${b},${b},${d},${ex},${ey})`; bk.style.clipPath = poly(peeled); bk.style.visibility = 'visible';
+      const s = Math.min(1, t / 40);
+      fl.style.filter = `drop-shadow(${(n[0] * 2.5 * s).toFixed(1)}px ${(n[1] * 2.5 * s).toFixed(1)}px ${(2 + 3 * s).toFixed(1)}px rgba(22,18,27,${(.16 + .14 * s).toFixed(2)}))`;
+    }
+    // tiny animator so the curl eases toward its target
+    const live = new Set(); let raf = 0;
+    function tick(){
+      raf = 0;
+      live.forEach(el => { const tg = el._tt || 0; el._t = (el._t || 0) + (tg - (el._t || 0)) * (reduce ? 1 : .28); if (Math.abs(tg - el._t) < .3) el._t = tg; curl(el, el._t); if (el._t === tg && !el._spring) live.delete(el); if (el._spring) el._spring(); });
+      if (live.size) raf = requestAnimationFrame(tick);
+    }
+    const kick = el => { live.add(el); if (!raf) raf = requestAnimationFrame(tick); };
+    // where the pointer sits in the sticker's own (unrotated) box → nearest corner + how close
+    function local(el, x, y){
+      const r = el.getBoundingClientRect(), f = el.firstElementChild, Wd = f.offsetWidth, Ht = f.offsetHeight, ang = -(parseFloat(el.style.getPropertyValue('--r')) || 0) * Math.PI / 180;
+      const dx = x - (r.left + r.width / 2), dy = y - (r.top + r.height / 2), sc = parseFloat(el.style.getPropertyValue('--s')) || 1, lx = (dx * Math.cos(ang) - dy * Math.sin(ang)) / sc + Wd / 2, ly = (dx * Math.sin(ang) + dy * Math.cos(ang)) / sc + Ht / 2;
+      const C = [[0, 0], [Wd, 0], [Wd, Ht], [0, Ht]]; let ci = 0, best = 1e9; C.forEach((q, i) => { const dd = Math.hypot(q[0] - lx, q[1] - ly); if (dd < best) { best = dd; ci = i; } });
+      const c = C[ci], nl = Math.hypot(Wd / 2 - c[0], Ht / 2 - c[1]), n = [(Wd / 2 - c[0]) / nl, (Ht / 2 - c[1]) / nl];
+      return { ci, c, n, ang, lx, ly, near: Math.max(0, 1 - best / (Math.min(Wd, Ht) * .9)), m: Math.min(Wd, Ht), pack: el.classList.contains('pk') };
+    }
+    // stickers I stuck: their edit tokens live only in this browser
+    let MINE = {}; try { MINE = JSON.parse(localStorage.getItem('ditto.board.mine') || '{}') || {}; } catch (_) {}
+    const saveMine = () => { try { localStorage.setItem('ditto.board.mine', JSON.stringify(MINE)); } catch (_) {} };
+    const isMine = el => !!(el && MINE[el.dataset.id]);
+    const getR = el => parseFloat(el.style.getPropertyValue('--r')) || 0, getS = el => parseFloat(el.style.getPropertyValue('--s')) || 1;
+    function save(el){ if (!isMine(el)) return; rpc('move_board_sticker', { p_id: +el.dataset.id, p_x: parseFloat(el.style.left) / 100, p_y: parseFloat(el.style.top) / 100, p_r: getR(el), p_scale: getS(el), p_token: MINE[el.dataset.id] }).then(rows => { const z = (rows[0] || {}).z; if (z) { el.style.zIndex = z; el._z = z; } }).catch(() => {}); }
+    function place(el, s){ if (el === sel && editing) return; el.style.left = (s.x * 100) + '%'; el.style.top = (s.y * 100) + '%'; el.style.setProperty('--r', s.r + 'deg'); el.style.setProperty('--s', s.scale || 1); el.style.zIndex = s.z; el._z = s.z; if (el === sel) syncSel(); }
+    function add(s, pop){
+      let el = els.get(s.id);
+      if (!el) { if (s.kind === 'pack' && !PACK.includes(s.body)) return; el = document.createElement('div'); el.className = 'sbs ' + (FIN_CLS[s.finish] || FIN_CLS.gloss) + (s.kind === 'text' ? ' ' + (EDGE_CLS[s.edge] || EDGE_CLS.white) : '') + (s.kind === 'photo' ? ' ph' : s.kind === 'pack' ? (/^ai-/.test(s.body) ? ' pk gl' : ' pk') : '') + (s.color === 'night' ? ' dk' : ''); el.dataset.id = s.id; el.innerHTML = shell(s); el.tabIndex = 0; if (MINE[s.id]) el.classList.add('mine'); el.setAttribute('role', 'img'); el.setAttribute('aria-label', s.kind === 'pack' ? (NAMES[s.body] ? NAMES[s.body] + ' 스티커' : '스티커') : s.kind === 'photo' ? '사진 스티커' + (s.body ? ': ' + s.body : '') : '스티커: ' + s.body); board.appendChild(el); els.set(s.id, el); if (pop && !reduce) { el.classList.add('pop'); setTimeout(() => el.classList.remove('pop'), 900); } }
+      if (dragging !== el) place(el, s);
+    }
+    const count = () => { $('sbCount').textContent = els.size ? `지금 ${els.size}장 붙어 있어요.` : ''; $('sbEmpty').hidden = els.size > 0; };
+    let loaded = false;
+    const load = () => rpc('board_stickers_all').then(rows => { rows.forEach(s => add(s)); count(); }).catch(() => { if (!els.size) $('sbEmpty').textContent = '지금은 보드를 불러올 수 없어요.'; });
+    const start = () => { if (loaded) return; loaded = true; load(); setInterval(() => { if (!document.hidden && !dragging) load(); }, 20000); };
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { if (es[0].isIntersecting) start(); }, { rootMargin: '300px' }).observe(board); else start();
+    // board surface (per-viewer preference)
+    const skin = s => { board.dataset.skin = s; $('sbSkin').querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', x.dataset.s === s)); try { localStorage.setItem('ditto.board.skin', s); } catch (_) {} };
+    try { const s0 = localStorage.getItem('ditto.board.skin'); if (s0 === 'cork' || s0 === 'metal') skin(s0); } catch (_) {}
+    $('sbSkin').addEventListener('click', e => { const b = e.target.closest('button'); if (b) skin(b.dataset.s); });
+    // hover: the corner nearest the pointer lifts a little, inviting a peel
+    const fine = matchMedia('(pointer: fine)').matches; let hov = null;
+    const lip = el => el.classList.contains('pk') ? 26 : el.classList.contains('ph') ? 10 : 18;   // transparent margin before the fold reaches the face
+    board.addEventListener('pointermove', e => {
+      if (dragging || !fine || reduce) return; const el = e.target.closest('.sbs');
+      if (hov && hov !== el) { hov._tt = 0; kick(hov); hov = null; }
+      if (!el) return; hov = el; const L = local(el, e.clientX, e.clientY); if (!isMine(el)) { el._ci = L.ci; el._c = L.c; el._n = L.n; el._tt = lip(el) * .7; kick(el); return; }
+      if (el._ci !== L.ci && el._t > 1) { el._tt = 0; kick(el); return; }
+      el._ci = L.ci; el._c = L.c; el._n = L.n; el._tt = lip(el) + L.near * 12; kick(el);
+    });
+    board.addEventListener('pointerleave', () => { if (hov && !dragging) { hov._tt = 0; kick(hov); hov = null; } });
+    const buzz = ms => { try { navigator.vibrate && navigator.vibrate(ms); } catch (_) {} };
+    // press & pull: the corner peels in the direction you pull, and the further you pull the more comes up;
+    // past the point of no return it comes off, goes flat and rides the pointer with a light 3D tilt; drop presses it back down
+    board.addEventListener('pointerdown', e => {
+      if (e.target.closest('.sbs-sel')) return;
+      const el = e.target.closest('.sbs'); if (!el) { select(null); return; } if (e.button > 0) return; e.preventDefault();
+      if (!isMine(el)) { nope(el, e); return; }
+      select(el);
+      const b = board.getBoundingClientRect(), r0 = el.getBoundingClientRect(), L = local(el, e.clientX, e.clientY);
+      const cx0 = r0.left + r0.width / 2 - b.left, cy0 = r0.top + r0.height / 2 - b.top, ox = e.clientX - b.left - cx0, oy = e.clientY - b.top - cy0, sx = e.clientX, sy = e.clientY;
+      dragging = el; hov = null; try { el.setPointerCapture(e.pointerId); } catch (_) {}
+      const t0 = lip(el) + L.m * .1, tOff = lip(el) + L.m * .5;
+      el._ci = L.ci; el._c = L.c; el._n = L.n; el._tt = t0; el.style.zIndex = 9999; el.classList.add('peeling'); kick(el);
+      let lifted = false, moved = false, px = cx0, py = cy0, vx = 0, vy = 0, tx = cx0, ty = cy0, sw = 0, rx = 0, ry = 0;
+      const ghost = document.createElement('div'); ghost.className = 'sbs-ghost'; ghost.style.cssText = `left:${el.style.left};top:${el.style.top};--r:${el.style.getPropertyValue('--r') || '0deg'}`;
+      const gf = el.firstElementChild.cloneNode(true); gf.style.clipPath = ''; ghost.appendChild(gf);
+      const lift = () => {
+        if (lifted) return; lifted = true; el.classList.remove('peeling'); el.classList.add('peel'); el._tt = 0; kick(el);
+        board.appendChild(ghost); requestAnimationFrame(() => ghost.classList.add('on')); setTimeout(() => ghost.classList.add('fade'), 60); buzz(8);
+      };
+      const holdT = setTimeout(lift, reduce ? 0 : 420);
+      el._spring = () => {
+        if (!lifted) return;
+        vx = (vx + (tx - px) * .22) * .64; vy = (vy + (ty - py) * .22) * .64; px += vx; py += vy;
+        sw += (Math.max(-14, Math.min(14, vx * 1.1)) - sw) * .2; rx += (Math.max(-14, Math.min(14, -vy * 1.4)) - rx) * .2; ry += (Math.max(-14, Math.min(14, vx * 1.4)) - ry) * .2;
+        el.style.left = (Math.min(Math.max(px / b.width, .02), .98) * 100) + '%'; el.style.top = (Math.min(Math.max(py / b.height, .03), .97) * 100) + '%';
+        el.style.setProperty('--sw', sw.toFixed(2) + 'deg'); el.style.setProperty('--rx', rx.toFixed(2) + 'deg'); el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+        if (el === sel) syncSel();
+        if (!dragging && Math.abs(vx) + Math.abs(vy) + Math.abs(sw) + Math.abs(rx) + Math.abs(ry) < .05) el._spring = null;
+      };
+      const mv = ev => {
+        const nx = ev.clientX - b.left - ox, ny = ev.clientY - b.top - oy; tx = nx; ty = ny;
+        if (!lifted) {
+          // pull vector in the sticker's own frame → fold perpendicular to it, peel depth grows with distance
+          const dx = ev.clientX - sx, dy = ev.clientY - sy, D = Math.hypot(dx, dy); if (D > 3) moved = true;
+          if (D > 3) { const lxv = dx * Math.cos(L.ang) - dy * Math.sin(L.ang), lyv = dx * Math.sin(L.ang) + dy * Math.cos(L.ang); let n = [-lxv / D, -lyv / D];
+            if (n[0] * L.n[0] + n[1] * L.n[1] < .35) n = L.n; else { const m2 = [n[0] * .7 + L.n[0] * .3, n[1] * .7 + L.n[1] * .3], l2 = Math.hypot(m2[0], m2[1]); n = [m2[0] / l2, m2[1] / l2]; } el._n = n; }
+          el._tt = t0 + D * 1.15; if (el._tt >= tOff) lift();
+        } else moved = true;
+        kick(el);
+      };
+      const up = () => {
+        clearTimeout(holdT); el.removeEventListener('pointermove', mv); el.removeEventListener('pointerup', up); el.removeEventListener('pointercancel', up);
+        dragging = null; el.classList.remove('peeling', 'peel'); el._tt = 0; tx = px; ty = py; kick(el);
+        ghost.remove();
+        if (!lifted || !moved) { el.style.zIndex = el._z || el.style.zIndex; ['--rx', '--ry', '--sw'].forEach(v => el.style.setProperty(v, '0deg')); return; }
+        const r = Math.round(getR(el) + sw * .3);
+        el.style.setProperty('--r', r + 'deg'); ['--rx', '--ry', '--sw'].forEach(v => el.style.setProperty(v, '0deg')); sw = rx = ry = 0;
+        el.classList.add('stuck'); setTimeout(() => el.classList.remove('stuck'), 360); buzz(12);
+        setTimeout(() => { save(el); syncSel(); }, 60);
+      };
+      el.addEventListener('pointermove', mv); el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+    });
+    board.addEventListener('keydown', e => {
+      const el = e.target.closest('.sbs'); if (!el) return;
+      if (e.key === 'Escape') { select(null); return; }
+      if (!isMine(el)) return;
+      const d = { ArrowLeft: [-.02, 0], ArrowRight: [.02, 0], ArrowUp: [0, -.03], ArrowDown: [0, .03] }[e.key];
+      if (d) { e.preventDefault(); el.style.left = Math.min(Math.max(parseFloat(el.style.left) / 100 + d[0], .02), .98) * 100 + '%'; el.style.top = Math.min(Math.max(parseFloat(el.style.top) / 100 + d[1], .03), .97) * 100 + '%'; }
+      else if (e.key === '+' || e.key === '=' || e.key === '-') { e.preventDefault(); el.style.setProperty('--s', Math.min(1.8, Math.max(.6, getS(el) + (e.key === '-' ? -.1 : .1))).toFixed(2)); }
+      else if (e.key === '[' || e.key === ']') { e.preventDefault(); el.style.setProperty('--r', (getR(el) + (e.key === '[' ? -10 : 10)) + 'deg'); }
+      else if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); removeMine(el); return; }
+      else return;
+      select(el); syncSel(); clearTimeout(el._t); el._t = setTimeout(() => save(el), 450);
+    });
+    board.addEventListener('focusin', e => { const el = e.target.closest('.sbs'); if (el && isMine(el)) select(el); });
+    // selection box for my sticker: rotate knob on a stem, resize knob at the corner, ✕ to peel it off for good
+    let sel = null, editing = false;
+    const box = document.createElement('div'); box.className = 'sbs-sel'; box.hidden = true;
+    box.innerHTML = '<i class="sel-stem" aria-hidden="true"></i><button type="button" class="sel-rot" aria-label="돌리기"></button><button type="button" class="sel-size" aria-label="크기 바꾸기"></button><button type="button" class="sel-del" aria-label="떼어서 버리기">✕</button>';
+    board.appendChild(box);
+    function syncSel(){
+      if (!sel) return; const f = sel.firstElementChild, s = getS(sel);
+      box.style.left = sel.style.left; box.style.top = sel.style.top; box.style.width = (f.offsetWidth * s + 16) + 'px'; box.style.height = (f.offsetHeight * s + 16) + 'px';
+      box.style.setProperty('--r', getR(sel) + 'deg');
+    }
+    function select(el){ sel = el && isMine(el) ? el : null; box.hidden = !sel; board.classList.toggle('editing-on', !!sel); if (sel) syncSel(); }
+    const center = () => { const r = sel.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+    function knob(btn, onMove){
+      btn.addEventListener('pointerdown', e => {
+        if (!sel) return; e.preventDefault(); e.stopPropagation(); try { btn.setPointerCapture(e.pointerId); } catch (_) {}
+        editing = true; sel.style.zIndex = 9999; const st = onMove(null, e);
+        const mv = ev => { onMove(st, ev); syncSel(); };
+        const up = () => { btn.removeEventListener('pointermove', mv); btn.removeEventListener('pointerup', up); btn.removeEventListener('pointercancel', up); editing = false; sel.classList.add('stuck'); const el = sel; setTimeout(() => el.classList.remove('stuck'), 360); save(sel); };
+        btn.addEventListener('pointermove', mv); btn.addEventListener('pointerup', up); btn.addEventListener('pointercancel', up);
+      });
+    }
+    knob(box.querySelector('.sel-rot'), (st, e) => {
+      const [cx, cy] = center(); const a = Math.atan2(e.clientY - cy, e.clientX - cx) * 180 / Math.PI;
+      if (!st) return { a0: a, r0: getR(sel) };
+      let r = st.r0 + (a - st.a0); if (e.shiftKey) r = Math.round(r / 15) * 15; r = ((r + 540) % 360) - 180; sel.style.setProperty('--r', r.toFixed(1) + 'deg');
+    });
+    knob(box.querySelector('.sel-size'), (st, e) => {
+      const [cx, cy] = center(), d = Math.hypot(e.clientX - cx, e.clientY - cy);
+      if (!st) return { d0: Math.max(10, d), s0: getS(sel) };
+      sel.style.setProperty('--s', Math.min(1.8, Math.max(.6, st.s0 * d / st.d0)).toFixed(3));
+    });
+    function removeMine(el){
+      const id = el.dataset.id, tok = MINE[id]; if (!tok) return; select(null);
+      el.classList.add('bye'); setTimeout(() => el.remove(), reduce ? 0 : 520); els.delete(+id); delete MINE[id]; saveMine(); count();
+      rpc('remove_board_sticker', { p_id: +id, p_token: tok }).catch(() => {});
+    }
+    box.querySelector('.sel-del').addEventListener('click', e => { e.stopPropagation(); if (sel) removeMine(sel); });
+    // two-finger pinch on my selected sticker: scale + rotate
+    const touches = new Map(); let pinch = null;
+    board.addEventListener('pointerdown', e => { if (e.pointerType !== 'touch') return; touches.set(e.pointerId, [e.clientX, e.clientY]); if (touches.size === 2 && sel) { const [p, q] = [...touches.values()]; pinch = { d0: Math.hypot(q[0] - p[0], q[1] - p[1]), a0: Math.atan2(q[1] - p[1], q[0] - p[0]), s0: getS(sel), r0: getR(sel) }; editing = true; } }, true);
+    board.addEventListener('pointermove', e => { if (!touches.has(e.pointerId)) return; touches.set(e.pointerId, [e.clientX, e.clientY]); if (pinch && sel && touches.size === 2) { const [p, q] = [...touches.values()]; sel.style.setProperty('--s', Math.min(1.8, Math.max(.6, pinch.s0 * Math.hypot(q[0] - p[0], q[1] - p[1]) / pinch.d0)).toFixed(3)); sel.style.setProperty('--r', (pinch.r0 + (Math.atan2(q[1] - p[1], q[0] - p[0]) - pinch.a0) * 180 / Math.PI).toFixed(1) + 'deg'); syncSel(); } }, true);
+    const endTouch = e => { touches.delete(e.pointerId); if (pinch && touches.size < 2) { pinch = null; editing = false; if (sel) save(sel); } };
+    board.addEventListener('pointerup', endTouch, true); board.addEventListener('pointercancel', endTouch, true);
+    // someone else's sticker: a tiny wiggle and a hint
+    const hint = document.createElement('p'); hint.className = 'sb-hint'; hint.hidden = true; board.appendChild(hint);
+    function nope(el, e){
+      el.classList.remove('nope'); void el.offsetWidth; el.classList.add('nope'); setTimeout(() => el.classList.remove('nope'), 420);
+      const b = board.getBoundingClientRect(); hint.textContent = '내가 붙인 스티커만 옮길 수 있어요'; hint.style.left = (e.clientX - b.left) + 'px'; hint.style.top = (e.clientY - b.top) + 'px'; hint.hidden = false;
+      clearTimeout(hint._t); hint._t = setTimeout(() => { hint.hidden = true; }, 1400);
+    }
+    // maker
+    $('sbPack').addEventListener('click', e => { const b = e.target.closest('.sb-pk'); if (!b) return; pack = b.dataset.k; $('sbPack').querySelectorAll('.sb-pk').forEach(x => x.setAttribute('aria-checked', x === b)); prev(); });
+    const drawPack = () => { $('sbPack').innerHTML = GROUPS[grp].map(k => `<button type="button" role="radio" class="sb-pk" data-k="${k}" aria-checked="${k === pack}" aria-label="${NAMES[k] || '스티커'}" title="${NAMES[k] || ''}"><img src="${packSrc(k)}" alt="" loading="lazy"></button>`).join(''); };
+    drawPack();
+    $('sbFin').innerHTML = Object.keys(FINISH).map(k => `<button type="button" role="radio" class="sb-chip sb-finb" data-v="${k}" aria-checked="${k === finish}"><i class="sb-sw ${FIN_CLS[k]}" aria-hidden="true"></i>${FINISH[k]}</button>`).join('');
+    $('sbFin').addEventListener('click', e => { const b = e.target.closest('.sb-chip'); if (!b) return; finish = b.dataset.v; $('sbFin').querySelectorAll('.sb-chip').forEach(x => x.setAttribute('aria-checked', x === b)); prev(); });
+    $('sbEdges').innerHTML = Object.keys(EDGE).map(k => `<button type="button" role="radio" class="sb-chip sb-edg" data-v="${k}" aria-checked="${k === edge}"><i class="sb-eico ${EDGE_CLS[k]}" aria-hidden="true"></i>${EDGE[k]}</button>`).join('');
+    $('sbEdges').addEventListener('click', e => { const b = e.target.closest('.sb-chip'); if (!b) return; edge = b.dataset.v; $('sbEdges').querySelectorAll('.sb-chip').forEach(x => x.setAttribute('aria-checked', x === b)); prev(); });
+    $('sbShapes').innerHTML = Object.keys(SHAPES).map(k => `<button type="button" role="radio" class="sb-chip sb-shp" data-v="${k}" aria-checked="${k === shape}"><i class="sb-ico ico-${k}" aria-hidden="true"></i>${SHAPES[k]}</button>`).join('');
+    $('sbFonts').innerHTML = Object.keys(FONTS).map(k => `<button type="button" role="radio" class="sb-chip sb-fnt fn-${k}" data-v="${k}" aria-checked="${k === font}">${FONTS[k][0]}</button>`).join('');
+    $('sbShapes').addEventListener('click', e => { const b = e.target.closest('.sb-chip'); if (!b) return; shape = b.dataset.v; $('sbShapes').querySelectorAll('.sb-chip').forEach(x => x.setAttribute('aria-checked', x === b)); prev(); });
+    $('sbFonts').addEventListener('click', e => { const b = e.target.closest('.sb-chip'); if (!b) return; font = b.dataset.v; $('sbFonts').querySelectorAll('.sb-chip').forEach(x => x.setAttribute('aria-checked', x === b)); prev(); });
+    $('sbCols').innerHTML = Object.keys(COLS).map((k, i) => `<button type="button" role="radio" class="sb-cl" data-c="${k}" style="--a:${COLS[k][0]};--b:${COLS[k][1]}" aria-checked="${i === 0}" aria-label="${k}"></button>`).join('');
+    const prev = () => { const p = $('sbPrev'), s = kind === 'pack' ? { kind, body: pack } : kind === 'photo' ? { kind, photo, body: $('sbCap').value.trim() } : { kind, color, font, shape, body: $('sbText').value.trim() || '여기에 글씨' }; p.className = 'sb-prev'; p.innerHTML = kind === 'photo' && !photo ? '<span class="sb-ph0">📷<br>사진을 찍거나 골라 주세요</span>' : `<div class="sbs ${FIN_CLS[finish]}${kind === 'text' ? ' ' + EDGE_CLS[edge] : ''}${kind === 'photo' ? ' ph' : kind === 'pack' ? (/^ai-/.test(pack) ? ' pk gl' : ' pk') : ''}${s.color === 'night' ? ' dk' : ''}">${shell(s)}</div>`; };
+    $('sbCols').addEventListener('click', e => { const b = e.target.closest('.sb-cl'); if (!b) return; color = b.dataset.c; $('sbCols').querySelectorAll('.sb-cl').forEach(x => x.setAttribute('aria-checked', x === b)); prev(); });
+    $('sbText').addEventListener('input', () => { $('sbLen').textContent = $('sbText').value.length + '/40'; prev(); });
+    $('sbCap').addEventListener('input', prev);
+    const stopCam = () => { if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; $('sbCam').hidden = true; };
+    document.querySelectorAll('.sb-tab').forEach(t => t.addEventListener('click', () => { kind = t.dataset.k; document.querySelectorAll('.sb-tab').forEach(x => x.setAttribute('aria-selected', x === t)); document.querySelectorAll('.sb-pane').forEach(p => p.hidden = p.dataset.k !== kind); if (kind !== 'photo') stopCam(); $('sbErr').textContent = ''; prev(); }));
+    const open = $('sbOpen');
+    // the maker folds open/closed in place; what you picked stays while it's folded
+    function fold(on){
+      const m = $('sbMake'); m.classList.toggle('open', on); m.inert = !on; m.setAttribute('aria-hidden', String(!on)); open.setAttribute('aria-expanded', String(on));
+      open.innerHTML = on ? '접기 <span class="ar" aria-hidden="true">−</span>' : '스티커 만들기 <span class="ar" aria-hidden="true">+</span>';
+      if (on) { needFont('jua'); prev(); } else stopCam();
+    }
+    open.addEventListener('click', () => fold(!$('sbMake').classList.contains('open')));
+    $('sbFold').addEventListener('click', () => { fold(false); open.focus(); });
+    // square-crop to 360px JPEG so it stays small on the board
+    function shrink(src, sw, sh){ const c = document.createElement('canvas'), S = 360, m = Math.min(sw, sh); c.width = c.height = S; c.getContext('2d').drawImage(src, (sw - m) / 2, (sh - m) / 2, m, m, 0, 0, S, S); let q = .78, u = c.toDataURL('image/jpeg', q); while (u.length > 100000 && q > .3) { q -= .12; u = c.toDataURL('image/jpeg', q); } return u; }
+    $('sbCamOn').addEventListener('click', () => {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { $('sbErr').textContent = '이 브라우저에선 카메라를 쓸 수 없어요. 사진을 골라 주세요.'; return; }
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 720 }, height: { ideal: 720 } }, audio: false }).then(s => { stream = s; const v = $('sbVid'); v.srcObject = s; v.play(); $('sbCam').hidden = false; $('sbErr').textContent = ''; }).catch(() => { $('sbErr').textContent = '카메라를 켤 수 없어요. 권한을 확인하거나 사진을 골라 주세요.'; });
+    });
+    $('sbShut').addEventListener('click', () => { const v = $('sbVid'); if (!v.videoWidth) return; photo = shrink(v, v.videoWidth, v.videoHeight); stopCam(); prev(); });
+    $('sbFile').addEventListener('change', e => { const f = e.target.files[0]; if (!f) return; const img = new Image(); img.onload = () => { photo = shrink(img, img.naturalWidth, img.naturalHeight); URL.revokeObjectURL(img.src); prev(); }; img.onerror = () => { $('sbErr').textContent = '이 사진은 열 수 없어요.'; }; img.src = URL.createObjectURL(f); e.target.value = ''; });
+    const ERR = { 'blocked words': '고운 말로 다시 적어 주세요.', 'no links': '링크는 붙일 수 없어요.', 'slow down': '잠깐 쉬었다가 다시 붙여 주세요.', 'body length': '스티커에 적을 말을 써 주세요 (40자까지).', 'bad photo': '사진을 다시 찍거나 골라 주세요.', 'bad pack': '스티커를 다시 골라 주세요.' };
+    $('sbPost').addEventListener('click', () => {
+      const err = $('sbErr'), body = kind === 'pack' ? pack : kind === 'photo' ? $('sbCap').value.trim() : $('sbText').value.trim();
+      if (kind === 'text' && !body) { err.textContent = ERR['body length']; return; }
+      if (kind === 'photo' && !photo) { err.textContent = ERR['bad photo']; return; }
+      // drop it somewhere in the part of the board you can see
+      const w = $('sbWrap'), x = Math.min(.9, Math.max(.1, (w.scrollLeft + w.clientWidth * (.3 + Math.random() * .4)) / W())), y = .2 + Math.random() * .6, r = Math.round((Math.random() - .5) * 14);
+      err.textContent = ''; const b = $('sbPost'); b.disabled = true;
+      rpc('post_board_sticker', { p_kind: kind, p_body: body || null, p_color: color, p_photo: kind === 'photo' ? photo : null, p_x: x, p_y: y, p_r: r, p_font: font, p_shape: shape, p_finish: finish, p_edge: kind === 'text' ? edge : 'white' }).then(rows => {
+        const row = rows[0] || rows; if (row.token) { MINE[row.id] = row.token; saveMine(); } add({ id: row.id, z: row.z, kind, body, color, font, shape, finish, edge, scale: 1, photo: kind === 'photo' ? photo : null, x, y, r }, true); count(); setTimeout(() => select(els.get(row.id)), 950);
+        $('sbText').value = ''; $('sbCap').value = ''; $('sbLen').textContent = '0/40'; photo = null; fold(false);
+        board.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      }).catch(e => { err.textContent = ERR[e.message] || '지금은 붙일 수 없어요. 잠시 뒤 다시 해 주세요.'; }).finally(() => { b.disabled = false; });
+    });
   })();
 })();
 </script>
