@@ -1850,6 +1850,10 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .sb-eico.edge-none{box-shadow:none}
 .sb-make{grid-template-columns:minmax(0,1fr)}
 .sb-make-in{min-width:0}
+/* Q&A: closed cards hug the question; only the opened card grows */
+.qgrid{grid-auto-rows:auto;align-items:start}
+.qgrid.is-js .qcard[data-open="false"] .qa-a{display:none}
+.qgrid.is-js .qcard[data-open="false"] .qbtn{padding-bottom:22px}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -1962,7 +1966,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <ol class="vlist" id="vlist">
         <li class="on"><span class="w">꾸미기</span><span class="c">위젯을 통해 나만의 개성있는 공간을 구축할 수 있어요.</span></li>
         <li><span class="w">살펴보기</span><span class="c">친구들의 공간을 알고리즘 없이 구경해요.</span></li>
-        <li><span class="w">가져오기</span><span class="c">마음에 드는 친구의 위젯을 꾹 누르면 디토해갈 수 있어요.</span></li>
+        <li><span class="w">가져오기</span><span class="c">나도 함께한 순간이 친구 방에서 빛나면, 꾹 눌러 내 플래터로 가져올 수 있어요.</span></li>
         <li><span class="w">확산하기</span><span class="c">내 위젯이 디토를 통해 친구의 친구까지 닿아요.</span></li>
         <li><span class="w">맞추기</span><span class="c">서로 다양한 상호작용을 해나가면 주파수가 점점 맞아가요.</span></li>
         <li><span class="w">친구되기</span><span class="c">주파수가 맞으면 자연스럽게 친구가 될 수 있어요.</span></li>
@@ -2048,7 +2052,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     <ol class="cr-track" tabindex="0" aria-label="여섯 가지 동사, 앱 화면으로 보기">
       <li class="cr-card vc"><div class="vc-m"><img src="assets/app-add.webp" alt="위젯 추가 시트. 기본, 기록, 함께, 미디어 갈래와 소셜, 상태, 텍스트, 이미지 위젯 카드" width="603" height="1311" loading="lazy" style="--op:50% 30%"></div><p><b><span class="vc-n">01</span>꾸미기.</b> 위젯을 통해 나만의 개성있는 공간을 구축할 수 있어요.</p></li>
       <li class="cr-card vc"><div class="vc-m"><img src="assets/app-friends.webp" alt="친구 탭. 친구가 새로 붙인 위젯이 카드로 올라온 피드" width="603" height="1311" loading="lazy" style="--op:50% 28%"></div><p><b><span class="vc-n">02</span>살펴보기.</b> 친구들의 공간을 알고리즘 없이 구경해요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittohold.webp" alt="디토 시트. 라이프를 고르고 디토 버튼을 꾹 누르는 중" width="603" height="1311" loading="lazy" style="--op:50% 88%"></div><p><b><span class="vc-n">03</span>가져오기.</b> 마음에 드는 친구의 위젯을 꾹 누르면 디토해갈 수 있어요.</p></li>
+      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittohold.webp" alt="디토 시트. 라이프를 고르고 디토 버튼을 꾹 누르는 중" width="603" height="1311" loading="lazy" style="--op:50% 88%"></div><p><b><span class="vc-n">03</span>가져오기.</b> 나도 함께한 순간이 친구 방에서 빛나면, 꾹 눌러 내 플래터로 가져올 수 있어요.</p></li>
       <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittotab.webp" alt="디토 탭. 내 위젯을 지민, 유나, 도현 외 17명이 가져갔다는 카드" width="603" height="1311" loading="lazy" style="--op:50% 30%"></div><p><b><span class="vc-n">04</span>확산하기.</b> 내 위젯이 디토를 통해 친구의 친구까지 닿아요.</p></li>
       <li class="cr-card vc"><div class="vc-m"><img src="assets/app-freq.webp" alt="주파수 화면. 라이브 주파수와 내 주변 주파수 목록의 파형" width="603" height="1311" loading="lazy" style="--op:50% 34%"></div><p><b><span class="vc-n">05</span>맞추기.</b> 서로 다양한 상호작용을 해나가면 주파수가 점점 맞아가요.</p></li>
       <li class="cr-card vc"><div class="vc-m"><img src="assets/app-freqsheet.webp" alt="주파수 시트. 친구 신청이 열렸어요라는 문구와 친구 신청 버튼" width="603" height="1311" loading="lazy" style="--op:50% 92%"></div><p><b><span class="vc-n">06</span>친구되기.</b> 주파수가 맞으면 자연스럽게 친구가 될 수 있어요.</p></li>
@@ -2158,7 +2162,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
           </li>
           <li class="cx-item">
             <button type="button" class="cx-pill" id="cx-b1" aria-expanded="true" aria-controls="cx-d1"><span class="pl" aria-hidden="true"></span>디토</button>
-            <div class="cx-card" id="cx-d1"><p><b>꾹 눌러, 나도.</b> 친구 방에서 빛나는 사진을 골라 대표와 라이프 중 둘 곳을 정하고, 3초 동안 꾹 누르면 내 플래터로 와요. 누구에게서 왔는지 그대로 남아요.</p></div>
+            <div class="cx-card" id="cx-d1"><p><b>꾹 눌러, 나도.</b> 친구 방에서 나도 함께한 순간이 빛나고 있으면, 대표와 라이프 중 둘 곳을 정하고 3초 동안 꾹 누르면 내 플래터로 와요. 누구에게서 왔는지 그대로 남아요.</p></div>
           </li>
           <li class="cx-item">
             <button type="button" class="cx-pill" id="cx-b2" aria-expanded="true" aria-controls="cx-d2"><span class="pl" aria-hidden="true"></span>주파수</button>
@@ -2191,7 +2195,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 <span class="pa-t pa-flowers" style="left:3.980%;top:59.039%;width:33.333%;height:20.709%;--i:9;--hx:50.35;--hy:-8.87;--hr:5;--sx:1.35;--sy:45.13;--sr:-10"><img src="assets/pa-flowers.webp" alt="" width="268" height="362" loading="lazy" decoding="async"></span>
           <span class="pa-chip"><b>+</b>위젯 추가하기</span>
         </div></div></figure>
-        <figure class="cx-fig"><div class="phone shadowed"><div class="ma dt" data-anim="ditto" role="img" aria-label="지우가 소라의 플래터에서 빛나는 ‘🧺 간식 부자’ 사진을 꾹 눌러요. 라이프에 두기로 하고 디토 버튼을 3초 누르면 보랏빛이 차오르고, 디토 완료 화면이 떠요">
+        <figure class="cx-fig"><div class="phone shadowed"><div class="ma dt" data-anim="ditto" role="img" aria-label="지우가 소라의 플래터에서 둘이 함께 간 피크닉 사진 ‘🧺 간식 부자’가 빛나는 걸 보고 꾹 눌러요. 라이프에 두기로 하고 디토 버튼을 3초 누르면 보랏빛이 차오르고, 디토 완료 화면이 떠요">
           <img class="dt-bg" src="assets/rooms/room-03-sora.webp" alt="" width="640" height="1392" loading="lazy">
           <span class="dt-glow"></span>
           <span class="ma-dim"></span>
@@ -2199,7 +2203,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
             <span class="ma-grab"></span>
             <img class="tw-ph dt-thumb" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy">
             <p class="dt-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>내 플래터로 가져오기</p>
-            <p class="dt-sub"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">소라님의 위젯 · 주파수가 번지는 중</p>
+            <p class="dt-sub"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">소라님이 올린 우리 피크닉 사진</p>
             <p class="dt-q">어디에 둘까요?</p>
             <div class="dt-seg"><span>대표</span><span class="on">라이프</span></div>
             <div class="dt-btn"><span class="dt-fill"></span><span class="dt-lbl"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg><b class="l1">꾹 눌러 디토하기</b><b class="l2">계속 누르세요</b></span></div>
@@ -2208,7 +2212,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
             <span class="dt-big"><img class="tw-ph" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><svg class="dt-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span>
             <p class="dt-k">디토 완료</p>
             <p class="dt-t">🧺 간식 부자</p>
-            <p class="dt-d">라이프 플래터에 자리를 내줬어요</p>
+            <p class="dt-d">그날 같이 있었던 순간, 내 라이프에도 남겼어요</p>
             <p class="dt-date">10월 13일에 가져옴</p>
             <span class="dt-from"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>소라에게서 가져옴</span>
             <span class="ma-btn">내 플래터에서 보기</span>
@@ -2264,14 +2268,14 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     <div class="wx-part" id="wx-ditto">
       <div class="wx-ph">
         <span class="lab"><b>5.2</b>Ditto</span>
-        <div><h3 class="h-l">친구 사진이 <mark>빛나면</mark>, 디토할 수 있어요</h3><p class="lead">가져온 조각에는 누구에게서 왔는지가 그대로 붙어 있어요.</p></div>
+        <div><h3 class="h-l">나도 함께한 사진이 <mark>빛나면</mark>, 디토할 수 있어요</h3><p class="lead">그날의 나도 거기 있었다는 표시예요. 가져온 조각에는 누구에게서 왔는지가 그대로 붙어 있어요.</p></div>
       </div>
       <div class="cr" data-cr>
         <ol class="cr-track" tabindex="0" aria-label="디토 과정">
           <li class="cr-card dp" style="--bg:#F6F2E6"><div class="dp-m"><span class="dp-glow beam"><img src="assets/wd-glow.webp" alt="뒤에서 은은하게 빛나는 나리의 ‘🫖 내 첫 컵’ 사진 위젯" width="462" height="603" loading="lazy"></span></div><p><b><span class="vc-n">1</span>빛나는 사진.</b> 주인이 디토를 열어 둔 사진은 뒤에서 은은하게 빛나요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</p></li>
-          <li class="cr-card dp" style="--bg:#EFE7FA"><div class="dp-m dp-ui"><div class="mui dp-sheet" role="img" aria-label="디토 시트. 소라의 ‘🧺 간식 부자’ 사진을 라이프에 두기로 고르고, 디토 버튼이 보랏빛으로 절반쯤 차오른 상태"><span class="ma-grab"></span><img class="tw-ph dt-thumb" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><p class="dt-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>내 플래터로 가져오기</p><p class="dt-q">어디에 둘까요?</p><div class="dt-seg"><span>대표</span><span class="on">라이프</span></div><div class="dt-btn half"><span class="dt-fill"></span><span class="dt-lbl"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg><b class="l2">계속 누르세요</b></span></div></div></div><p><b><span class="vc-n">2</span>꾹 눌러 가져오기.</b> 어디에 둘지 고르고 3초 동안 누르면 보랏빛이 차올라요. 중간에 떼면 취소돼요.</p></li>
+          <li class="cr-card dp" style="--bg:#EFE7FA"><div class="dp-m dp-ui"><div class="mui dp-sheet" role="img" aria-label="디토 시트. 소라가 올린, 둘이 함께 간 피크닉 사진 ‘🧺 간식 부자’를 라이프에 두기로 고르고, 디토 버튼이 보랏빛으로 절반쯤 차오른 상태"><span class="ma-grab"></span><img class="tw-ph dt-thumb" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><p class="dt-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>내 플래터로 가져오기</p><p class="dt-q">어디에 둘까요?</p><div class="dt-seg"><span>대표</span><span class="on">라이프</span></div><div class="dt-btn half"><span class="dt-fill"></span><span class="dt-lbl"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg><b class="l2">계속 누르세요</b></span></div></div></div><p><b><span class="vc-n">2</span>꾹 눌러 가져오기.</b> 어디에 둘지 고르고 3초 동안 누르면 보랏빛이 차올라요. 중간에 떼면 취소돼요.</p></li>
           <li class="cr-card dp" style="--bg:#F1E9F8"><div class="dp-m"><figure class="dp-anno dp-dw" role="img" aria-label="지우의 플래터에 놓인 디토 위젯. 소라의 ‘🧺 간식 부자’ 사진, 왼쪽 아래 @soramaybe 출처 칩, 오른쪽 위 디토 배지"><span class="dw-card"><img src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><span class="dw-chip"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">@soramaybe</span><svg class="dw-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span><span class="dp-c dp-c1">디토 배지</span><span class="dp-c dp-c2">출처 칩 · 소라</span></figure></div><p><b><span class="vc-n">3</span>출처가 남아요.</b> 가져온 사진엔 누구에게서 왔는지 칩과 디토 배지가 붙고, 친구에게도 알림이 가요.</p></li>
-          <li class="cr-card dp" style="--bg:#F4ECFA"><div class="dp-m dp-ui"><div class="mui dp-done" role="img" aria-label="디토 완료 화면. ‘🧺 간식 부자’, 라이프 플래터에 자리를 내줬어요, 소라에게서 가져옴"><span class="dt-big"><img class="tw-ph" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><svg class="dt-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span><p class="dt-k">디토 완료</p><p class="dt-t">🧺 간식 부자</p><p class="dt-d">라이프 플래터에 자리를 내줬어요</p><span class="dt-from"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>소라에게서 가져옴</span></div></div><p><b><span class="vc-n">4</span>내 방 한쪽에.</b> 디토가 끝나면 고른 플래터에 자리를 내줘요.</p></li>
+          <li class="cr-card dp" style="--bg:#F4ECFA"><div class="dp-m dp-ui"><div class="mui dp-done" role="img" aria-label="디토 완료 화면. ‘🧺 간식 부자’, 그날 같이 있었던 순간을 내 라이프에도 남겼어요, 소라에게서 가져옴"><span class="dt-big"><img class="tw-ph" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><svg class="dt-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span><p class="dt-k">디토 완료</p><p class="dt-t">🧺 간식 부자</p><p class="dt-d">그날 같이 있었던 순간, 내 라이프에도 남겼어요</p><span class="dt-from"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>소라에게서 가져옴</span></div></div><p><b><span class="vc-n">4</span>내 방 한쪽에.</b> 디토가 끝나면 고른 플래터에 자리를 내줘요.</p></li>
         </ol>
         <div class="cr-ctl" hidden><button type="button" class="cr-prev" aria-label="이전 단계">←</button><button type="button" class="cr-next" aria-label="다음 단계">→</button></div>
       </div>
@@ -2514,11 +2518,14 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     </div>
     <div class="qgrid" id="qgrid">
       <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb1" aria-expanded="true" aria-controls="qa1"><span class="qn">Q1</span><span class="qt">왜 친구가 15명까지인가요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa1" role="region" aria-labelledby="qb1"><p>사람이 가깝게 챙길 수 있는 관계가 15명 안팎이라는 던바의 연구를 따랐어요. 숫자를 늘리는 대신 이미 소중한 사람과의 거리를 좁혀요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb2" aria-expanded="true" aria-controls="qa2"><span class="qn">Q2</span><span class="qt">디토를 몇 번 주고받아야 친구 신청이 열려요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa2" role="region" aria-labelledby="qb2"><p>두 사람 사이에 디토가 세 번 쌓이면 열려요. 내가 가져온 것도, 상대가 가져간 것도 함께 세요. 점수 대신 주파수 파형이 선명해지는 걸로 보여줘요.</p></div></div>
+      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb2" aria-expanded="true" aria-controls="qa2"><span class="qn">Q2</span><span class="qt">친구 신청은 어떻게 열려요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa2" role="region" aria-labelledby="qb2"><p>디토가 오갈수록 두 사람의 주파수 파형이 선명해지고, 세 번 쌓이면 친구 신청 버튼이 열려요. 이미 아는 사이라면 아이디나 QR로 바로 신청할 수도 있어요.</p></div></div>
       <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb3" aria-expanded="true" aria-controls="qa3"><span class="qn">Q3</span><span class="qt">친구 신청에는 뭘 적어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa3" role="region" aria-labelledby="qb3"><p>짧은 편지(18자)와 상대를 부를 애칭(10자)을 붙일 수 있어요. 둘 다 비워 둬도 신청할 수 있어요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb4" aria-expanded="true" aria-controls="qa4"><span class="qn">Q4</span><span class="qt">친구 신청을 거절하면 알려지나요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa4" role="region" aria-labelledby="qb4"><p>아니요. 받은 사람은 거절, 디또, 나중에 중에 고를 수 있고, 거절해도 보낸 사람에게 알림이 가지 않아요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb5" aria-expanded="true" aria-controls="qa5"><span class="qn">Q5</span><span class="qt">내 플래터는 누가 볼 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa5" role="region" aria-labelledby="qb5"><p>친구로 연결된 사람만 볼 수 있어요. 친구 신청을 수락하면 서로의 글을 함께 볼 수 있어요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb6" aria-expanded="true" aria-controls="qa6"><span class="qn">Q6</span><span class="qt">언제 써 볼 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa6" role="region" aria-labelledby="qb6"><p>졸업전시 현장에서 iPhone으로 바로 체험할 수 있어요. 출시 소식은 ditto.place에 이메일을 남기면 가장 먼저 받아요.</p></div></div>
+      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb4" aria-expanded="true" aria-controls="qa4"><span class="qn">Q4</span><span class="qt">친구 신청을 거절하면 알려지나요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa4" role="region" aria-labelledby="qb4"><p>아니요. 받은 사람은 거절, 디또(수락), 나중에 중에 고를 수 있고, 거절해도 보낸 사람에게 알림이 가지 않아요.</p></div></div>
+      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb5" aria-expanded="true" aria-controls="qa5"><span class="qn">Q5</span><span class="qt">내 플래터는 누가 볼 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa5" role="region" aria-labelledby="qb5"><p>친구로 연결된 사람만 볼 수 있어요. 친구 신청을 수락하면 서로의 플래터를 함께 볼 수 있어요.</p></div></div>
+      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb6" aria-expanded="true" aria-controls="qa6"><span class="qn">Q6</span><span class="qt">언제 써 볼 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa6" role="region" aria-labelledby="qb6"><p>졸업전시 현장에서 iPhone으로 바로 체험할 수 있어요. 아래에서 출시 초대장을 뽑아 이메일을 남기면, 출시 날 가장 먼저 초대 메일을 보내 드려요. 선착순 1,000석이에요.</p></div></div>
+      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb7" aria-expanded="true" aria-controls="qa7"><span class="qn">Q7</span><span class="qt">디토는 몇 개까지 열어 둘 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa7" role="region" aria-labelledby="qb7"><p>내 위젯 중 세 개까지예요. 사진, GIF, 음악, 영상을 열어 둘 수 있고, 열어 둔 위젯은 뒤에서 은은하게 빛나서 친구가 알아볼 수 있어요.</p></div></div>
+      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb8" aria-expanded="true" aria-controls="qa8"><span class="qn">Q8</span><span class="qt">초대장을 뽑으면 뭐가 남아요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa8" role="region" aria-labelledby="qb8"><p>좌석 번호와 초대 코드가 발급되고, 고른 아이디가 출시 때까지 예약돼요. 이메일은 출시 초대 메일을 보내는 데만 쓰고, 출시 후 3개월이 지나면 지워요.</p></div></div>
+      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb9" aria-expanded="true" aria-controls="qa9"><span class="qn">Q9</span><span class="qt">스티커 보드는 누가 고칠 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa9" role="region" aria-labelledby="qb9"><p>붙인 사람만요. 붙였던 기기와 브라우저에서 내 스티커를 누르면 옮기고, 돌리고, 크기를 바꾸거나 떼어 버릴 수 있어요. 다른 사람의 스티커는 구경만 할 수 있어요.</p></div></div>
     </div>
   </div>
 </section>
