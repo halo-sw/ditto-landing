@@ -1854,6 +1854,271 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .qgrid{grid-auto-rows:auto;align-items:start}
 .qgrid.is-js .qcard[data-open="false"] .qa-a{display:none}
 .qgrid.is-js .qcard[data-open="false"] .qbtn{padding-bottom:22px}
+/* ================= Hero B · collage (review via ?hero=collage) ================= */
+html.hero-collage .hero{display:none}
+html.hero-collage .hc{display:block}
+.hc{--hcb:#6B2BF0;position:relative;overflow:hidden;padding:calc(12px + 56px + clamp(24px,4svh,48px)) 0 clamp(28px,4svh,48px);background:radial-gradient(120% 80% at 50% 0%,#8448FF,transparent 60%),var(--hcb);color:#fff}
+.hc-head{position:relative;z-index:30;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px}
+.hc-k{margin:0;font:700 clamp(15px,1.3vw,18px)/1.4 var(--kr);letter-spacing:-.01em;color:rgba(255,255,255,.86)}
+.hc h1{margin:8px 0 0;line-height:0}
+.hc-wm{height:clamp(64px,7vw,104px);width:auto;filter:brightness(0) invert(1) drop-shadow(0 10px 24px rgba(30,0,80,.35))}
+.hc-row{margin-top:18px;justify-content:center;gap:10px}
+.hc .hc-cta{background:#fff;color:#16121B}
+.hc .hc-line{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+.hc-stage{position:relative;width:min(1240px,100%);height:clamp(560px,64svh,660px);margin:clamp(-8px,-1vw,0px) auto 0}
+.hcp{position:absolute;z-index:5;transform:translate(var(--px,0px),var(--py,0px)) rotate(var(--r));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.hc.ready .hcp{animation:hcIn .9s cubic-bezier(.2,1.2,.3,1) backwards;animation-delay:calc(var(--i,0) * 70ms)}
+@keyframes hcIn{0%{opacity:0;translate:var(--fx,0) var(--fy,40px);scale:.6}100%{opacity:1;translate:0 0;scale:1}}
+.hc-phone{position:absolute;left:50%;top:0;z-index:12;transform:translateX(-50%)}
+.hc-phone .phone{--pw:clamp(230px,20vw,288px)}
+.hc-phone .scr{width:100%;height:100%;border-radius:calc(var(--pw)*.132);overflow:hidden}
+.hc-phone .scr img{display:block;width:100%;height:auto}
+/* invite ticket as a receipt */
+.hc-ticket{left:calc(50% - 470px);top:-18px;width:270px;padding:26px 24px 30px;background:#F5A3E6;color:#2A35E8;font-family:'IBM Plex Mono',ui-monospace,monospace;box-shadow:0 30px 50px -30px rgba(20,0,60,.6);clip-path:polygon(0 6px,4% 0,8% 6px,12% 0,16% 6px,20% 0,24% 6px,28% 0,32% 6px,36% 0,40% 6px,44% 0,48% 6px,52% 0,56% 6px,60% 0,64% 6px,68% 0,72% 6px,76% 0,80% 6px,84% 0,88% 6px,92% 0,96% 6px,100% 0,100% 100%,0 100%);z-index:4}
+.hc-ticket p{margin:0}
+/* black flower bubble */
+/* scalloped photos */
+.hc-photoL{left:calc(50% - 420px);top:340px;width:250px;height:170px;z-index:8;-webkit-mask:radial-gradient(circle 15px at 15px 50%,#000 98%,#0000) 0 0/30px 30px repeat-y,linear-gradient(#000 0 0) 15px 0/calc(100% - 15px) 100% no-repeat;mask:radial-gradient(circle 15px at 15px 50%,#000 98%,#0000) 0 0/30px 30px repeat-y,linear-gradient(#000 0 0) 15px 0/calc(100% - 15px) 100% no-repeat}
+.hc-photoL img,.hc-photoR img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0 18px 18px 0}
+.hc-photoR{left:calc(50% + 170px);top:330px;width:230px;height:290px;z-index:9;-webkit-mask:radial-gradient(circle 16px at 50% calc(100% - 16px),#000 98%,#0000) 0 0/32px 100% repeat-x,linear-gradient(#000 0 0) 0 0/100% calc(100% - 16px) no-repeat;mask:radial-gradient(circle 16px at 50% calc(100% - 16px),#000 98%,#0000) 0 0/32px 100% repeat-x,linear-gradient(#000 0 0) 0 0/100% calc(100% - 16px) no-repeat}
+.hc-photoR img{border-radius:22px 22px 0 0}
+.hc-pill{margin:0;padding:12px 22px;border-radius:999px;background:rgba(18,22,92,.86);backdrop-filter:blur(8px);font:600 clamp(18px,1.6vw,24px)/1.2 var(--kr);letter-spacing:-.02em;color:#fff;white-space:nowrap;z-index:14}
+.hc-pillL{left:calc(50% - 470px);top:510px}
+.hc-pillR{left:calc(50% + 150px);top:118px;background:rgba(70,40,30,.82)}
+/* 3D stickers */
+.hc-stk{z-index:13;filter:drop-shadow(0 12px 16px rgba(20,0,60,.35))}
+.hc-stk img{display:block;width:100%;height:auto}
+.hc-stk1{left:calc(50% - 205px);top:360px;width:120px}
+/* right card (like the reference's food card) */
+.hc-heart{left:calc(50% + 380px);top:200px;width:230px;height:207px;z-index:10;filter:drop-shadow(0 18px 24px rgba(20,0,60,.3))}
+.hc-heart svg{position:absolute;inset:0;width:100%;height:100%}
+.hc-heart span{position:absolute;left:0;right:0;top:62px;text-align:center;font:700 22px/1.25 'IBM Plex Mono',var(--kr);letter-spacing:.12em;color:#16121B;transform:rotate(-6deg)}
+@media (max-width:1100px){.hc-stage{transform:scale(.86);transform-origin:50% 0;height:clamp(500px,60svh,580px)}}
+@media (max-width:720px){.hc-stage{transform:none;height:560px;width:100%}
+.hc-phone .phone{--pw:200px}
+.hc-ticket{left:-28px;top:8px;width:170px;padding:16px 14px 18px}
+.hc-pillR{left:auto;right:8px;top:236px;font-size:14px;padding:9px 14px}
+.hc-pillL{left:8px;top:470px;font-size:14px;padding:9px 14px}
+.hc-photoL{left:-24px;top:300px;width:150px;height:110px}
+.hc-photoR{left:auto;right:-20px;top:300px;width:140px;height:180px}
+.hc-stk1{left:22%;top:390px;width:84px}
+.hc-heart{display:none}}
+@media (prefers-reduced-motion:reduce){.hc.ready .hcp{animation:none}
+.hcp{transition:none}}
+.hc{padding-top:calc(12px + 56px + clamp(14px,2.4svh,32px))}
+.hc-wm{height:clamp(52px,5.6vw,84px)}
+.hc-row{margin-top:14px}
+.hc-stage{margin-top:clamp(22px,3svh,36px);height:clamp(520px,60svh,600px)}
+.hc-phone .phone{--pw:clamp(220px,17.5vw,256px)}
+/* scallops drawn by an SVG mask (CSS radial masks were too faint) */
+.hc-photoL{-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Ccircle cx='15' cy='15' r='15'/%3E%3C/svg%3E") 0 0/30px 30px repeat-y,linear-gradient(#000 0 0) 15px 0/calc(100% - 15px) 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Ccircle cx='15' cy='15' r='15'/%3E%3C/svg%3E") 0 0/30px 30px repeat-y,linear-gradient(#000 0 0) 15px 0/calc(100% - 15px) 100% no-repeat}
+.hc-photoR{-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='16'/%3E%3C/svg%3E") 0 100%/32px 32px repeat-x,linear-gradient(#000 0 0) 0 0/100% calc(100% - 16px) no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='16'/%3E%3C/svg%3E") 0 100%/32px 32px repeat-x,linear-gradient(#000 0 0) 0 0/100% calc(100% - 16px) no-repeat}
+.hc-ticket{top:-34px}
+.hc-photoL{top:300px}
+.hc-pillL{top:466px}
+.hc-stk1{top:330px}
+.hc-pillR{top:96px}
+.hc-heart{top:170px}
+.hc-photoR{top:300px;height:250px}
+@media (max-width:720px){.hc-stage{height:520px}
+.hc-photoR{height:170px}}
+@media (max-width:720px){.hc-stage{height:500px}
+.hc-phone .phone{--pw:196px}
+.hc-photoL,.hc-heart{display:none}
+.hc-ticket{left:-34px;top:36px;width:150px;padding:14px 12px 16px;--r:-9deg}
+.hc-pillR{right:6px;top:206px;font-size:13px}
+.hc-photoR{right:-26px;top:270px;width:130px;height:170px}
+.hc-stk1{left:16px;top:300px;width:78px}
+.hc-pillL{left:10px;top:420px;font-size:13px}}
+/* ---- Hero B v2: Splup/Brand/Fluid (purple-pink) — three colours slowly mixing on the body tone ---- */
+.hc{--hcb:#7752DA;background:radial-gradient(42% 52% at 18% 22%,#AA4AF4 0,rgba(170,74,244,0) 70%),radial-gradient(46% 56% at 82% 30%,#FA97E2 0,rgba(250,151,226,0) 70%),radial-gradient(50% 60% at 50% 78%,#6655D2 0,rgba(102,85,210,0) 72%),radial-gradient(60% 40% at 50% 0%,#C27DF7 0,rgba(194,125,247,0) 70%),#7752DA;background-size:140% 140%,140% 140%,140% 140%,100% 100%,auto;animation:hcFluid 18s ease-in-out infinite alternate}
+@keyframes hcFluid{0%{background-position:0% 0%,100% 0%,50% 100%,0 0,0 0}50%{background-position:30% 20%,70% 30%,40% 70%,0 0,0 0}100%{background-position:10% 40%,90% 10%,60% 90%,0 0,0 0}}
+.hc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(rgba(254,230,248,0),#FEE6F8 92%);pointer-events:none;z-index:1;opacity:.0}
+/* real invite ticket */
+.hc-ticket{left:calc(50% - 520px);top:-10px;width:330px;padding:0;background:none;clip-path:none;box-shadow:none;filter:drop-shadow(0 26px 34px rgba(30,0,70,.4))}
+.hc-ticket img{display:block;width:100%;height:auto;border-radius:24px}
+/* CD player: a holographic disc spinning under a clear lid */
+.hc-cdp{left:calc(50% - 560px);top:220px;width:210px;z-index:8;filter:drop-shadow(0 22px 26px rgba(30,0,70,.4))}
+.cdp-body{position:relative;display:block;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#FFFFFF,#E4E6EC 40%,#B9BDC7 100%);box-shadow:inset 0 -6px 14px rgba(40,30,60,.25),inset 0 4px 8px rgba(255,255,255,.9)}
+.cdp-disc{position:absolute;inset:16px;border-radius:50%;overflow:hidden;animation:cdpSpin 3.2s linear infinite;box-shadow:0 0 0 2px rgba(255,255,255,.6)}
+.cdp-disc img{width:100%;height:100%;object-fit:cover;transform:scale(1.18)}
+.cdp-hub{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:radial-gradient(circle,#2B2731 0 7px,#D9DCE3 8px 18px,#F5F6F8 19px);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.cdp-body::after{content:"";position:absolute;inset:6px;border-radius:50%;background:linear-gradient(140deg,rgba(255,255,255,.55),rgba(255,255,255,0) 42%,rgba(255,255,255,0) 70%,rgba(255,255,255,.25));pointer-events:none}
+.cdp-lcd{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);padding:6px 12px;border-radius:10px;background:#1B2A22;color:#7DF0C8;font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;white-space:nowrap;box-shadow:0 0 0 3px #D9DCE3}
+@keyframes cdpSpin{to{transform:rotate(360deg)}}
+/* the real ditto widget */
+.hc-dw{left:calc(50% + 160px);top:-4px;width:220px;z-index:6}
+.hc-dw .dw-card > img{border-radius:20px;box-shadow:0 0 0 4px #FFFFFF;filter:drop-shadow(0 22px 28px rgba(30,0,70,.4))}
+.hc-dw .dw-chip{left:12px;bottom:12px;font-size:13px;padding:4px 11px 4px 4px}
+.hc-dw .dw-chip img{width:22px;height:22px}
+.hc-dw .dw-badge{width:44px;height:44px;right:-14px;top:-14px}
+/* 나도! — die-cut speech-bubble sticker */
+.hc-nado{left:calc(50% + 330px);top:-56px;margin:0;z-index:15;filter:drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 16px 18px rgba(30,0,70,.35))}
+.hc-nado span{position:relative;display:block;padding:14px 26px 16px;border-radius:26px;background:linear-gradient(135deg,#FA97E2,#AA4AF4 60%,#6655D2);font:900 34px/1 'Black Han Sans',var(--kr);letter-spacing:.02em;color:#fff;text-shadow:0 2px 0 rgba(60,0,90,.25)}
+.hc-nado span::after{content:"";position:absolute;left:26px;bottom:-14px;width:26px;height:18px;background:#AA4AF4;clip-path:polygon(0 0,100% 0,8% 100%)}
+.hc-heart span{top:72px;font-size:34px;letter-spacing:.14em}
+@media (max-width:720px){.hc-ticket{left:-40px;top:30px;width:190px}
+.hc-dw{left:auto;right:-26px;top:16px;width:136px}
+.hc-dw .dw-chip{font-size:10px}
+.hc-dw .dw-badge{width:32px;height:32px}
+.hc-nado{left:auto;right:4px;top:-30px}
+.hc-nado span{font-size:22px;padding:10px 16px 12px}
+.hc-cdp{display:none}}
+@media (prefers-reduced-motion:reduce){.hc{animation:none}
+.cdp-disc{animation:none}}
+.hc-cdp{left:calc(50% - 640px);top:196px}
+.hc-photoL{top:368px;left:calc(50% - 404px)}
+.hc-pillL{top:526px}
+.hc-stk1{top:392px}
+/* ---- Hero B v3: calmer, more natural collage ---- */
+.hct-svg{display:block;width:100%;aspect-ratio:1200/760}
+.hct-svg svg{display:block;width:100%;height:100%}
+.hcp{animation:none}
+.hc.ready .hcp{animation:hcIn .9s cubic-bezier(.2,1.1,.3,1) backwards,hcBob 7s ease-in-out infinite alternate;animation-delay:calc(var(--i,0) * 70ms),calc(var(--i,0) * -1.3s)}
+@keyframes hcBob{0%{translate:0 0}100%{translate:0 -6px}}
+/* one shadow language for every piece */
+.hc-ticket,.hc-cdp,.hc-dw,.hc-photoL,.hc-photoR,.hc-heart{filter:drop-shadow(0 18px 26px rgba(40,10,90,.28)) drop-shadow(0 2px 4px rgba(40,10,90,.12))}
+/* left column: ticket → CD player → photo, kept off the phone */
+.hc-ticket{left:calc(50% - 560px);top:-6px;width:300px;--r:-5deg}
+.hc-cdp{left:calc(50% - 600px);top:226px;width:170px;--r:0deg}
+.cdp-body{width:170px;height:170px}
+.cdp-disc{inset:13px}
+.cdp-hub{width:38px;height:38px;margin:-19px 0 0 -19px;background:radial-gradient(circle,#2B2731 0 6px,#D9DCE3 7px 15px,#F5F6F8 16px)}
+.cdp-lcd{bottom:-10px;font-size:11px;padding:5px 10px;box-shadow:0 0 0 2px #E6E8EE}
+.hc-photoL{left:calc(50% - 400px);top:360px;width:220px;height:150px;--r:-2deg}
+.hc-pillL{left:calc(50% - 430px);top:500px;--r:-2deg}
+/* soft glass pills instead of heavy dark ones */
+.hc-pill{padding:10px 18px;background:rgba(255,255,255,.2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),0 10px 24px -12px rgba(40,10,90,.5);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);font-size:clamp(15px,1.2vw,18px);font-weight:700}
+/* sticker sits on the phone's corner, smaller */
+.hc-stk1{left:calc(50% - 170px);top:430px;width:84px;--r:-14deg}
+/* right column: ditto widget (+ 나도!) → heart → photo */
+.hc-dw{left:calc(50% + 175px);top:0;width:200px;--r:4deg}
+.hc-nado{left:calc(50% + 300px);top:-34px;--r:6deg}
+.hc-nado span{font-size:26px;padding:11px 20px 13px;border-radius:20px}
+.hc-nado span::after{left:18px;bottom:-11px;width:20px;height:14px}
+.hc-pillR{left:calc(50% + 200px);top:250px;--r:2deg}
+.hc-heart{left:calc(50% + 395px);top:190px;width:170px;height:153px;--r:10deg}
+.hc-heart span{top:52px;font-size:24px}
+.hc-photoR{left:calc(50% + 190px);top:318px;width:190px;height:230px;--r:3deg}
+@media (max-width:1100px){.hc-cdp{display:none}}
+@media (max-width:720px){.hc-ticket{left:-36px;top:26px;width:170px}
+.hc-dw{right:-22px;top:14px;width:126px}
+.hc-nado{right:2px;top:-26px}
+.hc-nado span{font-size:18px;padding:8px 13px 10px}
+.hc-pillR{right:6px;top:200px}
+.hc-photoR{right:-22px;top:250px;width:120px;height:160px}
+.hc-stk1{left:18px;top:300px;width:64px}
+.hc-pillL{left:10px;top:410px}
+.hc-pill{font-size:12px;padding:8px 12px}}
+@media (prefers-reduced-motion:reduce){.hc.ready .hcp{animation:none}}
+@media (max-width:720px){.hc-dw,.hc-photoR,.hc-nado,.hc-pillR{left:auto}
+.hc-dw{right:-18px;top:40px;width:118px}
+.hc-nado{top:8px}
+.hc-photoR{right:-16px;top:262px;width:116px;height:150px}
+.hc-pillR{top:218px}}
+/* ---- Hero B: gather → burst entrance (JS drives it with the Web Animations API) ---- */
+.hc.ready .hcp{animation:none}
+.hc.landed .hcp{animation:hcBob 7s ease-in-out infinite alternate;animation-delay:calc(var(--i,0) * -1.3s)}
+.hc.bursting .hcp{transition:none}
+.hc-ring{position:absolute;left:50%;top:40%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;z-index:11;pointer-events:none;opacity:0;background:radial-gradient(circle,rgba(255,255,255,0) 38%,rgba(255,255,255,.55) 52%,rgba(250,151,226,.35) 60%,rgba(255,255,255,0) 70%)}
+@media (max-width:720px){.hc-ring{width:360px;height:360px;margin:-180px 0 0 -180px}}
+@media (prefers-reduced-motion:reduce){.hc.landed .hcp{animation:none}
+.hc-ring{display:none}}
+.hc.bursting .hcp{z-index:20}
+.hc.bursting .hc-ring{z-index:19}
+/* friend-request sheet — Figma Friend_request_send_letter */
+.fr-sheet .fr-letter{align-items:flex-start;min-height:calc(var(--u)*84);padding-bottom:calc(var(--u)*24)}
+.fr-sheet .fr-letter .ph{top:calc(var(--u)*12)}
+.fr-sheet .fr-cnt{position:absolute;right:calc(var(--u)*14);bottom:calc(var(--u)*10);font-size:calc(var(--u)*11.5);color:#9A93A3;font-weight:500}
+.fr-sheet .fr-nick .fr-cnt{top:50%;bottom:auto;transform:translateY(-50%)}
+.fr-sheet .fr-lbl{margin:calc(var(--u)*12) 0 0;text-align:left;font-size:calc(var(--u)*12.5);font-weight:700;color:var(--ink-a,#16121B)}
+.fr-sheet .fr-lbl + .ma-field{margin-top:calc(var(--u)*6)}
+.fr-sheet .fr-note{margin-top:calc(var(--u)*12)}
+.mui.fs4{--u:calc(100cqw / 430)}
+.fs-m .mui.fs4{--u:calc(100cqw / 410)}
+/* ---- Hero B v4 ---- */
+/* pieces never jump above their neighbours on hover/press */
+.hc-stage .hcp{cursor:default}
+/* CD player sits right next to the phone */
+.hc-cdp{left:calc(50% - 420px);top:210px;--r:-4deg}
+.hc-photoL{top:394px;left:calc(50% - 430px)}
+.hc-pillL{top:540px;left:calc(50% - 450px)}
+/* the dittoed photo as a polaroid: square crop (the baked-in title drops out), caption in the bottom margin, source chip + D! badge kept */
+.hc-dw{left:calc(50% + 165px);top:6px;width:208px;--r:5deg}
+.hc-dw .dw-card{padding:10px 10px 0;background:#FFFFFF;border-radius:6px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.hc-dw .dw-card > img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;object-position:50% 100%;border-radius:2px;box-shadow:none;filter:none}
+.hc-dw .dw-chip{left:18px;bottom:52px}
+.hc-dw .dw-badge{right:-16px;top:-16px}
+.hc-nado{left:calc(50% + 318px);top:-40px}
+.hc-pillR{left:calc(50% + 196px);top:262px}
+@media (max-width:1100px){.hc-cdp{display:block;left:calc(50% - 380px)}}
+@media (max-width:720px){.hc-cdp{display:none}
+.hc-dw{width:124px}
+.hc-dw .dw-card{padding:6px 6px 0}
+.hc-dw .dw-chip{left:10px;bottom:34px}}
+.hc-nado{left:calc(50% + 352px);top:-30px}
+.hc-nado{left:calc(50% + 398px);top:-14px;--r:8deg}
+/* Q&A: tighter bottom now that closed cards are compact, plus a contact line */
+.qa{padding-bottom:clamp(40px,5vw,72px)}
+.qa + .close,#close{padding-top:clamp(48px,6vw,88px)}
+.qa-more{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;margin:clamp(20px,2.4vw,28px) 0 0;padding:16px 20px;border-radius:var(--r-md);background:var(--bg-2);font:500 15px/1.5 var(--kr);color:var(--ink-2);text-align:center}
+.qa-more a{color:var(--violet-d);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.qa-more .qa-cta{text-decoration:none;padding:6px 14px;border-radius:999px;background:var(--ink);color:#fff;font-size:14px}
+.qa-more a:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px;border-radius:6px}
+/* the dittoed widget exactly like Splup/Widget/Ditto (Size 6x8: 276×370, r16, badge 32 @ inset 12, caption 17 SemiBold + source row 24/14 on a bottom gradient) */
+.hc-dw{width:220px;--r:4deg}
+.dw2{position:relative;margin:0;width:100%;aspect-ratio:276/370;border-radius:calc(16px * 220 / 276);overflow:hidden;box-shadow:inset 0 0 18px rgba(255,255,255,.18)}
+.dw2-ph{display:block;width:100%;height:100%;object-fit:cover}
+.dw2-badge{position:absolute;right:calc(12px * 220 / 276);top:calc(12px * 220 / 276);width:calc(32px * 220 / 276);height:auto;filter:drop-shadow(0 4px 8px rgba(90,30,140,.35))}
+.dw2-foot{position:absolute;left:0;right:0;bottom:0;padding:calc(24px * 220 / 276) calc(16px * 220 / 276) calc(12px * 220 / 276);background:linear-gradient(rgba(10,6,20,0),rgba(10,6,20,.62));color:#fff}
+.dw2-foot b{display:block;font:600 calc(17px * 220 / 276)/1.35 var(--kr);letter-spacing:-.01em}
+.dw2-src{display:flex;align-items:center;gap:calc(8px * 220 / 276);margin-top:calc(8px * 220 / 276);font:500 calc(14px * 220 / 276)/1.3 var(--kr);opacity:.95}
+.dw2-src img{width:calc(24px * 220 / 276);height:calc(24px * 220 / 276);border-radius:calc(8px * 220 / 276);object-fit:cover}
+.hc-dw .dw-card{display:none}
+.hc-nado{left:calc(50% + 372px);top:-22px}
+/* breathing room at the bottom of the hero */
+.hc{padding-bottom:clamp(48px,7svh,88px)}
+.hc-stage{height:clamp(560px,64svh,640px)}
+@media (max-width:720px){.hc-dw{width:120px}
+.dw2-foot b{font-size:10px}
+.dw2-src{font-size:9px}
+.hc-stage{height:540px}}
+.hc-pillR{left:calc(50% + 150px);top:314px;--r:-2deg}
+.hc-photoR{top:356px}
+.hc-nado{left:calc(50% + 402px);top:-6px}
+/* ================= 2026-10-15 · 히어로 B 정리 — iPhone 17 목업 · 상태 막대 · 버튼 간격 =================
+   iPhone 17: 화면 402×874pt · 화면 모서리 ≈55pt · 다이내믹 아일랜드 126×37pt(위 11pt) · 얇은 베젤 · 왼쪽 액션·볼륨, 오른쪽 측면·카메라 컨트롤 */
+.hc .hc-head .hc-row{display:flex;flex-wrap:wrap;justify-content:center;margin-top:26px;gap:14px}
+.hc-row .btn{min-width:168px;height:54px;padding:0 26px}
+.hc-stage{margin-top:clamp(36px,4.6svh,52px)}
+.hc-phone .phone.ip17{--pw:clamp(230px,19vw,280px);aspect-ratio:auto;width:var(--pw);height:calc(var(--pw)*2.155);padding:calc(var(--pw)*.026);border-radius:calc(var(--pw)*.162);
+  background:linear-gradient(145deg,#3a3a40 0%,#18181b 38%,#0c0c0e 62%,#2b2b31 100%);
+  box-shadow:inset 0 0 0 calc(var(--pw)*.006) #55555c,inset 0 0 0 calc(var(--pw)*.012) #0a0a0b,0 calc(var(--pw)*.18) calc(var(--pw)*.28) calc(var(--pw)*-.1) rgba(30,0,70,.55),0 calc(var(--pw)*.03) calc(var(--pw)*.06) rgba(30,0,70,.25)}
+.hc-phone .phone.ip17::before,.hc-phone .phone.ip17::after{display:none}
+.hc-phone .ip17 .scr{position:relative;width:100%;height:100%;border-radius:calc(var(--pw)*.137);overflow:hidden;background:#FAFAF9}
+.hc-phone .ip17 .scr img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0;border-radius:0}
+.ip17-btn{position:absolute;display:block;background:linear-gradient(90deg,#1c1c20,#4a4950 60%,#2a2a2f);border-radius:2px}
+.ip17-act{left:calc(var(--pw)*-.012);top:18.5%;width:calc(var(--pw)*.014);height:5.4%}
+.ip17-vu{left:calc(var(--pw)*-.012);top:27%;width:calc(var(--pw)*.014);height:8.6%}
+.ip17-vd{left:calc(var(--pw)*-.012);top:37.4%;width:calc(var(--pw)*.014);height:8.6%}
+.ip17-side{right:calc(var(--pw)*-.012);top:28%;width:calc(var(--pw)*.014);height:13.2%;background:linear-gradient(270deg,#1c1c20,#4a4950 60%,#2a2a2f)}
+.ip17-cam{right:calc(var(--pw)*-.008);top:56%;width:calc(var(--pw)*.01);height:7.4%;border-radius:2px;background:linear-gradient(270deg,#101012,#3b3a40)}
+/* 상태 막대 — 아일랜드 높이 가운데에 맞춰 살짝 내리고, 시간·아이콘은 양쪽 귀 가운데 */
+.ip17-sb{position:absolute;left:0;right:0;top:0;height:calc(var(--pw)*.122);z-index:3;display:grid;grid-template-columns:1fr calc(var(--pw)*.313) 1fr;align-items:center;padding-top:calc(var(--pw)*.008);color:#16121B;pointer-events:none}
+.ip17-t{justify-self:center;font:600 calc(var(--pw)*.042)/1 -apple-system,'SF Pro Text',var(--kr);letter-spacing:-.01em;padding-left:calc(var(--pw)*.03)}
+.ip17-di{display:block;width:100%;height:calc(var(--pw)*.092);border-radius:999px;background:#000;margin-top:calc(var(--pw)*.003)}
+.ip17-ic{justify-self:center;display:flex;align-items:center;gap:calc(var(--pw)*.014);padding-right:calc(var(--pw)*.02)}
+.ip17-ic svg{display:block;height:calc(var(--pw)*.029);width:auto;fill:currentColor}
+.ip17-ic .ip17-bat{height:calc(var(--pw)*.031)}
+@media (max-width:720px){.hc .hc-head .hc-row{gap:10px}
+.hc-row .btn{min-width:0;height:50px;padding:0 20px}
+.hc-phone .phone.ip17{--pw:200px}}
+.hc-photoR img.hc-demo-gif{object-fit:contain;background:#fff;border-radius:22px 22px 0 0}
+/* demo GIF as a real GIF widget — Splup/Widget/gif (4×4 · r16 · white · GIF tag 30×20 r4 #443651 @12) */
+.hc-photoR.hc-gifw{width:200px;height:200px;top:372px;-webkit-mask:none;mask:none;border-radius:calc(16px * 200 / 181);overflow:hidden;background:#fff;box-shadow:inset 0 0 18px rgba(255,255,255,.18)}
+.hc-photoR.hc-gifw img.hc-demo-gif{border-radius:0;object-fit:cover;background:#fff}
+.hc-giftag{position:absolute;left:calc(12px * 200 / 181);bottom:calc(12px * 200 / 181);padding:3px 6px;border-radius:4px;background:#443651;color:#fff;font:700 11px/1.3 var(--kr);letter-spacing:.02em}
+@media (max-width:720px){.hc-photoR.hc-gifw{width:120px;height:120px;top:262px}}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -1884,6 +2149,34 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     </defs>
   </svg>
 
+<section class="hc" id="topc" aria-labelledby="hc-h" hidden>
+  <div class="hc-head">
+    <p class="hc-k">친한 친구와 만들어 가는 우리만의 공간</p>
+    <h1 id="hc-h"><img class="hc-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"></h1>
+    <div class="row hc-row"><a class="btn hc-cta" href="#tm">초대장 받기 <span class="ar" aria-hidden="true">→</span></a><a class="btn line hc-line" href="#verbs">둘러보기</a></div>
+  </div>
+  <div class="hc-stage" id="hcStage">
+    <div class="hcp hc-ticket" data-d=".35" style="--r:-8deg" aria-hidden="true"><span class="hct-svg" id="hcTicket"></span></div>
+    <div class="hcp hc-cdp" data-d=".6" style="--r:-6deg" aria-hidden="true">
+      <span class="cdp-body"><span class="cdp-disc"><img src="assets/stk/ai-rx002.webp" alt="" width="240" height="240"></span><span class="cdp-hub"></span></span>
+      <span class="cdp-lcd">▶ CRASH</span>
+    </div>
+    <div class="hcp hc-photoL" data-d=".45" style="--r:0deg"><img src="assets/bg-friends.jpg" alt="촛불 앞에 모인 지우·소라·나리" width="1200" height="900" loading="eager"></div>
+    <p class="hcp hc-pill hc-pillL" data-d=".25" style="--r:0deg" aria-hidden="true">초는 늘 내 담당</p>
+    <div class="hcp hc-stk hc-stk1" data-d=".8" style="--r:-12deg" aria-hidden="true"><img src="assets/stk/ai-044.webp" alt="" width="160" height="160"></div>
+    
+    <div class="hcp hc-dw" data-d=".4" style="--r:4deg"><figure class="dw2" role="img" aria-label="소라에게서 디토해 온 위젯. 지우와 함께 간 피크닉 사진 ‘🧺 간식 부자’, 오른쪽 위 디토 배지, 아래 @soramaybe 출처">
+      <img class="dw2-ph" src="assets/dw-picnic.webp" alt="" width="552" height="740" loading="eager">
+      <img class="dw2-badge" src="assets/dittobadge-32.svg" alt="" width="32" height="32">
+      <figcaption class="dw2-foot"><b>🧺 간식 부자</b><span class="dw2-src"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="eager">@soramaybe</span></figcaption>
+    </figure></div>
+    <p class="hcp hc-nado" data-d=".9" style="--r:-8deg" aria-hidden="true"><span>나도!</span></p>
+    <p class="hcp hc-pill hc-pillR" data-d=".55" style="--r:0deg" aria-hidden="true">오늘 공강 개꿀</p>
+    <div class="hcp hc-heart" data-d=".75" style="--r:14deg" aria-hidden="true"><svg viewBox="0 0 200 180"><path d="M100 170C40 128 6 96 6 58a46 46 0 0 1 94-20 46 46 0 0 1 94 20c0 38-34 70-94 112z" fill="#fff"/></svg><span>IYKYK</span></div>
+    <div class="hcp hc-photoR" data-d=".5" style="--r:0deg"><img src="assets/tp-sora.webp" alt="꽃집 앞을 지나는 소라" width="603" height="804" loading="eager"></div>
+    <span class="hc-ring" aria-hidden="true"></span><div class="hc-phone"><div class="phone shadowed ip17"><i class="ip17-btn ip17-act" aria-hidden="true"></i><i class="ip17-btn ip17-vu" aria-hidden="true"></i><i class="ip17-btn ip17-vd" aria-hidden="true"></i><i class="ip17-btn ip17-side" aria-hidden="true"></i><i class="ip17-btn ip17-cam" aria-hidden="true"></i><div class="scr"><div class="ip17-sb" aria-hidden="true"><span class="ip17-t">9:41</span><span class="ip17-di"></span><span class="ip17-ic"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.6c2.2 0 4.2.9 5.7 2.3l1.1-1.2A9.6 9.6 0 0 0 8 1 9.6 9.6 0 0 0 1.2 3.7l1.1 1.2A8 8 0 0 1 8 2.6zm0 3.2c1.3 0 2.5.5 3.4 1.3l1.1-1.2A6.5 6.5 0 0 0 8 4.2c-1.7 0-3.3.6-4.5 1.7l1.1 1.2c.9-.8 2.1-1.3 3.4-1.3zm0 3.2c.5 0 .9.2 1.2.5L8 11 6.8 9.5c.3-.3.7-.5 1.2-.5z"/></svg><svg class="ip17-bat" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.6" fill="none" stroke="currentColor" opacity=".4"/><rect x="2.2" y="2.2" width="19.6" height="8.6" rx="2.2"/><path d="M25 4.4v4.2c.8-.3 1.4-1.1 1.4-2.1S25.8 4.7 25 4.4z" opacity=".45"/></svg></span></div><img src="assets/hero-jiu-v3.webp" alt="지우(@jiuallday)의 플래터 화면. 친구들과 모인 ‘🎂 초는 내가’ 사진, 목 20시, 🎀💿 상태, ‘🩰 한 번 더’ 사진, ALLDAY PROJECT ‘CRASH’ 음악, 쇼케이스 D−16, ‘🧺 각자 좋아하는 간식 하나’, ‘GO · 연출 참고’ 영상, 방명록이 붙어 있어요" width="804" height="1748" fetchpriority="high"></div></div></div>
+  </div>
+  </section>
 <section class="hero" id="top" aria-labelledby="hero-h">
   <span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span><span class="grain" aria-hidden="true"></span>
   <div class="hero-in">
@@ -2090,22 +2383,22 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <div class="people">
       <article class="pc" id="pc-jaemin" aria-labelledby="pc-jaemin-n">
         <div class="pc-in">
-          <figure class="pc-face pc-front person"><img src="assets/tp-jaemin.webp" alt="기차 창가 자리에서 창밖을 내다보는 재민" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-jaemin-n">재민</h4><div class="role">27 · 개발자 · 기록을 오래 정리하는 유저</div><q>그날 들었던 노래까지 남겨두고 싶어.</q></figcaption></figure>
-          <div class="pc-face pc-back" id="pc-jaemin-b"><p class="pc-bk"><span class="disp">재민</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“개발자예요. 만난 직후보다 며칠 뒤에 차분히 정리하는 편이에요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“그날 들었던 노래까지 남겨두고 싶어서요. 사진만 있으면 그날이 반쯤만 남거든요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“인화하기 전의 여행이요. 기차 창밖, 다시 간 바다, 그날 들은 HANRORO까지 한 판에.”</dd></div><div><dt>Q. 친구와는 어떻게 이어져요?</dt><dd>“도현의 즉흥 모임엔 늘 따라가요. 흔들린 컷도 보내 주기로 했어요.”</dd></div></dl></div>
+          <figure class="pc-face pc-front person"><img src="assets/tp-jaemin.webp" alt="기차 창가 자리에서 창밖을 내다보는 재민" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-jaemin-n">재민</h4><div class="role">27 · 개발자 · 친구들과 적극적으로 쓰는 유저</div><q>그날 들었던 노래까지 남겨두고 싶어.</q></figcaption></figure>
+          <div class="pc-face pc-back" id="pc-jaemin-b"><p class="pc-bk"><span class="disp">재민</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>조용히 보고 오래 기억하는 쪽이에요. 주말엔 카메라를 들고 걷고, 며칠 뒤에 차분히 정리해요.</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>그날 들었던 노래까지 남겨 두고 싶어서요. 사진만 늘어놓으면 그날의 맥락이 금방 사라지더라고요.</dd></div><div><dt>Q. 방엔 뭘 붙여 둬요?</dt><dd>출발할 때 찍은 기차 창밖이랑 도현이랑 간 바다요. 그때 들은 한로로 ‘You and I’도 옆에 붙여 뒀어요.</dd></div><div><dt>Q. 친구와는 어떻게 이어져요?</dt><dd>도현이 갑자기 부르면 따라 나가고, 준이 말한 다음 여행은 오래 기억해 둬요. 친구들 답장은 방명록에 쌓여요.</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-jaemin-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">재민 인터뷰 뒤집어 보기</span></button>
       </article>
       <article class="pc" id="pc-sora" aria-labelledby="pc-sora-n">
         <div class="pc-in">
           <figure class="pc-face pc-front person"><img src="assets/tp-sora.webp" alt="꽃시장에서 꽃을 고르며 웃는 소라" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-sora-n">소라</h4><div class="role">22 · 시각디자인 전공 · 친구들과 적극적으로 쓰는 유저</div><q>사진 보내는 대신 여기 붙여둘게.</q></figcaption></figure>
-          <div class="pc-face pc-back" id="pc-sora-b"><p class="pc-bk"><span class="disp">소라</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이야?</dt><dd>“시각디자인 전공. 먼저 연락하고 작은 약속을 잡는 쪽이야.”</dd></div><div><dt>Q. 왜 Ditto를 써?</dt><dd>“사진 보내는 대신 여기 붙여둘게. 다음 약속도 여기서 잡고.”</dd></div><div><dt>Q. 방은 어떻게 써?</dt><dd>“우리 다음엔 여기서. 소풍 사진 옆에 ‘🍒 돗자리 챙겨 둠’.”</dd></div><div><dt>Q. 친구와는 어떻게 이어져?</dt><dd>“지우랑 수업 사이에 자주 만나. ‘각자 좋아하는 간식 하나’도 내가 정한 규칙이야.”</dd></div></dl></div>
+          <div class="pc-face pc-back" id="pc-sora-b"><p class="pc-bk"><span class="disp">소라</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>먼저 연락하고 작은 만남을 제안하는 쪽이에요. 공강엔 카페, 주말엔 꽃시장을 돌아요.</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>사진만 보내고 끝나는 게 아쉬워서요. 여기 붙여 두면 다음에 같이 할 일이 자연스럽게 정해져요.</dd></div><div><dt>Q. 방엔 뭘 붙여 둬요?</dt><dd>소풍이랑 시장 사진 옆에 간식 분담이랑 친구 답장을 둬요. 다음에 같이 갈 빈티지마켓 브이로그도요.</dd></div><div><dt>Q. 친구와는 어떻게 이어져요?</dt><dd>지우랑은 수업 사이에 자주 봐요. ‘별일 없어도 모여’가 제 입버릇이에요.</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-sora-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">소라 인터뷰 뒤집어 보기</span></button>
       </article>
       <article class="pc" id="pc-seoyun" aria-labelledby="pc-seoyun-n">
         <div class="pc-in">
           <figure class="pc-face pc-front person"><img src="assets/tp-seoyun.webp" alt="노란 은행잎이 깔린 나무 아래 앉아 있는 서윤" loading="lazy" width="660" height="880"><figcaption><h4 class="name disp" id="pc-seoyun-n">서윤</h4><div class="role">22 · 미디어학 전공 · 세계관이 확실한 유저</div><q>프로필을 보면 이번 주 내가 보였으면.</q></figcaption></figure>
-          <div class="pc-face pc-back" id="pc-seoyun-b"><p class="pc-bk"><span class="disp">서윤</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>“미디어학 전공이에요. 지금 끌리는 색이랑 소재를 오래 봐요.”</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>“프로필을 보면 이번 주의 내가 보였으면 해서요.”</dd></div><div><dt>Q. 방은 어떻게 써요?</dt><dd>“초록을 모으는 순서예요. 빛, 기록, 그리고 다음 전시.”</dd></div><div><dt>Q. 친구의 어떤 말을 붙였어요?</dt><dd>“예서의 ‘오늘 빛은 조금 흐린 쪽’. 같이 빛 찾으러 나가는 친구라서요.”</dd></div></dl></div>
+          <div class="pc-face pc-back" id="pc-seoyun-b"><p class="pc-bk"><span class="disp">서윤</span> 인터뷰</p><dl class="pc-dl"><div><dt>Q. 어떤 사람이에요?</dt><dd>지금 끌리는 색이랑 소재를 오래 보는 편이에요. 전시를 보고, 거리에서 빛을 찍고, 집에선 레코드를 들어요.</dd></div><div><dt>Q. 왜 Ditto를 써요?</dt><dd>프로필을 열면 이번 주의 제가 보였으면 해서요. 이번 주는 크림, 올리브, 은색이에요.</dd></div><div><dt>Q. 방엔 뭘 붙여 둬요?</dt><dd>전시, 레코드, 산책 세 장면의 색을 맞춰요. 팔레트를 바꿀 땐 사진이랑 음악도 같이 바꿔요.</dd></div><div><dt>Q. 친구와는 어떻게 이어져요?</dt><dd>예서랑은 사진 찍으러 같이 나가요. 예서가 해 준 말은 메모로 옆에 적어 둬요.</dd></div></dl></div>
         </div>
         <button type="button" class="pc-flip" aria-pressed="false" aria-controls="pc-seoyun-b" hidden><span class="pc-flip-l"><span class="a">인터뷰 보기</span><span class="b">사진 보기</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17.5 3v3.6h-3.6M6.5 21v-3.6h3.6"/></svg></span><span class="sr">서윤 인터뷰 뒤집어 보기</span></button>
       </article>
@@ -2171,28 +2464,30 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
         </ul>
       </div>
       <div class="cx-stage" id="cxStage">
-        <figure class="cx-fig is-on"><div class="phone shadowed"><div class="ma pa" data-anim="platter" role="img" aria-label="지우의 위젯 열 개가 작게 옹기종기 모였다가, 하나씩 제자리를 찾아 지우의 플래터가 완성돼요. 사진 세 장은 디토할 수 있게 빛나요">
-          <img class="pa-head" src="assets/pa-head.webp" alt="" width="804" height="268">
-<span class="pa-slot" style="left:3.980%;top:15.789%;width:68.408%;height:20.709%;--i:0"></span>
-<span class="pa-slot" style="left:3.980%;top:37.414%;width:33.333%;height:20.709%;--i:1"></span>
-<span class="pa-slot" style="left:74.627%;top:15.789%;width:21.393%;height:9.840%;--i:2"></span>
-<span class="pa-slot" style="left:74.627%;top:26.659%;width:21.393%;height:9.840%;--i:3"></span>
-<span class="pa-slot" style="left:50.995%;top:75.286%;width:45.025%;height:9.840%;--i:4"></span>
-<span class="pa-slot" style="left:39.303%;top:53.661%;width:33.333%;height:20.709%;--i:5"></span>
-<span class="pa-slot" style="left:3.980%;top:80.664%;width:45.025%;height:15.332%;--i:6"></span>
-<span class="pa-slot" style="left:50.995%;top:86.156%;width:45.025%;height:13.844%;--i:7"></span>
-<span class="pa-slot" style="left:39.303%;top:37.414%;width:45.025%;height:15.332%;--i:8"></span>
-<span class="pa-slot" style="left:3.980%;top:59.039%;width:33.333%;height:20.709%;--i:9"></span>
-<span class="pa-t pa-cake" style="left:3.980%;top:15.789%;width:68.408%;height:20.709%;--i:0;--hx:15.82;--hy:35.16;--hr:4;--sx:37.82;--sy:-0.84;--sr:10"><img src="assets/pa-cake.webp" alt="" width="550" height="362" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-dance" style="left:3.980%;top:37.414%;width:33.333%;height:20.709%;--i:1;--hx:12.35;--hy:2.14;--hr:-6;--sx:-8.65;--sy:-43.86;--sr:-14"><img src="assets/pa-dance.webp" alt="" width="268" height="362" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-day" style="left:74.627%;top:15.789%;width:21.393%;height:9.840%;--i:2;--hx:-21.32;--hy:64.98;--hr:-5;--sx:-55.32;--sy:46.98;--sr:9"><img src="assets/pa-day.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-status" style="left:74.627%;top:26.659%;width:21.393%;height:9.840%;--i:3;--hx:-41.32;--hy:47.34;--hr:8;--sx:0.68;--sy:35.34;--sr:-12"><img src="assets/pa-status.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-sora" style="left:50.995%;top:75.286%;width:45.025%;height:9.840%;--i:4;--hx:-11.51;--hy:-48.38;--hr:-4;--sx:-3.51;--sy:-24.38;--sr:-9"><img src="assets/pa-sora.webp" alt="" width="362" height="172" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-flash" style="left:39.303%;top:53.661%;width:33.333%;height:20.709%;--i:5;--hx:-19.97;--hy:-11.18;--hr:3;--sx:-39.97;--sy:0.82;--sr:7"><img src="assets/pa-flash.webp" alt="" width="268" height="362" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-video" style="left:3.980%;top:80.664%;width:45.025%;height:15.332%;--i:6;--hx:25.51;--hy:-54.04;--hr:6;--sx:13.51;--sy:-10.04;--sr:14"><img src="assets/pa-video.webp" alt="" width="362" height="268" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-guest" style="left:50.995%;top:86.156%;width:45.025%;height:13.844%;--i:7;--hx:-45.51;--hy:-60.36;--hr:-8;--sx:14.49;--sy:-16.36;--sr:12"><img src="assets/pa-guest.webp" alt="" width="362" height="242" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-music" style="left:39.303%;top:37.414%;width:45.025%;height:15.332%;--i:8;--hx:-12.82;--hy:11.99;--hr:-3;--sx:-1.82;--sy:21.99;--sr:8"><img src="assets/pa-music.webp" alt="" width="362" height="268" loading="lazy" decoding="async"></span>
-<span class="pa-t pa-flowers" style="left:3.980%;top:59.039%;width:33.333%;height:20.709%;--i:9;--hx:50.35;--hy:-8.87;--hr:5;--sx:1.35;--sy:45.13;--sr:-10"><img src="assets/pa-flowers.webp" alt="" width="268" height="362" loading="lazy" decoding="async"></span>
+        <figure class="cx-fig is-on"><div class="phone shadowed"><div class="ma pa" data-anim="platter" role="img" aria-label="지우의 위젯 열한 개가 작게 옹기종기 모였다가, 하나씩 제자리를 찾아 지우의 플래터가 완성돼요. ALLDAY PROJECT ‘CRASH’ 음악과 쇼케이스 D−16도 붙어 있어요">
+          <img class="pa-head" src="assets/pa-head.webp" alt="" width="804" height="208">
+<span class="pa-slot" style="left:4.229%;top:13.043%;width:68.159%;height:20.595%;--i:0"></span>
+<span class="pa-slot" style="left:4.229%;top:34.554%;width:33.085%;height:20.595%;--i:1"></span>
+<span class="pa-slot" style="left:74.378%;top:13.043%;width:21.393%;height:9.840%;--i:2"></span>
+<span class="pa-slot" style="left:74.378%;top:23.799%;width:21.393%;height:9.840%;--i:3"></span>
+<span class="pa-slot" style="left:50.995%;top:72.140%;width:44.776%;height:9.840%;--i:4"></span>
+<span class="pa-slot" style="left:39.303%;top:50.686%;width:33.085%;height:20.595%;--i:5"></span>
+<span class="pa-slot" style="left:4.229%;top:77.517%;width:44.776%;height:15.217%;--i:6"></span>
+<span class="pa-slot" style="left:50.995%;top:82.895%;width:44.776%;height:15.217%;--i:7"></span>
+<span class="pa-slot" style="left:39.303%;top:34.554%;width:44.776%;height:15.217%;--i:8"></span>
+<span class="pa-slot" style="left:4.229%;top:56.064%;width:33.085%;height:20.595%;--i:9"></span>
+<span class="pa-slot" style="left:74.378%;top:50.686%;width:21.393%;height:9.840%;--i:10"></span>
+<span class="pa-t pa-cake" style="left:4.229%;top:13.043%;width:68.159%;height:20.595%;--i:0;--hx:15.69;--hy:41.25;--hr:4;--sx:37.69;--sy:5.25;--sr:10"><img src="assets/pa-cake.webp" alt="" width="548" height="360" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-dance" style="left:4.229%;top:34.554%;width:33.085%;height:20.595%;--i:1;--hx:12.23;--hy:8.49;--hr:-6;--sx:-8.77;--sy:-37.51;--sr:-14"><img src="assets/pa-dance.webp" alt="" width="266" height="360" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-day" style="left:74.378%;top:13.043%;width:21.393%;height:9.840%;--i:2;--hx:-21.07;--hy:70.95;--hr:-5;--sx:-55.07;--sy:52.95;--sr:9"><img src="assets/pa-day.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-status" style="left:74.378%;top:23.799%;width:21.393%;height:9.840%;--i:3;--hx:-41.07;--hy:53.56;--hr:8;--sx:0.93;--sy:41.56;--sr:-12"><img src="assets/pa-status.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-sora" style="left:50.995%;top:72.140%;width:44.776%;height:9.840%;--i:4;--hx:-11.38;--hy:-41.54;--hr:-4;--sx:-3.38;--sy:-17.54;--sr:-9"><img src="assets/pa-sora.webp" alt="" width="360" height="172" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-flash" style="left:39.303%;top:50.686%;width:33.085%;height:20.595%;--i:5;--hx:-19.85;--hy:-4.59;--hr:3;--sx:-39.85;--sy:7.41;--sr:7"><img src="assets/pa-flash.webp" alt="" width="266" height="360" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-video" style="left:4.229%;top:77.517%;width:44.776%;height:15.217%;--i:6;--hx:25.38;--hy:-47.07;--hr:6;--sx:13.38;--sy:-3.07;--sr:14"><img src="assets/pa-video.webp" alt="" width="360" height="266" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-guest" style="left:50.995%;top:82.895%;width:44.776%;height:15.217%;--i:7;--hx:-45.38;--hy:-54.77;--hr:-8;--sx:14.62;--sy:-10.77;--sr:12"><img src="assets/pa-guest.webp" alt="" width="360" height="266" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-music" style="left:39.303%;top:34.554%;width:44.776%;height:15.217%;--i:8;--hx:-12.69;--hy:18.33;--hr:-3;--sx:-1.69;--sy:28.33;--sr:8"><img src="assets/pa-music.webp" alt="" width="360" height="266" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-flowers" style="left:4.229%;top:56.064%;width:33.085%;height:20.595%;--i:9;--hx:50.23;--hy:-2.28;--hr:5;--sx:1.23;--sy:51.72;--sr:-10"><img src="assets/pa-flowers.webp" alt="" width="266" height="360" loading="lazy" decoding="async"></span>
+<span class="pa-t pa-dday" style="left:74.378%;top:50.686%;width:21.393%;height:9.840%;--i:10;--hx:-17.07;--hy:-0.90;--hr:7;--sx:-1.07;--sy:-46.90;--sr:11"><img src="assets/pa-dday.webp" alt="" width="172" height="172" loading="lazy" decoding="async"></span>
           <span class="pa-chip"><b>+</b>위젯 추가하기</span>
         </div></div></figure>
         <figure class="cx-fig"><div class="phone shadowed"><div class="ma dt" data-anim="ditto" role="img" aria-label="지우가 소라의 플래터에서 둘이 함께 간 피크닉 사진 ‘🧺 간식 부자’가 빛나는 걸 보고 꾹 눌러요. 라이프에 두기로 하고 디토 버튼을 3초 누르면 보랏빛이 차오르고, 디토 완료 화면이 떠요">
@@ -2237,7 +2532,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
           <div class="fq-spread"><p class="fq-ph">🩰 한 번 더<small>2시간 전</small></p><div class="fq-chain"><span><img class="ma-av" src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy">지우</span><span class="fq-pw"><img src="assets/pa-dance.webp" alt="" width="268" height="362" loading="lazy"></span><span><i class="fq-far"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg></i>그 너머 +1</span></div></div>
           <div class="fq-tabbar"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z"/></svg>홈</span><span class="on"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>Ditto!</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg>친구</span></div>
           <span class="ma-dim"></span>
-          <div class="ma-sheet fr-sheet"><span class="ma-grab"></span><p class="fr-t">친구 신청</p><img class="ma-av sq" src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><p class="fr-nm">하은</p><span class="ma-field fr-letter"><span class="ph">편지를 쓰면 수락할 확률이 높아져요.</span><span class="tx" data-t="창가 사진 보고 반했어 🫶">창가 사진 보고 반했어 🫶</span></span><p class="fr-pair">지우 💌 하은</p><span class="ma-field fr-nick"><span class="ph">애칭 정하기</span><span class="tx" data-t="창가 친구">창가 친구</span></span><p class="fr-note">‘수락’을 하면 해당 친구와 있는 글을 공유할 수 있어요.</p><span class="ma-btn">친구 신청하기</span><span class="ma-link">다음에 할게요</span></div>
+          <div class="ma-sheet fr-sheet"><span class="ma-grab"></span><p class="fr-t">친구 신청</p><img class="ma-av sq" src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><p class="fr-nm">하은</p><span class="ma-field fr-letter"><span class="ph">편지를 쓰면 수락할 확률이 높아져요.</span><span class="tx" data-t="창가 사진 보고 반했어 🫶" data-max="18">창가 사진 보고 반했어 🫶</span><small class="fr-cnt">14/18</small></span><p class="fr-lbl">지우 👉 하은</p><span class="ma-field fr-nick"><span class="ph">애칭 정하기</span><span class="tx" data-t="창가 친구" data-max="10">창가 친구</span><small class="fr-cnt">5/10</small></span><p class="fr-lbl">하은 👉 지우</p><span class="ma-field fr-nick"><span class="ph">애칭 정하기</span><span class="tx" data-t="연습실 지킴이" data-max="10">연습실 지킴이</span><small class="fr-cnt">7/10</small></span><p class="fr-note">‘수락’을 하면 해당 친구와 모든 글을 공유할 수 있어요.</p><span class="ma-btn">친구 신청하기</span></div>
           <span class="ma-toast">하은님에게 친구 신청을 보냈어요 💌</span>
           <span class="ma-finger"></span>
         </div></div></figure>
@@ -2496,7 +2791,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
         <p class="f3-m">하은님과 주고받은 디토가 충분히 무르익었어요.</p>
         <span class="ma-btn">친구 신청</span>
       </div></div><span class="fs-n">03</span><h3>세 번 쌓이면 열려요</h3><p>디토가 세 번 쌓이면 ‘친구 신청이 열렸어요’. 라이브 주파수의 파형 자리에 친구 신청 버튼이 생겨요.</p></li>
-      <li class="fs rv"><div class="fs-m"><div class="mui fs4 fr-sheet" role="img" aria-label="친구 신청 시트. 하은에게 보내는 편지 ‘창가 사진 보고 반했어 🫶’, 지우 💌 하은 애칭 ‘창가 친구’, 친구 신청하기와 다음에 할게요"><span class="ma-grab"></span><p class="fr-t">친구 신청</p><img class="ma-av sq" src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><p class="fr-nm">하은</p><span class="ma-field fr-letter"><span class="ph">편지를 쓰면 수락할 확률이 높아져요.</span><span class="tx" data-t="창가 사진 보고 반했어 🫶">창가 사진 보고 반했어 🫶</span></span><p class="fr-pair">지우 💌 하은</p><span class="ma-field fr-nick"><span class="ph">애칭 정하기</span><span class="tx" data-t="창가 친구">창가 친구</span></span><p class="fr-note">‘수락’을 하면 해당 친구와 있는 글을 공유할 수 있어요.</p><span class="ma-btn">친구 신청하기</span><span class="ma-link">다음에 할게요</span></div></div><span class="fs-n">04</span><h3>편지·애칭을 붙여 신청</h3><p>짧은 편지(18자)와 상대를 부를 애칭(10자)은 골라서 적어요. 비워 둬도 ‘친구 신청하기’를 누를 수 있어요.</p></li>
+      <li class="fs rv"><div class="fs-m"><div class="mui fs4 fr-sheet" role="img" aria-label="친구 신청 시트. 하은에게 보내는 편지 ‘창가 사진 보고 반했어 🫶’, 지우가 하은을 부를 애칭 ‘창가 친구’, 하은이 지우를 부를 애칭 ‘연습실 지킴이’, 친구 신청하기 버튼"><span class="ma-grab"></span><p class="fr-t">친구 신청</p><img class="ma-av sq" src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><p class="fr-nm">하은</p><span class="ma-field fr-letter"><span class="ph">편지를 쓰면 수락할 확률이 높아져요.</span><span class="tx" data-t="창가 사진 보고 반했어 🫶" data-max="18">창가 사진 보고 반했어 🫶</span><small class="fr-cnt">14/18</small></span><p class="fr-lbl">지우 👉 하은</p><span class="ma-field fr-nick"><span class="ph">애칭 정하기</span><span class="tx" data-t="창가 친구" data-max="10">창가 친구</span><small class="fr-cnt">5/10</small></span><p class="fr-lbl">하은 👉 지우</p><span class="ma-field fr-nick"><span class="ph">애칭 정하기</span><span class="tx" data-t="연습실 지킴이" data-max="10">연습실 지킴이</span><small class="fr-cnt">7/10</small></span><p class="fr-note">‘수락’을 하면 해당 친구와 모든 글을 공유할 수 있어요.</p><span class="ma-btn">친구 신청하기</span></div></div><span class="fs-n">04</span><h3>편지·애칭을 붙여 신청</h3><p>짧은 편지(18자)와 서로를 부를 애칭(각 10자)은 골라서 적어요. 비워 둬도 ‘친구 신청하기’를 누를 수 있어요.</p></li>
       <li class="fs rv"><div class="fs-m"><div class="mui fs5" role="img" aria-label="하은이 받은 친구 요청 시트. 지우의 편지 말풍선, 지우가 정한 애칭 창가 친구, 거절과 디또 버튼">
         <span class="ma-grab"></span>
         <p class="fr-t">친구 요청</p>
@@ -2527,6 +2822,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb8" aria-expanded="true" aria-controls="qa8"><span class="qn">Q8</span><span class="qt">초대장을 뽑으면 뭐가 남아요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa8" role="region" aria-labelledby="qb8"><p>좌석 번호와 초대 코드가 발급되고, 고른 아이디가 출시 때까지 예약돼요. 이메일은 출시 초대 메일을 보내는 데만 쓰고, 출시 후 3개월이 지나면 지워요.</p></div></div>
       <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb9" aria-expanded="true" aria-controls="qa9"><span class="qn">Q9</span><span class="qt">스티커 보드는 누가 고칠 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa9" role="region" aria-labelledby="qb9"><p>붙인 사람만요. 붙였던 기기와 브라우저에서 내 스티커를 누르면 옮기고, 돌리고, 크기를 바꾸거나 떼어 버릴 수 있어요. 다른 사람의 스티커는 구경만 할 수 있어요.</p></div></div>
     </div>
+    <p class="qa-more"><span>더 궁금한 게 있나요? <a href="mailto:support@ditto.place">support@ditto.place</a>로 보내 주세요.</span><a class="qa-cta" href="#tm">초대장 먼저 받아 두기 <span aria-hidden="true">→</span></a></p>
   </div>
 </section>
 
@@ -2951,17 +3247,17 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
         const f = ma.querySelector('.ma-finger'), req = ma.querySelector('.c1 .fq-go'), w1 = ma.querySelector('.dmw.w1'), w2 = ma.querySelector('.dmw.w2');
         const sheet = ma.querySelector('.fr-sheet'), sbtn = sheet.querySelector('.ma-btn'), txs = [...sheet.querySelectorAll('.tx')];
         const at = (el, dx, dy) => { const a = el.getBoundingClientRect(), b = ma.getBoundingClientRect(), k = ma.offsetWidth / b.width; f.style.left = ((a.left - b.left) * k + a.width * k * (dx ?? .5)) + 'px'; f.style.top = ((a.top - b.top) * k + a.height * k * (dy ?? .5)) + 'px'; };
-        const type = async (el) => { const full = [...(window.Intl && Intl.Segmenter ? [...new Intl.Segmenter().segment(el.dataset.t)].map(x => x.segment) : el.dataset.t)]; el.textContent = ''; for (let k = 1; k <= full.length; k++){ if (!alive()) return; el.textContent = full.slice(0, k).join(''); await sleep(85); } };
+        const type = async (el) => { const full = [...(window.Intl && Intl.Segmenter ? [...new Intl.Segmenter().segment(el.dataset.t)].map(x => x.segment) : el.dataset.t)]; const cnt = el.parentElement.querySelector('.fr-cnt'), mx = el.dataset.max; el.textContent = ''; if (cnt) cnt.textContent = '0/' + mx; for (let k = 1; k <= full.length; k++){ if (!alive()) return; el.textContent = full.slice(0, k).join(''); if (cnt) cnt.textContent = k + '/' + mx; await sleep(85); } };
         ma.classList.remove('gate', 'sent', 'sheet', 'toast', 'n3', 'static'); f.classList.remove('on', 'press'); sbtn.classList.remove('press');
-        txs.forEach(x => x.textContent = ''); DMW.set(w1, .67); DMW.set(w2, .67);
+        txs.forEach(x => { x.textContent = ''; const c = x.parentElement.querySelector('.fr-cnt'); if (c) c.textContent = '0/' + x.dataset.max; }); DMW.set(w1, .67); DMW.set(w2, .67);
         await sleep(1800); if (!alive()) return;
         ma.classList.add('n3'); DMW.set(w1, 1); DMW.set(w2, 1);
         await sleep(1600); if (!alive()) return; ma.classList.add('gate');
         await sleep(700); if (!alive()) return; at(req, .6, 1.8); f.classList.add('on'); await sleep(50); at(req, .55, .55);
         await sleep(700); if (!alive()) return; f.classList.add('press');
         await sleep(260); f.classList.remove('press', 'on'); ma.classList.add('sheet');
-        await sleep(800); if (!alive()) return; await type(txs[0]);
-        await sleep(300); if (!alive()) return; await type(txs[1]);
+        await sleep(800); if (!alive()) return;
+        for (const x of txs) { await type(x); if (!alive()) return; await sleep(260); }
         await sleep(500); if (!alive()) return; at(sbtn, .6, 1.5); f.classList.add('on'); await sleep(50); at(sbtn, .5, .5);
         await sleep(700); if (!alive()) return; f.classList.add('press'); sbtn.classList.add('press');
         await sleep(240); f.classList.remove('press', 'on'); sbtn.classList.remove('press'); ma.classList.remove('sheet'); ma.classList.add('sent', 'toast');
@@ -3367,6 +3663,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       }).catch(e => { err.textContent = ERR[e.message] || '지금은 발급할 수 없어요. 잠시 뒤 다시 해 주세요.'; btn.disabled = false; btn.textContent = '초대장 받기'; if (e.message === 'sold out') stats(); });
     });
     $('tcCopy').addEventListener('click', () => { const l = 'https://' + $('tcLink').textContent; (navigator.clipboard ? navigator.clipboard.writeText(l) : Promise.reject()).then(() => { $('tcCopy').textContent = '복사했어요'; setTimeout(() => $('tcCopy').textContent = '링크 복사', 1600); }).catch(() => prompt('초대장 링크', l)); });
+    window.__dittoTicket = (t, w, h) => ticketSVG(t, w, h); window.__dittoPalettes = Object.keys(PAL);
     function ticketSVG(t, W, H2){
       W = W || 1200; H2 = H2 || 760; const gw = Math.round(W * .517), sx = W / 1200, esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
       const ff = "Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif", x0 = gw + 56 * sx, f = n => (n * sx).toFixed(1);
@@ -3827,6 +4124,58 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
         $('sbText').value = ''; $('sbCap').value = ''; $('sbLen').textContent = '0/40'; photo = null; fold(false);
       }).catch(e => { err.textContent = ERR[e.message] || '지금은 붙일 수 없어요. 잠시 뒤 다시 해 주세요.'; }).finally(() => { b.disabled = false; });
     });
+  })();
+
+  /* ---- Hero B (collage): opt-in with ?hero=collage while it's being reviewed ---- */
+  (function(){
+    const hc = document.getElementById('topc'); if (!hc) return;
+    if (new URLSearchParams(location.search).get('hero') !== 'collage') { hc.remove(); return; }
+    const old = document.getElementById('top'); document.documentElement.classList.add('hero-collage'); hc.hidden = false;
+    if (old) old.id = 'top-classic'; hc.id = 'top';
+    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=DotGothic16&family=Black+Han+Sans&family=Gaegu:wght@700&display=swap'; document.head.appendChild(l);
+    // a real invite ticket, drawn fresh on every visit: random friend, palette, seat and code
+    const tkImg = document.getElementById('hcTicket');
+    if (tkImg && window.__dittoTicket) {
+      const who = [['소라', 'soramaybe', '사진 위젯 제일 기대'], ['재민', 'jaeminarchive', '출시하면 바로 갈게!'], ['나리', 'nariday', '우리 반 다 데려갈게'], ['준', 'junishere', '주파수 맞추러 갈게요'], ['예서', 'yeseofilm', null], ['도현', 'dohyunlinks', '첫 플래터 벌써 구상함']];
+      const pals = window.__dittoPalettes || ['purple-pink'];
+      const w = who[Math.floor(Math.random() * who.length)], AB = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      const code = Array.from({ length: 6 }, () => AB[Math.floor(Math.random() * AB.length)]).join('');
+      const t = { name: w[0], nickname: w[1], note: w[2], palette: pals[Math.floor(Math.random() * pals.length)], no: 2 + Math.floor(Math.random() * 240), code };
+      try { tkImg.innerHTML = window.__dittoTicket(t, 1200, 760).replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" '); const sv = tkImg.firstElementChild; if (sv) { sv.removeAttribute('width'); sv.removeAttribute('height'); sv.setAttribute('viewBox', '0 0 1200 760'); } } catch (_) {}
+    }
+    // local demo only (?demo=1): swap 소라's street photo for a GIF kept in the git-excluded _local/ folder
+    if (new URLSearchParams(location.search).get('demo') === '1') { const im = hc.querySelector('.hc-photoR img'); if (im) { im.src = '_local/demo-gif.gif'; im.alt = ''; im.classList.add('hc-demo-gif'); const box = im.parentElement; box.classList.add('hc-gifw'); const tag = document.createElement('span'); tag.className = 'hc-giftag'; tag.textContent = 'GIF'; box.appendChild(tag); } }
+    const parts = [...hc.querySelectorAll('.hcp')];
+    parts.forEach((p, i) => { p.style.setProperty('--i', i); const r = p.getBoundingClientRect(); });
+    // entrance: every piece gathers behind the phone, holds for a beat, then they all burst out at once
+    const phone = hc.querySelector('.hc-phone'), ring = hc.querySelector('.hc-ring');
+    function burst(){
+      if (reduce || !phone.animate) { hc.classList.add('ready', 'landed'); return; }
+      hc.classList.remove('landed'); hc.classList.add('ready', 'bursting');
+      const pc = phone.getBoundingClientRect(), cx = pc.left + pc.width / 2, cy = pc.top + pc.height * .45;
+      const G = 450, HOLD = 200, OUT = 760, T = G + HOLD + OUT;
+      parts.forEach((p, i) => {
+        p.getAnimations().forEach(a => a.cancel());
+        const r = p.getBoundingClientRect(), dx = cx - (r.left + r.width / 2), dy = cy - (r.top + r.height / 2), j = (i % 2 ? 1 : -1) * (6 + (i * 7) % 10);
+        p.animate([
+          { translate: `${dx}px ${dy}px`, scale: .2, rotate: `${j * 2}deg`, opacity: 0, offset: 0, easing: 'cubic-bezier(.3,.7,.4,1)' },
+          { translate: `${dx * .9}px ${dy * .9}px`, scale: .42, rotate: `${j}deg`, opacity: 1, offset: G / T, easing: 'ease-in-out' },
+          { translate: `${dx * .94}px ${dy * .94}px`, scale: .38, rotate: `${-j * .5}deg`, opacity: 1, offset: (G + HOLD) / T, easing: 'cubic-bezier(.16,1.4,.3,1)' },
+          { translate: '0px 0px', scale: 1, rotate: '0deg', opacity: 1, offset: 1 }
+        ], { duration: T, delay: (i % 3) * 18, fill: 'backwards' });
+      });
+      phone.animate([{ scale: 1 }, { scale: .965, offset: (G + HOLD * .6) / T }, { scale: 1.035, offset: (G + HOLD + 120) / T }, { scale: 1 }], { duration: T, easing: 'ease-out' });
+      if (ring) ring.animate([{ opacity: 0, scale: .3 }, { opacity: 0, scale: .3, offset: (G + HOLD - 20) / T }, { opacity: .85, scale: .5, offset: (G + HOLD + 20) / T }, { opacity: 0, scale: 2.6 }], { duration: T, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      setTimeout(() => { hc.classList.remove('bursting'); hc.classList.add('landed'); }, T + 80);
+    }
+    requestAnimationFrame(() => requestAnimationFrame(burst));
+    // press the D! wordmark to make it happen again
+    const wm = hc.querySelector('.hc-wm'); if (wm) { wm.style.cursor = 'pointer'; wm.addEventListener('click', burst); }
+    if (reduce || !matchMedia('(pointer: fine)').matches) return;
+    // depth parallax: each piece drifts by its own depth as the pointer moves
+    let raf = 0, mx = 0, my = 0;
+    hc.addEventListener('pointermove', e => { const b = hc.getBoundingClientRect(); mx = (e.clientX - b.left) / b.width - .5; my = (e.clientY - b.top) / b.height - .5; if (!raf) raf = requestAnimationFrame(() => { raf = 0; parts.forEach(p => { const d = parseFloat(p.dataset.d || .5); p.style.setProperty('--px', (-mx * 40 * d).toFixed(1) + 'px'); p.style.setProperty('--py', (-my * 30 * d).toFixed(1) + 'px'); }); }); });
+    hc.addEventListener('pointerleave', () => parts.forEach(p => { p.style.setProperty('--px', '0px'); p.style.setProperty('--py', '0px'); }));
   })();
 })();
 </script>
