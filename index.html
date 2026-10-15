@@ -48,7 +48,6 @@ p{text-wrap:pretty}
 .wrap{width:100%;max-width:calc(var(--max) + var(--gut)*2);margin:0 auto;padding-inline:var(--gut)}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 :focus-visible{outline:2px solid var(--violet-d);outline-offset:3px;border-radius:6px}
-@media (max-width:640px){.d-only{display:none}}
 /* ---------- type system ---------- */
 .lab{display:inline-flex;align-items:baseline;gap:10px;font-family:var(--round);font-style:italic;font-weight:800;font-size:13px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
 .lab b{font-weight:900;color:var(--violet-d);letter-spacing:0}
@@ -118,19 +117,8 @@ p{text-wrap:pretty}
 .hero{position:relative;isolation:isolate;overflow:hidden;overflow:clip;height:max(100svh,640px);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:calc(var(--gnb) + clamp(20px,5.5svh,64px)) 0 0;text-align:center;
   background:radial-gradient(58% 46% at 12% 6%,rgba(180,108,224,.95),rgba(180,108,224,0) 70%),radial-gradient(52% 44% at 90% 10%,rgba(224,135,230,.95),rgba(224,135,230,0) 70%),radial-gradient(70% 46% at 50% 52%,rgba(247,159,223,.85),rgba(247,159,223,0) 72%),linear-gradient(180deg,#C07FE6 0%,#EE9FE3 40%,#FBD3EE 70%,#FFFFFF 96%)}
 .hero .blob{position:absolute;z-index:-1;border-radius:50%;filter:blur(50px);pointer-events:none;will-change:transform}
-.hero .b1{width:46vw;height:46vw;left:-10vw;top:14%;background:radial-gradient(closest-side,rgba(226,220,255,.85),rgba(226,220,255,0))}
-.hero .b2{width:40vw;height:40vw;right:-8vw;top:20%;background:radial-gradient(closest-side,rgba(255,255,255,.75),rgba(255,255,255,0))}
-@media (prefers-reduced-motion:no-preference){.hero .b1{animation:fl1 16s ease-in-out infinite alternate}
-.hero .b2{animation:fl2 19s ease-in-out infinite alternate}}
-@keyframes fl1{to{transform:translate(18vw,8vh) scale(1.15)}}
-@keyframes fl2{to{transform:translate(-16vw,-6vh) scale(.9)}}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.2;mix-blend-mode:soft-light;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.hero-ui{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;width:100%;padding-inline:var(--gut)}
-.hero-eyebrow{margin:0;font-family:var(--round);font-style:italic;font-weight:900;font-size:clamp(16px,1.5vw,20px);line-height:1.3;color:var(--violet-d);min-height:1.3em}
-.hero-eyebrow .cur{display:inline-block;width:.5ch}
-@media (prefers-reduced-motion:no-preference){.hero-eyebrow .cur{animation:blink 1s steps(1) infinite}}
-@keyframes blink{50%{opacity:0}}
 .hero h1{margin-top:10px;font-size:clamp(30px,4.2vw,60px);font-weight:700;letter-spacing:-.035em;line-height:1.24;color:var(--ink)}
 .hero .lead{margin:14px auto 0;max-width:36em;font-size:clamp(15px,1.2vw,18px);color:#3E3446}
 .hero .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:clamp(20px,3svh,30px)}
@@ -600,50 +588,17 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 /* ---------- hero: copy left, a real platter on an iPhone 17 right ---------- */
 .hero{--nav-w:min(calc(100% - 32px),920px);--hv:clamp(28px,5.5svh,64px);height:auto;min-height:max(100svh,700px);padding:calc(12px + 56px + var(--hv)) 0 var(--hv);text-align:left;justify-content:center}
 /* the hero lives inside the floating nav's box: copy starts at the logo, the phone ends at the CTA */
-.hero-in{width:var(--nav-w);margin:0 auto;padding:0 8px 0 24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,4vw,56px);align-items:center}
-.hero-ui{align-items:flex-start;padding-inline:0}
 .hero h1{margin-top:12px;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(4px,.8vw,12px)}
-.hero .h1-k{font-size:clamp(32px,4.4vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1.12}
-.hero .h1-wm{display:block;height:clamp(64px,7.4vw,112px);width:auto;margin-left:-.02em;filter:drop-shadow(0 14px 26px rgba(90,20,120,.22))}
 .hero .lead{margin:clamp(16px,2svh,24px) 0 0;max-width:30em}
 .hero .row{justify-content:flex-start}
 .hero-dev{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px}
-.hero-phone{--pw:clamp(240px,22vw,300px)}
-.hero-phone .scr{position:relative;width:100%;height:100%;border-radius:calc(var(--pw)*.132);overflow:hidden}
-.hero-phone .scr > img{display:block}
-.hero-phone::after{z-index:2}
-.hs{position:absolute;z-index:3;padding:0;border:0;background:transparent;border-radius:calc(var(--pw)*.045);cursor:zoom-in;-webkit-tap-highlight-color:transparent;transition:box-shadow .3s ease,background-color .3s ease}
-.hs:hover{background:rgba(255,255,255,.12);box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px rgba(170,74,244,.75)}
-.hs:focus-visible{outline:none;box-shadow:0 0 0 2px #FFFFFF,0 0 0 5px var(--violet-d)}
-.hs-hint::after{content:"";position:absolute;inset:-3px;border-radius:inherit;box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 0 5px rgba(170,74,244,.6);opacity:0;pointer-events:none}
-@media (prefers-reduced-motion:no-preference){.hs-hint::after{animation:hsPing 2.6s ease-out 1.4s infinite}}
-@keyframes hsPing{0%{opacity:0;transform:scale(1.06)}25%{opacity:1;transform:none}70%,100%{opacity:0;transform:none}}
-.hero-cap{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 4px 14px -8px rgba(40,10,60,.4);font-size:13px;font-weight:600;color:var(--violet-d);text-align:center}
-.hc-dot{width:7px;height:7px;border-radius:50%;background:#AA4AF4;box-shadow:0 0 0 3px rgba(170,74,244,.22)}
 @media (max-width:860px){.hero{--nav-w:calc(100% - 24px);--hv:28px;padding-top:calc(10px + 50px + var(--hv));text-align:center}
-.hero-in{grid-template-columns:1fr;gap:28px;padding:0 4px}
-.hero-ui{align-items:center}
 .hero h1{align-items:center}
-.hero .h1-wm{margin-left:0}
 .hero .lead{margin-inline:auto}
-.hero .row{justify-content:center}
-.hero-phone{--pw:min(272px,calc(100vw - 96px))}}
+.hero .row{justify-content:center}}
 /* widget popover / lightbox (native [popover]; .is-open = fallback) */
-.wpop{position:fixed;inset:0;margin:auto;width:min(440px,calc(100vw - 32px));max-height:calc(100svh - 32px);height:fit-content;overflow:auto;padding:22px 22px 24px;border:0;border-radius:28px;background:#FFFFFF;color:var(--ink);text-align:left;box-shadow:0 40px 90px -30px rgba(40,10,60,.55),0 0 0 1px rgba(22,18,27,.06)}
-.wpop:not(:popover-open):not(.is-open){display:none}
-.wpop.is-open{display:block;z-index:90}
-.wpop::backdrop{background:rgba(30,14,40,.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-@media (prefers-reduced-motion:no-preference){.wpop:popover-open{animation:wpIn .42s var(--ease) both}
-.wpop:popover-open .wpop-m img{animation:wpImg .6s cubic-bezier(.3,1.5,.5,1) both .05s}}
-@keyframes wpIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
-@keyframes wpImg{from{transform:scale(.72) rotate(-2deg)}to{transform:none}}
 .wpop-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border:0;border-radius:50%;background:var(--bg-2);color:var(--ink);font-size:15px;cursor:pointer}
 .wpop-x:hover{background:var(--bg-3)}
-.wpop-m{display:grid;place-items:center;min-height:200px;padding:30px 10px;border-radius:20px;background:radial-gradient(80% 80% at 50% 0%,#FBEFFA,#F3F0F7)}
-.wpop-m img{width:min(calc(var(--w) * 1.55px),100%);height:auto;border-radius:calc(var(--rr,14) * 1.55px);box-shadow:0 26px 50px -24px rgba(70,20,100,.5)}
-.wpop-k{margin-top:18px;font:italic 900 13px/1.2 var(--round);letter-spacing:.04em;color:var(--violet-d)}
-.wpop-t{margin-top:6px;font-size:21px;font-weight:700;letter-spacing:-.03em;line-height:1.4}
-.wpop-d{margin-top:6px;font-size:15px;line-height:1.65;color:var(--ink-2)}
 /* ---------- 01 me too: [wordmark] = 나도. ---------- */
 .verbs .me-too{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin-top:14px;background:none;color:var(--ink);font-family:var(--kr);font-style:normal;font-weight:800;font-size:clamp(32px,3.6vw,52px);letter-spacing:-.04em;line-height:1.1;padding:0}
 .mt-wm{height:1.5em;width:auto}
@@ -1182,22 +1137,8 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 /* film grain over the gradient fields */
 .grain{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.22;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px}
 .hero{overflow:clip}
-.hero-in{position:relative;z-index:1}
 /* hero: real widgets drifting around the phone */
 .hero-dev{position:relative;--mx:0;--my:0}
-.hf{position:absolute;z-index:3;display:block;border-radius:16px;pointer-events:none;box-shadow:0 22px 40px -20px rgba(70,20,110,.55),0 0 0 1px rgba(255,255,255,.5);transition:translate .9s cubic-bezier(.2,.7,.2,1)}
-.hf img{display:block;width:100%;height:auto;border-radius:inherit}
-.hf1{width:150px;left:-112px;top:21%;rotate:-7deg;translate:calc(var(--mx) * -26px) calc(var(--my) * -18px)}
-.hf2{width:80px;right:-58px;top:4%;rotate:8deg;border-radius:14px;translate:calc(var(--mx) * 30px) calc(var(--my) * 22px)}
-.hf3{width:120px;right:-78px;bottom:12%;rotate:5deg;translate:calc(var(--mx) * 22px) calc(var(--my) * -24px)}
-@media (prefers-reduced-motion:no-preference){.hf img{animation:hfBob 6s ease-in-out infinite}
-.hf2 img{animation-duration:7.2s;animation-delay:-2s}
-.hf3 img{animation-duration:6.6s;animation-delay:-4s}}
-@keyframes hfBob{50%{transform:translateY(-10px)}}
-@media (max-width:1100px){.hf1{left:-56px;width:124px}
-.hf2{right:-22px;top:2%;width:68px}
-.hf3{right:-30px;width:104px}}
-@media (max-width:860px){.hf{display:none}}
 /* reveals: a little focus pull on the way in */
 @keyframes rv{from{opacity:0;transform:translateY(28px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
 /* 5.1 catalog: one board, group spotlight */
@@ -1246,15 +1187,11 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .rm-pf-tags .tg-dt{color:var(--violet-d);background:color-mix(in srgb,var(--violet-d) 10%,#FFFFFF)}
 /* widget crops carry their own rounded alpha — containers follow the alpha (no square backgrounds, rings or box shadows behind corners) */
 .wcat .wc-art{border-radius:18%;background:transparent}
-.hf{box-shadow:none;border-radius:0;filter:drop-shadow(0 18px 22px rgba(70,20,110,.32))}
-.hf img{border-radius:0}
 .bs-card.bs-ph{border-radius:0;box-shadow:none;filter:drop-shadow(0 18px 24px rgba(70,20,100,.4))}
 .tw-ph,.phone .ma .dt-thumb.tw-ph,.phone .ma .dt-big .tw-ph,.mui.dp-done .dt-big .tw-ph{border-radius:0;box-shadow:none;filter:drop-shadow(0 12px 16px rgba(46,30,70,.35))}
 .dw-card > img{border-radius:0;box-shadow:none;filter:drop-shadow(0 18px 24px rgba(60,20,90,.4))}
 .dp-glow img{border-radius:0;filter:drop-shadow(0 0 3px rgba(255,255,255,.95)) drop-shadow(0 0 16px rgba(170,74,244,.6)) drop-shadow(0 0 30px rgba(250,151,226,.35))}
 .dp-glow.beam::before{content:none}
-.wpop-m img{border-radius:0!important}
-.wpop-m img{box-shadow:none;filter:drop-shadow(0 22px 26px rgba(70,20,100,.35))}
 /* close: smaller "통하면," next to the full-size D! mark */
 .close h2.close-h{display:flex;align-items:center;justify-content:center;gap:.12em}
 .ch-t{font-size:.62em;letter-spacing:-.045em}
@@ -1855,8 +1792,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .qgrid.is-js .qcard[data-open="false"] .qa-a{display:none}
 .qgrid.is-js .qcard[data-open="false"] .qbtn{padding-bottom:22px}
 /* ================= Hero B · collage (review via ?hero=collage) ================= */
-html.hero-collage .hero{display:none}
-html.hero-collage .hc{display:block}
 .hc{--hcb:#6B2BF0;position:relative;overflow:hidden;padding:calc(12px + 56px + clamp(24px,4svh,48px)) 0 clamp(28px,4svh,48px);background:radial-gradient(120% 80% at 50% 0%,#8448FF,transparent 60%),var(--hcb);color:#fff}
 .hc-head{position:relative;z-index:30;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px}
 .hc-k{margin:0;font:700 clamp(15px,1.3vw,18px)/1.4 var(--kr);letter-spacing:-.01em;color:rgba(255,255,255,.86)}
@@ -2149,7 +2084,7 @@ html.hero-collage .hc{display:block}
     </defs>
   </svg>
 
-<section class="hc" id="topc" aria-labelledby="hc-h" hidden>
+<section class="hc" id="top" aria-labelledby="hc-h">
   <div class="hc-head">
     <p class="hc-k">친한 친구와 만들어 가는 우리만의 공간</p>
     <h1 id="hc-h"><img class="hc-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"></h1>
@@ -2177,78 +2112,7 @@ html.hero-collage .hc{display:block}
     <span class="hc-ring" aria-hidden="true"></span><div class="hc-phone"><div class="phone shadowed ip17"><i class="ip17-btn ip17-act" aria-hidden="true"></i><i class="ip17-btn ip17-vu" aria-hidden="true"></i><i class="ip17-btn ip17-vd" aria-hidden="true"></i><i class="ip17-btn ip17-side" aria-hidden="true"></i><i class="ip17-btn ip17-cam" aria-hidden="true"></i><div class="scr"><div class="ip17-sb" aria-hidden="true"><span class="ip17-t">9:41</span><span class="ip17-di"></span><span class="ip17-ic"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.6c2.2 0 4.2.9 5.7 2.3l1.1-1.2A9.6 9.6 0 0 0 8 1 9.6 9.6 0 0 0 1.2 3.7l1.1 1.2A8 8 0 0 1 8 2.6zm0 3.2c1.3 0 2.5.5 3.4 1.3l1.1-1.2A6.5 6.5 0 0 0 8 4.2c-1.7 0-3.3.6-4.5 1.7l1.1 1.2c.9-.8 2.1-1.3 3.4-1.3zm0 3.2c.5 0 .9.2 1.2.5L8 11 6.8 9.5c.3-.3.7-.5 1.2-.5z"/></svg><svg class="ip17-bat" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.6" fill="none" stroke="currentColor" opacity=".4"/><rect x="2.2" y="2.2" width="19.6" height="8.6" rx="2.2"/><path d="M25 4.4v4.2c.8-.3 1.4-1.1 1.4-2.1S25.8 4.7 25 4.4z" opacity=".45"/></svg></span></div><img src="assets/hero-jiu-v2.webp" alt="지우(@jiuallday)의 플래터 화면. 친구들과 모인 ‘🎂 초는 내가’ 사진, 목 20시, 🎀💿 상태, ‘🩰 한 번 더’ 사진, ALLDAY PROJECT ‘CRASH’ 음악, 쇼케이스 D−16, ‘🧺 각자 좋아하는 간식 하나’, ‘GO · 연출 참고’ 영상, 방명록이 붙어 있어요" width="804" height="1748" fetchpriority="high"></div></div></div>
   </div>
   </section>
-<section class="hero" id="top" aria-labelledby="hero-h">
-  <span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span><span class="grain" aria-hidden="true"></span>
-  <div class="hero-in">
-    <div class="hero-ui">
-      <p class="hero-eyebrow" aria-hidden="true"><span id="type">Ditto!</span><span class="cur">_</span></p>
-      <h1 id="hero-h"><span class="h1-k">우리만의 공간</span> <img class="h1-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"></h1>
-      <p class="lead">내 공간을 꾸미고 친구들과 공유하세요.<br class="d-only"> 그리고 친구 것도 같이 가져와서 함께 나눠요.</p>
-      <div class="row"><a class="btn" href="#tm">초대장 받기 <span class="ar" aria-hidden="true">→</span></a><a class="btn line" href="#verbs">둘러보기</a></div>
-    </div>
 
-    <figure class="hero-dev">
-      <span class="hf hf1" aria-hidden="true"><img src="assets/ws-status.webp" alt="" width="543" height="258"></span>
-      <span class="hf hf2" aria-hidden="true"><img src="assets/ws-video.webp" alt="" width="543" height="402"></span>
-      <span class="hf hf3" aria-hidden="true"><img src="assets/ws-music.webp" alt="" width="543" height="402"></span>
-      <div class="phone shadowed hero-phone">
-        <div class="scr">
-          <img src="assets/hero-jiu.webp" alt="지우(@jiuallday)의 플래터 화면. 소라·나리와 촛불 앞에 모인 ‘🎂 초는 내가’ 사진, 🪩 목 20시, 🎀🪩💿 상태, 연습실 ‘🩰 한 번 더’ 사진, BLACKPINK GO 음악, 소라의 말을 적어 둔 ‘🧺 각자 좋아하는 간식 하나’, ‘GO · 연출 참고’ 영상이 붙어 있어요. 사진 세 장이 은은하게 빛나요" width="804" height="1748" fetchpriority="high">
-          <button type="button" class="hs" popovertarget="wp-photo" style="left:3.98%;top:15.789%;width:68.408%;height:20.709%"><span class="sr">이미지 위젯 크게 보기</span></button>
-          <button type="button" class="hs" popovertarget="wp-status" style="left:74.627%;top:26.659%;width:21.393%;height:9.84%"><span class="sr">상태 위젯 크게 보기</span></button>
-          <button type="button" class="hs hs-hint" popovertarget="wp-dance" style="left:3.98%;top:37.414%;width:33.333%;height:20.709%"><span class="sr">이미지 위젯 크게 보기</span></button>
-          <button type="button" class="hs" popovertarget="wp-music" style="left:39.303%;top:37.414%;width:45.025%;height:15.332%"><span class="sr">음악 위젯 크게 보기</span></button>
-          <button type="button" class="hs" popovertarget="wp-text" style="left:50.995%;top:75.286%;width:45.025%;height:9.84%"><span class="sr">텍스트 위젯 크게 보기</span></button>
-          <button type="button" class="hs" popovertarget="wp-video" style="left:3.98%;top:80.664%;width:45.025%;height:15.332%"><span class="sr">영상 위젯 크게 보기</span></button>
-        </div>
-      </div>
-      <figcaption class="hero-cap"><span class="hc-dot" aria-hidden="true"></span>지우의 실제 플래터예요 · 위젯을 눌러 보세요</figcaption>
-    </figure>
-  </div>
-
-  <div class="wpop" id="wp-photo" popover role="dialog" aria-labelledby="wp-photo-t">
-    <button type="button" class="wpop-x" popovertarget="wp-photo" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-photo.webp" alt="촛불 앞에 모인 지우·소라·나리의 ‘🎂 초는 내가’ 사진 위젯" width="720" height="474" loading="lazy" style="--w:275;--rr:14"></div>
-    <p class="wpop-k">이미지 · 지우·소라·나리</p>
-    <h2 class="wpop-t" id="wp-photo-t">🎂 초는 내가.</h2>
-    <p class="wpop-d">생일 케이크 초는 늘 지우 담당이에요. 뒤에서 은은하게 빛나는 건 디토를 열어 둔 사진이라는 표시라, 친구가 꾹 눌러 가져갈 수 있어요.</p>
-  </div>
-  <div class="wpop" id="wp-status" popover role="dialog" aria-labelledby="wp-status-t">
-    <button type="button" class="wpop-x" popovertarget="wp-status" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-status.webp" alt="리본, 미러볼, CD 이모지가 놓인 보라색 상태 위젯" width="258" height="258" loading="lazy" style="--w:86;--rr:12"></div>
-    <p class="wpop-k">상태</p>
-    <h2 class="wpop-t" id="wp-status-t">🎀🪩💿</h2>
-    <p class="wpop-d">이모지 세 개면 돼요. 리본, 미러볼, CD — 말하지 않아도 오늘 지우가 어떤 기분인지 친구들이 알아봐요.</p>
-  </div>
-  <div class="wpop" id="wp-dance" popover role="dialog" aria-labelledby="wp-dance-t">
-    <button type="button" class="wpop-x" popovertarget="wp-dance" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-dance.webp" alt="연습실 거울 앞에서 휴대폰을 든 지우의 ‘🩰 한 번 더’ 사진 위젯" width="402" height="543" loading="lazy" style="--w:134;--rr:12"></div>
-    <p class="wpop-k">이미지 · 디토 열림</p>
-    <h2 class="wpop-t" id="wp-dance-t">🩰 한 번 더.</h2>
-    <p class="wpop-d">연습실엔 늘 마지막까지 남는 지우라서요. 이 사진도 빛나고 있어서 친구가 디토할 수 있어요. 지우가 디토를 열어 둔 사진은 세 장이에요.</p>
-  </div>
-  <div class="wpop" id="wp-music" popover role="dialog" aria-labelledby="wp-music-t">
-    <button type="button" class="wpop-x" popovertarget="wp-music" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-music.webp" alt="BLACKPINK ‘GO’ CD가 놓인 음악 위젯" width="543" height="402" loading="lazy" style="--w:181;--rr:14"></div>
-    <p class="wpop-k">음악</p>
-    <h2 class="wpop-t" id="wp-music-t">GO · BLACKPINK</h2>
-    <p class="wpop-d">지우가 요즘 트는 노래예요. 누르면 재생되고 CD가 돌아요.</p>
-  </div>
-  <div class="wpop" id="wp-text" popover role="dialog" aria-labelledby="wp-text-t">
-    <button type="button" class="wpop-x" popovertarget="wp-text" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-text.webp" alt="‘🧺 각자 좋아하는 간식 하나’ 텍스트 위젯" width="543" height="258" loading="lazy" style="--w:181;--rr:14"></div>
-    <p class="wpop-k">텍스트 · 소라의 말</p>
-    <h2 class="wpop-t" id="wp-text-t">🧺 각자 좋아하는 간식 하나.</h2>
-    <p class="wpop-d">소라가 한 말을 지우가 직접 옮겨 적어 둔 메모예요. 디토로 가져온 게 아니라, 다음 모임의 규칙처럼 붙여 뒀어요.</p>
-  </div>
-  <div class="wpop" id="wp-video" popover role="dialog" aria-labelledby="wp-video-t">
-    <button type="button" class="wpop-x" popovertarget="wp-video" popovertargetaction="hide" aria-label="닫기">✕</button>
-    <div class="wpop-m"><img src="assets/hw-video.webp" alt="‘GO · 연출 참고’ 유튜브 영상 위젯" width="543" height="402" loading="lazy" style="--w:181;--rr:14"></div>
-    <p class="wpop-k">영상</p>
-    <h2 class="wpop-t" id="wp-video-t">🪩 GO · 연출 참고.</h2>
-    <p class="wpop-d">다음 무대 연출을 고를 때 보는 영상이에요. 누르면 플래터 위에서 바로 재생돼요.</p>
-  </div>
-</section>
 
 <section class="verbs" id="verbs" aria-labelledby="verbs-h">
   <div class="verbs-stage">
@@ -4128,10 +3992,7 @@ html.hero-collage .hc{display:block}
 
   /* ---- Hero B (collage): opt-in with ?hero=collage while it's being reviewed ---- */
   (function(){
-    const hc = document.getElementById('topc'); if (!hc) return;
-    if (new URLSearchParams(location.search).get('hero') !== 'collage') { hc.remove(); return; }
-    const old = document.getElementById('top'); document.documentElement.classList.add('hero-collage'); hc.hidden = false;
-    if (old) old.id = 'top-classic'; hc.id = 'top';
+    const hc = document.querySelector('section.hc'); if (!hc) return;
     const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=DotGothic16&family=Black+Han+Sans&family=Gaegu:wght@700&display=swap'; document.head.appendChild(l);
     // a real invite ticket, drawn fresh on every visit: random friend, palette, seat and code
     const tkImg = document.getElementById('hcTicket');
