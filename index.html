@@ -2054,6 +2054,10 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .hc-photoR.hc-gifw img.hc-demo-gif{border-radius:0;object-fit:cover;background:#fff}
 .hc-giftag{position:absolute;left:calc(12px * 200 / 181);bottom:calc(12px * 200 / 181);padding:3px 6px;border-radius:4px;background:#443651;color:#fff;font:700 11px/1.3 var(--kr);letter-spacing:.02em}
 @media (max-width:720px){.hc-photoR.hc-gifw{width:120px;height:120px;top:262px}}
+.hc-nado{width:150px;filter:drop-shadow(0 14px 18px rgba(40,10,90,.3))}
+.hc-nado svg{display:block;width:100%;height:auto;overflow:visible}
+.hc-nado span{display:none}
+@media (max-width:720px){.hc-nado{width:96px}}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -2105,7 +2109,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       <img class="dw2-badge" src="assets/dittobadge-32.svg" alt="" width="32" height="32">
       <figcaption class="dw2-foot"><b>🧺 간식 부자</b><span class="dw2-src"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="eager">@soramaybe</span></figcaption>
     </figure></div>
-    <p class="hcp hc-nado" data-d=".9" style="--r:-8deg" aria-hidden="true"><span>나도!</span></p>
+    <p class="hcp hc-nado" data-d=".9" style="--r:-6deg" aria-hidden="true"><svg viewBox="0 0 156 92"><defs><linearGradient id="ndG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C77DFF"/><stop offset=".55" stop-color="#AA4AF4"/><stop offset="1" stop-color="#7B4FE0"/></linearGradient></defs><path d="M30 6H126a24 24 0 0 1 24 24V44a24 24 0 0 1-24 24H52L30 86L34 68H30A24 24 0 0 1 6 44V30A24 24 0 0 1 30 6Z" fill="url(#ndG)" stroke="#fff" stroke-width="6" stroke-linejoin="round"/><text x="78" y="49" text-anchor="middle" font-family="'Pretendard Variable',Pretendard,sans-serif" font-weight="800" font-size="30" letter-spacing="-.5" fill="#fff">나도!</text></svg></p>
     <p class="hcp hc-pill hc-pillR" data-d=".55" style="--r:0deg" aria-hidden="true">오늘 공강 개꿀</p>
     <div class="hcp hc-heart" data-d=".75" style="--r:14deg" aria-hidden="true"><svg viewBox="0 0 200 180"><path d="M100 170C40 128 6 96 6 58a46 46 0 0 1 94-20 46 46 0 0 1 94 20c0 38-34 70-94 112z" fill="#fff"/></svg><span>IYKYK</span></div>
     <div class="hcp hc-photoR" data-d=".5" style="--r:0deg"><img src="assets/tp-sora.webp" alt="꽃집 앞을 지나는 소라" width="603" height="804" loading="eager"></div>
@@ -4005,7 +4009,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       try { tkImg.innerHTML = window.__dittoTicket(t, 1200, 760).replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" '); const sv = tkImg.firstElementChild; if (sv) { sv.removeAttribute('width'); sv.removeAttribute('height'); sv.setAttribute('viewBox', '0 0 1200 760'); } } catch (_) {}
     }
     // local demo only (?demo=1): swap 소라's street photo for a GIF kept in the git-excluded _local/ folder
-    if (new URLSearchParams(location.search).get('demo') === '1') { const im = hc.querySelector('.hc-photoR img'); if (im) { im.src = '_local/demo-gif.gif'; im.alt = ''; im.classList.add('hc-demo-gif'); const box = im.parentElement; box.classList.add('hc-gifw'); const tag = document.createElement('span'); tag.className = 'hc-giftag'; tag.textContent = 'GIF'; box.appendChild(tag); } }
+    { const im = hc.querySelector('.hc-photoR img'); if (im) { im.src = 'assets/w-gif-chiikawa.gif'; im.alt = ''; im.classList.add('hc-demo-gif'); const box = im.parentElement; box.classList.add('hc-gifw'); const tag = document.createElement('span'); tag.className = 'hc-giftag'; tag.textContent = 'GIF'; box.appendChild(tag); } }
     const parts = [...hc.querySelectorAll('.hcp')];
     parts.forEach((p, i) => { p.style.setProperty('--i', i); const r = p.getBoundingClientRect(); });
     // entrance: every piece gathers behind the phone, holds for a beat, then they all burst out at once
