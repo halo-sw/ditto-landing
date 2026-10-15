@@ -3823,9 +3823,8 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
       const w = $('sbWrap'), x = Math.min(.9, Math.max(.1, (w.scrollLeft + w.clientWidth * (.3 + Math.random() * .4)) / W())), y = .2 + Math.random() * .6, r = Math.round((Math.random() - .5) * 14);
       err.textContent = ''; const b = $('sbPost'); b.disabled = true;
       rpc('post_board_sticker', { p_kind: kind, p_body: body || null, p_color: color, p_photo: kind === 'photo' ? photo : null, p_x: x, p_y: y, p_r: r, p_font: font, p_shape: shape, p_finish: finish, p_edge: kind === 'text' ? edge : 'white' }).then(rows => {
-        const row = rows[0] || rows; if (row.token) { MINE[row.id] = row.token; saveMine(); } add({ id: row.id, z: row.z, kind, body, color, font, shape, finish, edge, scale: 1, photo: kind === 'photo' ? photo : null, x, y, r }, true); count(); setTimeout(() => select(els.get(row.id)), 950);
+        const row = rows[0] || rows; if (row.token) { MINE[row.id] = row.token; saveMine(); } add({ id: row.id, z: row.z, kind, body, color, font, shape, finish, edge, scale: 1, photo: kind === 'photo' ? photo : null, x, y, r }, true); count(); setTimeout(() => { const el = els.get(row.id); if (el) { el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center', inline: 'center' }); select(el); } }, reduce ? 0 : 520);
         $('sbText').value = ''; $('sbCap').value = ''; $('sbLen').textContent = '0/40'; photo = null; fold(false);
-        board.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
       }).catch(e => { err.textContent = ERR[e.message] || '지금은 붙일 수 없어요. 잠시 뒤 다시 해 주세요.'; }).finally(() => { b.disabled = false; });
     });
   })();
