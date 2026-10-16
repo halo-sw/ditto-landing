@@ -9,6 +9,8 @@
 <meta property="og:image" content="https://ditto.place/assets/og/brand-home-v2.jpg">
 <meta property="og:image:width" content="1210">
 <meta property="og:image:height" content="680">
+<meta name="theme-color" content="#7752DA">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:site_name" content="ditto!">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ditto! IYKYK Place">
@@ -2058,6 +2060,15 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .hc-nado svg{display:block;width:100%;height:auto;overflow:visible}
 .hc-nado span{display:none}
 @media (max-width:720px){.hc-nado{width:96px}}
+/* ---- seamless mobile Safari: solid strips behind the status bar and the bottom toolbar, tinted to whatever section sits under them ---- */
+html{background:var(--edge-b,var(--bg))}
+.edge{display:none}
+@media (hover:none) and (pointer:coarse){.edge{display:block;position:fixed;left:0;right:0;z-index:2147483000;pointer-events:none;transition:background-color .25s ease}
+.edge-t{top:0;height:max(12px,env(safe-area-inset-top));background:var(--edge-t,#7752DA)}
+.edge-b{bottom:0;height:max(12px,env(safe-area-inset-bottom));background:var(--edge-b,var(--bg))}
+.edge::after{content:"";position:absolute;left:0;right:0;height:18px;pointer-events:none}
+.edge-t::after{top:100%;background:linear-gradient(var(--edge-t,#7752DA),transparent)}
+.edge-b::after{bottom:100%;background:linear-gradient(transparent,var(--edge-b,var(--bg)))}}
 </style>
 </head><body>
 <header class="gnb" id="gnb">
@@ -2088,7 +2099,8 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     </defs>
   </svg>
 
-<section class="hc" id="top" aria-labelledby="hc-h">
+<div class="edge edge-t" aria-hidden="true"></div><div class="edge edge-b" aria-hidden="true"></div>
+<section class="hc" id="top" aria-labelledby="hc-h" data-edge="#7752DA">
   <div class="hc-head">
     <p class="hc-k">친한 친구와 만들어 가는 우리만의 공간</p>
     <h1 id="hc-h"><img class="hc-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"></h1>
@@ -4041,6 +4053,31 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
     let raf = 0, mx = 0, my = 0;
     hc.addEventListener('pointermove', e => { const b = hc.getBoundingClientRect(); mx = (e.clientX - b.left) / b.width - .5; my = (e.clientY - b.top) / b.height - .5; if (!raf) raf = requestAnimationFrame(() => { raf = 0; parts.forEach(p => { const d = parseFloat(p.dataset.d || .5); p.style.setProperty('--px', (-mx * 40 * d).toFixed(1) + 'px'); p.style.setProperty('--py', (-my * 30 * d).toFixed(1) + 'px'); }); }); });
     hc.addEventListener('pointerleave', () => parts.forEach(p => { p.style.setProperty('--px', '0px'); p.style.setProperty('--py', '0px'); }));
+  })();
+
+  /* ---- seamless mobile Safari: keep the top/bottom edge strips (and theme-color) the colour of the section underneath ---- */
+  (function(){
+    if (!matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+    const root = document.documentElement, tc = document.querySelector('meta[name="theme-color"]');
+    const solid = c => c && c !== 'transparent' && !/rgba\([^)]*,\s*0\)$/.test(c);
+    function colorAt(y){
+      let el = document.elementFromPoint(2, y);
+      while (el && el !== document.documentElement) {
+        if (el.dataset && el.dataset.edge) return el.dataset.edge;
+        if (!el.classList || !el.classList.contains('edge')) { const c = getComputedStyle(el).backgroundColor; if (solid(c)) return c; }
+        el = el.parentElement;
+      }
+      return getComputedStyle(document.body).backgroundColor;
+    }
+    let raf = 0, lastT = '', lastB = '';
+    const tint = () => { raf = 0;
+      const t = colorAt(Math.max(14, parseFloat(getComputedStyle(document.querySelector('.edge-t')).height) + 4)), b = colorAt(innerHeight - Math.max(14, parseFloat(getComputedStyle(document.querySelector('.edge-b')).height) + 4));
+      if (t !== lastT) { lastT = t; root.style.setProperty('--edge-t', t); if (tc) tc.setAttribute('content', t); }
+      if (b !== lastB) { lastB = b; root.style.setProperty('--edge-b', b); }
+    };
+    addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(tint); }, { passive: true });
+    addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(tint); });
+    tint();
   })();
 })();
 </script>
