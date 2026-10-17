@@ -380,7 +380,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .s-take{--T:8s}
 .tk-slot{position:absolute;left:8.5%;top:28%;width:34%;height:34%;display:grid;place-items:center;border:2px dashed rgba(138,63,184,.5);border-radius:3cqw;background:rgba(255,255,255,.5);color:var(--violet-d);font:800 6cqw/1 var(--kr);opacity:0}
 .s-take .tk-src{position:absolute;left:57.5%;top:28%;width:34%;aspect-ratio:1;border-radius:3cqw}
-.tk-src img,.dw > img:first-child{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.tk-src img,.dw > img:first-child{width:100%;height:100%;object-fit:cover;object-position:50% 0;border-radius:inherit}
 .tk-hold{position:absolute;left:54.5%;top:66.5%;width:40%;height:10cqw;border-radius:2.4cqw;overflow:hidden;background:#B68AE2;color:#FFFFFF;box-shadow:0 1.6cqw 3.6cqw -1.6cqw rgba(111,38,164,.6),inset 0 .3cqw .4cqw rgba(255,255,255,.28)}
 .tk-hold > span{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:.8cqw;height:100%;padding:0 1cqw;font:700 max(8.5px,2.75cqw)/1 var(--kr);letter-spacing:-.04em;white-space:nowrap;text-shadow:0 1px 3px rgba(111,38,164,.35)}
 .tk-hold svg{width:max(10px,3.2cqw);height:max(10px,3.2cqw);flex:0 0 auto;color:#FFFFFF}
@@ -393,9 +393,9 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .dw::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset .2cqw .4cqw 1.2cqw rgba(255,255,255,.25),inset 0 0 3.2cqw rgba(255,255,255,.7);pointer-events:none}
 .dw .dw-b{position:absolute;right:2.1cqw;top:2.1cqw;width:5.8cqw;height:5.8cqw;filter:drop-shadow(0 .4cqw .8cqw rgba(80,20,120,.35))}
 .dw-s{position:absolute;left:2.1cqw;bottom:2.1cqw;display:flex;align-items:center;gap:1cqw;height:5.6cqw;padding:0 1.6cqw 0 1cqw;border-radius:1.4cqw;background:#FFFFFF;color:#1C1722;font:500 max(9px,2.4cqw)/1 var(--kr)}
-.dw-s i{width:4cqw;height:4cqw;border-radius:1.2cqw;background:center/cover url(assets/p-coast.jpg)}
+.dw-s i{width:4cqw;height:4cqw;border-radius:1.2cqw;background:center/cover url(assets/rooms/rav-sora.webp)}
 .tk-from{left:7%;top:66.5%;display:inline-flex;align-items:center;gap:1.2cqw}
-.tk-from i{width:4.2cqw;height:4.2cqw;border-radius:1.2cqw;background:center/cover url(assets/p-coast.jpg)}
+.tk-from i{width:4.2cqw;height:4.2cqw;border-radius:1.2cqw;background:center/cover url(assets/rooms/rav-sora.webp)}
 @media (prefers-reduced-motion:no-preference){.s-take .tk-src{animation:tkSrc var(--T) ease infinite both}
 .s-take .tk-hold{animation:tkHold var(--T) var(--ease) infinite both}
 .s-take .tk-fill{animation:tkFill var(--T) linear infinite both}
@@ -635,13 +635,11 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .cr-ctl button:disabled{opacity:.38;cursor:default}
 .vcards .cr-track{grid-auto-columns:min(78vw,300px)}
 /* ---------- seam: interactive tuning line ---------- */
-.seam2{position:relative;height:clamp(96px,10vw,140px);margin:0 auto;max-width:calc(var(--max) + var(--gut)*2);padding-inline:var(--gut);touch-action:pan-y;cursor:crosshair}
+.seam2{position:relative;height:clamp(96px,10vw,140px);margin:0 auto;max-width:calc(var(--max) + var(--gut)*2);padding-inline:var(--gut);touch-action:pan-y;cursor:pointer}
 .sm-svg{display:block;width:100%;height:100%;overflow:visible}
 .sm-a,.sm-b{fill:none;stroke-width:2.4;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .sm-a{stroke:#AA4AF4;filter:drop-shadow(0 0 5px rgba(170,74,244,.55))}
 .sm-b{stroke:#FA97E2;filter:drop-shadow(0 0 5px rgba(250,151,226,.6))}
-.sm-mk{position:absolute;top:50%;left:calc(var(--gut) + (100% - var(--gut) * 2) * var(--pxf,.5));width:40px;height:40px;transform:translate(-50%,-50%) scale(var(--pk,.75));opacity:0;pointer-events:none;filter:drop-shadow(0 8px 14px rgba(90,20,120,.4))}
-.sm-mk svg{width:100%;height:100%}
 /* ---------- 02 background: clearer 150 → 40 ---------- */
 .n2-v{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .n2-y{padding:4px 11px;border-radius:999px;background:var(--bg-2);font:italic 900 13px/1.2 var(--round);letter-spacing:.04em;color:var(--mute)}
@@ -805,17 +803,21 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .phone .ma .pa-head{position:absolute;left:0;top:0;width:100%;height:auto;z-index:3}
 .pa-slot{position:absolute;z-index:1;border-radius:calc(var(--u)*12);border:calc(var(--u)*1.5) dashed rgba(138,63,184,.28);background:rgba(255,255,255,.35);opacity:0;transition:opacity .35s ease calc(var(--i) * 110ms + .35s)}
 .pa-t{position:absolute;z-index:2;transform-origin:50% 50%;filter:drop-shadow(0 calc(var(--u)*6) calc(var(--u)*10) rgba(70,20,100,.18));transition:transform .7s cubic-bezier(.3,1.2,.5,1) calc(var(--i) * 110ms),opacity .45s ease calc(var(--i) * 110ms)}
-.phone .ma .pa-t img{width:100%;height:100%;border-radius:0}
+.phone .ma .pa-t img{width:100%;height:100%;object-fit:cover;border-radius:calc(var(--u)*var(--r,14))}
+/* corner radius per the app grid: min(20, 12 + (min(w,h) − 2) × 2) cells, music 24 */
+.pa-day,.pa-status,.pa-dday,.pa-sora{--r:12}
+.pa-cake{--r:16}
+.pa-music{--r:24}
 .pa-chip{position:absolute;z-index:6;left:50%;bottom:calc(var(--u)*30);display:inline-flex;align-items:center;gap:calc(var(--u)*6);padding:calc(var(--u)*10) calc(var(--u)*16);border-radius:999px;background:var(--ink-a);color:#FFFFFF;font-size:calc(var(--u)*14);font-weight:700;white-space:nowrap;transform:translate(-50%,calc(var(--u)*20));opacity:0;transition:opacity .4s ease,transform .5s var(--ease)}
 .pa-chip b{font-size:1.2em;line-height:1}
 .pa.p0 .pa-t{transform:translateY(calc(var(--u)*12)) scale(.9);opacity:0}
 .pa.out .pa-t{opacity:0;transition:opacity .45s ease}
-.pa.p0 .pa-slot,.pa.p1 .pa-slot,.pa.p2 .pa-slot{opacity:1;transition-delay:0s}
+.pa.p0 .pa-slot,.pa.p1 .pa-slot{opacity:1;transition-delay:0s}
 .pa.p1 .pa-chip,.pa.p2 .pa-chip{opacity:1;transform:translate(-50%,0)}
 .pa.snap .pa-t,.pa.snap .pa-slot{transition:none!important}
 /* ditto: glowing widget → sheet → 3 s fill → 디토 완료 */
 .phone .ma .dt-bg{position:absolute;left:0;top:calc(var(--u)*40);width:100%;height:auto}
-.dt-glow{position:absolute;z-index:2;left:3.98%;top:calc(var(--u)*40 + 69.65cqw);width:33.33%;height:45.02cqw;border-radius:calc(var(--u)*14);box-shadow:0 0 0 calc(var(--u)*3) rgba(255,255,255,.9),0 0 calc(var(--u)*22) calc(var(--u)*6) rgba(170,74,244,.75);opacity:0}
+.dt-glow{position:absolute;z-index:2;left:5%;top:calc(var(--u)*40 + 62.66cqw);width:32.5%;height:43.91cqw;border-radius:calc(var(--u)*14);box-shadow:0 0 0 calc(var(--u)*3) rgba(255,255,255,.9),0 0 calc(var(--u)*22) calc(var(--u)*6) rgba(170,74,244,.75);opacity:0}
 .dt-sheet{transform:translateY(105%)}
 .dt-thumb{width:calc(var(--u)*120);margin:0 auto;font-size:calc(var(--u)*13);padding:calc(var(--u)*13) calc(var(--u)*14);border-radius:calc(var(--u)*14);box-shadow:0 10px 20px -12px rgba(46,58,33,.6)}
 .dt-h{display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*6);margin-top:calc(var(--u)*14);font-size:calc(var(--u)*17);font-weight:700}
@@ -997,7 +999,6 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 /* ---------- seam: dot-matrix waves (canvas); the old line drawing is the no-JS fallback ---------- */
 .sm-cv{display:none;width:100%;height:100%}
 .js .sm-cv{display:block}
-.js .seam2 .sm-mk{opacity:1}
 .js .seam2 .sm-svg{display:none}
 /* ---------- 02 background: the friends photo is landscape ---------- */
 .bgx-grid{align-items:center}
@@ -2225,25 +2226,25 @@ html{background:var(--edge-b,var(--bg))}
         <span class="mb dots" style="left:4%;top:12%;width:43%;height:74%"></span>
         <span class="mh" style="left:6.5%;top:15%;width:38%;height:9%"><i style="background-image:url(assets/rooms/rav-jiu.webp)"></i>내 라이프</span>
         <span class="mb dots" style="left:53%;top:12%;width:43%;height:74%"></span>
-        <span class="mh" style="left:55.5%;top:15%;width:38%;height:9%"><i style="background-image:url(assets/p-coast.jpg)"></i>지민</span>
+        <span class="mh" style="left:55.5%;top:15%;width:38%;height:9%"><i style="background-image:url(assets/rooms/rav-sora.webp)"></i>소라의 플래터</span>
         <span class="tk-slot"><b>+</b></span>
-        <span class="tk-src beam"><img loading="lazy" src="assets/p-coast.jpg" alt=""></span>
+        <span class="tk-src beam"><img loading="lazy" src="assets/ws-snack.webp" alt=""></span>
         <span class="tk-hold"><i class="tk-fill"></i><span><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>내 플래터에 디토하기</span></span>
         <span class="tk-finger">👆</span>
-        <span class="tk-fly"><span class="dw"><img loading="lazy" src="assets/p-coast.jpg" alt=""><img class="dw-b" loading="lazy" src="assets/dittobadge-32.svg" alt=""><span class="dw-s"><i></i>@jimin</span></span></span>
-        <span class="cp k tk-from"><i></i>지민에게서 가져옴</span>
+        <span class="tk-fly"><span class="dw"><img loading="lazy" src="assets/ws-snack.webp" alt=""><img class="dw-b" loading="lazy" src="assets/dittobadge-32.svg" alt=""><span class="dw-s"><i></i>@sora.maybe</span></span></span>
+        <span class="cp k tk-from"><i></i>소라에게서 가져옴</span>
       </div><span class="en">Ditto</span></div>
 
       <div class="face"><div class="sc s-spread">
         <div class="sp-card">
-          <p class="sp-head"><span>주파수 확산 경로</span><b>바닷가 필름 사진</b></p>
+          <p class="sp-head"><span>주파수 확산 경로</span><b>🧺 간식 부자</b></p>
           <div class="sp-row">
             <span class="sp-track"><i></i></span>
-            <span class="sp-n"><i class="sp-av" style="background-image:url(assets/rooms/rav-jiu.webp)"></i><b>나</b><small>지우</small></span>
-            <span class="sp-n h1"><span class="sp-tick">디토 ✓</span><i class="sp-av" style="background-image:url(assets/rooms/rav-haeun.webp)"></i><b>친구</b><small>하은</small></span>
-            <span class="sp-n h2"><span class="sp-tick">디토 ✓</span><i class="sp-av" style="background-image:url(assets/rooms/rav-jaemin.webp)"></i><b>친구의 친구</b><small>재민</small></span>
+            <span class="sp-n"><i class="sp-av" style="background-image:url(assets/rooms/rav-sora.webp)"></i><b>나</b><small>소라</small></span>
+            <span class="sp-n h1"><span class="sp-tick">디토 ✓</span><i class="sp-av" style="background-image:url(assets/rooms/rav-jiu.webp)"></i><b>친구</b><small>지우</small></span>
+            <span class="sp-n h2"><span class="sp-tick">디토 ✓</span><i class="sp-av" style="background-image:url(assets/rooms/rav-haeun.webp)"></i><b>친구의 친구</b><small>하은</small></span>
             <span class="sp-n h3 anon"><span class="sp-tick">디토 ✓</span><img class="sp-av" src="assets/dittobadge-32.svg" alt="" loading="lazy"><b>그 너머</b><em class="sp-more">+2 더</em></span>
-            <span class="sp-w"><img loading="lazy" src="assets/p-coast.jpg" alt=""></span>
+            <span class="sp-w"><img loading="lazy" src="assets/ws-snack.webp" alt=""></span>
           </div>
           <p class="sp-foot"><span class="sp-cnt">2명이 가져감</span><span class="sp-note">멀리 갈수록 이름 대신 횟수만</span></p>
         </div>
@@ -2291,7 +2292,6 @@ html{background:var(--edge-b,var(--bg))}
     <path class="sm-a" d="M0 60 C150 52 300 68 450 60 S750 52 900 60 S1050 68 1200 60"/>
     <path class="sm-b" d="M0 60 C150 68 300 52 450 60 S750 68 900 60 S1050 52 1200 60"/>
   </svg>
-  <span class="sm-mk"><svg viewBox="0 0 181 181"><use href="#badge"/></svg></span>
 </div>
 
 <section class="bgx" id="background" aria-labelledby="bg-h">
@@ -3108,7 +3108,7 @@ html{background:var(--edge-b,var(--bg))}
     return { draw };
   }
 
-  /* ---- seam: a frequency spreading out — rings leave the D! mark and ripple across the dot matrix; the pointer moves the source ---- */
+  /* ---- seam: a frequency spreading out — rings ripple across the dot matrix; the pointer moves the source, a tap sends a wave of a different shape each time ---- */
   (function(){
     const el = document.getElementById('seam'); if (!el) return;
     const cv = el.querySelector('.sm-cv'); if (!cv || !cv.getContext) return;
@@ -3129,9 +3129,10 @@ html{background:var(--edge-b,var(--bg))}
         for (let r = 0; r < rows; r++){
           const y = rg * (r + .5), dy = (y - sy) * 2.4, d = Math.sqrt(dx*dx + dy*dy);
           let a = 0;
-          for (const g of rings){ const rr = (t - g.t0) * SPEED; if (rr < 0) continue; const e = (d - rr) / BAND; if (e > 3 || e < -3) continue;
-            a += Math.exp(-e*e) * Math.exp(-(t - g.t0) / LIFE * 1.6) * g.amp; }
-          a = Math.min(1, a + Math.exp(-d / 26) * (.55 + .25 * Math.sin(t * 4)));      // the source itself keeps humming
+          for (const g of rings){ const age = t - g.t0, rr = age * SPEED; if (rr < 0) continue; const fade = Math.exp(-age / LIFE * 1.6) * g.amp;
+            if (!g.k){ const e = (d - rr) / BAND; if (e < 3 && e > -3) a += Math.exp(-e*e) * fade; continue; }
+            a += tap(g, x, y, rr, age, rg) * fade; }
+          a = Math.min(1, a + Math.exp(-d / 26) * (.35 + .2 * Math.sin(t * 4)));      // the source itself keeps humming
           const edge = Math.min(1, d / far);
           ctx.globalAlpha = .08 + .92 * a * (1 - .3 * edge);
           ctx.fillStyle = a < .06 ? '#1C1722' : PAL[Math.min(39, Math.round(edge * 39))];
@@ -3139,7 +3140,27 @@ html{background:var(--edge-b,var(--bg))}
         }
       }
       ctx.globalAlpha = 1;
-      el.style.setProperty('--pxf', src.toFixed(4)); el.style.setProperty('--pk', (.75 + .25 * hk).toFixed(3));
+    }
+    // tap waves: ring · diamond · square burst a front out of the tap; sine and heartbeat draw a travelling line that unrolls both ways
+    const sq = v => v * v, G = (u, m, w) => Math.exp(-sq((u - m) / w));
+    const ecg = u => .16 * G(u, .2, .05) + G(u, .47, .018) - .38 * G(u, .51, .016) + .26 * G(u, .76, .06);
+    function tap(g, x, y, rr, age, rg){
+      const dx = x - g.x, dy = (y - g.y) * 2.4, ax = Math.abs(dx), ay = Math.abs(dy);
+      if (g.k === 'ring' || g.k === 'diamond' || g.k === 'square'){
+        const d = g.k === 'ring' ? Math.sqrt(dx*dx + dy*dy) : g.k === 'diamond' ? ax + ay : Math.max(ax, ay), e = (d - rr) / (BAND * .8);
+        return e < 3 && e > -3 ? Math.exp(-e*e) * 1.3 : 0;
+      }
+      const tail = ax <= rr ? Math.exp(-(rr - ax) / (SPEED * .9)) : Math.exp(-sq((ax - rr) / BAND));
+      const line = g.k === 'sine' ? g.y + H * .3 * Math.sin(ax / 34 - age * 7) : g.y + H * .4 * (.12 - ecg((ax / 150 + age * .25) % 1));
+      return tail * Math.exp(-sq((y - line) / (rg * 1.1))) * 1.4;
+    }
+    const KINDS = ['ring', 'sine', 'diamond', 'beat', 'square', 'train'];
+    let kind = 0;
+    function burst(e){
+      const r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, k = KINDS[kind++ % KINDS.length];
+      if (k === 'train') [0, .22, .44].forEach(o => rings.push({ t0: t + o, amp: 1, k: 'ring', x, y }));
+      else rings.push({ t0: t, amp: 1, k, x, y });
+      kick();
     }
     function frame(now){
       raf = 0; const dt = Math.min(.05, (now - (last || now)) / 1000); last = now; t += dt;
@@ -3151,7 +3172,7 @@ html{background:var(--edge-b,var(--bg))}
     }
     const kick = () => { if (!raf && vis){ last = 0; raf = requestAnimationFrame(frame); } };
     const at = e => { const r = el.getBoundingClientRect(); goal = clamp((e.clientX - r.left) / r.width, .04, .96); hover = 1; };
-    el.addEventListener('pointermove', at); el.addEventListener('pointerdown', at);
+    el.addEventListener('pointermove', at); el.addEventListener('pointerdown', at); if (!reduce) el.addEventListener('click', burst);
     el.addEventListener('pointerleave', () => { goal = .5; hover = 0; });
     if ('ResizeObserver' in window) new ResizeObserver(() => { W = 0; if (reduce) requestAnimationFrame(draw); }).observe(cv);
     if (reduce){ t = 3; rings = [0, 1.1, 2.2].map(t0 => ({ t0, amp: 1 })); requestAnimationFrame(draw); return; }
