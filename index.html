@@ -366,7 +366,9 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .s-look .em,.s-deco .cp,.s-near .bdg{animation:bobs 2.6s ease-in-out infinite}
 .s-near .l{animation:nearL 5.4s var(--ease) infinite both}
 .s-near .r{animation:nearR 5.4s var(--ease) infinite both}
-.s-near .cp.p{animation:show 5.4s ease infinite both}}
+.s-near .cp.p{animation:show 5.4s ease infinite both}
+.s-near .nr-open{color:#862FC6;background:linear-gradient(90deg,#F3E8FF,#FDE9F7)}
+.s-near .nr-note{animation:show 5.4s ease .5s infinite both}}
 @keyframes drop{0%{opacity:0;transform:translate(var(--dx,0),var(--dy,-40cqw)) rotate(var(--r,-10deg)) scale(1.15)}6%{opacity:1}22%,95%{opacity:1;transform:none}100%{opacity:0;transform:none}}
 @keyframes peek{0%{transform:translateX(70%) rotate(5deg)}28%,84%{transform:none}100%{transform:translateX(-80%) rotate(-4deg)}}
 @keyframes bobs{0%,100%{transform:none}50%{transform:translateY(-1.6cqw) rotate(4deg)}}
@@ -638,7 +640,7 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .sm-a,.sm-b{fill:none;stroke-width:2.4;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .sm-a{stroke:#AA4AF4;filter:drop-shadow(0 0 5px rgba(170,74,244,.55))}
 .sm-b{stroke:#FA97E2;filter:drop-shadow(0 0 5px rgba(250,151,226,.6))}
-.sm-mk{position:absolute;top:50%;left:calc(var(--gut) + (100% - var(--gut) * 2) * var(--pxf,.5));width:40px;height:40px;transform:translate(-50%,-50%) scale(calc(.4 + .6 * var(--pk,0)));opacity:var(--pk,0);pointer-events:none;filter:drop-shadow(0 8px 14px rgba(90,20,120,.4))}
+.sm-mk{position:absolute;top:50%;left:calc(var(--gut) + (100% - var(--gut) * 2) * var(--pxf,.5));width:40px;height:40px;transform:translate(-50%,-50%) scale(var(--pk,.75));opacity:0;pointer-events:none;filter:drop-shadow(0 8px 14px rgba(90,20,120,.4))}
 .sm-mk svg{width:100%;height:100%}
 /* ---------- 02 background: clearer 150 → 40 ---------- */
 .n2-v{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
@@ -798,24 +800,19 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .cx-pause[aria-pressed="true"] .i-play{display:block}
 .cx-pause[aria-pressed="true"] .i-pause{display:none}
 .cx-pause:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px}
-/* platter: tiles huddle (small, 옹기종기) then snap into 지우's platter */
+/* platter: empty slots first, then each tile rises into its own slot — nothing leaves the grid */
 .pa{background:#F1EEF6}
 .phone .ma .pa-head{position:absolute;left:0;top:0;width:100%;height:auto;z-index:3}
 .pa-slot{position:absolute;z-index:1;border-radius:calc(var(--u)*12);border:calc(var(--u)*1.5) dashed rgba(138,63,184,.28);background:rgba(255,255,255,.35);opacity:0;transition:opacity .35s ease calc(var(--i) * 110ms + .35s)}
-.pa-t{position:absolute;z-index:2;transform-origin:50% 50%;filter:drop-shadow(0 calc(var(--u)*6) calc(var(--u)*10) rgba(70,20,100,.18));transition:transform .95s cubic-bezier(.3,1.25,.5,1) calc(var(--i) * 110ms),opacity .4s ease,filter .6s ease}
+.pa-t{position:absolute;z-index:2;transform-origin:50% 50%;filter:drop-shadow(0 calc(var(--u)*6) calc(var(--u)*10) rgba(70,20,100,.18));transition:transform .7s cubic-bezier(.3,1.2,.5,1) calc(var(--i) * 110ms),opacity .45s ease calc(var(--i) * 110ms)}
 .phone .ma .pa-t img{width:100%;height:100%;border-radius:0}
 .pa-chip{position:absolute;z-index:6;left:50%;bottom:calc(var(--u)*30);display:inline-flex;align-items:center;gap:calc(var(--u)*6);padding:calc(var(--u)*10) calc(var(--u)*16);border-radius:999px;background:var(--ink-a);color:#FFFFFF;font-size:calc(var(--u)*14);font-weight:700;white-space:nowrap;transform:translate(-50%,calc(var(--u)*20));opacity:0;transition:opacity .4s ease,transform .5s var(--ease)}
 .pa-chip b{font-size:1.2em;line-height:1}
-.pa.p0 .pa-t{transform:translate(calc(var(--sx) * 1cqw),calc(var(--sy) * 1cqw)) rotate(calc(var(--sr) * 1deg)) scale(.42);opacity:0}
+.pa.p0 .pa-t{transform:translateY(calc(var(--u)*12)) scale(.9);opacity:0}
 .pa.out .pa-t{opacity:0;transition:opacity .45s ease}
-.pa.p1 .pa-t,.pa.p2 .pa-t{transform:translate(calc(var(--hx) * 1cqw),calc(var(--hy) * 1cqw)) rotate(calc(var(--hr) * 1deg)) scale(.5);filter:drop-shadow(0 calc(var(--u)*10) calc(var(--u)*14) rgba(70,20,100,.32))}
-.pa.p0.show .pa-t{opacity:1}
-.pa.p1 .pa-t{transition-delay:calc(var(--i) * 40ms)}
-.pa.p2 .pa-t{animation:paBob 1.4s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.23s)}
 .pa.p0 .pa-slot,.pa.p1 .pa-slot,.pa.p2 .pa-slot{opacity:1;transition-delay:0s}
 .pa.p1 .pa-chip,.pa.p2 .pa-chip{opacity:1;transform:translate(-50%,0)}
 .pa.snap .pa-t,.pa.snap .pa-slot{transition:none!important}
-@keyframes paBob{from{translate:0 0}to{translate:0 calc(var(--u)*-8)}}
 /* ditto: glowing widget → sheet → 3 s fill → 디토 완료 */
 .phone .ma .dt-bg{position:absolute;left:0;top:calc(var(--u)*40);width:100%;height:auto}
 .dt-glow{position:absolute;z-index:2;left:3.98%;top:calc(var(--u)*40 + 69.65cqw);width:33.33%;height:45.02cqw;border-radius:calc(var(--u)*14);box-shadow:0 0 0 calc(var(--u)*3) rgba(255,255,255,.9),0 0 calc(var(--u)*22) calc(var(--u)*6) rgba(170,74,244,.75);opacity:0}
@@ -992,12 +989,15 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 .tn-cv{display:block;width:100%;height:24cqw;margin-top:3cqw}
 .tn-st{position:relative;height:5cqw;margin-top:2.6cqw;font-size:3.3cqw;font-weight:700}
 .tn-st span{position:absolute;left:0;top:0;opacity:0;transition:opacity .35s ease;color:#6D5F7D}
-.tn-st .s2{color:#862FC6}
-.tn-st[data-k="0"] .s0,.tn-st[data-k="1"] .s1,.tn-st[data-k="2"] .s2{opacity:1}
-.tn-st:not([data-k]) .s2{opacity:1}
+.tn-st .s0{color:#6E7280}.tn-st .s1{color:#138A76}.tn-st .s2{color:#4446D0}.tn-st .s3{color:#862FC6}
+.tn-st[data-k="0"] .s0,.tn-st[data-k="1"] .s1,.tn-st[data-k="2"] .s2,.tn-st[data-k="3"] .s3{opacity:1}
+.tn-st:not([data-k]) .s3{opacity:1}
+.s-tune2 .tn-live,.s-tune2 .tn-live::after{background:var(--tn,#AA4AF4);transition:background .4s ease}
+.s-tune2[data-k="0"]{--tn:#8E919E}.s-tune2[data-k="1"]{--tn:#2BC4A8}.s-tune2[data-k="2"]{--tn:#5A5BF2}
 /* ---------- seam: dot-matrix waves (canvas); the old line drawing is the no-JS fallback ---------- */
 .sm-cv{display:none;width:100%;height:100%}
 .js .sm-cv{display:block}
+.js .seam2 .sm-mk{opacity:1}
 .js .seam2 .sm-svg{display:none}
 /* ---------- 02 background: the friends photo is landscape ---------- */
 .bgx-grid{align-items:center}
@@ -1077,6 +1077,9 @@ mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,15
 /* ---------- 5.3 rooms: profile area follows the active card (no tall empty gap) ---------- */
 .rm.is-js .rm-prof .rm-pf:not(.is-on){position:absolute;left:0;right:0;top:0}
 .wx{padding-bottom:clamp(24px,3vw,40px)}
+/* concept → widgets: the two section paddings stacked into ~340px of blank across the colour change */
+.cx{padding-bottom:clamp(56px,6vw,96px)}
+.wx{padding-top:clamp(64px,7vw,112px)}
 .wx .rm{padding-bottom:0}
 /* ---------- 07 Q&A: equal cards, open or closed ---------- */
 .qgrid{grid-auto-rows:1fr;align-items:stretch}
@@ -2163,14 +2166,14 @@ html{background:var(--edge-b,var(--bg))}
       <h2 class="me-too" id="verbs-h"><img class="mt-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"> <span class="mt-eq">= 나도.</span></h2>
       <p class="me-ko">너와 친구들이 순간을 공유할 수 있는 공간을 만들어나가봐!</p>
       <ol class="vlist" id="vlist">
-        <li class="on"><span class="w">꾸미기</span><span class="c">위젯을 통해 나만의 개성있는 공간을 구축할 수 있어요.</span></li>
-        <li><span class="w">살펴보기</span><span class="c">친구들의 공간을 알고리즘 없이 구경해요.</span></li>
-        <li><span class="w">가져오기</span><span class="c">나도 함께한 순간이 친구 방에서 빛나면, 꾹 눌러 내 플래터로 가져올 수 있어요.</span></li>
-        <li><span class="w">확산하기</span><span class="c">내 위젯이 디토를 통해 친구의 친구까지 닿아요.</span></li>
-        <li><span class="w">맞추기</span><span class="c">서로 다양한 상호작용을 해나가면 주파수가 점점 맞아가요.</span></li>
-        <li><span class="w">친구되기</span><span class="c">주파수가 맞으면 자연스럽게 친구가 될 수 있어요.</span></li>
+        <li class="on"><span class="w">꾸미기</span><span class="c">사진·음악·글·D-Day 같은 위젯을 붙여 나만의 플래터를 꾸며요.</span></li>
+        <li><span class="w">살펴보기</span><span class="c">친구와 친구의 친구 플래터를 알고리즘 없이 구경해요. 다녀간 발자국은 주인에게 남아요.</span></li>
+        <li><span class="w">가져오기</span><span class="c">친구가 열어 둔 빛나는 위젯을 꾹 눌러 내 플래터로 가져와요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</span></li>
+        <li><span class="w">퍼뜨리기</span><span class="c">디토된 위젯은 친구를 거쳐 친구의 친구에게까지 퍼져요. 멀리 갈수록 이름 대신 횟수만 보여요.</span></li>
+        <li><span class="w">맞추기</span><span class="c">친구의 친구와 같은 글에 댓글을 달고, 같은 그룹에서 이야기하고, 디토를 주고받으면 3주 동안 주파수가 쌓여요. 회색에서 민트, 인디고, 라일락으로 물들어요.</span></li>
+        <li><span class="w">친구되기</span><span class="c">주파수가 충분하고, 4일 넘게 이어지고, 함께한 교류가 있으면 친구 신청이 열려요. 편지와 애칭을 담아 보내고, 상대가 수락하면 친구예요.</span></li>
       </ol>
-      <p class="vcap" id="vCap" aria-hidden="true">위젯을 통해 나만의 개성있는 공간을 구축할 수 있어요.</p>
+      <p class="vcap" id="vCap" aria-hidden="true">사진·음악·글·D-Day 같은 위젯을 붙여 나만의 플래터를 꾸며요.</p>
       <p class="v-count" aria-hidden="true"><b id="vNum">01</b> / 06</p>
     </div>
     <div class="cube" aria-hidden="true">
@@ -2231,7 +2234,7 @@ html{background:var(--edge-b,var(--bg))}
           <p class="tn-h"><span class="tn-live"></span>라이브 주파수</p>
           <div class="tn-who"><span class="tn-p a"><img src="assets/rooms/rav-jiu.webp" alt="">지우</span><span class="tn-vs"></span><span class="tn-p b"><img src="assets/rooms/rav-haeun.webp" alt="">하은</span></div>
           <canvas class="tn-cv"></canvas>
-          <p class="tn-st"><span class="s0">잔잔하게 이어지는 중</span><span class="s1">선명하게 이어지는 중</span><span class="s2">친구 신청이 열렸어요</span></p>
+          <p class="tn-st"><span class="s0">잔잔하게 이어지는 중</span><span class="s1">선명하게 이어지는 중</span><span class="s2">곧 친구 신청이 열려요</span><span class="s3">친구 신청이 열렸어요</span></p>
         </div>
         <span class="cp k" style="left:28%;top:85%">주파수가 맞아요</span>
       </div><span class="en">In tune</span></div>
@@ -2242,19 +2245,21 @@ html{background:var(--edge-b,var(--bg))}
         <svg class="bdg" style="left:44.5%;top:33%" viewBox="0 0 181 181"><use href="#badge"/></svg>
         <span class="cp k" style="left:19%;top:56%">지우</span>
         <span class="cp k" style="left:63%;top:56%">하은</span>
+        <span class="cp k nr-open" style="left:50%;top:11%;transform:translateX(-50%)">친구 신청이 열렸어요</span>
         <span class="cp p" style="left:50%;top:70%;transform:translateX(-50%)">친구 신청</span>
+        <span class="cp k nr-note" style="left:50%;top:84%;transform:translateX(-50%)">💌 편지 · 애칭 → 수락하면 친구</span>
       </div><span class="en">Closer</span></div>
     </div>
   </div>
 
   <div class="vcards cr" data-cr>
     <ol class="cr-track" tabindex="0" aria-label="여섯 가지 동사, 앱 화면으로 보기">
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-add.webp" alt="위젯 추가 시트. 기본, 기록, 함께, 미디어 갈래와 소셜, 상태, 텍스트, 이미지 위젯 카드" width="603" height="1311" loading="lazy" style="--op:50% 30%"></div><p><b><span class="vc-n">01</span>꾸미기.</b> 위젯을 통해 나만의 개성있는 공간을 구축할 수 있어요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-friends.webp" alt="친구 탭. 친구가 새로 붙인 위젯이 카드로 올라온 피드" width="603" height="1311" loading="lazy" style="--op:50% 28%"></div><p><b><span class="vc-n">02</span>살펴보기.</b> 친구들의 공간을 알고리즘 없이 구경해요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittohold.webp" alt="디토 시트. 라이프를 고르고 디토 버튼을 꾹 누르는 중" width="603" height="1311" loading="lazy" style="--op:50% 88%"></div><p><b><span class="vc-n">03</span>가져오기.</b> 나도 함께한 순간이 친구 방에서 빛나면, 꾹 눌러 내 플래터로 가져올 수 있어요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittotab.webp" alt="디토 탭. 내 위젯을 지민, 유나, 도현 외 17명이 가져갔다는 카드" width="603" height="1311" loading="lazy" style="--op:50% 30%"></div><p><b><span class="vc-n">04</span>확산하기.</b> 내 위젯이 디토를 통해 친구의 친구까지 닿아요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-freq.webp" alt="주파수 화면. 라이브 주파수와 내 주변 주파수 목록의 파형" width="603" height="1311" loading="lazy" style="--op:50% 34%"></div><p><b><span class="vc-n">05</span>맞추기.</b> 서로 다양한 상호작용을 해나가면 주파수가 점점 맞아가요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-freqsheet.webp" alt="주파수 시트. 친구 신청이 열렸어요라는 문구와 친구 신청 버튼" width="603" height="1311" loading="lazy" style="--op:50% 92%"></div><p><b><span class="vc-n">06</span>친구되기.</b> 주파수가 맞으면 자연스럽게 친구가 될 수 있어요.</p></li>
+      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-add.webp" alt="위젯 추가 시트. 기본, 기록, 함께, 미디어 갈래와 소셜, 상태, 텍스트, 이미지 위젯 카드" width="603" height="1311" loading="lazy" style="--op:50% 30%"></div><p><b><span class="vc-n">01</span>꾸미기.</b> 사진·음악·글·D-Day 같은 위젯을 붙여 나만의 플래터를 꾸며요.</p></li>
+      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-friends.webp" alt="친구 탭. 친구가 새로 붙인 위젯이 카드로 올라온 피드" width="603" height="1311" loading="lazy" style="--op:50% 28%"></div><p><b><span class="vc-n">02</span>살펴보기.</b> 친구와 친구의 친구 플래터를 알고리즘 없이 구경해요. 다녀간 발자국은 주인에게 남아요.</p></li>
+      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittohold.webp" alt="디토 시트. 라이프를 고르고 디토 버튼을 꾹 누르는 중" width="603" height="1311" loading="lazy" style="--op:50% 88%"></div><p><b><span class="vc-n">03</span>가져오기.</b> 친구가 열어 둔 빛나는 위젯을 꾹 눌러 내 플래터로 가져와요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</p></li>
+      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittotab.webp" alt="디토 탭. 내 위젯을 지민, 유나, 도현 외 17명이 가져갔다는 카드" width="603" height="1311" loading="lazy" style="--op:50% 30%"></div><p><b><span class="vc-n">04</span>퍼뜨리기.</b> 디토된 위젯은 친구를 거쳐 친구의 친구에게까지 퍼져요. 멀리 갈수록 이름 대신 횟수만 보여요.</p></li>
+      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-freq.webp" alt="주파수 화면. 라이브 주파수와 내 주변 주파수 목록의 파형" width="603" height="1311" loading="lazy" style="--op:50% 34%"></div><p><b><span class="vc-n">05</span>맞추기.</b> 친구의 친구와 같은 글에 댓글을 달고, 같은 그룹에서 이야기하고, 디토를 주고받으면 3주 동안 주파수가 쌓여요. 회색에서 민트, 인디고, 라일락으로 물들어요.</p></li>
+      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-freqsheet.webp" alt="주파수 시트. 친구 신청이 열렸어요라는 문구와 친구 신청 버튼" width="603" height="1311" loading="lazy" style="--op:50% 92%"></div><p><b><span class="vc-n">06</span>친구되기.</b> 주파수가 충분하고, 4일 넘게 이어지고, 함께한 교류가 있으면 친구 신청이 열려요. 편지와 애칭을 담아 보내고, 상대가 수락하면 친구예요.</p></li>
     </ol>
     <div class="cr-ctl" hidden><button type="button" class="cr-prev" aria-label="이전 카드">←</button><button type="button" class="cr-next" aria-label="다음 카드">→</button></div>
   </div>
@@ -2370,7 +2375,7 @@ html{background:var(--edge-b,var(--bg))}
         </ul>
       </div>
       <div class="cx-stage" id="cxStage">
-        <figure class="cx-fig is-on"><div class="phone shadowed"><div class="ma pa" data-anim="platter" role="img" aria-label="지우의 위젯 열한 개가 작게 옹기종기 모였다가, 하나씩 제자리를 찾아 지우의 플래터가 완성돼요. ALLDAY PROJECT ‘CRASH’ 음악과 쇼케이스 D−16도 붙어 있어요">
+        <figure class="cx-fig is-on"><div class="phone shadowed"><div class="ma pa" data-anim="platter" role="img" aria-label="빈 칸이 놓인 지우의 플래터에 위젯 열한 개가 하나씩 제자리에 떠올라 플래터가 완성돼요. ALLDAY PROJECT ‘CRASH’ 음악과 쇼케이스 D−16도 붙어 있어요">
           <img class="pa-head" src="assets/pa-head.webp" alt="" width="804" height="208">
 <span class="pa-slot" style="left:4.229%;top:13.043%;width:68.159%;height:20.595%;--i:0"></span>
 <span class="pa-slot" style="left:4.229%;top:34.554%;width:33.085%;height:20.595%;--i:1"></span>
@@ -3063,9 +3068,9 @@ html{background:var(--edge-b,var(--bg))}
         for (let r = 0; r < rows; r++){
           const dr = Math.abs(r - c0), inA = dr <= hA, inB = dr <= hB;
           let rad = maxR * (.34 + .66 * (1 - dr / c0)), col, a;
-          if (inA && inB){ const k = .5 + .5*Math.sin(t*5 - x*9); col = x < .5 ? o.cMix[0] : o.cMix[1]; if (s > .5) col = k > .5 ? o.cMix[1] : o.cMix[0]; a = .82 + .18*k*s; rad *= 1 + .12*s; }
+          if (inA && inB){ const k = .5 + .5*Math.sin(t*5 - x*9); col = x < .5 ? o.cMix[0] : o.cMix[1]; if (s > .5) col = k > .5 ? o.cMix[1] : o.cMix[0]; if (o.stage) col = o.stage(x, k); a = .82 + .18*k*s; rad *= 1 + .12*s; }
           else if (inA){ col = o.cA; a = .8; }
-          else if (inB){ col = o.cB; a = .8; }
+          else if (inB){ col = o.stage ? o.stage(x, 0) : o.cB; a = .8; }
           else { col = o.cBg; a = o.bgA || .13; }
           ctx.globalAlpha = a; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(cg*(c+.5), rg*(r+.5), rad, 0, Math.PI*2); ctx.fill();
         }
@@ -3076,27 +3081,53 @@ html{background:var(--edge-b,var(--bg))}
     return { draw };
   }
 
-  /* ---- seam: the two waves drift apart and tune in on their own; under the pointer they lock together ---- */
+  /* ---- seam: a frequency spreading out — rings leave the D! mark and ripple across the dot matrix; the pointer moves the source ---- */
   (function(){
     const el = document.getElementById('seam'); if (!el) return;
     const cv = el.querySelector('.sm-cv'); if (!cv || !cv.getContext) return;
-    const dw = DualWave(cv, { rows: 9, pitch: 11, k1: 22, k2: 7, cA: '#1C1722', cB: '#AA4AF4', cMix: ['#AA4AF4', '#FA97E2'], cBg: '#1C1722', bgA: .08 });
-    let px = null, pk = 0, goal = 0, raf = 0, vis = false, last = 0, t = 0, tick = 0;
-    const auto = tt => .5 + .5 * Math.sin(tt * .55);
+    const ctx = cv.getContext('2d');
+    // near the source: pink → brand purple → lilac → calm grey at the edges
+    const STOPS = [[0xFA,0x97,0xE2],[0xAA,0x4A,0xF4],[0xC7,0x9B,0xFF],[0x8E,0x91,0x9E]];
+    const PAL = Array.from({ length: 40 }, (_, i) => { const p = i / 39 * (STOPS.length - 1), j = Math.min(STOPS.length - 2, Math.floor(p)), f = p - j;
+      return 'rgb(' + STOPS[j].map((v, k) => Math.round(v + (STOPS[j+1][k] - v) * f)).join(',') + ')'; });
+    const PITCH = 11, SPEED = 150, BAND = 26, EVERY = 1.25, LIFE = 4.6;
+    let W = 0, H = 0, cols = 0, rows = 0, rings = [], src = .5, goal = .5, hover = 0, hk = 0, emit = 0, raf = 0, vis = false, last = 0, t = 0, tick = 0;
+    function size(){ const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); W = r.width; H = r.height; if (!W) return;
+      cv.width = Math.round(W*d); cv.height = Math.round(H*d); ctx.setTransform(d,0,0,d,0,0); cols = Math.max(20, Math.round(W / PITCH)); rows = Math.max(7, Math.round(H / PITCH) | 1); }
+    function draw(){
+      if (!W) size(); if (!W) return; ctx.clearRect(0, 0, W, H);
+      const cg = W / cols, rg = H / rows, maxR = Math.min(cg, rg) * .44, sx = src * W, sy = H / 2, far = Math.max(sx, W - sx);
+      for (let c = 0; c < cols; c++){
+        const x = cg * (c + .5), dx = x - sx;
+        for (let r = 0; r < rows; r++){
+          const y = rg * (r + .5), dy = (y - sy) * 2.4, d = Math.sqrt(dx*dx + dy*dy);
+          let a = 0;
+          for (const g of rings){ const rr = (t - g.t0) * SPEED; if (rr < 0) continue; const e = (d - rr) / BAND; if (e > 3 || e < -3) continue;
+            a += Math.exp(-e*e) * Math.exp(-(t - g.t0) / LIFE * 1.6) * g.amp; }
+          a = Math.min(1, a + Math.exp(-d / 26) * (.55 + .25 * Math.sin(t * 4)));      // the source itself keeps humming
+          const edge = Math.min(1, d / far);
+          ctx.globalAlpha = .08 + .92 * a * (1 - .3 * edge);
+          ctx.fillStyle = a < .06 ? '#1C1722' : PAL[Math.min(39, Math.round(edge * 39))];
+          ctx.beginPath(); ctx.arc(x, y, maxR * (.3 + .7 * a), 0, Math.PI * 2); ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+      el.style.setProperty('--pxf', src.toFixed(4)); el.style.setProperty('--pk', (.75 + .25 * hk).toFixed(3));
+    }
     function frame(now){
       raf = 0; const dt = Math.min(.05, (now - (last || now)) / 1000); last = now; t += dt;
-      pk += (goal - pk) * Math.min(1, dt * 5);
-      if ((tick += dt) >= 1/24){ tick = 0;
-        const sync = px == null ? auto(t) : Math.max(auto(t) * .4, pk);
-        dw.draw(t, sync, px == null ? null : px);
-        el.style.setProperty('--pxf', (px == null ? .5 : px).toFixed(4)); el.style.setProperty('--pk', (px == null ? 0 : pk).toFixed(3)); }
+      src += (goal - src) * Math.min(1, dt * 3); hk += (hover - hk) * Math.min(1, dt * 4);
+      if ((emit -= dt) <= 0){ rings.push({ t0: t, amp: .8 + .2 * hk }); emit = EVERY * (1 - .4 * hk); }
+      rings = rings.filter(g => t - g.t0 < LIFE);
+      if ((tick += dt) >= 1/30){ tick = 0; draw(); }
       if (vis) raf = requestAnimationFrame(frame);
     }
     const kick = () => { if (!raf && vis){ last = 0; raf = requestAnimationFrame(frame); } };
-    const at = e => { const r = el.getBoundingClientRect(); px = clamp((e.clientX - r.left) / r.width, 0, 1); goal = 1; if (reduce){ dw.draw(0, 1, px); } };
+    const at = e => { const r = el.getBoundingClientRect(); goal = clamp((e.clientX - r.left) / r.width, .04, .96); hover = 1; };
     el.addEventListener('pointermove', at); el.addEventListener('pointerdown', at);
-    el.addEventListener('pointerleave', () => { goal = 0; px = null; if (reduce) dw.draw(0, .85, null); });
-    if (reduce){ requestAnimationFrame(() => dw.draw(0, .85, null)); new ResizeObserver(() => requestAnimationFrame(() => dw.draw(0, .85, px))).observe(cv); return; }
+    el.addEventListener('pointerleave', () => { goal = .5; hover = 0; });
+    if ('ResizeObserver' in window) new ResizeObserver(() => { W = 0; if (reduce) requestAnimationFrame(draw); }).observe(cv);
+    if (reduce){ t = 3; rings = [0, 1.1, 2.2].map(t0 => ({ t0, amp: 1 })); requestAnimationFrame(draw); return; }
     new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) kick(); }).observe(el);
   })();
 
@@ -3104,19 +3135,24 @@ html{background:var(--edge-b,var(--bg))}
   (function(){
     const face = document.querySelector('.s-tune2'); if (!face) return;
     const cv = face.querySelector('.tn-cv'), st = face.querySelector('.tn-st'), host = face.closest('.face');
-    const dw = DualWave(cv, { rows: 11, cols: 25, k1: 13, k2: 5, amp: 1, cA: '#1C1722', cB: '#AA4AF4', cMix: ['#AA4AF4', '#FA97E2'], cBg: '#1C1722', bgA: .09 });
-    const CYCLE = 9;
+    // frequency v2 stages (FREQUENCY_POLICY §5): 잔잔 grey → 선명 mint → 곧 열림 indigo → 열림 lilac·purple with a pink tip
+    const PAL = [['#8E919E', '#A3A6B2'], ['#2BC4A8', '#4FD6BE'], ['#5A5BF2', '#6E70F5'], ['#C79BFF', '#AA4AF4']];
+    let k = 0;
+    const dw = DualWave(cv, { rows: 11, cols: 25, k1: 13, k2: 5, amp: 1, cA: '#1C1722', cB: '#AA4AF4', cMix: ['#AA4AF4', '#FA97E2'], cBg: '#1C1722', bgA: .09,
+      stage: (x, b) => k === 3 && x > .8 ? '#FA97E2' : PAL[k][b > .5 ? 1 : 0] });
+    const CYCLE = 11;
     let raf = 0, t0 = 0, vis = false;
     const phase = tt => { const p = (tt % CYCLE) / CYCLE; return p < .15 ? 0 : p < .7 ? (p - .15) / .55 : p < .92 ? 1 : 1 - (p - .92) / .08; };
     function frame(now){
       raf = 0; if (!t0) t0 = now; const tt = (now - t0) / 1000;
       const sync = Math.pow(phase(tt), 1.4);
       dw.draw(tt, sync, null);
-      st.dataset.k = sync < .45 ? '0' : sync < .97 ? '1' : '2';
+      k = sync < .35 ? 0 : sync < .7 ? 1 : sync < .97 ? 2 : 3;
+      st.dataset.k = String(k); face.dataset.k = String(k);
       if (vis && host.classList.contains('on')) raf = requestAnimationFrame(frame);
     }
     const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
-    if (reduce){ requestAnimationFrame(() => { dw.draw(0, 1, null); st.dataset.k = '2'; }); return; }
+    if (reduce){ requestAnimationFrame(() => { k = 3; dw.draw(0, 1, null); st.dataset.k = '3'; }); return; }
     new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) kick(); }).observe(face);
     new MutationObserver(() => { if (host.classList.contains('on')){ t0 = 0; kick(); } }).observe(host, { attributes: true, attributeFilter: ['class'] });
   })();
