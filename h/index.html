@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>집들이 · ditto!</title>
+<meta name="description" content="디토 집들이 초대">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3F0F7">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+  /* Splup 토큰 (404.html과 같은 라이트 값) */
+  :root { --bg: #F3F0F7; --layer: #FFFFFF; --ink: #1C1722; --text: #443651; --subtle: #6D5F7D; --border: #E7E1EE; --brand-text: #862FC6; --tonal: #F2E8FF; color-scheme: light; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; line-height: 1.7; font-size: 15px; }
+  a { color: var(--brand-text); }
+  main { max-width: 720px; margin: 0 auto; padding: max(24px, env(safe-area-inset-top)) 16px 64px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0 28px; }
+  .top > a { text-decoration: none; font-weight: 700; color: var(--ink); font-size: 18px; }
+  .top nav a { font-weight: 500; font-size: 14px; color: var(--subtle); margin-left: 14px; text-decoration: none; }
+  .top nav a[aria-current] { color: var(--brand-text); }
+  h1 { color: var(--ink); font-size: 28px; line-height: 1.3; letter-spacing: -0.02em; }
+  .meta { color: var(--subtle); font-size: 13px; margin: 8px 0 28px; }
+  .card { background: var(--layer); border-radius: 20px; padding: 24px 20px; }
+  h2 { color: var(--ink); font-size: 17px; margin: 32px 0 10px; padding-top: 24px; border-top: 1px solid var(--border); }
+  h2:first-of-type { border-top: 0; padding-top: 0; margin-top: 24px; }
+  h3 { color: var(--ink); font-size: 15px; margin: 14px 0 4px; }
+  p + p, p + ul, p + ol, ul + p, ol + p, .scroll + p { margin-top: 8px; }
+  ul, ol { padding-left: 22px; }
+  li + li { margin-top: 4px; }
+  li > ul { margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+  th { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .scroll table { min-width: 560px; }
+  .note { background: var(--tonal); border-radius: 12px; padding: 12px 14px; font-size: 14px; margin-top: 12px; }
+  footer { color: var(--subtle); font-size: 13px; margin-top: 28px; text-align: center; }
+
+  .hero { text-align: center; padding: 40px 8px 8px; }
+  .emoji { font-size: 56px; line-height: 1; }
+  .hero h1 { margin-top: 16px; }
+  .hero p { margin-top: 10px; }
+  .btn { display: block; text-align: center; text-decoration: none; background: #9D3EE4; color: #fff; font-weight: 700; border-radius: 14px; padding: 16px; margin-top: 24px; }
+  .steps { margin-top: 20px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><a href="/">ditto!</a></div>
+  <div class="card hero">
+    <div class="emoji">🏠</div>
+    <h1>디토 앱에서 열리는 집들이 QR이에요</h1>
+    <p>친구의 집들이 QR을 디토 앱으로 찍으면 <strong>디토 여권</strong>에 도장이 찍혀요.</p>
+    <ol class="steps" style="text-align:left">
+      <li>디토 앱을 받고 로그인해 주세요.</li>
+      <li>QR은 30초마다 바뀌어요. 친구 화면의 <strong>새 QR</strong>을 다시 찍어 주세요.</li>
+    </ol>
+    <a class="btn" href="/download/">디토 앱 받기</a>
+  </div>
+  <footer>헤일로 스튜디오 · <a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a></footer>
+</main>
+</body>
+</html>

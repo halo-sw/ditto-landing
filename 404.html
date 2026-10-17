@@ -7,6 +7,8 @@
 (function () { var m = location.pathname.match(/^\/i\/([A-Za-z0-9]{6})\/?$/); if (!m) return;
   var q = new URLSearchParams(location.search); q.set("noapp", "1");
   location.replace("https://i.ditto.place/" + m[1].toUpperCase() + "?" + q.toString()); })();
+// 집들이 QR(/h/{토큰}) · 디토 키링(/k/{태그}) — 앱이 있으면 유니버설 링크로 앱이 열린다. 여기 왔다면 앱이 없는 것: 안내 페이지로.
+(function () { var m = location.pathname.match(/^\/(h|k)\/[A-Za-z0-9_-]+\/?$/); if (m) location.replace("/" + m[1] + "/"); })();
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
