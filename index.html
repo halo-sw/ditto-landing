@@ -312,11 +312,12 @@ p{text-wrap:pretty}
 @media (prefers-reduced-motion:reduce){.hb.is-pressed,.hb.is-pressed .hb-lbl{transform:none}
 .tabs-nav ul{scroll-behavior:auto}}
 /* ---------- hierarchy: display heads, accents, sub-heads ---------- */
-.h-xl{font-size:clamp(36px,5.2vw,76px);font-weight:800;letter-spacing:-.045em;line-height:1.12}
+.h-xl{font-size:clamp(34px,4.5vw,66px);font-weight:700;letter-spacing:-.035em;line-height:1.2;word-break:keep-all;text-wrap:balance}
 .h-l{font-size:clamp(26px,2.9vw,42px);font-weight:700;letter-spacing:-.035em;line-height:1.24}
-mark{color:inherit;background:linear-gradient(180deg,transparent 60%,rgba(247,159,223,.62) 60%,rgba(247,159,223,.62) 92%,transparent 92%);padding:0 .04em}
+/* accent words: a clean purple → pink ink instead of a highlighter bar */
+mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#AA4AF4 48%,#E569C6 100%);-webkit-background-clip:text;background-clip:text;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .acc{color:var(--violet-d)}
-.open .lead{font-size:clamp(16px,1.35vw,19.5px)}
+.open .lead{margin-top:22px;font-size:clamp(16px,1.25vw,18.5px);line-height:1.75;letter-spacing:-.015em;color:#5A5262;word-break:keep-all;text-wrap:pretty}
 .kick{display:block;font-family:var(--round);font-style:italic;font-weight:900;font-size:clamp(15px,1.3vw,18px);color:var(--violet-d);letter-spacing:.01em;margin-bottom:6px}
 /* sticker chip (shared) */
 /* ---------- hero room ---------- */
