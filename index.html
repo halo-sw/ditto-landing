@@ -476,6 +476,41 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .seam{position:relative;overflow:hidden;overflow:clip;padding:clamp(26px,3.6vw,46px) 0;background:linear-gradient(180deg,var(--from,#FFFFFF) 0%,#FBE3F4 32%,#EEDDFB 68%,var(--to,#FFFFFF) 100%)}
 /* ---------- background (why + stats + target) ---------- */
 .bgx{padding-block:var(--sec)}
+/* ---------- 02 background bento: photo + two live stats ---------- */
+.bb{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto auto;gap:clamp(12px,1.4vw,20px);margin-top:clamp(40px,5vw,72px)}
+.bb-t{position:relative;margin:0;border-radius:28px;background:var(--bg-2);padding:clamp(20px,2.2vw,32px);min-width:0;outline:0}
+.bb-t:focus-visible{box-shadow:0 0 0 3px var(--violet-d)}
+.bb-photo{grid-column:1/8;grid-row:1/3;padding:0;overflow:hidden;min-height:clamp(420px,40vw,580px);background:#2A2431}
+.bb-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transition:transform 1.2s var(--ease)}
+.bb-photo:hover img{transform:scale(1.03)}
+.bb-photo::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(22,18,27,.72))}
+.bb-photo figcaption{position:absolute;left:clamp(20px,2.2vw,32px);right:clamp(20px,2.2vw,32px);bottom:clamp(20px,2.2vw,30px);z-index:1;color:#FFFFFF}
+.bb-photo figcaption b{display:block;margin-top:8px;font-size:clamp(22px,2.2vw,32px);font-weight:700;line-height:1.3;letter-spacing:-.03em}
+.bb-photo .bb-k{color:#F3D9FF}
+.bb-self{grid-column:8/13;grid-row:1}
+.bb-time{grid-column:8/13;grid-row:2}
+.bb-self,.bb-time{display:flex;flex-direction:column;cursor:pointer}
+.bb-k{display:block;font:italic 900 13px/1.2 var(--round);letter-spacing:.02em;color:var(--violet-d)}
+.bb-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.bb-head .bb-k{align-self:flex-start;font-style:normal;font-family:var(--kr);font-weight:700}
+.bb-num{font-size:clamp(52px,5.4vw,84px);color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.bb-num small{font-size:.4em;margin-left:.04em;letter-spacing:0}
+.bb-t p{margin-top:14px;font-size:15px;line-height:1.6;color:var(--ink-2);word-break:keep-all}
+.bb-t p em{font-style:normal;font-weight:700;color:var(--ink)}
+.bb-t cite{display:block;margin-top:auto;padding-top:12px;font-style:normal;font-size:12px;line-height:1.5;color:var(--mute)}
+.bb-dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:clamp(3px,.4vw,5px);margin-top:16px}
+.bb-dots i{aspect-ratio:1;border-radius:50%;background:#DED7E6;transition:background-color .3s ease,transform .3s var(--ease)}
+.bb-dots i.on{background:linear-gradient(140deg,#AA4AF4,#FA97E2);transform:scale(1.08)}
+.bb-bars{display:grid;gap:10px;margin-top:18px}
+.bb-bar{display:grid;grid-template-columns:42px minmax(0,1fr) 52px;align-items:center;gap:10px}
+.bb-y{font:italic 900 12px/1 var(--round);color:var(--mute)}
+.bb-bar i{display:block;height:14px;border-radius:999px;background:#CFC7D9;width:100%;transform-origin:0 50%;transition:transform 1.4s var(--ease)}
+.bb-bar b{font-size:13px;font-weight:700;color:var(--mute);text-align:right}
+.bb-bar.now i{background:linear-gradient(90deg,#AA4AF4,#FA97E2);transform:scaleX(.2667)}
+.bb-bar.now b{color:var(--ink)}
+.bb.pre .bb-bar.now i{transform:none}
+@media (max-width:980px){.bb-photo{grid-column:1/-1;grid-row:auto;min-height:0;aspect-ratio:16/10}.bb-self{grid-column:1/7;grid-row:auto}.bb-time{grid-column:7/13;grid-row:auto}}
+@media (max-width:640px){.bb{grid-template-columns:1fr}.bb-photo,.bb-self,.bb-time{grid-column:1/-1}.bb-photo{aspect-ratio:4/3}.bb-photo figcaption b{font-size:21px}.bb-t{border-radius:22px}}
 .bgx-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(24px,4vw,72px);margin-top:clamp(40px,5vw,72px);align-items:stretch}
 .bgx-photo{position:relative;margin:0;border-radius:var(--r-lg);overflow:hidden;min-height:380px;background:#2A2431}
 .bgx-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
@@ -635,6 +670,13 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .cr-ctl button:hover:not(:disabled){background:#DCD8E2}
 .cr-ctl button:disabled{opacity:.38;cursor:default}
 .vcards .cr-track{grid-auto-columns:min(78vw,300px)}
+/* four steps fit the column on desktop: no scroll, no arrows; phones swipe with dots */
+@media (min-width:1024px){.cr-4 .cr-track{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:6px 0 10px;overflow:visible}}
+.cr-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.cr-dots button{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:#D9D4E0;cursor:pointer;transition:width .25s ease,background-color .25s ease}
+.cr-dots button[aria-current="true"]{width:22px;background:var(--violet-d)}
+.cr-dots.none{display:none}
+.cr-dots button:focus-visible{outline:3px solid var(--violet-d);outline-offset:3px}
 /* ---------- seam: interactive tuning line ---------- */
 .seam2{position:relative;height:clamp(96px,10vw,140px);margin:0 auto;max-width:calc(var(--max) + var(--gut)*2);padding-inline:var(--gut);touch-action:pan-y;cursor:pointer}
 .sm-svg{display:block;width:100%;height:100%;overflow:visible}
@@ -1113,6 +1155,7 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .foot-links a:hover,.foot-ext a:hover{background:var(--bg-2);color:var(--ink)}
 .foot-ext{padding-left:14px;border-left:1px solid var(--line)}
 .foot-ext a{color:var(--violet-d)}
+.foot-ext a.kr{font-family:var(--kr);font-style:normal;font-weight:600;font-size:14px}
 .foot-links a:focus-visible,.foot-ext a:focus-visible{outline:3px solid var(--violet-d);outline-offset:1px}
 .foot-bot{justify-content:center;text-align:center}
 .foot-bot small{font-size:12.5px;font-weight:500}
@@ -1159,6 +1202,28 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .wc-i.is-dim{opacity:.3;filter:grayscale(.85)}
 @media (prefers-reduced-motion:no-preference){.wcat.is-js[data-g]:not([data-g="all"]) .wc-i:not(.is-dim) .wc-art{animation:wcPop .5s var(--ease) both;animation-delay:calc(var(--n,0) * 50ms)}}
 @keyframes wcPop{from{transform:translateY(8px) scale(.94)}to{transform:none}}
+/* 5.1 preview: tapping a widget opens its real app render in a row right under it */
+.wcat.is-js .wc-i{cursor:pointer;border-radius:18px;outline:0}
+.wcat.is-js .wc-i:focus-visible .wc-art{outline:3px solid var(--violet-d);outline-offset:3px}
+.wc-i.is-on .wc-art{box-shadow:0 0 0 3px #FFFFFF,0 0 0 5px var(--violet-d),0 22px 30px -18px rgba(60,20,90,.55)}
+.wc-i.is-on b{color:var(--violet-d)}
+.wc-pv{grid-column:1/-1;position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:clamp(18px,3vw,48px);margin:4px 0 6px;padding:clamp(18px,2.4vw,32px);border-radius:28px;background:#FFFFFF;box-shadow:0 0 0 1px rgba(22,18,27,.05),0 30px 50px -36px rgba(60,20,90,.45)}
+.wc-pv[hidden]{display:none}
+.wc-pv::before{content:"";position:absolute;top:-8px;left:var(--x,50%);width:16px;height:16px;background:#FFFFFF;transform:translateX(-50%) rotate(45deg);border-radius:3px 0 0 0;box-shadow:-1px -1px 0 rgba(22,18,27,.05)}
+.wc-pv-st{position:relative;display:grid;place-items:center;min-height:clamp(200px,20vw,280px);padding:clamp(16px,2vw,28px);border-radius:20px;background:linear-gradient(160deg,#F3EDFA,#FBEFF6)}
+.wc-pv-st img{display:block;max-width:100%;max-height:clamp(170px,17vw,240px);width:auto;height:auto;border-radius:clamp(14px,1.4vw,20px);box-shadow:0 24px 40px -24px rgba(60,20,90,.5)}
+.wc-pv-st img.ic{max-height:120px;border-radius:22%;box-shadow:none}
+.wc-pv-tx .wc-g{margin-top:0}
+.wc-pv-tx h4{margin-top:8px;font-size:clamp(22px,2vw,28px);font-weight:700;letter-spacing:-.03em}
+.wc-pv-tx p{margin-top:8px;font-size:15.5px;line-height:1.65;color:var(--ink-2);word-break:keep-all}
+.wc-pv-tx .ex{margin-top:14px;padding:12px 14px;border-radius:14px;background:#F7F4FA;font-size:14.5px;color:var(--ink)}
+.wc-pv-tx .ex::before{content:"예시 · ";font-weight:700;color:var(--violet-d)}
+.wc-pv-tx .sz{margin-top:10px;font-size:13px;color:var(--mute)}
+.wc-pv-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;border-radius:50%;background:#F3F0F7;color:var(--ink);font-size:14px;cursor:pointer}
+.wc-pv-x:focus-visible{outline:3px solid var(--violet-d);outline-offset:1px}
+@media (prefers-reduced-motion:no-preference){.wc-pv{animation:wcPv .4s var(--ease) both}.wc-pv-st img{animation:wcPop .5s var(--ease) both}}
+@keyframes wcPv{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (max-width:760px){.wc-pv{grid-template-columns:1fr;padding:14px 14px 18px}.wc-pv-st{min-height:180px}.wc-pv-tx{padding:0 4px}.wc-pv-tx h4{padding-right:40px}}
 @media (max-width:1100px){.wcat .wc-grid,.wcat.is-js .wc-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media (max-width:760px){.wcat .wc-grid,.wcat.is-js .wc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 .wc-i > span:last-child{display:none}}
@@ -1197,6 +1262,8 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .dw-card > img{border-radius:0;box-shadow:none;filter:drop-shadow(0 18px 24px rgba(60,20,90,.4))}
 .dp-glow img{border-radius:0;filter:drop-shadow(0 0 3px rgba(255,255,255,.95)) drop-shadow(0 0 16px rgba(170,74,244,.6)) drop-shadow(0 0 30px rgba(250,151,226,.35))}
 .dp-glow.beam::before{content:none}
+.dp-glow.snack{width:min(200px,66%)}
+.dp-glow.snack img{border-radius:16px}
 /* close: smaller "통하면," next to the full-size D! mark */
 .close h2.close-h{display:flex;align-items:center;justify-content:center;gap:.12em}
 .ch-t{font-size:.62em;letter-spacing:-.045em}
@@ -1500,7 +1567,7 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .tk.tk-big.flip .tk-in{transform:rotateY(180deg)}
 .tk.tk-big .tk-in{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .tmd.flipped .tmd-g{opacity:0}
-.tmd-stage::after{content:"눌러서 뒷면 보기";position:absolute;right:4px;top:-26px;font:600 12px/1 var(--kr);color:var(--mute)}
+.tmd-stage::after{content:"눌러서 뒷면 보기";position:absolute;left:50%;transform:translateX(-50%);top:-26px;white-space:nowrap;font:600 12px/1 var(--kr);color:var(--mute)}
 /* standard consent */
 .tc-agree{margin-top:12px;padding:12px 14px;border-radius:16px;background:#F7F4FA}
 .tc-agree .tc-ok{margin-top:0;font-size:14px;color:var(--ink)}
@@ -1514,6 +1581,7 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .tc-pol dl div{display:grid;grid-template-columns:64px 1fr;gap:8px}
 .tc-pol dt{font-weight:700;color:var(--ink)}
 .tc-pol dd{margin:0}
+.tc-pol a{color:var(--violet-d);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 /* discard effects */
 .fx-dust{position:absolute;left:-40px;top:-100px;pointer-events:none}
 .fx-dust-src{position:absolute;inset:0}
@@ -2019,6 +2087,42 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .hc-nado{left:calc(50% + 352px);top:-30px}
 .hc-nado{left:calc(50% + 398px);top:-14px;--r:8deg}
 /* Q&A: tighter bottom now that closed cards are compact, plus a contact line */
+/* ---------- 07 Q&A: title rail on the left, one quiet accordion on the right ---------- */
+.faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:clamp(32px,6vw,96px);align-items:start;padding-top:22px;border-top:1px solid var(--line)}
+.faq-side{position:sticky;top:96px}
+.faq-side .h-xl{margin-top:18px}
+.faq-side .lead{margin-top:16px;max-width:22em}
+.faq-help{margin-top:clamp(24px,3vw,40px);padding-top:20px;border-top:1px solid var(--line)}
+.faq-help p{font-size:15px;line-height:1.6;color:var(--ink-2)}
+.faq-help p a{color:var(--violet-d);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.faq-cta{display:inline-flex;align-items:center;gap:6px;margin-top:16px;height:44px;padding:0 20px;border-radius:999px;background:var(--ink);color:#FFFFFF;font:700 15px/1 var(--kr);text-decoration:none;transition:transform .3s var(--ease)}
+.faq-cta:hover{transform:translateY(-2px)}
+.faq-help a:focus-visible,.faq-cta:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px}
+.faq-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.faq-tabs[hidden]{display:none}
+.faq-tabs button{height:38px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:#FFFFFF;color:var(--ink-2);font:600 14.5px/1 var(--kr);cursor:pointer;transition:background-color .25s ease,color .25s ease,border-color .25s ease}
+.faq-tabs button:hover{border-color:rgba(22,18,27,.25)}
+.faq-tabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#FFFFFF}
+.faq-tabs button:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px}
+.faq-list{border-top:1px solid var(--line)}
+.faq-i{border-bottom:1px solid var(--line)}
+.faq-i[hidden]{display:none}
+.faq-h{margin:0;font:inherit}
+.faq-b{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;padding:clamp(20px,2vw,26px) 4px;border:0;background:none;color:var(--ink);font:700 clamp(17px,1.4vw,20px)/1.45 var(--kr);letter-spacing:-.025em;text-align:left;cursor:pointer;transition:color .25s ease}
+.faq-b:hover{color:var(--violet-d)}
+.faq-b:focus-visible{outline:3px solid var(--violet-d);outline-offset:2px;border-radius:8px}
+.faq-b i{position:relative;flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--bg-2);transition:background-color .3s ease,transform .4s var(--ease)}
+.faq-b i::before,.faq-b i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;border-radius:2px;background:var(--ink);transition:background-color .3s ease}
+.faq-b i::after{transform:rotate(90deg)}
+.faq-b[aria-expanded="true"] i{background:var(--ink);transform:rotate(45deg)}
+.faq-b[aria-expanded="true"] i::before,.faq-b[aria-expanded="true"] i::after{background:#FFFFFF}
+.faq-a{display:grid;grid-template-rows:1fr}
+.faq-a > div{overflow:hidden;min-height:0}
+.faq-a p{margin:0;padding:0 56px 24px 4px;font-size:15.5px;line-height:1.75;color:var(--ink-2);word-break:keep-all}
+.faq.is-js .faq-a{grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.faq.is-js .faq-i.on .faq-a{grid-template-rows:1fr}
+/* phones: the help line drops below the list */
+@media (max-width:860px){.faq{display:flex;flex-direction:column;gap:0}.faq-side{display:contents}.faq-side .lab{order:0}.faq-side .h-xl{order:1;margin-top:14px}.faq-side .lead{order:2}.faq-main{order:3;margin-top:28px}.faq-help{order:4;width:100%;border-top:0;margin-top:20px;padding-top:0}.faq-a p{padding-right:8px}.faq-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut)}.faq-tabs::-webkit-scrollbar{display:none}.faq-tabs button{flex:0 0 auto;padding:0 14px}}
 .qa{padding-bottom:clamp(40px,5vw,72px)}
 .qa + .close,#close{padding-top:clamp(48px,6vw,88px)}
 .qa-more{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;margin:clamp(20px,2.4vw,28px) 0 0;padding:16px 20px;border-radius:var(--r-md);background:var(--bg-2);font:500 15px/1.5 var(--kr);color:var(--ink-2);text-align:center}
@@ -2301,11 +2405,22 @@ html{background:var(--edge-b,var(--bg))}
       <span class="lab"><b>02</b>Background</span>
       <div><h2 class="h-xl" id="bg-h">피드는 넓어졌지만,<br><mark>친구는 멀어졌어요.</mark></h2><p class="lead">모두가 보는 곳에선 주변 시선 때문에 잘 안 올리게 돼요. 쓰다 만 글, 올릴지 말지 고민하는 사진, 친한 친구의 요즘 소식은 추천 영상과 복잡한 미디어 뉴스 사이로 흘러가요.</p></div>
     </div>
-    <div class="bgx-grid">
-      <figure class="bgx-photo rv"><img src="assets/bg-friends.jpg" alt="생일 케이크 촛불 앞에 모여 웃고 박수 치는 지우, 소라, 나리" width="1200" height="900" loading="lazy"><figcaption>보여주고 싶은 사람은 결국, 이 몇 명이에요</figcaption></figure>
-      <div class="stats">
-      <div class="stat rv"><div class="n disp">71<small>%</small></div><p>17일 동안 한 번 이상, 글을 쓰고도 끝내 올리지 않은 페이스북 이용자의 비율이에요.</p><cite>Das &amp; Kramer, “Self-Censorship on Facebook”, ICWSM 2013</cite></div>
-      <div class="stat rv"><p class="sr">2003년 하루 150분에서 2020년 하루 40분으로 줄었어요.</p><div class="fqn2" aria-hidden="true"><span class="n2-v"><span class="n2-y">2003</span><span class="disp n2-n">150<small>분</small></span></span><span class="n2-ar"><svg viewBox="0 0 64 24" focusable="false"><path d="M2 12H58M48 3l11 9-11 9" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="n2-v"><span class="n2-y">2020</span><span class="disp n2-n">40<small>분</small></span></span></div><p>15–24세가 하루에 친구와 직접 만나 보내는 시간이 2003년에서 2020년 사이 이렇게 줄었어요.</p><cite>미국 공중보건총감 권고문 「Our Epidemic of Loneliness and Isolation」, 2023</cite></div>
+    <div class="bb" id="bgxBento">
+      <figure class="bb-t bb-photo rv"><img src="assets/bg-friends.jpg" alt="생일 케이크 촛불 앞에 모여 웃고 박수 치는 지우, 소라, 나리" width="1200" height="900" loading="lazy"><figcaption><span class="bb-k">Close friends_</span><b>보여주고 싶은 사람은<br>결국, 이 몇 명이에요.</b></figcaption></figure>
+      <div class="bb-t bb-self rv" tabindex="0" aria-label="글을 쓰고도 올리지 않은 페이스북 이용자 71%. 누르면 다시 보여요.">
+        <div class="bb-head"><span class="bb-k">쓰다 만 글</span><span class="bb-num disp"><span data-to="71" data-from="0">71</span><small>%</small></span></div>
+        <div class="bb-dots" aria-hidden="true"></div>
+        <p>17일 동안 한 번 이상, 글을 쓰고도 끝내 올리지 않은 페이스북 이용자의 비율이에요. <em>100명 중 71명</em>이 망설였어요.</p>
+        <cite>Das &amp; Kramer, “Self-Censorship on Facebook”, ICWSM 2013</cite>
+      </div>
+      <div class="bb-t bb-time rv" tabindex="0" aria-label="15–24세가 하루에 친구와 직접 만나 보내는 시간, 2003년 150분에서 2020년 40분. 누르면 다시 보여요.">
+        <div class="bb-head"><span class="bb-k">친구와 직접 만나는 시간 · 하루</span><span class="bb-num disp"><span data-to="40" data-from="150">40</span><small>분</small></span></div>
+        <div class="bb-bars" aria-hidden="true">
+          <div class="bb-bar was"><span class="bb-y">2003</span><i></i><b>150분</b></div>
+          <div class="bb-bar now"><span class="bb-y">2020</span><i></i><b>40분</b></div>
+        </div>
+        <p>15–24세가 친구와 직접 만나 보내는 시간이 17년 사이 <em>4분의 1</em>로 줄었어요.</p>
+        <cite>미국 공중보건총감 권고문 「Our Epidemic of Loneliness and Isolation」, 2023</cite>
       </div>
     </div>
     <div class="bgx-people" id="target">
@@ -2489,7 +2604,7 @@ html{background:var(--edge-b,var(--bg))}
         <div class="wc-top"><p class="wc-title"><span class="wc-plus" aria-hidden="true">+</span>위젯 추가하기 <small>14</small></p><div class="wc-tabs" role="group" aria-label="갈래별로 비춰 보기" hidden><button type="button" class="wc-tab" data-g="all" aria-pressed="true">전체<small>14</small></button><button type="button" class="wc-tab" data-g="basic" aria-pressed="false">기본<small>6</small></button><button type="button" class="wc-tab" data-g="record" aria-pressed="false">기록<small>3</small></button><button type="button" class="wc-tab" data-g="together" aria-pressed="false">함께<small>3</small></button><button type="button" class="wc-tab" data-g="media" aria-pressed="false">미디어<small>2</small></button></div></div>
         <ul class="wc-grid" id="wcGrid"><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-social.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>소셜</b><span>여러 SNS 계정을 프로필에 연결해요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-status.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>상태</b><span>이모지나 한 줄로 지금 기분·상태를 나눠요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-text.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>텍스트</b><span>한 줄 메모를 가볍게 남겨요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-image.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>이미지</b><span>사진으로 추억을 나눠요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-music.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>음악</b><span>요즘 자주 듣는 노래를 담아요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-video.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>영상</b><span>짧은 영상으로 일상을 전해요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-todo.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>To-do</b><span>카테고리별 할 일과 이번 주 기록</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-dday.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>D-Day</b><span>기다리는 날까지 함께 세요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-post.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>포스트</b><span>블로그 글을 쓰고 플래터에 카드로 보여줘요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-guestbook.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>방명록</b><span>친구가 남긴 안부에 답글을 달아요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-sticker.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>스티커 보드</b><span>친구들이 스티커를 붙여줘요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-together.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>Together</b><span>친구를 태그하고 같이 찍은 네 컷을 올려요</span></li><li class="wc-i" data-g="media"><span class="wc-art"><img src="assets/wa-gif.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">미디어</em><b>GIF</b><span>움직이는 반짝임을 더해요</span></li><li class="wc-i" data-g="media"><span class="wc-art"><img src="assets/wa-playlist.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">미디어</em><b>플레이리스트</b><span>곡을 모아 들려줘요</span></li></ul>
       </div>
-      <p class="wc-note">지금 앱의 위젯 추가 화면과 같은 구성이에요. 갈래를 누르면 그 위젯들만 비춰요. ‘곧 열려요’ 위젯은 뺐어요.</p>
+      <p class="wc-note">지금 앱의 위젯 추가 화면과 같은 구성이에요. 갈래를 누르면 그 위젯들만 비추고, 위젯을 누르면 실제 모습을 미리 볼 수 있어요. ‘곧 열려요’ 위젯은 뺐어요.</p>
     </div>
 
     <div class="wx-part" id="wx-ditto">
@@ -2497,9 +2612,9 @@ html{background:var(--edge-b,var(--bg))}
         <span class="lab"><b>5.2</b>Ditto</span>
         <div><h3 class="h-l">나도 함께한 사진이 <mark>빛나면</mark>, 디토할 수 있어요</h3><p class="lead">그날의 나도 거기 있었다는 표시예요. 가져온 조각에는 누구에게서 왔는지가 그대로 붙어 있어요.</p></div>
       </div>
-      <div class="cr" data-cr>
+      <div class="cr cr-4" data-cr data-dots>
         <ol class="cr-track" tabindex="0" aria-label="디토 과정">
-          <li class="cr-card dp" style="--bg:#F6F2E6"><div class="dp-m"><span class="dp-glow beam"><img src="assets/wd-glow.webp" alt="뒤에서 은은하게 빛나는 나리의 ‘🫖 내 첫 컵’ 사진 위젯" width="462" height="603" loading="lazy"></span></div><p><b><span class="vc-n">1</span>빛나는 사진.</b> 주인이 디토를 열어 둔 사진은 뒤에서 은은하게 빛나요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</p></li>
+          <li class="cr-card dp" style="--bg:#F6F2E6"><div class="dp-m"><span class="dp-glow beam snack"><img src="assets/ws-snack.webp" alt="뒤에서 은은하게 빛나는 소라의 ‘🧺 간식 부자’ 사진 위젯" width="402" height="543" loading="lazy"></span></div><p><b><span class="vc-n">1</span>빛나는 사진.</b> 주인이 디토를 열어 둔 사진은 뒤에서 은은하게 빛나요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</p></li>
           <li class="cr-card dp" style="--bg:#EFE7FA"><div class="dp-m dp-ui"><div class="mui dp-sheet" role="img" aria-label="디토 시트. 소라가 올린, 둘이 함께 간 피크닉 사진 ‘🧺 간식 부자’를 라이프에 두기로 고르고, 디토 버튼이 보랏빛으로 절반쯤 차오른 상태"><span class="ma-grab"></span><img class="tw-ph dt-thumb" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><p class="dt-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.9 6.1L20 10l-6.1 1.9L12 18l-1.9-6.1L4 10l6.1-1.9z"/></svg>내 플래터로 가져오기</p><p class="dt-q">어디에 둘까요?</p><div class="dt-seg"><span>대표</span><span class="on">라이프</span></div><div class="dt-btn half"><span class="dt-fill"></span><span class="dt-lbl"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg><b class="l2">계속 누르세요</b></span></div></div></div><p><b><span class="vc-n">2</span>꾹 눌러 가져오기.</b> 어디에 둘지 고르고 3초 동안 누르면 보랏빛이 차올라요. 중간에 떼면 취소돼요.</p></li>
           <li class="cr-card dp" style="--bg:#F1E9F8"><div class="dp-m"><figure class="dp-anno dp-dw" role="img" aria-label="지우의 플래터에 놓인 디토 위젯. 소라의 ‘🧺 간식 부자’ 사진, 왼쪽 아래 @soramaybe 출처 칩, 오른쪽 위 디토 배지"><span class="dw-card"><img src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><span class="dw-chip"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">@soramaybe</span><svg class="dw-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span><span class="dp-c dp-c1">디토 배지</span><span class="dp-c dp-c2">출처 칩 · 소라</span></figure></div><p><b><span class="vc-n">3</span>출처가 남아요.</b> 가져온 사진엔 누구에게서 왔는지 칩과 디토 배지가 붙고, 친구에게도 알림이 가요.</p></li>
           <li class="cr-card dp" style="--bg:#F4ECFA"><div class="dp-m dp-ui"><div class="mui dp-done" role="img" aria-label="디토 완료 화면. ‘🧺 간식 부자’, 그날 같이 있었던 순간을 내 라이프에도 남겼어요, 소라에게서 가져옴"><span class="dt-big"><img class="tw-ph" src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><svg class="dt-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></span><p class="dt-k">디토 완료</p><p class="dt-t">🧺 간식 부자</p><p class="dt-d">그날 같이 있었던 순간, 내 라이프에도 남겼어요</p><span class="dt-from"><img class="ma-av" src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy"><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>소라에게서 가져옴</span></div></div><p><b><span class="vc-n">4</span>내 방 한쪽에.</b> 디토가 끝나면 고른 플래터에 자리를 내줘요.</p></li>
@@ -2744,22 +2859,28 @@ html{background:var(--edge-b,var(--bg))}
 
 <section class="qa" id="qa" aria-labelledby="qa-h">
   <div class="wrap">
-    <div class="open rv">
-      <span class="lab"><b>07</b>Q&amp;A</span>
-      <div><h2 class="h-xl" id="qa-h"><mark>궁금한</mark> 것들.</h2><p class="lead">Ditto!의 규칙은 작게 정해서 깊게 만들려는 장치예요.</p></div>
+    <div class="faq">
+      <div class="faq-side rv">
+        <span class="lab"><b>07</b>Q&amp;A</span>
+        <h2 class="h-xl" id="qa-h">자주 묻는<br><mark>질문</mark></h2>
+        <p class="lead">친구, 디토, 출시 초대장까지. 가장 많이 물어본 것만 모았어요.</p>
+        <div class="faq-help"><p>찾는 답이 없나요?<br><a href="mailto:support@ditto.place">support@ditto.place</a>로 보내 주세요.</p><a class="faq-cta" href="#tm">초대장 먼저 받아 두기 <span aria-hidden="true">→</span></a></div>
+      </div>
+      <div class="faq-main">
+        <div class="faq-tabs" role="toolbar" aria-label="질문 갈래" hidden><button type="button" data-g="all" aria-pressed="true">전체</button><button type="button" data-g="friend" aria-pressed="false">친구</button><button type="button" data-g="space" aria-pressed="false">플래터·디토</button><button type="button" data-g="launch" aria-pressed="false">출시·초대장</button></div>
+        <div class="faq-list" id="qgrid">
+        <div class="faq-i" data-g="friend"><h3 class="faq-h"><button type="button" class="faq-b" id="qb1" aria-expanded="false" aria-controls="qa1"><span>왜 친구가 15명까지인가요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa1" role="region" aria-labelledby="qb1"><div><p>사람이 가깝게 챙길 수 있는 관계가 15명 안팎이라는 던바의 연구를 따랐어요. 숫자를 늘리는 대신 이미 소중한 사람과의 거리를 좁혀요.</p></div></div></div>
+        <div class="faq-i" data-g="friend"><h3 class="faq-h"><button type="button" class="faq-b" id="qb2" aria-expanded="false" aria-controls="qa2"><span>친구 신청은 언제 열려요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa2" role="region" aria-labelledby="qb2"><div><p>최근 3주 동안 함께 단 댓글, 같은 그룹에서의 대화, 주고받은 디토가 쌓이면 주파수가 선명해져요. 4일 이상 여러 날에 걸쳐 둘이 함께 주고받은 순간이 있어야 친구 신청이 열려요. 이미 아는 사이라면 아이디나 QR로 바로 신청할 수 있어요.</p></div></div></div>
+        <div class="faq-i" data-g="friend"><h3 class="faq-h"><button type="button" class="faq-b" id="qb3" aria-expanded="false" aria-controls="qa3"><span>친구 신청에는 뭘 적어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa3" role="region" aria-labelledby="qb3"><div><p>짧은 편지(18자)와 상대를 부를 애칭(10자)을 붙일 수 있어요. 둘 다 비워 둬도 신청할 수 있어요.</p></div></div></div>
+        <div class="faq-i" data-g="friend"><h3 class="faq-h"><button type="button" class="faq-b" id="qb4" aria-expanded="false" aria-controls="qa4"><span>친구 신청을 거절하면 알려지나요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa4" role="region" aria-labelledby="qb4"><div><p>아니요. 받은 사람은 거절과 수락 중에 고를 수 있고, 거절해도 보낸 사람에게 알림이 가지 않아요. 모르는 사람이면 차단해서 다시 못 보내게 할 수 있어요.</p></div></div></div>
+        <div class="faq-i" data-g="space"><h3 class="faq-h"><button type="button" class="faq-b" id="qb5" aria-expanded="false" aria-controls="qa5"><span>내 플래터는 누가 볼 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa5" role="region" aria-labelledby="qb5"><div><p>친구로 연결된 사람만 볼 수 있어요. 친구 신청을 수락하면 서로의 플래터를 함께 볼 수 있어요.</p></div></div></div>
+        <div class="faq-i" data-g="space"><h3 class="faq-h"><button type="button" class="faq-b" id="qb7" aria-expanded="false" aria-controls="qa7"><span>디토는 몇 개까지 열어 둘 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa7" role="region" aria-labelledby="qb7"><div><p>내 위젯 중 세 개까지예요. 사진, GIF, 음악, 영상을 열어 둘 수 있고, 열어 둔 위젯은 뒤에서 은은하게 빛나서 친구가 알아볼 수 있어요.</p></div></div></div>
+        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb6" aria-expanded="false" aria-controls="qa6"><span>언제 써 볼 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa6" role="region" aria-labelledby="qb6"><div><p>졸업전시 현장에서 iPhone으로 바로 체험할 수 있어요. 아래에서 출시 초대장을 뽑아 이메일을 남기면, 출시 날 가장 먼저 초대 메일을 보내 드려요. 선착순 1,000석이에요.</p></div></div></div>
+        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb8" aria-expanded="false" aria-controls="qa8"><span>초대장을 뽑으면 뭐가 남아요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa8" role="region" aria-labelledby="qb8"><div><p>좌석 번호와 초대 코드가 발급되고, 고른 아이디가 출시 때까지 예약돼요. 이메일은 출시 초대 메일을 보내는 데만 쓰고, 출시 후 3개월이 지나면 지워요.</p></div></div></div>
+        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb9" aria-expanded="false" aria-controls="qa9"><span>스티커 보드는 누가 고칠 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa9" role="region" aria-labelledby="qb9"><div><p>붙인 사람만요. 붙였던 기기와 브라우저에서 내 스티커를 누르면 옮기고, 돌리고, 크기를 바꾸거나 떼어 버릴 수 있어요. 다른 사람의 스티커는 구경만 할 수 있어요.</p></div></div></div>
+        </div>
+      </div>
     </div>
-    <div class="qgrid" id="qgrid">
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb1" aria-expanded="true" aria-controls="qa1"><span class="qn">Q1</span><span class="qt">왜 친구가 15명까지인가요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa1" role="region" aria-labelledby="qb1"><p>사람이 가깝게 챙길 수 있는 관계가 15명 안팎이라는 던바의 연구를 따랐어요. 숫자를 늘리는 대신 이미 소중한 사람과의 거리를 좁혀요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb2" aria-expanded="true" aria-controls="qa2"><span class="qn">Q2</span><span class="qt">친구 신청은 언제 열려요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa2" role="region" aria-labelledby="qb2"><p>최근 3주 동안 함께 단 댓글, 같은 그룹에서의 대화, 주고받은 디토가 쌓이면 주파수가 선명해져요. 4일 이상 여러 날에 걸쳐 둘이 함께 주고받은 순간이 있어야 친구 신청이 열려요. 이미 아는 사이라면 아이디나 QR로 바로 신청할 수 있어요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb3" aria-expanded="true" aria-controls="qa3"><span class="qn">Q3</span><span class="qt">친구 신청에는 뭘 적어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa3" role="region" aria-labelledby="qb3"><p>짧은 편지(18자)와 상대를 부를 애칭(10자)을 붙일 수 있어요. 둘 다 비워 둬도 신청할 수 있어요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb4" aria-expanded="true" aria-controls="qa4"><span class="qn">Q4</span><span class="qt">친구 신청을 거절하면 알려지나요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa4" role="region" aria-labelledby="qb4"><p>아니요. 받은 사람은 거절과 수락 중에 고를 수 있고, 거절해도 보낸 사람에게 알림이 가지 않아요. 모르는 사람이면 차단해서 다시 못 보내게 할 수 있어요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb5" aria-expanded="true" aria-controls="qa5"><span class="qn">Q5</span><span class="qt">내 플래터는 누가 볼 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa5" role="region" aria-labelledby="qb5"><p>친구로 연결된 사람만 볼 수 있어요. 친구 신청을 수락하면 서로의 플래터를 함께 볼 수 있어요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb6" aria-expanded="true" aria-controls="qa6"><span class="qn">Q6</span><span class="qt">언제 써 볼 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa6" role="region" aria-labelledby="qb6"><p>졸업전시 현장에서 iPhone으로 바로 체험할 수 있어요. 아래에서 출시 초대장을 뽑아 이메일을 남기면, 출시 날 가장 먼저 초대 메일을 보내 드려요. 선착순 1,000석이에요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb7" aria-expanded="true" aria-controls="qa7"><span class="qn">Q7</span><span class="qt">디토는 몇 개까지 열어 둘 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa7" role="region" aria-labelledby="qb7"><p>내 위젯 중 세 개까지예요. 사진, GIF, 음악, 영상을 열어 둘 수 있고, 열어 둔 위젯은 뒤에서 은은하게 빛나서 친구가 알아볼 수 있어요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb8" aria-expanded="true" aria-controls="qa8"><span class="qn">Q8</span><span class="qt">초대장을 뽑으면 뭐가 남아요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa8" role="region" aria-labelledby="qb8"><p>좌석 번호와 초대 코드가 발급되고, 고른 아이디가 출시 때까지 예약돼요. 이메일은 출시 초대 메일을 보내는 데만 쓰고, 출시 후 3개월이 지나면 지워요.</p></div></div>
-      <div class="qcard"><h3 class="qh"><button type="button" class="qbtn" id="qb9" aria-expanded="true" aria-controls="qa9"><span class="qn">Q9</span><span class="qt">스티커 보드는 누가 고칠 수 있어요?</span><span class="pm" aria-hidden="true">+</span></button></h3><div class="qa-a" id="qa9" role="region" aria-labelledby="qb9"><p>붙인 사람만요. 붙였던 기기와 브라우저에서 내 스티커를 누르면 옮기고, 돌리고, 크기를 바꾸거나 떼어 버릴 수 있어요. 다른 사람의 스티커는 구경만 할 수 있어요.</p></div></div>
-    </div>
-    <p class="qa-more"><span>더 궁금한 게 있나요? <a href="mailto:support@ditto.place">support@ditto.place</a>로 보내 주세요.</span><a class="qa-cta" href="#tm">초대장 먼저 받아 두기 <span aria-hidden="true">→</span></a></p>
   </div>
 </section>
 
@@ -2937,7 +3058,7 @@ html{background:var(--edge-b,var(--bg))}
             <div><dt>이용 목적</dt><dd>출시 초대 메일 발송, 아이디 예약, 초대장과 좌석표 표시</dd></div>
             <div><dt>보유 기간</dt><dd>서비스 출시 후 3개월까지 보관하고 지체 없이 파기합니다. 요청하면 언제든 삭제해요.</dd></div>
           </dl>
-          <p>동의를 거부할 수 있으며, 거부하면 초대장 발급이 제한돼요. 초대장 링크를 가진 사람은 이름, 아이디, 한마디를 볼 수 있어요.</p>
+          <p>동의를 거부할 수 있으며, 거부하면 초대장 발급이 제한돼요. 초대장 링크를 가진 사람은 이름, 아이디, 한마디를 볼 수 있어요. <a href="/privacy/" target="_blank" rel="noopener">처리방침 전문 보기</a></p>
         </details>
       </div>
       <div class="tc-wall">
@@ -2962,7 +3083,7 @@ html{background:var(--edge-b,var(--bg))}
     <p class="foot-brand"><img src="assets/wordmark.svg" alt="Ditto!" width="66" height="24" loading="lazy"><span>우리만의 공간</span></p>
     <nav class="foot-nav" aria-label="푸터">
       <ul class="foot-links"><li><a href="#verbs">Why</a></li><li><a href="#solution">Solution</a></li><li><a href="#concept">Concept</a></li><li><a href="#widgets">Widgets</a></li><li><a href="#wx-rooms">Rooms</a></li><li><a href="#friends">Friends</a></li><li><a href="#qa">Q&amp;A</a></li><li><a href="#tm">Invite</a></li></ul>
-      <ul class="foot-ext"><li><a href="/splup/">Guide</a></li><li><a href="/">ditto.place</a></li></ul>
+      <ul class="foot-ext"><li><a href="/splup/">Guide</a></li><li><a class="kr" href="/privacy/">개인정보 처리방침</a></li><li><a class="kr" href="/terms/">이용약관</a></li></ul>
     </nav>
   </div></div>
   <div class="foot-glow"><span class="grain" aria-hidden="true"></span>
@@ -3047,10 +3168,39 @@ html{background:var(--edge-b,var(--bg))}
     });
   })();
 
+  /* ---- 02 background bento: 71 of 100 dots light up; 2020's bar shrinks from 150 to 40 minutes (tap to replay) ---- */
+  (function(){
+    const bb = document.getElementById('bgxBento'); if (!bb) return;
+    const dots = bb.querySelector('.bb-dots'); for (let k = 0; k < 100; k++) dots.appendChild(document.createElement('i'));
+    const ds = [...dots.children], order = ds.map((_, k) => k).sort((x, y) => ((x * 37) % 100) - ((y * 37) % 100));
+    const nums = [...bb.querySelectorAll('[data-to]')];
+    const count = (el, from, to, ms) => { const t0 = performance.now(); const f = t => { const q = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - q, 3); el.textContent = Math.round(from + (to - from) * e); if (q < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); };
+    function play(which){
+      if (!which || which === 'self') { ds.forEach(d => d.classList.remove('on')); order.slice(0, 71).forEach((k, n) => setTimeout(() => ds[k].classList.add('on'), 200 + n * 16)); count(nums[0], 0, 71, 1300); }
+      if (!which || which === 'time') { bb.classList.add('pre'); void bb.offsetWidth; requestAnimationFrame(() => requestAnimationFrame(() => { bb.classList.remove('pre'); count(nums[1], 150, 40, 1400); })); }
+    }
+    if (reduce || !('IntersectionObserver' in window)) { order.slice(0, 71).forEach(k => ds[k].classList.add('on')); return; }
+    nums[0].textContent = '0'; nums[1].textContent = '150'; bb.classList.add('pre');
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); play(); } }, { threshold: .35 });
+    io.observe(bb.querySelector('.bb-self'));
+    bb.querySelector('.bb-self').addEventListener('click', () => play('self'));
+    bb.querySelector('.bb-time').addEventListener('click', () => play('time'));
+    bb.querySelectorAll('.bb-self,.bb-time').forEach(t => t.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); } }));
+  })();
+
   /* ---- card carousels (Apple-style row): native scroll-snap + prev/next ---- */
   document.querySelectorAll('[data-cr]').forEach(cr => {
     const track = cr.querySelector('.cr-track'), ctl = cr.querySelector('.cr-ctl'); if (!track || !ctl) return;
     const prev = ctl.querySelector('.cr-prev'), next = ctl.querySelector('.cr-next');
+    if (cr.hasAttribute('data-dots')) {
+      // swipe + dots instead of arrows: one dot per card, the current one stretches
+      const dots = document.createElement('div'); dots.className = 'cr-dots'; ctl.replaceWith(dots);
+      const cards = [...track.children];
+      cards.forEach((c, i) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', (i + 1) + '단계'); b.addEventListener('click', () => track.scrollTo({ left: c.offsetLeft - track.firstElementChild.offsetLeft, behavior: reduce ? 'auto' : 'smooth' })); dots.appendChild(b); });
+      const upd = () => { const max = track.scrollWidth - track.clientWidth - 2; dots.classList.toggle('none', max <= 0); const i = max <= 0 ? 0 : Math.round(track.scrollLeft / max * (cards.length - 1)); [...dots.children].forEach((b, k) => b.setAttribute('aria-current', k === i)); };
+      track.addEventListener('scroll', () => requestAnimationFrame(upd), { passive: true }); addEventListener('resize', upd); upd();
+      return;
+    }
     ctl.hidden = false;
     const step = () => { const c = track.children[0]; return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 16) : 300; };
     const upd = () => { const max = track.scrollWidth - track.clientWidth - 2; prev.disabled = track.scrollLeft <= 2; next.disabled = track.scrollLeft >= max; ctl.classList.toggle('none', max <= 0); };
@@ -3324,18 +3474,71 @@ html{background:var(--edge-b,var(--bg))}
     }
     chips.forEach(c => c.addEventListener('click', () => sel(c.dataset.g)));
     sel('all');
+    // preview: the real widget as the app draws it (Social and Together show their icon until a capture lands)
+    const PV = [
+      { d: '여러 SNS 계정을 한곳에 모아 프로필에 연결해 둬요.', ex: '쓰는 계정들을 한 위젯에 모아 두기' },
+      { img: 'ws-status.webp', d: '이모지 하나와 짧은 한 줄로 지금 상태를 걸어 둬요.', ex: '🍒 돗자리 챙겨 둠' },
+      { img: 'ws-text.webp', d: '한 줄 메모를 플래터에 붙여 둬요. 친구에게 남기는 말로도 좋아요.', ex: '🍕 늦어도 와, 자리 비워둘게' },
+      { img: 'ws-image.webp', d: '사진 한 장에 제목을 달아 붙여요. 함께한 사진이면 디토를 열어 둘 수도 있어요.', ex: '재민의 🚃 창밖 저장' },
+      { img: 'ws-music.webp', d: '요즘 자주 듣는 노래를 앨범 아트와 함께 보여 줘요.', ex: 'You and I · HANRORO' },
+      { img: 'ws-video.webp', d: '짧은 영상 한 편으로 오늘을 전해요.', ex: '쉬는 날 빵집 투어' },
+      { img: 'ws-todo.webp', d: '카테고리별 할 일을 적고 이번 주에 해낸 것을 모아 봐요.', ex: '📚 이번 주 작은 일', sz: '크기 네 가지 중에서 골라요.' },
+      { img: 'ws-dday.webp', d: '기다리는 날을 정해 두면 남은 날을 함께 세요.', ex: 'D-3 다음 피크닉' },
+      { img: 'ws-post.webp', d: '블로그처럼 글을 쓰면 플래터에는 카드로 보여요.', ex: '도현의 ‘돌아오는 기차에서’' },
+      { img: 'ws-guestbook.webp', d: '친구가 남긴 안부가 쌓이고, 나는 답글을 달아요.', ex: '퇴근하고 바로 갈게, 7시 반 🙌 — from. 준' },
+      { img: 'ws-sticker.webp', d: '친구들이 들러서 스티커를 붙이고 가요. 내 보드는 친구만 꾸밀 수 있어요.', ex: '친구들이 놓고 간 것' },
+      { d: '같이 찍은 네 컷을 올리고 함께한 친구를 태그해요.', ex: '친구와 찍은 네 컷 한 장', sz: '네 컷 방향에 맞춘 크기로 놓여요.' },
+      { img: 'pa-gif.webp', d: '움직이는 사진 한 장으로 플래터에 반짝임을 더해요.', ex: '연습실 거울 앞 한 컷' },
+      { img: 'ws-playlist.webp', d: '좋아하는 곡을 모아 목록으로 보여 줘요.', ex: '📊 전시 보고 나서' }
+    ];
+    const grid = cat.querySelector('.wc-grid');
+    const pv = document.createElement('li'); pv.className = 'wc-pv'; pv.id = 'wcPv'; pv.hidden = true; pv.setAttribute('aria-live', 'polite');
+    pv.innerHTML = '<div class="wc-pv-st"><img alt=""></div><div class="wc-pv-tx"><em class="wc-g"></em><h4></h4><p class="d"></p><p class="ex"></p><p class="sz"></p></div><button type="button" class="wc-pv-x" aria-label="미리보기 닫기">✕</button>';
+    let cur = -1;
+    function place(){
+      if (cur < 0) return;
+      const li = items[cur], top = li.offsetTop; let last = li;
+      items.forEach(x => { if (x.offsetTop === top && items.indexOf(x) > items.indexOf(last)) last = x; });
+      if (last.nextElementSibling !== pv) last.after(pv);
+      pv.style.setProperty('--x', (li.offsetLeft + li.offsetWidth / 2 - pv.offsetLeft) + 'px');
+    }
+    function show(k){
+      if (k === cur) { close(); return; }
+      cur = k; const li = items[k], d = PV[k], im = pv.querySelector('img');
+      items.forEach((x, j) => { x.classList.toggle('is-on', j === k); x.setAttribute('aria-expanded', j === k); });
+      im.className = d.img ? '' : 'ic'; im.src = 'assets/' + (d.img || li.querySelector('.wc-art img').getAttribute('src').replace(/^assets\//, ''));
+      im.alt = li.querySelector('b').textContent + ' 위젯' + (d.img ? ' 실제 모습' : ' 아이콘');
+      pv.querySelector('.wc-g').textContent = li.querySelector('.wc-g').textContent;
+      pv.querySelector('h4').textContent = li.querySelector('b').textContent;
+      pv.querySelector('.d').textContent = d.d; pv.querySelector('.ex').textContent = d.ex;
+      pv.querySelector('.sz').textContent = d.sz || '플래터에서 크기를 바꿀 수 있어요.';
+      pv.hidden = false; pv.style.animation = 'none'; void pv.offsetWidth; pv.style.animation = ''; place();
+    }
+    function close(){ const k = cur; cur = -1; pv.hidden = true; items.forEach(x => { x.classList.remove('is-on'); x.setAttribute('aria-expanded', 'false'); }); if (k >= 0) items[k].focus(); }
+    items.forEach((li, k) => {
+      li.tabIndex = 0; li.setAttribute('role', 'button'); li.setAttribute('aria-controls', 'wcPv'); li.setAttribute('aria-expanded', 'false');
+      li.addEventListener('click', () => show(k));
+      li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(k); } else if (e.key === 'Escape' && cur >= 0) close(); });
+    });
+    pv.querySelector('.wc-pv-x').addEventListener('click', close);
+    pv.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    addEventListener('resize', () => requestAnimationFrame(place));
+    if (items.length === PV.length) { grid.appendChild(pv); show(3); }
   })();
 
-  /* ---- 07 Q&A: equal cards; the answer keeps its room while closed so nothing jumps ---- */
+  /* ---- 07 Q&A: one answer open at a time; chips narrow the list to one group ---- */
   (function(){
-    const g = document.getElementById('qgrid'); if (!g) return;
-    g.classList.add('is-js');
-    g.querySelectorAll('.qcard').forEach(c => {
-      const b = c.querySelector('.qbtn'), a = c.querySelector('.qa-a');
-      const set = on => { c.dataset.open = on ? 'true' : 'false'; b.setAttribute('aria-expanded', on ? 'true' : 'false'); a.setAttribute('aria-hidden', on ? 'false' : 'true'); };
-      b.addEventListener('click', () => set(c.dataset.open !== 'true'));
-      set(false);
-    });
+    const fq = document.querySelector('.faq'), list = document.getElementById('qgrid'); if (!fq || !list) return;
+    fq.classList.add('is-js');
+    const items = [...list.querySelectorAll('.faq-i')], tabs = fq.querySelector('.faq-tabs'), chips = [...tabs.querySelectorAll('button')];
+    const set = (it, on) => { it.classList.toggle('on', on); it.querySelector('.faq-b').setAttribute('aria-expanded', on); it.querySelector('.faq-a').setAttribute('aria-hidden', !on); };
+    items.forEach(it => { set(it, false); it.querySelector('.faq-b').addEventListener('click', () => { const on = !it.classList.contains('on'); items.forEach(x => set(x, false)); set(it, on); }); });
+    tabs.hidden = false;
+    chips.forEach(c => c.addEventListener('click', () => {
+      const g = c.dataset.g; chips.forEach(x => x.setAttribute('aria-pressed', x === c));
+      items.forEach(it => { it.hidden = g !== 'all' && it.dataset.g !== g; if (it.hidden) set(it, false); });
+    }));
+    set(items[0], true);
   })();
 
   /* ---- 06 friends: start the little loops when a step scrolls in ---- */
@@ -3648,6 +3851,7 @@ html{background:var(--edge-b,var(--bg))}
     }
     // issue
     const ERR = { 'note length': '한마디는 30자까지예요.', 'no links': '한마디에 링크는 넣을 수 없어요.', 'consent required': '동의에 체크해 주세요.', 'invalid email': '이메일 주소를 다시 확인해 주세요.', 'email used': '이 이메일로 이미 받은 초대장이 있어요.', 'nickname taken': '방금 누가 이 아이디를 가져갔어요. 다른 아이디로 다시 뽑아 주세요.', 'nickname invalid': '아이디는 영문 소문자 3–16자예요.', 'nickname reserved': '쓸 수 없는 아이디예요.', 'name length': '이름은 10자까지예요.', 'blocked words': '이름이나 한마디를 고운 말로 바꿔 주세요.', 'bad photo': '사진을 다시 찍어 주세요.', 'slow down': '잠깐 쉬었다가 다시 해 주세요.', 'sold out': '1,000장이 모두 나갔어요.' };
+    const escH = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const linkOf = code => location.origin.replace(/\/$/, '') + location.pathname + '?t=' + code;
     function lockForm(t){ dispIn.value = t.name; idIn.value = t.nickname; [dispIn, idIn].forEach(x => x.disabled = true); setHint('ok'); hint.textContent = '이 아이디는 내 거예요.'; go.disabled = true; go.textContent = `내 초대장 No. ${pad(t.no)}`; noteIn.value = t.capsule ? '🔒 봉인된 타임캡슐' : (t.note || ''); noteIn.disabled = true; setPal(t.palette); $('tmRule').textContent = '한 사람당 한 장이에요. 링크로 언제든 다시 볼 수 있어요.'; }
     function done(t, stamp){
@@ -3858,7 +4062,7 @@ html{background:var(--edge-b,var(--bg))}
         if (!t) { $('tcDoneT').textContent = '찾을 수 없는 초대장이에요.'; $('tcDoneD').textContent = '링크를 다시 확인해 주세요.'; document.querySelector('.tc-link').hidden = true; return; }
         if (t.status === 'redeemed' || t.status === 'released') { $('tcDoneT').innerHTML = `초대장 <b>No. ${pad(t.no)}</b>은 이미 사용됐어요.`; $('tcDoneD').textContent = '앱에서 이 코드로 가입을 마쳐서, 링크가 닫혔어요.'; document.querySelector('.tc-link').hidden = true; return; }
         const v = { no: t.no, code: code.toUpperCase(), nickname: t.nickname, name: t.name, palette: t.palette, note: t.note, capsule: t.capsule, created_at: t.created_at };
-        if (own) { done(Object.assign({}, mine, v)); } else { viewing = v; paint(v); tk.hidden = false; $('tmIdle').hidden = true; mach.classList.add('out'); $('tcDoneT').innerHTML = `<b>${t.name}</b>님의 초대장 No. ${pad(t.no)}`; $('tcDoneD').innerHTML = `@${t.nickname} · 링크를 가진 사람만 볼 수 있어요. 나도 한 장 뽑으려면 위에서 이름과 아이디를 적어 보세요.`; $('tcLink').textContent = linkOf(v.code).replace(/^https?:\/\//, ''); }
+        if (own) { done(Object.assign({}, mine, v)); } else { viewing = v; paint(v); tk.hidden = false; $('tmIdle').hidden = true; mach.classList.add('out'); $('tcDoneT').innerHTML = `<b>${escH(t.name)}</b>님의 초대장 No. ${pad(t.no)}`; $('tcDoneD').innerHTML = `@${escH(t.nickname)} · 링크를 가진 사람만 볼 수 있어요. 나도 한 장 뽑으려면 위에서 이름과 아이디를 적어 보세요.`; $('tcLink').textContent = linkOf(v.code).replace(/^https?:\/\//, ''); }
       }).catch(() => {});
     }
     let started = false;
@@ -3889,7 +4093,7 @@ html{background:var(--edge-b,var(--bg))}
     function needFont(fn){ if (fontsOn || fn === 'base') return; fontsOn = true; const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?' + Object.values(FONTS).map(f => f[1]).filter(Boolean).map(f => 'family=' + f).join('&') + '&display=swap'; document.head.appendChild(l); }
     function face(s){
       if (s.kind === 'pack') return `<img class="sbs-pk" src="${packSrc(s.body)}" alt="" draggable="false"><i class="sbs-fin" style="--m:url(${packSrc(s.body)})"></i><span class="sbs-gl" style="--m:url(${packSrc(s.body)})"></span>`;
-      if (s.kind === 'photo') return `<span class="sbs-ph"><img src="${s.photo}" alt="" draggable="false"><i class="sbs-fin"></i></span>${s.body ? `<span class="sbs-cap">${esc(s.body)}</span>` : ''}`;
+      if (s.kind === 'photo') return `<span class="sbs-ph"><img src="${/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(s.photo || '') ? s.photo : ''}" alt="" draggable="false"><i class="sbs-fin"></i></span>${s.body ? `<span class="sbs-cap">${esc(s.body)}</span>` : ''}`;
       const c = COLS[s.color] || COLS.purple;
       const sh = SHAPES[s.shape] ? s.shape : 'pill', fn = FONTS[s.font] ? s.font : 'base'; needFont(fn);
       return `<span class="sbs-tx sh-${sh} fn-${fn}${s.color === 'lemon' ? ' lt' : ''}" style="--a:${c[0]};--b:${c[1]}">${sh === 'circle' ? `<span>${esc(s.body)}</span>` : esc(s.body)}<i class="sbs-fin"></i></span>`;
@@ -4197,7 +4401,7 @@ html{background:var(--edge-b,var(--bg))}
     }
     let raf = 0, lastT = '', lastB = '';
     const tint = () => { raf = 0;
-      const t = colorAt(Math.max(14, parseFloat(getComputedStyle(document.querySelector('.edge-t')).height) + 4)), b = colorAt(innerHeight - Math.max(14, parseFloat(getComputedStyle(document.querySelector('.edge-b')).height) + 4));
+      const t = colorAt(Math.max(14, (parseFloat(getComputedStyle(document.querySelector('.edge-t')).height) || 0) + 4)), b = colorAt(innerHeight - Math.max(14, (parseFloat(getComputedStyle(document.querySelector('.edge-b')).height) || 0) + 4));
       if (t !== lastT) { lastT = t; root.style.setProperty('--edge-t', t); if (tc) tc.setAttribute('content', t); }
       if (b !== lastB) { lastB = b; root.style.setProperty('--edge-b', b); }
     };

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ditto! · 친구들의 하루, 위젯으로</title>
+<meta name="description" content="내 방을 위젯으로 꾸미고, 가까운 친구들과만 나누는 iOS 앱 Ditto!">
+<link rel="canonical" href="https://ditto.place/new/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ditto.place/new/">
+<meta property="og:title" content="Ditto! · 친구들의 하루, 위젯으로">
+<meta property="og:description" content="내 방을 위젯으로 꾸미고, 가까운 친구들과만 나누는 iOS 앱 Ditto!">
+<meta property="og:image" content="https://ditto.place/assets/og/brand-home-v2.jpg">
+<meta property="og:site_name" content="ditto!">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link rel="preload" as="image" href="/assets/ws-snack.webp">
+<style>
+  /* /new — one screen: splash → wordmark, one line, one living widget tile, footer with the button */
+  :root { --ink: #16121B; --ink-2: #4A4352; --mute: #6E6578; --violet-d: #8A3FB8; --ease: cubic-bezier(.22,1,.36,1); color-scheme: light; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow-x: clip; }
+  body { min-height: 100svh; display: flex; flex-direction: column; background: #FFFFFF; color: var(--ink); font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, .tile:focus-visible { outline: 3px solid var(--violet-d); outline-offset: 4px; border-radius: 12px; }
+
+  /* splash: the mark on violet, then a circle opens onto the page (once per visit) */
+  .splash { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; background: linear-gradient(150deg, #8A3FB8, #AA4AF4 55%, #E07BD8); color: #FFFFFF; clip-path: circle(150% at 50% 50%); }
+  .splash svg { width: 92px; height: auto; }
+  .splash.go { transition: clip-path .9s cubic-bezier(.7,0,.2,1); clip-path: circle(0% at 50% 50%); }
+  .splash.go svg { transition: transform .5s var(--ease), opacity .4s ease; transform: scale(.6); opacity: 0; }
+  @media (prefers-reduced-motion: no-preference) { .splash svg { animation: beat 1s var(--ease) both; } }
+  @keyframes beat { 0% { transform: scale(.4); opacity: 0; } 60% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); } }
+
+  main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(18px, 2.4vw, 28px); padding: clamp(40px, 7vh, 88px) 16px 32px; text-align: center; }
+  /* the wordmark is the hero: ink letters with a holo band and a glare that follow the pointer (same light as the invite ticket) */
+  h1 { margin: 0; line-height: 0; }
+  h1 a { display: inline-block; perspective: 800px; }
+  .wm { --hx: 30%; --hy: 20%; position: relative; display: block; width: clamp(220px, 30vw, 420px); aspect-ratio: 370 / 134; -webkit-mask: url(/assets/wordmark.svg) center / contain no-repeat; mask: url(/assets/wordmark.svg) center / contain no-repeat; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .3s ease-out; }
+  .wm i { position: absolute; inset: 0; }
+  .wm .base { background: linear-gradient(160deg, #2B2036 0%, #16121B 40%, #16121B 70%, #2E2140 100%); }
+  .wm .holo { mix-blend-mode: screen; opacity: .9; background: linear-gradient(115deg, rgba(255,255,255,0) 41%, rgba(250,151,226,.9) 45%, rgba(199,155,255,.95) 48.5%, rgba(255,255,255,.95) 50%, rgba(159,216,255,.9) 52%, rgba(255,255,255,0) 56%) var(--hx) var(--hy) / 260% 260%; }
+  .wm .glare { mix-blend-mode: screen; background: radial-gradient(circle at var(--hx) var(--hy), rgba(236,214,255,.55), rgba(255,255,255,0) 22%); }
+  .tag { font-size: clamp(17px, 1.5vw, 21px); font-weight: 700; letter-spacing: -.03em; color: var(--ink); word-break: keep-all; }
+  .tag em { font-style: normal; color: var(--violet-d); }
+  .sub { margin-top: -14px; font-size: clamp(14px, 1.1vw, 15.5px); color: var(--mute); }
+
+  /* the tile: friends' photo widgets roll past in strips; hover/tap turns it into a card that names whose it is */
+  .tile { --w: clamp(230px, 22vw, 300px); position: relative; width: var(--w); margin-top: clamp(8px, 2vw, 24px); perspective: 900px; cursor: pointer; outline: 0; -webkit-tap-highlight-color: transparent; }
+  .card { position: relative; padding: 0; border-radius: 40px; background: #FFFFFF; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: padding .5s var(--ease), border-radius .5s var(--ease), box-shadow .5s var(--ease), transform .25s ease-out; }
+  .ph { position: relative; aspect-ratio: 402 / 543; border-radius: 40px; overflow: hidden; background: #EEE9F4; transition: border-radius .5s var(--ease); }
+  .ph img, .strip { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ph img { object-fit: cover; object-position: 50% 0; transform: scale(1.06); }
+  .strip { background-size: cover; background-position: 50% 0; clip-path: inset(0 var(--r) 0 var(--l)); }
+  .meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; height: 0; overflow: hidden; opacity: 0; text-align: left; transition: height .5s var(--ease), opacity .3s ease, padding .5s var(--ease); }
+  .meta b { display: block; font-size: 22px; font-weight: 800; letter-spacing: -.03em; }
+  .meta small { display: block; margin-top: 2px; font-size: 13px; color: var(--mute); }
+  .meta span:last-child { font-size: 13px; font-weight: 700; color: var(--violet-d); white-space: nowrap; }
+  .tile.on .card { padding: 10px 10px 0; border-radius: 30px; box-shadow: 0 30px 60px -28px rgba(60,20,90,.45), 0 0 0 1px rgba(22,18,27,.05); }
+  .tile.on .ph { border-radius: 22px; }
+  .tile.on .meta { height: 70px; opacity: 1; padding: 0 6px 14px; }
+  .hint { margin-top: 14px; font-size: 13px; color: var(--mute); transition: opacity .3s ease; }
+
+  .foot { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px 20px; padding: 18px 28px calc(18px + env(safe-area-inset-bottom)); font-size: 13.5px; }
+  .foot .legal { color: var(--mute); line-height: 1.6; }
+  .foot .legal a:hover, .foot nav a:hover { color: var(--ink); }
+  .foot nav { display: flex; gap: 28px; font-weight: 600; }
+  .btn { justify-self: end; display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 14px; background: var(--ink); color: #FFFFFF; font-size: 15.5px; font-weight: 700; transition: transform .3s var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn small { font-size: 11px; font-weight: 600; opacity: .7; display: block; line-height: 1; margin-bottom: 3px; }
+  .btn span { display: block; line-height: 1.1; text-align: left; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    main > * { animation: up .9s var(--ease) both; animation-play-state: var(--play, running); }
+    main > :nth-child(2) { animation-delay: .1s; } main > :nth-child(3) { animation-delay: .12s; } main > :nth-child(4) { animation-delay: .2s; }
+  }
+  @keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 760px) {
+    .foot { grid-template-columns: 1fr; justify-items: center; text-align: center; padding-inline: 16px; }
+    .btn { justify-self: stretch; justify-content: center; height: 54px; order: -1; }
+    .foot nav { order: 0; }
+    .foot .legal { order: 1; }
+  }
+</style>
+</head>
+<body>
+  <div class="splash" id="splash" aria-hidden="true" hidden><svg viewBox="0 0 214 204"><path fill="currentColor" d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path fill="currentColor" d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle fill="currentColor" cx="141.594" cy="187.204" r="16.75"/></svg></div>
+  <main>
+    <h1><a href="/" aria-label="Ditto!"><span class="wm" id="wm" aria-hidden="true"><i class="base"></i><i class="holo"></i><i class="glare"></i></span></a></h1>
+    <p class="tag">친구들의 하루, <em>위젯으로.</em></p>
+    <p class="sub">가까운 친구 15명과만 나누는 iPhone 앱</p>
+    <div class="tile" id="tile" role="button" tabindex="0" aria-pressed="false" aria-label="친구의 위젯 보기">
+      <div class="card" id="card">
+        <div class="ph" id="ph"><img id="img" src="/assets/ws-snack.webp" alt="소라의 사진 위젯 ‘간식 부자’" width="402" height="543"></div>
+        <div class="meta" aria-live="polite"><span><b id="nm">소라</b><small id="hd">@soramaybe</small></span><span>ditto.place</span></div>
+      </div>
+      <p class="hint" id="hint">올려 보면 누구의 위젯인지 보여요</p>
+    </div>
+  </main>
+  <footer class="foot">
+    <p class="legal"><a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a><br>© 2026 Ditto! · Halo Studio</p>
+    <nav aria-label="더 보기"><a href="/">자세히 보기</a><a href="mailto:support@ditto.place">문의</a></nav>
+    <a class="btn" href="/#tm"><span><small>iPhone · 선착순 1,000명</small>출시 초대장 받기</span></a>
+  </footer>
+<script>
+  (function(){
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // splash once per visit
+    const sp = document.getElementById('splash');
+    let seen = false; try { seen = sessionStorage.getItem('ditto.new.splash') === '1'; sessionStorage.setItem('ditto.new.splash', '1'); } catch (e) {}
+    if (!reduce && !seen) {
+      sp.hidden = false; document.documentElement.style.setProperty('--play', 'paused');
+      setTimeout(() => { sp.classList.add('go'); document.documentElement.style.setProperty('--play', 'running'); }, 1100);
+      setTimeout(() => sp.remove(), 2100);
+    } else sp.remove();
+
+    // wordmark light: follows the pointer anywhere on the page; drifts on its own on touch screens or when the pointer rests
+    const wm = document.getElementById('wm');
+    if (!reduce) {
+      let last = 0, raf = 0;
+      const light = (x, y) => { wm.style.setProperty('--hx', (x * 100).toFixed(1) + '%'); wm.style.setProperty('--hy', (y * 100).toFixed(1) + '%'); };
+      addEventListener('pointermove', e => { if (e.pointerType !== 'mouse') return; last = performance.now(); const r = wm.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height; light(Math.max(-.2, Math.min(1.2, x)), Math.max(-.2, Math.min(1.2, y))); const dx = Math.max(-1, Math.min(1, x - .5)), dy = Math.max(-1, Math.min(1, y - .5)); wm.style.setProperty('--rx', (-dy * 10).toFixed(2) + 'deg'); wm.style.setProperty('--ry', (dx * 14).toFixed(2) + 'deg'); }, { passive: true });
+      const drift = t => { raf = requestAnimationFrame(drift); if (performance.now() - last < 2500 || document.hidden) return; const q = (t / 3200) % 1; light(-.1 + q * 1.2, .25 + Math.sin(q * Math.PI * 2) * .2); };
+      raf = requestAnimationFrame(drift);
+    }
+
+    // friends' photo widgets roll past in vertical strips (left to right), one every ~2s
+    const F = [
+      { src: 'ws-snack.webp', n: '소라', h: 'soramaybe', a: '‘간식 부자’' },
+      { src: 'ws-cup.webp', n: '나리', h: 'nariday', a: '‘내 첫 컵’' },
+      { src: 'ws-jiu.webp', n: '지우', h: 'jiuallday', a: '‘한 번 더’' },
+      { src: 'ws-haeun.webp', n: '하은', h: 'haeunzip', a: '' },
+      { src: 'ws-image.webp', n: '재민', h: 'jaeminarchive', a: '‘창밖 저장’' }
+    ];
+    F.forEach(f => { const i = new Image(); i.src = '/assets/' + f.src; });
+    const tile = document.getElementById('tile'), card = document.getElementById('card'), ph = document.getElementById('ph'), img = document.getElementById('img');
+    const nm = document.getElementById('nm'), hd = document.getElementById('hd'), hint = document.getElementById('hint');
+    let k = 0, held = false, busy = false;
+    const N = 7;
+    function show(j){
+      const f = F[j]; nm.textContent = f.n; hd.textContent = '@' + f.h; img.alt = (f.n + '의 사진 위젯 ' + f.a).trim();
+      if (reduce) { img.src = '/assets/' + f.src; return; }
+      busy = true;
+      const strips = [];
+      for (let s = 0; s < N; s++) {
+        const d = document.createElement('div'); d.className = 'strip';
+        d.style.backgroundImage = `url(/assets/${f.src})`;
+        d.style.setProperty('--l', (s / N * 100) + '%'); d.style.setProperty('--r', ((N - s - 1) / N * 100) + '%');
+        d.animate([{ transform: 'scale(1.06) translateY(100%)' }, { transform: 'scale(1.06) translateY(0)' }], { duration: 620, delay: s * 55, easing: 'cubic-bezier(.65,0,.25,1)', fill: 'both' });
+        ph.appendChild(d); strips.push(d);
+      }
+      setTimeout(() => { img.src = '/assets/' + f.src; strips.forEach(d => d.remove()); busy = false; }, 620 + N * 55 + 30);
+    }
+    setInterval(() => { if (held || busy || document.hidden) return; k = (k + 1) % F.length; show(k); }, 2100);
+
+    // hover (mouse) or tap (touch): hold the current friend and show it as a named card that tilts toward the pointer
+    const tilt = (x, y) => { card.style.setProperty('--rx', x + 'deg'); card.style.setProperty('--ry', y + 'deg'); };
+    const hold = on => { held = on; tile.classList.toggle('on', on); tile.setAttribute('aria-pressed', on); hint.style.opacity = on ? 0 : 1; if (!on) tilt(0, 0); };
+    const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (fine) {
+      tile.addEventListener('pointerenter', () => hold(true));
+      tile.addEventListener('pointerleave', () => hold(false));
+      if (!reduce) tile.addEventListener('pointermove', e => { const r = tile.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; tilt((-y * 14).toFixed(2), (x * 18).toFixed(2)); });
+    } else { hint.textContent = '눌러 보면 누구의 위젯인지 보여요'; tile.addEventListener('click', () => hold(!held)); }
+    tile.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hold(!held); } });
+  })();
+</script>
+</body>
+</html>
