@@ -18,15 +18,15 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
-<link rel="preload" as="image" href="/assets/ws-snack.webp">
+<link rel="preload" as="image" href="/assets/rooms/room-03-sora.webp">
 <style>
-  /* /new — one screen: splash → wordmark, one line, one living widget tile, footer with the button */
-  :root { --ink: #16121B; --ink-2: #4A4352; --mute: #6E6578; --violet-d: #8A3FB8; --ease: cubic-bezier(.22,1,.36,1); color-scheme: light; }
+  /* /new — one screen: splash → wordmark, one line, friends' rooms opened from a dock, footer with the button */
+  :root { --ink: #16121B; --ink-2: #4A4352; --mute: #6E6578; --violet-d: #8A3FB8; --ease: cubic-bezier(.22,1,.36,1); --tw: clamp(240px, min(24vw, 34svh), 320px); --hue: #C5D88A; color-scheme: light; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { overflow-x: clip; }
   body { min-height: 100svh; display: flex; flex-direction: column; background: #FFFFFF; color: var(--ink); font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
-  a:focus-visible, .tile:focus-visible { outline: 3px solid var(--violet-d); outline-offset: 4px; border-radius: 12px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--violet-d); outline-offset: 4px; border-radius: 12px; }
 
   /* splash: the mark on violet, then a circle opens onto the page (once per visit) */
   .splash { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; background: linear-gradient(150deg, #8A3FB8, #AA4AF4 55%, #E07BD8); color: #FFFFFF; clip-path: circle(150% at 50% 50%); }
@@ -36,11 +36,11 @@
   @media (prefers-reduced-motion: no-preference) { .splash svg { animation: beat 1s var(--ease) both; } }
   @keyframes beat { 0% { transform: scale(.4); opacity: 0; } 60% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); } }
 
-  main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(18px, 2.4vw, 28px); padding: clamp(40px, 7vh, 88px) 16px 32px; text-align: center; }
+  main { flex: 1; overflow-x: clip; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(14px, 2.2svh, 26px); padding: clamp(28px, 5vh, 72px) 16px 24px; text-align: center; }
   /* the wordmark is the hero: ink letters with a holo band and a glare that follow the pointer (same light as the invite ticket) */
   h1 { margin: 0; line-height: 0; }
   h1 a { display: inline-block; perspective: 800px; }
-  .wm { --hx: 30%; --hy: 20%; position: relative; display: block; width: clamp(220px, 30vw, 420px); aspect-ratio: 370 / 134; -webkit-mask: url(/assets/wordmark.svg) center / contain no-repeat; mask: url(/assets/wordmark.svg) center / contain no-repeat; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .3s ease-out; }
+  .wm { --hx: 30%; --hy: 20%; position: relative; display: block; width: clamp(200px, min(30vw, 34svh), 420px); aspect-ratio: 370 / 134; -webkit-mask: url(/assets/wordmark.svg) center / contain no-repeat; mask: url(/assets/wordmark.svg) center / contain no-repeat; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .3s ease-out; }
   .wm i { position: absolute; inset: 0; }
   .wm .base { background: linear-gradient(160deg, #2B2036 0%, #16121B 40%, #16121B 70%, #2E2140 100%); }
   .wm .holo { mix-blend-mode: screen; opacity: .9; background: linear-gradient(115deg, rgba(255,255,255,0) 41%, rgba(250,151,226,.9) 45%, rgba(199,155,255,.95) 48.5%, rgba(255,255,255,.95) 50%, rgba(159,216,255,.9) 52%, rgba(255,255,255,0) 56%) var(--hx) var(--hy) / 260% 260%; }
@@ -49,21 +49,48 @@
   .tag em { font-style: normal; color: var(--violet-d); }
   .sub { margin-top: -14px; font-size: clamp(14px, 1.1vw, 15.5px); color: var(--mute); }
 
-  /* the tile: friends' photo widgets roll past in strips; hover/tap turns it into a card that names whose it is */
-  .tile { --w: clamp(230px, 22vw, 300px); position: relative; width: var(--w); margin-top: clamp(8px, 2vw, 24px); perspective: 900px; cursor: pointer; outline: 0; -webkit-tap-highlight-color: transparent; }
-  .card { position: relative; padding: 0; border-radius: 40px; background: #FFFFFF; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: padding .5s var(--ease), border-radius .5s var(--ease), box-shadow .5s var(--ease), transform .25s ease-out; }
-  .ph { position: relative; aspect-ratio: 402 / 543; border-radius: 40px; overflow: hidden; background: #EEE9F4; transition: border-radius .5s var(--ease); }
-  .ph img, .strip { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .ph img { object-fit: cover; object-position: 50% 0; transform: scale(1.06); }
-  .strip { background-size: cover; background-position: 50% 0; clip-path: inset(0 var(--r) 0 var(--l)); }
-  .meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; height: 0; overflow: hidden; opacity: 0; text-align: left; transition: height .5s var(--ease), opacity .3s ease, padding .5s var(--ease); }
-  .meta b { display: block; font-size: 22px; font-weight: 800; letter-spacing: -.03em; }
-  .meta small { display: block; margin-top: 2px; font-size: 13px; color: var(--mute); }
-  .meta span:last-child { font-size: 13px; font-weight: 700; color: var(--violet-d); white-space: nowrap; }
-  .tile.on .card { padding: 10px 10px 0; border-radius: 30px; box-shadow: 0 30px 60px -28px rgba(60,20,90,.45), 0 0 0 1px rgba(22,18,27,.05); }
-  .tile.on .ph { border-radius: 22px; }
-  .tile.on .meta { height: 70px; opacity: 1; padding: 0 6px 14px; }
-  .hint { margin-top: 14px; font-size: 13px; color: var(--mute); transition: opacity .3s ease; }
+  /* the visit: friends in a row, their room (a real app capture) in the window below; each room has its own colour */
+  .visit { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; width: var(--tw); margin-top: clamp(4px, 1svh, 14px); }
+  .visit::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 58%; width: 180%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--hue) 55%, transparent), transparent); opacity: .55; transition: background .8s ease; pointer-events: none; }
+  /* the dock: friends as glossy square app icons on a dark shelf (magnify under the pointer, bounce on open, a dot under the one that's open) */
+  .dock { display: flex; align-items: flex-end; gap: 9px; height: 66px; padding: 9px 12px; border-radius: 22px; background: linear-gradient(180deg, #2B2B2E 0%, #161616 55%, #0E0E0F 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.6), 0 2px 0 #050505, 0 16px 34px rgba(30,10,50,.38); list-style: none; }
+  .dock li { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .dock button, .dock a { --s: 1; position: relative; display: grid; place-items: center; width: calc(46px * var(--s)); height: calc(46px * var(--s)); padding: 0; border: 0; border-radius: 26%; overflow: hidden; background: var(--c, #2A2A2A); cursor: pointer; box-shadow: 0 1px 0 rgba(255,255,255,.08), 0 6px 10px -4px rgba(0,0,0,.7); transition: width .14s ease-out, height .14s ease-out; -webkit-tap-highlight-color: transparent; }
+  .dock button img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  /* room colour pooled at the bottom, a glass highlight on top, a bevel all round */
+  .dock button::before, .dock button::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; }
+  .dock button::before { background: linear-gradient(180deg, rgba(255,255,255,0) 45%, color-mix(in srgb, var(--c) 70%, transparent) 100%); }
+  .dock button::after { background: linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.12) 40%, rgba(255,255,255,0) 41%); box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,0,0,.28), inset 0 0 0 1px rgba(0,0,0,.18); }
+  .dock li::after { content: ""; position: absolute; bottom: -7px; width: 4px; height: 4px; border-radius: 50%; background: var(--c, #FFFFFF); box-shadow: 0 0 6px var(--c, #FFFFFF); opacity: 0; transition: opacity .3s ease; }
+  .dock li.open::after { opacity: 1; }
+  .dock .sep { width: 1px; height: 46px; margin: 0 2px; background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.25), rgba(255,255,255,0)); }
+  .dock .sep::after { display: none; }
+  /* the last icon is the app itself: same glass, no room tint */
+  .dock a img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .dock a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,.1) 40%, rgba(255,255,255,0) 41%); box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -2px 3px rgba(0,0,0,.28), inset 0 0 0 1px rgba(0,0,0,.18); }
+  .dock .tip { position: absolute; bottom: calc(100% + 10px); padding: 4px 10px; border-radius: 8px; background: rgba(22,22,22,.86); color: #FFFFFF; font-size: 12.5px; font-weight: 600; white-space: nowrap; opacity: 0; transform: translateY(4px); transition: opacity .15s ease, transform .15s ease; pointer-events: none; }
+  .dock li:hover .tip, .dock li:focus-within .tip { opacity: 1; transform: none; }
+  .dock .bounce { animation: bounce .9s cubic-bezier(.3,0,.3,1); }
+  @keyframes bounce { 0%, 100% { transform: none; } 25% { transform: translateY(-16px); } 50% { transform: none; } 70% { transform: translateY(-6px); } }
+    /* the platter: a friend's handle bar + the widget board from their room (no phone chrome), other friends' cards peeking behind */
+  .win { position: relative; width: 100%; }
+  .win::before, .win::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 100%; height: 100%; border-radius: 30px; transform: translate(-50%, 12px) scale(.94); background: color-mix(in srgb, var(--c1) 45%, #FFFFFF); box-shadow: 0 0 0 1px rgba(22,18,27,.05); transition: background .6s ease; }
+  .win::before { z-index: 0; }
+  .win::after { z-index: -1; transform: translate(-50%, 24px) scale(.88); background: color-mix(in srgb, var(--c2) 35%, #FFFFFF); }
+  .pl { position: relative; z-index: 1; padding: 10px; border-radius: 30px; background: #F6F4F8; box-shadow: 0 0 0 1px rgba(22,18,27,.06), 0 30px 60px -30px rgba(60,20,90,.45); }
+  .pl.pop { animation: pop .55s var(--ease); }
+  @keyframes pop { 0% { transform: translateY(8px) scale(.97); } 100% { transform: none; } }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 18px; background: linear-gradient(180deg, color-mix(in srgb, var(--hue) 70%, #FFFFFF), var(--hue)); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(0,0,0,.06); text-align: left; transition: background .6s ease; }
+  .bar img { width: 38px; height: 38px; border-radius: 11px; object-fit: cover; box-shadow: 0 0 0 2px rgba(255,255,255,.7); }
+  .bar b { display: block; font-size: 15px; font-weight: 700; letter-spacing: -.02em; color: #2A2230; }
+  .bar small { display: block; font-size: 12px; color: rgba(42,34,48,.6); }
+  .shot { position: relative; margin-top: 10px; aspect-ratio: 608 / 640; border-radius: 20px; overflow: hidden; -webkit-mask: linear-gradient(#000 78%, transparent); mask: linear-gradient(#000 78%, transparent); }
+  /* the capture minus status bar, handle bar and the hairline of bezel on both sides */
+  .shot img { position: absolute; left: -2.63%; top: 0; width: 105.26%; height: auto; margin-top: -28.3%; }
+  .shot img.next { opacity: 0; }
+  .shot img.in { opacity: 1; transition: opacity .45s ease; }
+  .cap { margin-bottom: 2px; font-size: 14px; color: var(--mute); }
+  .win + .dock { margin-top: 26px; }
 
   .foot { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px 20px; padding: 18px 28px calc(18px + env(safe-area-inset-bottom)); font-size: 13.5px; }
   .foot .legal { color: var(--mute); line-height: 1.6; }
@@ -80,6 +107,10 @@
   }
   @keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
   @media (max-width: 760px) {
+    :root { --tw: min(300px, 74vw); }
+    .dock { gap: 6px; height: 58px; padding: 8px 10px; }
+    .dock button, .dock a { width: 38px; height: 38px; }
+    .dock .sep { height: 38px; }
     .foot { grid-template-columns: 1fr; justify-items: center; text-align: center; padding-inline: 16px; }
     .btn { justify-self: stretch; justify-content: center; height: 54px; order: -1; }
     .foot nav { order: 0; }
@@ -93,12 +124,15 @@
     <h1><a href="/" aria-label="Ditto!"><span class="wm" id="wm" aria-hidden="true"><i class="base"></i><i class="holo"></i><i class="glare"></i></span></a></h1>
     <p class="tag">친구들의 하루, <em>위젯으로.</em></p>
     <p class="sub">가까운 친구 15명과만 나누는 iPhone 앱</p>
-    <div class="tile" id="tile" role="button" tabindex="0" aria-pressed="false" aria-label="친구의 위젯 보기">
-      <div class="card" id="card">
-        <div class="ph" id="ph"><img id="img" src="/assets/ws-snack.webp" alt="소라의 사진 위젯 ‘간식 부자’" width="402" height="543"></div>
-        <div class="meta" aria-live="polite"><span><b id="nm">소라</b><small id="hd">@soramaybe</small></span><span>ditto.place</span></div>
+    <div class="visit" id="visit">
+      <p class="cap" id="hn">친구를 눌러 방에 놀러 가 보세요</p>
+      <div class="win" id="win" role="tabpanel" aria-live="polite">
+        <div class="pl" id="pl">
+          <div class="bar"><img id="bav" src="/assets/rooms/rav-sora.webp" alt="" width="38" height="38"><span><b id="nm">소라</b><small id="hd">@sora.maybe</small></span></div>
+          <div class="shot" id="shot"><img src="/assets/rooms/room-03-sora.webp" alt="" width="640" height="1392"></div>
+        </div>
       </div>
-      <p class="hint" id="hint">올려 보면 누구의 위젯인지 보여요</p>
+      <ol class="dock" id="dock" role="tablist" aria-label="친구 방 고르기"></ol>
     </div>
   </main>
   <footer class="foot">
@@ -128,45 +162,73 @@
       raf = requestAnimationFrame(drift);
     }
 
-    // friends' photo widgets roll past in vertical strips (left to right), one every ~2s
+    // friends' platters: one every few seconds, or the one picked from the dock
     const F = [
-      { src: 'ws-snack.webp', n: '소라', h: 'soramaybe', a: '‘간식 부자’' },
-      { src: 'ws-cup.webp', n: '나리', h: 'nariday', a: '‘내 첫 컵’' },
-      { src: 'ws-jiu.webp', n: '지우', h: 'jiuallday', a: '‘한 번 더’' },
-      { src: 'ws-haeun.webp', n: '하은', h: 'haeunzip', a: '' },
-      { src: 'ws-image.webp', n: '재민', h: 'jaeminarchive', a: '‘창밖 저장’' }
+      { id: '03-sora', av: 'sora', n: '소라', h: 'sora.maybe', c: '#C5D88A', a: '‘🧺 간식 부자’, ‘🧺 각자 좋아하는 간식 하나’, ‘🫶 같은 표정’, ‘🍒 돗자리 챙겨 둠’' },
+      { id: '07-jiu', av: 'jiu-1', n: '지우', h: 'jiu.all.day', c: '#F29BC0', a: '‘🩰 한 번 더’, ‘🪩 목 20시’, ‘🩰 발레 가는 일상’, ‘쇼케이스 D−15’' },
+      { id: '01-haeun', av: 'haeun', n: '하은', h: 'haeun.zip', c: '#B69CF0', a: '‘🫧 여긴 조금 천천히 채울래’, ‘☕ 삐뚤어도 손에 맞는 내 컵’, ‘📚 이번 주 작은 일’, ‘첫 혼자 서점 D−8’' },
+      { id: '04-jaemin', av: 'jaemin', n: '재민', h: 'jaemin.archive', c: '#6FA4B0', a: '‘📖 책 읽는 오후’, ‘돌아오는 기차에서 🚃’, ‘🌊 다시 바다’, ‘다음 출사 D−15’' },
+      { id: '05-nari', av: 'nari-1', n: '나리', h: 'nari.day', c: '#D6B65E', a: '‘☕ 삐뚤어도 손에 맞는 내 컵’, ‘🫖 내 첫 컵’, ‘🥐 쉬는 날 빵집 투어’, ‘첫 컵 픽업 D−6’' },
+      { id: '02-jun', av: 'jun', n: '준', h: 'jun.is.here', c: '#9AA7B8', a: '‘🥐 공강 한 시간은 커피로’, ‘📸 흔들린 컷도 보내 줄게’, ‘중간고사 끝 D−7’, ‘잔불 (Still)’ 음악' }
     ];
-    F.forEach(f => { const i = new Image(); i.src = '/assets/' + f.src; });
-    const tile = document.getElementById('tile'), card = document.getElementById('card'), ph = document.getElementById('ph'), img = document.getElementById('img');
-    const nm = document.getElementById('nm'), hd = document.getElementById('hd'), hint = document.getElementById('hint');
-    let k = 0, held = false, busy = false;
-    const N = 7;
-    function show(j){
-      const f = F[j]; nm.textContent = f.n; hd.textContent = '@' + f.h; img.alt = (f.n + '의 사진 위젯 ' + f.a).trim();
-      if (reduce) { img.src = '/assets/' + f.src; return; }
-      busy = true;
-      const strips = [];
-      for (let s = 0; s < N; s++) {
-        const d = document.createElement('div'); d.className = 'strip';
-        d.style.backgroundImage = `url(/assets/${f.src})`;
-        d.style.setProperty('--l', (s / N * 100) + '%'); d.style.setProperty('--r', ((N - s - 1) / N * 100) + '%');
-        d.animate([{ transform: 'scale(1.06) translateY(100%)' }, { transform: 'scale(1.06) translateY(0)' }], { duration: 620, delay: s * 55, easing: 'cubic-bezier(.65,0,.25,1)', fill: 'both' });
-        ph.appendChild(d); strips.push(d);
-      }
-      setTimeout(() => { img.src = '/assets/' + f.src; strips.forEach(d => d.remove()); busy = false; }, 620 + N * 55 + 30);
-    }
-    setInterval(() => { if (held || busy || document.hidden) return; k = (k + 1) % F.length; show(k); }, 2100);
+    const src = f => '/assets/rooms/room-' + f.id + '.webp';
+    const dock = document.getElementById('dock'), win = document.getElementById('win'), pl = document.getElementById('pl'), shot = document.getElementById('shot'), nm = document.getElementById('nm'), hd = document.getElementById('hd'), bav = document.getElementById('bav'), hn = document.getElementById('hn'), visit = document.getElementById('visit');
+    let img = shot.querySelector('img');
+    const items = F.map((f, j) => {
+      const li = document.createElement('li'), b = document.createElement('button');
+      li.style.setProperty('--c', f.c);
+      b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', f.n + '의 방');
+      b.innerHTML = `<img src="/assets/rooms/rav-${f.av}.webp" alt="" width="46" height="46">`;
+      b.addEventListener('click', () => { hn.textContent = '위젯으로 꾸민 친구의 하루예요'; bounce(b); if (j !== k) show(j); });
+      li.innerHTML = `<span class="tip">${f.n}</span>`; li.prepend(b); dock.appendChild(li); return li;
+    });
+    dock.insertAdjacentHTML('beforeend', '<li class="sep" aria-hidden="true"></li><li class="app"><a href="/#tm" aria-label="앱 다운받기 · 출시 초대장 받기"><img src="/apple-touch-icon.png" alt="" width="46" height="46"></a><span class="tip">앱 다운받기</span></li>');
+    F.forEach(f => { const i = new Image(); i.src = src(f); });
+    const bounce = el => { if (reduce) return; el.classList.remove('bounce'); void el.offsetWidth; el.classList.add('bounce'); };
 
-    // hover (mouse) or tap (touch): hold the current friend and show it as a named card that tilts toward the pointer
-    const tilt = (x, y) => { card.style.setProperty('--rx', x + 'deg'); card.style.setProperty('--ry', y + 'deg'); };
-    const hold = on => { held = on; tile.classList.toggle('on', on); tile.setAttribute('aria-pressed', on); hint.style.opacity = on ? 0 : 1; if (!on) tilt(0, 0); };
+    // magnify like the macOS dock: icons near the pointer grow, the rest stay put
     const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const icons = [...dock.querySelectorAll('button, a')];
+    if (fine && !reduce) {
+      dock.addEventListener('pointermove', e => icons.forEach(el => { const r = el.getBoundingClientRect(), d = Math.abs(e.clientX - (r.left + r.width / 2)); el.style.setProperty('--s', (1 + .5 * Math.max(0, 1 - d / 96)).toFixed(3)); }));
+      dock.addEventListener('pointerleave', () => icons.forEach(el => el.style.setProperty('--s', 1)));
+    }
+
+    const STAY = 3800;
+    let k = 0, held = false, timer = 0;
+    const alt = f => f.n + '의 플래터. ' + f.a + ' 등이 위젯으로 붙어 있어요.';
+    function label(j){
+      const f = F[j]; nm.textContent = f.n; hd.textContent = '@' + f.h; bav.src = '/assets/rooms/rav-' + f.av + '.webp';
+      items.forEach((li, i) => { li.classList.toggle('open', i === j); li.firstChild.setAttribute('aria-selected', i === j); });
+      visit.style.setProperty('--hue', f.c);
+      win.style.setProperty('--c1', F[(j + 1) % F.length].c); win.style.setProperty('--c2', F[(j + 2) % F.length].c);
+    }
+    function roam(){ clearTimeout(timer); timer = setTimeout(tick, STAY); }
+    function tick(){ if (held || document.hidden) { timer = setTimeout(tick, 600); return; } show((k + 1) % F.length); bounce(items[k].firstChild); }
+    function show(j){
+      k = j; label(j); roam();
+      const f = F[j], old = img, nx = new Image();
+      nx.width = 640; nx.height = 1392; nx.alt = alt(f); nx.src = src(f);
+      if (reduce) { old.replaceWith(nx); img = nx; return; }
+      pl.classList.remove('pop'); void pl.offsetWidth; pl.classList.add('pop');
+      nx.className = 'next'; shot.appendChild(nx); img = nx;
+      (nx.decode ? nx.decode().catch(() => {}) : Promise.resolve()).then(() => {
+        if (img !== nx) return nx.remove();
+        requestAnimationFrame(() => nx.classList.add('in'));
+        setTimeout(() => { [...shot.querySelectorAll('img')].forEach(i => { if (i !== img) i.remove(); }); }, 500);
+      });
+    }
+    label(0); img.alt = alt(F[0]); roam();
+
+    // hover holds the current friend so the platter can be read
     if (fine) {
-      tile.addEventListener('pointerenter', () => hold(true));
-      tile.addEventListener('pointerleave', () => hold(false));
-      if (!reduce) tile.addEventListener('pointermove', e => { const r = tile.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; tilt((-y * 14).toFixed(2), (x * 18).toFixed(2)); });
-    } else { hint.textContent = '눌러 보면 누구의 위젯인지 보여요'; tile.addEventListener('click', () => hold(!held)); }
-    tile.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hold(!held); } });
+      win.addEventListener('pointerenter', () => { held = true; });
+      win.addEventListener('pointerleave', () => { held = false; });
+    }
+    dock.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+      e.preventDefault(); const j = (k + d + F.length) % F.length; items[j].firstChild.focus(); items[j].firstChild.click();
+    });
   })();
 </script>
 </body>
