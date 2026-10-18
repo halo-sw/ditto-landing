@@ -30,10 +30,12 @@
     return `<div class="cs-app-icon ${finish==='Glass'?'is-glass':''}" style="--icon-logo-width:${spec.logo.widthRatio*100}%;--icon-logo-height:${spec.logo.heightRatio*100}%" role="img" aria-label="${escape(p.name)} ${finish} 앱 아이콘">${surfaceSVG(p)}${shell}${mark}</div>`;
   };
 
-  const widgetTile = (g,title=g.name,artwork=false) => {
-    const id=`splup-widget-${++surfaceSerial}`,spec=D.widgetGraphics;
+  const widgetTile = (g,title=g.name,artwork=false,override=null) => {
+    const id=`splup-widget-${++surfaceSerial}`,sample=override??(artwork?D.widgetGraphics.sampleRevision?.samples[g.id]:null);
+    const spec=override?{...D.widgetGraphics,...D.widgetGraphics.pickerObjects.geometry}:sample?{...D.widgetGraphics,...D.widgetGraphics.sampleRevision.common}:D.widgetGraphics;
+    if(sample)g={...g,...sample};
     const glow=spec.glow;
-    return `<div class="cs-widget-tile" data-widget-palette="${escape(g.id)}" style="--widget-title:${g.titleColor}">
+    return `<div class="cs-widget-tile${override?' is-picker':sample?' is-refined':''}" data-widget-palette="${escape(g.id)}" style="--widget-title:${g.titleColor}">
       <svg viewBox="0 0 288 288" aria-hidden="true"><defs>
         <linearGradient id="${id}-base" x1="0" y1="0" x2="0" y2="1">${g.stops.map(([offset,color])=>`<stop offset="${offset}" stop-color="${color}"/>`).join('')}</linearGradient>
         <linearGradient id="${id}-shade" x1="0" y1="0" x2="0" y2="1">${spec.titleShade.stops.map(([offset,opacity])=>`<stop offset="${offset}" stop-color="${spec.titleShade.color}" stop-opacity="${opacity}"/>`).join('')}</linearGradient>
@@ -41,9 +43,18 @@
       </defs><rect width="288" height="288" fill="url(#${id}-base)"/>
       <ellipse cx="${glow.x+glow.width/2}" cy="${glow.y+glow.height/2}" rx="${glow.width/2}" ry="${glow.height/2}" fill="${g.glow}" opacity="${g.glowOpacity}" filter="url(#${id}-blur)"/>
       <rect width="288" height="288" fill="url(#${id}-shade)"/></svg>
-      ${artwork?`<img class="cs-widget-art" src="${spec.assets[g.art]}" alt="${escape(g.use)} 오브젝트" loading="lazy" width="204" height="204">`:''}
+      ${artwork?`<img class="cs-widget-art" src="${sample?.asset??spec.assets[g.art]}" alt="${escape(g.use)} 오브젝트" loading="lazy" width="204" height="204">`:''}
       <strong>${escape(title)}</strong></div>`;
   };
+
+  const pickerObjects = () => {
+    const p=D.widgetGraphics.pickerObjects;
+    if(!p)return '';
+    const originals=p.original.map(o=>`<figure><img class="cs-picker-original" src="${escape(o.asset)}" alt="${escape(o.title)} 원본 선택 그래픽" loading="lazy" width="288" height="288"><figcaption>${escape(o.ko)}<span class="cs-widget-caption">최초 그래픽 유지</span></figcaption></figure>`).join('');
+    const additions=p.extended.map(o=>`<figure>${o.render==='original-card'?`<div class="cs-picker-original-crop"><img src="${escape(o.asset)}" alt="Block 원본 그래픽" loading="lazy" width="165" height="190"></div>`:widgetTile(D.graphics.find(g=>g.id===o.palette),o.title,true,{asset:o.asset,titleColor:'#FFFFFF'})}<figcaption>${escape(o.ko)}<span class="cs-widget-caption">${escape(o.caption)}</span></figcaption></figure>`).join('');
+    return `<h3>원본 유지 · 6종</h3><div class="cs-picker-objects">${originals}</div><h3>확장 및 원본 복원 · 9종</h3><div class="cs-picker-objects">${additions}</div><p class="cs-note">288px 기준 · 오브제 248×208px 안에 FIT · 제목 36/44 · 좌우 20px · R28. 기본 6종과 Block은 최초 그래픽을 보존합니다. Sticker는 디토 앱 아이콘과 앱 오브제를 담은 종이 팩, 방명록은 로고 없는 롤링페이퍼, D-Day는 남은 날짜만 보이는 플립보드입니다.</p><figure class="cs-logo-charm"><img src="color-assets/widget-objects/ditto-logo-metal-charm-v3.png" alt="디토 로고 윤곽 자체로 만든 라일락 금속 키링" width="220" height="220" loading="lazy"><figcaption>Ditto · 로고 윤곽 금속 키링</figcaption></figure><p class="cs-note">ASK는 확정 은색 우편함을 유지합니다. 챰은 공용 에셋이며 출시 15종에 추가되는 위젯이 아닙니다. 실제 위젯의 버튼·상태·레이아웃은 기존 확정 UI를 따릅니다.</p><a class="cs-link" href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD?node-id=2976-9554" target="_blank" rel="noopener noreferrer">Figma에서 위젯 선택 오브제 가이드 열기 ↗</a>`;
+  };
+
   const widgetPaletteGrid = palettes => `<div class="cs-widget-palette-grid">${palettes.map(g=>`<figure>${widgetTile(g)}<figcaption>${String(g.number).padStart(2,'0')} · ${escape(g.label)}<span class="cs-widget-caption">${escape(g.recipeLabel)}</span><span class="cs-widget-stops" aria-label="같은 계열의 밝은 톤, 중간 톤, 깊은 톤">${g.sourceColors.map(c=>`<span><i style="background:${c}"></i><small>${c}</small></span>`).join('')}</span></figcaption></figure>`).join('')}</div>`;
   const dittoSurface = (palette,id,original=false) => {
     const rgb=D.dittoButton.originalCTA.rgb;
@@ -81,10 +92,10 @@
     section('04 위젯 배경 · 레퍼런스 5 + 새로운 컬러 20','위젯 배경은 이미지와 제목을 받쳐 주는 색입니다. 기준 5개에 서로 다른 색상의 20개를 더했습니다. 각 배경에서는 하나의 중심색이 밝은 상단에서 짙은 하단으로 자연스럽게 이어집니다.',
       '<h3>기준 배경 5종</h3>'+widgetPaletteGrid(D.graphics.slice(0,5))+'<h3>추가 배경 20종</h3>'+widgetPaletteGrid(D.graphics.slice(5))+
       '<p class="cs-note">색 조합을 바꾸어도 이미지와 제목의 자리는 같습니다. 배경보다 콘텐츠가 먼저 보이도록 상단의 빛은 은은하게, 제목 뒤의 색은 충분히 짙게 사용합니다.</p>','widget-backgrounds')+
-    section('05 이미지와 제목이 놓이는 자리','밝은 상단에는 이미지를, 짙은 하단에는 흰 제목을 배치합니다. 아래 다섯 예시와 같은 여백을 다른 배경에도 적용하면 색이 달라도 한 종류의 위젯으로 보입니다.',
+    section('05 오브제 소재 샘플','Together는 네컷 사진 키링, ASK는 확정된 은색 우편함을 사용합니다. 출시 15종의 선택 타일 규격은 아래 가이드에서 확인할 수 있습니다.',
       '<div class="cs-widget-examples">'+D.widgetGraphics.examples.map(e=>{const g=D.graphics.find(g=>g.id===e.palette);return `<figure>${widgetTile(g,e.title,true)}<figcaption>${escape(e.caption)}<span class="cs-widget-caption">${escape(e.note)}</span></figcaption></figure>`;}).join('')+'</div>'+
-      '<div class="cs-widget-rules"><div><h3>이미지 · 상단 20–230px</h3><p>248 × 210px 영역 안에 이미지 전체가 보이도록 배치합니다. 기본 이미지 크기는 204 × 204px이며, 이미지의 투명한 여백에 따라 크기를 조절합니다.</p></div><div><h3>제목 · 하단 238–268px</h3><p>제목은 Pretendard Bold 24px, 줄 높이 30px로 한 줄에 담습니다. 좌우와 하단은 20px, 이미지와는 8px를 띄웁니다. 긴 설명은 카드 밖에 둡니다.</p></div><div><h3>Figma에서 바꿔 끼우기</h3><p>Palette는 배경 선택, Artwork는 이미지 교체, Show artwork는 이미지 표시 여부입니다. Title에서 제목을 직접 입력합니다.</p></div></div>'+
-      '<p class="cs-note">색이 강한 이미지는 밝은 상단에 배치하고, 하단은 제목을 읽을 수 있도록 비워 둡니다.</p><a class="cs-link" href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD?node-id=1663-8765" target="_blank" rel="noopener noreferrer">Figma에서 이미지 배치 가이드 열기 ↗</a>','widget-artwork')+
+      '<p class="cs-note">첫 네 소재 샘플: 220px 오브제, 제목 20/28. GIF: 기존 204px 오브제, 제목 24/30. 실제 선택 타일은 아래의 별도 36/44 규격을 사용합니다.</p>','widget-artwork')+
+    section('06 위젯 선택 오브제 · 출시 15종','최초 그래픽 6종을 유지하고 기능을 보여주는 실물 오브제 9종을 보완했습니다.',pickerObjects(),'widget-picker-objects')+
     section('EVENT · 화면 전체에 쓰는 8가지 배경','EVENT는 화면 전체에 은은한 분위기를 더하는 배경입니다. 아래쪽에 색이 모이는 여덟 가지 조합을 사용합니다. 긴 글이나 조작 버튼은 단색 카드 안에 배치해 읽고 누르기 쉽게 만듭니다.',`<div class="cs-event-grid">${D.events.map(e=>`<figure><div class="cs-event" style="background:${gradient(e.stops)}"></div><figcaption>${e.name}</figcaption></figure>`).join('')}</div>`);
   }
   const action=document.querySelector('[data-color-system-ditto]');

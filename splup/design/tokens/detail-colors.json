@@ -506,5 +506,152 @@
       "text": "cyan-900",
       "body": "요즘 나를 웃게 하는 건?\n사소한 것도 좋아."
     }
-  ]
+  ],
+  "statusGrid": {
+    "note": "상태 위젯 배경 색상 보드 (2026-10-14) — 원안 widget_status_emoji_bg_colorpicker 7×5 구성을 상세 색 토큰으로 채운다. picker = 직접 고르기(원형 컬러 휠), 맨 앞",
+    "columns": 7,
+    "rows": [
+      [
+        "picker",
+        "neutral-white",
+        "yellow-100",
+        "lime-100",
+        "cyan-100",
+        "purple-100",
+        "pink-100"
+      ],
+      [
+        "coral-500",
+        "apricot-500",
+        "yellow-500",
+        "lime-500",
+        "cyan-500",
+        "purple-500",
+        "pink-500"
+      ],
+      [
+        "coral-700",
+        "apricot-700",
+        "yellow-700",
+        "lime-700",
+        "cyan-700",
+        "purple-700",
+        "pink-700"
+      ],
+      [
+        "coral-900",
+        "apricot-900",
+        "yellow-900",
+        "lime-900",
+        "cyan-900",
+        "purple-900",
+        "neutral-950"
+      ],
+      [
+        "gradient-violet",
+        "gradient-apricot",
+        "gradient-cyan",
+        "gradient-pink",
+        "gradient-purple",
+        "gradient-mint",
+        "gradient-rose"
+      ]
+    ]
+  },
+  "dday": {
+    "note": "D-Day 위젯 색 (2026-10-15) — Figma 변수 컬렉션 \"Splup · D-Day editable colors\" 8모드. 값 = DetailColor/Primitives 별칭(미드나잇은 color-system purple 950/300/200/700). 배경 색 줄의 선택 색을 가장 가까운 모드로 맞춘다.",
+    "palettes": [
+      {
+        "id": "purple",
+        "name": "퍼플",
+        "background": "#F2E8FF",
+        "accent": "#AA4AF4",
+        "text": "#582082",
+        "secondary": "#862FC6",
+        "line": "#AA4AF4"
+      },
+      {
+        "id": "midnight",
+        "name": "미드나잇",
+        "background": "#421763",
+        "accent": "#D6AEFF",
+        "text": "#F2E8FF",
+        "secondary": "#E5CEFF",
+        "line": "#862FC6"
+      },
+      {
+        "id": "cyan",
+        "name": "시안",
+        "background": "#D8F8FB",
+        "accent": "#27E5F2",
+        "text": "#153E4B",
+        "secondary": "#153E4B",
+        "line": "#27E5F2"
+      },
+      {
+        "id": "pink",
+        "name": "핑크",
+        "background": "#FCE6F6",
+        "accent": "#FA97E2",
+        "text": "#541E48",
+        "secondary": "#A83688",
+        "line": "#FA97E2"
+      },
+      {
+        "id": "apricot",
+        "name": "애프리콧",
+        "background": "#FFE7D9",
+        "accent": "#FF925D",
+        "text": "#582C1B",
+        "secondary": "#582C1B",
+        "line": "#FF925D"
+      },
+      {
+        "id": "coral",
+        "name": "코랄",
+        "background": "#FFE3EB",
+        "accent": "#FF5488",
+        "text": "#5A1831",
+        "secondary": "#B92E5B",
+        "line": "#FF5488"
+      },
+      {
+        "id": "yellow",
+        "name": "옐로",
+        "background": "#FFF9CE",
+        "accent": "#F9F871",
+        "text": "#403E1B",
+        "secondary": "#403E1B",
+        "line": "#F9F871"
+      },
+      {
+        "id": "lime",
+        "name": "라임",
+        "background": "#EAF5CE",
+        "accent": "#B0DE33",
+        "text": "#303F1C",
+        "secondary": "#303F1C",
+        "line": "#B0DE33"
+      }
+    ],
+    "remainingOpacity": 0.18,
+    "photo": {
+      "text": "#FFFFFF",
+      "scrim": "#060A14",
+      "scrimStops": [
+        [
+          0,
+          0
+        ],
+        [
+          0.3,
+          0.02
+        ],
+        [
+          1,
+          0.8
+        ]
+      ]
+    }
+  }
 }

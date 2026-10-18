@@ -71,3 +71,18 @@
 .cs-ditto-confirm form{display:flex;gap:12px;margin-top:24px}.cs-ditto-confirm button{min-height:48px;flex:1;border:0;border-radius:12px;padding:12px;background:#f3f0f7;color:#443651;font:inherit;cursor:pointer}.cs-ditto-confirm button[value=confirm]{background:#862fc6;color:white}
 @media(prefers-reduced-motion:reduce){.cs-ditto{transition:none!important;transform:none!important}.cs-ditto-depth,.cs-ditto-light{transition:none!important;transform:none!important;opacity:0}.cs-ditto[data-hold-state=holding] .cs-ditto-depth,.cs-ditto[data-hold-state=pending] .cs-ditto-depth{opacity:.18}.cs-ditto[data-hold-state=holding] .cs-ditto-light,.cs-ditto[data-hold-state=pending] .cs-ditto-light{opacity:.08}}
 @media(max-width:650px){.cs-hold-phases,.cs-badge-guide{grid-template-columns:1fr}.cs-badge-widget{max-width:200px}.cs-hold-control{width:100%}}
+
+/* 2026-10-11: four coordinated object samples; palette swatches keep their original recipes. */
+.cs-widget-tile.is-refined::after{box-shadow:inset 0 2px 8px #ffffffb8,inset 0 -2px 12px #594c800f}
+.cs-widget-tile.is-refined .cs-widget-art{left:11.80556%;top:4.16667%;width:76.38889%;height:76.38889%}
+.cs-widget-tile.is-refined>strong{left:8.33333%;right:8.33333%;font-size:clamp(11px,6.94444cqw,20px);line-height:1.4}
+.cs-picker-objects{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:28px 24px;margin:24px 0 40px}
+.cs-picker-objects figure{min-width:0;margin:0;container-type:inline-size}
+.cs-picker-original{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.cs-picker-original-crop{position:relative;aspect-ratio:1;overflow:hidden}
+.cs-picker-original-crop img{position:absolute;display:block;left:0;top:-12.121212%;width:100%;height:115.151515%}
+.cs-logo-charm{margin:24px 0;max-width:288px;text-align:center}
+.cs-logo-charm img{display:block;width:220px;height:220px;object-fit:contain;margin:auto}
+.cs-picker-objects .cs-widget-tile{width:100%;height:auto;aspect-ratio:1}
+.cs-widget-tile.is-picker .cs-widget-art{left:13.89%;top:2.78%;width:72.22%;height:72.22%;object-fit:contain}
+.cs-widget-tile.is-picker strong{left:6.944%;right:6.944%;bottom:6.944%;font-size:12.5cqw;line-height:1.222;white-space:nowrap;text-align:center}
