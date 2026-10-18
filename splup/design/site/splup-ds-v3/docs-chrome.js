@@ -113,7 +113,9 @@
     foundations: ["deep", "type"], components: ["mint", "press"], widgets: ["pink", "grid"], patterns: ["lemon", "bubble"], brand: ["pink", "blob"],
     resources: ["night", "token"], roadmap: ["mint", "list"], navigation: ["sky", "stack"], inputs: ["lemon", "list"], "photo-picker": ["coral", "grid"],
     "widget-catalog": ["purple", "grid"], "widget-ditto": ["night", "ditto"], "widget-todo": ["mint", "list"], "widget-guestbook": ["coral", "bubble"],
-    audit: ["deep", "list"], backlog: ["sky", "list"]
+    audit: ["deep", "list"], backlog: ["sky", "list"],
+    chips: ["lemon", "press"], menu: ["deep", "list"], feedback: ["sky", "bubble"], dialog: ["night", "stack"], comments: ["coral", "bubble"], chat: ["pink", "bubble"],
+    "music-search": ["purple", "motion"], "widget-manage": ["mint", "stack"], "post-widget": ["lemon", "list"], "sticker-board": ["pink", "blob"]
   };
   function coverFor(href) {
     var key = href.replace(/^.*[#/]/, "").replace(/\.html$/, "");

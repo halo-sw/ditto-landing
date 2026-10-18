@@ -765,6 +765,20 @@
   <h2>카드의 얇은 테두리</h2>
   <p class="muted"><code>hairline(color:radius:)</code> — 카드 공용 1px continuous 스트로크 오버레이. 기본색이 레거시 <code>DT.lineSubtle</code> 참조라 이관 시 <code>borderDefault</code> 계열로 교체 대상.</p>
 
+  <h2 id="interaction-shared">인터랙션 공통 규칙</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>규칙</th><th>값</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>롱프레스 (허용 위젯)</td><td class="num">0.8s 게이지</td><td>편집 진입 — 게이지 완주 후 커밋</td></tr>
+        <tr><td>롱프레스 (비허용)</td><td class="num">0.45s 조기 흔들림</td><td>불가함을 빨리 알린다 — 기다리게 하지 않음</td></tr>
+        <tr><td>햅틱 표준</td><td>리프트 medium · 커밋 medium · 비허용 rigid · 소형 light</td><td>전 컴포넌트 공통</td></tr>
+        <tr><td>상세 층위</td><td>내/친구 위젯 상세 = 시트(<code>Motion.sheet</code>) · 플래터 = 페이지 · 파괴적 = 알럿</td><td>층위 혼용 금지</td></tr>
+        <tr><td>컴포저 CTA 카피</td><td>[추가하기] / [수정 완료]</td><td>동작을 그대로 — <a href="#writing">UX Writing 형식 규칙</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="page-nav">
     <a href="#motion"><span class="dir">이전</span>움직임</a>
     <a class="next" href="#zindex"><span class="dir">다음</span>화면이 겹치는 순서</a>
@@ -926,103 +940,294 @@
 </article>
 
 <!-- ═══════════ 버튼 & 인터랙션 ═══════════ -->
-<article class="page content-max" id="page-buttons" hidden>
-  <div class="crumb">컴포넌트 / 버튼과 선택 요소</div>
-  <h1>버튼과 선택 요소</h1>
-  <p class="desc">버튼은 행동을 실행하고, 칩과 선택 탭은 값을 골라요. 사용 목적에 맞는 형태를 선택하고 기본·눌림·비활성 상태를 함께 확인해요.</p>
-
-  <h2>일반 버튼</h2>
-  <div class="btn-row">
-    <button class="dbtn primary" type="button">추가하기</button>
-    <button class="dbtn secondary" type="button">보조 동작</button>
-    <button class="dbtn destructive" type="button">내리기</button>
-    <button class="dbtn disabled" type="button" aria-disabled="true" disabled>비활성</button>
+<article class="page content-max comp-doc" id="page-buttons" hidden>
+  <div class="crumb">컴포넌트 / 버튼</div>
+  <h1>버튼</h1>
+  <p class="desc">사용자가 저장·추가·완료 같은 행동을 바로 실행하도록 돕는 기본 컴포넌트예요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=719-97485" target="_blank" rel="noopener">Button/Primary</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=719-97489" target="_blank" rel="noopener">Button/Secondary</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1918-17926" target="_blank" rel="noopener">Splup/Action/NeutralSolid</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1918-17912" target="_blank" rel="noopener">Splup/Action/Outline</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1918-18160" target="_blank" rel="noopener">Splup/Action/Button</a></span><span><b>코드</b> <code>Components.swift · DButton</code> · <code>SplupActionStyle</code></span></p>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/button-primary.png" alt="보라 그라디언트의 위젯 추가 버튼" width="370" height="60" loading="lazy"><figcaption>Primary · 60</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/button-secondary.png" alt="연보라 바탕에 테두리가 있는 앨범에서 선택 버튼" width="371" height="49" loading="lazy"><figcaption>Secondary · 48</figcaption></figure>
   </div>
-  <div class="tbl-scroll">
-    <table>
-      <thead><tr><th>속성</th><th>값</th><th>비고</th></tr></thead>
-      <tbody>
-        <tr><td>높이 · 라운드</td><td class="num">60 · 12 (continuous)</td><td>기본 CTA 기준 — 화면별 예외는 별도 검수</td></tr>
-        <tr><td>라벨</td><td><code>label</code> (17 Bold)</td><td>새 글자 기준 적용 후 <code>t4Bold</code></td></tr>
-        <tr><td>프라이머리 배경</td><td class="mono">#C78FF7 → #AA4AF4 52% → #9430D8</td><td>CTA 세로 그라디언트 + 상단 글로스(white 30%→0 @50%)</td></tr>
-        <tr><td>프라이머리 섀도우</td><td class="mono">#9430D8 28% · r10 · y4</td><td>은은한 브랜드 섀도우 — 비활성 시 제거</td></tr>
-        <tr><td>파괴적</td><td><code>danger</code> 배경 + 화이트 라벨</td><td>카피는 결과를 말한다("내리기") — <a href="#writing">UX Writing</a></td></tr>
-        <tr><td>pressed</td><td class="num">scale 0.97</td><td><code>PressableStyle(pressedScaleButton)</code> · Reduced Motion 시 1</td></tr>
-        <tr><td>disabled</td><td>배경 subtle + 라벨 assistive</td><td>터치 무시 · 로딩 중에는 스피너로 교체</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>칩과 선택 탭</h2>
-  <div class="btn-row">
-    <span class="dchip-demo" style="background:var(--surface-soft);color:var(--ink-soft)">칩 · 라이트</span>
-    <span class="dchip-demo" style="background:#2D313D;color:#fff">칩 · 다크</span>
-    <span class="seg-demo"><span class="on">주파수</span><span>그룹채팅</span></span>
-  </div>
-  <div class="tbl-scroll">
-    <table>
-      <thead><tr><th>컴포넌트</th><th>규격</th><th>상태</th></tr></thead>
-      <tbody>
-        <tr><td><code>DChip</code></td><td>높이 28 · 캡슐 · <code>labelSm</code> · 수평 패딩 x3(12)</td><td>라이트/다크 2변형 — 사진 위에는 다크</td></tr>
-        <tr><td><code>SegmentControl</code></td><td>pill 컨테이너(라운드 13 · fill strong · 내부 패딩 x1) + 탭 라운드 10</td><td>활성 = 화이트 + raised 그림자(black 8% · r3 · y1) · pressed 0.98</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3 id="size-chips">크기 칩</h3>
-  <p>위젯 작성 화면과 수정 시트 맨 위에서 크기를 고르는 칩이에요(<code>RatioBar</code>).</p>
+  <figure class="comp-stage wide"><img src="component-assets/button-neutral-solid.png" alt="진한 무채색 버튼 여섯 상태" width="1200" height="64" loading="lazy"><figcaption>Neutral Solid · 기본 · 포인터 올림 · 누름 · 포커스 · 비활성 · 불러오는 중</figcaption></figure>
+  <figure class="comp-stage wide"><img src="component-assets/button-outline.png" alt="테두리 버튼 두 종류의 여섯 상태" width="1400" height="130" loading="lazy"><figcaption>Neutral Outline · Brand Outline</figcaption></figure>
+  <h2 id="button-anatomy">구성</h2>
+  <ol class="comp-anatomy"><li><b>컨테이너</b><span>모서리 12 · 좌우 16. 종류에 따라 채움 또는 테두리</span></li><li><b>라벨</b><span>행동을 말하는 짧은 동사. 한 줄</span></li><li><b>아이콘 (선택)</b><span>라벨 앞 20. 아이콘 표시를 켤 때만, 라벨과 간격 8</span></li></ol>
+  <h2 id="button-properties">속성</h2>
+  <h3>종류</h3>
   <div class="tbl-scroll"><table>
-    <thead><tr><th>항목</th><th>규격</th></tr></thead>
-    <tbody>
-      <tr><td>칩</td><td>58×66 · 모서리 14 · 간격 8 · 위 32칸 안에 비율 글리프(긴 변 28, 모서리 4) + 아래 라벨 12</td></tr>
-      <tr><td>선택</td><td>흰 카드(layer.default) · 라벨 12/700 label.strong · 그림자 0 2 6 5% · 글리프 28%</td></tr>
-      <tr><td>선택 안 됨</td><td>바탕 없음 · 라벨 12/600 label.alternative · 글리프 14%</td></tr>
-      <tr><td>스크롤</td><td>개수와 관계없이 가로 스크롤 · 양끝 5% 흐리게 · 열릴 때와 고를 때 선택 칩을 가운데로</td></tr>
-      <tr><td>누름</td><td>0.96 축소 · 스프링 0.3 / 0.8</td></tr>
-    </tbody></table></div>
-  <p>대표/라이프처럼 두세 값 중 하나를 고르는 곳은 위 세그먼트와 같은 규칙(바탕 fill.strong 캡슐 + 선택 흰 캡슐)을 써요.</p>
-
-  <h2>인터랙션 공통 규칙</h2>
-  <div class="tbl-scroll">
-    <table>
-      <thead><tr><th>규칙</th><th>값</th><th>비고</th></tr></thead>
-      <tbody>
-        <tr><td>롱프레스 (허용 위젯)</td><td class="num">0.8s 게이지</td><td>편집 진입 — 게이지 완주 후 커밋</td></tr>
-        <tr><td>롱프레스 (비허용)</td><td class="num">0.45s 조기 흔들림</td><td>불가함을 빨리 알린다 — 기다리게 하지 않음</td></tr>
-        <tr><td>햅틱 표준</td><td>리프트 medium · 커밋 medium · 비허용 rigid · 소형 light</td><td>전 컴포넌트 공통</td></tr>
-        <tr><td>상세 층위</td><td>내/친구 위젯 상세 = 시트(<code>Motion.sheet</code>) · 플래터 = 페이지 · 파괴적 = 알럿</td><td>층위 혼용 금지</td></tr>
-        <tr><td>컴포저 CTA 카피</td><td>[추가하기] / [수정 완료]</td><td>동작을 그대로 — <a href="#writing">UX Writing 형식 규칙</a></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>컴포넌트 목록</h2>
-  <p class="muted">코드에 존재하는 전체 세트. 본 페이지는 버튼·칩·세그먼트를 선행 문서화한 것 — 나머지의 슬롯·변형·상태 스키마 문서화는 <a href="#backlog">추가 작업 6</a>.</p>
-  <div class="tbl-scroll">
-    <table>
-      <thead><tr><th>파일</th><th>컴포넌트</th></tr></thead>
-      <tbody>
-        <tr><td><code>Components.swift</code></td><td>DButton · DChip · SegmentControl · AvatarStack · StatusBar</td></tr>
-        <tr><td><code>DSComponents.swift</code></td><td>Skeleton · Snackbar · Callout · Badge · Divider · ListRow · Switch · ProgressCircle · AlertDialog · Spinner · Toggle · Sheet(DSSheetSpec) · Banner · TextArea · ColorSheet</td></tr>
-        <tr><td><code>AddComponents.swift</code></td><td>컴포저 세트 — InputField · LinkField · PositionGrid · FormatRows</td></tr>
-        <tr><td><code>SwipeTabs.swift</code></td><td>텍스트 탭 + 페이징</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="page-nav">
-    <a href="#grid"><span class="dir">이전</span>플래터 배치</a>
-    <a class="next" href="#voice"><span class="dir">다음</span>디토의 말과 용어</a>
-  </div>
+    <thead><tr><th>종류</th><th>쓰는 곳</th><th>모습</th></tr></thead>
+    <tbody><tr><td>Primary</td><td>화면의 주요 행동 · 컴포저 하단 [위젯 추가]</td><td>보라 세로 그라디언트 + 위쪽 광택 · 높이 60</td></tr><tr><td>Secondary</td><td>주요 행동 옆의 보조 행동 · [앨범에서 선택]</td><td>연보라 바탕 + 1px 테두리 · 높이 48</td></tr><tr><td>Compact</td><td>두 개를 나란히 둘 때</td><td>Primary와 같은 높이 60 · 무채색 바탕 · 폭 절반</td></tr><tr><td>Neutral Solid</td><td>일반 화면의 주요 완료 행동(적용하기)</td><td>진한 무채색 채움 · 높이 44</td></tr><tr><td>Neutral Outline · Brand Outline</td><td>낮은 강조의 보조 행동</td><td>테두리만 · 높이 44</td></tr><tr><td>Destructive</td><td>삭제·내리기처럼 되돌리기 어려운 행동</td><td>위험 배경 + 흰 라벨</td></tr></tbody></table></div>
+  <h3>크기</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>크기</th><th>보이는 높이</th><th>터치 영역</th><th>글자</th></tr></thead>
+    <tbody><tr><td>Small</td><td>36</td><td>44</td><td>14</td></tr><tr><td>Medium</td><td>44</td><td>44</td><td>16</td></tr><tr><td>Large</td><td>48</td><td>48</td><td>16</td></tr><tr><td>CTA</td><td>60</td><td>60</td><td>17 Bold</td></tr></tbody></table></div>
+  <p>가로는 내용에 맞추거나(Hug) 영역을 채워요(Fill). 크기를 줄여도 터치 영역과 글자 크기는 줄이지 않아요.</p>
+  <h3>상태</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>상태</th><th>표현</th></tr></thead>
+    <tbody><tr><td>기본</td><td>종류별 채움</td></tr><tr><td>포인터 올림 · 누름</td><td>채움이 한 단계 진해지거나(Solid) 옅은 바탕이 깔려요(Outline). 누를 때 0.97로 줄어요</td></tr><tr><td>포커스</td><td>키보드 포커스 테두리(border/focus)</td></tr><tr><td>비활성</td><td>흐린 바탕(action/disabled) + 흐린 라벨 · 터치 무시</td></tr><tr><td>불러오는 중</td><td>라벨 자리에 스피너 · 중복 입력 막음</td></tr></tbody></table></div>
+  <h2 id="button-guide">사용 가이드</h2>
+  <h3>강조 단계를 지켜요</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>강조</th><th>종류</th><th>한 화면에서</th></tr></thead>
+    <tbody><tr><td>높음</td><td>Primary · Neutral Solid</td><td>하나만</td></tr><tr><td>중간</td><td>Secondary · Compact</td><td>필요할 때 높음 옆에</td></tr><tr><td>낮음</td><td>Neutral Outline · Brand Outline</td><td>여러 개 가능</td></tr></tbody></table></div>
+  <h3>채움 버튼과 테두리 버튼을 섞지 않아요</h3>
+  <p>Outline은 Outline끼리 조합해요. Neutral Solid는 같은 줄에 무채색 보조 버튼과 짝을 이뤄요.</p>
+  <h3>라벨은 결과를 말해요</h3>
+  <p>‘확인’보다 ‘내리기’, ‘위젯 추가’, ‘수정 완료’처럼 눌렀을 때 일어나는 일을 써요. <a href="#writing">상황별 문구 →</a></p>
+  <div class="wa-dd"><div><h3>Do</h3><ul><li>한 화면에 주요 버튼은 하나만 둬요.</li><li>작게 써야 할 때도 터치 영역 44는 지켜요.</li><li>되돌리기 어려운 행동은 확인 대화상자를 한 번 거쳐요.</li></ul></div><div class="no"><h3>Don’t</h3><ul><li>보라 Primary를 한 화면에 두 개 이상 두지 마세요.</li><li>Solid와 Outline을 한 줄에 섞지 마세요.</li><li>라벨에 ‘확인’·‘예’처럼 결과가 안 보이는 말을 쓰지 마세요.</li></ul></div></div>
+  <h2 id="button-spec">규격</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>종류 · 상태</th><th>슬롯</th><th>속성</th><th>값</th></tr></thead>
+    <tbody><tr><td>Primary</td><td>컨테이너</td><td>높이 · 모서리 · 좌우</td><td>60 · 12 · 16</td></tr><tr><td>Primary</td><td>컨테이너</td><td>채움</td><td><code>action/primary/bg</code> · #C78FF7 → #AA4AF4 52% → #9430D8 + 위쪽 광택 white 30%→0</td></tr><tr><td>Primary</td><td>컨테이너</td><td>그림자</td><td>#9430D8 28% · 블러 10 · y 4 (비활성이면 없음)</td></tr><tr><td>Primary</td><td>라벨</td><td>글자 · 색</td><td>17 Bold · <code>action/primary/fg</code></td></tr><tr><td>Secondary</td><td>컨테이너</td><td>높이 · 채움 · 테두리</td><td>48 · <code>action/secondary/bg</code> · 1px</td></tr><tr><td>Secondary</td><td>라벨</td><td>글자 · 색</td><td>17 Medium · <code>action/secondary/fg</code></td></tr><tr><td>Neutral Solid</td><td>컨테이너</td><td>높이 · 모서리 · 좌우 · 간격</td><td>44 · 12 · 16 · 8</td></tr><tr><td>Neutral Solid</td><td>컨테이너 · 라벨</td><td>색</td><td><code>action/neutral-solid/bg</code> · <code>action/neutral-solid/fg</code> · 16 SemiBold</td></tr><tr><td>Outline</td><td>컨테이너</td><td>테두리</td><td><code>border/control</code> 1 · 포인터 올림·누름 채움 <code>action/ghost/hover</code></td></tr><tr><td>Outline</td><td>라벨</td><td>글자 · 색</td><td>16 SemiBold · <code>text/default</code></td></tr><tr><td>모든 종류 · 포커스</td><td>컨테이너</td><td>테두리</td><td><code>border/focus</code></td></tr><tr><td>모든 종류 · 비활성</td><td>컨테이너</td><td>채움</td><td><code>action/disabled/bg</code></td></tr><tr><td>모든 종류 · 누름</td><td>컨테이너</td><td>크기</td><td>0.97 (움직임 줄이기에서는 1)</td></tr></tbody></table></div>
+  <h2 id="button-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>Primary · Secondary · Compact</td><td>60 · 48 · 60</td><td><code>DButton</code> 60 · R12</td><td><span class="docs-status ready">일치</span></td></tr><tr><td>Neutral Solid · Outline · 크기 3종</td><td>44 기준 6상태</td><td><code>SplupActionStyle</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>불러오는 중</td><td>스피너 상태</td><td>저장 중 버튼은 비활성 처리</td><td><span class="docs-status pending">차이</span> 스피너 표시는 화면마다 달라요</td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#ditto-action">디토하기 버튼 →</a><a href="#chips">칩과 선택 탭 →</a><a href="#dialog">다이얼로그 →</a></div>
 </article>
 <article class="page content-max splup-graphics" id="page-ditto-action" hidden>
   <div class="crumb">컴포넌트 / 디토하기 버튼</div>
   <h1>디토하기 버튼</h1>
   <p class="desc">친구의 위젯을 내 플래터에 가져오는 버튼이에요. 3초 동안 누르면 담기고, 중간에 떼면 취소돼요. 어떤 위젯을 디토할 수 있는지는 <a href="#widget-ditto">디토 허용 규칙</a>에서 정해요.</p>
+  <figure class="comp-stage wide"><img src="component-assets/ditto-hold.png" alt="디토 버튼 여섯 색의 다섯 상태" width="1600" height="534" loading="lazy"><figcaption>Splup/Action/DittoHold · 6색 × 5상태</figcaption></figure>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1699-8399" target="_blank" rel="noopener">Splup/Action/DittoHold</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1592-7054" target="_blank" rel="noopener">Splup/Action/Ditto</a></span><span><b>코드</b> <code>DittoHoldButton.swift</code></span></p>
+  <h2 id="ditto-anatomy">구성</h2>
+  <ol class="comp-anatomy"><li><b>컨테이너</b><span>모서리 12 · 좌우 20 · 간격 8 · 팔레트 색 채움</span></li><li><b>압력 레이어</b><span>방사형 깊이 + 선형 확산 두 장. 누르는 동안 색이 안쪽으로 깊어져요</span></li><li><b>디토 마크</b><span>원본 로고 · 흰색</span></li><li><b>라벨</b><span>흰색 · 한 줄</span></li></ol>
+  <h2 id="ditto-properties">속성</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>속성</th><th>값</th><th>라벨</th></tr></thead>
+    <tbody><tr><td>Palette</td><td>violet · indigo · pink · peach · cyan · mint</td><td>—</td></tr><tr><td>State · Idle</td><td>누르기 전</td><td>내 플래터에 디토하기</td></tr><tr><td>State · HoldingStart / HoldingEnd</td><td>누르는 중(0 → 3초)</td><td>계속 누르세요 · 떼면 취소</td></tr><tr><td>State · Pending</td><td>3초를 채워 요청 중</td><td>가져오는 중…</td></tr><tr><td>State · Complete</td><td>저장 성공</td><td>내 플래터에 담았어요</td></tr><tr><td>포인터 · 포커스 · 비활성</td><td>Splup/Action/Ditto의 Hover · Pressed · Focus · Disabled</td><td>—</td></tr></tbody></table></div>
+  <p>진행 막대 없이 버튼 전체 색의 압력감으로 3초를 보여줘요. 실행은 긴 버튼에서만 하고, 작은 디토 아이콘은 상태 표시 전용이에요.</p>
+  <h2 id="ditto-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>크기</td><td>높이 48 · 마크 20 · 라벨 16 SemiBold</td><td>높이 60 · 마크 27 · 라벨 17 Bold</td><td><span class="docs-status pending">차이</span> 맞출 쪽을 정해야 해요</td></tr><tr><td>6색 × 5상태</td><td>같음</td><td><code>DittoHoldButton</code> · 3초 · 360ms 복귀</td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
   <div class="cs-root" data-color-system-ditto id="ditto-long-press"></div>
   <p class="wa-note">기준: <code>DittoHoldButton.swift</code> · <code>DittoHoldTimeline.swift</code> · <code>DittoAvailabilityBadge.swift</code>. 비동기 저장을 연결할 때는 요청 중 중복 입력을 막고 성공 뒤에만 완료를 표시해요.</p>
   <div class="docs-related"><span>함께 보기</span><a href="#widget-ditto">디토 허용 규칙 →</a><a href="#buttons">버튼과 선택 요소 →</a><a href="#color-application">앱에서의 색 적용 →</a></div>
 </article>
+<article class="page content-max comp-doc" id="page-chips" hidden>
+  <div class="crumb">컴포넌트 / 칩과 선택 탭</div>
+  <h1>칩과 선택 탭</h1>
+  <p class="desc">여러 값 중 하나를 고르거나 목록을 거를 때 쓰는 작은 선택 컴포넌트예요. 행동을 실행하지는 않아요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3001-25899" target="_blank" rel="noopener">Chip/Filter</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3035-9929" target="_blank" rel="noopener">Composer/SizeOption</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3674-40005" target="_blank" rel="noopener">Composer/ColorRow</a></span><span><b>코드</b> <code>Components.swift · DChip · SegmentControl</code> · <code>WidgetFrame.swift · RatioBar</code> · <code>AddComponents.swift · DSColorRow</code></span></p>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/chip-filter.png" alt="검정 선택 칩과 흰 기본 칩" width="196" height="98" loading="lazy"><figcaption>Chip/Filter · 선택 · 기본</figcaption></figure>
+  </div>
+  <figure class="comp-stage wide"><img src="component-assets/size-option.png" alt="크기 칩 15종의 선택과 기본 상태" width="1100" height="200" loading="lazy"><figcaption>Composer/SizeOption · 칸 수 표기</figcaption></figure>
+  <figure class="comp-stage wide"><img src="component-assets/color-row.png" alt="라벨과 흰 캡슐 안 색 점 일곱 개" width="1200" height="183" loading="lazy"><figcaption>Composer/ColorRow · 선택 없음 ~ 7</figcaption></figure>
+  <h2 id="chip-filter">필터 칩</h2>
+  <p>위젯 추가 시트의 바로가기처럼 섹션으로 이동하거나 목록을 거를 때 써요. 한 줄에서 가로로 넘겨요.</p>
+  <ol class="comp-anatomy"><li><b>컨테이너</b><span>캡슐 · 높이 34 · 좌우 14</span></li><li><b>라벨</b><span>14 Medium(t4 Md) · 한 단어</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>상태</th><th>컨테이너</th><th>라벨</th></tr></thead>
+    <tbody><tr><td>선택</td><td>진한 무채색 채움(gray/950)</td><td>흰색</td></tr><tr><td>기본</td><td>흰 바탕 + 테두리</td><td>기본 글자색</td></tr></tbody></table></div>
+  <p>칩 사이 간격 8, 터치 영역 44. 누르면 해당 묶음 맨 위로 스크롤하고 가벼운 진동을 줘요.</p>
+  <h2 id="chip-overlay">사진 위 칩</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>컴포넌트</th><th>규격</th><th>변형</th></tr></thead>
+    <tbody><tr><td><code>DChip</code></td><td>높이 28 · 캡슐 · 13 SemiBold · 좌우 12</td><td>라이트 / 다크 — 사진 위에는 다크</td></tr></tbody></table></div>
+  <h2 id="chip-segment">선택 탭</h2>
+  <p>두세 값 중 하나를 고를 때 써요(대표/라이프, 주파수/그룹 채팅).</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>슬롯</th><th>규격</th></tr></thead>
+    <tbody><tr><td>컨테이너</td><td>캡슐 · 모서리 13 · 바탕 fill.strong · 안쪽 4</td></tr><tr><td>선택 탭</td><td>흰 캡슐(모서리 10) + 얕은 그림자(검정 8% · 블러 3 · y 1) · 누름 0.98</td></tr><tr><td>선택 안 된 탭</td><td>바탕 없음 · 보조 글자색</td></tr></tbody></table></div>
+  <h2 id="size-chips">크기 칩</h2>
+  <p>위젯 작성 화면과 수정 시트 맨 위에서 크기를 고르는 칩이에요. 표기는 비율이 아니라 플래터 칸 수(가로×세로)이고, 상자 안 도형이 실제 비율이에요. 위젯마다 허용된 크기만 보여요.</p>
+  <ol class="comp-anatomy"><li><b>컨테이너</b><span>58×66 · 모서리 14</span></li><li><b>비율 글리프</b><span>32 상자 안 긴 변 28 · 모서리 4</span></li><li><b>라벨</b><span>‘2×2’ · 12</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>상태</th><th>컨테이너</th><th>라벨 · 글리프</th></tr></thead>
+    <tbody><tr><td>선택</td><td>흰 카드 + 그림자(블러 6)</td><td>12 Bold 진한 글자 · 글리프 진하게</td></tr><tr><td>기본</td><td>바탕 없음 · 테두리 없음</td><td>12 SemiBold 보조 글자 · 글리프 옅게</td></tr></tbody></table></div>
+  <p><b>정렬</b> 정사각 → 가로 → 세로. 같은 묶음 안에서는 면적이 작은 순, 같으면 덜 길쭉한 것 먼저. 칩 수와 관계없이 가로로 넘기고 양끝 5%는 흐리게, 고른 칩은 가운데로 와요.</p>
+  <h2 id="color-row">색 고르기 줄</h2>
+  <p>위젯 추가·수정 화면에서 배경색과 글자색을 고르는 줄이에요.</p>
+  <ol class="comp-anatomy"><li><b>라벨</b><span>‘배경’ · ‘텍스트’ · 15 Medium</span></li><li><b>캡슐</b><span>흰 캡슐 · 모서리 끝까지 · 안쪽 7 · 항목 간격 18</span></li><li><b>직접 고르기</b><span>팔레트 원형 버튼 — 작은 색상환이 열려요</span></li><li><b>색 점 7개</b><span>고른 점에 바깥 2px 진한 링</span></li><li><b>새로 추천 ↻</b><span>처음엔 팔레트에서, 다음부터 고른 색과 비슷한 색을 무작위로</span></li></ol>
+  <h2 id="chip-guide">사용 가이드</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th></th><th>칩</th><th>버튼</th></tr></thead>
+    <tbody><tr><td>목적</td><td>값을 고르거나 거르기</td><td>행동을 실행하기</td></tr><tr><td>라벨</td><td>명사(‘기록’, ‘2×2’)</td><td>동사(‘저장하기’)</td></tr><tr><td>결과</td><td>화면의 보기만 바뀜</td><td>데이터가 바뀜</td></tr></tbody></table></div>
+  <div class="wa-dd"><div><h3>Do</h3><ul><li>선택 상태는 채움으로 분명히 구분해요.</li><li>칩이 많으면 한 줄 가로 스크롤로 둬요.</li></ul></div><div class="no"><h3>Don’t</h3><ul><li>칩에 저장·삭제 같은 행동을 넣지 마세요.</li><li>두 줄 이상으로 칩을 쌓지 마세요.</li></ul></div></div>
+  <h2 id="chip-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>필터 칩</td><td>34 · 선택 gray/950</td><td>위젯 추가 시트 바로가기 34</td><td><span class="docs-status ready">일치</span></td></tr><tr><td>크기 칩</td><td>15크기 × 2상태</td><td><code>RatioBar</code> · <code>RatioOption.ordered</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>색 고르기 줄</td><td>7색 + 직접 고르기 + ↻</td><td><code>DSColorRow</code></td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#buttons">버튼 →</a><a href="#widget-catalog">위젯 작성 화면 →</a></div>
+</article>
+<article class="page content-max comp-doc" id="page-menu" hidden>
+  <div class="crumb">컴포넌트 / 메뉴 행과 스위치</div>
+  <h1>메뉴 행과 스위치</h1>
+  <p class="desc">바텀시트와 목록에서 여러 행동이나 설정을 한 줄씩 보여주는 컴포넌트예요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1918-18217" target="_blank" rel="noopener">Splup/Action/MenuRow</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1932-135983" target="_blank" rel="noopener">Splup/Action/Switch</a></span><span><b>코드</b> <code>DSComponents.swift · DSListRow · DSSwitch</code></span></p>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/menu-row-action.png" alt="수정하기 메뉴 행" width="370" height="52" loading="lazy"><figcaption>Action</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/menu-row-navigation.png" alt="화살표가 있는 메뉴 행" width="312" height="52" loading="lazy"><figcaption>Navigation</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/menu-row-destructive.png" alt="붉은 글자의 메뉴 행" width="370" height="52" loading="lazy"><figcaption>Destructive</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/menu-row-toggle.png" alt="스위치가 있는 메뉴 행" width="370" height="52" loading="lazy"><figcaption>Toggle</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/menu-row-pressed.png" alt="옅은 바탕이 깔린 눌린 메뉴 행" width="370" height="52" loading="lazy"><figcaption>누름</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/switch.png" alt="스위치 네 상태" width="296" height="76" loading="lazy"><figcaption>Switch · 꺼짐 · 켜짐 · 비활성</figcaption></figure>
+  </div>
+  <h2 id="menu-anatomy">구성</h2>
+  <ol class="comp-anatomy"><li><b>행</b><span>높이 52 · 좌우 16 · 모서리 12 · 바탕 없음</span></li><li><b>라벨</b><span>16 Regular · 기본 글자색</span></li><li><b>끝 요소 (선택)</b><span>Navigation = → · Toggle = 스위치</span></li></ol>
+  <h2 id="menu-properties">속성</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>속성</th><th>값</th><th>설명</th></tr></thead>
+    <tbody><tr><td>Case</td><td>Action · Navigation · Destructive · Toggle</td><td>바로 실행 · 다른 화면으로 이동 · 삭제 등 위험 · 켜고 끄기</td></tr><tr><td>State</td><td>Default · Pressed · Disabled</td><td>누를 때만 옅은 바탕(<code>action/ghost/hover</code>)</td></tr><tr><td>Switch isSelected</td><td>false · true</td><td>켜짐 = 브랜드 채움</td></tr><tr><td>Switch Disabled</td><td>false · true</td><td>흐리게 · 조작 불가</td></tr></tbody></table></div>
+  <h2 id="menu-guide">사용 가이드</h2>
+  <div class="wa-dd"><div><h3>Do</h3><ul><li>삭제는 텍스트만 위험색으로 두고, 누르면 확인 대화상자를 한 번 거쳐요.</li><li>스위치 행은 행 전체(52)를 터치 영역으로 써요.</li></ul></div><div class="no"><h3>Don’t</h3><ul><li>메뉴 행에 기본 바탕색을 깔지 마세요.</li><li>한 시트에 위험 행동을 맨 위에 두지 마세요.</li></ul></div></div>
+  <h2 id="menu-spec">규격</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>대상 · 상태</th><th>슬롯</th><th>속성</th><th>값</th></tr></thead>
+    <tbody><tr><td>메뉴 행</td><td>행</td><td>높이 · 좌우 · 간격 · 모서리</td><td>52 · 16 · 12 · 12</td></tr><tr><td>메뉴 행 · 누름</td><td>행</td><td>채움</td><td><code>action/ghost/hover</code></td></tr><tr><td>메뉴 행</td><td>라벨</td><td>글자 · 색</td><td>16 Regular · <code>text/default</code> (Destructive는 위험색)</td></tr><tr><td>스위치</td><td>트랙</td><td>크기 · 모서리</td><td>44×28 · 14</td></tr><tr><td>스위치 · 꺼짐</td><td>트랙</td><td>채움 · 테두리</td><td><code>action/neutral/bg</code> · <code>border/control</code> 1</td></tr><tr><td>스위치</td><td>손잡이</td><td>크기 · 색</td><td>24 원 · <code>text/inverse</code></td></tr></tbody></table></div>
+  <h2 id="menu-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>메뉴 행</td><td>52 · 4 Case</td><td><code>DSListRow</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>스위치</td><td>44×28</td><td><code>DSSwitch</code> · <code>DSToggleStyle</code></td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#navigation">상단 바와 바텀시트 →</a><a href="#dialog">다이얼로그 →</a></div>
+</article>
+<article class="page content-max comp-doc" id="page-feedback" hidden>
+  <div class="crumb">컴포넌트 / 빈 화면·오류·토스트·스켈레톤</div>
+  <h1>빈 화면·오류·토스트·스켈레톤</h1>
+  <p class="desc">내용이 없거나, 불러오지 못했거나, 결과를 잠깐 알려야 할 때 상태를 전달하는 컴포넌트예요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2975-9567" target="_blank" rel="noopener">Feedback/EmptyState</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2975-9611" target="_blank" rel="noopener">Feedback/ErrorState</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2975-9627" target="_blank" rel="noopener">Feedback/Toast</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2975-9631" target="_blank" rel="noopener">Feedback/Skeleton</a></span><span><b>코드</b> <code>AddComponents.swift · DSEmptyState</code> · <code>DSComponents.swift · DSSnackbar · DSSkeleton</code></span></p>
+  <figure class="comp-stage wide"><img src="component-assets/empty-state.png" alt="집 그림과 아직 아무것도 없어요 문구" width="860" height="416" loading="lazy"><figcaption>Feedback/EmptyState · 행동 버튼 있음 · 없음</figcaption></figure>
+  <figure class="comp-stage wide"><img src="component-assets/error-state.png" alt="오류 안내 여섯 가지" width="1400" height="232" loading="lazy"><figcaption>Feedback/ErrorState · Network · Load · NotFound × 아이콘 · 그림</figcaption></figure>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/toast.png" alt="토스트 세 종류" width="1200" height="123" loading="lazy"><figcaption>Feedback/Toast · 기본 · 성공 · 오류</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/skeleton.png" alt="줄 · 블록 · 원 자리표시" width="585" height="257" loading="lazy"><figcaption>Feedback/Skeleton</figcaption></figure>
+  </div>
+  <h2 id="empty-state">빈 화면</h2>
+  <p>아직 아무것도 없을 때 무엇을 하면 채워지는지 알려줘요.</p>
+  <ol class="comp-anatomy"><li><b>그림</b><span>140×140 · 용도별 앱 그래픽으로 교체. 작은 영역에서는 숨겨요</span></li><li><b>제목</b><span>18 Bold(t6 Bd) · 진한 글자색</span></li><li><b>설명</b><span>14 Regular(articleNote) · 보조 글자색 · 제목과 간격 6</span></li><li><b>행동 버튼 (선택)</b><span>Secondary 200×48 · 필요할 때만</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>속성</th><th>값</th></tr></thead>
+    <tbody><tr><td>Action</td><td>On · Off</td></tr><tr><td>Show illustration</td><td>켬 · 끔</td></tr><tr><td>Graphic</td><td>앱 그래픽 교체</td></tr><tr><td>간격</td><td>위아래 32 · 요소 사이 16</td></tr></tbody></table></div>
+  <h2 id="error-state">오류 안내</h2>
+  <p>불러오지 못했을 때 무슨 일이 있었고 무엇을 할 수 있는지 알려줘요.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>속성</th><th>값</th><th>설명</th></tr></thead>
+    <tbody><tr><td>Type</td><td>Network · Load · NotFound</td><td>연결 끊김 · 불러오기 실패 · 찾을 수 없음</td></tr><tr><td>Presentation</td><td>Icon · Graphic</td><td>작은 영역은 72 원 배지(연보라) 안 아이콘 32, 전체 화면은 140 그림</td></tr></tbody></table></div>
+  <p>제목·설명 규격은 빈 화면과 같아요. 복구 행동은 Primary 200×52(예: ‘다시 시도’).</p>
+  <h2 id="toast">토스트</h2>
+  <p>화면을 막지 않고 결과나 실패를 잠깐 알려요. 상단 바 아래 8에 나타나 2.5초 뒤 사라져요.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>슬롯</th><th>규격</th></tr></thead>
+    <tbody><tr><td>컨테이너</td><td>370×50 · 모서리 14 · 위아래 14 · 좌우 16 · <code>color/bg/layer-floating</code> + 그림자(블러 12)</td></tr><tr><td>메시지</td><td>14 Medium(t4 Md) · 한 줄 권장, 최대 두 줄</td></tr><tr><td>Type</td><td>Default · Success · Error — 성공·오류는 앞에 상태 아이콘</td></tr></tbody></table></div>
+  <h2 id="skeleton">스켈레톤</h2>
+  <p>처음 불러올 때 실제 레이아웃과 같은 크기로 자리를 잡아요. 0.9초 간격으로 은은하게 깜빡이고, 캐시가 있으면 쓰지 않아요.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Shape</th><th>기본 크기</th><th>모서리</th></tr></thead>
+    <tbody><tr><td>Line</td><td>200×14</td><td>7</td></tr><tr><td>Block</td><td>177×177</td><td>위젯과 같게</td></tr><tr><td>Circle</td><td>48×48</td><td>원</td></tr></tbody></table></div>
+  <h2 id="feedback-guide">사용 가이드</h2>
+  <div class="wa-dd"><div><h3>Do</h3><ul><li>빈 화면에는 채우는 방법 한 가지만 안내해요.</li><li>오류에는 원인과 다시 해볼 방법을 함께 써요.</li><li>토스트는 결과 확인용으로만 짧게 써요.</li></ul></div><div class="no"><h3>Don’t</h3><ul><li>입력 폼·짧은 댓글·필드 오류에 큰 그림을 넣지 마세요.</li><li>되돌릴 수 없는 행동의 확인을 토스트로 대신하지 마세요.</li><li>캐시가 있는데 스켈레톤을 보여주지 마세요.</li></ul></div></div>
+  <h2 id="feedback-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>빈 화면</td><td>EmptyState 2변형</td><td><code>DSEmptyState</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>오류 안내</td><td>ErrorState 6변형</td><td>화면별 개별 구현</td><td><span class="docs-status pending">Figma만</span> 공통 컴포넌트로 묶을 예정</td></tr><tr><td>토스트</td><td>Toast 3종</td><td><code>DSSnackbar</code> · <code>app.toastMsg</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>스켈레톤</td><td>Line · Block · Circle</td><td><code>DSSkeleton</code> · <code>DSSkeletonRow</code></td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#dialog">다이얼로그 →</a><a href="#writing">상황별 문구 →</a></div>
+</article>
+<article class="page content-max comp-doc" id="page-dialog" hidden>
+  <div class="crumb">컴포넌트 / 다이얼로그</div>
+  <h1>다이얼로그</h1>
+  <p class="desc">흐름을 잠깐 멈추고 사용자의 확인이나 선택을 받는 컴포넌트예요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2984-9848" target="_blank" rel="noopener">Overlay/Dialog</a></span><span><b>코드</b> <code>DSComponents.swift · DSAlertDialog</code></span></p>
+  <figure class="comp-stage wide"><img src="component-assets/dialog.png" alt="확인 대화상자 세 종류" width="1168" height="262" loading="lazy"><figcaption>Overlay/Dialog · Single · Double · Destructive</figcaption></figure>
+  <h2 id="dialog-anatomy">구성</h2>
+  <ol class="comp-anatomy"><li><b>딤</b><span>화면 전체 검정 40%</span></li><li><b>컨테이너</b><span>336 · 모서리 24 · 위 28 · 좌우·아래 20 · <code>color/bg/layer-modal</code> + 그림자(블러 32)</span></li><li><b>제목</b><span>18 Bold(t6 Bd)</span></li><li><b>본문 (선택)</b><span>14 Regular(articleNote) · 보조 글자색</span></li><li><b>버튼</b><span>높이 52 · 모서리 14 · 간격 8 · 본문과 12 띄움</span></li></ol>
+  <h2 id="dialog-properties">속성</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Type</th><th>버튼</th><th>쓰는 곳</th></tr></thead>
+    <tbody><tr><td>Single</td><td>[확인] 하나 · 연보라</td><td>안내 확인</td></tr><tr><td>Double</td><td>[취소] [확인]</td><td>두 가지 중 선택</td></tr><tr><td>Destructive</td><td>[취소] [삭제] — 오른쪽 위험색</td><td>삭제·나가기처럼 되돌릴 수 없는 행동</td></tr></tbody></table></div>
+  <h2 id="dialog-guide">사용 가이드</h2>
+  <div class="wa-dd"><div><h3>Do</h3><ul><li>제목에 상황을, 본문에 결과를 써요(‘작성 중인 내용이 있어요’ · ‘지금 나가면 작성한 내용이 사라져요.’).</li><li>위험 버튼은 항상 오른쪽에 두고 결과를 말해요(‘삭제’, ‘나가기’).</li></ul></div><div class="no"><h3>Don’t</h3><ul><li>단순 결과 알림에 다이얼로그를 쓰지 마세요 — 토스트를 써요.</li><li>‘예 / 아니요’ 버튼을 쓰지 마세요.</li></ul></div></div>
+  <h2 id="dialog-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>다이얼로그</td><td>버튼 52 · R14 · 폭 336</td><td><code>DSAlertDialog</code> 버튼 48 · 폭 최대 310</td><td><span class="docs-status pending">차이</span> 버튼 높이와 폭 맞추기 필요</td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#feedback">빈 화면·오류·토스트 →</a><a href="#buttons">버튼 →</a></div>
+</article>
+<article class="page content-max comp-doc" id="page-comments" hidden>
+  <div class="crumb">컴포넌트 / 댓글</div>
+  <h1>댓글</h1>
+  <p class="desc">위젯과 포스트에 남기는 댓글 한 줄과 입력 바예요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3023-9939" target="_blank" rel="noopener">Comment/Row</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3023-9954" target="_blank" rel="noopener">Comment/InputBar</a></span><span><b>코드</b> <code>DSGlassInputBar.swift</code> · <code>Overlays.swift · 위젯 댓글</code></span></p>
+  <figure class="comp-stage wide"><img src="component-assets/comment-row.png" alt="댓글과 답글 한 줄" width="860" height="150" loading="lazy"><figcaption>Comment/Row · 댓글 · 답글</figcaption></figure>
+  <figure class="comp-stage wide"><img src="component-assets/comment-input.png" alt="빈 입력 바와 입력 중인 입력 바" width="924" height="140" loading="lazy"><figcaption>Comment/InputBar · 비어 있음 · 입력 중</figcaption></figure>
+  <h2 id="comment-row">댓글 한 줄</h2>
+  <ol class="comp-anatomy"><li><b>아바타</b><span>댓글 36 · 답글 28(들여쓰기 46)</span></li><li><b>이름 · 시간</b><span>이름 14 Bold(t4 Bd) · 시간 11(t1)</span></li><li><b>본문</b><span>14 Regular(t4 Rg)</span></li><li><b>답글 달기</b><span>12 Medium(t2 Md)</span></li><li><b>좋아요</b><span>18 · 누르면 채운 빨간 하트</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>속성</th><th>값</th></tr></thead>
+    <tbody><tr><td>Type</td><td>Default(댓글) · Reply(답글)</td></tr><tr><td>여백</td><td>위아래 10 · 좌우 12 · 요소 간격 10</td></tr></tbody></table></div>
+  <h2 id="comment-input">입력 바</h2>
+  <ol class="comp-anatomy"><li><b>바</b><span>402×60 · 좌우 16 · 간격 10 · <code>color/bg/layer-default</code></span></li><li><b>입력 칸</b><span>높이 40 · 캡슐 · <code>color/bg/neutral-weak</code> · ‘댓글 남기기’</span></li><li><b>보내기</b><span>44 원 + 종이비행기</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>State</th><th>보내기 버튼</th></tr></thead>
+    <tbody><tr><td>Default</td><td>회색 원 · 보낼 수 없음</td></tr><tr><td>Typing</td><td>브랜드 색 원 + 흰 종이비행기 · 보낼 수 있음</td></tr></tbody></table></div>
+  <p>키보드 위, 키보드가 없으면 홈 인디케이터 위에 붙여요. 댓글 시트는 입력 바 위에서 잘라 보여줘요.</p>
+  <h2 id="comment-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>입력 바</td><td>회색 → 브랜드 원</td><td><code>DSGlassInputBar</code> · 위젯 댓글 시트</td><td><span class="docs-status ready">일치</span></td></tr><tr><td>포스트 댓글</td><td>Comment/Row</td><td>포스트 댓글 일부 화면은 이전 모양</td><td><span class="docs-status pending">차이</span> Comment/Row로 통일 예정</td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#chat">그룹 채팅 →</a><a href="#widget-manage">위젯 관리 시트 →</a></div>
+</article>
+<article class="page content-max comp-doc" id="page-chat" hidden>
+  <div class="crumb">컴포넌트 / 그룹 채팅</div>
+  <h1>그룹 채팅</h1>
+  <p class="desc">그룹 채팅방의 목록, 말풍선, 반응, 답장, 수정·삭제를 만드는 컴포넌트 묶음이에요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3837-40338" target="_blank" rel="noopener">Chat/Bubble</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3982-12012" target="_blank" rel="noopener">Chat/FocusMenu</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3980-11871" target="_blank" rel="noopener">Chat/ReactionBar</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3837-146581" target="_blank" rel="noopener">Chat/ListRow</a></span><span><b>코드</b> <code>GroupDetail.swift</code> · <code>DSGlassInputBar.swift</code></span></p>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/chat-list-row.png" alt="채팅 목록 한 줄" width="370" height="68" loading="lazy"><figcaption>Chat/ListRow</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/chat-bubble.png" alt="친구와 내 말풍선, 삭제된 메시지" width="444" height="140" loading="lazy"><figcaption>Chat/Bubble</figcaption></figure>
+  </div>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/chat-reaction-bar.png" alt="이모지 여섯 개 반응 막대" width="294" height="74" loading="lazy"><figcaption>Chat/ReactionBar</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/chat-reaction-chip.png" alt="반응 칩 두 상태" width="146" height="74" loading="lazy"><figcaption>Chat/ReactionChip</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/chat-reply-quote.png" alt="답장 인용" width="123" height="46" loading="lazy"><figcaption>Chat/ReplyQuote</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/chat-unread-jump.png" alt="새 메시지 12 캡슐" width="132" height="44" loading="lazy"><figcaption>Chat/UnreadJump</figcaption></figure>
+  </div>
+  <figure class="comp-stage wide"><img src="component-assets/chat-focus-menu.png" alt="길게 누르기 메뉴 네 종류" width="1114" height="377" loading="lazy"><figcaption>Chat/FocusMenu · 내 메시지 · 삭제 확인 · 친구 메시지 · 위젯</figcaption></figure>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/chat-compose-banner.png" alt="답장과 수정 배너" width="424" height="166" loading="lazy"><figcaption>Chat/ComposeBanner</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/chat-input.png" alt="채팅 입력 바" width="924" height="140" loading="lazy"><figcaption>Chat/InputBar</figcaption></figure>
+  </div>
+  <figure class="comp-stage wide"><img src="component-assets/chat-unread-divider.png" alt="여기부터 새 메시지 구분선" width="374" height="32" loading="lazy"><figcaption>Chat/UnreadDivider</figcaption></figure>
+  <h2 id="chat-list">목록 한 줄</h2>
+  <ol class="comp-anatomy"><li><b>이모지 타일</b><span>48 · 모서리 14</span></li><li><b>이름 + 인원</b><span>한 줄</span></li><li><b>마지막 메시지</b><span>위젯이면 ‘OO님이 위젯을 공유했어요’</span></li><li><b>시간</b><span>오늘 = 시각 · 어제 · M월 d일</span></li><li><b>안 읽음 배지</b><span>브랜드 원 + 수</span></li></ol>
+  <p>높이 68 · 위아래 10 · 간격 12. 최근 대화 순으로 정렬해요.</p>
+  <h2 id="chat-bubble">말풍선</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Sender · State</th><th>모습</th></tr></thead>
+    <tbody><tr><td>Other</td><td>흰 바탕 · 왼쪽 아래 모서리 5 · 본문 15/21</td></tr><tr><td>Me</td><td>핑크 → 퍼플 그라디언트 · 오른쪽 아래 모서리 5</td></tr><tr><td>Unsent</td><td>‘모두에게서 삭제’ 뒤 자리표시 — 테두리만, 반응·메뉴 없음</td></tr></tbody></table></div>
+  <p>안쪽 위아래 8 · 좌우 14. 최대 폭은 화면에서 아바타·시간 자리를 뺀 만큼. 수정된 메시지는 시간 앞에 ‘수정됨 · ’을 붙여요.</p>
+  <h2 id="chat-reaction">반응</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>컴포넌트</th><th>규격</th><th>동작</th></tr></thead>
+    <tbody><tr><td>반응 막대</td><td>270×50 · 모서리 30 · 칸 42 원 6개 · <code>color/bg/layer-floating</code></td><td>말풍선을 0.35초 길게 누르면 위에 떠요. 내 반응 칸은 선택 표시, 다시 누르면 빼기</td></tr><tr><td>반응 칩</td><td>높이 24 · 모서리 12 · 좌우 8 · 이모지 13 + 수 12 Medium</td><td>같은 이모지끼리 묶어 수를 세요(1명이면 수 숨김). 누르면 나도 +1, 내 반응이면 빼기</td></tr><tr><td>반응한 사람</td><td>아바타 20 · 이름 13 Medium · 이모지 15</td><td>길게 누르기 메뉴 맨 위에 누가 어떤 반응을 남겼는지</td></tr></tbody></table></div>
+  <h2 id="chat-reply">답장과 수정</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>컴포넌트</th><th>규격</th><th>동작</th></tr></thead>
+    <tbody><tr><td>답장 인용</td><td>최대 폭 220 · 모서리 14 · <code>color/bg/neutral-weak</code> · 한 줄 말줄임</td><td>누르면 원문으로 스크롤하고 1.2초 강조</td></tr><tr><td>작성 배너</td><td>입력 바 바로 위 · 모서리 16 · 닫기 28</td><td>Reply = ‘○○에게 답장’, Edit = ‘메시지 수정’(보낸 지 24시간 안). 입력 칸 안내 문구도 바뀌고 수정 중엔 ＋를 숨겨요</td></tr></tbody></table></div>
+  <h2 id="chat-menu">길게 누르기 메뉴</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Kind</th><th>메뉴</th></tr></thead>
+    <tbody><tr><td>Mine</td><td>답장 · 복사 · 수정(24시간 안 글 메시지) · 모두에게서 삭제</td></tr><tr><td>Mine · Confirm</td><td>삭제를 한 번 더 눌러 확인</td></tr><tr><td>Other</td><td>답장 · 복사 · 메시지 신고하기 · ○○ 님 차단하기</td></tr><tr><td>Widget</td><td>답장 · 디토하기(디토할 수 있을 때만) · 공유 보드에서 보기 · 신고 · 차단</td></tr></tbody></table></div>
+  <p>메뉴 폭 248 · 모서리 16 · 행 높이 46 · 라벨 15 Regular · 아이콘 16. 디토하기는 브랜드 색, 삭제·차단은 위험색이에요.</p>
+  <h2 id="chat-unread">안 읽은 메시지</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>컴포넌트</th><th>규칙</th></tr></thead>
+    <tbody><tr><td>구분선</td><td>들어올 때 안 읽은 메시지가 3개 이상이면 첫 메시지 앞에 ‘여기부터 새 메시지’(브랜드 글자 12 Medium + 옅은 브랜드 선)</td></tr><tr><td>이동 캡슐</td><td>헤더 아래 8 가운데 · 높이 32 · <code>color/bg/brand-weak</code>. 누르면 구분선으로 스크롤, 구분선이 보이면 사라져요</td></tr></tbody></table></div>
+  <h2 id="chat-input">입력 바</h2>
+  <p>＋(위젯 공유) 44 원 · 입력 칸(캡슐 40, ‘메시지 보내기’, 최대 500자) · 보내기 44. 보내기 버튼 규칙은 <a href="#comments">댓글 입력 바</a>와 같아요.</p>
+  <h2 id="chat-guide">사용 가이드</h2>
+  <div class="wa-dd"><div><h3>Do</h3><ul><li>반응·답장·수정은 모두 길게 누르기 한 곳에서 시작해요.</li><li>삭제는 두 번 눌러 확인하고, 지운 자리는 자리표시로 남겨요.</li></ul></div><div class="no"><h3>Don’t</h3><ul><li>말풍선 옆에 상시 버튼을 두지 마세요.</li><li>읽음 수를 숫자로 재촉하는 문구를 쓰지 마세요.</li></ul></div></div>
+  <h2 id="chat-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>반응 · 답장 · 수정 · 삭제</td><td>Chat v2 (2026-10-16)</td><td><code>GroupDetail.swift</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>입력 바</td><td>Chat/InputBar</td><td><code>DSGlassInputBar</code></td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#comments">댓글 →</a><a href="#menu">메뉴 행과 스위치 →</a></div>
+</article>
+
 <article class="page content-max" id="page-inputs" hidden>
   <div class="crumb">컴포넌트 / 텍스트 입력</div>
   <h1>텍스트 입력</h1>
@@ -1042,6 +1247,18 @@
     </tbody></table></div>
   <p>칸의 바탕은 작성 화면 배경 위에서 흰색이에요. 묶음 안 칸 사이 간격은 12, 묶음 제목은 14/600이에요.</p>
 
+  <h2 id="input-labeled">라벨이 있는 입력 칸</h2>
+  <figure class="comp-stage wide"><img src="component-assets/editor-field.png" alt="라벨이 있는 입력 칸 세 상태" width="1200" height="175" loading="lazy"><figcaption>Ditto/Editor/Field · 기본 · 포커스 · 오류</figcaption></figure>
+  <ol class="comp-anatomy"><li><b>라벨</b><span>항상 보여요 · 14 SemiBold · <code>text/strong</code></span></li><li><b>입력 칸</b><span>높이 56 · 모서리 12 · 위아래 12 · 좌우 16 · <code>bg/default</code></span></li><li><b>글자 수</b><span>칸 안 오른쪽 · <code>Label/Assistive</code></span></li><li><b>도움말 (오류)</b><span>색만 바꾸지 않고 무엇이 문제인지 문장으로</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>State</th><th>모습</th></tr></thead>
+    <tbody><tr><td>Default</td><td>높이 88(라벨 + 칸)</td></tr><tr><td>Focused</td><td>칸 테두리 브랜드</td></tr><tr><td>Error</td><td>테두리 위험색 + 아래 도움말 · 높이 120</td></tr></tbody></table></div>
+  <h2 id="input-bottom-action">하단 저장 버튼</h2>
+  <figure class="comp-stage wide"><img src="component-assets/bottom-action.png" alt="하단 저장 버튼 네 상태" width="1400" height="130" loading="lazy"><figcaption>Ditto/Editor/BottomAction · Ready · Unchanged · Saving · Invalid</figcaption></figure>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>State</th><th>동작</th></tr></thead>
+    <tbody><tr><td>Ready</td><td>저장할 수 있어요 · 브랜드 채움 60 · 모서리 12</td></tr><tr><td>Unchanged</td><td>바꾼 내용이 없어 비활성</td></tr><tr><td>Saving</td><td>저장 중 · 중복 탭을 막아요</td></tr><tr><td>Invalid</td><td>필수 내용이 없거나 오류라 비활성</td></tr></tbody></table></div>
+  <p>키보드가 올라오면 버튼도 키보드 위로 올라가고, 홈 인디케이터는 숨겨요.</p>
   <h2 id="input-counter">글자 수 표시</h2>
   <p>글자 수 한도가 있는 모든 입력 칸은 칸 안 오른쪽에 <code>DSCharCounter</code>를 둬요. ‘7/18’ 형식, 12/400(captionMd) · 보조 글자색 · 고정폭 숫자. 한도를 넘는 글자는 입력되지 않아요. 스크린 리더는 ‘18자 중 7자’로 읽어요. 새 입력 칸도 같은 표시를 써요.</p>
   <div class="tbl-scroll"><table>
@@ -1067,6 +1284,10 @@
       <tr><td>토글</td><td>시스템 토글 · 켜짐 색 primary</td></tr>
       <tr><td>디토 허용</td><td>켜진 동안 보라 테두리 1.2(purple60 50%). 허용 3개를 넘으면 켜지지 않고 알림. <a href="#widget-ditto">디토 허용 규칙 →</a></td></tr>
     </tbody></table></div>
+  <h2 id="input-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>글자 수 글자</td><td>14 Medium · 칸 안 아래 기준</td><td><code>DSCharCounter</code> 12 Regular(captionMd)</td><td><span class="docs-status pending">차이</span> 크기를 맞춰야 해요</td></tr><tr><td>라벨이 있는 입력 칸</td><td>Editor/Field 3상태</td><td>작성 화면은 라벨 대신 묶음 제목 + <code>DSFieldCard</code></td><td><span class="docs-status pending">차이</span> 오류 상태 문구는 아직 없어요</td></tr><tr><td>하단 저장 버튼</td><td>4상태</td><td><code>DButton</code> 비활성 ↔ 활성</td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
   <div class="docs-related"><span>함께 보기</span><a href="#widget-catalog">위젯 작성 화면 →</a><a href="#writing">상황별 문구 →</a></div>
 </article>
 
@@ -1089,7 +1310,7 @@
   <div class="crumb">컴포넌트 / 상단 바와 바텀시트</div>
   <h1>상단 바와 바텀시트</h1>
   <p class="desc">상단 바는 버튼 수로 정리하고, 바텀시트는 같은 틀 위에 목적에 맞는 본문을 얹어요. 서비스가 달라도 같은 구조를 써요.</p>
-  <p class="wa-note">기준: <code>NavigationChrome.swift</code>(<code>DDSChromeBar</code> · <code>DDSChromeSpec</code>) · <code>DSSheetContainer.swift</code> · 규격 1.1(2026-10-02). <a href="../navigation-sheets">라이트·다크와 큰 글씨로 체험하는 예시 ↗</a></p>
+  <p class="wa-note">기준: <code>NavigationChrome.swift</code>(<code>DDSChromeBar</code> · <code>DDSChromeSpec</code>) · <code>DSSheetContainer.swift</code> · 규격 1.1(2026-10-02) · Figma <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1271-3204" target="_blank" rel="noopener">Ditto/Navigation/TopBar</a>. <a href="../navigation-sheets">라이트·다크와 큰 글씨로 체험하는 예시 ↗</a></p>
 
   <h2 id="nav-bar">상단 바 · 버튼 수 3단계, 배치 4가지</h2>
   <div class="tbl-scroll"><table>
@@ -1111,6 +1332,18 @@
       <tr><td>버튼 수 세기</td><td>비활성 버튼은 세고, 로고·장식·그래버는 세지 않아요</td></tr>
     </tbody></table></div>
 
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/top-bar.png" alt="상단 바 여섯 배치" width="438" height="500" loading="lazy"><figcaption>Ditto/Navigation/TopBar</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/sheet.png" alt="바텀시트 틀 두 종류" width="438" height="672" loading="lazy"><figcaption>Ditto/Sheet/Container · 끌기 가능 · 불가</figcaption></figure>
+  </div>
+  <h3 id="nav-actions">상단 버튼</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>종류</th><th>규격</th></tr></thead>
+    <tbody><tr><td>아이콘</td><td>터치 44 · 아이콘 20 · 기본 <code>text/strong</code> · 비활성 <code>text/disabled</code>. 연한 색을 활성 뒤로 버튼에 쓰지 않아요</td></tr><tr><td>닫기</td><td>아이콘 16 + 원형 표면 32</td></tr><tr><td>텍스트 (취소·완료)</td><td>14 SemiBold · 터치 영역 가운데</td></tr><tr><td>완료 캡슐</td><td>55×36 · 브랜드 채움 · 바꾼 내용이 없으면 흐리게</td></tr></tbody></table></div>
+  <p>닫기·뒤로·취소에는 스크린 리더 이름을 꼭 붙여요.</p>
+  <h3 id="nav-back">하위 화면 상단 바</h3>
+  <figure class="comp-stage"><img src="component-assets/nav-back.png" alt="뒤로 버튼과 가운데 제목" width="402" height="48" loading="lazy"><figcaption>Navigation/Back · N1-L</figcaption></figure>
+  <p>하위 화면과 위젯 추가 작성 화면에서 써요. 뒤로 44 + 가운데 제목 17 Bold, 상태바 바로 아래에 붙어요.</p>
   <h2 id="nav-sheets">바텀시트 · 같은 틀, 세 가지 목적</h2>
   <div class="tbl-scroll"><table>
     <thead><tr><th>시트</th><th>머리</th><th>예</th></tr></thead>
@@ -1121,6 +1354,9 @@
     </tbody></table></div>
   <p>하단에 ‘완료’가 있으면 상단 저장은 두지 않아요. 바꾼 내용이 있을 때만 닫기 전에 버릴지 물어요(‘변경사항을 저장하지 않고 닫을까요?’).</p>
 
+  <h3 id="nav-sheet-anatomy">시트 구성</h3>
+  <ol class="comp-anatomy"><li><b>그래버</b><span>40×5 · 위 10 · 아래 12 · 전체 27 · <code>text/disabled</code>. 끌어서 닫거나 높이를 바꿀 수 있을 때만, 장식으로 처리</span></li><li><b>머리</b><span>높이 56 · 제목 + 닫기</span></li><li><b>내용</b><span>좌우 16</span></li><li><b>바닥 (선택)</b><span>하단 고정 버튼</span></li></ol>
+  <p>바탕은 <code>layer/modal</code>, 위쪽 두 모서리만 둥글어요. 시스템 시트의 그래버와 함께 그리지 않아요.</p>
   <h2 id="nav-choose">시트보다 먼저, 작업을 구분해요</h2>
   <div class="tbl-scroll"><table>
     <thead><tr><th>작업</th><th>형식</th><th>이유</th></tr></thead>
@@ -1133,6 +1369,12 @@
       <tr><td>위젯 종류 · 댓글 · 미니 프로필</td><td>시트</td><td>원래 화면을 보며 짧게 처리하는 보조 작업이에요</td></tr>
     </tbody></table></div>
 
+  <h2 id="nav-tabbar">하단 탭 바</h2>
+  <figure class="comp-stage wide"><img src="component-assets/tab-bar.png" alt="유리 질감과 불투명 탭 바 여섯 변형" width="1200" height="293" loading="lazy"><figcaption>Ditto/Navigation/LiquidGlass · Glass · Opaque × 홈 · Ditto! · 친구</figcaption></figure>
+  <ol class="comp-anatomy"><li><b>바</b><span>370×64 · 모서리 32 · 안쪽 4 · 유리 질감 + 그림자</span></li><li><b>탭</b><span>120×56 · 아이콘 + 라벨 · 간격 4</span></li><li><b>선택 탭</b><span><code>fill/brand-tonal</code> 캡슐</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>속성</th><th>값</th></tr></thead>
+    <tbody><tr><td>Selected</td><td>홈 · Ditto! · 친구</td></tr><tr><td>Material</td><td>Glass(유리) · Opaque(불투명)</td></tr></tbody></table></div>
   <h2 id="nav-rules">화면이 늘어나도 지킬 기준</h2>
   <ul>
     <li><b>제목의 가운데는 흔들리지 않게.</b> 양쪽 슬롯을 같은 폭으로 예약해요. 큰 글씨는 줄바꿈과 높이 확장을 허용하고, 제목과 버튼을 겹치지 않아요.</li>
@@ -1140,6 +1382,10 @@
     <li><b>닫기와 저장을 나눠요.</b> 조회·선택은 닫기와 끌어 내리기, 편집은 취소와 저장.</li>
     <li><b>시스템이 맡는 영역은 한 번만.</b> 상태바·safe area·시스템 그래버를 두 번 그리지 않아요. 본문은 스크롤하고 주요 행동은 손이 닿는 곳에 둬요.</li>
   </ul>
+  <h2 id="nav-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>상단 바</td><td>TopBar 6배치</td><td><code>DDSTopBar</code> · <code>DDSChromeBar</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>바텀시트</td><td>Sheet/Container · Grabber</td><td><code>DSSheetContainer</code> · <code>DSGrabber</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>하단 탭 바</td><td>Glass · Opaque</td><td>유리 질감 탭 바</td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
   <p class="muted">앱의 공통 헤더와 주요 화면에 반영했고, 남은 독립 헤더는 차례로 옮기고 있어요. <a href="../../../docs/Ditto_Navigation_Sheets_2026-10-02.md">상세 규격과 이관 범위</a></p>
   <div class="docs-related"><span>함께 보기</span><a href="#zindex">화면이 겹치는 순서 →</a><a href="#buttons">버튼과 선택 요소 →</a></div>
 </article>
@@ -1545,7 +1791,7 @@
     <section><span class="docs-status pending">캡처 갱신 필요</span><h3>친구 위젯 시트 캡처</h3><p>디토 허용 규칙의 시트 캡처는 2026-10-12 빌드예요. 지금 배치(하단 고정 디토 영역)로 다시 찍어야 해요.</p></section>
   </div>
   <h2>최근 변경</h2>
-  <ol class="docs-change-list"><li><time datetime="2026-10-19">2026.10.19</time><span>가이드 구조를 다시 짰어요. 상단 메뉴를 파운데이션 · 컴포넌트 · 위젯 · 글쓰기 · 브랜드 · 자료로 나누고, 한 주제는 한 페이지에서만 설명해요. 컬러 기준과 색 적용은 파운데이션으로, <a href="#ditto-action">디토하기 버튼</a>은 독립 컴포넌트로, 플래터 배치와 <a href="#widget-guestbook">방명록</a>은 위젯으로, 브랜드 그래픽·원본 파일·OG 이미지는 브랜드로 옮겼어요. <a href="#inputs">텍스트 입력</a> · <a href="#photo-picker">이미지 셀렉터</a> · <a href="#navigation">상단 바와 바텀시트</a> 페이지를 새로 두고, 문서 말투를 해요체로 맞췄어요. 예전 주소(#colorgraphy 등)는 그대로 열려요.</span></li><li><time datetime="2026-10-18">2026.10.18</time><span>위젯 문서를 10-18 앱에 맞췄어요. <a href="#widget-ditto">디토 허용 규칙</a>: 디토할 수 있는 종류를 이미지 · GIF · 폴라로이드 · 음악 · 영상 다섯 가지로 좁히고(<code>WType.dittoableSet</code>), 친구 위젯 시트를 위젯 중심 구성 + 하단 고정 디토 영역(시트 안에서 바로 담기)으로 바꿨어요. <a href="#widget-catalog">위젯 추가와 편집</a>: 크기 칩을 맨 위로 고정하고 흰 선택 카드로, 미리보기는 내용과 함께 스크롤, 고정 크기 위젯 폐지, 수정 시트의 왼쪽 닫기·크기 칩을 반영하고 <a href="#inputs">글자 수 표시</a>와 <a href="#photo-picker">공통 이미지 셀렉터</a>를 새로 정리했어요.</span></li><li><time datetime="2026-10-12">2026.10.12</time><span>위젯 문서를 지금 앱에 맞췄어요. <a href="#widget-catalog">위젯 추가와 편집</a>(출시 위젯 네 묶음 · 추가 시트 · 작성 화면 · 편집 도구 · 방명록), <a href="#widget-todo">To-do 위젯</a>, <a href="#widget-ditto">디토 허용 규칙</a>을 새로 만들고 실제 앱 화면으로 보여줘요. 음악 모서리 24, ‘대표로 ↑’ 라벨 제거, 허용 3개 한도를 반영했어요.</span></li><li><time datetime="2026-10-11">2026.10.11</time><span><a href="#og-images">OG 이미지</a> 문서를 추가했어요. ditto.place의 모든 공개 페이지에 링크 미리보기 이미지를 두고, 프로필은 각자의 핸들 색으로 그려요.</span></li><li><time datetime="2026-10-05">2026.10.05</time><span>문서 목록과 상단 메뉴를 정리했어요. 제목과 설명을 쉬운 말로 바꾸고 모바일 목차, 검색, 문서 이동을 개선했어요.</span></li><li><time datetime="2026-09-29">2026.09.29</time><span>프로필 외곽선을 정리하고 친구 상태를 사람+체크 아이콘으로 구분했어요.</span></li><li><time datetime="2026-09-28">2026.09.28</time><span>프로필 10색과 대표·라이프 표면, 우측 액션 상태를 디자인 가이드에 반영했어요.</span></li></ol>
+  <ol class="docs-change-list"><li><time datetime="2026-10-19">2026.10.19</time><span>Figma 디자인 시스템(Design_system_Final)의 컴포넌트를 문서에 옮겼어요. 컴포넌트 문서는 모두 ‘구성 → 속성 → 사용 가이드 → 규격 → 구현 상태’ 순서로 맞췄고, 미리보기는 Figma 컴포넌트 그대로예요. 새 페이지: <a href="#chips">칩과 선택 탭</a> · <a href="#menu">메뉴 행과 스위치</a> · <a href="#feedback">빈 화면·오류·토스트·스켈레톤</a> · <a href="#dialog">다이얼로그</a> · <a href="#comments">댓글</a> · <a href="#chat">그룹 채팅</a> · <a href="#music-search">음악 검색과 구간</a> · <a href="#widget-manage">위젯 관리 시트</a> · <a href="#post-widget">포스트</a> · <a href="#sticker-board">스티커 보드</a>. <a href="#buttons">버튼</a>은 새로 썼고, <a href="#ditto-action">디토하기 버튼</a> · <a href="#inputs">텍스트 입력</a> · <a href="#navigation">상단 바와 바텀시트</a>에 Figma 컴포넌트 규격을 더했어요. Figma와 앱이 다른 곳은 각 페이지 ‘구현 상태’에 적었어요.</span></li><li><time datetime="2026-10-19">2026.10.19</time><span>가이드 구조를 다시 짰어요. 상단 메뉴를 파운데이션 · 컴포넌트 · 위젯 · 글쓰기 · 브랜드 · 자료로 나누고, 한 주제는 한 페이지에서만 설명해요. 컬러 기준과 색 적용은 파운데이션으로, <a href="#ditto-action">디토하기 버튼</a>은 독립 컴포넌트로, 플래터 배치와 <a href="#widget-guestbook">방명록</a>은 위젯으로, 브랜드 그래픽·원본 파일·OG 이미지는 브랜드로 옮겼어요. <a href="#inputs">텍스트 입력</a> · <a href="#photo-picker">이미지 셀렉터</a> · <a href="#navigation">상단 바와 바텀시트</a> 페이지를 새로 두고, 문서 말투를 해요체로 맞췄어요. 예전 주소(#colorgraphy 등)는 그대로 열려요.</span></li><li><time datetime="2026-10-18">2026.10.18</time><span>위젯 문서를 10-18 앱에 맞췄어요. <a href="#widget-ditto">디토 허용 규칙</a>: 디토할 수 있는 종류를 이미지 · GIF · 폴라로이드 · 음악 · 영상 다섯 가지로 좁히고(<code>WType.dittoableSet</code>), 친구 위젯 시트를 위젯 중심 구성 + 하단 고정 디토 영역(시트 안에서 바로 담기)으로 바꿨어요. <a href="#widget-catalog">위젯 추가와 편집</a>: 크기 칩을 맨 위로 고정하고 흰 선택 카드로, 미리보기는 내용과 함께 스크롤, 고정 크기 위젯 폐지, 수정 시트의 왼쪽 닫기·크기 칩을 반영하고 <a href="#inputs">글자 수 표시</a>와 <a href="#photo-picker">공통 이미지 셀렉터</a>를 새로 정리했어요.</span></li><li><time datetime="2026-10-12">2026.10.12</time><span>위젯 문서를 지금 앱에 맞췄어요. <a href="#widget-catalog">위젯 추가와 편집</a>(출시 위젯 네 묶음 · 추가 시트 · 작성 화면 · 편집 도구 · 방명록), <a href="#widget-todo">To-do 위젯</a>, <a href="#widget-ditto">디토 허용 규칙</a>을 새로 만들고 실제 앱 화면으로 보여줘요. 음악 모서리 24, ‘대표로 ↑’ 라벨 제거, 허용 3개 한도를 반영했어요.</span></li><li><time datetime="2026-10-11">2026.10.11</time><span><a href="#og-images">OG 이미지</a> 문서를 추가했어요. ditto.place의 모든 공개 페이지에 링크 미리보기 이미지를 두고, 프로필은 각자의 핸들 색으로 그려요.</span></li><li><time datetime="2026-10-05">2026.10.05</time><span>문서 목록과 상단 메뉴를 정리했어요. 제목과 설명을 쉬운 말로 바꾸고 모바일 목차, 검색, 문서 이동을 개선했어요.</span></li><li><time datetime="2026-09-29">2026.09.29</time><span>프로필 외곽선을 정리하고 친구 상태를 사람+체크 아이콘으로 구분했어요.</span></li><li><time datetime="2026-09-28">2026.09.28</time><span>프로필 10색과 대표·라이프 표면, 우측 액션 상태를 디자인 가이드에 반영했어요.</span></li></ol>
   <div class="docs-related"><span>다음 단계</span><a href="#mapping">기존 화면 변경 가이드 ↗</a><a href="#audit">검토 기록 ↗</a></div>
 </article>
 
@@ -1590,14 +1836,35 @@
 </article><article class="page docs-index" id="page-components" hidden>
   <div class="crumb">Splup / 컴포넌트</div><h1>컴포넌트</h1><p class="desc">앱 여러 곳에서 다시 쓰는 부품이에요. 모양만이 아니라 상태와 반응, 쓰는 기준을 함께 정리했어요.</p>
   <div class="docs-index-list">
-    <a href="#buttons"><span class="index-number">01</span><span class="index-copy"><strong>버튼과 선택 요소</strong><small>일반 버튼 · 칩과 선택 탭 · 크기 칩</small></span><b aria-hidden="true">→</b></a>
-    <a href="#ditto-action"><span class="index-number">02</span><span class="index-copy"><strong>디토하기 버튼</strong><small>3초 동안 누르는 긴 버튼 · 가져온 위젯의 표시</small></span><b aria-hidden="true">→</b></a>
-    <a href="#inputs"><span class="index-number">03</span><span class="index-copy"><strong>텍스트 입력</strong><small>한 줄·여러 줄 입력 칸 · 글자 수 표시 · 옵션 토글</small></span><b aria-hidden="true">→</b></a>
-    <a href="#photo-picker"><span class="index-number">04</span><span class="index-copy"><strong>이미지 셀렉터</strong><small>사진을 고르는 모든 화면이 쓰는 셀렉터</small></span><b aria-hidden="true">→</b></a>
-    <a href="#navigation"><span class="index-number">05</span><span class="index-copy"><strong>상단 바와 바텀시트</strong><small>버튼 수로 정리한 상단 바 · 시트 세 가지</small></span><b aria-hidden="true">→</b></a>
-    <a href="#profile-handles"><span class="index-number">06</span><span class="index-copy"><strong>프로필 구성</strong><small>대표·라이프 10색과 우측 액션 5개 상태</small></span><b aria-hidden="true">→</b></a>
-    <a href="#profile-avatars"><span class="index-number">07</span><span class="index-copy"><strong>기본 아바타</strong><small>프로필 10색과 같은 색의 기본 아바타</small></span><b aria-hidden="true">→</b></a>
+    <a href="#buttons"><span class="index-number">01</span><span class="index-copy"><strong>버튼</strong><small>Primary · Secondary · Neutral · Outline · 크기와 상태</small></span><b aria-hidden="true">→</b></a>
+    <a href="#ditto-action"><span class="index-number">02</span><span class="index-copy"><strong>디토하기 버튼</strong><small>3초 동안 누르는 긴 버튼 · 6색 × 5상태</small></span><b aria-hidden="true">→</b></a>
+    <a href="#chips"><span class="index-number">03</span><span class="index-copy"><strong>칩과 선택 탭</strong><small>필터 칩 · 선택 탭 · 크기 칩 · 색 고르기 줄</small></span><b aria-hidden="true">→</b></a>
+    <a href="#menu"><span class="index-number">04</span><span class="index-copy"><strong>메뉴 행과 스위치</strong><small>시트·목록의 52 메뉴 행 · 44×28 스위치</small></span><b aria-hidden="true">→</b></a>
+    <a href="#inputs"><span class="index-number">05</span><span class="index-copy"><strong>텍스트 입력</strong><small>입력 칸 · 글자 수 · 하단 저장 버튼</small></span><b aria-hidden="true">→</b></a>
+    <a href="#photo-picker"><span class="index-number">06</span><span class="index-copy"><strong>이미지 셀렉터</strong><small>사진을 고르는 모든 화면이 쓰는 셀렉터</small></span><b aria-hidden="true">→</b></a>
+    <a href="#feedback"><span class="index-number">07</span><span class="index-copy"><strong>빈 화면·오류·토스트·스켈레톤</strong><small>상태를 알리는 피드백</small></span><b aria-hidden="true">→</b></a>
+    <a href="#dialog"><span class="index-number">08</span><span class="index-copy"><strong>다이얼로그</strong><small>확인 · 선택 · 되돌릴 수 없는 행동</small></span><b aria-hidden="true">→</b></a>
+    <a href="#navigation"><span class="index-number">09</span><span class="index-copy"><strong>상단 바와 바텀시트</strong><small>상단 바 · 시트 · 하단 탭 바</small></span><b aria-hidden="true">→</b></a>
+    <a href="#comments"><span class="index-number">10</span><span class="index-copy"><strong>댓글</strong><small>댓글 한 줄 · 입력 바</small></span><b aria-hidden="true">→</b></a>
+    <a href="#chat"><span class="index-number">11</span><span class="index-copy"><strong>그룹 채팅</strong><small>말풍선 · 반응 · 답장 · 길게 누르기 메뉴</small></span><b aria-hidden="true">→</b></a>
+    <a href="#profile-handles"><span class="index-number">12</span><span class="index-copy"><strong>프로필 구성</strong><small>대표·라이프 10색과 우측 액션 5개 상태</small></span><b aria-hidden="true">→</b></a>
+    <a href="#profile-avatars"><span class="index-number">13</span><span class="index-copy"><strong>기본 아바타</strong><small>프로필 10색과 같은 색의 기본 아바타</small></span><b aria-hidden="true">→</b></a>
   </div>
+  <h2 id="components-code">코드에 있는 컴포넌트</h2>
+  <p class="muted">앱 소스의 공통 컴포넌트 파일이에요. 각 페이지의 ‘구현 상태’에서 Figma 컴포넌트와 짝을 확인해요.</p>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>파일</th><th>컴포넌트</th></tr></thead>
+      <tbody>
+        <tr><td><code>Components.swift</code></td><td>DButton · DChip · SegmentControl · AvatarStack · StatusBar</td></tr>
+        <tr><td><code>DSComponents.swift</code></td><td>Skeleton · Snackbar · Callout · Badge · Divider · ListRow · Switch · ProgressCircle · AlertDialog · Spinner · Toggle · Sheet(DSSheetSpec) · Banner · TextArea · ColorSheet</td></tr>
+        <tr><td><code>AddComponents.swift</code></td><td>컴포저 세트 — InputField · LinkField · PositionGrid · FormatRows</td></tr>
+        <tr><td><code>SwipeTabs.swift</code></td><td>텍스트 탭 + 페이징</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
 </article><article class="page docs-index" id="page-widgets" hidden>
   <div class="crumb">Splup / 위젯</div><h1>위젯</h1><p class="desc">플래터를 채우는 위젯의 크기와 배치, 추가와 편집, 디토 규칙, 위젯별 규격이에요.</p>
   <div class="docs-index-list">
@@ -1607,6 +1874,10 @@
     <a href="#widget-ditto"><span class="index-number">04</span><span class="index-copy"><strong>디토 허용 규칙</strong><small>디토할 수 있는 위젯 · 허용 3개 · 숨쉬는 후광 · 친구 위젯 시트</small></span><b aria-hidden="true">→</b></a>
     <a href="#widget-todo"><span class="index-number">05</span><span class="index-copy"><strong>To-do 위젯</strong><small>카테고리 5색 · 체크 칸 22 · 주간 스트립 · 크기별 타일</small></span><b aria-hidden="true">→</b></a>
     <a href="#widget-guestbook"><span class="index-number">06</span><span class="index-copy"><strong>방명록 위젯</strong><small>타일과 상세 · 안부와 답글</small></span><b aria-hidden="true">→</b></a>
+    <a href="#music-search"><span class="index-number">07</span><span class="index-copy"><strong>음악 검색과 구간</strong><small>검색 결과 한 줄 · 들려줄 구간 고르기</small></span><b aria-hidden="true">→</b></a>
+    <a href="#widget-manage"><span class="index-number">08</span><span class="index-copy"><strong>위젯 관리 시트</strong><small>내용 수정 · 받은 댓글 · 디토 허용 · 삭제</small></span><b aria-hidden="true">→</b></a>
+    <a href="#post-widget"><span class="index-number">09</span><span class="index-copy"><strong>포스트</strong><small>목록 카드 · 상세 블럭 · 플래터 위젯</small></span><b aria-hidden="true">→</b></a>
+    <a href="#sticker-board"><span class="index-number">10</span><span class="index-copy"><strong>스티커 보드</strong><small>스티커 · 질감 칩 · 이름표</small></span><b aria-hidden="true">→</b></a>
   </div>
 </article><article class="page docs-index" id="page-patterns" hidden>
   <div class="crumb">Splup / 글쓰기</div><h1>글쓰기</h1><p class="desc">사용자에게 건네는 말의 기준이에요. 같은 뜻은 같은 말로, 재촉하지 않고 짧게 써요.</p>
@@ -2179,6 +2450,108 @@
   <p>타일 글자 수는 크기에 따라 달라요. 높이 150 미만은 2줄, 좁은 세로형은 6줄, 그 밖에는 3줄까지 보여요. 크기는 공통 12종을 모두 쓸 수 있어요. 친구 위젯 시트에도 최근 안부 4개를 미리 보여줘요.</p>
   <div class="docs-related"><span>함께 보기</span><a href="#widget-catalog">위젯 추가와 편집 →</a><a href="#widget-ditto">디토 허용 규칙 →</a></div>
 </article>
+<article class="page content-max comp-doc" id="page-music-search" hidden>
+  <div class="crumb">위젯 / 음악 검색과 구간</div>
+  <h1>음악 검색과 구간</h1>
+  <p class="desc">음악 위젯을 만들 때 곡을 찾고, 위젯이 들려줄 구간을 고르는 컴포넌트예요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3037-9842" target="_blank" rel="noopener">Music/SearchRow</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3037-9991" target="_blank" rel="noopener">Music/SectionPicker</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3046-10215" target="_blank" rel="noopener">Music/SectionEditor</a></span><span><b>코드</b> <code>MusicSongSearch.swift</code> · <code>MusicSectionPicker.swift</code></span></p>
+  <figure class="comp-stage wide"><img src="component-assets/music-search-row.png" alt="검색 결과 세 상태" width="1000" height="117" loading="lazy"><figcaption>Music/SearchRow · 기본 · 재생 중 · 선택</figcaption></figure>
+  <figure class="comp-stage wide"><img src="component-assets/music-section-picker.png" alt="파형 위 30초 창" width="860" height="288" loading="lazy"><figcaption>Music/SectionPicker · 기본 · 끄는 중</figcaption></figure>
+  <figure class="comp-stage wide"><img src="component-assets/music-section-editor.png" alt="구간 설정 본체 네 상태" width="1400" height="246" loading="lazy"><figcaption>Music/SectionEditor · 기본 · 끄는 중 · 재생 중 · 고정</figcaption></figure>
+  <h2 id="music-search-row">검색 결과 한 줄</h2>
+  <p>검색은 한 칸이에요(곡 · 아티스트 · YouTube 링크). 입력하는 대로 결과가 나와요.</p>
+  <ol class="comp-anatomy"><li><b>커버</b><span>48 · 모서리 12(프로필 아바타와 같게)</span></li><li><b>곡명 · 정보</b><span>곡명 14 Bold(t4 Bd) · 아티스트·앨범 12(t2)</span></li><li><b>행동</b><span>36 원</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>State</th><th>행동 원</th><th>행</th></tr></thead>
+    <tbody><tr><td>Default</td><td>브랜드 원 + ▶ 30초 미리듣기</td><td>바탕 없음</td></tr><tr><td>Playing</td><td>채운 진한 원 + 일시정지 + 진행</td><td>바탕 없음</td></tr><tr><td>Selected</td><td>브랜드 원 + 흰 체크</td><td>바탕 없음(목록 상자 하나만 감싸요)</td></tr></tbody></table></div>
+  <p>370×68 · 좌우 10 · 간격 12. 한 번에 한 곡만 재생해요.</p>
+  <h2 id="music-section">구간 고르기</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>컴포넌트</th><th>규격</th><th>동작</th></tr></thead>
+    <tbody><tr><td>구간 카드</td><td>370 · 모서리 20 · 안쪽 16 · 파형 56 · 미리듣기 버튼 44(진한 채움)</td><td>파형 위 창을 좌우로 끌어 시작점을 정해요. 끄는 동안 시작 시간 말풍선</td></tr><tr><td>구간 설정 시트</td><td>파형 72막대(112) · 양쪽 손잡이 · 1초 미세 조정</td><td>Playing = 재생 위치와 재생한 부분 표시 · Locked = 30초 미리듣기만 있는 곡(0:00 고정, 조작 불가)</td></tr></tbody></table></div>
+  <p>저장 값은 시작 초(<code>previewStart</code>)예요. 미리듣기는 고른 구간만 재생해요. 위젯 화면 카드의 ‘편집 ›’ → 시트(취소/완료) → 저장 토스트 순서로 열려요.</p>
+  <h2 id="music-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>검색 결과 한 줄</td><td>3상태</td><td><code>MusicSongSearch</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>구간 길이</td><td>30초 고정</td><td>YouTube 곡 30 · 60 · 90초(기본 90)</td><td><span class="docs-status pending">차이</span> Figma 표기를 앱에 맞춰야 해요</td></tr><tr><td>구간 설정 시트</td><td>SectionEditor 4상태</td><td><code>MusicSectionPicker</code></td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#widget-system">위젯 크기와 구성 →</a><a href="#widget-catalog">위젯 추가와 편집 →</a></div>
+</article>
+<article class="page content-max comp-doc" id="page-widget-manage" hidden>
+  <div class="crumb">위젯 / 위젯 관리 시트</div>
+  <h1>위젯 관리 시트</h1>
+  <p class="desc">내 위젯을 눌렀을 때 열리는 시트에서 내용 수정, 받은 댓글, 디토 허용, 삭제를 다루는 컴포넌트예요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3481-129429" target="_blank" rel="noopener">Splup/WidgetManage/EditBanner</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2878-105441" target="_blank" rel="noopener">…/CommentsCard</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2878-105470" target="_blank" rel="noopener">…/DittoAllow</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2878-105477" target="_blank" rel="noopener">…/DeleteButton</a></span><span><b>코드</b> <code>WidgetDetailParts.swift</code></span></p>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/manage-edit-banner.png" alt="내용 수정 띠 배너" width="370" height="48" loading="lazy"><figcaption>EditBanner</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/manage-edit-tile.png" alt="편집 타일 두 종류" width="410" height="129" loading="lazy"><figcaption>EditTile</figcaption></figure>
+  </div>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/manage-comments.png" alt="받은 댓글 카드" width="370" height="123" loading="lazy"><figcaption>CommentsCard</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/manage-ditto-allow.png" alt="디토 허용 스위치 행" width="370" height="59" loading="lazy"><figcaption>DittoAllow</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/manage-delete.png" alt="위젯 삭제 버튼" width="370" height="52" loading="lazy"><figcaption>DeleteButton</figcaption></figure>
+  </div>
+  <h2 id="manage-order">구성 순서</h2>
+  <ol class="comp-anatomy"><li><b>내용 수정</b><span>한 줄 띠 배너 · 높이 48 · 모서리 12 · <code>fill/brand-tonal</code> · ‘내용 수정’ 15 SemiBold 브랜드 + 고칠 수 있는 것 13 보조 + ›. 크기·위치는 플래터에서 바꿔요</span></li><li><b>받은 댓글</b><span>카드 · 모서리 16 · 안쪽 16 · 수 + 최근 2개, 누르면 전체 댓글. 비었으면 ‘아직 받은 댓글이 없어요 — 친구가 남기면 여기서 바로 보여요’</span></li><li><b>디토 허용</b><span>행 · 모서리 16 · 위아래 12 · 좌우 16 · 스위치. 디토할 수 있는 종류에만 둬요</span></li><li><b>위젯 삭제</b><span>단독 버튼 · 높이 52 · 모서리 16 · <code>status/danger</code> · 다른 행동과 20 이상 띄움 · 누르면 확인 대화상자</span></li></ol>
+  <p>편집 타일(<code>EditTile</code>, 181×97 · 모서리 16 · Primary = 브랜드 톤)은 이전 2열 배치예요. 지금은 띠 배너 하나를 써요(2026-10-13).</p>
+  <h2 id="manage-guide">사용 가이드</h2>
+  <div class="wa-dd"><div><h3>Do</h3><ul><li>주 행동(내용 수정)을 맨 위에 둬요.</li><li>삭제는 맨 아래에 떨어뜨리고 확인을 거쳐요.</li></ul></div><div class="no"><h3>Don’t</h3><ul><li>디토할 수 없는 종류에 디토 허용 행을 두지 마세요.</li><li>삭제를 다른 버튼과 나란히 두지 마세요.</li></ul></div></div>
+  <h2 id="manage-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>관리 시트 순서</td><td>배너 · 댓글 · 허용 · 삭제</td><td><code>WidgetDetailParts.swift</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>디토 허용 대상</td><td>설명: 디토·스티커 보드·To-do 제외</td><td>이미지 · GIF · 폴라로이드 · 음악 · 영상만</td><td><span class="docs-status pending">차이</span> Figma 설명을 지금 규칙으로 고쳐야 해요</td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#widget-ditto">디토 허용 규칙 →</a><a href="#comments">댓글 →</a><a href="#dialog">다이얼로그 →</a></div>
+</article>
+<article class="page content-max comp-doc" id="page-post-widget" hidden>
+  <div class="crumb">위젯 / 포스트</div>
+  <h1>포스트</h1>
+  <p class="desc">블로그처럼 쓴 글을 목록 카드와 상세 블럭으로 보여주는 컴포넌트예요. 플래터에는 포스트 위젯으로 놓여요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3448-10286" target="_blank" rel="noopener">Splup/Post/Card</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=3448-10300" target="_blank" rel="noopener">Splup/Post/BlockSection</a></span><span><b>코드</b> <code>PostComponents.swift</code> · <code>PostWidget.swift</code></span></p>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/post-card.png" alt="포스트 목록 카드 두 종류" width="402" height="644" loading="lazy"><figcaption>Splup/Post/Card · 사진 없음 · 있음</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/post-block.png" alt="포스트 상세 블럭 두 종류" width="402" height="482" loading="lazy"><figcaption>Splup/Post/BlockSection</figcaption></figure>
+  </div>
+  <h2 id="post-card">목록 카드</h2>
+  <ol class="comp-anatomy"><li><b>메타 줄</b><span>블럭이 2개 이상이면 칩</span></li><li><b>제목</b><span>19 Bold</span></li><li><b>업데이트 날짜</b><span>11 Medium 보조</span></li><li><b>본문</b><span>14 Regular · 두 줄</span></li><li><b>사진 (선택)</b><span>첫 블럭의 3장 · 108×132</span></li><li><b>이어서 추가하기</b><span>내 글에만 · [＋ 블럭 이어서 추가하기] 높이 52 · 모서리 16</span></li></ol>
+  <p>흰 카드 · 모서리 18 · 안쪽 16 · 간격 10.</p>
+  <h2 id="post-block">상세 블럭</h2>
+  <p>본문 16/26 → 사진(1장은 원본 비율로 넓게, 여러 장은 2열) → 날짜 + ⋯(블럭 수정·삭제, 내 글만). 블럭 사이는 구분선(fill/subtle)과 16 간격.</p>
+  <h2 id="post-widget-rules">플래터 위젯</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>규칙</th></tr></thead>
+    <tbody><tr><td>추가</td><td>위젯 추가 시트의 ‘포스트’는 위젯을 바로 놓고 최신 글로 채워요. 글이 없으면 빈 카드를 눌러 에디터로</td></tr><tr><td>모습</td><td>사진은 가장자리까지(작은 카드는 사진 위 흰 글자), 머리 줄 ‘✎ 포스트 · 글 N개’ 하나</td></tr><tr><td>디토</td><td>불가 — 내 블로그 창이에요</td></tr></tbody></table></div>
+  <h2 id="post-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>목록 카드 · 상세 블럭</td><td>Post/Card · BlockSection</td><td><code>PostComponents.swift</code> · <code>PostEditor.swift</code></td><td><span class="docs-status ready">일치</span></td></tr><tr><td>포스트 위젯</td><td>Splup/Widget/post 12크기</td><td><code>PostWidget.swift</code></td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#widget-catalog">위젯 추가와 편집 →</a><a href="#comments">댓글 →</a></div>
+</article>
+<article class="page content-max comp-doc" id="page-sticker-board" hidden>
+  <div class="crumb">위젯 / 스티커 보드</div>
+  <h1>스티커 보드</h1>
+  <p class="desc">친구들이 내 대문에 사진 스티커를 붙여주는 보드의 컴포넌트예요.</p>
+  <p class="comp-meta"><span><b>Figma</b> <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2822-104838" target="_blank" rel="noopener">Splup/Sticker/Item</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2827-104828" target="_blank" rel="noopener">Splup/Sticker/FinishChip</a> · <a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2822-104804" target="_blank" rel="noopener">Splup/Sticker/NameTag</a></span><span><b>코드</b> <code>StickerBoard.swift</code> · <code>StickerPeel.swift</code></span></p>
+  <div class="comp-stage-row">
+    <figure class="comp-stage"><img src="component-assets/sticker-item.png" alt="스티커 세 상태" width="610" height="254" loading="lazy"><figcaption>Splup/Sticker/Item · 붙음 · 들어올림 · 선택</figcaption></figure>
+    <figure class="comp-stage"><img src="component-assets/sticker-finish.png" alt="질감 선택 칩" width="202" height="136" loading="lazy"><figcaption>Splup/Sticker/FinishChip</figcaption></figure>
+  </div>
+  <h2 id="sticker-item">스티커</h2>
+  <ol class="comp-anatomy"><li><b>그림</b><span>이미지 채움을 교체해 써요</span></li><li><b>이름표 (선택)</b><span>붙인 사람 · 아바타 18 + 이름 11 SemiBold · 캡슐. 보드 상세에서만, 위젯에서는 숨겨요</span></li></ol>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>State</th><th>모습</th></tr></thead>
+    <tbody><tr><td>Default</td><td>붙은 상태 · 회전 ±18°</td></tr><tr><td>Lifted</td><td>끌거나 눌러 들어 올림</td></tr><tr><td>Selected</td><td>붙일 자리 정하기 — 스티커 모양 + 8 흰 테두리 · 위 손잡이 = 돌리기 · 모서리 = 크기 · 삭제</td></tr></tbody></table></div>
+  <h2 id="sticker-finish">질감 칩</h2>
+  <p>64 썸네일(모서리 16) + 이름 12 Medium. 고르면 썸네일을 해당 질감 렌더로 바꿔요.</p>
+  <h2 id="sticker-rules">보드 규칙</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>규칙</th></tr></thead>
+    <tbody><tr><td>붙이는 사람</td><td>친구만 붙여요. 기본 스티커는 앱 아이콘과 워드마크</td></tr><tr><td>디토</td><td>불가 — 친구들이 함께 채우는 보드예요</td></tr></tbody></table></div>
+  <h2 id="sticker-status">구현 상태</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>Figma</th><th>앱</th><th>상태</th></tr></thead>
+    <tbody><tr><td>스티커 · 질감 · 이름표</td><td>Sticker/Item · FinishChip · NameTag</td><td><code>StickerBoard.swift</code> · <code>StickerPeel.swift</code></td><td><span class="docs-status ready">일치</span></td></tr></tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#widget-catalog">위젯 추가와 편집 →</a><a href="#widget-ditto">디토 허용 규칙 →</a></div>
+</article>
+
 
 <!-- ═══════════ 디토 허용 규칙 ═══════════ -->
 <article class="page content-max" id="page-widget-ditto" hidden>
@@ -2277,7 +2650,7 @@
 
 <script>
   (function () {
-    var pages = ["widget-system", "widget-catalog", "widget-todo", "widget-ditto", "widget-guestbook", "profile-avatars", "profile-handles", "foundations", "components", "widgets", "patterns", "brand", "resources", "overview", "color", "brand-graphics", "color-application", "ditto-action", "inputs", "photo-picker", "navigation", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "og-images", "roadmap"];
+    var pages = ["widget-system", "widget-catalog", "widget-todo", "widget-ditto", "widget-guestbook", "profile-avatars", "profile-handles", "foundations", "components", "widgets", "patterns", "brand", "resources", "overview", "color", "brand-graphics", "color-application", "ditto-action", "inputs", "photo-picker", "navigation", "chips", "menu", "feedback", "dialog", "comments", "chat", "music-search", "widget-manage", "post-widget", "sticker-board", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "og-images", "roadmap"];
     var tocEl = document.getElementById("toc");
     var tocList = document.getElementById("tocList");
     var mobileToc = document.getElementById("mobileToc");
@@ -2344,7 +2717,9 @@
       radius: "foundations", motion: "foundations", interaction: "foundations", zindex: "foundations", darkmode: "foundations",
       components: "components", buttons: "components", "ditto-action": "components", inputs: "components", "photo-picker": "components",
       navigation: "components", "profile-handles": "components", "profile-avatars": "components",
+      chips: "components", menu: "components", feedback: "components", dialog: "components", comments: "components", chat: "components",
       widgets: "widgets", "widget-system": "widgets", grid: "widgets", "widget-catalog": "widgets", "widget-ditto": "widgets", "widget-todo": "widgets", "widget-guestbook": "widgets",
+      "music-search": "widgets", "widget-manage": "widgets", "post-widget": "widgets", "sticker-board": "widgets",
       patterns: "writing", voice: "writing", writing: "writing",
       brand: "brand", "brand-graphics": "brand", assets: "brand", "og-images": "brand",
       resources: "reference", tokens: "reference", mapping: "reference", roadmap: "reference", audit: "reference", backlog: "reference"
