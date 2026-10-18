@@ -40,7 +40,7 @@
       sizes.forEach(size => { const m = measure(size, width), figure = make('figure'), frame = make('div', 'sw-preview'); frame.append(widget(id, size, width, sourced));
         const caption = make('figcaption'); caption.append(make('strong', '', size.replace('x', ' × ') + '칸'), make('span', '', `${+m.width.toFixed(2)} × ${+m.height.toFixed(2)} · R${m.radius}`)); figure.append(frame, caption); gallery.append(figure); });
       host.querySelector('#sw-rule').textContent = selected.rule;
-      host.querySelector('#sw-result').textContent = sizes.length ? `${sizes.length}개 크기${sourced ? ' · 하단 출처 52px 포함' : ''} · 사진과 문구는 적용 예시입니다.` : '이 유형은 출처가 들어가는 크기를 제공하지 않아요. 원본 위젯으로 보거나 사진·음악·텍스트 유형을 선택하세요.';
+      host.querySelector('#sw-result').textContent = sizes.length ? `${sizes.length}개 크기${sourced ? ' · 하단 출처 52px 포함' : ''} · 사진과 문구는 적용 예시예요.` : '이 유형은 출처가 들어가는 크기를 제공하지 않아요. 원본 위젯으로 보거나 사진·음악·텍스트 유형을 선택하세요.';
     }
     [family, viewport, ditto].forEach(control => control.addEventListener('input', render));
     const tbody = host.querySelector('.sw-matrix tbody');

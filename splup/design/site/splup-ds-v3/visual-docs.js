@@ -7,7 +7,7 @@
    timer=setTimeout(()=>{track.classList.remove('pressed');button.textContent='눌림·복원 재생'},160);
   });
  });
- document.querySelectorAll('.spec-cta:not([disabled])').forEach(button=>button.addEventListener('click',()=>{button.parentElement.querySelector('.spec-feedback').textContent='선택했어요. 기본 상태로 돌아갑니다.'}));
+ document.querySelectorAll('.spec-cta:not([disabled])').forEach(button=>button.addEventListener('click',()=>{button.parentElement.querySelector('.spec-feedback').textContent='선택했어요. 기본 상태로 돌아가요.'}));
  document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.getElementById('sidebar')?.classList.remove('open');document.getElementById('menuBtn')?.setAttribute('aria-expanded','false')}});
 })();
 // Keep the selected category visible in the mobile horizontal menu.

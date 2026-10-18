@@ -435,7 +435,7 @@
 <header class="topbar">
   <div class="tb-lead"><a class="logo tb-logo" href="#overview" aria-label="Splup 디자인 가이드 처음으로"><svg class="wm" viewBox="0 0 370 134" aria-hidden="true"><use href="#wm-ditto"/></svg><span class="logo-label tb-title">Splup <small>디자인 가이드</small></span></a></div>
   <nav class="top-nav" id="topNav" aria-label="주요 카테고리">
-<a href="#overview" data-group="start">처음으로</a><a href="#colorgraphy" data-group="colorgraphy">컬러</a><a href="#foundations" data-group="foundations">기본 규칙</a><a href="#components" data-group="components">컴포넌트</a><a href="#patterns" data-group="brand">적용 방법</a><a href="#resources" data-group="reference">자료</a><a href="#roadmap" data-group="migration">변경 기록</a></nav>
+<a href="#overview" data-group="start">처음으로</a><a href="#foundations" data-group="foundations">파운데이션</a><a href="#components" data-group="components">컴포넌트</a><a href="#widgets" data-group="widgets">위젯</a><a href="#patterns" data-group="writing">글쓰기</a><a href="#brand" data-group="brand">브랜드</a><a href="#resources" data-group="reference">자료</a></nav>
   <div class="top-search">
     <input id="searchInput" type="search" placeholder="문서 검색" autocomplete="off" aria-label="문서 검색" role="combobox" aria-autocomplete="list" aria-controls="searchPop" aria-expanded="false">
     <kbd>⌘K</kbd>
@@ -454,82 +454,72 @@
   <div class="docs-home-intro">
     <div class="crumb">Splup</div>
     <h1>디자인 가이드</h1>
-    <p class="desc">디토의 화면을 함께 만드는 기준입니다. 색과 글자부터 버튼과 위젯까지, 필요한 규칙을 찾아 적용하세요.</p>
+    <p class="desc">디토의 화면을 함께 만드는 기준이에요. 색과 글자부터 버튼과 위젯까지, 필요한 규칙을 찾아 적용하세요.</p>
     <nav class="docs-shortcuts" aria-label="자주 찾는 문서">
       <h2>자주 찾는 문서</h2>
-      <a href="#multi-palette">멀티 팔레트 8종</a>
+      <a href="#color">컬러 기준</a>
       <a href="#ditto-action">디토하기 버튼</a>
       <a href="#widget-system">위젯 크기와 구성</a>
       <a href="#widget-catalog">위젯 추가와 편집</a>
-      <a href="#profile-handles">프로필 구성</a>
+      <a href="#navigation">상단 바와 바텀시트</a>
+      <a href="#roadmap">변경 기록</a>
     </nav>
   </div>
   <nav class="docs-home-directory" aria-label="전체 가이드">
     <h2>전체 가이드</h2>
     <div class="docs-topic-list">
-      <a href="#colorgraphy"><span class="index-number" aria-hidden="true">01</span><span><strong>컬러</strong><small>기본색과 사용처, 브랜드 그래픽과 팔레트</small></span><b aria-hidden="true">→</b></a>
-      <a href="#foundations"><span class="index-number" aria-hidden="true">02</span><span><strong>기본 규칙</strong><small>글자, 간격, 모서리, 움직임과 화면의 순서</small></span><b aria-hidden="true">→</b></a>
-      <a href="#components"><span class="index-number" aria-hidden="true">03</span><span><strong>컴포넌트</strong><small>프로필, 버튼과 위젯의 모습과 동작</small></span><b aria-hidden="true">→</b></a>
-      <a href="#patterns"><span class="index-number" aria-hidden="true">04</span><span><strong>적용 방법</strong><small>플래터 배치와 사용자에게 건네는 말</small></span><b aria-hidden="true">→</b></a>
-      <a href="../navigation-sheets"><span class="index-number" aria-hidden="true">05</span><span><strong>상단 바와 바텀시트</strong><small>헤더 구성과 아래에서 열리는 화면의 사용 기준</small></span><b aria-hidden="true">→</b></a>
-      <a href="#resources"><span class="index-number" aria-hidden="true">06</span><span><strong>자료</strong><small>공통 설정값, 원본 파일, 링크 미리보기와 기존 화면 변경 방법</small></span><b aria-hidden="true">→</b></a>
-      <a href="#roadmap"><span class="index-number" aria-hidden="true">07</span><span><strong>변경 기록</strong><small>반영된 내용과 확인이 필요한 항목</small></span><b aria-hidden="true">→</b></a>
+      <a href="#foundations"><span class="index-number" aria-hidden="true">01</span><span><strong>파운데이션</strong><small>색, 글자, 간격, 모서리, 움직임과 화면의 순서</small></span><b aria-hidden="true">→</b></a>
+      <a href="#components"><span class="index-number" aria-hidden="true">02</span><span><strong>컴포넌트</strong><small>버튼, 디토하기 버튼, 입력, 이미지 셀렉터, 상단 바와 시트, 프로필</small></span><b aria-hidden="true">→</b></a>
+      <a href="#widgets"><span class="index-number" aria-hidden="true">03</span><span><strong>위젯</strong><small>크기와 배치, 추가와 편집, 디토 허용, 위젯별 규격</small></span><b aria-hidden="true">→</b></a>
+      <a href="#patterns"><span class="index-number" aria-hidden="true">04</span><span><strong>글쓰기</strong><small>관계를 표현하는 말과 상황별 문구</small></span><b aria-hidden="true">→</b></a>
+      <a href="#brand"><span class="index-number" aria-hidden="true">05</span><span><strong>브랜드</strong><small>브랜드 그래픽과 팔레트, 원본 파일, 링크 미리보기</small></span><b aria-hidden="true">→</b></a>
+      <a href="#resources"><span class="index-number" aria-hidden="true">06</span><span><strong>자료</strong><small>공통 설정값, 기존 화면 변경 가이드, 변경 기록</small></span><b aria-hidden="true">→</b></a>
     </div>
   </nav>
 </article>
 
-<article class="page docs-index" id="page-colorgraphy" hidden>
-  <div class="crumb">Splup / 컬러</div>
-  <h1>컬러</h1>
-  <p class="desc">Splup의 색은 사용자가 무엇을 할 수 있는지 알려주고, 자신의 공간을 표현하도록 돕습니다. 이 가이드는 색을 고르는 이유부터 화면에 적용하는 방법까지 하나의 기준으로 정리합니다.</p>
-  <div class="cg-index-meta"><span>컬러 기준 3.3.0</span><span>밝은 화면 · 어두운 화면</span><span>66개 사용처별 색상</span><span>업데이트 2026.10.05</span></div>
-  <nav class="cg-index-quick" aria-label="컬러 기준 빠른 이동"><a href="#color-overview">개요 →</a><a href="#color-roles">역할별 컬러 →</a><a href="#color-palette">팔레트 →</a></nav>
-  <div class="docs-index-list">
-    <a href="#color"><span class="index-number">01</span><span class="index-copy"><strong>컬러 기준</strong><small>어디에 어떤 색을 쓰는지, 밝은 화면과 어두운 화면에서 어떻게 보이는지 확인합니다.</small></span><b aria-hidden="true">→</b></a>
-    <a href="#color-application"><span class="index-number">02</span><span class="index-copy"><strong>앱에서의 적용</strong><small>버튼을 누르거나 색을 고를 때, 사용자의 행동을 어떻게 보여주는지 설명합니다.</small></span><b aria-hidden="true">→</b></a>
-    <a href="#brand-graphics"><span class="index-number">03</span><span class="index-copy"><strong>브랜드 표현</strong><small>Fluid 6조합 · 멀티 팔레트 8종 · 앱 아이콘 · 위젯 25종 · EVENT 8종의 사용처를 안내합니다.</small></span><b aria-hidden="true">→</b></a>
-  </div>
-  <section class="cg-index-rules"><h2>같은 역할, 같은 컬러</h2><p>같은 뜻을 전달하는 요소에는 같은 색을 사용합니다. 예를 들어 적용 버튼은 브랜드 보라색, 보조 설명은 보랏빛 회색을 사용합니다. 화면을 만들 때는 01의 사용처별 색상에서 시작하고, 공간의 분위기를 더할 때는 03의 색 조합을 선택합니다.</p><p><a href="../../tokens/colorgraphy.json" download>사용처별 색상 데이터 다운로드</a> · <a href="../../tokens/colorgraphy.css" download>밝은 화면·어두운 화면 스타일 다운로드</a></p></section>
-</article>
-
 <article class="page content-max splup-graphics" id="page-color" hidden>
-  <div class="crumb">Splup / 01 · 컬러 기준</div><h1>컬러 기준</h1>
+  <div class="crumb">파운데이션 / 컬러 기준</div><h1>컬러 기준</h1>
+  <p class="desc">Splup의 색은 사용자가 무엇을 할 수 있는지 알려주고, 자신의 공간을 표현하도록 도와요. 어디에 어떤 색을 쓰는지, 밝은 화면과 어두운 화면에서 어떻게 보이는지 이 페이지 하나에서 확인해요.</p>
+  <div class="cg-index-meta"><span>컬러 기준 3.3.3</span><span>밝은 화면 · 어두운 화면</span><span>66개 사용처별 색상</span><span>업데이트 2026.10.13</span></div>
+  <nav class="cg-index-quick" aria-label="컬러 기준 빠른 이동"><a href="#color-overview">개요 →</a><a href="#color-roles">역할별 컬러 →</a><a href="#color-palette">팔레트 →</a></nav>
   <div class="cs-root" data-color-system-core></div>
-  <h2>색을 바꿀 때도 같은 기준을 사용합니다</h2>
-  <p>기본색에 사용처를 연결하고, 그 이름을 버튼과 카드에서 함께 사용합니다. 공통 원본을 바꾸면 연결된 색상을 같은 기준으로 갱신할 수 있습니다. 브랜드 배경과 앱 아이콘의 색 조합은 03에서 따로 확인합니다.</p>
-  <p><a href="../../tokens/color-system.json" download>통합 컬러 토큰 JSON ↓</a> · <a href="#color-application">02 · 앱에서의 적용 →</a></p>
+  <h2>색을 바꿀 때도 같은 기준을 써요</h2>
+  <p>기본색에 사용처를 연결하고, 그 이름을 버튼과 카드에서 함께 써요. 공통 원본을 바꾸면 연결된 색상을 같은 기준으로 갱신할 수 있어요. 브랜드 배경과 앱 아이콘의 색 조합은 <a href="#brand-graphics">브랜드 그래픽</a>에서 따로 확인해요.</p>
+  <section class="cg-index-rules"><h2>같은 역할, 같은 컬러</h2><p>같은 뜻을 전달하는 요소에는 같은 색을 사용해요. 예를 들어 적용 버튼은 브랜드 보라색, 보조 설명은 보랏빛 회색을 사용해요. 화면을 만들 때는 이 페이지의 사용처별 색상에서 시작하고, 공간의 분위기를 더할 때는 <a href="#brand-graphics">브랜드 그래픽</a>의 색 조합을 골라요.</p><p><a href="../../tokens/colorgraphy.json" download>사용처별 색상 데이터 다운로드</a> · <a href="../../tokens/colorgraphy.css" download>밝은 화면·어두운 화면 스타일 다운로드</a></p></section>
+  <p><a href="../../tokens/color-system.json" download>통합 컬러 토큰 JSON ↓</a> · <a href="#color-application">앱에서의 색 적용 →</a></p>
 </article>
 
 <!-- ═══════════ TYPOGRAPHY ═══════════ -->
 <article class="page content-max" id="page-typography" hidden>
   <div class="crumb">기본 규칙 / <b>Typography</b></div>
-  <h1>글자 스타일</h1><p class="desc">모든 신규 UI 텍스트는 Pretendard를 사용합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="type-specimen"><b>나의 일상, 우리의 공간.</b><span>친구의 순간을 내 플래터에 담아요.</span><small>Pretendard · Regular / Medium / Bold</small></div></div>
+  <h1>글자 스타일</h1><p class="desc">모든 신규 UI 텍스트는 Pretendard를 사용해요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="type-specimen"><b>나의 일상, 우리의 공간.</b><span>친구의 순간을 내 플래터에 담아요.</span><small>Pretendard · Regular / Medium / Bold</small></div></div>
 
-  <h2>Pretendard · 하나의 서체</h2><p>브랜드 설명과 사용자 콘텐츠 모두 Pretendard를 사용합니다. 위계는 크기·굵기·행간으로 구분하며, 로고는 원본 SVG 아트로 유지합니다.</p>
+  <h2>Pretendard · 하나의 서체</h2><p>브랜드 설명과 사용자 콘텐츠 모두 Pretendard를 사용해요. 위계는 크기·굵기·행간으로 구분하며, 로고는 원본 SVG 아트로 유지해요.</p>
   <h2>글자 크기 14단계</h2>
-  <p class="muted">글자 크기마다 행간을 함께 정합니다. 굵기는 보통(400), 중간(500), 굵게(700) 세 가지입니다. <code>Static</code>이 붙은 스타일은 기기의 글자 크기 설정과 관계없이 크기를 유지합니다. 국문은 Pretendard, 별도 영문 브랜드 예시는 LINE Seed Sans App을 사용합니다.</p>
+  <p class="muted">글자 크기마다 행간을 함께 정해요. 굵기는 보통(400), 중간(500), 굵게(700) 세 가지예요. <code>Static</code>이 붙은 스타일은 기기의 글자 크기 설정과 관계없이 크기를 유지해요. 국문은 Pretendard, 별도 영문 브랜드 예시는 LINE Seed Sans App을 사용해요.</p>
   <div class="scale-ramp">
-    <div class="scale-row"><div class="scale-meta"><code>t1</code> <span class="sz">11 / 15</span><span class="rmk">현 captionSm 자리</span></div>
+    <div class="scale-row"><div class="scale-meta"><code>t1</code> <span class="sz">11 / 15</span><span class="rmk">앱 captionSm</span></div>
       <div class="scale-demo" style="font-size:11px;line-height:15px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
-    <div class="scale-row"><div class="scale-meta"><code>t2</code> <span class="sz">12 / 16</span><span class="rmk">현 captionMd 자리</span></div>
+    <div class="scale-row"><div class="scale-meta"><code>t2</code> <span class="sz">12 / 16</span><span class="rmk">앱 captionMd</span></div>
       <div class="scale-demo" style="font-size:12px;line-height:16px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
-    <div class="scale-row"><div class="scale-meta"><code>t3</code> <span class="sz">13 / 18</span><span class="rmk">현 labelSm 자리</span></div>
+    <div class="scale-row"><div class="scale-meta"><code>t3</code> <span class="sz">13 / 18</span><span class="rmk">앱 labelSm</span></div>
       <div class="scale-demo" style="font-size:13px;line-height:18px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
-    <div class="scale-row"><div class="scale-meta"><code>t4</code> <span class="sz">14 / 19</span><span class="rmk">현 bodySm·labelMd 자리</span></div>
+    <div class="scale-row"><div class="scale-meta"><code>t4</code> <span class="sz">14 / 19</span><span class="rmk">앱 bodySm·labelMd</span></div>
       <div class="scale-demo" style="font-size:14px;line-height:19px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
-    <div class="scale-row"><div class="scale-meta"><code>t5</code> <span class="sz">16 / 22</span><span class="rmk">현 bodyMd·labelLg 자리</span></div>
+    <div class="scale-row"><div class="scale-meta"><code>t5</code> <span class="sz">16 / 22</span><span class="rmk">앱 bodyMd·labelLg</span></div>
       <div class="scale-demo" style="font-size:16px;line-height:22px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
     <div class="scale-row"><div class="scale-meta"><code>t6</code> <span class="sz">18 / 24</span><span class="rmk"><b>= 보드 Body 18</b></span></div>
       <div class="scale-demo" style="font-size:18px;line-height:24px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
     <div class="scale-row"><div class="scale-meta"><code>t7</code> <span class="sz">20 / 27</span><span class="rmk">기존 19px 제목을 바꾸는 단계</span></div>
       <div class="scale-demo" style="font-size:20px;line-height:27px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
-    <div class="scale-row"><div class="scale-meta"><code>t8</code> <span class="sz">22 / 30</span><span class="rmk">현 titleLg 자리</span></div>
+    <div class="scale-row"><div class="scale-meta"><code>t8</code> <span class="sz">22 / 30</span><span class="rmk">앱 titleLg</span></div>
       <div class="scale-demo" style="font-size:22px;line-height:30px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
     <div class="scale-row"><div class="scale-meta"><code>t9</code> <span class="sz">24 / 32</span><span class="rmk"><b>= 보드 Display 24</b></span></div>
       <div class="scale-demo" style="font-size:24px;line-height:32px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
     <div class="scale-row"><div class="scale-meta"><code>t10</code> <span class="sz">26 / 35</span><span class="rmk"><code>screenTitle</code> = t10 Bold</span></div>
       <div class="scale-demo" style="font-size:26px;line-height:35px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
-    <div class="scale-row"><div class="scale-meta"><code>t11</code> <span class="sz">28 / 38</span><span class="rmk">현 displayMd 자리 · 넓은 화면에 권장</span></div>
+    <div class="scale-row"><div class="scale-meta"><code>t11</code> <span class="sz">28 / 38</span><span class="rmk">앱 displayMd · 넓은 화면에 권장</span></div>
       <div class="scale-demo" style="font-size:28px;line-height:38px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
     <div class="scale-row"><div class="scale-meta"><code>t12</code> <span class="sz">32 / 42</span><span class="rmk">넓은 화면에 권장</span></div>
       <div class="scale-demo" style="font-size:32px;line-height:42px"><span class="ko">통하면 디토해!</span> <span class="en brandface">Everything about you!</span></div></div>
@@ -544,15 +534,15 @@
   <h2>제목·본문·주석에 쓰는 글자 스타일</h2>
   <div class="scale-ramp">
     <div class="scale-row"><div class="scale-meta"><code>screenTitle</code> <span class="sz">t10 Bold · 26 / 35</span><span class="rmk">화면 주요 타이틀</span></div>
-      <div class="scale-demo alias-demo"><p style="font-size:26px;line-height:35px;font-weight:700">주고받은 것들은 파형으로 쌓입니다</p></div></div>
+      <div class="scale-demo alias-demo"><p style="font-size:26px;line-height:35px;font-weight:700">주고받은 것들은 파형으로 쌓여요</p></div></div>
     <div class="scale-row"><div class="scale-meta"><code>articleBody</code> <span class="sz">t5 Rg + lh t6 · 16 / 24</span><span class="rmk">콘텐츠 본문 · 유일한 교차 짝</span></div>
-      <div class="scale-demo alias-demo"><p style="font-size:16px;line-height:24px;font-weight:400">디토는 공감의 표현 중 가장 비용이 큰 형태, 소유로 하는 공감입니다. 무엇을 들이는가가 곧 선택이고, 선택이라서 상대에게 의미가 됩니다. "나도(ditto)"라는 말이 가장 짧은 형태의 이 행동입니다.</p></div></div>
+      <div class="scale-demo alias-demo"><p style="font-size:16px;line-height:24px;font-weight:400">디토는 공감의 표현 중 가장 비용이 큰 형태, 소유로 하는 공감이에요. 무엇을 들이는가가 곧 선택이고, 선택이라서 상대에게 의미가 돼요. "나도(ditto)"라는 말이 가장 짧은 형태의 이 행동이에요.</p></div></div>
     <div class="scale-row"><div class="scale-meta"><code>articleNote</code> <span class="sz">t4 Rg + lh t5 · 14 / 22</span><span class="rmk">주석·부가 정보 (일반 본문 금지)</span></div>
-      <div class="scale-demo alias-demo"><p style="font-size:14px;line-height:22px;font-weight:400;opacity:.72">디토는 공감의 표현 중 가장 비용이 큰 형태, 소유로 하는 공감입니다. 무엇을 들이는가가 곧 선택이고, 선택이라서 상대에게 의미가 됩니다. "나도(ditto)"라는 말이 가장 짧은 형태의 이 행동입니다.</p></div></div>
+      <div class="scale-demo alias-demo"><p style="font-size:14px;line-height:22px;font-weight:400;opacity:.72">디토는 공감의 표현 중 가장 비용이 큰 형태, 소유로 하는 공감이에요. 무엇을 들이는가가 곧 선택이고, 선택이라서 상대에게 의미가 돼요. "나도(ditto)"라는 말이 가장 짧은 형태의 이 행동이에요.</p></div></div>
   </div>
 
   <h2>기존 글자 스타일을 새 기준으로 바꾸기</h2>
-  <p>기존 화면의 글자를 변경할 때는 왼쪽의 스타일을 찾아 오른쪽의 새 스타일로 바꿉니다. <code>DDSType</code>은 기존 앱의 글자 스타일 이름이고, <code>t1–t14</code>는 새 기준의 크기 단계입니다. 크기나 굵기가 달라지는 항목은 화면에서 다시 확인합니다.</p>
+  <p>기존 화면의 글자를 변경할 때는 왼쪽의 스타일을 찾아 오른쪽의 새 스타일로 바꿔요. <code>DDSType</code>은 기존 앱의 글자 스타일 이름이고, <code>t1–t14</code>는 새 기준의 크기 단계예요. 크기나 굵기가 달라지는 항목은 화면에서 다시 확인해요.</p>
   <div class="tbl-scroll">
     <table>
       <thead><tr><th>기존 스타일 · 크기 / 행간 배수</th><th>새 스타일 · 크기 / 행간(px)</th><th>달라지는 점</th></tr></thead>
@@ -572,7 +562,7 @@
       </tbody>
     </table>
   </div>
-  <p class="muted">변경 후에는 글자 크기(19·17px), 굵기(600), 버튼 문구의 행간, 자간(−1%)을 확인합니다. 자세한 검토는 <a href="#audit">기존 구현 검토</a>에 남겨두었습니다.</p>
+  <p class="muted">변경 후에는 글자 크기(19·17px), 굵기(600), 버튼 문구의 행간, 자간(−1%)을 확인해요. 자세한 검토는 <a href="#audit">기존 구현 검토</a>에 남겨두었어요.</p>
 
   <h2>사용할 때 확인할 것</h2>
   <ul style="font-size:13.5px">
@@ -592,7 +582,7 @@
 <article class="page content-max" id="page-spacing" hidden>
   <div class="crumb">기본 규칙 / <b>Spacing</b></div>
   <h1>간격</h1>
-  <p class="desc">화면 가장자리, 버튼 사이, 글자 사이의 간격을 같은 기준으로 맞춥니다. 먼저 사용처별 간격을 고르고, 맞는 항목이 없으면 아래 19단계에서 선택합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="spacing-specimen"><div><span>4</span><i style="width:12px"></i></div><div><span>8</span><i style="width:24px"></i></div><div><span>12</span><i style="width:36px"></i></div><div><span>16</span><i style="width:48px"></i></div><div><span>24</span><i style="width:72px"></i></div><div><span>32</span><i style="width:96px"></i></div><div><span>48</span><i style="width:144px"></i></div></div></div>
+  <p class="desc">화면 가장자리, 버튼 사이, 글자 사이의 간격을 같은 기준으로 맞춰요. 먼저 사용처별 간격을 고르고, 맞는 항목이 없으면 아래 19단계에서 선택해요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="spacing-specimen"><div><span>4</span><i style="width:12px"></i></div><div><span>8</span><i style="width:24px"></i></div><div><span>12</span><i style="width:36px"></i></div><div><span>16</span><i style="width:48px"></i></div><div><span>24</span><i style="width:72px"></i></div><div><span>32</span><i style="width:96px"></i></div><div><span>48</span><i style="width:144px"></i></div></div></div>
 
   <h2>간격 크기 19단계</h2>
   <div class="tbl-scroll">
@@ -648,7 +638,7 @@
 <article class="page content-max" id="page-radius" hidden>
   <div class="crumb">기본 규칙 / <b>Radius &amp; Elevation</b></div>
   <h1>모서리와 그림자</h1>
-  <p class="desc">모서리는 기본 16px, 내부 요소 8px, 완전한 원형으로 구분합니다. 그림자는 요소가 배경에서 얼마나 떠 있는지 보여줍니다. 위젯과 전용 버튼은 각자의 크기 규칙을 따릅니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="radius-specimen"><div><i style="border-radius:8px"></i><span>R8</span></div><div><i style="border-radius:12px"></i><span>R12</span></div><div><i style="border-radius:16px"></i><span>R16</span></div><div><i style="border-radius:24px"></i><span>R24</span></div></div></div>
+  <p class="desc">모서리는 기본 16px, 내부 요소 8px, 완전한 원형으로 구분해요. 그림자는 요소가 배경에서 얼마나 떠 있는지 보여줘요. 위젯과 전용 버튼은 각자의 크기 규칙을 따라요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="radius-specimen"><div><i style="border-radius:8px"></i><span>R8</span></div><div><i style="border-radius:12px"></i><span>R12</span></div><div><i style="border-radius:16px"></i><span>R16</span></div><div><i style="border-radius:24px"></i><span>R24</span></div></div></div>
 
   <h2>모서리 모양</h2>
   <div class="demo-row">
@@ -699,7 +689,7 @@
 <article class="page content-max" id="page-motion" hidden>
   <div class="crumb">기본 규칙 / <b>Motion</b></div>
   <h1>움직임</h1>
-  <p class="desc">움직임은 눌렀는지, 화면이 바뀌었는지 알려주는 데 사용합니다. 아래 동작별 설정을 함께 사용해 같은 행동이 화면마다 다르게 느껴지지 않도록 합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="motion-specimen"><div class="motion-track"><i></i></div><button type="button" class="demo-replay">눌림·복원 재생</button><span>110ms 누름 / 360ms 복원 · Ditto Action</span></div></div>
+  <p class="desc">움직임은 눌렀는지, 화면이 바뀌었는지 알려주는 데 사용해요. 아래 동작별 설정을 함께 사용해 같은 행동이 화면마다 다르게 느껴지지 않도록 해요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="motion-specimen"><div class="motion-track"><i></i></div><button type="button" class="demo-replay">눌림·복원 재생</button><span>110ms 누름 / 360ms 복원 · Ditto Action</span></div></div>
 
   <h2>동작별 움직임 설정</h2>
   <div class="tbl-scroll">
@@ -738,7 +728,7 @@
 <article class="page content-max" id="page-interaction" hidden>
   <div class="crumb">기본 규칙 / <b>Interaction</b></div>
   <h1>입력과 반응</h1>
-  <p class="desc">누를 수 있는 요소는 반응을 보여주고, 사용할 수 없는 요소는 상태를 구분합니다. 버튼의 크기 변화, 관계를 표현하는 빛, 카드 테두리의 기준을 확인하세요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="state-specimen"><button type="button" class="spec-cta">눌러보기</button><button type="button" class="spec-cta" disabled>비활성</button><span class="spec-feedback" role="status">직접 눌러 상태를 확인하세요.</span></div></div>
+  <p class="desc">누를 수 있는 요소는 반응을 보여주고, 사용할 수 없는 요소는 상태를 구분해요. 버튼의 크기 변화, 관계를 표현하는 빛, 카드 테두리의 기준을 확인하세요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="state-specimen"><button type="button" class="spec-cta">눌러보기</button><button type="button" class="spec-cta" disabled>비활성</button><span class="spec-feedback" role="status">직접 눌러 상태를 확인하세요.</span></div></div>
 
   <h2>눌림과 비활성 상태</h2>
   <div class="tbl-scroll">
@@ -785,7 +775,7 @@
 <article class="page content-max" id="page-zindex" hidden>
   <div class="crumb">기본 규칙 / <b>Z-Index &amp; 오버레이</b></div>
   <h1>화면이 겹치는 순서</h1>
-  <p class="desc">여러 화면이 함께 열릴 때 무엇을 앞에 보여줄지 정합니다. 상세 화면, 바텀시트, 카메라, 안내 메시지를 아래 5가지 순서에 맞춰 배치합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="layer-specimen"><span>배경</span><span>콘텐츠</span><span>모달</span></div></div>
+  <p class="desc">여러 화면이 함께 열릴 때 무엇을 앞에 보여줄지 정해요. 상세 화면, 바텀시트, 카메라, 안내 메시지를 아래 5가지 순서에 맞춰 배치해요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="layer-specimen"><span>배경</span><span>콘텐츠</span><span>모달</span></div></div>
 
   <h2>화면 종류별 표시 순서</h2>
   <div class="zstack" aria-hidden="true">
@@ -826,7 +816,7 @@
 <article class="page content-max" id="page-darkmode" hidden>
   <div class="crumb">기본 규칙 / <b>다크 모드</b></div>
   <h1>밝은 화면과 어두운 화면</h1>
-  <p class="desc">밝은 화면과 어두운 화면에서도 같은 역할을 알아볼 수 있어야 합니다. 배경, 콘텐츠, 글자의 밝기를 함께 조절해 읽기 편한 상태를 유지합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="theme-specimen"><div><small>LIGHT</small><b>나의 플래터</b><span>오늘의 기록</span></div><div><small>DARK</small><b>나의 플래터</b><span>오늘의 기록</span></div></div></div>
+  <p class="desc">밝은 화면과 어두운 화면에서도 같은 역할을 알아볼 수 있어야 해요. 배경, 콘텐츠, 글자의 밝기를 함께 조절해 읽기 편한 상태를 유지해요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="theme-specimen"><div><small>LIGHT</small><b>나의 플래터</b><span>오늘의 기록</span></div><div><small>DARK</small><b>나의 플래터</b><span>오늘의 기록</span></div></div></div>
 
   <h2>배경과 콘텐츠의 밝기 구분</h2>
   <div class="tbl-scroll">
@@ -858,7 +848,7 @@
 <article class="page content-max" id="page-grid" hidden>
   <div class="crumb">기본 규칙 / <b>Platter Grid</b></div>
   <h1>플래터 배치</h1>
-  <p class="desc">플래터는 위젯을 놓는 공간입니다. 위젯의 크기와 간격을 격자에 맞추고, 위치가 겹치거나 바깥으로 나갔을 때의 처리 방법을 함께 정합니다.</p>
+  <p class="desc">플래터는 위젯을 놓는 공간이에요. 위젯의 크기와 간격을 격자에 맞추고, 위치가 겹치거나 바깥으로 나갔을 때의 처리 방법을 함께 정해요.</p>
 
   <h2>규격</h2>
   <div class="tbl-scroll">
@@ -902,8 +892,8 @@
   </div>
 
   <h2>직접 배치해 보기</h2>
-  <p class="muted">GridEngine과 동일한 공식·규칙을 브라우저에서 재현한 데모입니다. 위젯을 추가하고 <b>드래그해서 옮기고, 우하단 핸들로 크기를 늘려보세요</b> —
-  행 우선 착지, 동일 크기 자리 교환, 방향 푸시(연쇄 ≤3), 원래 위치로 복귀, 크기 조절 범위 제한(2×2~6×8 러버밴드), 10개 제한, 크기 비례 라운드가 실제 공식대로 동작합니다.
+  <p class="muted">GridEngine과 동일한 공식·규칙을 브라우저에서 재현한 데모예요. 위젯을 추가하고 <b>드래그해서 옮기고, 우하단 핸들로 크기를 늘려보세요</b> —
+  행 우선 착지, 동일 크기 자리 교환, 방향 푸시(연쇄 ≤3), 원래 위치로 복귀, 크기 조절 범위 제한(2×2~6×8 러버밴드), 10개 제한, 크기 비례 라운드가 실제 공식대로 동작해요.
   화면 폭 슬라이더로 셀의 반응형 계산(<code>W 320–620 클램프</code>)도 확인할 수 있어요.</p>
   <div class="sim-controls">
     <button data-add="2,2">＋ 2×2</button>
@@ -916,7 +906,7 @@
     <label>W <input type="range" id="simW" min="320" max="620" value="390" step="2"> <span id="simWv" class="mono num">390</span></label>
     <span id="simCount" class="mono num">0/10</span>
   </div>
-  <div id="simStatus" class="sim-status">위젯을 추가해 보세요 — 행 우선 첫 빈 슬롯(findFree)에 착지합니다.</div>
+  <div id="simStatus" class="sim-status">위젯을 추가해 보세요 — 행 우선 첫 빈 슬롯(findFree)에 착지해요.</div>
   <div class="sim-outer"><div id="simBoard" aria-label="플래터 그리드 시뮬레이터"></div></div>
   <p class="muted" style="margin-top:8px">데모 범위: <code>findFree</code>·<code>resolve</code>(드래그 방향 우선 푸시)·<code>trySwap</code>·리사이즈 러버밴드(2×2~6×8)·10개 캡·라운드/셀 공식. 앱 전용 동작(디토 슬롯·디토 잠금·<code>promote</code> 글로우)은 생략.</p>
 
@@ -937,9 +927,9 @@
 
 <!-- ═══════════ 버튼 & 인터랙션 ═══════════ -->
 <article class="page content-max" id="page-buttons" hidden>
-  <div class="crumb">컴포넌트 / <b>버튼 &amp; 인터랙션</b></div>
+  <div class="crumb">컴포넌트 / 버튼과 선택 요소</div>
   <h1>버튼과 선택 요소</h1>
-  <p class="desc">버튼은 행동을 실행하고, 칩과 선택 탭은 값을 고릅니다. 사용 목적에 맞는 형태를 선택하고 기본·눌림·비활성 상태를 함께 확인합니다.</p>
+  <p class="desc">버튼은 행동을 실행하고, 칩과 선택 탭은 값을 골라요. 사용 목적에 맞는 형태를 선택하고 기본·눌림·비활성 상태를 함께 확인해요.</p>
 
   <h2>일반 버튼</h2>
   <div class="btn-row">
@@ -979,6 +969,19 @@
     </table>
   </div>
 
+  <h3 id="size-chips">크기 칩</h3>
+  <p>위젯 작성 화면과 수정 시트 맨 위에서 크기를 고르는 칩이에요(<code>RatioBar</code>).</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>규격</th></tr></thead>
+    <tbody>
+      <tr><td>칩</td><td>58×66 · 모서리 14 · 간격 8 · 위 32칸 안에 비율 글리프(긴 변 28, 모서리 4) + 아래 라벨 12</td></tr>
+      <tr><td>선택</td><td>흰 카드(layer.default) · 라벨 12/700 label.strong · 그림자 0 2 6 5% · 글리프 28%</td></tr>
+      <tr><td>선택 안 됨</td><td>바탕 없음 · 라벨 12/600 label.alternative · 글리프 14%</td></tr>
+      <tr><td>스크롤</td><td>개수와 관계없이 가로 스크롤 · 양끝 5% 흐리게 · 열릴 때와 고를 때 선택 칩을 가운데로</td></tr>
+      <tr><td>누름</td><td>0.96 축소 · 스프링 0.3 / 0.8</td></tr>
+    </tbody></table></div>
+  <p>대표/라이프처럼 두세 값 중 하나를 고르는 곳은 위 세그먼트와 같은 규칙(바탕 fill.strong 캡슐 + 선택 흰 캡슐)을 써요.</p>
+
   <h2>인터랙션 공통 규칙</h2>
   <div class="tbl-scroll">
     <table>
@@ -1012,12 +1015,141 @@
     <a class="next" href="#voice"><span class="dir">다음</span>디토의 말과 용어</a>
   </div>
 </article>
+<article class="page content-max splup-graphics" id="page-ditto-action" hidden>
+  <div class="crumb">컴포넌트 / 디토하기 버튼</div>
+  <h1>디토하기 버튼</h1>
+  <p class="desc">친구의 위젯을 내 플래터에 가져오는 버튼이에요. 3초 동안 누르면 담기고, 중간에 떼면 취소돼요. 어떤 위젯을 디토할 수 있는지는 <a href="#widget-ditto">디토 허용 규칙</a>에서 정해요.</p>
+  <div class="cs-root" data-color-system-ditto id="ditto-long-press"></div>
+  <p class="wa-note">기준: <code>DittoHoldButton.swift</code> · <code>DittoHoldTimeline.swift</code> · <code>DittoAvailabilityBadge.swift</code>. 비동기 저장을 연결할 때는 요청 중 중복 입력을 막고 성공 뒤에만 완료를 표시해요.</p>
+  <div class="docs-related"><span>함께 보기</span><a href="#widget-ditto">디토 허용 규칙 →</a><a href="#buttons">버튼과 선택 요소 →</a><a href="#color-application">앱에서의 색 적용 →</a></div>
+</article>
+<article class="page content-max" id="page-inputs" hidden>
+  <div class="crumb">컴포넌트 / 텍스트 입력</div>
+  <h1>텍스트 입력</h1>
+  <p class="desc">위젯 작성 화면과 수정 시트에서 글을 적는 칸이에요. 한 줄 칸과 여러 줄 칸 두 가지만 쓰고, 둘 다 칸 안에 글자 수를 보여줘요.</p>
+  <p class="wa-note">기준: <code>AddComponents.swift</code>(<code>DSFieldCard</code> · <code>DSTextCard</code> · <code>DSCharCounter</code>) · <code>PlatterAddSheet.swift</code>.</p>
+  <div class="doc-preview" aria-label="입력 칸 예시"><div class="input-specimen">
+    <div class="in-field"><span>무슨 날인가요?</span><small>0/12</small></div>
+    <div class="in-text"><span>텍스트를 작성하세요</span><small>0/300</small></div>
+  </div></div>
+
+  <h2 id="input-fields">입력 칸 두 가지</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>종류</th><th>규격</th><th>쓰는 곳</th></tr></thead>
+    <tbody>
+      <tr><td>한 줄 칸 <code>DSFieldCard</code></td><td>높이 52 · 좌우 16 · 모서리 14 · 흰 바탕 · 글자 16 Regular(bodyMd) · 오른쪽 글자 수, 간격 8</td><td>제목, 이름, 핸들, D-Day</td></tr>
+      <tr><td>여러 줄 칸 <code>DSTextCard</code></td><td>안쪽 14 · 모서리 16 · 흰 바탕 · 3줄 높이를 미리 확보 · 글자 수는 아래 오른쪽</td><td>텍스트, 사진 위 글, 한 줄 일기</td></tr>
+    </tbody></table></div>
+  <p>칸의 바탕은 작성 화면 배경 위에서 흰색이에요. 묶음 안 칸 사이 간격은 12, 묶음 제목은 14/600이에요.</p>
+
+  <h2 id="input-counter">글자 수 표시</h2>
+  <p>글자 수 한도가 있는 모든 입력 칸은 칸 안 오른쪽에 <code>DSCharCounter</code>를 둬요. ‘7/18’ 형식, 12/400(captionMd) · 보조 글자색 · 고정폭 숫자. 한도를 넘는 글자는 입력되지 않아요. 스크린 리더는 ‘18자 중 7자’로 읽어요. 새 입력 칸도 같은 표시를 써요.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>위젯 입력 칸</th><th>한도</th></tr></thead>
+    <tbody>
+      <tr><td>이미지 · 사진 위 글</td><td>18</td></tr>
+      <tr><td>텍스트</td><td>300</td></tr>
+      <tr><td>상태 · 한 줄</td><td>10 · 한도에서 더 치면 약한 진동</td></tr>
+      <tr><td>소셜 · 핸들 / 표시 제목</td><td>18 / 18</td></tr>
+      <tr><td>영상 제목</td><td>50</td></tr>
+      <tr><td>D-Day · 무슨 날</td><td>12</td></tr>
+      <tr><td>방명록 제목 · 안부</td><td>12 · 200</td></tr>
+      <tr><td>플레이리스트 이름</td><td>16</td></tr>
+    </tbody></table></div>
+
+  <h2 id="input-toggle">옵션 토글 행</h2>
+  <p>작성 화면 맨 아래 ‘옵션’ 묶음에 놓는 켜고 끄는 행이에요.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>규격</th></tr></thead>
+    <tbody>
+      <tr><td>행</td><td>높이 52(보조 문구가 있으면 위아래 12) · 좌우 16 · 모서리 14 · 바탕 layer.default</td></tr>
+      <tr><td>글자</td><td>제목 bodyMd · 보조 문구 captionSm · 보조 글자색</td></tr>
+      <tr><td>토글</td><td>시스템 토글 · 켜짐 색 primary</td></tr>
+      <tr><td>디토 허용</td><td>켜진 동안 보라 테두리 1.2(purple60 50%). 허용 3개를 넘으면 켜지지 않고 알림. <a href="#widget-ditto">디토 허용 규칙 →</a></td></tr>
+    </tbody></table></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#widget-catalog">위젯 작성 화면 →</a><a href="#writing">상황별 문구 →</a></div>
+</article>
+
+<article class="page content-max" id="page-photo-picker" hidden>
+  <div class="crumb">컴포넌트 / 이미지 셀렉터</div>
+  <h1>이미지 셀렉터</h1>
+  <p class="desc">사진을 고르는 모든 화면이 같은 셀렉터 하나를 전체 화면으로 열어요. 시스템 사진 선택기를 따로 띄우지 않아요.</p>
+  <p>사진을 고르는 모든 화면(이미지 위젯 · 음악 커버 · 포스트 · 프로필 편집 · 온보딩 · Together · 스티커 보드 배경)이 같은 셀렉터 하나를 전체 화면으로 열어요(<code>DittoPhotoPicker</code>, Figma ED_toolbar_uploadimg).</p>
+  <h2 id="photo-picker-steps">고르기부터 자르기까지</h2>
+  <ol class="wa-steps">
+    <li><b>앨범 격자</b><span>[✕] 앨범 이름 ⌄ [다음] · All / Photos 탭 · 4열 정사각 썸네일. 고른 순서대로 보라 원에 번호를 붙여요.</span></li>
+    <li><b>아래 트레이</b><span>여러 장을 고를 때 고른 사진을 64 썸네일 + ✕로 모아 보여줘요.</span></li>
+    <li><b>한도 알림</b><span>‘이미지는 최대 N개까지 선택할 수 있어요.’ [확인]</span></li>
+    <li><b>비율 자르기</b><span>[‹] 앨범 이름 [추가] · 고른 사진을 가로로 넘기며 3분할 격자로 맞춰요. 비율 Auto · 1:1 · 3:4 · 4:3 · 16:9 · 9:16.</span></li>
+  </ol>
+  <div class="docs-related"><span>함께 보기</span><a href="#widget-catalog">위젯 작성 화면 →</a><a href="#inputs">텍스트 입력 →</a></div>
+</article>
+
+<article class="page content-max" id="page-navigation" hidden>
+  <div class="crumb">컴포넌트 / 상단 바와 바텀시트</div>
+  <h1>상단 바와 바텀시트</h1>
+  <p class="desc">상단 바는 버튼 수로 정리하고, 바텀시트는 같은 틀 위에 목적에 맞는 본문을 얹어요. 서비스가 달라도 같은 구조를 써요.</p>
+  <p class="wa-note">기준: <code>NavigationChrome.swift</code>(<code>DDSChromeBar</code> · <code>DDSChromeSpec</code>) · <code>DSSheetContainer.swift</code> · 규격 1.1(2026-10-02). <a href="../navigation-sheets">라이트·다크와 큰 글씨로 체험하는 예시 ↗</a></p>
+
+  <h2 id="nav-bar">상단 바 · 버튼 수 3단계, 배치 4가지</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>형</th><th>구성</th><th>쓰는 곳</th></tr></thead>
+    <tbody>
+      <tr><td>N0</td><td>버튼 없음 · 제목만</td><td>헤더 액션이 없는 화면(보관함)</td></tr>
+      <tr><td>N1-L</td><td>왼쪽에 하나</td><td>이전 화면으로 돌아가기. 하단 완료가 있는 편집은 이 자리에 취소·닫기</td></tr>
+      <tr><td>N1-R</td><td>오른쪽에 하나</td><td>조회 시트의 닫기, 최상위 화면의 알림</td></tr>
+      <tr><td>N2</td><td>좌우 하나씩</td><td>뒤로 + 더보기 · 취소 + 완료(하단 완료와 겹쳐 두지 않음) · 초대 + 알림(가운데 로고)</td></tr>
+    </tbody></table></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>항목</th><th>값</th></tr></thead>
+    <tbody>
+      <tr><td>바 높이</td><td>56 이상 (상태바는 OS 영역)</td></tr>
+      <tr><td>양쪽 슬롯</td><td>64씩 항상 확보 — 버튼이 없어도 제목이 가운데에서 움직이지 않아요</td></tr>
+      <tr><td>터치 영역</td><td>44</td></tr>
+      <tr><td>아이콘</td><td>20 · 닫기는 16 아이콘에 32 표면</td></tr>
+      <tr><td>제목</td><td>17/600 · 로고는 높이 22</td></tr>
+      <tr><td>버튼 수 세기</td><td>비활성 버튼은 세고, 로고·장식·그래버는 세지 않아요</td></tr>
+    </tbody></table></div>
+
+  <h2 id="nav-sheets">바텀시트 · 같은 틀, 세 가지 목적</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>시트</th><th>머리</th><th>예</th></tr></thead>
+    <tbody>
+      <tr><td>조회·선택 (Browse)</td><td>그래버 + 가운데 제목 + 오른쪽 닫기(N1-R)</td><td>위젯 추가, 친구 초대, 댓글</td></tr>
+      <tr><td>짧은 편집 (Editor)</td><td>왼쪽 닫기 + 가운데 제목 · 하단 ‘완료’ · 작동하지 않는 그래버는 두지 않아요</td><td>위젯 수정</td></tr>
+      <tr><td>확인 (Confirmation)</td><td>N1-R · 닫기와 배경 탭은 항상 취소</td><td>맥락 설명이 필요한 확인</td></tr>
+    </tbody></table></div>
+  <p>하단에 ‘완료’가 있으면 상단 저장은 두지 않아요. 바꾼 내용이 있을 때만 닫기 전에 버릴지 물어요(‘변경사항을 저장하지 않고 닫을까요?’).</p>
+
+  <h2 id="nav-choose">시트보다 먼저, 작업을 구분해요</h2>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>작업</th><th>형식</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr><td>프로필 수정 · 그룹 만들기</td><td>전체 화면 편집</td><td>여러 칸·키보드·다음 단계에 충분한 공간이 필요해요</td></tr>
+      <tr><td>스티커 보드</td><td>전체 화면 캔버스</td><td>드래그·사진·그리기가 중심 작업이에요</td></tr>
+      <tr><td>친구 초대</td><td>일반 화면 + 시스템 공유</td><td>친구 목록 조회와 링크 공유를 나눠요</td></tr>
+      <tr><td>친구 끊기</td><td>확인창</td><td>대상과 결과를 설명하고 취소 / 친구 끊기만 둬요</td></tr>
+      <tr><td>주파수 · 열람권 안내</td><td>인라인 도움말</td><td>관련 카드나 목록에서 펼쳐 봐요</td></tr>
+      <tr><td>위젯 종류 · 댓글 · 미니 프로필</td><td>시트</td><td>원래 화면을 보며 짧게 처리하는 보조 작업이에요</td></tr>
+    </tbody></table></div>
+
+  <h2 id="nav-rules">화면이 늘어나도 지킬 기준</h2>
+  <ul>
+    <li><b>제목의 가운데는 흔들리지 않게.</b> 양쪽 슬롯을 같은 폭으로 예약해요. 큰 글씨는 줄바꿈과 높이 확장을 허용하고, 제목과 버튼을 겹치지 않아요.</li>
+    <li><b>색은 역할에서.</b> 머리와 본문은 같은 modal 표면. 닫기는 중립색, 일반 저장은 브랜드색, 되돌릴 수 없는 행동은 위험 색이에요.</li>
+    <li><b>닫기와 저장을 나눠요.</b> 조회·선택은 닫기와 끌어 내리기, 편집은 취소와 저장.</li>
+    <li><b>시스템이 맡는 영역은 한 번만.</b> 상태바·safe area·시스템 그래버를 두 번 그리지 않아요. 본문은 스크롤하고 주요 행동은 손이 닿는 곳에 둬요.</li>
+  </ul>
+  <p class="muted">앱의 공통 헤더와 주요 화면에 반영했고, 남은 독립 헤더는 차례로 옮기고 있어요. <a href="../../../docs/Ditto_Navigation_Sheets_2026-10-02.md">상세 규격과 이관 범위</a></p>
+  <div class="docs-related"><span>함께 보기</span><a href="#zindex">화면이 겹치는 순서 →</a><a href="#buttons">버튼과 선택 요소 →</a></div>
+</article>
+
 
 <!-- ═══════════ 용어 · 라이팅 ═══════════ -->
 <article class="page content-max" id="page-voice" hidden>
   <div class="crumb">적용 방법 / <b>용어 · 라이팅</b></div>
   <h1>디토의 말과 용어</h1>
-  <p class="desc">친구의 일상을 내 공간에 담는 행동은 ‘디토’, 관계가 이어지는 리듬은 ‘주파수’라고 부릅니다. 같은 뜻은 같은 말로 표현하고, 사용자가 행동을 이해할 수 있도록 설명합니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="copy-specimen"><small>Ditto의 말투</small><b>내 플래터에 담았어요.</b><span>짧고 명확하게, 사용자의 행동을 설명합니다.</span></div></div>
+  <p class="desc">친구의 일상을 내 공간에 담는 행동은 ‘디토’, 관계가 이어지는 리듬은 ‘주파수’라고 불러요. 같은 뜻은 같은 말로 표현하고, 사용자가 행동을 이해할 수 있도록 설명해요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="copy-specimen"><small>Ditto의 말투</small><b>내 플래터에 담았어요.</b><span>짧고 명확하게, 사용자의 행동을 설명해요.</span></div></div>
 
   <div class="callout"><div>⚠️</div><div>
     <b>절대 규칙</b> — '공명', 'Halo'는 사용자 노출 텍스트에서 금지. 상호공감 → <b>디토</b>, 신호/축적 → <b>주파수</b>로 쓴다.
@@ -1054,7 +1186,7 @@
 <article class="page content-max" id="page-writing" hidden>
   <div class="crumb">적용 방법 / <b>UX Writing</b></div>
   <h1>상황별 문구</h1>
-  <p class="desc">사용자에게 필요한 정보만 짧게 전달합니다. 친근한 해요체를 사용하되, 공유나 반응을 재촉하지 않습니다. 무엇이 바뀌었고 다음에 무엇을 할 수 있는지 알려줍니다.</p><div class="doc-preview" aria-label="시각적 예시"><div class="copy-specimen"><small>완료 피드백 예시</small><b>변경 내용을 저장했어요.</b><span>다음 행동이 필요한 경우에만 안내를 덧붙입니다.</span></div></div>
+  <p class="desc">사용자에게 필요한 정보만 짧게 전달해요. 친근한 해요체를 사용하되, 공유나 반응을 재촉하지 않아요. 무엇이 바뀌었고 다음에 무엇을 할 수 있는지 알려줘요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="copy-specimen"><small>완료 피드백 예시</small><b>변경 내용을 저장했어요.</b><span>다음 행동이 필요한 경우에만 안내를 덧붙여요.</span></div></div>
 
   <h2>문구를 읽는 네 사람</h2>
   <p class="muted">위젯 기획서 15종이 공유하는 고정 페르소나(<code>00_공통규격_템플릿.md</code>). 같은 화면도 관계 거리에 따라 다른 사람에게 말하고 있음을 항상 의식한다.</p>
@@ -1125,7 +1257,7 @@
 <article class="page content-max" id="page-assets" hidden>
   <div class="crumb">적용 방법 / <b>브랜드 에셋</b></div>
   <h1>브랜드 원본 파일</h1>
-  <p class="desc">로고, 아이콘, 배경 그래픽의 원본과 사용 기준입니다. 원본의 비율을 유지하고, 사용할 화면에 맞는 색과 크기를 선택합니다.</p>
+  <p class="desc">로고, 아이콘, 배경 그래픽의 원본과 사용 기준이에요. 원본의 비율을 유지하고, 사용할 화면에 맞는 색과 크기를 선택해요.</p>
 
   <h2>디토 로고</h2>
   <p class="muted">앱 에셋 카탈로그의 SVG 벡터 원본(<code>Assets.xcassets/wordmark-*.imageset</code>, 370×134)이 공통 원본.
@@ -1177,7 +1309,7 @@
 <article class="page content-max" id="page-mapping" hidden>
 <div class="crumb">Resources / 변경 가이드</div>
 <h1>기존 화면 변경하기</h1>
-<p class="desc">기존 화면을 새 기준에 맞추는 순서입니다. 색과 글꼴을 먼저 확인하고, 버튼은 실행할 행동에 맞게 선택합니다.</p>
+<p class="desc">기존 화면을 새 기준에 맞추는 순서예요. 색과 글꼴을 먼저 확인하고, 버튼은 실행할 행동에 맞게 선택해요.</p>
 <nav class="guide-jumps" aria-label="변경 항목 바로가기"><button type="button" data-guide-target="mapping-colors">컬러</button><button type="button" data-guide-target="mapping-type">글꼴</button><button type="button" data-guide-target="mapping-buttons">버튼</button><button type="button" data-guide-target="mapping-start">적용 순서</button></nav>
 <h2 id="mapping-colors">컬러는 용도에 맞게 골라요</h2>
 <p>대표 보라색은 그대로예요. 브랜드 배경과 버튼은 각각 정해진 배색을 사용해요.</p>
@@ -1219,7 +1351,7 @@
 <!-- ═══════════ 감사 ═══════════ -->
 <article class="page" id="page-audit" hidden>
   <div class="crumb">Migration / <b>기존 구현 검토</b></div>
-  <h1>기존 구현 검토</h1><p class="desc">아래는 이전 설계와 검토 기록입니다. 현재 제작은 Pretendard 단일 서체, 기본 CTA R12·60pt, 최신 Colorgraphy와 Ditto Action 규격을 우선합니다.</p>
+  <h1>기존 구현 검토</h1><p class="desc">아래는 이전 설계와 검토 기록이에요. 현재 제작은 Pretendard 단일 서체, 기본 CTA R12·60pt, 최신 Colorgraphy와 Ditto Action 규격을 우선해요.</p>
 <details class="docs-history"><summary>2026년 8월의 검토 기록 보기</summary>
   <p class="desc">코드 전수 스캔 결과(2026-08-26, 워킹트리 기준).
   <b style="color:var(--sev-conflict)">충돌</b> = v3 도입과 부딪혀 결정이 필요한 것 ·
@@ -1333,9 +1465,9 @@
 <!-- ═══════════ 추가 작업 목록 ═══════════ -->
 <article class="page content-max" id="page-backlog" hidden>
   <div class="crumb">Migration / <b>추가 작업 목록</b></div>
-  <h1>추가 작업 목록</h1><p class="desc">아래는 이전 설계와 검토 기록입니다. 현재 제작은 Pretendard 단일 서체, 기본 CTA R12·60pt, 최신 Colorgraphy와 Ditto Action 규격을 우선합니다.</p>
+  <h1>추가 작업 목록</h1><p class="desc">아래는 이전 설계와 검토 기록이에요. 현재 제작은 Pretendard 단일 서체, 기본 CTA R12·60pt, 최신 Colorgraphy와 Ditto Action 규격을 우선해요.</p>
 <details class="docs-history"><summary>2026년 8월의 검토 기록 보기</summary>
-  <p class="desc">현 시스템에 <b>추가·보강해야 할 항목만</b> 정리한 목록입니다. 완료한 항목은 관련 문서에 반영합니다.
+  <p class="desc">현 시스템에 <b>추가·보강해야 할 항목만</b> 정리한 목록이에요. 완료한 항목은 관련 문서에 반영해요.
   기존 것의 애매한 적용은 <a href="#audit">감사 보드</a>가, 새로 필요한 것은 이 백로그가 담당한다.</p>
 
   <h2>앞으로 추가할 항목</h2>
@@ -1374,7 +1506,7 @@
 <article class="page content-max" id="page-tokens" hidden>
   <div class="crumb">자료 / <b>공통 설정값</b></div>
   <h1>공통 설정값</h1>
-  <p class="desc">색, 글자, 간격처럼 여러 화면에서 반복하는 값을 이름으로 저장합니다. 같은 이름을 사용하면 공통 원본을 수정했을 때 연결된 화면을 함께 바꿀 수 있습니다. 아래 표에서 이름, 값, 적용 위치를 확인하세요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="token-specimen"><span style="background:#AA4AF4"></span><code>purple.500</code><b>→</b><code>fillBrand</code><b>→</b><span class="sample-button">추가하기</span></div></div>
+  <p class="desc">색, 글자, 간격처럼 여러 화면에서 반복하는 값을 이름으로 저장해요. 같은 이름을 사용하면 공통 원본을 수정했을 때 연결된 화면을 함께 바꿀 수 있어요. 아래 표에서 이름, 값, 적용 위치를 확인하세요.</p><div class="doc-preview" aria-label="시각적 예시"><div class="token-specimen"><span style="background:#AA4AF4"></span><code>purple.500</code><b>→</b><code>fillBrand</code><b>→</b><span class="sample-button">추가하기</span></div></div>
   <div class="tbl-scroll">
     <table>
       <thead><tr><th>tokens.json 경로</th><th>값</th><th>Swift 공통 원본</th><th>용도</th></tr></thead>
@@ -1399,94 +1531,110 @@
 
   <div class="page-nav">
     <a href="#backlog"><span class="dir">이전</span>추가 작업 목록</a>
-    <a class="next" href="#roadmap"><span class="dir">다음</span>적용 로드맵</a>
+    <a class="next" href="#roadmap"><span class="dir">다음</span>변경 기록</a>
   </div>
 </article>
 
 <!-- ═══════════ 로드맵 ═══════════ -->
 <article class="page docs-index" id="page-roadmap" hidden>
   <div class="crumb">Splup / 변경 기록</div><h1>변경 기록</h1>
-  <p class="desc">문서에 그려진 모습과 앱에 적용된 상태는 다를 수 있습니다. 이 페이지에서는 무엇이 준비됐고 무엇을 더 확인해야 하는지 나눠 봅니다.</p>
+  <p class="desc">문서에 그려진 모습과 앱에 적용된 상태는 다를 수 있어요. 무엇이 반영됐고 무엇을 더 확인해야 하는지 나눠 봐요.</p>
   <div class="docs-status-grid">
-    <section><span class="docs-status ready">문서 반영</span><h3>Splup 웹 가이드</h3><p>브랜드 컬러, 그래픽 팔레트, 프로필 10색, 우측 액션 5개 상태를 확인할 수 있습니다.</p></section>
-    <section><span class="docs-status ready">디자인 반영</span><h3>Figma 프로필 가이드</h3><p>대표·라이프 표면과 친구 상태 아이콘을 같은 기준으로 정리했습니다.</p></section>
-    <section><span class="docs-status pending">기기 검증 필요</span><h3>앱 적용 상태</h3><p>10색 프로필 설정이 소스에 연결되어 있습니다. 실제 기기 화면은 별도 검증이 필요합니다.</p></section>
+    <section><span class="docs-status ready">문서 반영</span><h3>위젯·컴포넌트 문서</h3><p>위젯 작성 화면, 디토 허용 규칙, 친구 위젯 시트, 텍스트 입력, 이미지 셀렉터를 2026-10-18 앱 소스와 대조했어요.</p></section>
+    <section><span class="docs-status ready">컬러 반영</span><h3>컬러 3.3.3</h3><p>위젯 선택 오브제 15종까지 컬러 토큰과 앱 생성 코드(<code>SplupColors.generated.swift</code>)가 같아요.</p></section>
+    <section><span class="docs-status pending">캡처 갱신 필요</span><h3>친구 위젯 시트 캡처</h3><p>디토 허용 규칙의 시트 캡처는 2026-10-12 빌드예요. 지금 배치(하단 고정 디토 영역)로 다시 찍어야 해요.</p></section>
   </div>
   <h2>최근 변경</h2>
-  <ol class="docs-change-list"><li><time datetime="2026-10-18">2026.10.18</time><span>위젯 문서를 10-18 앱에 맞췄습니다. <a href="#widget-ditto">디토 허용 규칙</a>: 디토할 수 있는 종류를 이미지 · GIF · 폴라로이드 · 음악 · 영상 다섯 가지로 좁히고(<code>WType.dittoableSet</code>), 친구 위젯 시트를 위젯 중심 구성 + 하단 고정 디토 영역(시트 안에서 바로 담기)으로 바꿨습니다. <a href="#widget-catalog">위젯 추가와 편집</a>: 크기 칩을 맨 위로 고정하고 흰 선택 카드로, 미리보기는 내용과 함께 스크롤, 고정 크기 위젯 폐지, 수정 시트의 왼쪽 닫기·크기 칩을 반영하고 <a href="#widget-char-counter">글자 수 표시</a>와 <a href="#widget-photo-picker">공통 이미지 셀렉터</a>를 새로 정리했습니다.</span></li><li><time datetime="2026-10-12">2026.10.12</time><span>위젯 문서를 지금 앱에 맞췄습니다. <a href="#widget-catalog">위젯 추가와 편집</a>(출시 위젯 네 묶음 · 추가 시트 · 작성 화면 · 편집 도구 · 방명록), <a href="#widget-todo">To-do 위젯</a>, <a href="#widget-ditto">디토 허용 규칙</a>을 새로 만들고 실제 앱 화면으로 보여줍니다. 음악 모서리 24, ‘대표로 ↑’ 라벨 제거, 허용 3개 한도를 반영했습니다.</span></li><li><time datetime="2026-10-11">2026.10.11</time><span><a href="#og-images">OG 이미지</a> 문서를 추가했습니다. ditto.place의 모든 공개 페이지에 링크 미리보기 이미지를 두고, 프로필은 각자의 핸들 색으로 그립니다.</span></li><li><time datetime="2026-10-05">2026.10.05</time><span>문서 목록과 상단 메뉴를 정리했습니다. 제목과 설명을 쉬운 말로 바꾸고 모바일 목차, 검색, 문서 이동을 개선했습니다.</span></li><li><time datetime="2026-09-29">2026.09.29</time><span>프로필 외곽선을 정리하고 친구 상태를 사람+체크 아이콘으로 구분했습니다.</span></li><li><time datetime="2026-09-28">2026.09.28</time><span>프로필 10색과 대표·라이프 표면, 우측 액션 상태를 디자인 가이드에 반영했습니다.</span></li></ol>
+  <ol class="docs-change-list"><li><time datetime="2026-10-19">2026.10.19</time><span>가이드 구조를 다시 짰어요. 상단 메뉴를 파운데이션 · 컴포넌트 · 위젯 · 글쓰기 · 브랜드 · 자료로 나누고, 한 주제는 한 페이지에서만 설명해요. 컬러 기준과 색 적용은 파운데이션으로, <a href="#ditto-action">디토하기 버튼</a>은 독립 컴포넌트로, 플래터 배치와 <a href="#widget-guestbook">방명록</a>은 위젯으로, 브랜드 그래픽·원본 파일·OG 이미지는 브랜드로 옮겼어요. <a href="#inputs">텍스트 입력</a> · <a href="#photo-picker">이미지 셀렉터</a> · <a href="#navigation">상단 바와 바텀시트</a> 페이지를 새로 두고, 문서 말투를 해요체로 맞췄어요. 예전 주소(#colorgraphy 등)는 그대로 열려요.</span></li><li><time datetime="2026-10-18">2026.10.18</time><span>위젯 문서를 10-18 앱에 맞췄어요. <a href="#widget-ditto">디토 허용 규칙</a>: 디토할 수 있는 종류를 이미지 · GIF · 폴라로이드 · 음악 · 영상 다섯 가지로 좁히고(<code>WType.dittoableSet</code>), 친구 위젯 시트를 위젯 중심 구성 + 하단 고정 디토 영역(시트 안에서 바로 담기)으로 바꿨어요. <a href="#widget-catalog">위젯 추가와 편집</a>: 크기 칩을 맨 위로 고정하고 흰 선택 카드로, 미리보기는 내용과 함께 스크롤, 고정 크기 위젯 폐지, 수정 시트의 왼쪽 닫기·크기 칩을 반영하고 <a href="#inputs">글자 수 표시</a>와 <a href="#photo-picker">공통 이미지 셀렉터</a>를 새로 정리했어요.</span></li><li><time datetime="2026-10-12">2026.10.12</time><span>위젯 문서를 지금 앱에 맞췄어요. <a href="#widget-catalog">위젯 추가와 편집</a>(출시 위젯 네 묶음 · 추가 시트 · 작성 화면 · 편집 도구 · 방명록), <a href="#widget-todo">To-do 위젯</a>, <a href="#widget-ditto">디토 허용 규칙</a>을 새로 만들고 실제 앱 화면으로 보여줘요. 음악 모서리 24, ‘대표로 ↑’ 라벨 제거, 허용 3개 한도를 반영했어요.</span></li><li><time datetime="2026-10-11">2026.10.11</time><span><a href="#og-images">OG 이미지</a> 문서를 추가했어요. ditto.place의 모든 공개 페이지에 링크 미리보기 이미지를 두고, 프로필은 각자의 핸들 색으로 그려요.</span></li><li><time datetime="2026-10-05">2026.10.05</time><span>문서 목록과 상단 메뉴를 정리했어요. 제목과 설명을 쉬운 말로 바꾸고 모바일 목차, 검색, 문서 이동을 개선했어요.</span></li><li><time datetime="2026-09-29">2026.09.29</time><span>프로필 외곽선을 정리하고 친구 상태를 사람+체크 아이콘으로 구분했어요.</span></li><li><time datetime="2026-09-28">2026.09.28</time><span>프로필 10색과 대표·라이프 표면, 우측 액션 상태를 디자인 가이드에 반영했어요.</span></li></ol>
   <div class="docs-related"><span>다음 단계</span><a href="#mapping">기존 화면 변경 가이드 ↗</a><a href="#audit">검토 기록 ↗</a></div>
 </article>
 
 <article class="page content-max splup-graphics" id="page-brand-graphics" hidden>
-  <div class="crumb">Splup / 03 · 브랜드 표현</div><h1>브랜드 표현</h1><div class="cs-root" data-color-system-brand></div>
-  <p><a href="#color">01 · 컬러 기준으로 돌아가기 →</a></p>
+  <div class="crumb">브랜드 / 브랜드 그래픽</div><h1>브랜드 그래픽</h1><div class="cs-root" data-color-system-brand></div>
+  <p><a href="#color">컬러 기준 →</a> · <a href="#assets">브랜드 원본 파일 →</a></p>
 </article>
 <article class="page content-max splup-graphics" id="page-color-application" hidden>
-  <div class="crumb">Splup / 02 · 앱에서의 적용</div><h1>앱에서의 적용</h1>
-  <p>사용자가 누를 수 있는 곳, 이미 고른 것, 아직 사용할 수 없는 것을 색으로 구분합니다. 일반 버튼부터 Ditto, 색상 선택, 프로필까지 실제 화면에 적용하는 방법을 설명합니다.</p>
+  <div class="crumb">파운데이션 / 앱에서의 색 적용</div><h1>앱에서의 색 적용</h1>
+  <p class="desc">사용자가 누를 수 있는 곳, 이미 고른 것, 아직 사용할 수 없는 것을 색으로 구분해요. 버튼 상태, 선택과 포커스, 상세 화면의 배경·글자색을 실제 화면에 적용하는 방법이에요. 디토하기 버튼의 색과 누름은 <a href="#ditto-action">디토하기 버튼</a>에서 다뤄요.</p>
   <div class="cs-root" data-color-system-application></div>
-  <div class="cs-root" data-color-system-ditto id="ditto-long-press"></div>
   <h2 id="detail-colors">상세페이지 · 배경과 텍스트</h2>
-  <p>배경과 글자색을 따로 고르면 원하는 분위기와 읽기 편한 화면을 함께 만들 수 있습니다. 색상표의 무지개 버튼을 누르면 작은 컬러 휠이 열립니다. 그라디언트는 배경에만 사용합니다.</p>
+  <p>배경과 글자색을 따로 고르면 원하는 분위기와 읽기 편한 화면을 함께 만들 수 있어요. 색상표의 무지개 버튼을 누르면 작은 컬러 휠이 열려요. 그라디언트는 배경에만 사용해요.</p>
   <div class="detail-colors" data-detail-colors></div>
   <p><a href="../../tokens/detail-colors.json" download>상세 컬러 토큰 JSON ↓</a> · <a href="#widget-system">위젯 크기와 음원 출처 규격 →</a></p>
   <h2>프로필 · 같은 색, 같은 선택 규칙</h2>
-  <p>프로필의 10가지 색은 나를 표현하는 선택지입니다. 같은 색을 프로필 핸들과 기본 아바타에 함께 사용합니다. 고른 색에는 테두리를, 키보드로 이동한 위치에는 바깥 링을 표시합니다.</p>
+  <p>프로필의 10가지 색은 나를 표현하는 선택지예요. 같은 색을 프로필 핸들과 기본 아바타에 함께 사용해요. 고른 색에는 테두리를, 키보드로 이동한 위치에는 바깥 링을 표시해요.</p>
   <p><a href="#profile-handles">프로필 핸들과 적용 예시 →</a> · <a href="#profile-avatars">기본 아바타 에셋 →</a></p>
   <h2>앱 적용과 편집</h2>
   <table><thead><tr><th>대상</th><th>적용 기준</th></tr></thead><tbody>
-    <tr><td>일반 화면</td><td>배경, 글자, 테두리는 사용처별 색상을 연결합니다. 밝은 화면과 어두운 화면을 함께 확인합니다.</td></tr>
-    <tr><td>Ditto</td><td>로고와 문구가 있는 긴 버튼을 사용합니다. 3초 동안 누르면 색이 깊어지고, 일찍 떼면 360ms 동안 원래 색으로 돌아오며 취소됩니다.</td></tr>
-    <tr><td>위젯</td><td>배경 25종 위에 이미지와 제목을 각각 배치합니다. 작은 Ditto 마크는 가져온 위젯임을 알려줍니다.</td></tr>
-    <tr><td>재사용</td><td>Figma에서는 Palette로 배경을, Title로 제목을, Artwork로 이미지를 바꿉니다. 앱에서는 같은 색상 데이터와 공통 버튼·카드를 사용합니다.</td></tr>
+    <tr><td>일반 화면</td><td>배경, 글자, 테두리는 사용처별 색상을 연결해요. 밝은 화면과 어두운 화면을 함께 확인해요.</td></tr>
+    <tr><td>Ditto</td><td>로고와 문구가 있는 긴 버튼을 써요. 3초 동안 누르면 색이 깊어지고, 일찍 떼면 360ms 동안 원래 색으로 돌아오며 취소돼요. <a href="#ditto-action">디토하기 버튼 →</a></td></tr>
+    <tr><td>위젯</td><td>배경 25종 위에 이미지와 제목을 각각 배치해요. 작은 Ditto 마크는 가져온 위젯임을 알려줘요.</td></tr>
+    <tr><td>재사용</td><td>Figma에서는 Palette로 배경을, Title로 제목을, Artwork로 이미지를 바꿔요. 앱에서는 같은 색상 데이터와 공통 버튼·카드를 사용해요.</td></tr>
   </tbody></table>
   <details><summary>개발 적용 파일과 갱신 방법</summary><p><code>color-system.json</code> 변경 후 <code>python3 scripts/sync_splup_colors.py</code>로 앱 컬러를 갱신해요. <code>SplupColor</code>는 역할별 색, <code>SplupGraphicPalette</code>는 위젯·EVENT 배경, <code>DittoHoldButton</code>은 실제 가져오기 동작에 연결하는 컴포넌트예요. 비동기 저장을 연결할 때는 요청 중 중복 입력을 막고 성공 뒤에만 완료를 표시해요.</p></details>
-  <p><a href="#brand-graphics">03 · 브랜드 표현 →</a></p>
+  <p><a href="#brand-graphics">브랜드 그래픽 →</a></p>
 </article>
 <article class="page docs-index" id="page-foundations" hidden>
-  <div class="crumb">Splup / 기본 규칙</div><h1>기본 규칙</h1><p class="desc">글자와 간격에서 움직임과 표면까지. 필요한 규칙을 골라 실제 예시와 함께 확인하세요.</p>
+  <div class="crumb">Splup / 파운데이션</div><h1>파운데이션</h1><p class="desc">모든 화면이 함께 쓰는 바탕이에요. 색과 글자부터 간격, 움직임, 화면이 겹치는 순서까지 실제 예시와 함께 확인하세요.</p>
   <div class="docs-index-list">
-    <a href="#typography"><span class="index-number">01</span><span class="index-copy"><strong>글자 스타일</strong><small>글자의 크기·굵기·역할</small></span><b aria-hidden="true">→</b></a>
-    <a href="#spacing"><span class="index-number">02</span><span class="index-copy"><strong>간격</strong><small>화면 안팎의 간격과 리듬</small></span><b aria-hidden="true">→</b></a>
-    <a href="#radius"><span class="index-number">03</span><span class="index-copy"><strong>모서리와 그림자</strong><small>모서리와 표면 깊이</small></span><b aria-hidden="true">→</b></a>
-    <a href="#motion"><span class="index-number">04</span><span class="index-copy"><strong>움직임</strong><small>움직임의 길이와 동작 줄이기</small></span><b aria-hidden="true">→</b></a>
-    <a href="#interaction"><span class="index-number">05</span><span class="index-copy"><strong>입력과 반응</strong><small>기본·눌림·비활성 상태</small></span><b aria-hidden="true">→</b></a>
-    <a href="#zindex"><span class="index-number">06</span><span class="index-copy"><strong>화면이 겹치는 순서</strong><small>겹치는 화면의 순서</small></span><b aria-hidden="true">→</b></a>
-    <a href="#darkmode"><span class="index-number">07</span><span class="index-copy"><strong>밝은 화면과 어두운 화면</strong><small>밝은 화면과 어두운 화면의 명도 관계</small></span><b aria-hidden="true">→</b></a>
+    <a href="#color"><span class="index-number">01</span><span class="index-copy"><strong>컬러 기준</strong><small>사용처별 색상 66개 · 밝은 화면과 어두운 화면</small></span><b aria-hidden="true">→</b></a>
+    <a href="#color-application"><span class="index-number">02</span><span class="index-copy"><strong>앱에서의 색 적용</strong><small>버튼 상태 · 선택과 포커스 · 상세 화면 배경과 글자색</small></span><b aria-hidden="true">→</b></a>
+    <a href="#typography"><span class="index-number">03</span><span class="index-copy"><strong>글자 스타일</strong><small>글자의 크기·굵기·역할</small></span><b aria-hidden="true">→</b></a>
+    <a href="#spacing"><span class="index-number">04</span><span class="index-copy"><strong>간격</strong><small>화면 안팎의 간격과 리듬</small></span><b aria-hidden="true">→</b></a>
+    <a href="#radius"><span class="index-number">05</span><span class="index-copy"><strong>모서리와 그림자</strong><small>모서리와 표면 깊이</small></span><b aria-hidden="true">→</b></a>
+    <a href="#motion"><span class="index-number">06</span><span class="index-copy"><strong>움직임</strong><small>움직임의 길이와 동작 줄이기</small></span><b aria-hidden="true">→</b></a>
+    <a href="#interaction"><span class="index-number">07</span><span class="index-copy"><strong>입력과 반응</strong><small>기본·눌림·비활성 상태</small></span><b aria-hidden="true">→</b></a>
+    <a href="#zindex"><span class="index-number">08</span><span class="index-copy"><strong>화면이 겹치는 순서</strong><small>겹치는 화면의 순서</small></span><b aria-hidden="true">→</b></a>
+    <a href="#darkmode"><span class="index-number">09</span><span class="index-copy"><strong>밝은 화면과 어두운 화면</strong><small>밝은 화면과 어두운 화면의 명도 관계</small></span><b aria-hidden="true">→</b></a>
   </div>
 </article><article class="page docs-index" id="page-components" hidden>
-  <div class="crumb">Splup / 컴포넌트</div><h1>컴포넌트</h1><p class="desc">모양만 보여주지 않고 상태와 반응, 적용 기준을 함께 정리했습니다.</p>
+  <div class="crumb">Splup / 컴포넌트</div><h1>컴포넌트</h1><p class="desc">앱 여러 곳에서 다시 쓰는 부품이에요. 모양만이 아니라 상태와 반응, 쓰는 기준을 함께 정리했어요.</p>
   <div class="docs-index-list">
-    <a href="#profile-handles"><span class="index-number">01</span><span class="index-copy"><strong>프로필 구성</strong><small>대표·라이프 10색과 우측 액션 5개 상태</small></span><b aria-hidden="true">→</b></a>
-    <a href="#buttons"><span class="index-number">02</span><span class="index-copy"><strong>일반 버튼</strong><small>저장·완료처럼 기본적인 행동</small></span><b aria-hidden="true">→</b></a>
-    <a href="#ditto-action"><span class="index-number">03</span><span class="index-copy"><strong>디토하기 버튼</strong><small>3초 동안 누르는 긴 버튼 · 가져온 위젯의 표시</small></span><b aria-hidden="true">→</b></a>
-    <a href="#widget-catalog"><span class="index-number">04</span><span class="index-copy"><strong>위젯 추가와 편집</strong><small>출시 위젯 네 묶음 · 추가 시트 · 작성 화면 · 편집 도구 · 방명록</small></span><b aria-hidden="true">→</b></a>
+    <a href="#buttons"><span class="index-number">01</span><span class="index-copy"><strong>버튼과 선택 요소</strong><small>일반 버튼 · 칩과 선택 탭 · 크기 칩</small></span><b aria-hidden="true">→</b></a>
+    <a href="#ditto-action"><span class="index-number">02</span><span class="index-copy"><strong>디토하기 버튼</strong><small>3초 동안 누르는 긴 버튼 · 가져온 위젯의 표시</small></span><b aria-hidden="true">→</b></a>
+    <a href="#inputs"><span class="index-number">03</span><span class="index-copy"><strong>텍스트 입력</strong><small>한 줄·여러 줄 입력 칸 · 글자 수 표시 · 옵션 토글</small></span><b aria-hidden="true">→</b></a>
+    <a href="#photo-picker"><span class="index-number">04</span><span class="index-copy"><strong>이미지 셀렉터</strong><small>사진을 고르는 모든 화면이 쓰는 셀렉터</small></span><b aria-hidden="true">→</b></a>
+    <a href="#navigation"><span class="index-number">05</span><span class="index-copy"><strong>상단 바와 바텀시트</strong><small>버튼 수로 정리한 상단 바 · 시트 세 가지</small></span><b aria-hidden="true">→</b></a>
+    <a href="#profile-handles"><span class="index-number">06</span><span class="index-copy"><strong>프로필 구성</strong><small>대표·라이프 10색과 우측 액션 5개 상태</small></span><b aria-hidden="true">→</b></a>
+    <a href="#profile-avatars"><span class="index-number">07</span><span class="index-copy"><strong>기본 아바타</strong><small>프로필 10색과 같은 색의 기본 아바타</small></span><b aria-hidden="true">→</b></a>
+  </div>
+</article><article class="page docs-index" id="page-widgets" hidden>
+  <div class="crumb">Splup / 위젯</div><h1>위젯</h1><p class="desc">플래터를 채우는 위젯의 크기와 배치, 추가와 편집, 디토 규칙, 위젯별 규격이에요.</p>
+  <div class="docs-index-list">
+    <a href="#widget-system"><span class="index-number">01</span><span class="index-copy"><strong>위젯 크기와 구성</strong><small>크기 12종 · 음악 CDP · 외부 서비스 배지 · 웹 시안</small></span><b aria-hidden="true">→</b></a>
+    <a href="#grid"><span class="index-number">02</span><span class="index-copy"><strong>플래터 배치</strong><small>격자 · 겹침과 밖으로 나간 위젯 처리</small></span><b aria-hidden="true">→</b></a>
+    <a href="#widget-catalog"><span class="index-number">03</span><span class="index-copy"><strong>위젯 추가와 편집</strong><small>출시 위젯 네 묶음 · 추가 시트 · 작성 화면 · 편집 도구</small></span><b aria-hidden="true">→</b></a>
+    <a href="#widget-ditto"><span class="index-number">04</span><span class="index-copy"><strong>디토 허용 규칙</strong><small>디토할 수 있는 위젯 · 허용 3개 · 숨쉬는 후광 · 친구 위젯 시트</small></span><b aria-hidden="true">→</b></a>
     <a href="#widget-todo"><span class="index-number">05</span><span class="index-copy"><strong>To-do 위젯</strong><small>카테고리 5색 · 체크 칸 22 · 주간 스트립 · 크기별 타일</small></span><b aria-hidden="true">→</b></a>
-    <a href="#widget-ditto"><span class="index-number">06</span><span class="index-copy"><strong>디토 허용 규칙</strong><small>디토할 수 있는 위젯 · 허용 3개 · 숨쉬는 후광 · 시트 상태</small></span><b aria-hidden="true">→</b></a>
-    <a href="#widget-system"><span class="index-number">07</span><span class="index-copy"><strong>위젯 크기와 구성</strong><small>크기 12종 · 음악 CDP · 외부 서비스 배지 · 웹 시안</small></span><b aria-hidden="true">→</b></a>
+    <a href="#widget-guestbook"><span class="index-number">06</span><span class="index-copy"><strong>방명록 위젯</strong><small>타일과 상세 · 안부와 답글</small></span><b aria-hidden="true">→</b></a>
   </div>
 </article><article class="page docs-index" id="page-patterns" hidden>
-  <div class="crumb">Splup / 적용 방법</div><h1>적용 방법</h1><p class="desc">단일 요소를 넘어, 플래터의 구성과 사용자를 대하는 언어를 확인하세요.</p>
+  <div class="crumb">Splup / 글쓰기</div><h1>글쓰기</h1><p class="desc">사용자에게 건네는 말의 기준이에요. 같은 뜻은 같은 말로, 재촉하지 않고 짧게 써요.</p>
   <div class="docs-index-list">
-    <a href="#grid"><span class="index-number">01</span><span class="index-copy"><strong>플래터 배치</strong><small>위젯 크기와 배치 규칙</small></span><b aria-hidden="true">→</b></a>
-    <a href="#voice"><span class="index-number">02</span><span class="index-copy"><strong>말과 용어</strong><small>관계를 표현하는 말의 기준</small></span><b aria-hidden="true">→</b></a>
-    <a href="#writing"><span class="index-number">03</span><span class="index-copy"><strong>상황별 문구</strong><small>상황별 문장과 피해야 할 표현</small></span><b aria-hidden="true">→</b></a>
+    <a href="#voice"><span class="index-number">01</span><span class="index-copy"><strong>말과 용어</strong><small>관계를 표현하는 말의 기준</small></span><b aria-hidden="true">→</b></a>
+    <a href="#writing"><span class="index-number">02</span><span class="index-copy"><strong>상황별 문구</strong><small>상황별 문장과 피해야 할 표현</small></span><b aria-hidden="true">→</b></a>
+  </div>
+</article><article class="page docs-index" id="page-brand" hidden>
+  <div class="crumb">Splup / 브랜드</div><h1>브랜드</h1><p class="desc">디토다운 분위기를 만드는 그래픽과 원본 파일, 링크를 공유할 때 보이는 미리보기 이미지예요.</p>
+  <div class="docs-index-list">
+    <a href="#brand-graphics"><span class="index-number">01</span><span class="index-copy"><strong>브랜드 그래픽</strong><small>Fluid 6조합 · 멀티 팔레트 8종 · 앱 아이콘 · 위젯 배경 25종 · EVENT 8종</small></span><b aria-hidden="true">→</b></a>
+    <a href="#assets"><span class="index-number">02</span><span class="index-copy"><strong>브랜드 원본 파일</strong><small>원본 로고·아이콘·그래픽 파일과 사용 기준</small></span><b aria-hidden="true">→</b></a>
+    <a href="#og-images"><span class="index-number">03</span><span class="index-copy"><strong>OG 이미지</strong><small>링크 미리보기 규격과 ditto.place의 실제 이미지</small></span><b aria-hidden="true">→</b></a>
   </div>
 </article><article class="page docs-index" id="page-resources" hidden>
-  <div class="crumb">Splup / 자료</div><h1>자료</h1>
-  <p class="desc">색, 간격, 모서리의 공통 설정값과 브랜드 원본 파일을 제공합니다. 기존 화면을 수정할 때는 변경 가이드를 함께 확인합니다.</p>
+  <div class="crumb">Splup / 자료</div><h1>자료</h1><p class="desc">여러 화면이 함께 쓰는 설정값과 기존 화면을 옮기는 방법, 문서가 바뀐 기록이에요.</p>
   <div class="docs-index-list">
     <a href="#tokens"><span class="index-number">01</span><span class="index-copy"><strong>공통 설정값</strong><small>색·간격·반경의 이름과 실제 값</small></span><b aria-hidden="true">→</b></a>
-    <a href="#assets"><span class="index-number">02</span><span class="index-copy"><strong>브랜드 에셋</strong><small>원본 로고·아이콘·그래픽 파일과 사용 기준</small></span><b aria-hidden="true">→</b></a>
-    <a href="#mapping"><span class="index-number">03</span><span class="index-copy"><strong>변경 가이드</strong><small>기존 규격을 새 기준으로 옮기는 순서</small></span><b aria-hidden="true">→</b></a>
-    <a href="#og-images"><span class="index-number">04</span><span class="index-copy"><strong>OG 이미지</strong><small>링크 미리보기 규격과 ditto.place의 실제 이미지</small></span><b aria-hidden="true">→</b></a>
+    <a href="#mapping"><span class="index-number">02</span><span class="index-copy"><strong>기존 화면 변경 가이드</strong><small>기존 규격을 새 기준으로 옮기는 순서</small></span><b aria-hidden="true">→</b></a>
+    <a href="#roadmap"><span class="index-number">03</span><span class="index-copy"><strong>변경 기록</strong><small>반영된 내용과 확인이 필요한 항목</small></span><b aria-hidden="true">→</b></a>
+    <a href="#audit"><span class="index-number">04</span><span class="index-copy"><strong>기존 구현 검토</strong><small>2026-08 코드 전수 검토 기록</small></span><b aria-hidden="true">→</b></a>
+    <a href="#backlog"><span class="index-number">05</span><span class="index-copy"><strong>추가 작업 목록</strong><small>추가·보강할 항목</small></span><b aria-hidden="true">→</b></a>
   </div>
-  <div class="docs-related"><span>계속 보기</span><a href="#roadmap">반영 상태와 최근 변경 ↗</a></div>
 </article>
 <article class="page content-max og-doc" id="page-og-images" hidden>
   <div class="crumb">자료 / <b>OG 이미지</b></div>
   <h1>OG 이미지</h1>
-  <p class="desc">카카오톡, X, 메시지에 ditto.place 링크를 붙이면 보이는 미리보기 이미지입니다. 모든 공개 페이지에 하나씩 두고, 같은 무리끼리는 같은 틀을 씁니다. 아래 이미지는 지금 ditto.place에 올라가 있는 실제 파일입니다.</p>
+  <p class="desc">카카오톡, X, 메시지에 ditto.place 링크를 붙이면 보이는 미리보기 이미지예요. 모든 공개 페이지에 하나씩 두고, 같은 무리끼리는 같은 틀을 써요. 아래 이미지는 지금 ditto.place에 올라가 있는 실제 파일이에요.</p>
   <div class="doc-preview og-anatomy" aria-label="안전 영역 예시">
     <div class="og-anat-frame"><img src="https://ditto.place/assets/og/guide-splup.png" width="1200" height="630" alt="안전 영역을 표시한 OG 이미지 예시" loading="lazy" decoding="async"><i class="og-safe" aria-hidden="true"></i></div>
     <ul class="og-anat-notes"><li><b>1200 × 630</b> 전체 캔버스 (1.91 : 1)</li><li><b>1080 × 560</b> 가운데 안전 영역 — 좌우 60 · 위아래 35</li><li>점선 밖은 앱마다 잘리거나 라벨이 덮을 수 있는 자리</li></ul>
@@ -1508,7 +1656,7 @@
   </div>
 
   <h2>필수 메타 태그</h2>
-  <p class="muted">페이지 <code>&lt;head&gt;</code>에 아래 태그를 모두 넣습니다. <code>og:url</code>은 <code>.html</code> 없는 깨끗한 주소로, 제목과 설명은 페이지마다 다르게 씁니다.</p>
+  <p class="muted">페이지 <code>&lt;head&gt;</code>에 아래 태그를 모두 넣어요. <code>og:url</code>은 <code>.html</code> 없는 깨끗한 주소로, 제목과 설명은 페이지마다 다르게 써요.</p>
   <div class="og-code"><code>&lt;meta property="og:type" content="website"&gt;
 &lt;meta property="og:site_name" content="ditto!"&gt;
 &lt;meta property="og:url" content="https://ditto.place/splup/design/site/navigation-sheets"&gt;
@@ -1533,11 +1681,11 @@
       </tbody>
     </table>
   </div>
-  <p class="muted">고정 이미지는 모두 <code>/assets/og/</code> 한곳에 <b>{무리}-{페이지}</b> 이름으로 둡니다. 가이드 페이지의 메타 태그는 prj_Ditto! 원본 HTML에 있어서 다음 동기화에도 그대로 유지됩니다.</p>
+  <p class="muted">고정 이미지는 모두 <code>/assets/og/</code> 한곳에 <b>{무리}-{페이지}</b> 이름으로 둬요. 가이드 페이지의 메타 태그는 prj_Ditto! 원본 HTML에 있어서 다음 동기화에도 그대로 유지돼요.</p>
 
   <h2>브랜드</h2>
-  <p class="og-tools"><button class="og-safe-toggle" type="button" aria-pressed="false">안전 영역 표시</button><span>모든 이미지 위에 1080 × 560 점선을 겹쳐 봅니다</span></p>
-  <p class="muted">홈 히어로와 같은 퍼플→핑크 대각 그라디언트, 화이트 워드마크, 흐린 하트. 페이지가 하는 일을 한 문장으로 크게 씁니다.</p>
+  <p class="og-tools"><button class="og-safe-toggle" type="button" aria-pressed="false">안전 영역 표시</button><span>모든 이미지 위에 1080 × 560 점선을 겹쳐 봐요</span></p>
+  <p class="muted">홈 히어로와 같은 퍼플→핑크 대각 그라디언트, 화이트 워드마크, 흐린 하트. 페이지가 하는 일을 한 문장으로 크게 써요.</p>
   <div class="og-gallery">
 <figure class="og-card">
   <div class="og-shot"><img src="https://ditto.place/assets/og/brand-home.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="홈 링크 미리보기 이미지"></div>
@@ -1566,7 +1714,7 @@
 </div>
 
   <h2>프로필</h2>
-  <p class="muted">앱 ProfileHandle 카드(높이 64 · 아바타 48 R12 · 이름 16/500 · 아이디 12)를 2.5배로 그리고, 그 사람의 <code>profiles.handle_color</code> 그라디언트를 그대로 씁니다. 바탕은 같은 색을 옅게, 오른쪽은 대표 플래터의 사진 위젯 3장입니다. 시안 계정 10명이 Profile handle v2의 10색을 하나씩 씁니다.</p>
+  <p class="muted">앱 ProfileHandle 카드(높이 64 · 아바타 48 R12 · 이름 16/500 · 아이디 12)를 2.5배로 그리고, 그 사람의 <code>profiles.handle_color</code> 그라디언트를 그대로 써요. 바탕은 같은 색을 옅게, 오른쪽은 대표 플래터의 사진 위젯 3장이에요. 시안 계정 10명이 Profile handle v2의 10색을 하나씩 써요.</p>
   <div class="og-gallery">
 <figure class="og-card">
   <div class="og-shot"><img src="https://ditto.place/demo/haeunzip/og.jpg" width="1200" height="630" loading="lazy" decoding="async" alt="하은 · lavender 링크 미리보기 이미지"></div>
@@ -1651,7 +1799,7 @@
   </div>
 
   <h2>가이드</h2>
-  <p class="muted">Splup 문서 스킨 — 밝은 회색 바탕, 떠 있는 상단 바, 문서 표지와 같은 색·도형의 카드. 바뀌는 것은 제목·설명·주소·표지 색뿐입니다.</p>
+  <p class="muted">Splup 문서 스킨 — 밝은 회색 바탕, 떠 있는 상단 바, 문서 표지와 같은 색·도형의 카드. 바뀌는 것은 제목·설명·주소·표지 색뿐이에요.</p>
   <div class="og-gallery">
 <figure class="og-card">
   <div class="og-shot"><img src="https://ditto.place/assets/og/guide-splup.png" width="1200" height="630" loading="lazy" decoding="async" alt="Splup 디자인 시스템 링크 미리보기 이미지"></div>
@@ -1726,26 +1874,26 @@
 <article class="page content-max" id="page-profile-avatars" hidden>
   <div class="crumb">컬러 / 기본 아바타</div>
   <h1>프로필 기본 아바타</h1>
-  <p class="desc">프로필과 같은 색을 사용하는 기본 아바타 10가지입니다. 사진을 등록하지 않았을 때 표시하며, 아래 예시에서 실제 크기로 비교할 수 있습니다.</p>
+  <p class="desc">프로필과 같은 색을 사용하는 기본 아바타 10가지예요. 사진을 등록하지 않았을 때 표시하며, 아래 예시에서 실제 크기로 비교할 수 있어요.</p>
   <h2>핸들에 넣어서 비교하기</h2>
   <p>컬러를 고르면 같은 배색의 대표·라이프 핸들에 함께 적용돼요. 실제 48px 크기로 확인하세요.</p>
   <div class="avatar-workbench" data-avatar-demo style="--handle-top:#B66BEC;--handle-bottom:#9270D9;--handle-life:#C792ED">
     <div class="avatar-picker" role="group" aria-label="기본 아바타 10종 선택"><button type="button" data-avatar-choice="purple-pink" aria-pressed="true" aria-label="01 퍼플 · 핑크 선택"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" ><span><small>01</small>퍼플 · 핑크</span></button><button type="button" data-avatar-choice="deep-purple" aria-pressed="false" aria-label="02 딥 퍼플 · 바이올렛 선택"><img class="" src="../../brand/color-system/profile-avatars/deep-purple.svg" alt="딥 퍼플 · 바이올렛 기본 아바타" width="96" height="96" ><span><small>02</small>딥 퍼플 · 바이올렛</span></button><button type="button" data-avatar-choice="pink-coral" aria-pressed="false" aria-label="03 핑크 · 코랄 선택"><img class="" src="../../brand/color-system/profile-avatars/pink-coral.svg" alt="핑크 · 코랄 기본 아바타" width="96" height="96" ><span><small>03</small>핑크 · 코랄</span></button><button type="button" data-avatar-choice="peach-yellow" aria-pressed="false" aria-label="04 피치 · 옐로 선택"><img class="" src="../../brand/color-system/profile-avatars/peach-yellow.svg" alt="피치 · 옐로 기본 아바타" width="96" height="96" ><span><small>04</small>피치 · 옐로</span></button><button type="button" data-avatar-choice="cyan-blue" aria-pressed="false" aria-label="05 시안 · 블루 선택"><img class="" src="../../brand/color-system/profile-avatars/cyan-blue.svg" alt="시안 · 블루 기본 아바타" width="96" height="96" ><span><small>05</small>시안 · 블루</span></button><button type="button" data-avatar-choice="mint-lime" aria-pressed="false" aria-label="06 민트 · 라임 선택"><img class="" src="../../brand/color-system/profile-avatars/mint-lime.svg" alt="민트 · 라임 기본 아바타" width="96" height="96" ><span><small>06</small>민트 · 라임</span></button><button type="button" data-avatar-choice="coral-red" aria-pressed="false" aria-label="07 코랄 · 레드 선택"><img class="" src="../../brand/color-system/profile-avatars/coral-red.svg" alt="코랄 · 레드 기본 아바타" width="96" height="96" ><span><small>07</small>코랄 · 레드</span></button><button type="button" data-avatar-choice="gold-yellow" aria-pressed="false" aria-label="08 골드 · 옐로 선택"><img class="" src="../../brand/color-system/profile-avatars/gold-yellow.svg" alt="골드 · 옐로 기본 아바타" width="96" height="96" ><span><small>08</small>골드 · 옐로</span></button><button type="button" data-avatar-choice="lime-green" aria-pressed="false" aria-label="09 라임 · 그린 선택"><img class="" src="../../brand/color-system/profile-avatars/lime-green.svg" alt="라임 · 그린 기본 아바타" width="96" height="96" ><span><small>09</small>라임 · 그린</span></button><button type="button" data-avatar-choice="neutral-gray" aria-pressed="false" aria-label="10 뉴트럴 · 그레이 선택"><img class="" src="../../brand/color-system/profile-avatars/neutral-gray.svg" alt="뉴트럴 · 그레이 기본 아바타" width="96" height="96" ><span><small>10</small>뉴트럴 · 그레이</span></button></div>
     <div class="avatar-handle-pair"><section><h3>대표</h3><div class="profile-handle representative"><span class="handle-avatar avatar-art"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" data-avatar-live></span><div class="ph-identity"><b>지우 ⭐</b><span>나의 애칭목록</span></div><span class="avatar-demo-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section><section><h3>라이프</h3><div class="profile-handle life"><span class="handle-avatar avatar-art"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" data-avatar-live></span><div class="ph-identity"><b>지우 ⭐</b><span>나의 애칭목록</span></div><span class="avatar-demo-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section></div>
-    <p class="avatar-choice-status" role="status" aria-live="polite">01 · 퍼플 · 핑크</p><h3>크기를 바꿔서 확인하기</h3><p>사각 프로필에 맞춰 만든 컬러 표면입니다. 크기와 비율을 바꿔도 색이 전체 영역을 채워요.</p><div class="avatar-resize-controls"><label>크기 <input type="range" min="24" max="192" step="8" value="96" data-avatar-size><output data-avatar-size-value>96px</output></label><label>비율 <select data-avatar-ratio><option value="1">정사각형</option><option value="1.25">세로형 4:5</option><option value="0.5625">가로형 16:9</option></select></label></div><div class="avatar-resize-stage"><div class="avatar-resize-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 크기 조절 미리보기" data-avatar-live></div></div><p class="avatar-resize-status" role="status" aria-live="polite">96 × 96 · 모서리 24</p>
+    <p class="avatar-choice-status" role="status" aria-live="polite">01 · 퍼플 · 핑크</p><h3>크기를 바꿔서 확인하기</h3><p>사각 프로필에 맞춰 만든 컬러 표면이에요. 크기와 비율을 바꿔도 색이 전체 영역을 채워요.</p><div class="avatar-resize-controls"><label>크기 <input type="range" min="24" max="192" step="8" value="96" data-avatar-size><output data-avatar-size-value>96px</output></label><label>비율 <select data-avatar-ratio><option value="1">정사각형</option><option value="1.25">세로형 4:5</option><option value="0.5625">가로형 16:9</option></select></label></div><div class="avatar-resize-stage"><div class="avatar-resize-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 크기 조절 미리보기" data-avatar-live></div></div><p class="avatar-resize-status" role="status" aria-live="polite">96 × 96 · 모서리 24</p>
   </div>
   <h2>아바타 에셋 10종</h2>
-  <p>동일한 광택·번짐으로 통일했어요. 48×48 · 모서리 12의 라운드 사각형에 테두리 없이 적용합니다.</p>
+  <p>동일한 광택·번짐으로 통일했어요. 48×48 · 모서리 12의 라운드 사각형에 테두리 없이 적용해요.</p>
   <div class="avatar-asset-grid"><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="퍼플 · 핑크 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>01</small>퍼플 · 핑크</strong><div class="avatar-color-chips"><span><i style="background:#B66BEC"></i><code>#B66BEC</code></span><span><i style="background:#9270D9"></i><code>#9270D9</code></span><span><i style="background:#C792ED"></i><code>#C792ED</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/purple-pink.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/purple-pink.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/purple-pink-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/deep-purple.svg" alt="딥 퍼플 · 바이올렛 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>02</small>딥 퍼플 · 바이올렛</strong><div class="avatar-color-chips"><span><i style="background:#9580DE"></i><code>#9580DE</code></span><span><i style="background:#8D73CE"></i><code>#8D73CE</code></span><span><i style="background:#AE99E6"></i><code>#AE99E6</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/deep-purple.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/deep-purple.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/deep-purple-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/pink-coral.svg" alt="핑크 · 코랄 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>03</small>핑크 · 코랄</strong><div class="avatar-color-chips"><span><i style="background:#FA91D9"></i><code>#FA91D9</code></span><span><i style="background:#F064B3"></i><code>#F064B3</code></span><span><i style="background:#F5A5D8"></i><code>#F5A5D8</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/pink-coral.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/pink-coral.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/pink-coral-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/peach-yellow.svg" alt="피치 · 옐로 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>04</small>피치 · 옐로</strong><div class="avatar-color-chips"><span><i style="background:#FFA36F"></i><code>#FFA36F</code></span><span><i style="background:#F68A50"></i><code>#F68A50</code></span><span><i style="background:#FFBC87"></i><code>#FFBC87</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/peach-yellow.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/peach-yellow.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/peach-yellow-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/cyan-blue.svg" alt="시안 · 블루 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>05</small>시안 · 블루</strong><div class="avatar-color-chips"><span><i style="background:#62C3F1"></i><code>#62C3F1</code></span><span><i style="background:#369FD9"></i><code>#369FD9</code></span><span><i style="background:#89CDEE"></i><code>#89CDEE</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/cyan-blue.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/cyan-blue.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/cyan-blue-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/mint-lime.svg" alt="민트 · 라임 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>06</small>민트 · 라임</strong><div class="avatar-color-chips"><span><i style="background:#38DBB1"></i><code>#38DBB1</code></span><span><i style="background:#09BA97"></i><code>#09BA97</code></span><span><i style="background:#6BDDC2"></i><code>#6BDDC2</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/mint-lime.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/mint-lime.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/mint-lime-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/coral-red.svg" alt="코랄 · 레드 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>07</small>코랄 · 레드</strong><div class="avatar-color-chips"><span><i style="background:#F77983"></i><code>#F77983</code></span><span><i style="background:#E9576F"></i><code>#E9576F</code></span><span><i style="background:#F39CA8"></i><code>#F39CA8</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/coral-red.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/coral-red.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/coral-red-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/gold-yellow.svg" alt="골드 · 옐로 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>08</small>골드 · 옐로</strong><div class="avatar-color-chips"><span><i style="background:#F4D76C"></i><code>#F4D76C</code></span><span><i style="background:#DDC057"></i><code>#DDC057</code></span><span><i style="background:#EDDA94"></i><code>#EDDA94</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/gold-yellow.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/gold-yellow.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/gold-yellow-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/lime-green.svg" alt="라임 · 그린 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>09</small>라임 · 그린</strong><div class="avatar-color-chips"><span><i style="background:#C8E96B"></i><code>#C8E96B</code></span><span><i style="background:#ACCE48"></i><code>#ACCE48</code></span><span><i style="background:#D1E796"></i><code>#D1E796</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/lime-green.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/lime-green.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/lime-green-rounded.png" download>사각 PNG</a></div></figcaption></figure><figure><div class="avatar-specimen"><img class="" src="../../brand/color-system/profile-avatars/neutral-gray.svg" alt="뉴트럴 · 그레이 기본 아바타" width="96" height="96" ></div><figcaption><strong><small>10</small>뉴트럴 · 그레이</strong><div class="avatar-color-chips"><span><i style="background:#AEB3BF"></i><code>#AEB3BF</code></span><span><i style="background:#929AA9"></i><code>#929AA9</code></span><span><i style="background:#BDC4D0"></i><code>#BDC4D0</code></span></div><div class="avatar-asset-links"><a href="../../brand/color-system/profile-avatars/neutral-gray.svg" download>SVG</a><a href="../../brand/color-system/profile-avatars/neutral-gray.png" download>PNG</a><a href="../../brand/color-system/profile-avatars/neutral-gray-rounded.png" download>사각 PNG</a></div></figcaption></figure></div>
   <p><a class="avatar-doc-link" href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1126-115578" target="_blank" rel="noopener">Figma에서 10종과 프로필 핸들 적용 보기 ↗</a></p>
 <p class="avatar-download"><a href="../../brand/color-system/profile-avatars/splup-profile-avatars-10.zip" download>10종 모두 다운로드 ↗</a><span>SVG · 1024px PNG · 512px 라운드 사각 PNG · 팔레트 JSON</span></p>
   <h2>브랜드 그래픽과 어떻게 이어지나요?</h2>
-  <div class="avatar-principles"><section><h3>핸들과 같은 주색</h3><p>01–06은 브랜드 그래픽, 07–10은 기존 프로필 핸들 팔레트에서 파생했어요. 아바타는 작은 크기에 맞춰 보조색의 채도를 조절합니다.</p></section><section><h3>빛은 같은 방향</h3><p>위쪽의 넓은 반사광과 아래쪽의 얕은 음영만 사용해요. 흰 테두리·노이즈·로고는 넣지 않습니다.</p></section><section><h3>선택과 미등록은 구분</h3><p>선택한 기본 아바타는 이미지 전체를 표시해요. 사진도 아바타 선택도 없으면 기존 라이트 그레이 바탕과 회색 사람 아이콘을 유지합니다.</p></section></div>
-  <p>라이프와 대표를 전환할 때 아바타는 유지합니다. 팔레트를 바꿀 때 같은 계열을 추천하되, 사용자가 고른 아바타를 임의로 바꾸지 않습니다.</p>
-  <details class="guide-details"><summary>개발용 컬러·에셋 기준</summary><p><code>component.profileAvatar</code> · <code>handlePaletteId</code>로 프로필 핸들 배색을 연결합니다. 이 페이지는 디자인 시스템 예시이며 실제 앱 적용은 별도입니다. Figma에는 10종의 편집 가능한 그라디언트 컴포넌트와 대표·라이프 적용 예시를 등록했어요. 기존 프로필 핸들의 Avatar 항목에서 선택할 수 있어요. 크기 변경은 Resize, 비율을 유지하며 모서리까지 확대하려면 Scale(K)을 사용하세요.</p><a href="../../tokens/tokens.json">디자인 토큰</a> · <a href="../../brand/color-system/profile-avatars/palette.json">아바타 팔레트 JSON</a></details>
+  <div class="avatar-principles"><section><h3>핸들과 같은 주색</h3><p>01–06은 브랜드 그래픽, 07–10은 기존 프로필 핸들 팔레트에서 파생했어요. 아바타는 작은 크기에 맞춰 보조색의 채도를 조절해요.</p></section><section><h3>빛은 같은 방향</h3><p>위쪽의 넓은 반사광과 아래쪽의 얕은 음영만 사용해요. 흰 테두리·노이즈·로고는 넣지 않아요.</p></section><section><h3>선택과 미등록은 구분</h3><p>선택한 기본 아바타는 이미지 전체를 표시해요. 사진도 아바타 선택도 없으면 기존 라이트 그레이 바탕과 회색 사람 아이콘을 유지해요.</p></section></div>
+  <p>라이프와 대표를 전환할 때 아바타는 유지해요. 팔레트를 바꿀 때 같은 계열을 추천하되, 사용자가 고른 아바타를 임의로 바꾸지 않아요.</p>
+  <details class="guide-details"><summary>개발용 컬러·에셋 기준</summary><p><code>component.profileAvatar</code> · <code>handlePaletteId</code>로 프로필 핸들 배색을 연결해요. 이 페이지는 디자인 시스템 예시이며 실제 앱 적용은 별도예요. Figma에는 10종의 편집 가능한 그라디언트 컴포넌트와 대표·라이프 적용 예시를 등록했어요. 기존 프로필 핸들의 Avatar 항목에서 선택할 수 있어요. 크기 변경은 Resize, 비율을 유지하며 모서리까지 확대하려면 Scale(K)을 사용하세요.</p><a href="../../tokens/tokens.json">디자인 토큰</a> · <a href="../../brand/color-system/profile-avatars/palette.json">아바타 팔레트 JSON</a></details>
   <p><a href="#profile-handles">프로필 핸들과 우측 버튼 가이드 →</a></p>
 </article>
-<article class="page content-max" id="page-profile-handles" hidden><div class="crumb">컴포넌트 / Profile Handle</div><h1>프로필 구성</h1><p class="desc">같은 프로필을 대표와 라이프에서 어떻게 보여줄지 정합니다. 색을 선택해 두 모습을 비교하고, 오른쪽 버튼의 배치와 동작을 확인하세요.</p><a class="avatar-doc-link" href="#profile-avatars">기본 아바타 10종 보기 →</a><section class="phx" id="profile-handle-identity" aria-labelledby="phx-title"><style>
+<article class="page content-max" id="page-profile-handles" hidden><div class="crumb">컴포넌트 / Profile Handle</div><h1>프로필 구성</h1><p class="desc">같은 프로필을 대표와 라이프에서 어떻게 보여줄지 정해요. 색을 선택해 두 모습을 비교하고, 오른쪽 버튼의 배치와 동작을 확인하세요.</p><a class="avatar-doc-link" href="#profile-avatars">기본 아바타 10종 보기 →</a><section class="phx" id="profile-handle-identity" aria-labelledby="phx-title"><style>
 .phx{margin:32px 0 40px}.phx>p{max-width:68ch}
 .phx-grid{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
 .phx-card{padding:12px;border-radius:16px;background:var(--surface-soft);min-width:0}
@@ -1782,33 +1930,33 @@
 </section><section class="profile-color-editor" id="profile-color-carousel" data-profile-carousel-demo data-profile-color-editor>
 <h2>좁은 화면 · 스와이프 적용 예시</h2><p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=1211-128856" target="_blank" rel="noopener">Figma · 통합 Profile System 보기 →</a></p><p>색을 줄이지 않고 가로로 넘겨요. 스와이프는 목록만 이동하고, 컬러칩을 눌러야 선택이 바뀌어요.</p>
 <div class="profile-editor-layout"><div><fieldset class="profile-color-palette"><legend>핸들 컬러 선택 · 가로로 넘겨 10색 보기</legend><div class="profile-color-options" aria-label="10색 컬러 목록, 가로 스와이프 가능"><label class="profile-color-option" title="라벤더 · #C8B3F2"><input type="radio" name="profile-color-carousel-draft" value="lavender" aria-label="라벤더" checked><span class="profile-color-chip" style="background:#C8B3F2" aria-hidden="true"></span></label><label class="profile-color-option" title="슬레이트 · #A1ADB9"><input type="radio" name="profile-color-carousel-draft" value="slate" aria-label="슬레이트"><span class="profile-color-chip" style="background:#A1ADB9" aria-hidden="true"></span></label><label class="profile-color-option" title="라임 · #C0D289"><input type="radio" name="profile-color-carousel-draft" value="lime" aria-label="라임"><span class="profile-color-chip" style="background:#C0D289" aria-hidden="true"></span></label><label class="profile-color-option" title="틸 · #8DB0BC"><input type="radio" name="profile-color-carousel-draft" value="teal" aria-label="틸"><span class="profile-color-chip" style="background:#8DB0BC" aria-hidden="true"></span></label><label class="profile-color-option" title="골드 · #D2BC8C"><input type="radio" name="profile-color-carousel-draft" value="gold" aria-label="골드"><span class="profile-color-chip" style="background:#D2BC8C" aria-hidden="true"></span></label><label class="profile-color-option" title="코랄 · #E9A382"><input type="radio" name="profile-color-carousel-draft" value="coral" aria-label="코랄"><span class="profile-color-chip" style="background:#E9A382" aria-hidden="true"></span></label><label class="profile-color-option" title="핑크 · #EBA3BE"><input type="radio" name="profile-color-carousel-draft" value="pink" aria-label="핑크"><span class="profile-color-chip" style="background:#EBA3BE" aria-hidden="true"></span></label><label class="profile-color-option" title="세이지 · #AAB49A"><input type="radio" name="profile-color-carousel-draft" value="sage" aria-label="세이지"><span class="profile-color-chip" style="background:#AAB49A" aria-hidden="true"></span></label><label class="profile-color-option" title="모브 · #B2A9B7"><input type="radio" name="profile-color-carousel-draft" value="mauve" aria-label="모브"><span class="profile-color-chip" style="background:#B2A9B7" aria-hidden="true"></span></label><label class="profile-color-option" title="스카이 · #A1CFE1"><input type="radio" name="profile-color-carousel-draft" value="sky" aria-label="스카이"><span class="profile-color-chip" style="background:#A1CFE1" aria-hidden="true"></span></label></div></fieldset><p class="profile-color-choice" data-profile-color-choice></p><div class="profile-color-actions"><button type="button" data-profile-color-cancel>취소</button><button type="button" class="profile-color-apply" data-profile-color-apply>적용하기</button></div><p class="profile-color-status" data-profile-color-status role="status" aria-live="polite">디자인 시스템 미리보기예요. 실제 프로필은 저장되지 않아요.</p></div><div class="profile-editor-previews"><section><h3>대표</h3><div class="profile-handle representative"><span class="handle-avatar avatar-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="선택한 사각 기본 아바타"></span><div class="ph-identity"><b>지우</b><span>나의 애칭목록</span></div><span class="profile-editor-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section><section><h3>라이프</h3><div class="profile-handle life"><span class="handle-avatar avatar-art"><img src="../../brand/color-system/profile-avatars/purple-pink.svg" alt="선택한 사각 기본 아바타"></span><div class="ph-identity"><b>지우</b><span>나의 애칭목록</span></div><span class="profile-editor-tools" aria-hidden="true"><img src="../../brand/color-system/profile-pencil.svg" alt=""><img src="../../brand/color-system/profile-gear.svg" alt=""></span></div></section></div></div><p class="profile-color-values" data-profile-color-values></p>
-</section><section class="profile-action-guide" id="profile-action-guide"><h2>프로필 오른쪽 버튼 배치</h2><p>아래는 상태 전환을 확인하는 데모예요. 실제 프로필 저장이나 친구 요청은 전송되지 않아요.</p><div class="ph-state-list"><section class="ph-state-card" data-profile-state="self"><h3>내 프로필 · 기본</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button aria-label="프로필 수정" data-profile-edit><img src="../../brand/color-system/profile-pencil.svg" alt="" aria-hidden="true"></button><button aria-label="설정" data-profile-settings><img src="../../brand/color-system/profile-gear.svg" alt="" aria-hidden="true"></button></div></div><p>수정은 프로필 편집을 열고, 설정은 계정 설정으로 이동해요.</p></section><section class="ph-state-card" data-profile-state="editing"><h3>내 프로필 · 수정 중</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-primary" data-profile-done>수정완료</button></div></div><p>수정완료 후 기본 상태로 돌아가요. 저장 중에는 중복 입력을 막아요.</p></section><section class="ph-state-card" data-profile-state="friend"><h3>친구 프로필 · 친구인 상태</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><span class="ph-status ph-circle" role="img" aria-label="친구인 상태" title="친구"><img src="../../brand/color-system/profile-person-check.svg" alt="" aria-hidden="true"></span></div></div><p>사람과 체크를 함께 사용해 친구 관계를 표시해요. 친구 삭제를 즉시 실행하지 않아요.</p></section><section class="ph-state-card" data-profile-state="add"><h3>친구 프로필 · 추가 가능</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-circle" data-profile-add aria-label="친구 추가하기" title="친구 추가하기"><img src="../../brand/color-system/profile-person-plus.svg" alt=""></button></div></div><p>요청을 보낸 뒤 요청됨으로 바꿔요. 수락 전에는 친구로 표시하지 않아요.</p></section><section class="ph-state-card" data-profile-state="unavailable"><h3>친구 프로필 · 추가 불가</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-circle ph-disabled" disabled aria-label="친구추가 불가" title="친구추가 불가"><img src="../../brand/color-system/profile-person-x.svg" alt=""></button></div></div><p>버튼은 비활성화하고 추가할 수 없는 사유를 아래에 안내해요.</p></section></div><p class="ph-feedback" role="status" aria-live="polite">수정 버튼을 눌러 상태 변화를 확인해보세요.</p><h3>공통 배치 규칙</h3><ul><li>핸들 높이 64 · 모서리 16 · 사진 48 · 우측 여백 8.</li><li>터치 영역은 최소 44 × 44, 아이콘은 20. 두 액션 사이는 4.</li><li>이름 영역만 줄어들고 버튼은 고정돼요. 긴 이름은 한 줄 말줄임으로 처리해요.</li><li>친구 상태는 사람+체크·사람 추가·추가 불가 아이콘으로 구분해요. 각 아이콘에는 스크린 리더용 상태 이름을 제공해요.</li><li>큰 글자 설정에서는 높이를 늘리고 액션을 다음 줄로 배치해요.</li></ul></section><h2>어떻게 달라지나요?</h2><ul><li>대표: 그래픽 팔레트의 주색을 중심으로 위에서 아래로 색이 깊어져요.</li><li>라이프: 같은 컬러군의 단색을 사용해요.</li><li>두 핸들의 크기와 아이콘은 같고, 라이프는 음영 없이 단색으로 표현해요.</li><li>여러 색을 모두 넣기보다, 이름과 편집 기능이 잘 보이도록 색을 단순화했어요.</li></ul><h2>적용 기준</h2><p>높이 64 · 모서리 16 · 프로필 이미지 48. 어두운 글자로 읽기 쉽게 맞췄어요. 위 핸들은 색과 형태를 비교하는 예시이며 편집·설정 기능은 연결되지 않았어요.</p><p>앱 소스의 프로필 선택도 10종으로 연결했어요. 기존 선택은 유지하고 이전 컬러 ID는 가까운 팔레트로 연결되며 직접 지정한 커스텀 색은 유지해요. 실제 기기 화면 검증은 별도입니다.</p><details class="guide-details"><summary>개발용 컬러 기준</summary><p><code>component.profileHandle</code><br><code>DGrad.profileHandlePalettes</code></p><a href="../../tokens/tokens.json">공통 원본 토큰 보기</a></details><p><a href="#brand-graphics">원본 그래픽 팔레트 보기 →</a></p></article>
+</section><section class="profile-action-guide" id="profile-action-guide"><h2>프로필 오른쪽 버튼 배치</h2><p>아래는 상태 전환을 확인하는 데모예요. 실제 프로필 저장이나 친구 요청은 전송되지 않아요.</p><div class="ph-state-list"><section class="ph-state-card" data-profile-state="self"><h3>내 프로필 · 기본</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button aria-label="프로필 수정" data-profile-edit><img src="../../brand/color-system/profile-pencil.svg" alt="" aria-hidden="true"></button><button aria-label="설정" data-profile-settings><img src="../../brand/color-system/profile-gear.svg" alt="" aria-hidden="true"></button></div></div><p>수정은 프로필 편집을 열고, 설정은 계정 설정으로 이동해요.</p></section><section class="ph-state-card" data-profile-state="editing"><h3>내 프로필 · 수정 중</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-primary" data-profile-done>수정완료</button></div></div><p>수정완료 후 기본 상태로 돌아가요. 저장 중에는 중복 입력을 막아요.</p></section><section class="ph-state-card" data-profile-state="friend"><h3>친구 프로필 · 친구인 상태</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><span class="ph-status ph-circle" role="img" aria-label="친구인 상태" title="친구"><img src="../../brand/color-system/profile-person-check.svg" alt="" aria-hidden="true"></span></div></div><p>사람과 체크를 함께 사용해 친구 관계를 표시해요. 친구 삭제를 즉시 실행하지 않아요.</p></section><section class="ph-state-card" data-profile-state="add"><h3>친구 프로필 · 추가 가능</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-circle" data-profile-add aria-label="친구 추가하기" title="친구 추가하기"><img src="../../brand/color-system/profile-person-plus.svg" alt=""></button></div></div><p>요청을 보낸 뒤 요청됨으로 바꿔요. 수락 전에는 친구로 표시하지 않아요.</p></section><section class="ph-state-card" data-profile-state="unavailable"><h3>친구 프로필 · 추가 불가</h3><div class="profile-handle life"><span class="handle-avatar"><img src="../../brand/color-system/profile-person-fallback.svg" alt=""></span><div class="ph-identity"><b>연지</b><span>나의 애칭목록</span></div><div class="ph-actions"><button class="ph-circle ph-disabled" disabled aria-label="친구추가 불가" title="친구추가 불가"><img src="../../brand/color-system/profile-person-x.svg" alt=""></button></div></div><p>버튼은 비활성화하고 추가할 수 없는 사유를 아래에 안내해요.</p></section></div><p class="ph-feedback" role="status" aria-live="polite">수정 버튼을 눌러 상태 변화를 확인해보세요.</p><h3>공통 배치 규칙</h3><ul><li>핸들 높이 64 · 모서리 16 · 사진 48 · 우측 여백 8.</li><li>터치 영역은 최소 44 × 44, 아이콘은 20. 두 액션 사이는 4.</li><li>이름 영역만 줄어들고 버튼은 고정돼요. 긴 이름은 한 줄 말줄임으로 처리해요.</li><li>친구 상태는 사람+체크·사람 추가·추가 불가 아이콘으로 구분해요. 각 아이콘에는 스크린 리더용 상태 이름을 제공해요.</li><li>큰 글자 설정에서는 높이를 늘리고 액션을 다음 줄로 배치해요.</li></ul></section><h2>어떻게 달라지나요?</h2><ul><li>대표: 그래픽 팔레트의 주색을 중심으로 위에서 아래로 색이 깊어져요.</li><li>라이프: 같은 컬러군의 단색을 사용해요.</li><li>두 핸들의 크기와 아이콘은 같고, 라이프는 음영 없이 단색으로 표현해요.</li><li>여러 색을 모두 넣기보다, 이름과 편집 기능이 잘 보이도록 색을 단순화했어요.</li></ul><h2>적용 기준</h2><p>높이 64 · 모서리 16 · 프로필 이미지 48. 어두운 글자로 읽기 쉽게 맞췄어요. 위 핸들은 색과 형태를 비교하는 예시이며 편집·설정 기능은 연결되지 않았어요.</p><p>앱 소스의 프로필 선택도 10종으로 연결했어요. 기존 선택은 유지하고 이전 컬러 ID는 가까운 팔레트로 연결되며 직접 지정한 커스텀 색은 유지해요. 실제 기기 화면 검증은 별도예요.</p><details class="guide-details"><summary>개발용 컬러 기준</summary><p><code>component.profileHandle</code><br><code>DGrad.profileHandlePalettes</code></p><a href="../../tokens/tokens.json">공통 원본 토큰 보기</a></details><p><a href="#brand-graphics">원본 그래픽 팔레트 보기 →</a></p></article>
 <article class="page" id="page-widget-system" hidden>
   <div class="crumb">Splup / 컴포넌트</div>
   <h1>위젯 크기와 구성</h1>
-  <p class="desc">위젯 13개 유형의 콘텐츠, 글자 크기, 출처와 이동 표시를 웹 시안으로 확인하세요. 작은 크기에서는 글자를 축소하지 않고 표시하는 정보량을 조절합니다.</p>
+  <p class="desc">위젯 13개 유형의 콘텐츠, 글자 크기, 출처와 이동 표시를 웹 시안으로 확인하세요. 작은 크기에서는 글자를 축소하지 않고 표시하는 정보량을 조절해요.</p>
   <p class="wa-note">출시 위젯 15종의 목록과 추가·작성 화면은 <a href="#widget-catalog">위젯 추가와 편집</a>, To-do는 <a href="#widget-todo">To-do 위젯</a>, 디토 가능 표시는 <a href="#widget-ditto">디토 허용 규칙</a>에서 실제 앱 화면으로 확인하세요. 이 페이지의 위젯 그림은 웹에서 다시 그린 시안이에요.</p>
   <p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/Ditto?node-id=1241-2758" target="_blank" rel="noopener">Figma 위젯 시스템 보기 ↗</a> · <a href="#grid">플래터 배치 규칙</a></p>
   <section class="sw-music-study">
     <h2 id="music-player">음악 위젯 · 눌러서 재생하기</h2>
     <p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2285-11190" target="_blank" rel="noopener">Figma · CDP와 6×6·6×8 영상형 보기 ↗</a> · <a href="../../tokens/music-player.json">음악 플레이어 규격</a></p>
-    <p>CDP 형태는 음악을 가져오는 방식과 별개예요. 앨범 커버를 CD에 넣고 커버의 주요 색을 본체에 밝게 적용합니다. 금속 테두리와 중앙 허브, 은은한 반사광을 함께 보여줍니다. 재생 시안은 누르면 회전하고 다시 누르면 멈춰요.</p>
+    <p>CDP 형태는 음악을 가져오는 방식과 별개예요. 앨범 커버를 CD에 넣고 커버의 주요 색을 본체에 밝게 적용해요. 금속 테두리와 중앙 허브, 은은한 반사광을 함께 보여줘요. 재생 시안은 누르면 회전하고 다시 누르면 멈춰요.</p>
     <p class="sw-case-note">6×6·6×8은 뮤직비디오를 표시해요. 그 외 크기에서 CD는 가로·세로 1:1로 표시하며 전체 원이 보이도록 배치해요. 중심 구멍은 외경의 12.5%, 투명 허브는 27.5%를 사용해요. <a href="https://ecma-international.org/wp-content/uploads/ECMA-130_2nd_edition_june_1996.pdf" target="_blank" rel="noopener">CD 치수 참고 ↗</a></p>
-    <p class="mp-spacing-rule">6 × 2는 곡 정보와 CD를 좌우로, 2 × 6은 CD·곡 정보·재생 표시를 위아래로 배치해요. 긴 형태의 안쪽 여백은 10px입니다. 2 × 6은 곡명 두 줄, 아티스트 한 줄, 출처 아이콘을 사용하며 하단에는 진행 시간을 표시합니다.</p><div id="music-player-lab" class="mp-lab"></div>
-    <div class="mp-motion-notes"><div><h3>재생 · 일시정지</h3><p>카드 전체를 눌러 전환해요. 다른 음악을 누르면 이전 곡은 멈춰요.</p></div><div><h3>확장 · 축소</h3><p>곡과 재생 위치를 유지해요. 6×6·6×8은 영상형으로 바뀌며 본체 색은 앨범 커버를 따릅니다.</p></div><div><h3>움직임 줄이기</h3><p>기기 설정에 맞춰 회전과 막대 움직임을 끄고 재생 상태를 글자로 보여줘요.</p></div></div>
+    <p class="mp-spacing-rule">6 × 2는 곡 정보와 CD를 좌우로, 2 × 6은 CD·곡 정보·재생 표시를 위아래로 배치해요. 긴 형태의 안쪽 여백은 10px예요. 2 × 6은 곡명 두 줄, 아티스트 한 줄, 출처 아이콘을 사용하며 하단에는 진행 시간을 표시해요.</p><div id="music-player-lab" class="mp-lab"></div>
+    <div class="mp-motion-notes"><div><h3>재생 · 일시정지</h3><p>카드 전체를 눌러 전환해요. 다른 음악을 누르면 이전 곡은 멈춰요.</p></div><div><h3>확장 · 축소</h3><p>곡과 재생 위치를 유지해요. 6×6·6×8은 영상형으로 바뀌며 본체 색은 앨범 커버를 따라요.</p></div><div><h3>움직임 줄이기</h3><p>기기 설정에 맞춰 회전과 막대 움직임을 끄고 재생 상태를 글자로 보여줘요.</p></div></div>
     <h2 id="music-album-cases">음악 · 9개 앨범 적용</h2>
     <p><a href="https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD/?node-id=2303-10592" target="_blank" rel="noopener">Figma · 검증한 앨범 9종 보기 ↗</a> · <a href="../../tokens/music-album-cases.json">앨범별 컬러 값</a></p>
-    <p>음악 위젯은 앨범 커버가 담긴 CD와 그 앨범의 색을 닮은 본체로 구성했어요. 402px 화면 기준 정사각·가로형·세로형을 비교해보세요. CD는 항상 1:1이며, 곡명과 아티스트는 편집 가능한 텍스트로 유지합니다.</p>
-    <p class="sw-context-note">직접 제공한 커버로 만든 디자인 예시입니다. 서비스에서 내려받은 데이터나 실제 재생 상태를 뜻하지 않습니다.</p>
-    <div class="sw-album-cases"></div><h2>6×6·6×8 · 뮤직비디오</h2><p>영상 포스터는 별도로 지정하고 본체 색상은 앨범에서 가져옵니다. MV가 연결되지 않은 경우에는 앨범 커버를 표시합니다. 별도 재생 버튼과 하단 원형 버튼 줄은 사용하지 않습니다.</p><div class="sw-music-video-cases" style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start"></div>
-    <h2 id="music-service-examples">이전 서비스 연결 참고</h2><p>현재 지원 기준은 YouTube입니다. 아래 다중 서비스 화면은 이전 비교 자료입니다.</p>
+    <p>음악 위젯은 앨범 커버가 담긴 CD와 그 앨범의 색을 닮은 본체로 구성했어요. 402px 화면 기준 정사각·가로형·세로형을 비교해보세요. CD는 항상 1:1이며, 곡명과 아티스트는 편집 가능한 텍스트로 유지해요.</p>
+    <p class="sw-context-note">직접 제공한 커버로 만든 디자인 예시예요. 서비스에서 내려받은 데이터나 실제 재생 상태를 뜻하지 않아요.</p>
+    <div class="sw-album-cases"></div><h2>6×6·6×8 · 뮤직비디오</h2><p>영상 포스터는 별도로 지정하고 본체 색상은 앨범에서 가져와요. MV가 연결되지 않은 경우에는 앨범 커버를 표시해요. 별도 재생 버튼과 하단 원형 버튼 줄은 사용하지 않아요.</p><div class="sw-music-video-cases" style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start"></div>
+    <h2 id="music-service-examples">이전 서비스 연결 참고</h2><p>현재 지원 기준은 YouTube예요. 아래 다중 서비스 화면은 이전 비교 자료예요.</p>
     <p>커버와 음악 정보의 구성은 유지하고, 연결한 서비스 표시와 도착 위치를 명확하게 보여줘요.</p>
     <p class="sw-demo-label">연동 UI 데모 · API 계정 미연결 · 음악 재생 없음</p>
     <div class="sw-service-controls"><div class="sw-service-tabs" role="group" aria-label="음악 서비스 선택"></div><label>상태 <select id="sw-service-state"><option value="ready">연결 완료 예시</option><option value="loading">불러오는 중</option><option value="auth">연결 필요</option><option value="unavailable">이용 불가</option></select></label></div>
     <div class="sw-service-stage" aria-live="polite"></div><p class="sw-service-feedback" role="status"></p>
   </section>
-  <h2>실제 플래터에서 보기</h2><p>음악은 앨범에서 추출한 색상, 메모는 14px 본문, 폴라로이드는 종이 여백을 사용합니다. 공통 Floating 음영은 바깥 표면에만 적용합니다.</p><div class="sw-contexts"></div><p class="sw-context-note">GIF와 기분은 별도 위젯입니다. 기분·방명록·플레이리스트는 새 구조로 제안합니다. 미디어는 기존 시안의 예시이며 GIF·영상은 정적 예시이며 음악은 눌러서 무음 모션을 확인할 수 있습니다. 실제 오디오 테스트는 위의 음악 플레이어에서 가능합니다.</p><h2>새로 정립한 위젯</h2><p>기분은 상태와 짧은 기록, 방명록은 친구의 메시지, 플레이리스트는 커버와 곡 목록에 집중합니다. 앱의 방명록 타일은 최근 안부와 ‘from. 이름 · 안부 남기기’로 그려요 — <a href="#widget-guestbook">방명록 규격</a>.</p><div class="sw-new-widgets"></div><h2>유형별 크기와 구성</h2>
-  <p>숫자는 <strong>가로 칸 × 세로 칸</strong>입니다. 화면 폭을 바꿔도 글자와 출처 영역은 일정한 크기를 유지합니다.</p>
+  <h2>실제 플래터에서 보기</h2><p>음악은 앨범에서 추출한 색상, 메모는 14px 본문, 폴라로이드는 종이 여백을 사용해요. 공통 Floating 음영은 바깥 표면에만 적용해요.</p><div class="sw-contexts"></div><p class="sw-context-note">GIF와 기분은 별도 위젯이에요. 기분·방명록·플레이리스트는 새 구조로 제안해요. 미디어는 기존 시안의 예시이며 GIF·영상은 정적 예시이며 음악은 눌러서 무음 모션을 확인할 수 있어요. 실제 오디오 테스트는 위의 음악 플레이어에서 가능해요.</p><h2>새로 정립한 위젯</h2><p>기분은 상태와 짧은 기록, 방명록은 친구의 메시지, 플레이리스트는 커버와 곡 목록에 집중해요. 앱의 방명록 타일은 최근 안부와 ‘from. 이름 · 안부 남기기’로 그려요 — <a href="#widget-guestbook">방명록 규격</a>.</p><div class="sw-new-widgets"></div><h2>유형별 크기와 구성</h2>
+  <p>숫자는 <strong>가로 칸 × 세로 칸</strong>이에요. 화면 폭을 바꿔도 글자와 출처 영역은 일정한 크기를 유지해요.</p>
   <div class="sw-controls">
     <label>위젯 종류 <select id="sw-family"></select></label>
     <label>화면 폭 <input id="sw-viewport" type="range" min="320" max="620" step="1" value="402"><output id="sw-viewport-value" for="sw-viewport">402px</output></label>
@@ -1817,33 +1965,33 @@
   <div class="sw-artwork-controls"><strong>앨범에 맞춰 색상 바꾸기</strong><div class="sw-album-selector" role="group" aria-label="샘플 앨범 선택"></div><label>내 앨범 이미지 <input id="sw-album-upload" type="file" accept="image/*"></label><span id="sw-album-status" role="status"></span><label><input id="sw-long-text" type="checkbox"> 긴 질문·답변 보기</label></div>
   <p id="sw-rule"></p><p id="sw-result" role="status" aria-live="polite"></p>
   <div class="sw-gallery" aria-label="크기별 위젯 예시"></div>
-  <details class="mp-research"><summary>음악 배경과 서비스별 적용 기준</summary><p>앨범 선택에 따라 CD 커버와 본체 색이 함께 달라집니다. 사각 썸네일과 서비스 출처도 유지합니다.</p><ul><li><a href="https://developer.spotify.com/documentation/design" target="_blank" rel="noopener">Spotify</a>: 커버와 출처를 표시하고 Spotify 링크로 이동합니다.</li><li><a href="https://marketing.services.apple/apple-music-identity-guidelines" target="_blank" rel="noopener">Apple Music</a>: 앱 내 콘텐츠 링크는 서비스 아이콘과 전체 이름을 표시합니다. 마케팅용 공식 배지와 앱 내 출처 라벨은 구분합니다. 재생은 MusicKit 연결 후 제공합니다.</li><li><a href="https://developers.google.com/youtube/terms/developer-policies" target="_blank" rel="noopener">YouTube Music</a>: 공유된 음악 링크로 이동합니다. YouTube Data API 응답을 전용 음악 재생 API로 표시하거나 숨겨진 오디오 재생으로 연결하지 않습니다.</li></ul></details><h2>외부 서비스 배지</h2><p>높이 22px · 아이콘 14px · 글자 11px · 모서리 6px · 가장자리 여백 8px. 충분한 폭에서는 서비스명과 ↗를, 작은 카드에서는 아이콘과 ↗를 표시합니다. GIF는 파일 형식이므로 외부 이동 화살표와 구분합니다.</p><div class="sw-badge-examples"></div><div class="mp-service-badge-examples" aria-label="음악 서비스 외부 이동 표시"></div><p>음악 서비스는 22px 행 안에 서비스명과 ↗를 표시합니다. Spotify 아이콘은 최소 21px와 주변 11px 여백을 확보해요. 음악 재생형은 위젯을 눌러 재생·일시정지하고, 링크형은 위젯 전체를 눌러 서비스에서 엽니다. 링크형에는 재생 표시를 붙이지 않아요.</p><p>배지는 도착 위치를 알려주는 표시입니다. 별도 작은 버튼으로 만들지 않고 위젯 전체를 눌러 이동합니다. 사진·GIF의 Ditto 배지는 우측 상단, 글자가 있는 위젯의 Ditto 배지는 출처 영역 우측에 배치합니다. 사진·영상의 서비스 배지는 우측 하단에 배치하고, 음악의 출처는 곡명·아티스트 아래에 정렬해요.</p>
-  <h2>글자와 긴 콘텐츠</h2><p>본문 14px / 행간 20px, 제목 14px, 보조 정보 11px를 유지합니다. 질문은 120자, 답변은 500자까지 입력할 수 있으며 카드에서는 질문 최대 3줄·답변 최대 6줄까지만 보이고 나머지는 말줄임합니다. 실제 앱에서는 전체 내용을 상세 화면에서 보여주도록 설계합니다. 이 페이지는 말줄임을 확인하는 예시입니다.</p>
+  <details class="mp-research"><summary>음악 배경과 서비스별 적용 기준</summary><p>앨범 선택에 따라 CD 커버와 본체 색이 함께 달라져요. 사각 썸네일과 서비스 출처도 유지해요.</p><ul><li><a href="https://developer.spotify.com/documentation/design" target="_blank" rel="noopener">Spotify</a>: 커버와 출처를 표시하고 Spotify 링크로 이동해요.</li><li><a href="https://marketing.services.apple/apple-music-identity-guidelines" target="_blank" rel="noopener">Apple Music</a>: 앱 내 콘텐츠 링크는 서비스 아이콘과 전체 이름을 표시해요. 마케팅용 공식 배지와 앱 내 출처 라벨은 구분해요. 재생은 MusicKit 연결 후 제공해요.</li><li><a href="https://developers.google.com/youtube/terms/developer-policies" target="_blank" rel="noopener">YouTube Music</a>: 공유된 음악 링크로 이동해요. YouTube Data API 응답을 전용 음악 재생 API로 표시하거나 숨겨진 오디오 재생으로 연결하지 않아요.</li></ul></details><h2>외부 서비스 배지</h2><p>높이 22px · 아이콘 14px · 글자 11px · 모서리 6px · 가장자리 여백 8px. 충분한 폭에서는 서비스명과 ↗를, 작은 카드에서는 아이콘과 ↗를 표시해요. GIF는 파일 형식이므로 외부 이동 화살표와 구분해요.</p><div class="sw-badge-examples"></div><div class="mp-service-badge-examples" aria-label="음악 서비스 외부 이동 표시"></div><p>음악 서비스는 22px 행 안에 서비스명과 ↗를 표시해요. Spotify 아이콘은 최소 21px와 주변 11px 여백을 확보해요. 음악 재생형은 위젯을 눌러 재생·일시정지하고, 링크형은 위젯 전체를 눌러 서비스에서 열어요. 링크형에는 재생 표시를 붙이지 않아요.</p><p>배지는 도착 위치를 알려주는 표시예요. 별도 작은 버튼으로 만들지 않고 위젯 전체를 눌러 이동해요. 사진·GIF의 Ditto 배지는 우측 상단, 글자가 있는 위젯의 Ditto 배지는 출처 영역 우측에 배치해요. 사진·영상의 서비스 배지는 우측 하단에 배치하고, 음악의 출처는 곡명·아티스트 아래에 정렬해요.</p>
+  <h2>글자와 긴 콘텐츠</h2><p>본문 14px / 행간 20px, 제목 14px, 보조 정보 11px를 유지해요. 질문은 120자, 답변은 500자까지 입력할 수 있으며 카드에서는 질문 최대 3줄·답변 최대 6줄까지만 보이고 나머지는 말줄임해요. 실제 앱에서는 전체 내용을 상세 화면에서 보여주도록 설계해요. 이 페이지는 말줄임을 확인하는 예시예요.</p>
   <h2>공통 사이즈 12종</h2>
-  <p>402px 화면 기준입니다. 가로 8칸, 좌우 여백 16px, 위젯 사이 간격 8px을 공유합니다. 아래 도형은 크기를 비교하기 위해 축소했습니다.</p>
+  <p>402px 화면 기준이에요. 가로 8칸, 좌우 여백 16px, 위젯 사이 간격 8px을 공유해요. 아래 도형은 크기를 비교하기 위해 축소했어요.</p>
   <div class="sw-atlas"></div>
   <h2>유형별 허용 크기</h2>
-  <p>작은 크기에서 읽기 어려운 유형은 허용 목록에서 제외했습니다. 비율을 억지로 늘리지 않고 내용 배치를 바꿉니다.</p>
+  <p>작은 크기에서 읽기 어려운 유형은 허용 목록에서 제외했어요. 비율을 억지로 늘리지 않고 내용 배치를 바꿔요.</p>
   <div style="overflow-x:auto" tabindex="0" role="region" aria-label="위젯 유형별 크기 표">
     <table class="sw-matrix"><thead><tr><th scope="col">유형</th><th scope="col">가로 × 세로 칸</th><th scope="col">내용 배치</th></tr></thead><tbody></tbody></table>
   </div>
   <h2>Ditto로 가져온 위젯</h2>
-  <p>사진 위젯을 기준으로 4×4, 6×4, 4×6, 6×6, 6×8의 5개 크기를 정리했습니다. 위의 ‘Ditto 출처 표시’를 켜면 직접 비교할 수 있습니다.</p>
+  <p>사진 위젯을 기준으로 4×4, 6×4, 4×6, 6×6, 6×8의 5개 크기를 정리했어요. 위의 ‘Ditto 출처 표시’를 켜면 직접 비교할 수 있어요.</p>
   <div class="sw-notes">
-    <div><h3>출처는 하단에 고정</h3><p>높이 52px · 아바타 28px · 이름 13px · 출처 11px. 좁은 카드는 아이디와 출처를 두 줄로 나눕니다.</p></div>
-    <div><h3>아이콘은 하나의 원본</h3><p>디자인 시스템의 앱 아이콘 벡터를 사용합니다. 사진 위 배지는 32px이며, 기존 앱 아이콘과 얕은 내부 음영을 함께 유지합니다.</p></div>
-    <div><h3>배지와 액션을 구분</h3><p>출처 배지는 상태 표시입니다. 실제 Ditto 액션은 <a href="#ditto-action">로고와 문구가 있는 긴 버튼</a>을 3초간 눌러 실행합니다. 작은 배지에는 액션을 넣지 않습니다.</p></div>
+    <div><h3>출처는 하단에 고정</h3><p>높이 52px · 아바타 28px · 이름 13px · 출처 11px. 좁은 카드는 아이디와 출처를 두 줄로 나눠요.</p></div>
+    <div><h3>아이콘은 하나의 원본</h3><p>디자인 시스템의 앱 아이콘 벡터를 사용해요. 사진 위 배지는 32px이며, 기존 앱 아이콘과 얕은 내부 음영을 함께 유지해요.</p></div>
+    <div><h3>배지와 액션을 구분</h3><p>출처 배지는 상태 표시예요. 실제 Ditto 액션은 <a href="#ditto-action">로고와 문구가 있는 긴 버튼</a>을 3초간 눌러 실행해요. 작은 배지에는 액션을 넣지 않아요.</p></div>
   </div>
-  <p class="desc">웹 예시와 Figma 위젯 가이드를 같은 구성으로 정리했어요. Figma 문구는 Pretendard 텍스트로 직접 수정할 수 있어요. 네이티브 앱의 허용 크기와 동작은 별도 구현 대상입니다.</p>
+  <p class="desc">웹 예시와 Figma 위젯 가이드를 같은 구성으로 정리했어요. Figma 문구는 Pretendard 텍스트로 직접 수정할 수 있어요. 네이티브 앱의 허용 크기와 동작은 별도 구현 대상이에요.</p>
   <p>참고: <a href="https://picocam.app/" target="_blank" rel="noopener">Picocam 즉석사진</a> · <a href="https://developer.apple.com/documentation/applemusicapi/artwork" target="_blank" rel="noopener">Apple Music 앨범 색상 정보</a></p>
-  <noscript>적용 예시를 보려면 JavaScript를 켜 주세요. 유형별 규격은 디자인 토큰 JSON에서도 확인할 수 있습니다.</noscript>
+  <noscript>적용 예시를 보려면 JavaScript를 켜 주세요. 유형별 규격은 디자인 토큰 JSON에서도 확인할 수 있어요.</noscript>
 </article>
 
 <!-- ═══════════ 위젯 카탈로그와 추가 (2026-10-12 · 앱 origin/main 기준) ═══════════ -->
 <article class="page content-max" id="page-widget-catalog" hidden>
   <div class="crumb">Splup / 컴포넌트</div>
   <h1>위젯 추가와 편집</h1>
-  <p class="desc">위젯 추가 시트에서 고를 수 있는 위젯, 카드 규격, 모든 위젯이 함께 쓰는 작성 화면과 플래터 편집 도구를 정리했어요. 이미지는 모두 실제 앱 화면이에요.</p>
+  <p class="desc">위젯 추가 시트에서 고를 수 있는 위젯, 카드 규격, 모든 위젯이 함께 쓰는 작성 화면과 플래터 편집 도구를 정리했어요. 이미지는 실제 앱 화면이에요.</p>
   <p class="wa-note">기준: 앱 소스 <code>AddWidgetSheet.swift</code> · <code>PlatterAddSheet.swift</code> · <code>WidgetFrame.swift</code> · <code>GridEngine.swift</code>. 1.0 출시 위젯은 15종이에요(<code>WType.launchSet</code>). 그 밖의 위젯은 ‘곧 열려요’로 잠겨 있어요. <a href="../../tokens/widget-add-sheet.json">추가 시트 규격 JSON</a></p>
 
   <h2 id="widget-catalog-groups">위젯 목록 · 네 묶음</h2>
@@ -1880,7 +2028,7 @@
     </tbody></table></div>
 
   <h2 id="widget-composer">작성 화면 · 모든 위젯이 같은 순서</h2>
-  <p>위젯을 고르면 전체 화면 작성 화면이 열려요. 위젯마다 입력 칸은 다르지만 순서는 같아요.</p>
+  <p>위젯을 고르면 전체 화면 작성 화면이 열려요. 위젯마다 입력 칸은 다르지만 순서는 같아요. 입력 칸과 글자 수는 <a href="#inputs">텍스트 입력</a>, 사진 고르기는 <a href="#photo-picker">이미지 셀렉터</a>를 따라요.</p>
   <ol class="wa-steps">
     <li><b>상단 바 · ‘{종류} 위젯 추가’</b><span>뒤로 가면 위젯 추가 시트로 돌아가요.</span></li>
     <li><b>크기 칩 (고정)</b><span>상단 바 바로 아래에 고정돼요. 칩 58×66 · 간격 8 · 모서리 14. 고른 칩만 흰 카드 + 진한 굵은 글씨(12/700)와 옅은 그림자, 나머지는 바탕 위 회색 비율 글리프. 칩 수와 관계없이 가로로 넘기고, 양끝 5%는 흐리게 사라져요. 열릴 때와 고를 때 선택 칩이 가운데로 와요. 처음 크기는 위젯별 기본 크기예요.</span></li>
@@ -1908,30 +2056,6 @@
   <h3>수정할 때</h3>
   <p>플래터에서 ‘수정’을 누르면 같은 입력 칸을 시트로 열어요. 머리는 왼쪽 닫기 + 가운데 ‘{종류} 위젯 수정’, 하단 버튼은 ‘수정 완료’예요. 추가 화면과 같은 크기 칩과 미리보기를 갖고, 현재 크기에서 시작해요. 자리에 맞지 않으면 저장할 때 알려요. 바꾼 내용이 있으면 끌어내리거나 닫아도 바로 닫히지 않고 ‘변경사항을 저장하지 않고 닫을까요?’를 물어요(변경사항 버리기 · 계속 수정하기). 이미 디토된 위젯은 내용을 수정할 수 없어요.</p>
 
-  <h3 id="widget-char-counter">글자 수 표시</h3>
-  <p>글자 수 한도가 있는 모든 입력 칸은 칸 안 오른쪽에 <code>DSCharCounter</code>를 둬요. ‘7/18’ 형식, 12/400(captionMd) · 보조 글자색 · 고정폭 숫자. 한도를 넘는 글자는 입력되지 않아요. 스크린 리더는 ‘18자 중 7자’로 읽어요. 새 입력 칸도 같은 표시를 써요.</p>
-  <div class="tbl-scroll"><table>
-    <thead><tr><th>입력 칸</th><th>한도</th></tr></thead>
-    <tbody>
-      <tr><td>이미지 · 사진 위 글</td><td>18</td></tr>
-      <tr><td>텍스트</td><td>300</td></tr>
-      <tr><td>상태 · 한 줄</td><td>10 · 한도에서 더 치면 약한 진동</td></tr>
-      <tr><td>소셜 · 핸들 / 표시 제목</td><td>18 / 18</td></tr>
-      <tr><td>영상 제목</td><td>50</td></tr>
-      <tr><td>D-Day · 무슨 날</td><td>12</td></tr>
-      <tr><td>방명록 제목 · 안부</td><td>12 · 200</td></tr>
-      <tr><td>플레이리스트 이름</td><td>16</td></tr>
-    </tbody></table></div>
-
-  <h3 id="widget-photo-picker">사진 고르기 · 공통 이미지 셀렉터</h3>
-  <p>사진을 고르는 모든 화면(이미지 위젯 · 음악 커버 · 포스트 · 프로필 편집 · 온보딩 · Together · 스티커 보드 배경)이 같은 셀렉터 하나를 전체 화면으로 열어요(<code>DittoPhotoPicker</code>, Figma ED_toolbar_uploadimg).</p>
-  <ol class="wa-steps">
-    <li><b>앨범 격자</b><span>[✕] 앨범 이름 ⌄ [다음] · All / Photos 탭 · 4열 정사각 썸네일. 고른 순서대로 보라 원에 번호를 붙여요.</span></li>
-    <li><b>아래 트레이</b><span>여러 장을 고를 때 고른 사진을 64 썸네일 + ✕로 모아 보여줘요.</span></li>
-    <li><b>한도 알림</b><span>‘이미지는 최대 N개까지 선택할 수 있어요.’ [확인]</span></li>
-    <li><b>비율 자르기</b><span>[‹] 앨범 이름 [추가] · 고른 사진을 가로로 넘기며 3분할 격자로 맞춰요. 비율 Auto · 1:1 · 3:4 · 4:3 · 16:9 · 9:16.</span></li>
-  </ol>
-
   <h2 id="widget-edit-chrome">플래터 편집 도구</h2>
   <p>편집 중인 위젯에는 세 가지 도구만 붙어요. 편집 중 ‘대표로 ↑’ 라벨은 없앴어요(2026-10-11). 대표·라이프 이동은 위젯 수정·관리에서 해요.</p>
   <div class="wa-shots wide"><figure><img src="widget-assets/app/edit-home.jpg" alt="플래터 편집 중인 위젯. 오른쪽 위 삭제, 왼쪽 아래 수정, 오른쪽 아래 크기 조절 핸들" width="720" height="478" loading="lazy"><figcaption><b>편집 중인 위젯</b>삭제 · 수정 · 크기 조절</figcaption></figure></div>
@@ -1952,22 +2076,7 @@
       <tr><td>그 밖의 위젯</td><td><code>min(20, 12 + (짧은 변 칸 − 2) × 2)</code> → 2칸 12 · 3칸 14 · 4칸 16 · 6칸 이상 20</td></tr>
     </tbody></table></div>
 
-  <h2 id="widget-guestbook">방명록</h2>
-  <p>방명록은 서버에 저장돼요. 친구 누구나 안부를 남길 수 있고, 답글은 주인만 달 수 있어요.</p>
-  <div class="wa-shots">
-    <figure><img src="widget-assets/app/guest-tile.jpg" alt="플래터의 방명록 위젯. 최근 안부 글과 from. 지민 · 안부 남기기" width="720" height="645" loading="lazy" style="max-width:360px;border-radius:14px"><figcaption><b>플래터 타일</b>가장 최근 안부 + ‘from. 이름 · 안부 남기기’</figcaption></figure>
-    <figure><img src="widget-assets/app/guest-detail.jpg" alt="방명록 상세. 방명록과 롤링페이퍼 탭, 안부와 주인의 답글, 답글 수정, 안부 남기기 버튼" width="540" height="1174" loading="lazy"><figcaption><b>상세</b>방명록 · 롤링페이퍼 탭, 답글, ‘안부 남기기’</figcaption></figure>
-  </div>
-  <div class="tbl-scroll"><table>
-    <thead><tr><th>상태</th><th>타일</th><th>상세</th></tr></thead>
-    <tbody>
-      <tr><td>안부 없음</td><td>‘첫 안부를 기다려요. 짧은 한 줄을 남겨봐.’ · 아래 ‘첫 안부를 남겨봐’</td><td>‘첫 안부를 기다리고 있어요’ · ‘짧은 한 줄도 오래 남는 마음이 돼요.’</td></tr>
-      <tr><td>안부 있음</td><td>최근 안부(종이색 #FAF6ED 상자) · 제목 · ‘from. 이름 · 안부 남기기’</td><td>작성자(아바타 28) · 시간 · 글 · 주인의 답글 상자</td></tr>
-      <tr><td>답글</td><td>—</td><td>주인에게만 ‘답글 쓰기’/‘답글 수정’(터치 44). 저장 중이거나 이전 데이터인 안부에는 답글을 달 수 없어요</td></tr>
-      <tr><td>쓰기</td><td>타일을 누르면 상세</td><td>시트 ‘안부 남기기’/‘답글 쓰기’ · 최대 200자 · 빈 글은 저장 안 됨</td></tr>
-    </tbody></table></div>
-  <p>타일 글자 수는 크기에 따라 달라요. 높이 150 미만은 2줄, 좁은 세로형은 6줄, 그 밖에는 3줄까지 보여요. 크기는 공통 12종을 모두 쓸 수 있어요. 친구 위젯 시트에도 최근 안부 4개를 미리 보여줘요.</p>
-  <div class="docs-related"><span>함께 보기</span><a href="#widget-todo">To-do 위젯 →</a><a href="#widget-ditto">디토 허용 규칙 →</a><a href="#widget-system">위젯 크기와 구성 →</a></div>
+  <div class="docs-related"><span>함께 보기</span><a href="#inputs">텍스트 입력 →</a><a href="#photo-picker">이미지 셀렉터 →</a><a href="#widget-ditto">디토 허용 규칙 →</a><a href="#widget-guestbook">방명록 위젯 →</a></div>
 </article>
 
 <!-- ═══════════ To-do (W-13 · 2026-10-11 재설계) ═══════════ -->
@@ -2047,6 +2156,28 @@
     <div><h3>Do</h3><ul><li>기록은 색 배지로만 보여줘요.</li><li>체크·배지·칩은 같은 카테고리 색을 써요.</li><li>잘려도 카테고리 칩만 남기지 말고 칩과 첫 행을 함께 보여줘요.</li><li>친구의 To-do는 읽기 전용 시트로 열어요.</li></ul></div>
     <div class="no"><h3>Don’t</h3><ul><li>완료율, ‘3/5’, 진행 막대, 연속 기록 숫자를 넣지 마세요.</li><li>다섯 가지 밖의 색이나 사용자 지정 색을 쓰지 마세요.</li><li>디토 허용 토글이나 디토 배지를 붙이지 마세요.</li><li>투두 완료를 피드 소식으로 만들지 마세요.</li></ul></div>
   </div>
+</article>
+
+<article class="page content-max" id="page-widget-guestbook" hidden>
+  <div class="crumb">위젯 / 방명록 위젯</div>
+  <h1>방명록 위젯</h1>
+  <p class="desc">친구가 남긴 안부에 주인이 답글을 달아요. 안부는 서버에 저장되고, 친구 누구나 남길 수 있어요. 디토할 수 없어요.</p>
+  <p class="wa-note">기준: <code>GuestbookContent.swift</code>. 안부·답글은 최대 200자예요.</p>
+  <h2 id="guestbook-tile-detail">타일과 상세</h2>
+  <div class="wa-shots">
+    <figure><img src="widget-assets/app/guest-tile.jpg" alt="플래터의 방명록 위젯. 최근 안부 글과 from. 지민 · 안부 남기기" width="720" height="645" loading="lazy" style="max-width:360px;border-radius:14px"><figcaption><b>플래터 타일</b>가장 최근 안부 + ‘from. 이름 · 안부 남기기’</figcaption></figure>
+    <figure><img src="widget-assets/app/guest-detail.jpg" alt="방명록 상세. 방명록과 롤링페이퍼 탭, 안부와 주인의 답글, 답글 수정, 안부 남기기 버튼" width="540" height="1174" loading="lazy"><figcaption><b>상세</b>방명록 · 롤링페이퍼 탭, 답글, ‘안부 남기기’</figcaption></figure>
+  </div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>상태</th><th>타일</th><th>상세</th></tr></thead>
+    <tbody>
+      <tr><td>안부 없음</td><td>‘첫 안부를 기다려요. 짧은 한 줄을 남겨봐.’ · 아래 ‘첫 안부를 남겨봐’</td><td>‘첫 안부를 기다리고 있어요’ · ‘짧은 한 줄도 오래 남는 마음이 돼요.’</td></tr>
+      <tr><td>안부 있음</td><td>최근 안부(종이색 #FAF6ED 상자) · 제목 · ‘from. 이름 · 안부 남기기’</td><td>작성자(아바타 28) · 시간 · 글 · 주인의 답글 상자</td></tr>
+      <tr><td>답글</td><td>—</td><td>주인에게만 ‘답글 쓰기’/‘답글 수정’(터치 44). 저장 중이거나 이전 데이터인 안부에는 답글을 달 수 없어요</td></tr>
+      <tr><td>쓰기</td><td>타일을 누르면 상세</td><td>시트 ‘안부 남기기’/‘답글 쓰기’ · 최대 200자 · 빈 글은 저장 안 됨</td></tr>
+    </tbody></table></div>
+  <p>타일 글자 수는 크기에 따라 달라요. 높이 150 미만은 2줄, 좁은 세로형은 6줄, 그 밖에는 3줄까지 보여요. 크기는 공통 12종을 모두 쓸 수 있어요. 친구 위젯 시트에도 최근 안부 4개를 미리 보여줘요.</p>
+  <div class="docs-related"><span>함께 보기</span><a href="#widget-catalog">위젯 추가와 편집 →</a><a href="#widget-ditto">디토 허용 규칙 →</a></div>
 </article>
 
 <!-- ═══════════ 디토 허용 규칙 ═══════════ -->
@@ -2135,7 +2266,7 @@
   </div>
 </article>
 
-<footer class="docs-footer"><span>Splup · 디자인 가이드</span><a href="#roadmap">반영 상태 확인</a></footer>
+<footer class="docs-footer"><span>Splup · 디자인 가이드</span><a href="#roadmap">변경 기록</a></footer>
 </main>
 
 <aside class="toc" id="toc">
@@ -2146,7 +2277,7 @@
 
 <script>
   (function () {
-    var pages = ["widget-system", "widget-catalog", "widget-todo", "widget-ditto", "profile-avatars", "profile-handles", "foundations", "components", "patterns", "resources", "overview", "colorgraphy", "color", "brand-graphics", "color-application", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "og-images", "roadmap"];
+    var pages = ["widget-system", "widget-catalog", "widget-todo", "widget-ditto", "widget-guestbook", "profile-avatars", "profile-handles", "foundations", "components", "widgets", "patterns", "brand", "resources", "overview", "color", "brand-graphics", "color-application", "ditto-action", "inputs", "photo-picker", "navigation", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "og-images", "roadmap"];
     var tocEl = document.getElementById("toc");
     var tocList = document.getElementById("tocList");
     var mobileToc = document.getElementById("mobileToc");
@@ -2208,17 +2339,18 @@
 
     /* notebook 구조: 헤더 내비 = 섹션, 사이드바 = 활성 섹션의 트리만 */
     var GROUP = {
-      "profile-avatars": "colorgraphy", "profile-handles": "components", overview: "start", roadmap: "migration", foundations: "foundations", components: "components", patterns: "brand", resources: "reference", colorgraphy: "colorgraphy",
-      color: "colorgraphy", "brand-graphics": "colorgraphy", "color-application": "colorgraphy", "ditto-action": "components", typography: "foundations", spacing: "foundations",
-      radius: "foundations", motion: "foundations", interaction: "foundations",
-      zindex: "foundations", darkmode: "foundations", grid: "brand",
-      buttons: "components", "widget-system": "components", "widget-catalog": "components", "widget-todo": "components", "widget-ditto": "components",
-      voice: "brand", writing: "brand", assets: "reference",
-      mapping: "reference", audit: "migration", backlog: "migration",
-      tokens: "reference", "og-images": "reference"
+      overview: "start",
+      foundations: "foundations", color: "foundations", "color-application": "foundations", typography: "foundations", spacing: "foundations",
+      radius: "foundations", motion: "foundations", interaction: "foundations", zindex: "foundations", darkmode: "foundations",
+      components: "components", buttons: "components", "ditto-action": "components", inputs: "components", "photo-picker": "components",
+      navigation: "components", "profile-handles": "components", "profile-avatars": "components",
+      widgets: "widgets", "widget-system": "widgets", grid: "widgets", "widget-catalog": "widgets", "widget-ditto": "widgets", "widget-todo": "widgets", "widget-guestbook": "widgets",
+      patterns: "writing", voice: "writing", writing: "writing",
+      brand: "brand", "brand-graphics": "brand", assets: "brand", "og-images": "brand",
+      resources: "reference", tokens: "reference", mapping: "reference", roadmap: "reference", audit: "reference", backlog: "reference"
     };
-    var GROUP_HOME = { start: "overview", colorgraphy: "colorgraphy", foundations: "foundations", components: "components", brand: "patterns", reference: "resources", migration: "roadmap" };
-    var GROUP_NAME = { colorgraphy: "컬러", foundations: "기본 규칙", components: "컴포넌트", brand: "적용 방법", reference: "자료", migration: "변경 기록" };
+    var GROUP_HOME = { start: "overview", foundations: "foundations", components: "components", widgets: "widgets", writing: "patterns", brand: "brand", reference: "resources" };
+    var GROUP_NAME = { foundations: "파운데이션", components: "컴포넌트", widgets: "위젯", writing: "글쓰기", brand: "브랜드", reference: "자료" };
     pages.forEach(function (id) {
       var group = GROUP[id], home = GROUP_HOME[group];
       if (!home || id === home) return;
@@ -2242,11 +2374,10 @@
           ancestor = ancestor.parentElement;
         }
       }
-      var dittoAlias = id === "ditto-action";
+      if (id === "colorgraphy") id = "color";   // 예전 컬러 목차 주소 (2026-10-19 컬러 기준에 합침)
       var multiPaletteAlias = id === "multi-palette";
       var colorAnchor = ["color-overview", "color-roles", "color-palette"].indexOf(id) !== -1 ? id : null;
       if (colorAnchor) id = "color";
-      if (dittoAlias) id = "color-application";
       if (multiPaletteAlias) id = "brand-graphics";
       if (pages.indexOf(id) === -1) id = "overview";
       pages.forEach(function (p) {
@@ -2272,7 +2403,6 @@
       window.scrollTo(0, 0);
       if (targetHeading) requestAnimationFrame(function () { targetHeading.scrollIntoView({ block: "start", behavior: "auto" }); });
       if (colorAnchor) requestAnimationFrame(function () { document.getElementById(colorAnchor)?.scrollIntoView({ block: "start" }); });
-      if (dittoAlias) requestAnimationFrame(function () { document.getElementById("ditto-long-press")?.scrollIntoView({ block: "start" }); });
       if (multiPaletteAlias) requestAnimationFrame(function () { document.getElementById("multi-palette")?.scrollIntoView({ block: "start" }); });
     }
     window.addEventListener("hashchange", function () { show(location.hash.slice(1), true); });
@@ -2428,7 +2558,7 @@
     function addWidget(w, h) {
       if (widgets.length >= CAP) { say("플래터당 위젯은 10개까지예요 (디토 위젯 제외 카운트) — 앱에서는 안내 시트가 떠요."); return; }
       var spot = findFree(w, h, -1);
-      if (!spot) { say("빈 자리가 없어요 — findFree(행 우선 스캔)가 슬롯을 찾지 못했습니다."); return; }
+      if (!spot) { say("빈 자리가 없어요 — findFree(행 우선 스캔)가 슬롯을 찾지 못했어요."); return; }
       var wg = { id: seq++, x: spot.x, y: spot.y, w: w, h: h, color: palette[seq % palette.length] };
       var el = document.createElement("div");
       el.className = "widget";

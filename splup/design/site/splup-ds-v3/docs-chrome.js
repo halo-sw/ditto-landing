@@ -13,15 +13,15 @@
 
   /* ── Sidebar: one list per header section ── */
   var SECTIONS = [
-    { group: "colorgraphy", home: "colorgraphy", extra: ["profile-avatars"] },
     { group: "foundations", home: "foundations" },
     { group: "components", home: "components" },
-    { group: "brand", home: "patterns" },
-    { group: "reference", home: "resources" },
-    { group: "migration", home: "roadmap", extra: ["audit", "backlog"] }
+    { group: "widgets", home: "widgets" },
+    { group: "writing", home: "patterns" },
+    { group: "brand", home: "brand" },
+    { group: "reference", home: "resources" }
   ];
   /* Pages that render inside another page's article (aliases in the router). */
-  var ALIAS = { "ditto-action": "color-application", "multi-palette": "brand-graphics" };
+  var ALIAS = { "multi-palette": "brand-graphics" };
   function pageTitle(id) {
     var h = document.querySelector("#page-" + id + " h1");
     return h ? h.textContent.trim() : id;
@@ -107,11 +107,13 @@
     color: ["purple", "swatches"], "color-application": ["night", "ditto"], "brand-graphics": ["pink", "blob"], "profile-avatars": ["peri", "avatar"],
     typography: ["deep", "type"], spacing: ["lemon", "bars"], radius: ["pink", "stack"], motion: ["sky", "motion"], interaction: ["purple", "press"],
     zindex: ["coral", "stack"], darkmode: ["night", "halves"],
-    "profile-handles": ["peri", "avatar"], buttons: ["mint", "press"], "ditto-action": ["purple", "ditto"], "widget-system": ["pink", "grid"],
+    "profile-handles": ["pink", "avatar"], buttons: ["mint", "press"], "ditto-action": ["purple", "ditto"], "widget-system": ["pink", "grid"],
     grid: ["lemon", "grid"], voice: ["coral", "bubble"], writing: ["sky", "bubble"],
     tokens: ["night", "token"], assets: ["purple", "blob"], mapping: ["mint", "arrows"], "og-images": ["sky", "og"],
-    colorgraphy: ["purple", "swatches"], foundations: ["deep", "type"], components: ["pink", "grid"], patterns: ["lemon", "bubble"],
-    resources: ["night", "token"], roadmap: ["mint", "list"], "navigation-sheets": ["sky", "stack"]
+    foundations: ["deep", "type"], components: ["mint", "press"], widgets: ["pink", "grid"], patterns: ["lemon", "bubble"], brand: ["pink", "blob"],
+    resources: ["night", "token"], roadmap: ["mint", "list"], navigation: ["sky", "stack"], inputs: ["lemon", "list"], "photo-picker": ["coral", "grid"],
+    "widget-catalog": ["purple", "grid"], "widget-ditto": ["night", "ditto"], "widget-todo": ["mint", "list"], "widget-guestbook": ["coral", "bubble"],
+    audit: ["deep", "list"], backlog: ["sky", "list"]
   };
   function coverFor(href) {
     var key = href.replace(/^.*[#/]/, "").replace(/\.html$/, "");
