@@ -21,7 +21,7 @@
 <link rel="preload" as="image" href="/assets/rooms/room-03-sora.webp">
 <style>
   /* /new — one screen: splash → wordmark, one line, friends' rooms opened from a dock, footer with the button */
-  :root { --ink: #16121B; --ink-2: #4A4352; --mute: #6E6578; --violet-d: #8A3FB8; --ease: cubic-bezier(.22,1,.36,1); --tw: clamp(240px, min(24vw, 34svh), 320px); --hue: #C5D88A; color-scheme: light; }
+  :root { --ink: #16121B; --ink-2: #4A4352; --mute: #6E6578; --violet-d: #8A3FB8; --ease: cubic-bezier(.22,1,.36,1); --tw: clamp(240px, min(24vw, 30svh), 320px); --hue: #C5D88A; color-scheme: light; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { overflow-x: clip; }
   body { min-height: 100svh; display: flex; flex-direction: column; background: #FFFFFF; color: var(--ink); font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; -webkit-font-smoothing: antialiased; }
@@ -84,7 +84,7 @@
   .bar img { width: 38px; height: 38px; border-radius: 11px; object-fit: cover; box-shadow: 0 0 0 2px rgba(255,255,255,.7); }
   .bar b { display: block; font-size: 15px; font-weight: 700; letter-spacing: -.02em; color: #2A2230; }
   .bar small { display: block; font-size: 12px; color: rgba(42,34,48,.6); }
-  .shot { position: relative; margin-top: 10px; aspect-ratio: 608 / 640; border-radius: 20px; overflow: hidden; -webkit-mask: linear-gradient(#000 78%, transparent); mask: linear-gradient(#000 78%, transparent); }
+  .shot { position: relative; margin-top: 10px; aspect-ratio: 608 / 780; border-radius: 20px; overflow: hidden; -webkit-mask: linear-gradient(#000 84%, transparent); mask: linear-gradient(#000 84%, transparent); }
   /* the capture minus status bar, handle bar and the hairline of bezel on both sides */
   .shot img { position: absolute; left: -2.63%; top: 0; width: 105.26%; height: auto; margin-top: -28.3%; }
   .shot img.next { opacity: 0; }
@@ -138,7 +138,7 @@
   <footer class="foot">
     <p class="legal"><a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a><br>© 2026 Ditto! · Halo Studio</p>
     <nav aria-label="더 보기"><a href="/">자세히 보기</a><a href="mailto:support@ditto.place">문의</a></nav>
-    <a class="btn" href="/#tm"><span><small>iPhone · 선착순 1,000명</small>출시 초대장 받기</span></a>
+    <a class="btn" href="/#tm"><span><small id="left">iPhone · 선착순 1,000명</small>출시 초대장 받기</span></a>
   </footer>
 <script>
   (function(){
@@ -225,6 +225,10 @@
       win.addEventListener('pointerenter', () => { held = true; });
       win.addEventListener('pointerleave', () => { held = false; });
     }
+    // seats left, live (same read the main page's ticket machine uses); the static line stays if it fails
+    fetch('https://lisqekczixwzshmpewzq.supabase.co/rest/v1/rpc/launch_ticket_stats', { method: 'POST', headers: { apikey: 'sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf', Authorization: 'Bearer sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf', 'Content-Type': 'application/json' }, body: '{}' })
+      .then(r => r.ok ? r.json() : Promise.reject()).then(d => { const s = d[0] || d, left = Math.max(0, s.total - s.issued); if (Number.isFinite(left)) document.getElementById('left').textContent = `iPhone · ${s.total.toLocaleString()}석 중 ${left.toLocaleString()}석 남음`; }).catch(() => {});
+
     dock.addEventListener('keydown', e => {
       const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
       e.preventDefault(); const j = (k + d + F.length) % F.length; items[j].firstChild.focus(); items[j].firstChild.click();
