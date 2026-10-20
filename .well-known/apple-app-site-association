@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["3K5K5Q6WGY.com.ditto.DittoPrototype"],
+        "appIDs": ["3K5K5Q6WGY.place.ditto.app", "3K5K5Q6WGY.com.ditto.DittoPrototype"],
         "components": [
           { "/": "/", "exclude": true },
           { "/": "/download*", "exclude": true },
