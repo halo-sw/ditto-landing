@@ -92,6 +92,17 @@
   .cap { margin-bottom: 2px; font-size: 14px; color: var(--mute); }
   .win + .dock { margin-top: 26px; }
 
+  /* text with a sticker in it: a few letters turn into 3D objects for a beat, then the line moves on */
+  .fx .ch { position: relative; display: inline-block; transition: margin .35s var(--ease); }
+  .fx .ch .g { display: inline-block; font-style: normal; transition: opacity .2s ease, transform .3s var(--ease), filter .3s ease; }
+  .fx .ch .o { position: absolute; left: 50%; top: 50%; width: 1.3em; height: 1.3em; object-fit: contain; transform: translate(-50%, -50%) scale(0) rotate(-24deg); opacity: 0; transition: transform .5s cubic-bezier(.3,1.6,.5,1), opacity .15s ease; pointer-events: none; filter: drop-shadow(0 .08em .1em rgba(40,10,60,.25)); }
+  .fx .ch.on { margin: 0 .12em; }
+  .fx .ch.on .g { opacity: 0; transform: scale(.3); filter: blur(4px); }
+  .fx .ch.on .o { opacity: 1; transform: translate(-50%, -54%) scale(1) rotate(var(--r, 0deg)); }
+  .fx { display: inline-block; transition: opacity .28s ease, filter .28s ease, transform .28s ease; }
+  .fx.out { opacity: 0; filter: blur(10px); transform: translateY(-.15em); }
+  .fx.pre { opacity: 0; filter: blur(10px); transform: translateY(.15em); transition: none; }
+
   .foot { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px 20px; padding: 18px 28px calc(18px + env(safe-area-inset-bottom)); font-size: 13.5px; }
   .foot .legal { color: var(--mute); line-height: 1.6; }
   .foot .legal a:hover, .foot nav a:hover { color: var(--ink); }
@@ -122,7 +133,7 @@
   <div class="splash" id="splash" aria-hidden="true" hidden><svg viewBox="0 0 214 204"><path fill="currentColor" d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path fill="currentColor" d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle fill="currentColor" cx="141.594" cy="187.204" r="16.75"/></svg></div>
   <main>
     <h1><a href="/" aria-label="Ditto!"><span class="wm" id="wm" aria-hidden="true"><i class="base"></i><i class="holo"></i><i class="glare"></i></span></a></h1>
-    <p class="tag">친구들의 하루, <em>위젯으로.</em></p>
+    <p class="tag fx" id="tag" aria-label="친구들의 하루, 위젯으로.">친구들의 하루, <em>위젯으로.</em></p>
     <p class="sub">가까운 친구 15명과만 나누는 iPhone 앱</p>
     <div class="visit" id="visit">
       <p class="cap" id="hn">친구를 눌러 방에 놀러 가 보세요</p>
@@ -228,6 +239,38 @@
     // seats left, live (same read the main page's ticket machine uses); the static line stays if it fails
     fetch('https://lisqekczixwzshmpewzq.supabase.co/rest/v1/rpc/launch_ticket_stats', { method: 'POST', headers: { apikey: 'sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf', Authorization: 'Bearer sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf', 'Content-Type': 'application/json' }, body: '{}' })
       .then(r => r.ok ? r.json() : Promise.reject()).then(d => { const s = d[0] || d, left = Math.max(0, s.total - s.issued); if (Number.isFinite(left)) document.getElementById('left').textContent = `iPhone · ${s.total.toLocaleString()}석 중 ${left.toLocaleString()}석 남음`; }).catch(() => {});
+
+    // stickers inside text: letters flip into 3D objects for a moment (the same objects as the sticker board)
+    const OBJ = ['ai-076', 'ai-001', 'ai-044', 'ai-130', 'ai-rx007', 'ai-026', 'ai-061', 'ai-rx008', 'ai-085', 'ai-037', 'ai-rx002', 'ai-rx020', 'ai-rx034', 'ai-057', 'ai-048', 'ai-011', 'ai-062', 'ai-rx017'];
+    OBJ.forEach(o => { const i = new Image(); i.src = '/assets/stk/' + o + '.webp'; });
+    function fx(el){
+      const wrap = () => {
+        const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+        while (walk.nextNode()) nodes.push(walk.currentNode);
+        nodes.forEach(n => { const f = document.createDocumentFragment(); [...n.textContent].forEach(c => { if (c === ' ') { f.append(' '); return; } const s = document.createElement('span'); s.className = 'ch'; s.setAttribute('aria-hidden', 'true'); s.innerHTML = '<i class="g"></i>'; s.firstChild.textContent = c; f.append(s); }); n.replaceWith(f); });
+      };
+      wrap();
+      const chars = () => [...el.querySelectorAll('.ch')].filter(c => /[^\s,.]/.test(c.textContent));
+      function swap(n, ms){
+        if (reduce) return;
+        const cs = chars().sort(() => Math.random() - .5).slice(0, n), pool = OBJ.slice().sort(() => Math.random() - .5);
+        cs.forEach((c, i) => {
+          let o = c.querySelector('.o'); if (!o) { o = document.createElement('img'); o.className = 'o'; o.alt = ''; c.append(o); }
+          o.src = '/assets/stk/' + pool[i] + '.webp'; c.style.setProperty('--r', (Math.random() * 30 - 15).toFixed(0) + 'deg');
+          setTimeout(() => c.classList.add('on'), i * 120);
+          setTimeout(() => c.classList.remove('on'), ms + i * 120);
+        });
+      }
+      function to(text){
+        if (reduce) { el.textContent = text; return; }
+        swap(2, 700);
+        setTimeout(() => { el.classList.add('out'); }, 950);
+        setTimeout(() => { el.classList.remove('out'); el.classList.add('pre'); el.textContent = text; wrap(); void el.offsetWidth; el.classList.remove('pre'); }, 1250);
+      }
+      return { swap, to };
+    }
+    const tag = fx(document.getElementById('tag'));
+    setTimeout(function again(){ if (!document.hidden) tag.swap(2, 900); setTimeout(again, 5200); }, 2600);
 
     dock.addEventListener('keydown', e => {
       const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
