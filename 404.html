@@ -424,7 +424,12 @@
       else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
     }
   });
-  [].forEach.call(document.querySelectorAll("[data-dl]"), function (a) { a.addEventListener("click", function (e) { e.preventDefault(); open(a.getAttribute("data-msg")); }); });
+  // 위임 — 404에서 나중에 그린 플래터 위젯([data-dl])도 같은 안내를 띄운다
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("[data-dl]") : null;
+    if (!a) return;
+    e.preventDefault(); open(a.getAttribute("data-msg"));
+  });
   window.dittoOpenDownload = open;
   // 공유 — 시스템 공유창, 안 되면 링크 복사
   var toast = $("toast"), tt = 0;
@@ -438,36 +443,36 @@
   });
   // 자동으로 한 번 띄운다. 플래터가 있으면 플래터를 먼저 보게 한다:
   // 플래터 끝까지 내려 본 뒤 잠시 후, 아니면 9초 뒤. 음악·영상을 듣는 중이면 끝날 때까지 미룬다.
-  var end = $("platterEnd");
   function auto() {
     if (shown) return;
     if (document.querySelector(".w.playing")) { setTimeout(auto, 3000); return; }
     open();
   }
-  if (!end) { setTimeout(auto, 1400); return; }
-  setTimeout(auto, 9000);
-  // 플래터가 첫 화면에 다 들어와도 바로 띄우지 않는다 — 직접 스크롤해 끝을 본 경우에만 조금 앞당긴다.
-  var seen = false;
-  function check() {
-    if (seen || window.scrollY < 40 || end.getBoundingClientRect().top > window.innerHeight) return;
-    seen = true; window.removeEventListener("scroll", check);
-    setTimeout(auto, 1500);
+  // 프로필이 보일 때 한 번 건다. 404에서 서버로 불러온 프로필은 그린 뒤 window.dittoArmDownload()로 건다.
+  var armed = false;
+  function arm() {
+    if (armed) return;
+    armed = true;
+    var end = $("platterEnd");
+    if (!end) { setTimeout(auto, 1400); return; }
+    setTimeout(auto, 9000);
+    // 플래터가 첫 화면에 다 들어와도 바로 띄우지 않는다 — 직접 스크롤해 끝을 본 경우에만 조금 앞당긴다.
+    var seen = false;
+    function check() {
+      if (seen || window.scrollY < 40 || end.getBoundingClientRect().top > window.innerHeight) return;
+      seen = true; window.removeEventListener("scroll", check);
+      setTimeout(auto, 1500);
+    }
+    window.addEventListener("scroll", check, { passive: true });
   }
-  window.addEventListener("scroll", check, { passive: true });
+  window.dittoArmDownload = arm;
+  if (!$("profile").hidden) arm();
 })();
 </script>
 <script>
 (function () {
   // 플래터 위젯 — 웹에서 되는 것만: 음악 30초 미리듣기 · 영상 재생 · 사진 넘겨 보기. 나머지는 앱 안내(data-dl).
-  var tiles = document.querySelectorAll(".pl .w");
-  if (!tiles.length) return;
-  // D-Day는 보는 날 기준으로 다시 센다 (빌드 날짜가 아니라)
-  [].forEach.call(document.querySelectorAll("[data-dday]"), function (b) {
-    var d = new Date(+b.getAttribute("data-dday")), now = new Date();
-    var n = Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 864e5);
-    b.textContent = n > 0 ? "D-" + n : n === 0 ? "D-DAY" : (n < -365 ? "1년+" : "D+" + (-n));
-    b.style.fontSize = b.textContent.length > 4 ? (parseFloat(b.dataset.fs) * 0.8) + "cqw" : b.dataset.fs + "cqw";
-  });
+  // 404에서 서버로 불러와 그린 플래터는 넣은 뒤 window.dittoInitPlatter()로 다시 붙인다 (이미 붙인 위젯은 건너뜀).
   var current = null;
   function stop(t) {
     if (!t) return;
@@ -508,22 +513,36 @@
     var c = t.querySelector(".fl-count");
     if (c) c.textContent = (n + 1) + "/" + imgs.length;
   }
-  [].forEach.call(tiles, function (t) {
-    var act = t.getAttribute("data-act");
-    if (act === "music" || act === "video") t.setAttribute("aria-pressed", "false");
-    if (act) t.addEventListener("click", function () {
-      if (act === "flip") flip(t); else toggle(t);
+  function init() {
+    var tiles = document.querySelectorAll(".pl .w:not([data-bound])");
+    if (!tiles.length) return;
+    // D-Day는 보는 날 기준으로 다시 센다 (빌드 날짜가 아니라)
+    [].forEach.call(document.querySelectorAll("[data-dday]"), function (b) {
+      var d = new Date(+b.getAttribute("data-dday")), now = new Date();
+      var n = Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 864e5);
+      b.textContent = n > 0 ? "D-" + n : n === 0 ? "D-DAY" : (n < -365 ? "1년+" : "D+" + (-n));
+      b.style.fontSize = b.textContent.length > 4 ? (parseFloat(b.dataset.fs) * 0.8) + "cqw" : b.dataset.fs + "cqw";
     });
-    if (act === "music" || act === "video") {
-      var a = t.querySelector("audio, video");
-      a.addEventListener("play", function () { t.setAttribute("aria-pressed", "true"); });
-      a.addEventListener("pause", function () { t.setAttribute("aria-pressed", "false"); });
-    }
-    t.addEventListener("keydown", function (e) {
-      if (t.getAttribute("role") !== "button") return;
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t.click(); }
+    [].forEach.call(tiles, function (t) {
+      t.setAttribute("data-bound", "");
+      var act = t.getAttribute("data-act");
+      if (act === "music" || act === "video") t.setAttribute("aria-pressed", "false");
+      if (act) t.addEventListener("click", function () {
+        if (act === "flip") flip(t); else toggle(t);
+      });
+      if (act === "music" || act === "video") {
+        var a = t.querySelector("audio, video");
+        a.addEventListener("play", function () { t.setAttribute("aria-pressed", "true"); });
+        a.addEventListener("pause", function () { t.setAttribute("aria-pressed", "false"); });
+      }
+      t.addEventListener("keydown", function (e) {
+        if (t.getAttribute("role") !== "button") return;
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t.click(); }
+      });
     });
-  });
+  }
+  window.dittoInitPlatter = init;
+  init();
   document.addEventListener("visibilitychange", function () { if (document.hidden) stop(current); });
 })();
 </script>
@@ -543,7 +562,7 @@
     $("navTitle").textContent = (name || handle) + "의 플래터";
     $("handle").textContent = "@" + handle;
     $("stepHandle").textContent = "@" + handle;
-    if (avatar && /^https:\/\//.test(avatar)) {
+    if (avatar && /^(https:\/\/|\/assets\/app\/)/.test(avatar)) {
       var img = $("avatar");
       img.onload = function () { img.hidden = false; $("avatarFallback").hidden = true; };
       img.onerror = function () { img.hidden = true; $("avatarFallback").hidden = false; };
@@ -551,12 +570,65 @@
     }
     document.title = (name || handle) + " (@" + handle + ") · ditto!";
   };
-  // 공유하지 않은 아이디는 보여 주지 않는다 (미리 만든 페이지 = 공유한 사람).
-  if (!prebuilt) { $("missing").hidden = false; document.title = "ditto!"; return; }
+  // 미리 만들지 않은 아이디 — 서버(public-profile)에서 불러와 그 자리에서 그린다.
+  // 없는 아이디이거나 프로필을 공개하지 않았으면(404) 지금처럼 '페이지를 찾을 수 없어요'.
+  if (!prebuilt) { load(); return; }
   fetch(SB + "/rest/v1/profiles?select=nickname,handle,avatar_url&handle=ilike." + encodeURIComponent(handle.replace(/[_%]/g, "\\$&")) + "&limit=1", { headers: { apikey: KEY } })
     .then(function (r) { return r.ok ? r.json() : []; })
     .then(function (rows) { if (rows && rows[0]) show(rows[0].nickname, rows[0].avatar_url); })
     .catch(function () {});
+
+  function missing() { $("missing").hidden = false; document.title = "ditto!"; }
+  function renderer() {   // 미리 만든 페이지는 렌더러를 받지 않는다
+    if (window.DittoPlatter) return Promise.resolve(window.DittoPlatter);
+    return new Promise(function (ok, fail) {
+      var s = document.createElement("script");
+      s.src = "/assets/platter/render.js";
+      s.onload = function () { window.DittoPlatter ? ok(window.DittoPlatter) : fail(); };
+      s.onerror = fail;
+      document.head.appendChild(s);
+    });
+  }
+  function load() {
+    var own = Object.prototype.hasOwnProperty;
+    // 로컬 확인용: localhost에서만 ?mock=저장한 응답.json 을 읽는다
+    var mock = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? new URLSearchParams(location.search).get("mock") : null;
+    var url = mock ? mock : SB + "/functions/v1/public-profile?handle=" + encodeURIComponent(handle);
+    var res = fetch(url, { headers: mock ? {} : { apikey: KEY } })
+      .then(function (r) { if (!r.ok) throw new Error("status " + r.status); return r.json(); });
+    Promise.all([res, renderer()]).then(function (all) {
+      var j = all[0], P = all[1], p = j && j.profile;
+      if (!p) throw new Error("no profile");
+      var mm = j.media || {};
+      // 위젯 사진·영상 — 서버가 준 서명 URL(원래 참조 그대로가 키) > https 그대로(옛 공개 버킷 주소는 이제 안 열림) > 앱 에셋
+      var media = {
+        sources: j.sources || {}, people: j.people || {},
+        image: function (ref) {
+          if (typeof ref !== "string" || !ref) return null;
+          if (own.call(mm, ref)) return mm[ref] || null;
+          if (/^https:\/\//.test(ref)) return ref.indexOf("/storage/v1/object/public/widget-media/") >= 0 ? null : ref;
+          if (/^(file|sb):/.test(ref)) return null;
+          return P.assetURL(ref);
+        },
+        exists: function (ref) { return typeof ref === "string" && own.call(mm, ref) ? mm[ref] || null : null; }
+      };
+      var avatar = /^https:\/\//.test(p.avatar_url || "") ? p.avatar_url : P.assetURL(p.avatar_asset);
+      show((p.nickname || "").trim(), avatar);
+      var card = document.querySelector("#profile .handle");
+      if (card) card.setAttribute("style", P.handleStyle(p.handle_color));   // 앱과 같은 핸들 색 (profiles.handle_color)
+      var html = "";
+      try { html = P.render(j.widgets || [], media); } catch (e) { html = ""; }
+      var steps = document.querySelector("#profile .steps");
+      if (html && steps) steps.insertAdjacentHTML("beforebegin", html);
+      $("profile").hidden = false;
+      $("banner").hidden = false;
+      if (html) {
+        P.paintMusic($("platter"));
+        if (window.dittoInitPlatter) window.dittoInitPlatter();
+      }
+      if (window.dittoArmDownload) window.dittoArmDownload();
+    }).catch(missing);
+  }
 })();
 </script>
 </body>
