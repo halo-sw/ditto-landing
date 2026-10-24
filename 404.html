@@ -102,10 +102,6 @@
   .platter { padding: 4px 16px 0; }
   #platterEnd { height: 1px; }
 
-  /* 친구가 되는 3단계 — 이전 버전 문구·톤 그대로 (다운로드 버튼은 하단 고정 배너가 맡는다) */
-  .steps { margin: 28px 16px 0; padding: 18px 20px; border-radius: 16px; background: rgba(255,255,255,.6); list-style: none; font-size: 13.5px; font-weight: 600; color: #44444c; line-height: 2; }
-  .steps li > span { display: inline-block; width: 1.4em; color: var(--brand-text); font-weight: 700; }
-  .steps b { font-weight: 700; color: var(--ink); }
   .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 56px; margin-top: 20px; border-radius: 12px; background: var(--primary); color: #fff; font-size: 17px; font-weight: 700; text-decoration: none; transition: background .11s ease-out; }
   .btn:hover { background: var(--primary-hover); }
   .foot { padding: 28px 16px calc(32px + env(safe-area-inset-bottom, 0px)); text-align: center; }
@@ -127,7 +123,7 @@
   /* 하단 고정 배너 — 이전 버전 그대로 (어두운 반투명 바 · 워드마크 · 다운로드) */
   .banner { position: fixed; z-index: 30; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: calc(100% - 32px); max-width: 398px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 16px; text-decoration: none; background: rgba(28,20,40,.92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 10px 34px rgba(40,16,60,.35); -webkit-tap-highlight-color: transparent; }
   .banner-mark { height: 20px; }
-  .banner-text { flex: 1 1; font-size: 13px; font-weight: 600; color: #fff; text-align: left; }
+  .banner-text { flex: 1 1; min-width: 0; font-size: 13px; font-weight: 600; color: #fff; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .banner-btn { font-size: 13px; font-weight: 700; color: #fff; background: #b255d9; padding: 8px 16px; border-radius: 10px; white-space: nowrap; }
   @media (min-width: 560px) { .banner { bottom: 48px; } }
 
@@ -138,7 +134,7 @@
     background: #fff; color: #1c1c22; border-radius: 28px 28px 0 0; padding: 12px 24px calc(24px + env(safe-area-inset-bottom, 0px)); text-align: center; box-shadow: 0 -18px 60px rgba(40,16,60,.28); }
   .dl.on { transform: translate(-50%, 0); }
   .dl-grab { width: 40px; height: 5px; border-radius: 3px; background: #e4dcee; margin: 0 auto 18px; }
-  .dl-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #f4f1f8; color: #44444c; font-size: 20px; line-height: 1; cursor: pointer; }
+  .dl-x { position: absolute; z-index: 3; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #f4f1f8; color: #44444c; font-size: 20px; line-height: 1; cursor: pointer; }
   .dl-av { position: relative; width: 84px; height: 84px; margin: 6px auto 14px; }
   .dl-av > span { width: 84px; height: 84px; border-radius: 84px; display: flex; align-items: center; justify-content: center; border: 3px solid #f0e8fa; background: linear-gradient(150deg, #b46ce0, #f39fce) center / cover no-repeat; color: #fff; font-size: 36px; font-weight: 700; }
   .dl-av i { position: absolute; right: -6px; bottom: -4px; width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(135deg, #AA4AF4, #6655D2); box-shadow: 0 0 0 3px #fff; display: grid; place-items: center; }
@@ -147,10 +143,77 @@
   .dl p { margin-top: 8px; font-size: 14px; font-weight: 500; color: #6b6b76; line-height: 1.6; word-break: keep-all; }
   .dl-store { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 22px; height: 54px; border-radius: 14px; background: #16121B; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none; }
   .dl-store svg { width: 20px; height: 20px; }
-  .dl-later { margin-top: 8px; width: 100%; height: 46px; border: 0; border-radius: 14px; background: none; color: #6b6b76; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
+  .dl:focus { outline: none; }
+  .dl.kb { transition: none; }
+  /* 사전등록 — 이메일 칸 + [사전등록하기]. 그 자리에서 waitlist에 보낸다 (download/index.html과 같은 주소·키) */
+  .wl { margin-top: 22px; text-align: left; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wl-in { display: block; width: 100%; height: 54px; padding: 0 16px; border: 0; border-radius: 14px; background: #F3F0F7; box-shadow: inset 0 0 0 1px rgba(68,54,81,.06); font: inherit; font-size: 16px; font-weight: 500; color: var(--ink); outline: none; -webkit-appearance: none; appearance: none; transition: box-shadow .15s ease, background .15s ease; }
+  .wl-in::placeholder { color: #9A90A6; }
+  .wl-in:focus { background: #fff; box-shadow: inset 0 0 0 2px var(--primary); }
+  .wl-in[aria-invalid="true"] { background: #fff; box-shadow: inset 0 0 0 2px #D6336C; }
+  .dl .wl-msg { min-height: 0; margin: 8px 2px 0; font-size: 13px; font-weight: 500; line-height: 1.5; color: #C2255C; word-break: keep-all; }
+  .wl-msg:empty { display: none; }
+  .wl-btn, .dl-primary { position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 54px; margin-top: 10px; border: 0; border-radius: 14px; background: var(--primary); color: #fff; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; transition: background .11s ease-out, transform .12s ease; -webkit-tap-highlight-color: transparent; }
+  .wl-btn:hover, .dl-primary:hover { background: var(--primary-hover); }
+  .wl-btn:active, .dl-primary:active { transform: scale(.985); background: var(--primary-pressed); }
+  .wl-btn[aria-disabled="true"] { cursor: default; background: #B884E8; transform: none; }
+  .wl-spin { display: none; width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; animation: wlspin .7s linear infinite; }
+  .wl-btn[aria-disabled="true"] .wl-spin { display: block; }
+  @keyframes wlspin { to { transform: rotate(360deg); } }
+  .wl-note a { color: inherit; text-underline-offset: 2px; }
+  .dl .wl-note { margin: 10px 2px 0; font-size: 12.5px; font-weight: 500; line-height: 1.5; color: #8B8296; text-align: center; word-break: keep-all; }
+  .dl .wl-have { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--brand-text); }
+  .wl-have i { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--brand); }
+  .wl-have i svg { width: 12px; height: 12px; }
+  .wl-have b { font-weight: 600; color: #6b6b76; }
+  .wl-done h2 { margin-top: 2px; }
+  .wl-done h2:focus { outline: none; }
+  /* 대기 카드 — 랜딩 초대장 티켓과 같은 모양: 왼쪽 그래픽(빛 번짐 + 볼록한 디토 마크) · 점선 절취선과 홈 · 오른쪽 스텁 · 홀로 광택 */
+  .wl-stage { position: relative; max-width: 340px; margin: 30px auto 18px; padding-bottom: 40px; }
+  .wl-clip { position: relative; margin: -16px -24px 0; padding: 16px 24px 0; overflow: hidden; perspective: 900px;
+    -webkit-mask: linear-gradient(#000 calc(100% - 18px), transparent); mask: linear-gradient(#000 calc(100% - 18px), transparent); }   /* 주머니 뒤로 들어간 카드 그림자가 잘린 선으로 보이지 않게 */
+  .wl-card { --rx: 6deg; --ry: -4deg; --rz: -1.5deg; --hx: 30%; --hy: 20%; --notch: 11px; position: relative; width: 100%; aspect-ratio: 16 / 10; container-type: inline-size; transform-origin: 50% 100%;
+    transform: translateY(0) rotateX(var(--rx)) rotateY(var(--ry)) rotate(var(--rz)); transition: transform .5s cubic-bezier(.2,.8,.2,1); filter: drop-shadow(0 18px 22px rgba(40,10,70,.28)) drop-shadow(0 3px 5px rgba(40,10,70,.14)); }
+  .wl-face { position: absolute; inset: 0; display: flex; overflow: hidden; border-radius: 16px; background: #FBF8FF;
+    -webkit-mask: radial-gradient(circle var(--notch) at 42% 0, transparent 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--notch) at 42% 100%, transparent 98%, #000) bottom / 100% 51% no-repeat;
+    mask: radial-gradient(circle var(--notch) at 42% 0, transparent 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--notch) at 42% 100%, transparent 98%, #000) bottom / 100% 51% no-repeat; }
+  .wl-face::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .28; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .wl-gr { position: relative; flex: none; width: 42%; overflow: hidden; }
+  .wl-gr svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .wl-gr::after { content: ""; position: absolute; top: var(--notch); bottom: var(--notch); right: 0; border-right: 2px dashed rgba(255,255,255,.85); }
+  .wl-stub { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 5.4cqw 5cqw 4.6cqw 5.4cqw; text-align: left; color: #16121B; }
+  .wl-k { font: italic 900 2.9cqw/1 "Nunito", "Arial Rounded MT Bold", system-ui, sans-serif; letter-spacing: .04em; color: #8A3FB8; }
+  .dl .wl-mail { margin-top: 3.6cqw; font-size: 5cqw; color: #16121B; font-weight: 800; line-height: 1.2; letter-spacing: -.03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dl .wl-from { margin-top: 1.2cqw; font-size: 3.4cqw; font-weight: 700; color: #8A3FB8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .wl-meta { display: flex; gap: 5cqw; margin: auto 0 0; padding-top: 2.6cqw; border-top: 1.5px dashed rgba(138,130,146,.45); }
+  .wl-meta dt { font: italic 900 2.5cqw/1.2 "Nunito", "Arial Rounded MT Bold", system-ui, sans-serif; letter-spacing: .03em; color: #8A3FB8; }
+  .wl-meta dd { margin: .8cqw 0 0; font-size: 3.6cqw; font-weight: 800; line-height: 1.2; white-space: nowrap; }
+  .wl-holo { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: color-dodge; opacity: .32; background: linear-gradient(115deg, rgba(255,255,255,0) 18%, rgba(255,154,213,.85) 32%, rgba(159,216,255,.85) 44%, rgba(182,255,207,.8) 55%, rgba(255,243,160,.8) 66%, rgba(255,255,255,0) 82%) var(--hx) var(--hy) / 300% 300%; transition: background-position .25s ease-out; }
+  .wl-glare { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: overlay; opacity: .45; background: radial-gradient(circle at var(--hx) var(--hy), rgba(255,255,255,.8), rgba(255,255,255,0) 46%); }
+  .wl-shine { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(105deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.75) 48%, rgba(255,255,255,0) 60%); transform: translateX(-120%); }
+  .wl-stamp { position: absolute; right: 4.6cqw; top: 4.6cqw; padding: 1cqw 2.2cqw; border: .55cqw solid #D6336C; border-radius: 1.4cqw; color: #D6336C; font-size: 3cqw; font-weight: 800; line-height: 1; transform: rotate(-10deg); opacity: .85; }
+  /* 카드가 나오는 주머니 — 앞판이 카드 아랫단을 가린다 */
+  .wl-pocket { position: absolute; left: 0; right: 0; bottom: 0; height: 58px; z-index: 2; border-radius: 14px 14px 20px 20px; background: linear-gradient(180deg, #3A2850 0%, #241C2B 60%, #160F1E 100%); box-shadow: inset 0 1.5px 0 rgba(255,255,255,.22), inset 0 -10px 18px rgba(0,0,0,.25), 0 14px 26px -16px rgba(22,15,30,.6); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 12px; }
+  .wl-pocket::before { content: ""; position: absolute; left: 14px; right: 14px; top: 0; height: 8px; border-radius: 0 0 8px 8px; background: rgba(0,0,0,.35); }
+  .wl-pocket img { position: relative; height: 15px; opacity: .9; }
+  /* 꺼내기 — 주머니에서 위로 쑥 올라오며 앞뒤로 기울었다가 자리 잡는다 · 광택이 한 번 지나간다 · 도장 */
+  .wl-stage.go .wl-card { animation: wlDraw 1.15s cubic-bezier(.22,1,.36,1) both; }
+  .wl-stage.go .wl-pocket { animation: wlPocket .5s ease-out both; }
+  .wl-stage.go .wl-shine { animation: wlShine .9s ease-in-out .95s both; }
+  .wl-stage.go .wl-stamp { animation: wlStamp .5s cubic-bezier(.3,1.6,.5,1) 1.25s both; }
+  @keyframes wlDraw { 0% { transform: translateY(104%) rotateX(0) rotate(0); } 55% { transform: translateY(-9%) rotateX(16deg) rotateY(-6deg) rotate(-3deg); } 78% { transform: translateY(2%) rotateX(-3deg) rotateY(2deg) rotate(-.5deg); } 100% { transform: translateY(0) rotateX(var(--rx)) rotateY(var(--ry)) rotate(var(--rz)); } }
+  @keyframes wlPocket { 0% { transform: scaleX(1); } 30% { transform: scaleX(1.03) translateY(2px); } 100% { transform: none; } }
+  @keyframes wlShine { 0% { opacity: 0; transform: translateX(-120%); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateX(120%); } }
+  @keyframes wlStamp { from { transform: rotate(-10deg) scale(2.2); opacity: 0; } to { transform: rotate(-10deg) scale(1); opacity: .85; } }
+  .wl-card.drag { transition: none; }
   .dl :focus-visible, .banner:focus-visible { outline: 2px solid #9b4be0; outline-offset: 3px; }
   @media (min-width: 640px) { .dl { bottom: 50%; border-radius: 28px; padding-bottom: 24px; transform: translate(-50%, calc(50% + 24px)); opacity: 0; transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .3s ease; } .dl.on { transform: translate(-50%, 50%); opacity: 1; } .dl-grab { display: none; } }
-  @media (prefers-reduced-motion: reduce) { .dl, .dl-scrim, .toast { transition: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .dl, .dl-scrim, .toast, .wl-card, .wl-in, .wl-btn { transition: none; }
+    .wl-stage.go .wl-card, .wl-stage.go .wl-pocket, .wl-stage.go .wl-shine, .wl-stage.go .wl-stamp { animation: none; }
+    .wl-spin { animation-duration: 1.6s; }
+  }
 
   /* ───── 위젯 (scripts/platter.py) — 앱 렌더러 치수를 Grid.width 358 기준 cqw로 ───── */
   .pl-head { font-size: 13px; font-weight: 700; color: #6b6b76; margin: 0 6px 10px; letter-spacing: -.01em; }
@@ -161,7 +224,9 @@
   .w[role=button] { cursor: pointer; transition: transform .18s ease; }
   .w[role=button]:active { transform: scale(.97); }
   .w:focus-visible { outline: 2px solid #9b4be0; outline-offset: 2px; }
-  .w.glow { box-shadow: 0 0 16px 3px rgba(170,74,244,.30); }
+  .w.glow { box-shadow: 0 0 14px rgba(124,77,255,.24); }   /* 앱 GlowSpec.frequencyBase (#7c4dff 22% · 반경 7) */
+  /* 글자색에 투명도가 있어도 이모지는 원래 색으로 (render.js emo) */
+  .emo { color: #000; -webkit-text-fill-color: #000; font-style: normal; }
   .w .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .w .soft { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 18px rgba(255,255,255,.95), inset 1px 2px 7px rgba(255,255,255,.25); pointer-events: none; }
   .w .grow { flex: 1 1 auto; }
@@ -176,8 +241,12 @@
   .bl-src { display: flex; gap: 4px; font-weight: 500; color: #70737c; }
   .bl-src span { flex: 1 1 auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   /* 영상 */
-  .vd-shade { position: absolute; left: 0; right: 0; top: 0; height: 57%; background: linear-gradient(#111, rgba(17,17,17,0)); }
-  .vd-title { position: absolute; left: 0; right: 0; top: 0; color: #fff; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .vd-shade { position: absolute; left: 0; right: 0; top: 0; height: 57%; background: linear-gradient(rgba(28,23,33,.72), rgba(28,23,33,.35) 58%, rgba(28,23,33,0)); }
+  .vd-title { position: absolute; left: 0; right: 0; top: 0; color: #fff; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
+  /* 가운데 재생 버튼 — 앱 #6655D2 60% 원 + 흰 삼각형 */
+  .vd-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(102,85,210,.6); display: grid; place-items: center; -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); transition: opacity .3s; }
+  .vd-play i { display: block; transform: translateX(6%); }
+  .w.playing .vd-play { opacity: 0; }
   .vd-yt { position: absolute; transition: opacity .3s; }
   .w.playing .vd-shade, .w.playing .vd-title { opacity: 0; transition: opacity .3s; }
   .w.playing .vd-yt { opacity: 0; }
@@ -250,6 +319,29 @@
   .mu-info b, .mu-info span { max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mu-info b { font-weight: 600; color: #1c1722; }
   .mu-info span { font-weight: 400; color: #443651; }
+  /* 한 줄 제목은 넘치면 흘려서 다 보여 준다 (앱 MarqueeText) · 두 줄 제목(.ml) */
+  .mu-info .mq { display: block; text-overflow: clip; }
+  .mu-info .mq > span { display: inline-block; max-width: none; overflow: visible; text-overflow: clip; color: inherit; font-weight: inherit; }
+  .mu-info .mq.run { text-align: left; align-self: stretch; }
+  .mu-info .mq.run > span { animation: mq var(--mqd, 6s) ease-in-out 1.2s infinite alternate; }
+  @keyframes mq { 0%, 18% { transform: none; } 82%, 100% { transform: translateX(var(--mq, 0)); } }
+  .mu-info .ml { display: -webkit-box; -webkit-box-orient: vertical; white-space: normal; word-break: keep-all; overflow-wrap: anywhere; }
+  .mu-src { position: absolute; display: flex; align-items: center; color: #443651; white-space: nowrap; }
+  .mu-src.c { justify-content: center; }
+  .mu-info .mu-src { position: static; overflow: visible; }
+  .mu-src b { font-weight: 600; color: #443651; }
+  .mu-mk { flex: none; display: grid; place-items: center; font-style: normal; }
+  .mu-mk.am { background: #FA2D48; color: #fff; }
+  .mu-mk.am b { display: block; color: #fff; }
+  .mu-mk.pv { color: #443651; }
+  .mu-prog { position: absolute; display: flex; flex-direction: column; }
+  .mu-track { position: relative; display: block; border-radius: 99px; background: #B8ACB4; }
+  .mu-track i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: inherit; background: #6B5579; }
+  .mu-time { display: flex; justify-content: space-between; color: #443651; font-variant-numeric: tabular-nums; line-height: 1.3; }
+  .mu-vid { position: absolute; left: 0; right: 0; top: 0; overflow: hidden; background: #29272C; }
+  .mu-vid img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .mu-vid i { position: absolute; inset: 0; background: linear-gradient(rgba(20,18,26,0) 55%, rgba(20,18,26,.42)); }
+  .mu-vid em { position: absolute; font-style: normal; color: #fff; line-height: 1.4; }
   .mu-bar { position: absolute; border-radius: 3px; background: rgba(28,23,34,.14); overflow: hidden; opacity: 0; transition: opacity .25s; }
   .mu-bar i { display: block; height: 100%; width: 0; background: #6b5579; border-radius: inherit; }
   .w.playing .mu-bar, .w.paused .mu-bar { opacity: 1; }
@@ -260,7 +352,79 @@
   .ss { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 8px; }
   .ss-h { flex-direction: row; justify-content: flex-start; }
   .ss span { line-height: 1.1; }
-  .ss b { font-weight: 600; color: #171719; }
+  .ss b { font-weight: 600; color: #171719; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; word-break: keep-all; }
+  .ss-h b { text-align: left; }
+  /* 상태 이모지 1·3·6개 무늬 (앱 StatusEmojiPattern) */
+  .ep { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+  .ep > span { display: flex; }
+  .ep i { font-style: normal; line-height: 1.15; }
+  /* 사진 위 글 — 위(기본) · 아래 · 가운데 (앱 imageCaption) */
+  .im-cap { position: absolute; left: 0; right: 0; top: 0; background: linear-gradient(rgba(28,23,33,.72), rgba(28,23,33,.35) 58%, rgba(28,23,33,0)); }
+  .im-cap.b { top: auto; bottom: 0; background: linear-gradient(0deg, rgba(28,23,33,.72), rgba(28,23,33,.35) 58%, rgba(28,23,33,0)); }
+  .im-cap.m { bottom: 0; display: flex; align-items: center; background: rgba(28,23,33,.28); }
+  .im-cap.m p { flex: 1 1 auto; }
+  .im-cap p { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-line; }
+  /* 포스트 위젯 (데이터 타입 block · 앱 PostWidgetTile) — 흰 카드 · 사진이 주인공 */
+  .w-block > .po-col, .po-row { position: absolute; inset: 0; }
+  .po-row { display: flex; }
+  .po-col { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+  .po-col.mid { flex: 1 1 auto; justify-content: center; }
+  .po-ph { position: relative; flex: none; overflow: hidden; background: #EEEDF2; }
+  .po-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .po-eb { flex: none; display: flex; align-items: center; min-width: 0; font-weight: 500; line-height: 1.3; color: #862FC6; white-space: nowrap; }
+  .po-eb i { flex: none; display: block; }
+  .po-eb b { font-weight: 500; }
+  .po-eb em { font-style: normal; color: #989ba2; }
+  .po-eb span { color: #70737c; overflow: hidden; text-overflow: ellipsis; }
+  .po-eb.on, .po-eb.on em, .po-eb.on span { color: #fff; }
+  .po-t, .po-b { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; letter-spacing: -.01em; }
+  .po-b { font-weight: 400; }
+  .po-b[data-fit] { flex: 1 1 auto; min-height: 0; }
+  .po-shade { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0) 25%, rgba(0,0,0,.62)); }
+  .po-cov { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; }
+  .po-pen { flex: none; display: block; color: #862FC6; }
+  .po-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; }
+  .po-empty.c { align-items: center; justify-content: center; }
+  .po-ico { border-radius: 50%; background: #F2E8FF; color: #862FC6; display: grid; place-items: center; }
+  .po-ico i { display: block; }
+  .po-empty b { font-weight: 600; color: #70737c; }
+  /* D-Day (앱 DDayTile 2026-10-15 — 그리드 · 포토 · 그라디언트 · 미니멀 바) */
+  .dd2 { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; }
+  .dd2.ph { justify-content: flex-end; }
+  .dd-h { display: flex; flex-direction: column; min-width: 0; max-width: 100%; }
+  .dd-t { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dd-n { display: flex; font-weight: 800; line-height: 1.05; letter-spacing: -.03em; white-space: nowrap; }
+  .dd-n.st { flex-direction: column; }
+  .dd-d { font-weight: 500; white-space: nowrap; line-height: 1.3; }
+  .dd-row { display: flex; align-items: center; width: 100%; }
+  .dd-col { display: flex; flex-direction: column; width: 100%; }
+  .dd-bar { position: relative; display: block; width: 100%; border-radius: 99px; overflow: hidden; }
+  .dd-bar i { display: block; height: 100%; border-radius: inherit; }
+  .dd-dots, .dd-grid > span { display: flex; }
+  .dd-dots i, .dd-grid i { flex: none; display: block; border-radius: 50%; }
+  .dd-grid { display: flex; flex-direction: column; }
+  .dd-scrim { position: absolute; inset: 0; background: linear-gradient(rgba(6,10,20,0), rgba(6,10,20,.02) 30%, rgba(6,10,20,.8)); }
+  /* To-do (앱 TodoTile) */
+  .td { position: absolute; inset: 0; display: flex; flex-direction: column; }
+  .td-h { flex: none; display: flex; align-items: center; min-width: 0; }
+  .td-h b { min-width: 0; font-weight: 600; color: #171719; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .td-h em { max-width: 50%; font-style: normal; font-weight: 500; color: #989ba2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .td-g { flex: none; display: grid; grid-template-columns: repeat(2, auto); align-content: center; justify-content: center; }
+  .td-g i { display: block; border-radius: 50%; }
+  .td-w { flex: none; display: flex; }
+  .td-d { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 6px; }
+  .td-d.on { background: rgba(238,237,242,.6); }
+  .td-d b { font-weight: 600; line-height: 1; }
+  .td-bl { position: relative; display: grid; place-items: center; }
+  .td-e { display: block; background: #EEEDF2; }
+  .td-b { position: absolute; left: 50%; top: 50%; border-radius: 50%; display: grid; place-items: center; }
+  .td-b svg, .td-cb svg { width: 60%; height: 60%; }
+  .td-cb { flex: none; display: grid; place-items: center; font-style: normal; }
+  .td-l { display: flex; flex-direction: column; min-width: 0; }
+  .td-r { display: flex; align-items: center; min-width: 0; }
+  .td-r span { min-width: 0; font-weight: 500; line-height: 1.3; color: #171719; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .td-c { display: flex; align-items: center; }
+  .td-c b { display: inline-flex; align-items: center; border-radius: 99px; font-weight: 600; white-space: nowrap; }
   .tx { position: absolute; inset: 0; display: flex; flex-direction: column; }
   .tx p { max-width: 100%; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
   .bl-text, .ask-t, .dt-title, .tx p, .md b, .dy-t, .ss b, .sk-text { white-space: pre-line; }
@@ -325,6 +489,7 @@
     .sk > * { animation: none; }
     .w.playing .cd-rot { animation: none; }
     .w.np-live .np-bars i { animation: none; }
+    .mu-info .mq.run > span { animation: none; }
     .w[role=button] { transition: none; }
   }
 </style>
@@ -349,11 +514,6 @@
       <button class="h-act" type="button" data-dl data-msg="add" aria-label="친구 추가하기"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.83 12.33c.55 0 1 .45 1 1v1.5h1.5a1 1 0 1 1 0 2h-1.5v1.5a1 1 0 1 1-2 0v-1.5h-1.5a1 1 0 1 1 0-2h1.5v-1.5c0-.55.45-1 1-1ZM10 1.08a5.17 5.17 0 0 1 2.32 9.79c.5.09.95.21 1.38.36a2.98 2.98 0 0 0-.83 1.64 2.98 2.98 0 0 0-.9 5.63H4.5c-.82 0-1.6-.34-2.11-.94-.53-.62-.74-1.5-.38-2.38.4-.99 1.13-2.14 2.42-3.03.86-.59 1.92-1.04 3.25-1.29A5.17 5.17 0 0 1 10 1.08Z" fill="currentColor"/></svg></button>
     </section>
     
-    <ol class="steps" aria-label="친구가 되는 방법">
-      <li><span>1</span>ditto! 앱을 설치해요</li>
-      <li><span>2</span><b id="stepHandle">@</b> 님을 친구로 추가해요</li>
-      <li><span>3</span>서로의 플래터를 구경해요</li>
-    </ol>
     <footer class="foot"><a href="/"><img src="/assets/wordmark.svg" alt="ditto!"><span>위젯으로 서로의 하루를 주고받는 친구들의 공간</span></a></footer>
   </div>
   <section class="missing" id="missing" hidden>
@@ -364,30 +524,80 @@
   </section>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<a class="banner" id="banner" href="/download/" data-dl hidden><img class="banner-mark" src="/email/wordmark-white.png" alt="ditto!"><span class="banner-text">앱에서 더 자세히 보기</span><span class="banner-btn">다운로드</span></a>
+<a class="banner" id="banner" href="/download/" data-dl hidden><img class="banner-mark" src="/email/wordmark-white.png" alt="ditto!"><span class="banner-text" id="bannerText">앱에서 더 자세히 보기</span><span class="banner-btn" id="bannerBtn">다운로드</span></a>
 <div class="dl-scrim" id="dlScrim" hidden></div>
-<section class="dl" id="dl" role="dialog" aria-modal="true" aria-labelledby="dlTitle" aria-describedby="dlDesc" hidden>
+<section class="dl" id="dl" role="dialog" aria-modal="true" aria-labelledby="dlTitle" aria-describedby="dlDesc" tabindex="-1" hidden>
   <div class="dl-grab" aria-hidden="true"></div>
   <button class="dl-x" id="dlClose" type="button" aria-label="닫기">×</button>
-  <div class="dl-av" aria-hidden="true"><span id="dlAvatar"></span><i><img src="/email/wordmark-white.png" alt=""></i></div>
-  <h2 id="dlTitle"><span id="dlName"></span>님의 플래터는<br>ditto! 앱에서 볼 수 있어요</h2>
-  <p id="dlDesc">앱을 받으면 바로 친구로 추가하고, 서로의 위젯을 구경할 수 있어요.</p>
-  <a class="dl-store" id="dlStore" href="/download/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span id="dlStoreLabel">App Store에서 받기</span></a>
-  <button class="dl-later" id="dlLater" type="button">웹에서 먼저 둘러볼게요</button>
+  <div id="dlAsk">
+    <div class="dl-av" aria-hidden="true"><span id="dlAvatar"></span><i><img src="/email/wordmark-white.png" alt=""></i></div>
+    <h2 id="dlTitle"><span id="dlName"></span>님의 플래터는<br>ditto! 앱에서 볼 수 있어요</h2>
+    <p id="dlDesc">앱을 받으면 바로 친구로 추가하고, 서로의 위젯을 구경할 수 있어요.</p>
+    <a class="dl-store" id="dlStore" href="/download/" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><span>App Store에서 받기</span></a>
+    <form class="wl" id="wl" novalidate hidden>
+      <label class="sr" for="wlEmail">출시 소식을 받을 이메일</label>
+      <input class="wl-in" id="wlEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" enterkeyhint="send" placeholder="이메일 주소" maxlength="254" aria-describedby="wlMsg wlNote">
+      <p class="wl-msg" id="wlMsg" role="alert"></p>
+      <button class="wl-btn" id="wlBtn" type="submit"><i class="wl-spin" aria-hidden="true"></i><span id="wlBtnLabel">사전등록하기</span></button>
+      <p class="wl-note" id="wlNote">이메일은 출시 소식을 보낼 때만 써요. <a href="/privacy/">개인정보 처리방침</a></p>
+    </form>
+    <div id="wlHave" hidden>
+      <p class="wl-have"><i aria-hidden="true"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.6 6.3 5 8.6l4.4-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i>사전등록했어요 <b id="wlHaveMail"></b></p>
+      <button class="dl-primary" id="wlShow" type="button">대기 카드 보기</button>
+    </div>
+  </div>
+  <div class="wl-done" id="dlDone" hidden>
+    <div class="wl-stage" id="wlStage" aria-hidden="true">
+      <div class="wl-clip">
+        <div class="wl-card" id="wlCard">
+          <div class="wl-face">
+            <div class="wl-gr"><svg id="wlG" viewBox="0 0 300 333" preserveAspectRatio="xMidYMid slice"></svg></div>
+            <div class="wl-stub">
+              <span class="wl-k">WAITING CARD_</span>
+              <p class="wl-mail" id="wlCardMail"></p>
+              <p class="wl-from" id="wlCardFrom"></p>
+              <dl class="wl-meta"><div><dt>STATUS</dt><dd>출시 알림 대기</dd></div><div><dt>SINCE</dt><dd id="wlCardDate"></dd></div></dl>
+            </div>
+            <span class="wl-holo"></span><span class="wl-glare"></span><span class="wl-shine"></span>
+            <span class="wl-stamp" id="wlStamp">사전등록 완료</span>
+          </div>
+        </div>
+      </div>
+      <div class="wl-pocket"><img src="/email/wordmark-white.png" alt=""></div>
+    </div>
+    <h2 id="wlDoneTitle" tabindex="-1">사전등록을 마쳤어요</h2>
+    <p id="wlDoneDesc">출시 소식을 이 이메일로 가장 먼저 보내 드릴게요.</p>
+    <button class="dl-primary" id="wlOk" type="button">플래터 계속 보기</button>
+  </div>
 </section>
 <script>
 (function () {
-  // 앱 다운로드 유도 모달. 출시 후 APP_STORE_URL만 채우면 App Store로 바로 연결된다. 비어 있으면 출시 알림 신청(/download/)으로 보낸다.
+  // 앱 다운로드 유도 모달. 출시 후 APP_STORE_URL만 채우면 App Store로 바로 연결된다.
+  // 비어 있는 동안(출시 전)은 모달 안에서 바로 사전등록(출시 알림)을 받는다 — download/index.html과 같은 waitlist 주소·키·본문.
   var APP_STORE_URL = "";
+  var WL = "https://lisqekczixwzshmpewzq.supabase.co/rest/v1/waitlist";
+  var WL_KEY = "sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf";
+  var STORE = "ditto.waitlist";   // 이 브라우저에서 사전등록했는지 (가린 이메일 · 날짜만, 편의용)
   var $ = function (id) { return document.getElementById(id); };
   var dl = $("dl"), scrim = $("dlScrim"), lastFocus = null, shown = false;
-  $("dlStore").href = APP_STORE_URL || "/download/";
-  $("dlStoreLabel").textContent = APP_STORE_URL ? "App Store에서 받기" : "출시 알림 받기";
-  if (!APP_STORE_URL) $("dlDesc").textContent = "곧 App Store에 나와요. 출시 알림을 받으면 가장 먼저 친구로 추가할 수 있어요.";
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function readReg() { try { var v = JSON.parse(localStorage.getItem(STORE) || "null"); return v && v.mail ? v : null; } catch (e) { return null; } }
+  function saveReg(v) { try { localStorage.setItem(STORE, JSON.stringify(v)); } catch (e) { /* 저장 못 해도 화면은 그대로 */ } }
+  var reg = readReg();
+  var PRE_DESC = "곧 App Store에 나와요. 사전등록하면 출시 소식을 가장 먼저 보내 드려요.";
+  if (APP_STORE_URL) { $("dlStore").href = APP_STORE_URL; $("dlStore").hidden = false; }
+  else $("dlDesc").textContent = PRE_DESC;
+  function syncBanner() {
+    if (APP_STORE_URL) return;
+    $("bannerText").textContent = reg ? "사전등록을 마쳤어요" : "곧 App Store에 나와요";
+    $("bannerBtn").textContent = reg ? "카드 보기" : "사전등록하기";
+  }
+  syncBanner();
+  function handleText() { return ($("handle").textContent || "").trim(); }
   function sync() {
     var name = $("name").textContent || "";
     [].forEach.call(document.querySelectorAll("#dl .js-name"), function (e) { e.textContent = name; });
-    [].forEach.call(document.querySelectorAll("#dl .js-handle"), function (e) { e.textContent = $("handle").textContent; });
+    [].forEach.call(document.querySelectorAll("#dl .js-handle"), function (e) { e.textContent = handleText(); });
     if ($("dlName")) $("dlName").textContent = name;
     var src = $("avatar").hidden ? "" : $("avatar").currentSrc;
     var box = $("dlAvatar");
@@ -404,33 +614,151 @@
     guestbook: ["방명록은 ditto! 앱에서<br>남길 수 있어요", "앱을 받고 친구로 추가하면 바로 안부를 남길 수 있어요."]
   };
   var baseTitle = $("dlTitle").innerHTML, baseDesc = $("dlDesc").textContent;
+
+  // ───── 사전등록 ─────
+  var form = $("wl"), input = $("wlEmail"), btn = $("wlBtn"), msg = $("wlMsg"), busy = false;
+  function mask(email) {
+    var at = email.lastIndexOf("@"), id = email.slice(0, at), dom = email.slice(at + 1);
+    return (id.length <= 2 ? id.slice(0, 1) : id.slice(0, 2)) + "***@" + dom;
+  }
+  function today() { var d = new Date(); return (d.getMonth() + 1) + "월 " + d.getDate() + "일"; }
+  function setError(t) { msg.textContent = t; input.setAttribute("aria-invalid", t ? "true" : "false"); }
+  function setBusy(on) {
+    busy = on;
+    btn.setAttribute("aria-disabled", on ? "true" : "false");
+    form.setAttribute("aria-busy", on ? "true" : "false");
+    input.readOnly = on;
+    $("wlBtnLabel").textContent = on ? "등록하는 중" : "사전등록하기";
+  }
+  function paneAsk() {
+    var registered = !!reg && !APP_STORE_URL;
+    form.hidden = !!APP_STORE_URL || registered;
+    $("wlHave").hidden = !registered;
+    if (registered) $("wlHaveMail").textContent = reg.mail;
+    $("dlAsk").hidden = false; $("dlDone").hidden = true;
+    dl.setAttribute("aria-labelledby", "dlTitle"); dl.setAttribute("aria-describedby", "dlDesc");
+  }
+  input.addEventListener("input", function () { if (msg.textContent) setError(""); });
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (busy) return;
+    var email = input.value.trim();
+    if (!email) { setError("출시 소식을 받을 이메일을 적어 주세요."); input.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { setError("이메일 주소가 맞는지 다시 확인해 주세요. 예: name@example.com"); input.focus(); return; }
+    setError(""); setBusy(true);
+    fetch(WL, { method: "POST", headers: { apikey: WL_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ email: email }) })
+      .then(function (r) {
+        setBusy(false);
+        if (r.status === 201 || r.status === 200 || r.status === 204) done(email, false);
+        else if (r.status === 409) done(email, true);   // 이미 등록한 이메일 — 그대로 대기 카드를 보여 준다
+        else setError("문제가 생겼어요. 다시 시도해 주세요.");
+      }, function () {
+        setBusy(false);
+        setError("연결이 불안정해요. 잠시 후 다시 시도해 주세요.");
+      });
+  });
+  // 대기 카드 — 왼쪽 그래픽 = 랜딩 초대장과 같은 빛 번짐 + 볼록한 디토 마크 (퍼플 · 핑크)
+  var MARK = '<path d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle cx="141.594" cy="187.204" r="16.75"/>';
+  function glow() {
+    var W = 300, H = 333, s = Math.min(W, H), L = s * 0.42, u = "wg", c = ["#AA4AF4", "#6655D2", "#FA97E2"], tint = "#6655D2";
+    var F = [{ c: [.38, .18], r: [.93, .9], o: .94 }, { c: [.08, .72], r: [.94, .92], o: .9 }, { c: [.9, .76], r: [1.02, .98], o: .9 }];
+    var d = '<filter id="' + u + 'b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="' + s * .1 + '"/></filter><filter id="' + u + 'r" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="' + s * .05 + '"/></filter>' +
+      '<linearGradient id="' + u + 'v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".34"/><stop offset=".24" stop-color="#fff" stop-opacity=".12"/><stop offset=".62" stop-color="#fff" stop-opacity="0"/></linearGradient>', f = "";
+    F.forEach(function (x, j) {
+      d += '<radialGradient id="' + u + "c" + j + '" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(' + x.c[0] * W + " " + x.c[1] * H + ") scale(" + x.r[0] * W + " " + x.r[1] * H + ')"><stop offset="0" stop-color="' + c[j] + '"/><stop offset=".52" stop-color="' + c[j] + '" stop-opacity=".38"/><stop offset="1" stop-color="' + c[j] + '" stop-opacity="0"/></radialGradient>';
+      f += '<rect x="' + -.3 * W + '" y="' + -.3 * H + '" width="' + W * 1.6 + '" height="' + H * 1.6 + '" fill="url(#' + u + "c" + j + ')" opacity="' + x.o + '"/>';
+    });
+    d += '<linearGradient id="' + u + 'mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#FBF6FF"/><stop offset="1" stop-color="#EFE3FF"/></linearGradient>' +
+      '<filter id="' + u + 'm" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="' + L * .03 + '" result="h"/><feDiffuseLighting in="h" surfaceScale="' + L * .045 + '" diffuseConstant="1.1" lighting-color="#fff" result="dl"><feDistantLight azimuth="235" elevation="52"/></feDiffuseLighting><feColorMatrix in="dl" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -.62 0 0 0 .55" result="sa"/><feFlood flood-color="' + tint + '"/><feComposite in2="sa" operator="in" result="sh"/><feComposite in="sh" in2="SourceGraphic" operator="over" result="bd"/><feSpecularLighting in="h" surfaceScale="' + L * .045 + '" specularConstant=".9" specularExponent="30" lighting-color="#fff" result="sp"><feDistantLight azimuth="235" elevation="58"/></feSpecularLighting><feComposite in="bd" in2="sp" operator="arithmetic" k2="1" k3=".45" result="lit"/><feComposite in="lit" in2="SourceAlpha" operator="in" result="mk"/><feGaussianBlur in="SourceAlpha" stdDeviation="' + L * .035 + '" result="sb"/><feOffset in="sb" dy="' + L * .035 + '" result="so"/><feFlood flood-color="' + tint + '" flood-opacity=".3"/><feComposite in2="so" operator="in" result="dr"/><feMerge><feMergeNode in="dr"/><feMergeNode in="mk"/></feMerge></filter>';
+    var k = L / 214, mx = (W - L) / 2, my = (H - 204 * k) / 2;
+    return "<defs>" + d + '</defs><rect width="' + W + '" height="' + H + '" fill="#EBD5FC"/><g filter="url(#' + u + 'b)">' + f + '</g><rect width="' + W + '" height="' + H + '" fill="url(#' + u + 'v)"/>' +
+      '<rect width="' + W + '" height="' + H + '" fill="none" stroke="#fff" stroke-width="' + s * .11 + '" opacity=".68" filter="url(#' + u + 'r)"/><g filter="url(#' + u + 'm)"><g transform="translate(' + mx + " " + my + ") scale(" + k + ')" fill="url(#' + u + 'mg)">' + MARK + "</g></g>";
+  }
+  var drawn = false;
+  function paneDone(dup, play) {
+    if (!drawn) { $("wlG").innerHTML = glow(); drawn = true; }
+    $("wlCardMail").textContent = reg.mail;
+    var from = reg.from || handleText();
+    $("wlCardFrom").textContent = from && from !== "@" ? "from. " + from : "ditto.place";
+    $("wlCardDate").textContent = reg.date || today();
+    $("wlStamp").textContent = dup ? "등록 확인" : "사전등록 완료";
+    $("wlDoneTitle").textContent = dup ? "이미 사전등록했어요" : "사전등록을 마쳤어요";
+    $("wlDoneDesc").textContent = "출시 소식을 이 이메일로 가장 먼저 보내 드릴게요.";
+    $("dlAsk").hidden = true; $("dlDone").hidden = false;
+    dl.setAttribute("aria-labelledby", "wlDoneTitle"); dl.setAttribute("aria-describedby", "wlDoneDesc");
+    var stage = $("wlStage");
+    stage.classList.remove("go");
+    if (play && !reduce) { void stage.offsetWidth; stage.classList.add("go"); }
+    $("wlDoneTitle").focus({ preventScroll: true });
+  }
+  function done(email, dup) {
+    reg = { mail: mask(email), date: today(), from: handleText() };
+    saveReg(reg); syncBanner();
+    input.value = "";
+    paneDone(dup, true);
+  }
+  $("wlShow").addEventListener("click", function () { paneDone(false, true); });
+  $("wlOk").addEventListener("click", close);
+  // 카드를 손가락·마우스로 기울이면 광택이 따라 움직인다
+  (function () {
+    var card = $("wlCard");
+    function move(e) {
+      var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      if (x < -0.2 || x > 1.2 || y < -0.2 || y > 1.2) return;
+      card.classList.add("drag");
+      if (!reduce) { card.style.setProperty("--ry", ((x - 0.5) * 16).toFixed(1) + "deg"); card.style.setProperty("--rx", ((0.5 - y) * 14).toFixed(1) + "deg"); }
+      card.style.setProperty("--hx", (x * 100).toFixed(0) + "%"); card.style.setProperty("--hy", (y * 100).toFixed(0) + "%");
+    }
+    function leave() { card.classList.remove("drag"); ["--rx", "--ry", "--hx", "--hy"].forEach(function (k) { card.style.removeProperty(k); }); }
+    card.addEventListener("pointermove", move);
+    card.addEventListener("pointerleave", leave);
+    card.addEventListener("pointerup", leave);
+    card.addEventListener("animationend", function () { $("wlStage").classList.remove("go"); });
+  })();
+
+  // ───── 열기 · 닫기 ─────
   function open(kind) {
     if ($("profile").hidden || !dl.hidden) return;
     var m = MSG[kind];
     $("dlTitle").innerHTML = m ? m[0] : baseTitle;
-    $("dlDesc").textContent = m ? m[1] : baseDesc;
+    $("dlDesc").textContent = APP_STORE_URL ? (m ? m[1] : baseDesc) : (reg ? "곧 App Store에 나와요. 출시 소식을 가장 먼저 보내 드릴게요." : PRE_DESC);
+    setError(""); paneAsk();
     if (window.dittoPauseAll) window.dittoPauseAll();
     sync(); lastFocus = document.activeElement; shown = true;
     scrim.hidden = false; dl.hidden = false;
-    requestAnimationFrame(function () { requestAnimationFrame(function () { scrim.classList.add("on"); dl.classList.add("on"); $("dlStore").focus(); }); });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { scrim.classList.add("on"); dl.classList.add("on"); dl.focus({ preventScroll: true }); }); });
   }
   function close() {
+    if (dl.hidden) return;
     scrim.classList.remove("on"); dl.classList.remove("on");
-    setTimeout(function () { scrim.hidden = true; dl.hidden = true; }, 450);
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    if (document.activeElement === input) input.blur();
+    setTimeout(function () { scrim.hidden = true; dl.hidden = true; dl.style.bottom = ""; }, 450);
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }
   $("dlClose").addEventListener("click", close);
-  $("dlLater").addEventListener("click", close);
   scrim.addEventListener("click", close);
   document.addEventListener("keydown", function (e) {
     if (dl.hidden) return;
     if (e.key === "Escape") { close(); return; }
     if (e.key === "Tab") {
-      var f = [$("dlClose"), $("dlStore"), $("dlLater")], i = f.indexOf(document.activeElement);
+      var f = [].filter.call(dl.querySelectorAll("button, a[href], input"), function (x) { return x.offsetParent !== null && !x.hidden; });
+      if (!f.length) return;
+      var i = f.indexOf(document.activeElement);
       if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
       else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
     }
   });
+  // 모바일 키보드가 올라오면 시트를 키보드 위로 올린다 (iOS Safari는 고정 요소를 가리기도 한다)
+  if (window.visualViewport) {
+    var vv = window.visualViewport;
+    var lift = function () {
+      if (dl.hidden || window.innerWidth >= 640) { dl.style.bottom = ""; return; }
+      var gap = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+      dl.classList.toggle("kb", gap > 0);
+      dl.style.bottom = gap > 0 ? gap + "px" : "";
+    };
+    vv.addEventListener("resize", lift); vv.addEventListener("scroll", lift);
+  }
   // 위임 — 404에서 나중에 그린 플래터 위젯([data-dl])도 같은 안내를 띄운다
   document.addEventListener("click", function (e) {
     var a = e.target && e.target.closest ? e.target.closest("[data-dl]") : null;
@@ -450,8 +778,9 @@
   });
   // 자동으로 한 번 띄운다. 플래터가 있으면 플래터를 먼저 보게 한다:
   // 플래터 끝까지 내려 본 뒤 잠시 후, 아니면 9초 뒤. 음악·영상을 듣는 중이면 끝날 때까지 미룬다.
+  // 이 브라우저에서 이미 사전등록했으면 다시 띄우지 않는다.
   function auto() {
-    if (shown) return;
+    if (shown || (reg && !APP_STORE_URL)) return;
     if (document.querySelector(".w.playing")) { setTimeout(auto, 3000); return; }
     open();
   }
@@ -491,12 +820,16 @@
     var a = t.querySelector("audio, video");
     if (!a.dataset.bound) {
       a.dataset.bound = "1";
-      var bar = t.querySelector(".mu-bar i");
+      var bar = t.querySelector(".mu-bar i, .mu-track i"), el = t.querySelector(".mu-el");
+      var clock = function (x) { x = Math.floor(x || 0); return Math.floor(x / 60) + ":" + ("0" + x % 60).slice(-2); };
       a.addEventListener("playing", function () { t.classList.add("playing"); t.classList.remove("paused"); });
       a.addEventListener("pause", function () { t.classList.remove("playing"); if (!a.ended) t.classList.add("paused"); });
-      a.addEventListener("ended", function () { t.classList.remove("playing", "paused"); if (bar) bar.style.width = "0"; a.currentTime = 0; });
+      a.addEventListener("ended", function () { t.classList.remove("playing", "paused"); if (bar) bar.style.width = "0"; if (el) el.textContent = "0:00"; a.currentTime = 0; });
       a.addEventListener("error", function () { t.classList.remove("playing", "paused"); if (window.dittoOpenDownload) window.dittoOpenDownload(); });
-      if (bar) a.addEventListener("timeupdate", function () { if (a.duration) bar.style.width = (a.currentTime / a.duration * 100) + "%"; });
+      a.addEventListener("timeupdate", function () {
+        if (bar && a.duration) bar.style.width = (a.currentTime / a.duration * 100) + "%";
+        if (el) el.textContent = clock(a.currentTime);
+      });
     }
     return a;
   }
@@ -568,7 +901,6 @@
     $("name").textContent = name || handle;
     $("navTitle").textContent = (name || handle) + "의 플래터";
     $("handle").textContent = "@" + handle;
-    $("stepHandle").textContent = "@" + handle;
     if (avatar && /^(https:\/\/|\/assets\/app\/)/.test(avatar)) {
       var img = $("avatar");
       img.onload = function () { img.hidden = false; $("avatarFallback").hidden = true; };
@@ -625,12 +957,20 @@
       if (card) card.setAttribute("style", P.handleStyle(p.handle_color));   // 앱과 같은 핸들 색 (profiles.handle_color)
       var html = "";
       try { html = P.render(j.widgets || [], media); } catch (e) { html = ""; }
-      var steps = document.querySelector("#profile .steps");
-      if (html && steps) steps.insertAdjacentHTML("beforebegin", html);
+      var foot = document.querySelector("#profile .foot");
+      if (html && foot) foot.insertAdjacentHTML("beforebegin", html);
       $("profile").hidden = false;
       $("banner").hidden = false;
       if (html) {
         P.paintMusic($("platter"));
+        // 글자 크기·이미지 비율을 알아야 하는 마무리 (본문 줄 수 · 흐르는 제목 · 유튜브 썸네일 띠) — 글꼴이 늦게 오거나 폭이 바뀌면 다시
+        if (P.finish) {
+          var fin = function () { try { P.finish($("platter")); } catch (e) {} };
+          fin();
+          if (document.fonts && document.fonts.ready) document.fonts.ready.then(fin);
+          var rt = 0;
+          window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(fin, 150); });
+        }
         if (window.dittoInitPlatter) window.dittoInitPlatter();
       }
       if (window.dittoArmDownload) window.dittoArmDownload();
