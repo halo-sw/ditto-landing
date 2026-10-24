@@ -9,6 +9,13 @@
   location.replace("https://i.ditto.place/" + m[1].toUpperCase() + "?" + q.toString()); })();
 // 집들이 QR(/h/{토큰}) · 디토 키링(/k/{태그}) — 앱이 있으면 유니버설 링크로 앱이 열린다. 여기 왔다면 앱이 없는 것: 안내 페이지로.
 (function () { var m = location.pathname.match(/^\/(h|k)\/[A-Za-z0-9_-]+\/?$/); if (m) location.replace("/" + m[1] + "/"); })();
+// 관계 지도(/relationship-ontology/…) — 대소문자·밑줄·없는 사람 주소로 들어와도 '찾을 수 없어요' 대신 가장 가까운 지도로.
+// 사람 아이디는 #으로 넘겨 지도에서 열고(없는 아이디면 지도만), 다시 404로 돌아오는 일이 없게 한다.
+(function () { var p; try { p = decodeURIComponent(location.pathname).toLowerCase(); } catch (e) { p = location.pathname.toLowerCase(); }
+  var m = p.match(/^\/relationship[-_ .]?ontology(?:\/([^\/]*))?(?:\/([^\/]*))?/); if (!m) return;
+  var who = { chaewon: "chaewon", uni: "chaewon", "채원": "chaewon", siwoo: "siwoo", high: "siwoo", "시우": "siwoo" }[m[1] || ""];
+  var id = who && m[2] && /^[a-z0-9_-]+$/.test(m[2]) ? m[2] : "";
+  location.replace("/relationship-ontology/" + (who ? who + "/" : "") + (id ? "#" + id : "")); })();
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
