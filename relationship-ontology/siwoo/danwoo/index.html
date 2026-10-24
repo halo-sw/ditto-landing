@@ -25,17 +25,17 @@
 <link rel="preload" href="/relationship-ontology/assets/pretendard-sim.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* Layout: one screen. Controls on top; persona and the day's notifications on the left, the map with a 6-month timeline in the middle, summary · people tabs on the right. Anything that stands for a relationship opens its card.
-   Splup DS dark mode (color system 3.3.3): bg/default page, layer surfaces, text/border/selection/action tokens, callout pairs for levels.
+   Splup DS dark mode: neutral gray surfaces and text (gray950 #181818 family), selection/action/brand tokens from color system 3.3.3, callout pairs for levels.
    Type is the service standard — LINE Seed Sans App for Latin and numbers, Pretendard for Korean — on the t-scale with weights 400/500/700, no tracking.
-   Radius: base 16, nested 8, sheet 24. The stage glows with bg/brand-subtle where Ditto! happens. Both personas share every slot so switching never moves the layout. */
+   Radius: base 16, nested 8, sheet 24. Purple is kept for meaning only — selection, play, Ditto! balls, brand text; surfaces stay on the gray ramp. Both personas share every slot so switching never moves the layout. */
 @font-face{font-family:"LINE Seed Sim";src:url("assets/lineseed-rg.woff2") format("woff2");font-weight:400 500;font-display:swap}
 @font-face{font-family:"LINE Seed Sim";src:url("assets/lineseed-bd.woff2") format("woff2");font-weight:700;font-display:swap}
 @font-face{font-family:"Pretendard Sim";src:url("assets/pretendard-sim.woff2") format("woff2");font-weight:100 900;font-display:swap}
 :root{
-  /* Splup DS · dark */
-  --bg:#1C1722; --bg-2:#2D2435; --bg-3:#443651; --card:#443651; --card-2:#584A68;
-  --ink:#FAF9FC; --ink-2:#E7E1EE; --mute:#B2A7BF; --faint:#6D5F7D;
-  --line:#443651; --line-2:#584A68;
+  /* Splup DS · dark, neutral surfaces (gray950 #181818 family per the dark-mode rule; #242424 · #2A2A2A · #333333 fill the gaps in the 6-step gray) */
+  --bg:#181818; --bg-2:#242424; --bg-3:#333333; --card:#2A2A2A; --card-2:#424242;
+  --ink:#FAFAFA; --ink-2:#E6E6E6; --mute:#AEAEAE; --faint:#6C6C6C;
+  --line:#333333; --line-2:#424242;
   --sel:#582082; --on-sel:#F2E8FF; --sel-line:#D6AEFF;
   --brand:#C588FF; --on-brand:#421763; --brand-text:#D6AEFF; --brand-subtle:#AA4AF424; --tonal:#582082;
   --violet:#C588FF; --violet-d:#D6AEFF;
@@ -97,9 +97,9 @@ mark{padding:0;background:none;color:var(--brand-text)}
 .phc{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:var(--bg-2);font:500 12px/16px var(--kr);color:var(--ink-2)}
 .phc i{width:6px;height:6px;border-radius:50%;background:var(--violet)}
 .phc.vac i{background:#48B5F4}
-.phc.exam i{background:#897B99}
+.phc.exam i{background:#6C6C6C}
 .lv{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;font:500 12px/16px var(--kr);white-space:nowrap}
-.lv0{background:#302C32;color:#D5CEDB}
+.lv0{background:#333333;color:#E6E6E6}
 .lv1{background:#123240;color:#A2DAF6}
 .lv2{background:#0F352E;color:#9FE1D1}
 .lv3{background:#302942;color:#D4C8FA}
@@ -112,13 +112,13 @@ mark{padding:0;background:none;color:var(--brand-text)}
 .nt .av{width:32px;height:32px}
 .nt p{font:400 13px/18px var(--kr);color:var(--ink)}
 .nt small{display:block;font:400 11px/15px var(--kr);color:var(--mute);margin-top:4px}
-.nt.dit{background:var(--tonal)}
-.nt.dit:hover{background:#6F26A4}
+.nt.dit{background:linear-gradient(var(--brand-subtle),var(--brand-subtle)),var(--bg-2)}
+.nt.dit:hover{background:var(--bg-3)}
 .nt.open{box-shadow:inset 0 0 0 2px var(--sel-line)}
 .nt.static{cursor:default}
 @keyframes ntIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
-.stage{position:relative;min-height:0;background:radial-gradient(60% 55% at 50% 46%,var(--brand-subtle) 0%,rgba(170,74,244,0) 72%),var(--bg);display:grid;grid-template-rows:minmax(0,1fr) auto}
+.stage{position:relative;min-height:0;background:var(--bg);display:grid;grid-template-rows:minmax(0,1fr) auto}
 .map{position:relative;min-height:0}
 #cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
 .wseg{position:absolute;z-index:2;top:12px;left:50%;transform:translateX(-50%)}
@@ -126,7 +126,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
 .mlg button{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border:0;border-radius:999px;background:var(--bg-2);font:500 12px/16px var(--kr);color:var(--ink-2);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
 .mlg button[aria-pressed="false"]{opacity:.4}
 .mlg i{width:9px;height:9px;border-radius:50%}
-.mlg .dust i{width:4px;height:4px;border-radius:0;background:#897B99}
+.mlg .dust i{width:4px;height:4px;border-radius:0;background:#6C6C6C}
 .hint{position:absolute;z-index:2;top:56px;left:50%;transform:translateX(-50%);font:500 12px/16px var(--kr);color:var(--mute);white-space:nowrap;pointer-events:none}
 .tip{position:absolute;z-index:5;pointer-events:none;max-width:240px;padding:8px 11px;border-radius:var(--r-md);background:var(--card);box-shadow:inset 0 0 0 1px var(--line-2),var(--shadow);font:400 12px/16px var(--kr);color:#FFFFFF;opacity:0;transition:opacity .15s}
 .tip.on{opacity:1}
@@ -152,7 +152,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
 .cn b{font:700 32px/42px var(--round);color:var(--ink);font-variant-numeric:tabular-nums}
 .cn b small{font:500 12px/16px var(--kr);color:var(--mute);margin-left:3px;font-style:normal}
 .cn span{font:400 12px/16px var(--kr);color:var(--mute)}
-.cn.dit{background:var(--tonal)}
+.cn.dit{background:var(--bg-2)}
 .cn.dit b{color:var(--brand-text)}
 .cn.dit b small{color:var(--mute)}
 .box{padding:14px;border-radius:var(--r-lg);background:var(--bg-2);display:flex;flex-direction:column;gap:8px}
@@ -183,11 +183,11 @@ mark{padding:0;background:none;color:var(--brand-text)}
 .rc{position:relative;width:min(440px,100%);max-height:100%;overflow:auto;border-radius:var(--r-sheet);background:var(--card);display:flex;flex-direction:column;animation:rise .32s var(--ease);scrollbar-width:thin;box-shadow:var(--shadow)}
 @keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.scrim,.rc,.rm,.nt,.rm-cap .in{animation:none}}
-.rc-h{position:relative;padding:20px 56px 18px 20px;display:flex;flex-direction:column;gap:12px;background:var(--tonal);color:var(--ink)}
+.rc-h{position:relative;padding:20px 56px 18px 20px;display:flex;flex-direction:column;gap:12px;background:none;border-bottom:1px solid var(--line-2);color:var(--ink)}
 .rc-h > *{position:relative;z-index:1}
 .rc-x{position:absolute;z-index:3;top:14px;right:14px;width:34px;height:34px;border:0;border-radius:999px;background:var(--card-2);color:var(--ink);font-size:14px;cursor:pointer}
 .pair{display:flex;align-items:center}
-.pair .av{width:56px;height:56px;box-shadow:0 0 0 3px var(--tonal)}
+.pair .av{width:56px;height:56px;box-shadow:0 0 0 3px var(--card)}
 .pair .av + .av{margin-left:-12px}
 .pair .amp{margin-left:12px;font:500 12px/16px var(--kr);color:var(--mute)}
 .rc-h h2{font:700 28px/38px var(--kr)}
@@ -216,30 +216,30 @@ mark{padding:0;background:none;color:var(--brand-text)}
 .pkv dd{margin:0}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;background:var(--bg-2);font:500 12px/16px var(--kr);color:var(--ink)}
-.quote{padding:14px;border-radius:var(--r-md);background:var(--tonal);color:var(--on-sel);font:500 13px/18px var(--kr)}
+.quote{padding:14px;border-radius:var(--r-md);background:var(--card-2);color:var(--ink-2);font:500 13px/18px var(--kr)}
 .brow{display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px;align-items:start;font:400 13px/18px var(--kr);color:var(--ink-2)}
 
 /* relationship media: a lavender stage replays the pair's story (balls = interactions, fanned to both people), chapters alongside */
 .rm{position:relative;width:min(1160px,100%);height:min(780px,100%);border-radius:var(--r-sheet);background:var(--card);display:grid;grid-template-columns:minmax(0,1fr) 380px;overflow:hidden;animation:rise .32s var(--ease);box-shadow:var(--shadow)}
-.rm-st{position:relative;background:radial-gradient(60% 55% at 50% 46%,var(--brand-subtle) 0%,rgba(170,74,244,0) 72%),var(--bg);display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;min-width:0}
+.rm-st{position:relative;background:var(--bg);display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;min-width:0}
 .rm-cw{position:relative;min-height:0;overflow:hidden}
 #rmCv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
 .rm-lg{position:absolute;top:18px;left:18px;display:flex;flex-direction:column;gap:4px;font:500 11px/15px var(--kr);color:var(--mute);pointer-events:none}
 .rm-lg span{display:grid;grid-template-columns:8px 22px auto;gap:8px;align-items:center;transition:opacity .3s}
 .rm-lg span.z{opacity:.35}
 .rm-lg i{width:8px;height:8px;border-radius:50%}
-.rm-lg .dust i{width:3px;height:3px;border-radius:0;background:#897B99;justify-self:center}
+.rm-lg .dust i{width:3px;height:3px;border-radius:0;background:#6C6C6C;justify-self:center}
 .rm-lg b{font:700 12px/16px var(--round);color:var(--ink);font-variant-numeric:tabular-nums;text-align:right}
 .rm-lg em{font-style:normal;color:var(--faint);margin-top:4px}
 .rm-cap{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:min(460px,calc(100% - 300px));text-align:center;pointer-events:none}
 .rm-cap .in{animation:capIn .55s var(--ease)}
 @keyframes capIn{from{opacity:0;transform:translateY(8px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
 .rm-cap .dd{display:inline-flex;gap:8px;align-items:center;height:26px;padding:0 12px;border-radius:999px;background:var(--bg-2);box-shadow:inset 0 0 0 1px var(--line);font:700 12px/16px var(--round);color:var(--ink-2);font-variant-numeric:tabular-nums}
-.rm-cap .dd i{width:6px;height:6px;border-radius:50%;background:var(--dc,#897B99)}
+.rm-cap .dd i{width:6px;height:6px;border-radius:50%;background:var(--dc,#6C6C6C)}
 .rm-cap p{font:700 20px/27px var(--kr);color:var(--ink);margin-top:10px;text-wrap:balance}
 .rm-cap p small{display:block;font:400 13px/18px var(--kr);color:var(--mute);margin-top:6px}
 .rm-cap.dit p b{color:var(--brand-text)}
-.rm-m{position:absolute;bottom:12px;display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:var(--r-lg);background:rgba(45,36,53,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:var(--shadow),inset 0 0 0 1px rgba(255,255,255,.08);pointer-events:none}
+.rm-m{position:absolute;bottom:12px;display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:var(--r-lg);background:rgba(36,36,36,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:var(--shadow),inset 0 0 0 1px rgba(255,255,255,.08);pointer-events:none}
 .rm-m.l{left:12px;width:min(272px,calc(50% - 18px))}
 .rm-m.r{right:12px;width:min(232px,calc(50% - 18px))}
 .rm-m h4{font:500 11px/15px var(--kr);color:var(--mute);display:flex;justify-content:space-between;gap:8px}
@@ -439,7 +439,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
     if (st.world === 'without') r.ids.forEach(id => { const p = r.people[id], a = Math.atan2(p.dir[2], p.dir[0]) + rotY; pq[id] = [CX + Math.cos(a) * p.rad * R0, CY + Math.sin(a) * p.rad * R0, 0, 1]; });
     const K = kr();
     ctx.lineWidth = 1; ctx.setLineDash([2, 6]);
-    (st.world === 'with' ? [[.4, '가까운 친구 15'], [.66, '친구'], [.94, '친구의 친구']] : [[.34, '가까운 친구'], [.48, '친구'], [.66, '가벼운 친구'], [.86, '아는 사이']]).forEach(([rr, l]) => { ctx.strokeStyle = 'rgba(197,136,255,.22)'; ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); ctx.fillStyle = 'rgba(197,136,255,.75)'; ctx.font = '500 11px ' + K; ctx.textAlign = 'center'; ctx.fillText(l, CX, CY - R0 * rr - 6); });
+    (st.world === 'with' ? [[.4, '가까운 친구 15'], [.66, '친구'], [.94, '친구의 친구']] : [[.34, '가까운 친구'], [.48, '친구'], [.66, '가벼운 친구'], [.86, '아는 사이']]).forEach(([rr, l]) => { ctx.strokeStyle = 'rgba(174,174,174,.2)'; ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); ctx.fillStyle = '#6C6C6C'; ctx.font = '500 11px ' + K; ctx.textAlign = 'center'; ctx.fillText(l, CX, CY - R0 * rr - 6); });
     ctx.setLineDash([]);
     const F = focus || openId, inv = e => e.a === F || e.b === F;
     const items = [];
@@ -456,7 +456,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
         if (e.t === 'visit') { ctx.fillStyle = `rgba(110,90,140,${((.15 + .45 * dep) * a0).toFixed(3)})`; const z = 1.2 * q[3]; ctx.fillRect(q[0] - z / 2, q[1] - z / 2, z, z); return; }
         const flash = Math.max(0, 1 - (now - e.born) / 1100);
         const la = e.t === 'ditto' ? (.1 + .3 * dep) * a0 : (.04 + .12 * dep) * a0;
-        ctx.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#D5CCDF'; ctx.lineWidth = e.t === 'ditto' ? .9 : .5;
+        ctx.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#E6E6E6'; ctx.lineWidth = e.t === 'ditto' ? .9 : .5;
         [e.a, e.b].forEach(k => { const o = pq[k]; ctx.globalAlpha = Math.min(1, la + .7 * flash); ctx.beginPath(); ctx.moveTo(o[0], o[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); });
         ctx.globalAlpha = 1;
         items.push({ z: q[2], e, a0 });
@@ -478,14 +478,14 @@ mark{padding:0;background:none;color:var(--brand-text)}
       const fr = id === 'me' || (qs && qs.fr), z = (id === 'me' ? 30 : fr ? (qs.cl ? 20 : 17) : 14) * q[3] * (id === F ? 1.25 : 1);
       let a = 1; if (F && id !== F && id !== 'me') a = .2;
       if (st.world === 'with' && qs && !qs.fr && (qs.st === 'near' || qs.st === 'open')) { const pulse = reduce ? .5 : .5 + .5 * Math.sin(now / 400); const g = ctx.createRadialGradient(q[0], q[1], z * .5, q[0], q[1], z * 1.9); g.addColorStop(0, qs.st === 'open' ? `rgba(199,155,255,${.4 + .2 * pulse})` : `rgba(211,176,255,${.2 + .25 * pulse})`); g.addColorStop(1, 'rgba(199,155,255,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], z * 1.9, 0, 7); ctx.fill(); }
-      if (id === 'me') { const g = ctx.createRadialGradient(q[0], q[1], z * .4, q[0], q[1], z * 2.2); g.addColorStop(0, 'rgba(170,74,244,.35)'); g.addColorStop(1, 'rgba(170,74,244,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], z * 2.2, 0, 7); ctx.fill(); }
+      if (id === 'me') { const g = ctx.createRadialGradient(q[0], q[1], z * .4, q[0], q[1], z * 2.2); g.addColorStop(0, 'rgba(170,74,244,.16)'); g.addColorStop(1, 'rgba(170,74,244,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], z * 2.2, 0, 7); ctx.fill(); }
       ctx.globalAlpha = a * (fr || st.world === 'without' ? 1 : .8);
       const x0 = q[0] - z / 2, y0 = q[1] - z / 2, rrect = (x, y, w, h, rd) => { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, rd); else ctx.rect(x, y, w, h); };
-      if (id === F) { ctx.strokeStyle = '#FAF9FC'; ctx.lineWidth = 1.5; rrect(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
+      if (id === F) { ctx.strokeStyle = '#FAFAFA'; ctx.lineWidth = 1.5; rrect(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
       ctx.save(); rrect(x0, y0, z, z, z * .25); ctx.clip();
-      const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#443651'; ctx.fillRect(x0, y0, z, z); }
+      const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#333333'; ctx.fillRect(x0, y0, z, z); }
       ctx.restore();
-      ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${K}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(28,23,34,.9)'; ctx.fillStyle = '#FAF9FC';
+      ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${K}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(24,24,24,.9)'; ctx.fillStyle = '#FAFAFA';
       const ly = q[1] + z / 2 + 13; ctx.strokeText(p.n, q[0], ly); ctx.fillText(p.n, q[0], ly);
       if (st.world === 'with' && qs && !qs.fr && qs.st && W >= 560) { ctx.font = `500 11px ${K}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }
       ctx.globalAlpha = 1;
@@ -549,7 +549,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
   // The card is a small stage: it replays the pair from day 0 to the current day, pausing on each chapter.
   // Me on the left, them on the right, mutual friends above; each interaction is a ball fanned to both.
   let rm = null;
-  const LVC = ['#B2A7BF', '#48B5F4', '#2BC4A8', '#AA4AF4', '#E569C6'];
+  const LVC = ['#AEAEAE', '#48B5F4', '#2BC4A8', '#AA4AF4', '#E569C6'];
   const BSZ = { ditto: 10, invite: 9, group: 7, comment: 6, guest: 6.4, reaction: 4 };
   function openCard(id, o){
     o = o || {}; openId = id; if (o.from) lastFocusEl = o.from; syncUrl();
@@ -660,9 +660,9 @@ mark{padding:0;background:none;color:var(--brand-text)}
     const d = Math.min(rm.d, Math.floor(rm.t)), p = rm.p, q = r.snap[d].p[rm.id], wo = rm.world === 'without';
     let ch = -1; rm.items.forEach((it, i) => { if (it.d <= rm.t + 1e-6) ch = i; });
     if (force || ch !== rm.ch || wo !== rm.wo0) {
-      const it = rm.items[ch], col = it ? ({ dit: '#AA4AF4', op: '#C79BFF', st: '#2BC4A8', nr: '#5A5BF2', fr: '#07E7B4', mt: '#F2C94C', lvu: '#F08BC0', now: '#FAF9FC' })[it.cls.split(' ')[0]] : null;
+      const it = rm.items[ch], col = it ? ({ dit: '#AA4AF4', op: '#C79BFF', st: '#2BC4A8', nr: '#5A5BF2', fr: '#07E7B4', mt: '#F2C94C', lvu: '#F08BC0', now: '#FAFAFA' })[it.cls.split(' ')[0]] : null;
       $('rmCapW').classList.toggle('dit', !!it && /dit/.test(it.cls) && !wo);
-      $('rmCap').innerHTML = `<div class="in">${wo ? `<span class="dd">디토 없이 · D+${d}</span><p>${p.kind === 'fof' ? `${p.n}의 플래터를 볼 일이 없어요<small>${p.via.map(v => r.people[v].n).join('·')}의 친구라는 것만 겨우 아는 사이예요</small>` : `오프라인에서 마주친 시간만 쌓여요<small>디토로 나눈 교류 ${rm.balls.filter(b => b.shown && b.e.t !== 'invite').length}번이 없는 6개월이에요</small>`}</p>` : it ? `<span class="dd" style="--dc:${col || '#B2A7BF'}"><i></i>D+${Math.floor(it.d)} · ${mdw(it.d)}</span><p>${it.html}</p>` : `<span class="dd">D+${d}</span><p>아직 서로 보이지 않아요<small>${p.via.map(v => r.people[v].n).join('·')}의 친구로 곧 지도에 나타나요</small></p>`}</div>`;
+      $('rmCap').innerHTML = `<div class="in">${wo ? `<span class="dd">디토 없이 · D+${d}</span><p>${p.kind === 'fof' ? `${p.n}의 플래터를 볼 일이 없어요<small>${p.via.map(v => r.people[v].n).join('·')}의 친구라는 것만 겨우 아는 사이예요</small>` : `오프라인에서 마주친 시간만 쌓여요<small>디토로 나눈 교류 ${rm.balls.filter(b => b.shown && b.e.t !== 'invite').length}번이 없는 6개월이에요</small>`}</p>` : it ? `<span class="dd" style="--dc:${col || '#AEAEAE'}"><i></i>D+${Math.floor(it.d)} · ${mdw(it.d)}</span><p>${it.html}</p>` : `<span class="dd">D+${d}</span><p>아직 서로 보이지 않아요<small>${p.via.map(v => r.people[v].n).join('·')}의 친구로 곧 지도에 나타나요</small></p>`}</div>`;
       rm.ch = ch; rm.wo0 = wo;
       $('rmCh').querySelectorAll('li').forEach((li, i) => { li.classList.toggle('on', i === ch); li.classList.toggle('fut', rm.items[i].d > rm.t + 1e-6); });
       if (rm.playing && ch >= 0 && matchMedia('(min-width: 821px)').matches) { const li = $('rmCh').children[ch]; if (li) li.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' }); }
@@ -675,12 +675,12 @@ mark{padding:0;background:none;color:var(--brand-text)}
     $('rmM1').innerHTML = `<h4><span>함께 보낸 시간</span><span>${wo ? '디토 없이' : '디토와 함께'}</span></h4><div class="big">${cur.toFixed(0)}<small>시간</small><small>${wo ? '디토와 함께' : '디토 없이'} ${oth.toFixed(0)}</small></div><div class="hb"><i style="width:${pc(cur)}"></i>${[[50, '가벼운'], [90, '친구'], [200, '가까운']].map(([v, l]) => `<s style="left:${pc(v)}" data-l="${l}"></s>`).join('')}<u style="left:${pc(oth)}"></u></div><div class="row">${lvChip(wo ? (p.kind === 'fof' ? 0 : q.lo) : q.lw)}${!wo && p.kind === 'known' && q.lw > q.lo ? `<span>디토 없이 ${LV[q.lo]}</span>` : ''}</div>`;
     if (p.kind === 'fof') {
       const fr = q.fr && !wo, stg = wo ? null : fr ? null : q.st;
-      $('rmM2').innerHTML = `<h4><span>주파수</span><span style="color:${fr ? '#07E7B4' : stg ? STG[stg][1] : '#B2A7BF'}">${wo ? '없음' : fr ? '친구' : stg ? STG[stg][0] : '아직'}</span></h4><canvas id="rmMx"></canvas><p class="mxs">${wo ? '디토 없이는 주파수가 생기지 않아요' : fr ? `D+${Math.floor(p.fd)}에 친구가 됐어요` : q.sc !== null && q.sc !== undefined ? `점수 ${q.sc.toFixed(1)} · 열림 기준 10` : '아직 교류 전이에요'}</p>`;
+      $('rmM2').innerHTML = `<h4><span>주파수</span><span style="color:${fr ? '#07E7B4' : stg ? STG[stg][1] : '#AEAEAE'}">${wo ? '없음' : fr ? '친구' : stg ? STG[stg][0] : '아직'}</span></h4><canvas id="rmMx"></canvas><p class="mxs">${wo ? '디토 없이는 주파수가 생기지 않아요' : fr ? `D+${Math.floor(p.fd)}에 친구가 됐어요` : q.sc !== null && q.sc !== undefined ? `점수 ${q.sc.toFixed(1)} · 열림 기준 10` : '아직 교류 전이에요'}</p>`;
       const [g] = setup($('rmMx')); rm.mx = g;
     } else {
       rm.mx = null;
       const fr = q.fr && !wo;
-      $('rmM2').innerHTML = `<h4><span>디토 친구</span><span style="color:${fr ? '#0FB98F' : '#B2A7BF'}">${fr ? (q.cl ? '가까운 15' : '친구') : '아직'}</span></h4><div class="big" style="font-size:22px;line-height:28px">${fr ? `D+${Math.floor(p.fd)}` : '—'}<small>${fr ? '부터' : ''}</small></div><div class="row">${lvChip(q0lv(rm.id))}<span class="ar">→</span>${lvChip(wo ? q.lo : q.lw)}</div>`;
+      $('rmM2').innerHTML = `<h4><span>디토 친구</span><span style="color:${fr ? '#0FB98F' : '#AEAEAE'}">${fr ? (q.cl ? '가까운 15' : '친구') : '아직'}</span></h4><div class="big" style="font-size:22px;line-height:28px">${fr ? `D+${Math.floor(p.fd)}` : '—'}<small>${fr ? '부터' : ''}</small></div><div class="row">${lvChip(q0lv(rm.id))}<span class="ar">→</span>${lvChip(wo ? q.lo : q.lw)}</div>`;
     }
     rmTl();
   }
@@ -710,7 +710,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
     const P = v => { const x = v[0] * ca - v[2] * sa, z = v[0] * sa + v[2] * ca; return [cx + x * rx, cy + v[1] * ry, z, 1 + z * .2]; };
     const meP = [ax, cy], thP = [bx, cy];
     // the cloud's outline, like a faint globe
-    g.strokeStyle = 'rgba(197,136,255,.2)'; g.lineWidth = 1; g.setLineDash([2, 6]); g.beginPath(); g.ellipse(cx, cy, rx * 1.12, ry * 1.12, 0, 0, 7); g.stroke(); g.setLineDash([]);
+    g.strokeStyle = 'rgba(174,174,174,.18)'; g.lineWidth = 1; g.setLineDash([2, 6]); g.beginPath(); g.ellipse(cx, cy, rx * 1.12, ry * 1.12, 0, 0, 7); g.stroke(); g.setLineDash([]);
     // mutual friends above: the bridge a friend of a friend came through
     const vias = p.kind === 'fof' ? p.via : [];
     const vy = Math.max(mob ? top + 8 : top - 28, cy - ry * 1.12 - 44), viaP = vias.map((v, i) => [cx + (i - (vias.length - 1) / 2) * 76, vy]);
@@ -731,7 +731,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
     list.forEach(({ bl, pq }) => {
       const e = bl.e, age = t - e.d, rec = age < 7 ? 1 : age < 14 ? .75 : age < 21 ? .55 : .28, flash = Math.max(0, 1 - (now - bl.born) / 1100), dep = (pq[2] + 1) / 2;
       const la = (e.t === 'ditto' ? (.12 + .3 * dep) : (.04 + .1 * dep)) * (e.t === 'ditto' ? Math.max(rec, .5) : rec) * vis;
-      g.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#D5CCDF'; g.lineWidth = e.t === 'ditto' ? .9 : .5;
+      g.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#E6E6E6'; g.lineWidth = e.t === 'ditto' ? .9 : .5;
       [meP, thP].forEach(o => { g.globalAlpha = Math.min(1, la + .75 * flash * vis); g.beginPath(); g.moveTo(o[0], o[1]); g.lineTo(pq[0], pq[1]); g.stroke(); });
       g.globalAlpha = 1;
     });
@@ -742,7 +742,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
       if (e.t === 'ditto' && !old) { const gr = g.createRadialGradient(pq[0], pq[1], rad * .5, pq[0], pq[1], rad * 3); gr.addColorStop(0, `rgba(170,74,244,${(.5 * a0).toFixed(3)})`); gr.addColorStop(1, 'rgba(170,74,244,0)'); g.fillStyle = gr; g.beginPath(); g.arc(pq[0], pq[1], rad * 3, 0, 7); g.fill(); }
       const rk = (now - bl.born) / 900; if (rk < 1) { g.strokeStyle = S.TYPES[e.t].c; g.globalAlpha = (1 - rk) * .7 * vis; g.lineWidth = 1.2; g.beginPath(); g.arc(pq[0], pq[1], rad + 4 + rk * (e.t === 'ditto' ? 46 : 26), 0, 7); g.stroke(); g.globalAlpha = 1; }
       g.globalAlpha = Math.max(.08, a0); g.drawImage(SPR[e.t], pq[0] - rad, pq[1] - rad, rad * 2, rad * 2); g.globalAlpha = 1;
-      if (rm.hi === e) { g.strokeStyle = '#FAF9FC'; g.lineWidth = 1.5; g.beginPath(); g.arc(pq[0], pq[1], rad + 5, 0, 7); g.stroke(); }
+      if (rm.hi === e) { g.strokeStyle = '#FAFAFA'; g.lineWidth = 1.5; g.beginPath(); g.arc(pq[0], pq[1], rad + 5, 0, 7); g.stroke(); }
       if (vis > .5) rm.hits.push({ x: pq[0], y: pq[1], r: Math.max(rad + 3, 9), e });
     });
     // people
@@ -750,11 +750,11 @@ mark{padding:0;background:none;color:var(--brand-text)}
       g.globalAlpha = a; const x0 = pt[0] - z / 2, y0 = pt[1] - z / 2;
       if (ring) { g.lineWidth = 2.5; g.strokeStyle = 'rgba(255,255,255,.08)'; g.beginPath(); g.arc(pt[0], pt[1], z * .5 + 9, 0, 7); g.stroke(); g.strokeStyle = ring[1]; g.lineCap = 'round'; g.beginPath(); g.arc(pt[0], pt[1], z * .5 + 9, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(.02, Math.min(1, ring[0]))); g.stroke(); g.lineCap = 'butt'; }
       g.save(); g.beginPath(); if (g.roundRect) g.roundRect(x0, y0, z, z, z * .25); else g.rect(x0, y0, z, z); g.clip();
-      const im = avImg[person.av]; if (im && im.complete && im.naturalWidth) g.drawImage(im, x0, y0, z, z); else { g.fillStyle = '#443651'; g.fillRect(x0, y0, z, z); }
+      const im = avImg[person.av]; if (im && im.complete && im.naturalWidth) g.drawImage(im, x0, y0, z, z); else { g.fillStyle = '#333333'; g.fillRect(x0, y0, z, z); }
       g.restore();
-      g.textAlign = 'center'; g.font = `700 ${z > 40 ? 14 : 12}px ${K}`; g.fillStyle = '#FAF9FC'; g.lineWidth = 3; g.strokeStyle = 'rgba(28,23,34,.9)';
+      g.textAlign = 'center'; g.font = `700 ${z > 40 ? 14 : 12}px ${K}`; g.fillStyle = '#FAFAFA'; g.lineWidth = 3; g.strokeStyle = 'rgba(24,24,24,.9)';
       const ly = pt[1] + z / 2 + (ring ? 26 : 18); g.strokeText(person.n, pt[0], ly); g.fillText(person.n, pt[0], ly);
-      if (sub) { g.font = `500 11px ${K}`; g.fillStyle = subC || '#B2A7BF'; g.strokeText(sub, pt[0], ly + 15); g.fillText(sub, pt[0], ly + 15); }
+      if (sub) { g.font = `500 11px ${K}`; g.fillStyle = subC || '#AEAEAE'; g.strokeText(sub, pt[0], ly + 15); g.fillText(sub, pt[0], ly + 15); }
       g.globalAlpha = 1;
     };
     viaP.forEach((vp, i) => hub(vp, r.people[vias[i]], mob ? 24 : 30, .9, null, mob ? '' : '함께 아는 친구'));
@@ -788,14 +788,14 @@ mark{padding:0;background:none;color:var(--brand-text)}
     const path = k => { g.beginPath(); vals.forEach((v, i) => i ? g.lineTo(X(i), Y(v[k])) : g.moveTo(X(i), Y(v[k]))); };
     path(0); g.lineTo(X(rm.d), Y(0)); g.lineTo(X(0), Y(0)); g.closePath(); g.fillStyle = 'rgba(170,74,244,.12)'; g.fill();
     g.save(); g.beginPath(); g.rect(0, 0, X(rm.t), bh); g.clip(); path(0); g.lineTo(X(rm.d), Y(0)); g.lineTo(X(0), Y(0)); g.closePath(); g.fillStyle = 'rgba(170,74,244,.32)'; g.fill(); path(0); g.strokeStyle = '#AA4AF4'; g.lineWidth = 1.5; g.stroke(); g.restore();
-    if (rm.p.kind === 'known') { path(1); g.strokeStyle = 'rgba(201,194,210,.8)'; g.setLineDash([3, 3]); g.lineWidth = 1; g.stroke(); g.setLineDash([]); }
+    if (rm.p.kind === 'known') { path(1); g.strokeStyle = 'rgba(230,230,230,.8)'; g.setLineDash([3, 3]); g.lineWidth = 1; g.stroke(); g.setLineDash([]); }
     rm.balls.forEach(bl => { const e = bl.e; g.globalAlpha = e.d <= rm.t ? 1 : .28; g.fillStyle = S.TYPES[e.t].c; g.beginPath(); g.arc(X(e.d), Tp - 8, e.t === 'ditto' ? 2.6 : 1.6, 0, 7); g.fill(); });
     g.globalAlpha = 1;
-    rm.items.forEach((it, i) => { if (it.cls === 'now') return; g.fillStyle = it.d <= rm.t ? '#FAF9FC' : '#584A68'; g.beginPath(); g.moveTo(X(it.d), Tp + h - 4); g.lineTo(X(it.d) + 4, Tp + h); g.lineTo(X(it.d), Tp + h + 4); g.lineTo(X(it.d) - 4, Tp + h); g.closePath(); g.fill(); });
-    g.fillStyle = '#B2A7BF'; g.font = `400 11px ${K}`; g.textAlign = 'left'; g.fillText('설치', L, bh - 1); g.textAlign = 'right'; g.fillText(`D+${rm.d}`, L + w, bh - 1);
+    rm.items.forEach((it, i) => { if (it.cls === 'now') return; g.fillStyle = it.d <= rm.t ? '#FAFAFA' : '#424242'; g.beginPath(); g.moveTo(X(it.d), Tp + h - 4); g.lineTo(X(it.d) + 4, Tp + h); g.lineTo(X(it.d), Tp + h + 4); g.lineTo(X(it.d) - 4, Tp + h); g.closePath(); g.fill(); });
+    g.fillStyle = '#AEAEAE'; g.font = `400 11px ${K}`; g.textAlign = 'left'; g.fillText('설치', L, bh - 1); g.textAlign = 'right'; g.fillText(`D+${rm.d}`, L + w, bh - 1);
     g.textAlign = 'center'; for (let m = 30; m < rm.d - 12; m += 30) g.fillText(`${m / 30}개월`, X(m), bh - 1);
-    g.strokeStyle = '#FAF9FC'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(rm.t), Tp - 4); g.lineTo(X(rm.t), Tp + h + 2); g.stroke();
-    g.fillStyle = '#FAF9FC'; g.beginPath(); g.arc(X(rm.t), Tp + h, 5, 0, 7); g.fill();
+    g.strokeStyle = '#FAFAFA'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(rm.t), Tp - 4); g.lineTo(X(rm.t), Tp + h + 2); g.stroke();
+    g.fillStyle = '#FAFAFA'; g.beginPath(); g.arc(X(rm.t), Tp + h, 5, 0, 7); g.fill();
   }
   function openPersona(from){
     openId = null; rm = null; lastFocusEl = from || document.activeElement;
@@ -879,7 +879,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
     const L = 24, Rp = 8, Tp = 8, B = 18, w = bw - L - Rp, h = bh - Tp - B, N = st.period;
     const X = d => L + d / N * w, Y = v => Tp + h - v / yMax * h, K = kr();
     r.P.phases.forEach(p => { if ((p[3] !== 'vac' && p[3] !== 'exam') || p[0] > N) return; g.fillStyle = p[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(255,255,255,.04)'; g.fillRect(X(p[0]), Tp, X(Math.min(N, p[1])) - X(p[0]), h); });
-    g.strokeStyle = 'rgba(255,255,255,.07)'; g.fillStyle = '#B2A7BF'; g.font = `400 11px ${K}`; g.textAlign = 'right';
+    g.strokeStyle = 'rgba(255,255,255,.07)'; g.fillStyle = '#AEAEAE'; g.font = `400 11px ${K}`; g.textAlign = 'right';
     for (let v = 0; v <= yMax; v += step) { g.beginPath(); g.moveTo(L, Y(v)); g.lineTo(L + w, Y(v)); g.stroke(); g.fillText(v, L - 4, Y(v) + 3); }
     g.textAlign = 'center'; for (let d = 0; d <= N; d += 30) g.fillText(d ? `${d / 30}개월` : '설치', Math.max(L + 10, X(d)), Tp + h + 13);
     series.forEach(sr => {
@@ -899,14 +899,14 @@ mark{padding:0;background:none;color:var(--brand-text)}
   function drawTimeline(){
     const [g, bw, bh] = setup($('tlc')), N = st.period, L = 4, w = bw - 8, Tp = 18, h = bh - Tp - 14, X = d => L + d / N * w, K = kr();
     const Y = v => Tp + h - v / 35 * h;
-    r.P.phases.forEach(p => { if (p[0] > N) return; if (p[3] === 'vac' || p[3] === 'exam') { g.fillStyle = p[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(255,255,255,.04)'; g.fillRect(X(p[0]), Tp, X(Math.min(N, p[1])) - X(p[0]), h); } if (p[3] === 'vac') { g.fillStyle = '#B2A7BF'; g.font = `500 11px ${K}`; g.textAlign = 'left'; g.fillText(p[2], X(p[0]) + 4, Tp + 10); } });
+    r.P.phases.forEach(p => { if (p[0] > N) return; if (p[3] === 'vac' || p[3] === 'exam') { g.fillStyle = p[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(255,255,255,.04)'; g.fillRect(X(p[0]), Tp, X(Math.min(N, p[1])) - X(p[0]), h); } if (p[3] === 'vac') { g.fillStyle = '#AEAEAE'; g.font = `500 11px ${K}`; g.textAlign = 'left'; g.fillText(p[2], X(p[0]) + 4, Tp + 10); } });
     g.beginPath(); for (let d = 0; d <= N; d++) { const v = r.snap[d].nFriends; d ? g.lineTo(X(d), Y(v)) : g.moveTo(X(d), Y(v)); } g.lineTo(X(N), Y(0)); g.lineTo(X(0), Y(0)); g.closePath(); g.fillStyle = 'rgba(170,74,244,.22)'; g.fill();
     const d = Math.min(N, T); g.fillStyle = '#AA4AF4'; g.fillRect(X(0), Tp + h, X(d) - X(0), 2); g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(X(d), Tp + h, X(N) - X(d), 2);
-    g.fillStyle = '#B2A7BF'; g.font = `400 11px ${K}`; g.textAlign = 'center'; for (let m = 0; m <= N; m += 30) g.fillText(m ? `${m / 30}개월` : '설치', Math.min(bw - 16, Math.max(12, X(m))), bh - 1);
+    g.fillStyle = '#AEAEAE'; g.font = `400 11px ${K}`; g.textAlign = 'center'; for (let m = 0; m <= N; m += 30) g.fillText(m ? `${m / 30}개월` : '설치', Math.min(bw - 16, Math.max(12, X(m))), bh - 1);
     tlDots = (r._ms || []).filter(m => m.who).map(m => ({ x: X(m.d), y: Tp - 6, m }));
-    tlDots.forEach(t => { g.fillStyle = t.m.d <= T ? '#FAF9FC' : '#584A68'; g.beginPath(); g.arc(t.x, t.y, 3, 0, 7); g.fill(); });
-    g.strokeStyle = '#FAF9FC'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(d), Tp - 2); g.lineTo(X(d), Tp + h + 2); g.stroke();
-    g.fillStyle = '#FAF9FC'; g.beginPath(); g.arc(X(d), Tp + h + 1, 5, 0, 7); g.fill();
+    tlDots.forEach(t => { g.fillStyle = t.m.d <= T ? '#FAFAFA' : '#424242'; g.beginPath(); g.arc(t.x, t.y, 3, 0, 7); g.fill(); });
+    g.strokeStyle = '#FAFAFA'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(d), Tp - 2); g.lineTo(X(d), Tp + h + 2); g.stroke();
+    g.fillStyle = '#FAFAFA'; g.beginPath(); g.arc(X(d), Tp + h + 1, 5, 0, 7); g.fill();
   }
   const tlc = $('tlc'); let scrub = null;
   const tAt = x => { const b = tlc.getBoundingClientRect(); return Math.max(0, Math.min(st.period, (x - b.left - 4) / (b.width - 8) * st.period)); };
