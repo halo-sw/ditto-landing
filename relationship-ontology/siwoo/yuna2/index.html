@@ -70,7 +70,6 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .seg button[aria-pressed="true"]{background:var(--night);color:#FFFFFF}
 .seg button:disabled{color:var(--faint);cursor:default;background:none}
 .seg.big button{height:38px;padding:0 16px;font:700 14px/19px var(--kr)}
-.seg.big button[aria-pressed="true"]{background:var(--grad);color:#FFFFFF;box-shadow:0 6px 16px -8px rgba(110,30,170,.7),inset 0 1px 0 rgba(255,255,255,.3)}
 .g.off > span{color:var(--faint)}
 
 .main{display:grid;grid-template-columns:300px minmax(0,1fr) 360px;min-height:0}
@@ -122,9 +121,10 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .mlg i{width:9px;height:9px;border-radius:50%}
 .mlg .dust i{width:4px;height:4px;border-radius:0;background:#8B7AA6}
 .hint{position:absolute;z-index:2;top:56px;left:50%;transform:translateX(-50%);font:500 12px/16px var(--kr);color:var(--mute);white-space:nowrap;pointer-events:none}
-.tip{position:absolute;z-index:5;pointer-events:none;max-width:240px;padding:8px 12px;border-radius:12px;background:#FFFFFF;box-shadow:var(--shadow),0 0 0 1px var(--line);font:400 12px/16px var(--kr);color:var(--ink-2);opacity:0;transition:opacity .12s}
+.tip{position:absolute;z-index:5;pointer-events:none;max-width:240px;padding:8px 11px;border-radius:12px;background:rgba(22,18,27,.92);font:400 12.5px/1.4 var(--kr);color:#FFFFFF;opacity:0;transition:opacity .15s}
 .tip.on{opacity:1}
-.tip b{color:var(--ink);font-weight:700}
+.tip b{color:#FFFFFF;font-weight:700}
+.tip .sub,.tip small{color:#C9BEDA}
 .tl{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;padding:8px 16px 12px;border-top:1px solid var(--line);background:rgba(255,255,255,.6)}
 .pl{width:40px;height:40px;border-radius:999px;border:0;background:var(--grad);color:#FFFFFF;font-size:13px;cursor:pointer;box-shadow:0 6px 16px -8px rgba(110,30,170,.7),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .35s var(--ease)}
 .pl:hover{transform:translateY(-1px)}
@@ -187,19 +187,19 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 /* cards */
 .scrim{position:fixed;inset:0;z-index:20;background:rgba(22,18,27,.38);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:grid;place-items:center;padding:24px var(--gxr) 24px var(--gx);animation:fade .2s ease-out}
 @keyframes fade{from{opacity:0}to{opacity:1}}
+.rc:focus,.rm:focus{outline:none}
 .rc{position:relative;width:min(440px,100%);max-height:100%;overflow:auto;border-radius:28px;background:var(--bg);display:flex;flex-direction:column;animation:rise .32s var(--ease);scrollbar-width:thin;box-shadow:0 30px 60px -30px rgba(60,10,90,.45)}
 @keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.scrim,.rc,.rm,.nt,.rm-cap .in{animation:none}}
-.rc-h{position:relative;padding:20px 56px 18px 20px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(160deg,var(--h1) 0%,var(--h2) 55%,var(--h3) 100%);color:#171719}
-.rc-h::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0) 60%);pointer-events:none}
+.rc-h{position:relative;padding:20px 56px 18px 20px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(135deg,#F1E4FC 0%,#F6ECFC 50%,#FBE8F5 100%);color:var(--ink)}
 .rc-h > *{position:relative;z-index:1}
-.rc-x{position:absolute;z-index:3;top:14px;right:14px;width:34px;height:34px;border:0;border-radius:999px;background:rgba(255,255,255,.72);color:var(--ink);font-size:14px;cursor:pointer;box-shadow:0 4px 12px -6px rgba(22,18,27,.4)}
+.rc-x{position:absolute;z-index:3;top:14px;right:14px;width:34px;height:34px;border:0;border-radius:999px;background:#FFFFFF;color:var(--ink);font-size:14px;cursor:pointer;box-shadow:0 4px 12px -6px rgba(22,18,27,.4)}
 .pair{display:flex;align-items:center}
-.pair .av{width:56px;height:56px;box-shadow:0 0 0 3px rgba(255,255,255,.75)}
+.pair .av{width:56px;height:56px;box-shadow:0 0 0 3px #FFFFFF}
 .pair .av + .av{margin-left:-12px}
-.pair .amp{margin-left:12px;font:700 12px/16px var(--kr);opacity:.75}
+.pair .amp{margin-left:12px;font:600 12px/16px var(--kr);color:var(--mute)}
 .rc-h h2{font:800 28px/36px var(--kr);letter-spacing:-.03em}
-.rc-h p{font:500 13px/18px var(--kr);opacity:.8}
+.rc-h p{font:500 13px/18px var(--kr);color:var(--ink-2)}
 .badge{align-self:flex-start;display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;background:var(--night);color:#FFFFFF;font:700 12px/16px var(--kr)}
 .badge.dit{background:var(--grad);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
 .rc-b{padding:18px 20px 20px;display:flex;flex-direction:column;gap:22px}
@@ -334,7 +334,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 
 <div class="app">
   <header class="top">
-    <div class="brand"><a href="https://ditto.place/" aria-label="ditto.place 홈"><img src="assets/wordmark.svg" alt="Ditto!" width="61" height="22"></a><h1><span class="lab"><b>06</b>Relationship Ontology</span><span>6개월, <mark>친구 30명</mark>이 되기까지</span></h1></div>
+    <div class="brand"><a href="https://ditto.place/" aria-label="ditto.place 홈"><img src="assets/wordmark.svg" alt="Ditto!" width="61" height="22"></a><h1><span class="lab"><b>Map</b>Relationship Ontology</span><span>Ditto!로 6개월, <mark>친구 30명</mark>이 되기까지</span></h1></div>
     <div class="ctl">
       <div class="g"><div class="seg big" role="group" aria-label="페르소나" id="segP"><button type="button" data-v="uni" aria-pressed="true">대학교 1학년 채원</button><button type="button" data-v="high" aria-pressed="false">고등학교 1학년 시우</button></div></div>
       <div class="g"><span id="lD">기간</span><div class="seg" role="group" aria-labelledby="lD" id="segD"><button type="button" data-v="90" aria-pressed="false">3개월</button><button type="button" data-v="180" aria-pressed="true">6개월</button></div></div>
@@ -499,7 +499,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
       ctx.restore();
       ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${K}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.92)'; ctx.fillStyle = '#16121B';
       const ly = q[1] + z / 2 + 13; ctx.strokeText(p.n, q[0], ly); ctx.fillText(p.n, q[0], ly);
-      if (st.world === 'with' && qs && !qs.fr && qs.st) { ctx.font = `500 10px ${K}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }
+      if (st.world === 'with' && qs && !qs.fr && qs.st && W >= 560) { ctx.font = `500 10px ${K}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }
       ctx.globalAlpha = 1;
       if (a > .5) hits.push({ x: q[0], y: q[1], r: z / 2 + 8, id });
     });
@@ -575,7 +575,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     const idx = order.indexOf(id);
     const wo = p.kind === 'fof' ? `디토가 없었다면 <b>${J(p.n, '과', '와')} ${r.me.n}</b>은 서로 모르는 사이로 남아요. ${p.via.map(v => r.people[v].n).join('·')}에게 이름만 들었을 수도 있어요.` : `디토 없이 같은 ${d}일을 보냈다면 지금 <b>${LV[lo]}</b>예요. 함께한 시간은 ${q.Ho.toFixed(0)}시간, 디토와 함께면 ${q.Hw.toFixed(0)}시간이에요.`;
     const seen = BALL.filter(t => all.some(e => e.t === t));
-    $('modal').innerHTML = `<div class="scrim" id="scrim"><article class="rm" role="dialog" aria-modal="true" aria-labelledby="rcT">
+    $('modal').innerHTML = `<div class="scrim" id="scrim"><article class="rm" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="rcT">
       <section class="rm-st" aria-label="${J(r.me.n, '과', '와')} ${p.n}의 관계 재생">
         <div class="rm-cw">
           <canvas id="rmCv" role="img" aria-label="왼쪽은 ${r.me.n}, 오른쪽은 ${p.n}. 둘 사이 구슬이 교류 한 번이고 보라 구슬이 디토예요. 장면 설명은 오른쪽 목록에 있어요."></canvas>
@@ -812,7 +812,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     openId = null; rm = null; lastFocusEl = from || document.activeElement;
     const P = r.P, pal = PAL[r.me.av], s0 = r.snap[0], by = [[], [], [], [], []];
     r.ids.forEach(id => { const p = r.people[id]; if (p.hidden) return; by[p.kind === 'fof' ? 0 : s0.p[id].lo].push(p.n); });
-    $('modal').innerHTML = `<div class="scrim" id="scrim"><article class="rc" role="dialog" aria-modal="true" aria-labelledby="rcT">
+    $('modal').innerHTML = `<div class="scrim" id="scrim"><article class="rc" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="rcT">
       <div class="rc-h" style="--h1:${pal[0]};--h2:${pal[1]};--h3:${pal[2]}"><button type="button" class="rc-x" id="rcX" aria-label="소개 닫기">✕</button>
         <div class="pair">${av(r.me, 56)}<span class="amp">${P.label}</span></div>
         <div><h2 id="rcT">${P.me.n}</h2><p>@${P.me.h} · ${P.bio}</p></div><span class="badge">${P.type}</span>
@@ -826,7 +826,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     wireModal();
   }
   function wireModal(prev, next, play){
-    const sc = $('scrim'); $('rcX').focus();
+    const sc = $('scrim'); sc.querySelector('[role=dialog]').focus();
     sc.addEventListener('click', e => { if (e.target === sc) closeCard(); });
     $('rcX').addEventListener('click', () => closeCard());
     if ($('rcP')) { $('rcP').addEventListener('click', prev); $('rcN').addEventListener('click', next); }

@@ -59,10 +59,10 @@
 .ro-hud{position:absolute;left:22px;top:18px;display:flex;flex-direction:column;gap:2px;pointer-events:none}
 .ro-hud b{font:italic 900 34px/1.05 var(--round);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
 .ro-hud span{font-size:12.5px;font-weight:600;color:var(--mute)}
-.ro-leg{position:absolute;left:22px;right:22px;bottom:30px;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;font-weight:600;color:var(--mute);pointer-events:none}
-.ro-leg span{display:inline-flex;align-items:center;gap:5px}
-.ro-leg i{width:8px;height:8px;border-radius:50%}
-.ro-bar{position:absolute;left:22px;right:22px;bottom:18px;height:4px;border-radius:99px;background:rgba(22,18,27,.08);overflow:hidden;pointer-events:none}
+.ro-leg{position:absolute;left:18px;right:18px;bottom:30px;display:flex;flex-wrap:wrap;gap:4px 6px;pointer-events:none}
+.ro-leg span{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px rgba(22,18,27,.1);font-size:12px;font-weight:600;color:var(--ink-2)}
+.ro-leg i{width:9px;height:9px;border-radius:50%}
+.ro-bar{position:absolute;left:22px;right:22px;bottom:16px;height:4px;border-radius:99px;background:rgba(22,18,27,.08);overflow:hidden;pointer-events:none}
 .ro-bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#AA4AF4,#E569C6)}
 .ro-tip{position:absolute;z-index:3;max-width:230px;padding:8px 11px;border-radius:12px;background:rgba(22,18,27,.92);color:#FFFFFF;font-size:12.5px;line-height:1.4;pointer-events:none;opacity:0;transition:opacity .15s}
 .ro-tip.on{opacity:1}
@@ -3740,7 +3740,7 @@ html{background:var(--edge-b,var(--bg))}
     const cv = document.getElementById('roCv'), ctx = cv.getContext('2d'), tip = document.getElementById('roTip');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const BASE = '/relationship-ontology/', SLUG = { uni: 'chaewon', high: 'siwoo' }, DAYS = 180, PLAY = 14000;
-    const BALL = ['invite', 'ditto', 'group', 'comment', 'guest', 'reaction'], BSZ = { ditto: 6.6, invite: 5.6, group: 4.2, comment: 3.6, guest: 3.8, reaction: 2.4 };
+    const BALL = ['invite', 'ditto', 'group', 'comment', 'guest', 'reaction'], BSZ = { ditto: 6.8, invite: 5.6, group: 4.2, comment: 3.6, guest: 3.8, reaction: 2.4 };
     const STG = { calm: ['잔잔', '#8E919E'], clear: ['선명', '#2BC4A8'], near: ['곧 열림', '#5A5BF2'], open: ['열림', '#AA4AF4'] };
     let S = null, r = null, pk = 'uni', T = 0, t0 = 0, playing = false, inView = false, started = false;
     let W = 0, H = 0, DPR = 1, CX = 0, CY = 0, R0 = 0, rotY = .5, rotX = -.28, vy = 0, drag = null, idleAt = 0, hits = [], hover = null, lastD = -1;
@@ -3779,8 +3779,8 @@ html{background:var(--edge-b,var(--bg))}
       const pos = { me: [0, 0, 0] }, alive = { me: true };
       r.ids.forEach(id => { const p = r.people[id], q = s.p[id], tg = !q.vis && !q.fr ? 0 : q.fr ? (q.cl ? .4 : .66) : .94; p.rad += (tg - p.rad) * (reduce ? 1 : .08); if (tg === 0 && p.rad < .02) p.rad = 0; alive[id] = p.rad > .02 || tg > 0; const rr = p.rad || tg; pos[id] = [p.dir[0] * rr, p.dir[1] * rr, p.dir[2] * rr]; });
       const pq = {}; Object.keys(pos).forEach(k => { pq[k] = proj(pos[k]); });
-      ctx.lineWidth = 1; ctx.setLineDash([2, 6]); ctx.strokeStyle = 'rgba(138,63,184,.18)';
-      [.4, .66, .94].forEach(rr => { ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); });
+      ctx.lineWidth = 1; ctx.setLineDash([2, 6]); ctx.textAlign = 'center'; ctx.font = `500 11px ${font}`;
+      [[.4, '가까운 친구 15'], [.66, '친구'], [.94, '친구의 친구']].forEach(([rr, l]) => { ctx.strokeStyle = 'rgba(138,63,184,.22)'; ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); ctx.fillStyle = 'rgba(138,63,184,.75)'; ctx.fillText(l, CX, CY - R0 * rr - 6); });
       ctx.setLineDash([]);
       const F = hover && hover.id && hover.id !== 'me' ? hover.id : null, items = [];
       r.EV.forEach(e => {
@@ -3805,15 +3805,15 @@ html{background:var(--edge-b,var(--bg))}
           ctx.globalAlpha = Math.max(.08, .35 + .65 * it.a0); ctx.drawImage(SPR[e.t], q[0] - rad, q[1] - rad, rad * 2, rad * 2); ctx.globalAlpha = 1; return;
         }
         const id = it.id, p = id === 'me' ? r.me : r.people[id], q = pq[id], qs = id === 'me' ? null : s.p[id];
-        const z = (id === 'me' ? 32 : qs.fr ? (qs.cl ? 20 : 17) : 14) * q[3] * (id === F ? 1.25 : 1), x0 = q[0] - z / 2, y0 = q[1] - z / 2;
+        const z = (id === 'me' ? 30 : qs.fr ? (qs.cl ? 20 : 17) : 14) * q[3] * (id === F ? 1.25 : 1), x0 = q[0] - z / 2, y0 = q[1] - z / 2;
         ctx.globalAlpha = F && id !== F && id !== 'me' ? .2 : qs && !qs.fr ? .85 : 1;
         if (qs && !qs.fr && (qs.st === 'near' || qs.st === 'open')) { const g = ctx.createRadialGradient(q[0], q[1], z * .5, q[0], q[1], z * 1.9); g.addColorStop(0, qs.st === 'open' ? 'rgba(170,74,244,.35)' : 'rgba(90,91,242,.25)'); g.addColorStop(1, 'rgba(170,74,244,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], z * 1.9, 0, 7); ctx.fill(); }
         const rr = (x, y, w, h, k) => { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, k); else ctx.rect(x, y, w, h); };
         if (id === F) { ctx.strokeStyle = '#16121B'; ctx.lineWidth = 1.5; rr(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
         ctx.save(); rr(x0, y0, z, z, z * .25); ctx.clip(); const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#E4DDEC'; ctx.fillRect(x0, y0, z, z); } ctx.restore();
-        ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 600} ${id === 'me' ? 13 : 11}px ${font}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.92)'; ctx.fillStyle = '#16121B';
+        ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${font}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.92)'; ctx.fillStyle = '#16121B';
         const ly = q[1] + z / 2 + 13; ctx.strokeText(p.n, q[0], ly); ctx.fillText(p.n, q[0], ly);
-        if (qs && !qs.fr && qs.st) { ctx.font = `600 10px ${font}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }
+        if (qs && !qs.fr && qs.st && W >= 560) { ctx.font = `500 10px ${font}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }
         ctx.globalAlpha = 1; hits.push({ x: q[0], y: q[1], r: z / 2 + 8, id });
       });
     }
