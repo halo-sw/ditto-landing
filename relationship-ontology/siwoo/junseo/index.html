@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,700;1,800;1,900&display=swap">
 <style>
-/* Layout: one screen. Controls on top; persona and the day's notifications on the left, the map with a 6-month timeline in the middle, summary · people · review tabs on the right. Anything that stands for a relationship opens its card.
+/* Layout: one screen. Controls on top; persona and the day's notifications on the left, the map with a 6-month timeline in the middle, summary · people tabs on the right. Anything that stands for a relationship opens its card.
    Dark, like a media player: a near-black violet stage that glows where Ditto! happens, glass panels over it, a light pill for the chosen option,
    the violet gradient for play and highlighted words, Nunito italic for numbers. Both personas share every slot so switching never moves the layout. */
 @font-face{font-family:"Pretendard Sim";src:url("assets/pretendard-sim.woff2") format("woff2");font-weight:100 900;font-display:swap}
@@ -169,23 +169,6 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .pr span{min-width:0}
 .pr b{display:block;font:600 14px/19px var(--kr);color:var(--ink)}
 .pr small{display:block;font:400 12px/16px var(--kr);color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rv{display:flex;flex-direction:column;gap:10px}
-.rv details{border-radius:var(--r-lg);background:var(--bg-2);padding:14px 16px}
-.rv summary{cursor:pointer;list-style:none;display:flex;flex-direction:column;gap:6px}
-.rv summary::-webkit-details-marker{display:none}
-.rv summary b{font:700 14px/19px var(--kr);color:var(--ink)}
-.rv details > div{display:flex;flex-direction:column;gap:8px;padding-top:8px}
-.rv p,.rv li{font:400 13px/19px var(--kr);color:var(--ink-2)}
-.rv ul{margin:0;padding-left:16px}
-.tag{align-self:flex-start;display:inline-flex;height:22px;align-items:center;padding:0 9px;border-radius:999px;font:600 11px/15px var(--kr)}
-.tag.dec{background:#41242B;color:#FABECB}
-.tag.pol{background:#302942;color:#D4C8FA}
-.tag.ref{background:rgba(255,255,255,.05);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line)}
-.mini{width:100%;border-collapse:collapse;font:400 12px/16px var(--kr)}
-.mini th,.mini td{padding:5px 6px;border-bottom:1px solid var(--line);text-align:right}
-.mini th{font-weight:600;color:var(--mute)}
-.mini th:first-child,.mini td:first-child{text-align:left}
-.mini td{font-variant-numeric:tabular-nums;color:var(--ink)}
 
 /* cards */
 .scrim{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:grid;place-items:center;padding:24px var(--gxr) 24px var(--gx);animation:fade .2s ease-out}
@@ -368,7 +351,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     </section>
 
     <aside class="pane r" aria-label="요약과 사람">
-      <div class="tabs" role="tablist"><button type="button" role="tab" data-t="sum" aria-selected="true" id="tb-sum">요약</button><button type="button" role="tab" data-t="ppl" aria-selected="false" id="tb-ppl">사람</button><button type="button" role="tab" data-t="rev" aria-selected="false" id="tb-rev">검토</button></div>
+      <div class="tabs" role="tablist"><button type="button" role="tab" data-t="sum" aria-selected="true" id="tb-sum">요약</button><button type="button" role="tab" data-t="ppl" aria-selected="false" id="tb-ppl">사람</button></div>
       <div class="tp" id="tp-sum" role="tabpanel" aria-labelledby="tb-sum">
         <div class="cn4">
           <div class="cn"><b id="cF">0</b><span id="cFl">친구</span></div>
@@ -381,17 +364,15 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
         <div class="box"><h3>이정표</h3><ul class="ms" id="ms"></ul></div>
       </div>
       <div class="tp" id="tp-ppl" role="tabpanel" aria-labelledby="tb-ppl" hidden></div>
-      <div class="tp" id="tp-rev" role="tabpanel" aria-labelledby="tb-rev" hidden><div class="rv" id="rv"></div></div>
     </aside>
   </main>
 </div>
 <div id="modal"></div>
 
 <script src="sim.js"></script>
-<script src="review-data.js"></script>
 <script>
 (function(){
-  const S = window.DittoSim, REV = window.DITTO_REVIEW, $ = id => document.getElementById(id);
+  const S = window.DittoSim, $ = id => document.getElementById(id);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const LV = ['모르는 사이', '아는 사이', '가벼운 친구', '친구', '가까운 친구'], LVH = [0, 0, 50, 90, 200];
   const STG = { calm: ['잔잔', '#8E919E'], clear: ['선명', '#2BC4A8'], near: ['곧 열림', '#5A5BF2'], open: ['열림', '#C79BFF'] };
@@ -421,7 +402,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     T = Math.min(T, st.period); Tt = Math.min(Tt, st.period);
     focus = null; closeCard(true);
     $('meBtn').innerHTML = `${av(r.me, 48)}<span><b>${r.me.n}</b><span>@${r.me.h}</span><span>${r.P.label} · ${r.P.type.split(' · ')[0]}</span></span><i>소개 ›</i>`;
-    milestones(); review(); legend();
+    milestones(); legend();
     lastKey = ''; ui(true); syncUrl();
   }
   function mul(seed){ return function(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
@@ -926,20 +907,6 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
   tlc.addEventListener('pointerdown', e => { scrub = { x: e.clientX, moved: false }; try { tlc.setPointerCapture(e.pointerId); } catch (er) {} });
   tlc.addEventListener('pointermove', e => { const b = tlc.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top; tlc.title = (tlDots.find(t => Math.hypot(t.x - x, t.y - y) < 9) || {}).m?.text || ''; if (!scrub) return; if (Math.abs(e.clientX - scrub.x) > 3) scrub.moved = true; if (scrub.moved) { playing = false; $('play').textContent = '▶'; T = Tt = tAt(e.clientX); } });
   tlc.addEventListener('pointerup', e => { if (!scrub) return; const moved = scrub.moved; scrub = null; if (moved) return; const b = tlc.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top, hit = tlDots.find(t => Math.hypot(t.x - x, t.y - y) < 9); playing = false; $('play').textContent = '▶'; if (hit) { T = Tt = Math.floor(hit.m.d) + .95; ui(true); openCard(hit.m.who, { from: tlc }); } else T = Tt = tAt(e.clientX); });
-
-  // ---------------- review ----------------
-  function review(){
-    const u = REV.uni, h = REV.high, pct = d => Math.round(d['active|v2'].noDitto / d['active|v2'].opened * 100);
-    const row = (d, a, lab) => `<tr><td>${lab}</td><td>${d[a + '|v2'].f90}</td><td>${d[a + '|v2'].f180}</td><td>${d[a + '|v2'].fof180}</td></tr>`;
-    const card = (tag, cls, title, body, open) => `<details ${open ? 'open' : ''}><summary><span class="tag ${cls}">${tag}</span><b>${title}</b></summary><div>${body}</div></details>`;
-    $('rv').innerHTML = `<p class="sub">시드 16개 평균이에요. 지도는 그중 한 번이에요.</p>`
-      + card('결정 필요', 'dec', '친구 30명이 한도 정책과 맞지 않아요', `<p>서비스 기획서 §5.15는 기본 15명, Ditto Plus 30명이에요. 10월 17일 전략은 가까운 친구 15명 + 친구 확장층인데 기획서는 그대로예요.</p><p>이 시뮬레이터는 전략 쪽을 따라 친구 중 돈독한 15명을 가까운 친구 자리에, 나머지를 그 바깥에 뒀어요.</p>`, true)
-      + card('정책 제안', 'pol', '지금 규칙은 디토 없이도 친구 신청이 열려요', `<p>‘함께한 교류’가 댓글이나 그룹 대화로도 채워져서, 활발 기준 친구의 친구 열림 중 대1 ${pct(u)}%, 고1 ${pct(h)}%가 디토 없이 열렸어요.</p><p><b>디토 필수안</b>(열림 조건에 둘 사이 디토 1번 이상)은 6개월 열림 수가 대1 ${u['active|v2'].opened}→${u['active|ditto'].opened}, 고1 ${h['active|v2'].opened}→${h['active|ditto'].opened}로 거의 같아요.</p>`)
-      + card('참고', 'ref', '6개월 30명은 활발하게 쓰는 사람 기준이에요', `<table class="mini"><thead><tr><th>사용 강도</th><th>3개월</th><th>6개월</th><th>디토로</th></tr></thead><tbody>${row(u, 'active', '대1 활발')}${row(u, 'normal', '대1 보통')}${row(u, 'light', '대1 가볍게')}${row(h, 'active', '고1 활발')}${row(h, 'normal', '고1 보통')}${row(h, 'light', '고1 가볍게')}</tbody></table><p>첫 열림 중앙값은 대1 ${u['active|v2'].firstOpenMed}일, 고1 ${h['active|v2'].firstOpenMed}일이에요. 기획서의 이전 모델은 41.7일이었어요.</p>`)
-      + card('정책 제안', 'pol', '고1은 친구의 친구로 성인이 보여요', `<p>시우의 지도에는 ${h.adults.map(a => `${a.n}(${a.age}세)`).join(', ')}이 친구의 친구로 보일 수 있어요. 방문자 공개와 겹치면 성인이 미성년자의 방문 기록을 봐요.</p><ul><li>만 19세 미만은 친구의 친구 노출·주파수를 만 19세 미만끼리로</li><li>만 19세 미만의 방문 기록은 서로 숨김</li><li>성인이 미성년자에게 먼저 디토·친구 신청 불가</li></ul>`)
-      + card('참고', 'ref', '‘더 돈독해졌다’는 아직 가설이에요', `<p>6개월 뒤 가벼운 친구 이상은 대1 ${u['active|v2'].casualW}명(디토 없이 ${u['active|v2'].casualO}), 고1 ${h['active|v2'].casualW}명(${h['active|v2'].casualO})이에요. 앱 교류를 시간으로 바꾼 가정에서 나온 차이예요. 확실한 건 디토로 이어진 친구의 친구가 디토 없이는 생기지 않는다는 점이에요.</p>`)
-      + card('가정', 'ref', '이 시뮬레이션의 가정', `<ul><li>돈독함 = 함께 보낸 시간. 50시간 가벼운 친구 · 90시간 친구 · 200시간 가까운 친구 (Hall, 2018). 연락이 없으면 하루 0.12%씩 옅어져요.</li><li>앱 교류 1번 = 디토 15분 · 같은 날 그룹 대화 20분 · 방명록 8분 · 댓글 6분 · 방문 2분 · 리액션 1분</li><li>주파수는 지금 정책 그대로. 디토는 21일이 지나도 ×0.3로 남아요.</li><li>오프라인 시간은 학기·시험·방학에 따라 달라지고 두 경우가 같아요.</li><li>앱에서는 점수와 시간을 사용자에게 보여 주지 않아요.</li></ul>`);
-  }
 
   // ---------------- legend · controls ----------------
   function legend(){
