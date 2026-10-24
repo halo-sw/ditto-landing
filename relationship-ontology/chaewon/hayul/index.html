@@ -25,21 +25,22 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,700;1,800;1,900&display=swap">
 <style>
 /* Layout: one screen. Controls on top; persona and the day's notifications on the left, the map with a 6-month timeline in the middle, summary · people · review tabs on the right. Anything that stands for a relationship opens its card.
-   Look follows ditto.place: white page, lavender cards, black pill for the chosen option, violet gradient for the main action and highlighted words, Nunito italic for numbers. Both personas share every slot so switching never moves the layout. */
+   Dark, like a media player: a near-black violet stage that glows where Ditto! happens, glass panels over it, a light pill for the chosen option,
+   the violet gradient for play and highlighted words, Nunito italic for numbers. Both personas share every slot so switching never moves the layout. */
 @font-face{font-family:"Pretendard Sim";src:url("assets/pretendard-sim.woff2") format("woff2");font-weight:100 900;font-display:swap}
 :root{
-  --bg:#FFFFFF; --bg-2:#F5F2F8; --bg-3:#ECE6F1; --stage:#F6F0FB;
-  --ink:#16121B; --ink-2:#4A4352; --mute:#6E6578; --faint:#A79FB1;
-  --line:rgba(22,18,27,.1); --night:#161616;
-  --violet:#AA4AF4; --violet-d:#8A3FB8; --tonal:#F1E4FC;
+  --bg:#0E0C12; --bg-2:#1A1620; --bg-3:#25202D; --stage:#0B0910; --card:#141118;
+  --ink:#F5F2F8; --ink-2:#CFC8D8; --mute:#958CA0; --faint:#5F5769;
+  --line:rgba(255,255,255,.09); --sel:#F5F2F8; --on-sel:#16121B;
+  --violet:#AA4AF4; --violet-d:#C588FF; --tonal:linear-gradient(135deg,#2A1C3B,#331F31);
   --grad:linear-gradient(135deg,#AA4AF4,#8A3FB8); --mark:linear-gradient(100deg,#7B3BC4 0%,#AA4AF4 48%,#E569C6 100%);
-  --shadow:0 10px 28px -16px rgba(90,20,120,.32);
+  --shadow:0 16px 36px -18px rgba(0,0,0,.8);
   --r-lg:20px; --r-md:14px;
   --kr:"Pretendard Sim","Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
   --round:"Nunito","Arial Rounded MT Bold",system-ui,sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
   --gx:max(16px,env(safe-area-inset-left,0px)); --gxr:max(16px,env(safe-area-inset-right,0px));
-  color-scheme:light;
+  color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{height:100%}
@@ -58,7 +59,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding:12px var(--gxr) 12px var(--gx);border-bottom:1px solid var(--line);background:var(--bg)}
 .brand{display:flex;align-items:center;gap:16px;margin-right:auto}
 .brand a{display:flex;flex:none;border-radius:8px}
-.brand img{height:22px;width:auto;filter:brightness(0);flex:none}
+.brand img{height:22px;width:auto;filter:brightness(0) invert(1);flex:none}
 .brand h1{display:flex;flex-direction:column;gap:2px;font:700 18px/24px var(--kr);letter-spacing:-.03em;color:var(--ink)}
 .brand h1 .lab{font-size:11px}
 .ctl{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
@@ -67,7 +68,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .seg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line),0 6px 18px -14px rgba(90,20,120,.35)}
 .seg button{height:30px;padding:0 13px;border:0;border-radius:999px;background:none;color:var(--ink-2);font:600 13px/18px var(--kr);cursor:pointer;white-space:nowrap;transition:background .25s,color .25s}
 .seg button:hover{background:var(--bg-2)}
-.seg button[aria-pressed="true"]{background:var(--night);color:#FFFFFF}
+.seg button[aria-pressed="true"]{background:var(--sel);color:var(--on-sel)}
 .seg button:disabled{color:var(--faint);cursor:default;background:none}
 .seg.big button{height:38px;padding:0 16px;font:700 14px/19px var(--kr)}
 .g.off > span{color:var(--faint)}
@@ -92,11 +93,11 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .phc.vac i{background:#48B5F4}
 .phc.exam i{background:#A79FB1}
 .lv{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;font:600 12px/16px var(--kr);white-space:nowrap}
-.lv0{background:#EFEBF3;color:#6E6578}
-.lv1{background:#E3EFFC;color:#2B6CB0}
-.lv2{background:#DDF5EE;color:#0F7A60}
-.lv3{background:#EDE3FC;color:#7438C2}
-.lv4{background:#FCE3F1;color:#B5307D}
+.lv0{background:#2A2530;color:#D5CEDB}
+.lv1{background:#123240;color:#A2DAF6}
+.lv2{background:#0F352E;color:#9FE1D1}
+.lv3{background:#302942;color:#D4C8FA}
+.lv4{background:#41242B;color:#FABECB}
 .feed h4{font:700 14px/19px var(--kr);color:var(--ink);display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
 .feed h4 small{font:italic 800 12px/16px var(--round);color:var(--mute)}
 .fl{display:flex;flex-direction:column;gap:8px}
@@ -105,30 +106,32 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .nt .av{width:32px;height:32px}
 .nt p{font:400 13px/18px var(--kr);color:var(--ink)}
 .nt small{display:block;font:400 11px/15px var(--kr);color:var(--mute);margin-top:4px}
-.nt.dit{background:linear-gradient(135deg,#F1E4FC,#FBE8F5)}
-.nt.dit:hover{background:linear-gradient(135deg,#E9D6FB,#F8DCEF)}
+.nt.dit{background:var(--tonal)}
+.nt.dit:hover{background:linear-gradient(135deg,#352349,#3E2540)}
 .nt.open{box-shadow:inset 0 0 0 1.5px #C79BFF}
 .nt.static{cursor:default}
 @keyframes ntIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
-.stage{position:relative;min-height:0;background:radial-gradient(120% 90% at 50% 45%,#FFFFFF 0%,var(--stage) 60%,#EFE5FA 100%);display:grid;grid-template-rows:minmax(0,1fr) auto}
+.stage{position:relative;min-height:0;background:radial-gradient(70% 60% at 50% 46%,#1D1428 0%,#100C16 55%,var(--stage) 100%);display:grid;grid-template-rows:minmax(0,1fr) auto}
 .map{position:relative;min-height:0}
 #cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
 .wseg{position:absolute;z-index:2;top:12px;left:50%;transform:translateX(-50%)}
 .mlg{position:absolute;z-index:2;left:12px;bottom:8px;right:12px;display:flex;flex-wrap:wrap;gap:4px 6px}
-.mlg button{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border:0;border-radius:999px;background:rgba(255,255,255,.7);font:600 12px/16px var(--kr);color:var(--ink-2);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.mlg button{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border:0;border-radius:999px;background:rgba(255,255,255,.05);font:600 12px/16px var(--kr);color:var(--ink-2);cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
 .mlg button[aria-pressed="false"]{opacity:.4}
 .mlg i{width:9px;height:9px;border-radius:50%}
 .mlg .dust i{width:4px;height:4px;border-radius:0;background:#8B7AA6}
 .hint{position:absolute;z-index:2;top:56px;left:50%;transform:translateX(-50%);font:500 12px/16px var(--kr);color:var(--mute);white-space:nowrap;pointer-events:none}
-.tip{position:absolute;z-index:5;pointer-events:none;max-width:240px;padding:8px 11px;border-radius:12px;background:rgba(22,18,27,.92);font:400 12.5px/1.4 var(--kr);color:#FFFFFF;opacity:0;transition:opacity .15s}
+.tip{position:absolute;z-index:5;pointer-events:none;max-width:240px;padding:8px 11px;border-radius:12px;background:rgba(37,32,45,.94);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 12px 28px -12px rgba(0,0,0,.8);font:400 12.5px/1.4 var(--kr);color:#FFFFFF;opacity:0;transition:opacity .15s}
 .tip.on{opacity:1}
 .tip b{color:#FFFFFF;font-weight:700}
 .tip .sub,.tip small{color:#C9BEDA}
-.tl{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;padding:8px 16px 12px;border-top:1px solid var(--line);background:rgba(255,255,255,.6)}
+.tl{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 16px 12px;border-top:1px solid var(--line);background:rgba(8,6,11,.7)}
 .pl{width:40px;height:40px;border-radius:999px;border:0;background:var(--grad);color:#FFFFFF;font-size:13px;cursor:pointer;box-shadow:0 6px 16px -8px rgba(110,30,170,.7),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .35s var(--ease)}
 .pl:hover{transform:translateY(-1px)}
 .track{position:relative;height:56px}
+.spd{min-width:52px;height:34px;padding:0 12px;border:0;border-radius:999px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);font:italic 900 14px/1 var(--round);font-variant-numeric:tabular-nums;cursor:pointer;transition:background .2s}
+.spd:hover{background:rgba(255,255,255,.13)}
 #tlc{position:absolute;inset:0;width:100%;height:100%;cursor:pointer;touch-action:none}
 #tR{position:absolute;left:0;right:0;bottom:-8px;width:100%;opacity:0;height:16px;pointer-events:none}
 .track:focus-within{outline:2px solid var(--violet);outline-offset:2px;border-radius:8px}
@@ -136,14 +139,14 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .tabs{display:flex;gap:4px;padding:12px 16px;position:sticky;top:0;background:var(--bg);z-index:2;border-bottom:1px solid var(--line)}
 .tabs button{height:34px;padding:0 14px;border:0;border-radius:999px;background:none;font:600 14px/19px var(--kr);color:var(--ink-2);cursor:pointer;transition:background .25s,color .25s}
 .tabs button:hover{background:var(--bg-2)}
-.tabs button[aria-selected="true"]{background:var(--night);color:#FFFFFF}
+.tabs button[aria-selected="true"]{background:var(--sel);color:var(--on-sel)}
 .tp{padding:16px;display:flex;flex-direction:column;gap:12px}
 .cn4{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .cn{padding:14px;border-radius:var(--r-lg);background:var(--bg-2);display:flex;flex-direction:column;gap:2px;min-width:0;min-height:104px}
 .cn b{font:italic 900 32px/38px var(--round);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
 .cn b small{font:600 12px/16px var(--kr);color:var(--mute);margin-left:3px;font-style:normal}
 .cn span{font:400 12px/16px var(--kr);color:var(--mute)}
-.cn.dit{background:linear-gradient(135deg,#F1E4FC,#FBE8F5)}
+.cn.dit{background:var(--tonal)}
 .cn.dit b{color:transparent;background:var(--mark);-webkit-background-clip:text;background-clip:text}
 .cn.dit b small{-webkit-text-fill-color:var(--mute)}
 .box{padding:14px;border-radius:var(--r-lg);background:var(--bg-2);display:flex;flex-direction:column;gap:8px}
@@ -155,7 +158,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .lgd i.dash{background:repeating-linear-gradient(90deg,currentColor 0 3px,transparent 3px 5px)!important}
 .ms{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
 .ms button{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;width:100%;padding:8px;border:0;border-radius:10px;background:none;text-align:left;cursor:pointer;align-items:baseline;transition:background .2s}
-.ms button:hover{background:#FFFFFF}
+.ms button:hover{background:var(--bg-3)}
 .ms em{font:italic 800 12px/16px var(--round);color:var(--violet-d);font-variant-numeric:tabular-nums}
 .ms b{font:500 13px/18px var(--kr);color:var(--ink)}
 .pl-g{display:flex;flex-direction:column;gap:2px}
@@ -175,9 +178,9 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .rv p,.rv li{font:400 13px/19px var(--kr);color:var(--ink-2)}
 .rv ul{margin:0;padding-left:16px}
 .tag{align-self:flex-start;display:inline-flex;height:22px;align-items:center;padding:0 9px;border-radius:999px;font:600 11px/15px var(--kr)}
-.tag.dec{background:#FCE3F1;color:#B5307D}
-.tag.pol{background:#EDE3FC;color:#7438C2}
-.tag.ref{background:#FFFFFF;color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line)}
+.tag.dec{background:#41242B;color:#FABECB}
+.tag.pol{background:#302942;color:#D4C8FA}
+.tag.ref{background:rgba(255,255,255,.05);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line)}
 .mini{width:100%;border-collapse:collapse;font:400 12px/16px var(--kr)}
 .mini th,.mini td{padding:5px 6px;border-bottom:1px solid var(--line);text-align:right}
 .mini th{font-weight:600;color:var(--mute)}
@@ -185,22 +188,22 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .mini td{font-variant-numeric:tabular-nums;color:var(--ink)}
 
 /* cards */
-.scrim{position:fixed;inset:0;z-index:20;background:rgba(22,18,27,.38);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:grid;place-items:center;padding:24px var(--gxr) 24px var(--gx);animation:fade .2s ease-out}
+.scrim{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:grid;place-items:center;padding:24px var(--gxr) 24px var(--gx);animation:fade .2s ease-out}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .rc:focus,.rm:focus{outline:none}
-.rc{position:relative;width:min(440px,100%);max-height:100%;overflow:auto;border-radius:28px;background:var(--bg);display:flex;flex-direction:column;animation:rise .32s var(--ease);scrollbar-width:thin;box-shadow:0 30px 60px -30px rgba(60,10,90,.45)}
+.rc{position:relative;width:min(440px,100%);max-height:100%;overflow:auto;border-radius:28px;background:var(--card);display:flex;flex-direction:column;animation:rise .32s var(--ease);scrollbar-width:thin;box-shadow:inset 0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.9)}
 @keyframes rise{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.scrim,.rc,.rm,.nt,.rm-cap .in{animation:none}}
-.rc-h{position:relative;padding:20px 56px 18px 20px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(135deg,#F1E4FC 0%,#F6ECFC 50%,#FBE8F5 100%);color:var(--ink)}
+.rc-h{position:relative;padding:20px 56px 18px 20px;display:flex;flex-direction:column;gap:12px;background:var(--tonal);color:var(--ink)}
 .rc-h > *{position:relative;z-index:1}
-.rc-x{position:absolute;z-index:3;top:14px;right:14px;width:34px;height:34px;border:0;border-radius:999px;background:#FFFFFF;color:var(--ink);font-size:14px;cursor:pointer;box-shadow:0 4px 12px -6px rgba(22,18,27,.4)}
+.rc-x{position:absolute;z-index:3;top:14px;right:14px;width:34px;height:34px;border:0;border-radius:999px;background:rgba(255,255,255,.1);color:var(--ink);font-size:14px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
 .pair{display:flex;align-items:center}
-.pair .av{width:56px;height:56px;box-shadow:0 0 0 3px #FFFFFF}
+.pair .av{width:56px;height:56px;box-shadow:0 0 0 3px #2A1C3B}
 .pair .av + .av{margin-left:-12px}
 .pair .amp{margin-left:12px;font:600 12px/16px var(--kr);color:var(--mute)}
 .rc-h h2{font:800 28px/36px var(--kr);letter-spacing:-.03em}
 .rc-h p{font:500 13px/18px var(--kr);color:var(--ink-2)}
-.badge{align-self:flex-start;display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;background:var(--night);color:#FFFFFF;font:700 12px/16px var(--kr)}
+.badge{align-self:flex-start;display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;background:var(--sel);color:var(--on-sel);font:700 12px/16px var(--kr)}
 .badge.dit{background:var(--grad);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
 .rc-b{padding:18px 20px 20px;display:flex;flex-direction:column;gap:22px}
 .rc-b h3{font:700 13px/18px var(--kr);color:var(--mute);margin-bottom:10px}
@@ -214,7 +217,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .mixl i{width:8px;height:8px;border-radius:50%}
 .wo{padding:14px;border-radius:var(--r-md);background:var(--bg-2);font:400 13px/19px var(--kr);color:var(--ink-2)}
 .wo b{color:var(--ink)}
-.rc-f{display:flex;justify-content:space-between;gap:8px;padding:12px 20px 16px;border-top:1px solid var(--line);position:sticky;bottom:0;background:var(--bg);z-index:4}
+.rc-f{display:flex;justify-content:space-between;gap:8px;padding:12px 20px 16px;border-top:1px solid var(--line);position:sticky;bottom:0;background:var(--card);z-index:4}
 .rc-f button{height:38px;padding:0 16px;border:0;border-radius:999px;background:var(--bg-2);font:600 13px/18px var(--kr);color:var(--ink);cursor:pointer;transition:background .2s}
 .rc-f button:hover{background:var(--bg-3)}
 .rc-f button:disabled{opacity:.35;cursor:default}
@@ -224,12 +227,12 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .pkv dd{margin:0}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;background:var(--bg-2);font:500 12px/16px var(--kr);color:var(--ink)}
-.quote{padding:14px;border-radius:var(--r-md);background:linear-gradient(135deg,#F1E4FC,#FBE8F5);color:#4B2470;font:500 13px/19px var(--kr)}
+.quote{padding:14px;border-radius:var(--r-md);background:var(--tonal);color:#E3CCFF;font:500 13px/19px var(--kr)}
 .brow{display:grid;grid-template-columns:84px minmax(0,1fr);gap:8px;align-items:start;font:400 13px/19px var(--kr);color:var(--ink-2)}
 
 /* relationship media: a lavender stage replays the pair's story (balls = interactions, fanned to both people), chapters alongside */
-.rm{position:relative;width:min(1160px,100%);height:min(780px,100%);border-radius:28px;background:var(--bg);display:grid;grid-template-columns:minmax(0,1fr) 380px;overflow:hidden;animation:rise .32s var(--ease);box-shadow:0 30px 60px -30px rgba(60,10,90,.45)}
-.rm-st{position:relative;background:radial-gradient(110% 90% at 50% 48%,#FFFFFF 0%,var(--stage) 62%,#EEE3FA 100%);display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;min-width:0}
+.rm{position:relative;width:min(1160px,100%);height:min(780px,100%);border-radius:28px;background:var(--card);display:grid;grid-template-columns:minmax(0,1fr) 380px;overflow:hidden;animation:rise .32s var(--ease);box-shadow:inset 0 0 0 1px var(--line),0 30px 60px -30px rgba(0,0,0,.9)}
+.rm-st{position:relative;background:radial-gradient(70% 60% at 50% 48%,#1D1428 0%,#100C16 55%,var(--stage) 100%);display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;min-width:0}
 .rm-cw{position:relative;min-height:0;overflow:hidden}
 #rmCv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
 .rm-lg{position:absolute;top:18px;left:18px;display:flex;flex-direction:column;gap:4px;font:500 11px/15px var(--kr);color:var(--mute);pointer-events:none}
@@ -242,27 +245,27 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .rm-cap{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:min(460px,calc(100% - 300px));text-align:center;pointer-events:none}
 .rm-cap .in{animation:capIn .55s var(--ease)}
 @keyframes capIn{from{opacity:0;transform:translateY(8px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
-.rm-cap .dd{display:inline-flex;gap:8px;align-items:center;height:26px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.8);box-shadow:inset 0 0 0 1px var(--line);font:italic 800 12px/16px var(--round);color:var(--ink-2);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.rm-cap .dd{display:inline-flex;gap:8px;align-items:center;height:26px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px var(--line);font:italic 800 12px/16px var(--round);color:var(--ink-2);letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .rm-cap .dd i{width:6px;height:6px;border-radius:50%;background:var(--dc,#A79FB1)}
 .rm-cap p{font:800 21px/29px var(--kr);letter-spacing:-.03em;color:var(--ink);margin-top:10px;text-wrap:balance}
 .rm-cap p small{display:block;font:400 13px/18px var(--kr);letter-spacing:-.01em;color:var(--mute);margin-top:6px}
 .rm-cap.dit p b{color:transparent;background:var(--mark);-webkit-background-clip:text;background-clip:text}
-.rm-m{position:absolute;bottom:12px;display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:var(--r-lg);background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:var(--shadow),inset 0 0 0 1px rgba(22,18,27,.06);pointer-events:none}
+.rm-m{position:absolute;bottom:12px;display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:var(--r-lg);background:rgba(22,18,28,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:var(--shadow),inset 0 0 0 1px rgba(255,255,255,.08);pointer-events:none}
 .rm-m.l{left:12px;width:min(272px,calc(50% - 18px))}
 .rm-m.r{right:12px;width:min(232px,calc(50% - 18px))}
 .rm-m h4{font:600 11px/15px var(--kr);color:var(--mute);display:flex;justify-content:space-between;gap:8px}
 .rm-m .big{font:italic 900 32px/36px var(--round);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
 .rm-m .big small{font:500 12px/16px var(--kr);color:var(--mute);letter-spacing:-.01em}
 .rm-m .big small + small{margin-left:auto}
-.hb{position:relative;height:6px;border-radius:999px;background:rgba(22,18,27,.08);margin:2px 0 14px}
+.hb{position:relative;height:6px;border-radius:999px;background:rgba(255,255,255,.1);margin:2px 0 14px}
 .hb i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#C99BF7,#AA4AF4 60%,#E569C6);transition:width .25s}
-.hb u{position:absolute;top:-3px;width:2px;height:12px;margin-left:-1px;background:#6E6578;border-radius:1px;transition:left .25s}
-.hb s{position:absolute;top:0;bottom:0;width:1px;background:rgba(22,18,27,.25);text-decoration:none}
+.hb u{position:absolute;top:-3px;width:2px;height:12px;margin-left:-1px;background:#CFC8D8;border-radius:1px;transition:left .25s}
+.hb s{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.25);text-decoration:none}
 .hb s::after{content:attr(data-l);position:absolute;top:9px;left:50%;transform:translateX(-50%);font:400 10px/12px var(--kr);color:var(--faint);white-space:nowrap}
 .rm-m .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:400 12px/16px var(--kr);color:var(--mute)}
 #rmMx{width:119px;height:63px;display:block;align-self:center}
 .rm-m .mxs{font:400 12px/16px var(--kr);color:var(--mute);text-align:center}
-.rm-bar{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 16px 12px;border-top:1px solid var(--line);background:rgba(255,255,255,.6)}
+.rm-bar{display:grid;grid-template-columns:40px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:8px 16px 12px;border-top:1px solid var(--line);background:rgba(8,6,11,.7)}
 #rmTl{position:absolute;inset:0;width:100%;height:100%;cursor:pointer;touch-action:none}
 #rmRange{position:absolute;left:0;right:0;bottom:-8px;width:100%;opacity:0;height:16px;pointer-events:none}
 .rm-sd{display:flex;flex-direction:column;min-height:0;border-left:1px solid var(--line)}
@@ -276,8 +279,8 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
 .ch button:hover{background:var(--bg-2)}
 .ch li.on button{background:var(--bg-2)}
 .ch li.hl button{box-shadow:inset 0 0 0 1.5px #C79BFF}
-.ch button::before{content:"";position:relative;z-index:1;width:8px;height:8px;border-radius:50%;background:#CFC8D8;margin:5px 0 0 4px}
-.ch li.on button::before{box-shadow:0 0 0 3px rgba(22,18,27,.1)}
+.ch button::before{content:"";position:relative;z-index:1;width:8px;height:8px;border-radius:50%;background:#4A4352;margin:5px 0 0 4px}
+.ch li.on button::before{box-shadow:0 0 0 3px rgba(255,255,255,.14)}
 .ch .dit button::before{background:var(--violet);box-shadow:0 0 0 3px rgba(170,74,244,.22)}
 .ch .op button::before{background:#C79BFF}
 .ch .st button::before{background:#2BC4A8}
@@ -325,7 +328,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
   .rm-m .big{font-size:24px;line-height:28px}
   .rm-m .big small + small{display:none}
   #rmMx{width:102px;height:54px}
-  .rm-bar{grid-template-columns:40px minmax(0,1fr);padding:8px 12px 10px}
+  .rm-bar{grid-template-columns:40px minmax(0,1fr) auto;padding:8px 12px 10px}
   .rm-bar .seg{grid-column:1 / -1;justify-self:center}
 }
 </style>
@@ -339,8 +342,6 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
       <div class="g"><div class="seg big" role="group" aria-label="페르소나" id="segP"><button type="button" data-v="uni" aria-pressed="true">대학교 1학년 채원</button><button type="button" data-v="high" aria-pressed="false">고등학교 1학년 시우</button></div></div>
       <div class="g"><span id="lD">기간</span><div class="seg" role="group" aria-labelledby="lD" id="segD"><button type="button" data-v="90" aria-pressed="false">3개월</button><button type="button" data-v="180" aria-pressed="true">6개월</button></div></div>
       <div class="g"><span id="lA">사용 강도</span><div class="seg" role="group" aria-labelledby="lA" id="segA"><button type="button" data-v="light" aria-pressed="false">가볍게</button><button type="button" data-v="normal" aria-pressed="false">보통</button><button type="button" data-v="active" aria-pressed="true">활발</button></div></div>
-      <div class="g"><span id="lG">열림 조건</span><div class="seg" role="group" aria-labelledby="lG" id="segG"><button type="button" data-v="v2" aria-pressed="true">현재 v2</button><button type="button" data-v="ditto" aria-pressed="false">디토 필수안</button></div></div>
-      <div class="g" id="protWrap" title="고등학교 1학년에만 해당해요"><span id="lY">청소년 보호안</span><div class="seg" role="group" aria-labelledby="lY" id="segY"><button type="button" data-v="1" aria-pressed="true">켬</button><button type="button" data-v="0" aria-pressed="false">끔</button></div></div>
     </div>
   </header>
 
@@ -362,6 +363,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
       <div class="tl">
         <button type="button" class="pl" id="play" aria-label="0일부터 재생">▶</button>
         <div class="track"><canvas id="tlc" aria-hidden="true"></canvas><input type="range" id="tR" min="0" max="180" step="0.1" value="180" aria-label="앱 설치 후 날짜"></div>
+        <button type="button" class="spd" aria-label="재생 속도">1×</button>
       </div>
     </section>
 
@@ -414,7 +416,6 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     r.EV.forEach((e, i) => { const R = mul(i + 1); e.j = [R() * 2 - 1, R() * 2 - 1, R() * 2 - 1]; e.rr = .66 + R() * .32; e.v = false; e.born = -1e9; });
     // when each person crossed each closeness level, with and without Ditto, and each frequency stage
     r.ids.forEach(id => { const p = r.people[id]; p.upW = {}; p.upO = {}; p.stD = {}; r.snap.forEach(s => { const q = s.p[id]; for (let k = 2; k <= 4; k++) { if (q.lw >= k && p.upW[k] === undefined) p.upW[k] = s.d; if (q.lo >= k && p.upO[k] === undefined) p.upO[k] = s.d; } if (q.st && !q.fr && p.stD[q.st] === undefined) p.stD[q.st] = s.d; }); });
-    $('protWrap').classList.toggle('off', st.pk !== 'high'); $('segY').querySelectorAll('button').forEach(b => { b.disabled = st.pk !== 'high'; });
     $('tR').max = st.period;
     if (!keepT) T = Tt = st.period;
     T = Math.min(T, st.period); Tt = Math.min(Tt, st.period);
@@ -451,7 +452,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     if (st.world === 'without') r.ids.forEach(id => { const p = r.people[id], a = Math.atan2(p.dir[2], p.dir[0]) + rotY; pq[id] = [CX + Math.cos(a) * p.rad * R0, CY + Math.sin(a) * p.rad * R0, 0, 1]; });
     const K = kr();
     ctx.lineWidth = 1; ctx.setLineDash([2, 6]);
-    (st.world === 'with' ? [[.4, '가까운 친구 15'], [.66, '친구'], [.94, '친구의 친구']] : [[.34, '가까운 친구'], [.48, '친구'], [.66, '가벼운 친구'], [.86, '아는 사이']]).forEach(([rr, l]) => { ctx.strokeStyle = 'rgba(138,63,184,.22)'; ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); ctx.fillStyle = 'rgba(138,63,184,.75)'; ctx.font = '500 11px ' + K; ctx.textAlign = 'center'; ctx.fillText(l, CX, CY - R0 * rr - 6); });
+    (st.world === 'with' ? [[.4, '가까운 친구 15'], [.66, '친구'], [.94, '친구의 친구']] : [[.34, '가까운 친구'], [.48, '친구'], [.66, '가벼운 친구'], [.86, '아는 사이']]).forEach(([rr, l]) => { ctx.strokeStyle = 'rgba(197,136,255,.22)'; ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); ctx.fillStyle = 'rgba(197,136,255,.75)'; ctx.font = '500 11px ' + K; ctx.textAlign = 'center'; ctx.fillText(l, CX, CY - R0 * rr - 6); });
     ctx.setLineDash([]);
     const F = focus || openId, inv = e => e.a === F || e.b === F;
     const items = [];
@@ -468,7 +469,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
         if (e.t === 'visit') { ctx.fillStyle = `rgba(110,90,140,${((.15 + .45 * dep) * a0).toFixed(3)})`; const z = 1.2 * q[3]; ctx.fillRect(q[0] - z / 2, q[1] - z / 2, z, z); return; }
         const flash = Math.max(0, 1 - (now - e.born) / 1100);
         const la = e.t === 'ditto' ? (.1 + .3 * dep) * a0 : (.04 + .12 * dep) * a0;
-        ctx.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#5B4A70'; ctx.lineWidth = e.t === 'ditto' ? .9 : .5;
+        ctx.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#CDBFE3'; ctx.lineWidth = e.t === 'ditto' ? .9 : .5;
         [e.a, e.b].forEach(k => { const o = pq[k]; ctx.globalAlpha = Math.min(1, la + .7 * flash); ctx.beginPath(); ctx.moveTo(o[0], o[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); });
         ctx.globalAlpha = 1;
         items.push({ z: q[2], e, a0 });
@@ -493,11 +494,11 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
       if (id === 'me') { const g = ctx.createRadialGradient(q[0], q[1], z * .4, q[0], q[1], z * 2.2); g.addColorStop(0, 'rgba(170,74,244,.35)'); g.addColorStop(1, 'rgba(170,74,244,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], z * 2.2, 0, 7); ctx.fill(); }
       ctx.globalAlpha = a * (fr || st.world === 'without' ? 1 : .8);
       const x0 = q[0] - z / 2, y0 = q[1] - z / 2, rrect = (x, y, w, h, rd) => { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, rd); else ctx.rect(x, y, w, h); };
-      if (id === F) { ctx.strokeStyle = '#16121B'; ctx.lineWidth = 1.5; rrect(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
+      if (id === F) { ctx.strokeStyle = '#F5F2F8'; ctx.lineWidth = 1.5; rrect(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
       ctx.save(); rrect(x0, y0, z, z, z * .25); ctx.clip();
-      const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#E4DDEC'; ctx.fillRect(x0, y0, z, z); }
+      const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#2A2432'; ctx.fillRect(x0, y0, z, z); }
       ctx.restore();
-      ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${K}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.92)'; ctx.fillStyle = '#16121B';
+      ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${K}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(11,9,16,.9)'; ctx.fillStyle = '#F5F2F8';
       const ly = q[1] + z / 2 + 13; ctx.strokeText(p.n, q[0], ly); ctx.fillText(p.n, q[0], ly);
       if (st.world === 'with' && qs && !qs.fr && qs.st && W >= 560) { ctx.font = `500 10px ${K}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }
       ctx.globalAlpha = 1;
@@ -542,7 +543,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     if (p.kind === 'fof') {
       if (p.stD.clear !== undefined && p.stD.clear <= upto) add(p.stD.clear, 'st', `주파수가 <b>선명</b>해졌어요`);
       if (p.stD.near !== undefined && p.stD.near <= upto) add(p.stD.near, 'nr', `<b>곧 친구 신청이 열려요</b>`);
-      if (p.open !== null && p.open <= upto) { const noD = !E.some(e => e.t === 'ditto' && e.d <= p.open + 1); add(p.open, 'op', `주파수 <b>열림</b> · 친구 신청을 보낼 수 있어요${noD ? `<small>디토 없이 ${p.grp ? p.grp + ' 대화' : '댓글'}로 열렸어요. 디토 필수안이면 첫 디토를 기다려요</small>` : '<small>점수 10 · 교류한 날 4일 · 함께한 교류</small>'}`); }
+      if (p.open !== null && p.open <= upto) { const noD = !E.some(e => e.t === 'ditto' && e.d <= p.open + 1); add(p.open, 'op', `주파수 <b>열림</b> · 친구 신청을 보낼 수 있어요${noD ? `<small>디토 없이 ${p.grp ? p.grp + ' 대화' : '댓글'}로 열렸어요.</small>` : '<small>점수 10 · 교류한 날 4일 · 함께한 교류</small>'}`); }
       if (p.sent !== null && p.sent <= upto) add(p.sent, '', `편지를 붙여 친구 신청을 보냈어요`);
       if (p.fd !== null && p.fd <= upto) add(p.fd, 'fr', `<b>${J(p.n, '이', '가')}</b> 수락했어요 · 디토 친구가 됐어요`, E.find(x => x.t === 'invite'));
       if (p.firstMeet && p.firstMeet <= upto) add(p.firstMeet, 'mt', `처음 직접 만났어요${p.meets > 1 && upto >= st.period ? `<small>6개월까지 ${p.meets}번 만났어요</small>` : ''}`);
@@ -588,6 +589,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
         <div class="rm-bar">
           <button type="button" class="pl" id="rmPl" aria-label="재생">▶</button>
           <div class="track"><canvas id="rmTl" aria-hidden="true"></canvas><input type="range" id="rmRange" min="0" max="${d + .999}" step="0.1" value="0" aria-label="두 사람의 날짜"></div>
+          <button type="button" class="spd" aria-label="재생 속도">1×</button>
           <div class="seg" role="group" aria-label="비교" id="rmWs"><button type="button" data-v="with" aria-pressed="true">디토와 함께</button><button type="button" data-v="without" aria-pressed="false">디토 없이</button></div>
         </div>
       </section>
@@ -671,7 +673,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     const d = Math.min(rm.d, Math.floor(rm.t)), p = rm.p, q = r.snap[d].p[rm.id], wo = rm.world === 'without';
     let ch = -1; rm.items.forEach((it, i) => { if (it.d <= rm.t + 1e-6) ch = i; });
     if (force || ch !== rm.ch || wo !== rm.wo0) {
-      const it = rm.items[ch], col = it ? ({ dit: '#AA4AF4', op: '#C79BFF', st: '#2BC4A8', nr: '#5A5BF2', fr: '#07E7B4', mt: '#F2C94C', lvu: '#F08BC0', now: '#16121B' })[it.cls.split(' ')[0]] : null;
+      const it = rm.items[ch], col = it ? ({ dit: '#AA4AF4', op: '#C79BFF', st: '#2BC4A8', nr: '#5A5BF2', fr: '#07E7B4', mt: '#F2C94C', lvu: '#F08BC0', now: '#F5F2F8' })[it.cls.split(' ')[0]] : null;
       $('rmCapW').classList.toggle('dit', !!it && /dit/.test(it.cls) && !wo);
       $('rmCap').innerHTML = `<div class="in">${wo ? `<span class="dd">디토 없이 · D+${d}</span><p>${p.kind === 'fof' ? `${p.n}의 플래터를 볼 일이 없어요<small>${p.via.map(v => r.people[v].n).join('·')}의 친구라는 것만 겨우 아는 사이예요</small>` : `오프라인에서 마주친 시간만 쌓여요<small>디토로 나눈 교류 ${rm.balls.filter(b => b.shown && b.e.t !== 'invite').length}번이 없는 6개월이에요</small>`}</p>` : it ? `<span class="dd" style="--dc:${col || '#A79FB1'}"><i></i>D+${Math.floor(it.d)} · ${mdw(it.d)}</span><p>${it.html}</p>` : `<span class="dd">D+${d}</span><p>아직 서로 보이지 않아요<small>${p.via.map(v => r.people[v].n).join('·')}의 친구로 곧 지도에 나타나요</small></p>`}</div>`;
       rm.ch = ch; rm.wo0 = wo;
@@ -702,8 +704,8 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     if (rm.playing && now >= rm.hold) {
       const next = rm.items.find(it => it.d > rm.t + 1e-6);
       let sp = Math.max(5, rm.d / 11); if (next && next.d - rm.t > 6) sp *= 2.6;
-      let nt = rm.t + dt / 1000 * sp;
-      if (next && nt >= next.d) { nt = next.d; rm.hold = now + (next.cls === 'now' ? 0 : /dit|op|fr/.test(next.cls) ? 1700 : 1200); }
+      let nt = rm.t + dt / 1000 * sp * spd;
+      if (next && nt >= next.d) { nt = next.d; rm.hold = now + (next.cls === 'now' ? 0 : /dit|op|fr/.test(next.cls) ? 1700 : 1200) / spd; }
       if (nt >= rm.D) { nt = rm.D; rm.playing = false; $('rmPl').textContent = '▶'; $('rmPl').setAttribute('aria-label', '처음부터 재생'); }
       rm.t = nt;
     }
@@ -721,15 +723,15 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     const P = v => { const x = v[0] * ca - v[2] * sa, z = v[0] * sa + v[2] * ca; return [cx + x * rx, cy + v[1] * ry, z, 1 + z * .2]; };
     const meP = [ax, cy], thP = [bx, cy];
     // the cloud's outline, like a faint globe
-    g.strokeStyle = 'rgba(138,63,184,.2)'; g.lineWidth = 1; g.setLineDash([2, 6]); g.beginPath(); g.ellipse(cx, cy, rx * 1.12, ry * 1.12, 0, 0, 7); g.stroke(); g.setLineDash([]);
+    g.strokeStyle = 'rgba(197,136,255,.2)'; g.lineWidth = 1; g.setLineDash([2, 6]); g.beginPath(); g.ellipse(cx, cy, rx * 1.12, ry * 1.12, 0, 0, 7); g.stroke(); g.setLineDash([]);
     // mutual friends above: the bridge a friend of a friend came through
     const vias = p.kind === 'fof' ? p.via : [];
     const vy = Math.max(mob ? top + 8 : top - 28, cy - ry * 1.12 - 44), viaP = vias.map((v, i) => [cx + (i - (vias.length - 1) / 2) * 76, vy]);
-    viaP.forEach(vp => { g.strokeStyle = 'rgba(22,18,27,.2)'; g.lineWidth = 1; [meP, thP].forEach(o => { g.beginPath(); g.moveTo(vp[0], vp[1]); g.lineTo(o[0], o[1]); g.stroke(); }); });
+    viaP.forEach(vp => { g.strokeStyle = 'rgba(255,255,255,.2)'; g.lineWidth = 1; [meP, thP].forEach(o => { g.beginPath(); g.moveTo(vp[0], vp[1]); g.lineTo(o[0], o[1]); g.stroke(); }); });
     // the pair's own line: dashed while they only know of each other, solid once they're Ditto friends, thicker as they get closer
     const fr = q.fr && wk < .5, lv = wk > .5 ? q.lo : q.lw;
     if (fr) { g.strokeStyle = LVC[Math.max(1, q.lw)]; g.globalAlpha = .55; g.lineWidth = .8 + q.lw * .5; g.beginPath(); g.moveTo(meP[0], meP[1]); g.lineTo(thP[0], thP[1]); g.stroke(); g.globalAlpha = 1; }
-    else if (p.kind === 'known' || (!wk && q.vis)) { g.strokeStyle = p.kind === 'known' ? LVC[Math.max(1, lv)] : 'rgba(22,18,27,.45)'; g.globalAlpha = .35; g.lineWidth = .8 + (p.kind === 'known' ? lv * .4 : 0); g.setLineDash([3, 6]); g.beginPath(); g.moveTo(meP[0], meP[1]); g.lineTo(thP[0], thP[1]); g.stroke(); g.setLineDash([]); g.globalAlpha = 1; }
+    else if (p.kind === 'known' || (!wk && q.vis)) { g.strokeStyle = p.kind === 'known' ? LVC[Math.max(1, lv)] : 'rgba(255,255,255,.45)'; g.globalAlpha = .35; g.lineWidth = .8 + (p.kind === 'known' ? lv * .4 : 0); g.setLineDash([3, 6]); g.beginPath(); g.moveTo(meP[0], meP[1]); g.lineTo(thP[0], thP[1]); g.stroke(); g.setLineDash([]); g.globalAlpha = 1; }
     // balls: born when the playhead passes them, fanned to both people
     const ease = k => k >= 1 ? 1 : 1 + 2.4 * Math.pow(k - 1, 3) + 1.4 * Math.pow(k - 1, 2);
     const vis = 1 - wk, list = [];
@@ -742,7 +744,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     list.forEach(({ bl, pq }) => {
       const e = bl.e, age = t - e.d, rec = age < 7 ? 1 : age < 14 ? .75 : age < 21 ? .55 : .28, flash = Math.max(0, 1 - (now - bl.born) / 1100), dep = (pq[2] + 1) / 2;
       const la = (e.t === 'ditto' ? (.12 + .3 * dep) : (.04 + .1 * dep)) * (e.t === 'ditto' ? Math.max(rec, .5) : rec) * vis;
-      g.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#5B4A70'; g.lineWidth = e.t === 'ditto' ? .9 : .5;
+      g.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#CDBFE3'; g.lineWidth = e.t === 'ditto' ? .9 : .5;
       [meP, thP].forEach(o => { g.globalAlpha = Math.min(1, la + .75 * flash * vis); g.beginPath(); g.moveTo(o[0], o[1]); g.lineTo(pq[0], pq[1]); g.stroke(); });
       g.globalAlpha = 1;
     });
@@ -753,19 +755,19 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
       if (e.t === 'ditto' && !old) { const gr = g.createRadialGradient(pq[0], pq[1], rad * .5, pq[0], pq[1], rad * 3); gr.addColorStop(0, `rgba(170,74,244,${(.5 * a0).toFixed(3)})`); gr.addColorStop(1, 'rgba(170,74,244,0)'); g.fillStyle = gr; g.beginPath(); g.arc(pq[0], pq[1], rad * 3, 0, 7); g.fill(); }
       const rk = (now - bl.born) / 900; if (rk < 1) { g.strokeStyle = S.TYPES[e.t].c; g.globalAlpha = (1 - rk) * .7 * vis; g.lineWidth = 1.2; g.beginPath(); g.arc(pq[0], pq[1], rad + 4 + rk * (e.t === 'ditto' ? 46 : 26), 0, 7); g.stroke(); g.globalAlpha = 1; }
       g.globalAlpha = Math.max(.08, a0); g.drawImage(SPR[e.t], pq[0] - rad, pq[1] - rad, rad * 2, rad * 2); g.globalAlpha = 1;
-      if (rm.hi === e) { g.strokeStyle = '#16121B'; g.lineWidth = 1.5; g.beginPath(); g.arc(pq[0], pq[1], rad + 5, 0, 7); g.stroke(); }
+      if (rm.hi === e) { g.strokeStyle = '#F5F2F8'; g.lineWidth = 1.5; g.beginPath(); g.arc(pq[0], pq[1], rad + 5, 0, 7); g.stroke(); }
       if (vis > .5) rm.hits.push({ x: pq[0], y: pq[1], r: Math.max(rad + 3, 9), e });
     });
     // people
     const hub = (pt, person, z, a, ring, sub, subC) => {
       g.globalAlpha = a; const x0 = pt[0] - z / 2, y0 = pt[1] - z / 2;
-      if (ring) { g.lineWidth = 2.5; g.strokeStyle = 'rgba(22,18,27,.08)'; g.beginPath(); g.arc(pt[0], pt[1], z * .5 + 9, 0, 7); g.stroke(); g.strokeStyle = ring[1]; g.lineCap = 'round'; g.beginPath(); g.arc(pt[0], pt[1], z * .5 + 9, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(.02, Math.min(1, ring[0]))); g.stroke(); g.lineCap = 'butt'; }
+      if (ring) { g.lineWidth = 2.5; g.strokeStyle = 'rgba(255,255,255,.08)'; g.beginPath(); g.arc(pt[0], pt[1], z * .5 + 9, 0, 7); g.stroke(); g.strokeStyle = ring[1]; g.lineCap = 'round'; g.beginPath(); g.arc(pt[0], pt[1], z * .5 + 9, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(.02, Math.min(1, ring[0]))); g.stroke(); g.lineCap = 'butt'; }
       g.save(); g.beginPath(); if (g.roundRect) g.roundRect(x0, y0, z, z, z * .25); else g.rect(x0, y0, z, z); g.clip();
-      const im = avImg[person.av]; if (im && im.complete && im.naturalWidth) g.drawImage(im, x0, y0, z, z); else { g.fillStyle = '#E4DDEC'; g.fillRect(x0, y0, z, z); }
+      const im = avImg[person.av]; if (im && im.complete && im.naturalWidth) g.drawImage(im, x0, y0, z, z); else { g.fillStyle = '#2A2432'; g.fillRect(x0, y0, z, z); }
       g.restore();
-      g.textAlign = 'center'; g.font = `700 ${z > 40 ? 14 : 12}px ${K}`; g.fillStyle = '#16121B'; g.lineWidth = 3; g.strokeStyle = 'rgba(255,255,255,.92)';
+      g.textAlign = 'center'; g.font = `700 ${z > 40 ? 14 : 12}px ${K}`; g.fillStyle = '#F5F2F8'; g.lineWidth = 3; g.strokeStyle = 'rgba(11,9,16,.9)';
       const ly = pt[1] + z / 2 + (ring ? 26 : 18); g.strokeText(person.n, pt[0], ly); g.fillText(person.n, pt[0], ly);
-      if (sub) { g.font = `500 11px ${K}`; g.fillStyle = subC || '#6E6578'; g.strokeText(sub, pt[0], ly + 15); g.fillText(sub, pt[0], ly + 15); }
+      if (sub) { g.font = `500 11px ${K}`; g.fillStyle = subC || '#A79FB1'; g.strokeText(sub, pt[0], ly + 15); g.fillText(sub, pt[0], ly + 15); }
       g.globalAlpha = 1;
     };
     viaP.forEach((vp, i) => hub(vp, r.people[vias[i]], mob ? 24 : 30, .9, null, mob ? '' : '함께 아는 친구'));
@@ -786,7 +788,7 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
       const C = 17, Rw = 9, sx = mw / C, sy = mh / Rw, lit = wk > .5 ? 0 : q.fr ? 1 : Math.min(1, (q.sc || 0) / 10), col = q.fr ? '#07E7B4' : q.st ? STG[q.st][1] : '#8E919E';
       if (!rm.mord) { rm.mord = []; for (let i = 0; i < C * Rw; i++) { const x = i % C, y = Math.floor(i / C); rm.mord.push([Math.hypot((x - 8) / 8, (y - 4) / 4) + ((x * 7 + y * 13) % 5) * .02, x, y]); } rm.mord.sort((a, b2) => a[0] - b2[0]); }
       const nl = Math.round(lit * C * Rw);
-      rm.mord.forEach((m, i) => { const on = i < nl; mg.globalAlpha = on ? .75 + .25 * Math.sin(now / 320 + i) : 1; mg.fillStyle = on ? col : 'rgba(22,18,27,.09)'; mg.beginPath(); mg.arc(m[1] * sx + sx / 2, m[2] * sy + sy / 2, Math.min(sx, sy) * .3, 0, 7); mg.fill(); });
+      rm.mord.forEach((m, i) => { const on = i < nl; mg.globalAlpha = on ? .75 + .25 * Math.sin(now / 320 + i) : 1; mg.fillStyle = on ? col : 'rgba(255,255,255,.09)'; mg.beginPath(); mg.arc(m[1] * sx + sx / 2, m[2] * sy + sy / 2, Math.min(sx, sy) * .3, 0, 7); mg.fill(); });
       mg.globalAlpha = 1;
     }
   }
@@ -794,19 +796,19 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     const c = $('rmTl'); if (!c) return; const [g, bw, bh] = setup(c); if (bw < 10) return;
     const D = rm.D, L = 4, w = bw - 8, Tp = 16, h = bh - Tp - 14, X = d => L + d / D * w, K = kr();
     const vals = r.snap.slice(0, rm.d + 1).map(s => [s.p[rm.id].Hw, s.p[rm.id].Ho]), mx = Math.max(60, ...vals.map(v => v[0])) * 1.1, Y = v => Tp + h - v / mx * h;
-    r.P.phases.forEach(ph => { if (ph[0] > D || (ph[3] !== 'vac' && ph[3] !== 'exam')) return; g.fillStyle = ph[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(22,18,27,.04)'; g.fillRect(X(ph[0]), Tp, X(Math.min(D, ph[1] + 1)) - X(ph[0]), h); });
-    g.strokeStyle = 'rgba(22,18,27,.07)'; g.lineWidth = 1; [50, 90, 200].forEach(v => { if (v > mx) return; g.beginPath(); g.moveTo(L, Y(v)); g.lineTo(L + w, Y(v)); g.stroke(); });
+    r.P.phases.forEach(ph => { if (ph[0] > D || (ph[3] !== 'vac' && ph[3] !== 'exam')) return; g.fillStyle = ph[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(255,255,255,.04)'; g.fillRect(X(ph[0]), Tp, X(Math.min(D, ph[1] + 1)) - X(ph[0]), h); });
+    g.strokeStyle = 'rgba(255,255,255,.07)'; g.lineWidth = 1; [50, 90, 200].forEach(v => { if (v > mx) return; g.beginPath(); g.moveTo(L, Y(v)); g.lineTo(L + w, Y(v)); g.stroke(); });
     const path = k => { g.beginPath(); vals.forEach((v, i) => i ? g.lineTo(X(i), Y(v[k])) : g.moveTo(X(i), Y(v[k]))); };
     path(0); g.lineTo(X(rm.d), Y(0)); g.lineTo(X(0), Y(0)); g.closePath(); g.fillStyle = 'rgba(170,74,244,.12)'; g.fill();
     g.save(); g.beginPath(); g.rect(0, 0, X(rm.t), bh); g.clip(); path(0); g.lineTo(X(rm.d), Y(0)); g.lineTo(X(0), Y(0)); g.closePath(); g.fillStyle = 'rgba(170,74,244,.32)'; g.fill(); path(0); g.strokeStyle = '#AA4AF4'; g.lineWidth = 1.5; g.stroke(); g.restore();
-    if (rm.p.kind === 'known') { path(1); g.strokeStyle = 'rgba(110,101,120,.8)'; g.setLineDash([3, 3]); g.lineWidth = 1; g.stroke(); g.setLineDash([]); }
+    if (rm.p.kind === 'known') { path(1); g.strokeStyle = 'rgba(201,194,210,.8)'; g.setLineDash([3, 3]); g.lineWidth = 1; g.stroke(); g.setLineDash([]); }
     rm.balls.forEach(bl => { const e = bl.e; g.globalAlpha = e.d <= rm.t ? 1 : .28; g.fillStyle = S.TYPES[e.t].c; g.beginPath(); g.arc(X(e.d), Tp - 8, e.t === 'ditto' ? 2.6 : 1.6, 0, 7); g.fill(); });
     g.globalAlpha = 1;
-    rm.items.forEach((it, i) => { if (it.cls === 'now') return; g.fillStyle = it.d <= rm.t ? '#16121B' : '#CFC8D8'; g.beginPath(); g.moveTo(X(it.d), Tp + h - 4); g.lineTo(X(it.d) + 4, Tp + h); g.lineTo(X(it.d), Tp + h + 4); g.lineTo(X(it.d) - 4, Tp + h); g.closePath(); g.fill(); });
-    g.fillStyle = '#6E6578'; g.font = `400 10px ${K}`; g.textAlign = 'left'; g.fillText('설치', L, bh - 1); g.textAlign = 'right'; g.fillText(`D+${rm.d}`, L + w, bh - 1);
+    rm.items.forEach((it, i) => { if (it.cls === 'now') return; g.fillStyle = it.d <= rm.t ? '#F5F2F8' : '#4A4352'; g.beginPath(); g.moveTo(X(it.d), Tp + h - 4); g.lineTo(X(it.d) + 4, Tp + h); g.lineTo(X(it.d), Tp + h + 4); g.lineTo(X(it.d) - 4, Tp + h); g.closePath(); g.fill(); });
+    g.fillStyle = '#A79FB1'; g.font = `400 10px ${K}`; g.textAlign = 'left'; g.fillText('설치', L, bh - 1); g.textAlign = 'right'; g.fillText(`D+${rm.d}`, L + w, bh - 1);
     g.textAlign = 'center'; for (let m = 30; m < rm.d - 12; m += 30) g.fillText(`${m / 30}개월`, X(m), bh - 1);
-    g.strokeStyle = '#16121B'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(rm.t), Tp - 4); g.lineTo(X(rm.t), Tp + h + 2); g.stroke();
-    g.fillStyle = '#16121B'; g.beginPath(); g.arc(X(rm.t), Tp + h, 5, 0, 7); g.fill();
+    g.strokeStyle = '#F5F2F8'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(rm.t), Tp - 4); g.lineTo(X(rm.t), Tp + h + 2); g.stroke();
+    g.fillStyle = '#F5F2F8'; g.beginPath(); g.arc(X(rm.t), Tp + h, 5, 0, 7); g.fill();
   }
   function openPersona(from){
     openId = null; rm = null; lastFocusEl = from || document.activeElement;
@@ -889,8 +891,8 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     const [g, bw, bh] = setup($(id)); if (bw < 10) return;
     const L = 24, Rp = 8, Tp = 8, B = 18, w = bw - L - Rp, h = bh - Tp - B, N = st.period;
     const X = d => L + d / N * w, Y = v => Tp + h - v / yMax * h, K = kr();
-    r.P.phases.forEach(p => { if ((p[3] !== 'vac' && p[3] !== 'exam') || p[0] > N) return; g.fillStyle = p[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(22,18,27,.04)'; g.fillRect(X(p[0]), Tp, X(Math.min(N, p[1])) - X(p[0]), h); });
-    g.strokeStyle = 'rgba(22,18,27,.07)'; g.fillStyle = '#6E6578'; g.font = `400 10px ${K}`; g.textAlign = 'right';
+    r.P.phases.forEach(p => { if ((p[3] !== 'vac' && p[3] !== 'exam') || p[0] > N) return; g.fillStyle = p[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(255,255,255,.04)'; g.fillRect(X(p[0]), Tp, X(Math.min(N, p[1])) - X(p[0]), h); });
+    g.strokeStyle = 'rgba(255,255,255,.07)'; g.fillStyle = '#A79FB1'; g.font = `400 10px ${K}`; g.textAlign = 'right';
     for (let v = 0; v <= yMax; v += step) { g.beginPath(); g.moveTo(L, Y(v)); g.lineTo(L + w, Y(v)); g.stroke(); g.fillText(v, L - 4, Y(v) + 3); }
     g.textAlign = 'center'; for (let d = 0; d <= N; d += 30) g.fillText(d ? `${d / 30}개월` : '설치', Math.max(L + 10, X(d)), Tp + h + 13);
     series.forEach(sr => {
@@ -898,11 +900,11 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
       if (sr.fill) { for (let d = N; d >= 0; d--) g.lineTo(X(d), Y(sr.base ? sr.base(r.snap[d]) : 0)); g.closePath(); g.fillStyle = sr.fill; g.fill(); }
       else { g.strokeStyle = sr.c; g.lineWidth = 2; g.setLineDash(sr.dash ? [4, 3] : []); g.stroke(); g.setLineDash([]); }
     });
-    const d = Math.min(N, Math.floor(T)); g.strokeStyle = 'rgba(22,18,27,.45)'; g.lineWidth = 1; g.beginPath(); g.moveTo(X(d), Tp); g.lineTo(X(d), Tp + h); g.stroke();
+    const d = Math.min(N, Math.floor(T)); g.strokeStyle = 'rgba(255,255,255,.45)'; g.lineWidth = 1; g.beginPath(); g.moveTo(X(d), Tp); g.lineTo(X(d), Tp + h); g.stroke();
   }
   function drawCharts(){
     if ($('tp-sum').hidden) return;
-    chart('chA', [{ v: s => s.nFriends, fill: 'rgba(170,74,244,.6)', base: s => s.nInvite }, { v: s => s.nInvite, fill: 'rgba(7,231,180,.38)' }, { v: s => s.nFriends, c: '#8A3FB8' }], 35, 10);
+    chart('chA', [{ v: s => s.nFriends, fill: 'rgba(170,74,244,.6)', base: s => s.nInvite }, { v: s => s.nInvite, fill: 'rgba(7,231,180,.38)' }, { v: s => s.nFriends, c: '#C588FF' }], 35, 10);
     const mx = Math.max(23, ...r.snap.slice(0, st.period + 1).map(s => s.w.casual)) + 2; // same scale for both personas
     chart('chB', [{ v: s => s.w.casual, c: '#48B5F4' }, { v: s => s.o.casual, c: '#48B5F4', dash: true }, { v: s => s.w.friend, c: '#AA4AF4' }, { v: s => s.o.friend, c: '#AA4AF4', dash: true }], Math.ceil(mx / 5) * 5, 5);
   }
@@ -910,14 +912,14 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
   function drawTimeline(){
     const [g, bw, bh] = setup($('tlc')), N = st.period, L = 4, w = bw - 8, Tp = 18, h = bh - Tp - 14, X = d => L + d / N * w, K = kr();
     const Y = v => Tp + h - v / 35 * h;
-    r.P.phases.forEach(p => { if (p[0] > N) return; if (p[3] === 'vac' || p[3] === 'exam') { g.fillStyle = p[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(22,18,27,.04)'; g.fillRect(X(p[0]), Tp, X(Math.min(N, p[1])) - X(p[0]), h); } if (p[3] === 'vac') { g.fillStyle = '#6E6578'; g.font = `500 10px ${K}`; g.textAlign = 'left'; g.fillText(p[2], X(p[0]) + 4, Tp + 10); } });
+    r.P.phases.forEach(p => { if (p[0] > N) return; if (p[3] === 'vac' || p[3] === 'exam') { g.fillStyle = p[3] === 'vac' ? 'rgba(72,181,244,.10)' : 'rgba(255,255,255,.04)'; g.fillRect(X(p[0]), Tp, X(Math.min(N, p[1])) - X(p[0]), h); } if (p[3] === 'vac') { g.fillStyle = '#A79FB1'; g.font = `500 10px ${K}`; g.textAlign = 'left'; g.fillText(p[2], X(p[0]) + 4, Tp + 10); } });
     g.beginPath(); for (let d = 0; d <= N; d++) { const v = r.snap[d].nFriends; d ? g.lineTo(X(d), Y(v)) : g.moveTo(X(d), Y(v)); } g.lineTo(X(N), Y(0)); g.lineTo(X(0), Y(0)); g.closePath(); g.fillStyle = 'rgba(170,74,244,.22)'; g.fill();
-    const d = Math.min(N, T); g.fillStyle = '#AA4AF4'; g.fillRect(X(0), Tp + h, X(d) - X(0), 2); g.fillStyle = 'rgba(22,18,27,.12)'; g.fillRect(X(d), Tp + h, X(N) - X(d), 2);
-    g.fillStyle = '#6E6578'; g.font = `400 10px ${K}`; g.textAlign = 'center'; for (let m = 0; m <= N; m += 30) g.fillText(m ? `${m / 30}개월` : '설치', Math.min(bw - 16, Math.max(12, X(m))), bh - 1);
+    const d = Math.min(N, T); g.fillStyle = '#AA4AF4'; g.fillRect(X(0), Tp + h, X(d) - X(0), 2); g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(X(d), Tp + h, X(N) - X(d), 2);
+    g.fillStyle = '#A79FB1'; g.font = `400 10px ${K}`; g.textAlign = 'center'; for (let m = 0; m <= N; m += 30) g.fillText(m ? `${m / 30}개월` : '설치', Math.min(bw - 16, Math.max(12, X(m))), bh - 1);
     tlDots = (r._ms || []).filter(m => m.who).map(m => ({ x: X(m.d), y: Tp - 6, m }));
-    tlDots.forEach(t => { g.fillStyle = t.m.d <= T ? '#16121B' : '#CFC8D8'; g.beginPath(); g.arc(t.x, t.y, 3, 0, 7); g.fill(); });
-    g.strokeStyle = '#16121B'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(d), Tp - 2); g.lineTo(X(d), Tp + h + 2); g.stroke();
-    g.fillStyle = '#16121B'; g.beginPath(); g.arc(X(d), Tp + h + 1, 5, 0, 7); g.fill();
+    tlDots.forEach(t => { g.fillStyle = t.m.d <= T ? '#F5F2F8' : '#4A4352'; g.beginPath(); g.arc(t.x, t.y, 3, 0, 7); g.fill(); });
+    g.strokeStyle = '#F5F2F8'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(d), Tp - 2); g.lineTo(X(d), Tp + h + 2); g.stroke();
+    g.fillStyle = '#F5F2F8'; g.beginPath(); g.arc(X(d), Tp + h + 1, 5, 0, 7); g.fill();
   }
   const tlc = $('tlc'); let scrub = null;
   const tAt = x => { const b = tlc.getBoundingClientRect(); return Math.max(0, Math.min(st.period, (x - b.left - 4) / (b.width - 8) * st.period)); };
@@ -932,11 +934,11 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
     const card = (tag, cls, title, body, open) => `<details ${open ? 'open' : ''}><summary><span class="tag ${cls}">${tag}</span><b>${title}</b></summary><div>${body}</div></details>`;
     $('rv').innerHTML = `<p class="sub">시드 16개 평균이에요. 지도는 그중 한 번이에요.</p>`
       + card('결정 필요', 'dec', '친구 30명이 한도 정책과 맞지 않아요', `<p>서비스 기획서 §5.15는 기본 15명, Ditto Plus 30명이에요. 10월 17일 전략은 가까운 친구 15명 + 친구 확장층인데 기획서는 그대로예요.</p><p>이 시뮬레이터는 전략 쪽을 따라 친구 중 돈독한 15명을 가까운 친구 자리에, 나머지를 그 바깥에 뒀어요.</p>`, true)
-      + card('정책 제안', 'pol', '지금 규칙은 디토 없이도 친구 신청이 열려요', `<p>‘함께한 교류’가 댓글이나 그룹 대화로도 채워져서, 활발 기준 친구의 친구 열림 중 대1 ${pct(u)}%, 고1 ${pct(h)}%가 디토 없이 열렸어요.</p><p><b>디토 필수안</b>(열림 조건에 둘 사이 디토 1번 이상)은 6개월 열림 수가 대1 ${u['active|v2'].opened}→${u['active|ditto'].opened}, 고1 ${h['active|v2'].opened}→${h['active|ditto'].opened}로 거의 같아요. 위 ‘열림 조건’으로 바로 비교해 보세요.</p>`)
-      + card('참고', 'ref', '6개월 30명은 활발하게 쓰는 사람 기준이에요', `<table class="mini"><thead><tr><th>현재 v2</th><th>3개월</th><th>6개월</th><th>디토로</th></tr></thead><tbody>${row(u, 'active', '대1 활발')}${row(u, 'normal', '대1 보통')}${row(u, 'light', '대1 가볍게')}${row(h, 'active', '고1 활발')}${row(h, 'normal', '고1 보통')}${row(h, 'light', '고1 가볍게')}</tbody></table><p>첫 열림 중앙값은 대1 ${u['active|v2'].firstOpenMed}일, 고1 ${h['active|v2'].firstOpenMed}일이에요. 기획서의 이전 모델은 41.7일이었어요.</p>`)
+      + card('정책 제안', 'pol', '지금 규칙은 디토 없이도 친구 신청이 열려요', `<p>‘함께한 교류’가 댓글이나 그룹 대화로도 채워져서, 활발 기준 친구의 친구 열림 중 대1 ${pct(u)}%, 고1 ${pct(h)}%가 디토 없이 열렸어요.</p><p><b>디토 필수안</b>(열림 조건에 둘 사이 디토 1번 이상)은 6개월 열림 수가 대1 ${u['active|v2'].opened}→${u['active|ditto'].opened}, 고1 ${h['active|v2'].opened}→${h['active|ditto'].opened}로 거의 같아요.</p>`)
+      + card('참고', 'ref', '6개월 30명은 활발하게 쓰는 사람 기준이에요', `<table class="mini"><thead><tr><th>사용 강도</th><th>3개월</th><th>6개월</th><th>디토로</th></tr></thead><tbody>${row(u, 'active', '대1 활발')}${row(u, 'normal', '대1 보통')}${row(u, 'light', '대1 가볍게')}${row(h, 'active', '고1 활발')}${row(h, 'normal', '고1 보통')}${row(h, 'light', '고1 가볍게')}</tbody></table><p>첫 열림 중앙값은 대1 ${u['active|v2'].firstOpenMed}일, 고1 ${h['active|v2'].firstOpenMed}일이에요. 기획서의 이전 모델은 41.7일이었어요.</p>`)
       + card('정책 제안', 'pol', '고1은 친구의 친구로 성인이 보여요', `<p>시우의 지도에는 ${h.adults.map(a => `${a.n}(${a.age}세)`).join(', ')}이 친구의 친구로 보일 수 있어요. 방문자 공개와 겹치면 성인이 미성년자의 방문 기록을 봐요.</p><ul><li>만 19세 미만은 친구의 친구 노출·주파수를 만 19세 미만끼리로</li><li>만 19세 미만의 방문 기록은 서로 숨김</li><li>성인이 미성년자에게 먼저 디토·친구 신청 불가</li></ul>`)
       + card('참고', 'ref', '‘더 돈독해졌다’는 아직 가설이에요', `<p>6개월 뒤 가벼운 친구 이상은 대1 ${u['active|v2'].casualW}명(디토 없이 ${u['active|v2'].casualO}), 고1 ${h['active|v2'].casualW}명(${h['active|v2'].casualO})이에요. 앱 교류를 시간으로 바꾼 가정에서 나온 차이예요. 확실한 건 디토로 이어진 친구의 친구가 디토 없이는 생기지 않는다는 점이에요.</p>`)
-      + card('가정', 'ref', '이 시뮬레이션의 가정', `<ul><li>돈독함 = 함께 보낸 시간. 50시간 가벼운 친구 · 90시간 친구 · 200시간 가까운 친구 (Hall, 2018). 연락이 없으면 하루 0.12%씩 옅어져요.</li><li>앱 교류 1번 = 디토 15분 · 같은 날 그룹 대화 20분 · 방명록 8분 · 댓글 6분 · 방문 2분 · 리액션 1분</li><li>주파수는 정책 v2 그대로. 디토는 21일이 지나도 ×0.3로 남아요.</li><li>오프라인 시간은 학기·시험·방학에 따라 달라지고 두 경우가 같아요.</li><li>앱에서는 점수와 시간을 사용자에게 보여 주지 않아요.</li></ul>`);
+      + card('가정', 'ref', '이 시뮬레이션의 가정', `<ul><li>돈독함 = 함께 보낸 시간. 50시간 가벼운 친구 · 90시간 친구 · 200시간 가까운 친구 (Hall, 2018). 연락이 없으면 하루 0.12%씩 옅어져요.</li><li>앱 교류 1번 = 디토 15분 · 같은 날 그룹 대화 20분 · 방명록 8분 · 댓글 6분 · 방문 2분 · 리액션 1분</li><li>주파수는 지금 정책 그대로. 디토는 21일이 지나도 ×0.3로 남아요.</li><li>오프라인 시간은 학기·시험·방학에 따라 달라지고 두 경우가 같아요.</li><li>앱에서는 점수와 시간을 사용자에게 보여 주지 않아요.</li></ul>`);
   }
 
   // ---------------- legend · controls ----------------
@@ -948,18 +950,25 @@ mark{padding:0;color:transparent;background:var(--mark);-webkit-background-clip:
   seg('segP', v => { st.pk = v; run(); });
   seg('segD', v => { st.period = +v; run(true); });
   seg('segA', v => { st.activity = v; run(true); });
-  seg('segG', v => { st.gate = v; run(true); });
-  seg('segY', v => { st.protect = v === '1'; run(true); });
   seg('segW', v => { st.world = v; lastKey = ''; ui(true); });
   document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.tabs button').forEach(x => { x.setAttribute('aria-selected', x === b); $('tp-' + x.dataset.t).hidden = x !== b; }); if (b.dataset.t === 'sum') drawCharts(); }));
   $('meBtn').addEventListener('click', e => openPersona(e.currentTarget));
   $('tR').addEventListener('input', e => { playing = false; $('play').textContent = '▶'; T = Tt = +e.target.value; });
   $('play').addEventListener('click', () => { if (playing) { playing = false; Tt = T; $('play').textContent = '▶'; return; } if (T >= st.period - .5) { T = 0; r.EV.forEach(e => { e.v = false; }); } Tt = st.period; playing = true; $('play').textContent = '❚❚'; });
 
+  // Playback speed, shared by the map and the pair replay; the chips cycle 0.5× → 1× → 2× → 4×, and < / > step it.
+  const SPDS = [.5, 1, 2, 4]; let spd = 1;
+  try { const v = +localStorage.getItem('ro-spd'); if (SPDS.includes(v)) spd = v; } catch (e) {}
+  function setSpd(v){ spd = v; try { localStorage.setItem('ro-spd', v); } catch (e) {} document.querySelectorAll('.spd').forEach(b => { b.textContent = (v === .5 ? '0.5' : v) + '×'; b.setAttribute('aria-label', `재생 속도 ${v}배, 눌러서 바꾸기`); }); }
+  document.addEventListener('click', e => { if (e.target.closest('.spd')) setSpd(SPDS[(SPDS.indexOf(spd) + 1) % SPDS.length]); });
+  document.addEventListener('keydown', e => { if (/INPUT|TEXTAREA/.test(document.activeElement && document.activeElement.tagName) && document.activeElement.type !== 'range') return; const k = e.key === '>' || e.key === '.' ? 1 : e.key === '<' || e.key === ',' ? -1 : 0; if (k) setSpd(SPDS[Math.max(0, Math.min(SPDS.length - 1, SPDS.indexOf(spd) + k))]); });
+  new MutationObserver(() => setSpd(spd)).observe($('modal'), { childList: true });
+  setSpd(spd);
+
   let last = 0;
   function tick(now){
     const dt = Math.min(60, now - (last || now)); last = now;
-    if (playing) { T = Math.min(Tt, T + dt / 1000 * (st.period / 30)); if (T >= Tt) { playing = false; $('play').textContent = '▶'; } }
+    if (playing) { T = Math.min(Tt, T + dt / 1000 * (st.period / 30) * spd); if (T >= Tt) { playing = false; $('play').textContent = '▶'; } }
     if (!drag) { vy *= .93; rotY += vy; if (!reduce && now - idleAt > 2200 && !openId) rotY += dt * .00006; }
     draw(now); ui(false); if (rm) rmFrame(now);
     if (scrub || playing) drawTimeline();

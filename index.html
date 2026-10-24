@@ -51,20 +51,25 @@
 .fx .ch.on .o{opacity:1;transform:translate(-50%,-54%) scale(1) rotate(var(--r,0deg))}
 @media (max-width:760px){.wsp{--ts:92px;--gap:10px;--pw:220px}.wsp-tabs{overflow-x:auto;scrollbar-width:none;justify-content:flex-start}.wsp-top{padding:14px 18px 0;font-size:12px}.wsp-top i{top:9px;height:20px}.wsp-card{grid-template-columns:1fr;gap:6px;padding:16px 18px}}
 
-/* 06 friends · relationship ontology preview: the simulator's map replayed from the day the app was installed, with a way into /relationship-ontology/ */
+/* 06 friends · relationship ontology preview: the simulator's map replayed from the day the app was installed, on a dark stage like a media player
+   (play/pause, speed), with a way into /relationship-ontology/ */
 .ro{margin-top:clamp(36px,4vw,56px);display:grid;grid-template-columns:minmax(0,1fr) 340px;border-radius:28px;overflow:hidden;background:#FFFFFF;box-shadow:0 0 0 1px rgba(22,18,27,.06),0 30px 60px -40px rgba(60,20,90,.35)}
-.ro-st{position:relative;min-width:0;height:clamp(480px,42vw,600px);background:radial-gradient(60% 60% at 50% 50%,#FFFFFF 0%,#F6F0FB 62%,#EFE5FA 100%)}
+.ro-st{position:relative;min-width:0;height:clamp(480px,42vw,600px);background:radial-gradient(70% 60% at 50% 46%,#1D1428 0%,#100C16 55%,#0B0910 100%);color-scheme:dark}
 .ro-cv{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
 .ro-cv.drag{cursor:grabbing}
 .ro-hud{position:absolute;left:22px;top:18px;display:flex;flex-direction:column;gap:2px;pointer-events:none}
-.ro-hud b{font:italic 900 34px/1.05 var(--round);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
-.ro-hud span{font-size:12.5px;font-weight:600;color:var(--mute)}
-.ro-leg{position:absolute;left:18px;right:18px;bottom:30px;display:flex;flex-wrap:wrap;gap:4px 6px;pointer-events:none}
-.ro-leg span{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px rgba(22,18,27,.1);font-size:12px;font-weight:600;color:var(--ink-2)}
+.ro-hud b{font:italic 900 34px/1.05 var(--round);letter-spacing:-.02em;color:#F5F2F8;font-variant-numeric:tabular-nums}
+.ro-hud span{font-size:12.5px;font-weight:600;color:#958CA0}
+.ro-leg{position:absolute;left:18px;right:18px;bottom:62px;display:flex;flex-wrap:wrap;gap:4px 6px;pointer-events:none}
+.ro-leg span{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);font-size:12px;font-weight:600;color:#CFC8D8}
 .ro-leg i{width:9px;height:9px;border-radius:50%}
-.ro-bar{position:absolute;left:22px;right:22px;bottom:16px;height:4px;border-radius:99px;background:rgba(22,18,27,.08);overflow:hidden;pointer-events:none}
+.ro-ctl{position:absolute;left:14px;right:14px;bottom:12px;display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:12px;align-items:center}
+.ro-pl{width:36px;height:36px;border:0;border-radius:999px;background:linear-gradient(135deg,#AA4AF4,#8A3FB8);color:#FFFFFF;font-size:11px;cursor:pointer;box-shadow:0 6px 16px -8px rgba(170,74,244,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+.ro-spd{min-width:48px;height:32px;padding:0 11px;border:0;border-radius:999px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);color:#F5F2F8;font:italic 900 13px/1 var(--round);font-variant-numeric:tabular-nums;cursor:pointer}
+.ro-spd:hover{background:rgba(255,255,255,.13)}
+.ro-bar{position:relative;height:4px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;pointer-events:none}
 .ro-bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#AA4AF4,#E569C6)}
-.ro-tip{position:absolute;z-index:3;max-width:230px;padding:8px 11px;border-radius:12px;background:rgba(22,18,27,.92);color:#FFFFFF;font-size:12.5px;line-height:1.4;pointer-events:none;opacity:0;transition:opacity .15s}
+.ro-tip{position:absolute;z-index:3;max-width:230px;padding:8px 11px;border-radius:12px;background:rgba(37,32,45,.94);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 12px 28px -12px rgba(0,0,0,.8);color:#FFFFFF;font-size:12.5px;line-height:1.4;pointer-events:none;opacity:0;transition:opacity .15s}
 .ro-tip.on{opacity:1}
 .ro-tip small{display:block;color:#C9BEDA;font-size:11.5px}
 .ro-sd{display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:30px 26px 26px;border-left:1px solid rgba(22,18,27,.06)}
@@ -2918,7 +2923,11 @@ html{background:var(--edge-b,var(--bg))}
         <canvas class="ro-cv" id="roCv" role="img" aria-label="대학교 1학년 채원을 가운데 둔 관계 지도. 앱을 깐 날부터 6개월 동안 안쪽에 친구, 바깥에 친구의 친구가 생기고, 그 사이를 교류 구슬이 이어요. 사람을 누르면 그 관계의 자세한 이야기로 가요."></canvas>
         <div class="ro-hud" aria-hidden="true"><b id="roDay">D+0</b><span id="roPh">앱을 깐 날</span></div>
         <div class="ro-leg" aria-hidden="true"><span><i style="background:#07E7B4"></i>친구 맺기</span><span><i style="background:#AA4AF4"></i>디토</span><span><i style="background:#48B5F4"></i>그룹 대화</span><span><i style="background:#FF2CBF"></i>댓글</span><span><i style="background:#F9F871"></i>방명록</span><span><i style="background:#FF925D"></i>댓글 리액션</span></div>
-        <div class="ro-bar" aria-hidden="true"><i id="roBar"></i></div>
+        <div class="ro-ctl">
+          <button type="button" class="ro-pl" id="roPl" aria-label="일시정지">❚❚</button>
+          <div class="ro-bar" aria-hidden="true"><i id="roBar"></i></div>
+          <button type="button" class="ro-spd" id="roSpd" aria-label="재생 속도 1배, 눌러서 바꾸기">1×</button>
+        </div>
         <div class="ro-tip" id="roTip" role="tooltip"></div>
       </div>
       <div class="ro-sd">
@@ -3739,10 +3748,10 @@ html{background:var(--edge-b,var(--bg))}
     const box = document.getElementById('ro'); if (!box) return;
     const cv = document.getElementById('roCv'), ctx = cv.getContext('2d'), tip = document.getElementById('roTip');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const BASE = '/relationship-ontology/', SLUG = { uni: 'chaewon', high: 'siwoo' }, DAYS = 180, PLAY = 14000;
+    const BASE = '/relationship-ontology/', SLUG = { uni: 'chaewon', high: 'siwoo' }, DAYS = 180, PLAY = 14000, SPDS = [.5, 1, 2, 4];
     const BALL = ['invite', 'ditto', 'group', 'comment', 'guest', 'reaction'], BSZ = { ditto: 6.8, invite: 5.6, group: 4.2, comment: 3.6, guest: 3.8, reaction: 2.4 };
     const STG = { calm: ['잔잔', '#8E919E'], clear: ['선명', '#2BC4A8'], near: ['곧 열림', '#5A5BF2'], open: ['열림', '#AA4AF4'] };
-    let S = null, r = null, pk = 'uni', T = 0, t0 = 0, playing = false, inView = false, started = false;
+    let S = null, r = null, pk = 'uni', T = 0, t0 = 0, last = 0, spd = 1, playing = false, inView = false, started = false;
     let W = 0, H = 0, DPR = 1, CX = 0, CY = 0, R0 = 0, rotY = .5, rotX = -.28, vy = 0, drag = null, idleAt = 0, hits = [], hover = null, lastD = -1;
     const avImg = {}, SPR = {};
     const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
@@ -3760,7 +3769,7 @@ html{background:var(--edge-b,var(--bg))}
       box.querySelectorAll('#roSeg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === pk));
       document.getElementById('roGo').href = BASE + SLUG[pk] + '/';
       cv.setAttribute('aria-label', `${r.P.label} ${r.me.n}을 가운데 둔 관계 지도. 앱을 깐 날부터 6개월 동안 안쪽에 친구, 바깥에 친구의 친구가 생기고, 그 사이를 교류 구슬이 이어요. 사람을 누르면 그 관계의 자세한 이야기로 가요.`);
-      T = reduce ? DAYS : 0; playing = !reduce; t0 = performance.now(); lastD = -1;
+      T = reduce ? DAYS : 0; setPlay(!reduce); t0 = performance.now(); lastD = -1;
     }
     function size(){ const b = cv.getBoundingClientRect(); W = b.width; H = b.height; DPR = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); CX = W / 2; CY = H / 2 + 6; R0 = Math.min(W, H - 90) * .42; }
     function hud(){
@@ -3780,7 +3789,7 @@ html{background:var(--edge-b,var(--bg))}
       r.ids.forEach(id => { const p = r.people[id], q = s.p[id], tg = !q.vis && !q.fr ? 0 : q.fr ? (q.cl ? .4 : .66) : .94; p.rad += (tg - p.rad) * (reduce ? 1 : .08); if (tg === 0 && p.rad < .02) p.rad = 0; alive[id] = p.rad > .02 || tg > 0; const rr = p.rad || tg; pos[id] = [p.dir[0] * rr, p.dir[1] * rr, p.dir[2] * rr]; });
       const pq = {}; Object.keys(pos).forEach(k => { pq[k] = proj(pos[k]); });
       ctx.lineWidth = 1; ctx.setLineDash([2, 6]); ctx.textAlign = 'center'; ctx.font = `500 11px ${font}`;
-      [[.4, '가까운 친구 15'], [.66, '친구'], [.94, '친구의 친구']].forEach(([rr, l]) => { ctx.strokeStyle = 'rgba(138,63,184,.22)'; ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); ctx.fillStyle = 'rgba(138,63,184,.75)'; ctx.fillText(l, CX, CY - R0 * rr - 6); });
+      [[.4, '가까운 친구 15'], [.66, '친구'], [.94, '친구의 친구']].forEach(([rr, l]) => { ctx.strokeStyle = 'rgba(197,136,255,.18)'; ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); ctx.fillStyle = 'rgba(197,136,255,.7)'; ctx.fillText(l, CX, CY - R0 * rr - 6); });
       ctx.setLineDash([]);
       const F = hover && hover.id && hover.id !== 'me' ? hover.id : null, items = [];
       r.EV.forEach(e => {
@@ -3790,7 +3799,7 @@ html{background:var(--edge-b,var(--bg))}
         const q = proj([d[0] * e.rr, d[1] * e.rr, d[2] * e.rr]), age = T - e.d, dep = (q[2] + 1.1) / 2.2;
         let a0 = age < 7 ? 1 : age < 14 ? .7 : age < 21 ? .45 : .3; if (F && e.a !== F && e.b !== F) a0 *= .08; else if (F) a0 = Math.min(1, a0 * 1.6);
         const flash = Math.max(0, 1 - (now - e.born) / 1100), la = e.t === 'ditto' ? (.1 + .3 * dep) * a0 : (.04 + .12 * dep) * a0;
-        ctx.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#5B4A70'; ctx.lineWidth = e.t === 'ditto' ? .8 : .5;
+        ctx.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#CDBFE3'; ctx.lineWidth = e.t === 'ditto' ? .8 : .5;
         [e.a, e.b].forEach(k => { const o = pq[k]; ctx.globalAlpha = Math.min(1, la + .7 * flash); ctx.beginPath(); ctx.moveTo(o[0], o[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); });
         ctx.globalAlpha = 1; items.push({ z: q[2], e, q, a0 });
       });
@@ -3809,9 +3818,9 @@ html{background:var(--edge-b,var(--bg))}
         ctx.globalAlpha = F && id !== F && id !== 'me' ? .2 : qs && !qs.fr ? .85 : 1;
         if (qs && !qs.fr && (qs.st === 'near' || qs.st === 'open')) { const g = ctx.createRadialGradient(q[0], q[1], z * .5, q[0], q[1], z * 1.9); g.addColorStop(0, qs.st === 'open' ? 'rgba(170,74,244,.35)' : 'rgba(90,91,242,.25)'); g.addColorStop(1, 'rgba(170,74,244,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], z * 1.9, 0, 7); ctx.fill(); }
         const rr = (x, y, w, h, k) => { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, k); else ctx.rect(x, y, w, h); };
-        if (id === F) { ctx.strokeStyle = '#16121B'; ctx.lineWidth = 1.5; rr(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
-        ctx.save(); rr(x0, y0, z, z, z * .25); ctx.clip(); const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#E4DDEC'; ctx.fillRect(x0, y0, z, z); } ctx.restore();
-        ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${font}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.92)'; ctx.fillStyle = '#16121B';
+        if (id === F) { ctx.strokeStyle = '#F5F2F8'; ctx.lineWidth = 1.5; rr(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
+        ctx.save(); rr(x0, y0, z, z, z * .25); ctx.clip(); const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#2A2432'; ctx.fillRect(x0, y0, z, z); } ctx.restore();
+        ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${font}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(11,9,16,.9)'; ctx.fillStyle = '#F5F2F8';
         const ly = q[1] + z / 2 + 13; ctx.strokeText(p.n, q[0], ly); ctx.fillText(p.n, q[0], ly);
         if (qs && !qs.fr && qs.st && W >= 560) { ctx.font = `500 10px ${font}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }
         ctx.globalAlpha = 1; hits.push({ x: q[0], y: q[1], r: z / 2 + 8, id });
@@ -3831,10 +3840,15 @@ html{background:var(--edge-b,var(--bg))}
     addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (!drag.moved && Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) { drag.moved = true; cv.classList.add('drag'); tip.classList.remove('on'); try { cv.setPointerCapture(drag.id); } catch (er) {} } if (drag.moved) { const n = drag.ry + dx * .006; vy = (n - rotY) * .5; rotY = n; rotX = Math.max(-1.1, Math.min(1.1, drag.rx + dy * .004)); } });
     addEventListener('pointerup', e => { if (!drag) return; const moved = drag.moved; drag = null; cv.classList.remove('drag'); idleAt = performance.now(); if (moved || e.target !== cv || !r) return; const b = cv.getBoundingClientRect(), h = hitAt(e.clientX - b.left, e.clientY - b.top); if (h) location.href = href(h.id); });
     addEventListener('pointercancel', () => { drag = null; cv.classList.remove('drag'); });
+    const pl = document.getElementById('roPl'), sp = document.getElementById('roSpd');
+    function setPlay(on){ playing = on; pl.textContent = on ? '❚❚' : '▶'; pl.setAttribute('aria-label', on ? '일시정지' : T >= DAYS ? '처음부터 재생' : '재생'); }
+    pl.addEventListener('click', () => { if (!r) return; if (playing) return setPlay(false); if (T >= DAYS) { T = 0; r.EV.forEach(e => { e.v = false; }); } t0 = performance.now(); setPlay(true); });
+    sp.addEventListener('click', () => { spd = SPDS[(SPDS.indexOf(spd) + 1) % SPDS.length]; sp.textContent = (spd === .5 ? '0.5' : spd) + '×'; sp.setAttribute('aria-label', `재생 속도 ${spd}배, 눌러서 바꾸기`); });
     box.querySelectorAll('#roSeg button').forEach(b => b.addEventListener('click', () => { if (S && b.dataset.v !== pk) start(b.dataset.v); }));
     function tick(now){
       if (inView && r) {
-        if (playing) { T = Math.max(0, Math.min(DAYS, (now - t0) / PLAY * DAYS)); if (T >= DAYS) playing = false; }
+        const dt = Math.min(60, now - (last || now)); last = now;
+        if (playing) { T = Math.min(DAYS, T + dt / PLAY * DAYS * spd); if (T >= DAYS) setPlay(false); }
         if (!drag) { vy *= .93; rotY += vy; if (!reduce && now - idleAt > 2000) rotY += .0009; }
         frame(now); hud();
       }
@@ -3846,7 +3860,7 @@ html{background:var(--edge-b,var(--bg))}
       size(); start('uni'); requestAnimationFrame(tick);
     }
     addEventListener('resize', () => { if (r) size(); });
-    if ('IntersectionObserver' in window) new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView && !started) { started = true; load(boot); } else if (inView && r && !reduce && T >= DAYS && performance.now() - t0 > 60000) { T = 0; t0 = performance.now(); playing = true; r.EV.forEach(e => { e.v = false; }); } }, { rootMargin: '200px 0px', threshold: 0 }).observe(box);
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView && !started) { started = true; load(boot); } else if (inView && r && !reduce && T >= DAYS && performance.now() - t0 > 60000) { T = 0; t0 = performance.now(); setPlay(true); r.EV.forEach(e => { e.v = false; }); } }, { rootMargin: '200px 0px', threshold: 0 }).observe(box);
     else { inView = true; started = true; load(boot); }
   })();
 
