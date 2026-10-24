@@ -51,95 +51,37 @@
 .fx .ch.on .o{opacity:1;transform:translate(-50%,-54%) scale(1) rotate(var(--r,0deg))}
 @media (max-width:760px){.wsp{--ts:92px;--gap:10px;--pw:220px}.wsp-tabs{overflow-x:auto;scrollbar-width:none;justify-content:flex-start}.wsp-top{padding:14px 18px 0;font-size:12px}.wsp-top i{top:9px;height:20px}.wsp-card{grid-template-columns:1fr;gap:6px;padding:16px 18px}}
 
-/* 06 friends · ditto sphere: me in the middle, friends on the inner shell, friends of friends outside, the interactions between them as small typed nodes */
-.dmap{margin-top:clamp(36px,4vw,56px);display:grid;grid-template-columns:280px minmax(0,1fr);border-radius:28px;overflow:hidden;background:#FFFFFF;box-shadow:0 0 0 1px rgba(22,18,27,.06),0 30px 60px -40px rgba(60,20,90,.35)}
-.dm-pan{display:flex;flex-direction:column;gap:18px;padding:20px 18px;background:#16121B;color:#EDE7F3;min-width:0}
-.dm-pan h4{font-size:12px;font-weight:700;letter-spacing:.02em;color:#A99DB8;display:flex;justify-content:space-between;align-items:baseline}
-.dm-pan h4 small{font-weight:600;color:#7E7290}
-.dm-tys{display:flex;flex-direction:column;gap:6px;margin-top:10px}
-.dm-ty{display:flex;align-items:center;gap:10px;width:100%;height:36px;padding:0 10px;border:0;border-radius:10px;background:#211A29;color:#EDE7F3;font:600 13.5px/1 var(--kr);cursor:pointer;text-align:left}
-.dm-ty .ic{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;color:#FFFFFF;font-size:11px;font-weight:800}
-.dm-ty .n{margin-left:auto;font:italic 900 12px/1 var(--round);color:#A99DB8}
-.dm-ty .sw{width:30px;height:16px;border-radius:99px;background:#3A3044;position:relative;transition:background .2s}
-.dm-ty .sw::after{content:"";position:absolute;left:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#FFFFFF;transition:transform .2s var(--ease)}
-.dm-ty[aria-pressed="true"] .sw{background:var(--violet)}
-.dm-ty[aria-pressed="true"] .sw::after{transform:translateX(14px)}
-.dm-ty[aria-pressed="false"]{color:#7E7290}
-.dm-q{width:100%;height:36px;margin-top:10px;padding:0 12px;border:0;border-radius:10px;background:#211A29;color:#EDE7F3;font:500 13.5px/1 var(--kr)}
-.dm-q::placeholder{color:#7E7290}
-.dm-ppl{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;max-height:300px;overflow:auto;scrollbar-width:thin}
-.dm-ppl label{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:9px;font-size:13.5px;cursor:pointer}
-.dm-ppl label:hover{background:#211A29}
-.dm-ppl input{accent-color:var(--violet);width:15px;height:15px;margin:0}
-.dm-ppl img{width:24px;height:24px;border-radius:8px;object-fit:cover}
-.dm-ppl .tg{margin-left:auto;font-size:11px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap}
-.dm-board{position:relative;min-width:0;background:radial-gradient(55% 55% at 50% 50%,#F6EEFE 0%,#FBF8FD 60%,#FFFFFF 100%)}
-.dm-top{position:absolute;z-index:2;left:18px;right:18px;top:16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;pointer-events:none}
-.dm-top > *{pointer-events:auto}
-.dm-seg{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:#FFFFFF;box-shadow:0 0 0 1px rgba(22,18,27,.06)}
-.dm-seg button{height:34px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--ink-2);font:600 13.5px/1 var(--kr);cursor:pointer}
-.dm-seg button[aria-selected="true"]{background:var(--ink);color:#FFFFFF}
-.dm-rings{display:flex;gap:12px;font-size:12px;color:var(--mute)}
-.dm-rings span{display:inline-flex;align-items:center;gap:5px}
-.dm-rings i{width:9px;height:9px;border-radius:50%}
-.dm-svg{display:block;width:100%;height:clamp(520px,46vw,660px);cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.dm-svg.drag{cursor:grabbing}
-.dm-svg text{font-family:var(--kr)}
-.dm-svg .ln{fill:none;stroke-linecap:round}
-.dm-svg .pn{cursor:pointer}
-.dm-svg .pn text{font-size:11.5px;font-weight:700;fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:#FFFFFF;stroke-width:4px;stroke-linejoin:round}
-.dm-svg .ev text{font-size:9px;font-weight:800;fill:#FFFFFF;text-anchor:middle;dominant-baseline:central;pointer-events:none}
-.dm-svg .ev .lb{font-size:10px;font-weight:600;fill:var(--mute);text-anchor:start;paint-order:stroke;stroke:#FFFFFF;stroke-width:3px}
-.dm-svg .dim{opacity:.08!important}
-.dm-svg .behind{opacity:.2!important}
-.dm-svg .behind text{display:none}
-.dm-svg .guide{fill:none;stroke:rgba(138,63,184,.07);stroke-width:.8}
-.dm-card{position:absolute;z-index:2;right:16px;bottom:16px;width:min(300px,calc(100% - 32px));padding:16px 18px;border-radius:20px;background:rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(22,18,27,.06),0 18px 34px -18px rgba(60,20,90,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.dm-card h5{font-size:12px;font-weight:700;color:var(--mute)}
-.dm-who{display:flex;align-items:center;gap:10px}
-.dm-who img{width:42px;height:42px;border-radius:13px;object-fit:cover}
-.dm-who b{display:block;font-size:16px;font-weight:700}
-.dm-who small{display:block;font-size:12px;color:var(--mute)}
-.dm-facts{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2)}
-.dm-facts li{display:flex;gap:8px;align-items:baseline;word-break:keep-all}
-.dm-facts li > em{flex:none;width:44px;font-style:normal;font-size:11.5px;font-weight:700;color:var(--mute)}
-.dm-chip{display:inline-block;margin:0 4px 4px 0;padding:2px 8px;border-radius:999px;font-size:11.5px;font-weight:700;white-space:nowrap}
-.dm-svg .pn .arc{fill:none;stroke-linecap:round;transition:stroke-dashoffset .5s var(--ease)}
-.dm-svg .pn .sc{font-size:9.5px;font-weight:700;fill:var(--mute);stroke-width:3px}
-.dm-svg .ev image{pointer-events:none}
-.dm-svg .ev{cursor:help}
-.dm-svg .an{fill:#C9BEDA}
-.dm-svg .orbit{fill:none;stroke:rgba(170,74,244,.2);stroke-width:.8;stroke-dasharray:2 6}
-.dm-svg .orbit-l{font-size:11px;font-weight:700;fill:#8A3FB8;text-anchor:middle;paint-order:stroke;stroke:#FFFFFF;stroke-width:4px}
-.dm-svg .me .pulse{fill:none;stroke:#AA4AF4;transform-box:fill-box;transform-origin:center}
-@media (prefers-reduced-motion:no-preference){.dm-svg .me .pulse{animation:dmPulse 2.6s ease-out infinite}.dm-svg .me .pulse.b{animation-delay:1.3s}}
-@keyframes dmPulse{from{opacity:.55;transform:scale(1)}to{opacity:0;transform:scale(2.1)}}
-
-.dm-svg .strand{stroke-dasharray:1 4}
-@media (prefers-reduced-motion:no-preference){.dm-svg .strand{animation:dmFlow 1.4s linear infinite}.dm-svg .pn.open .halo{animation:dmHalo 1.8s ease-in-out infinite}}
-@keyframes dmFlow{to{stroke-dashoffset:-15}}
-@keyframes dmHalo{50%{opacity:.55;transform:scale(1.18)}}
-.dm-tl{position:absolute;z-index:2;left:16px;bottom:16px;display:flex;align-items:center;gap:10px;width:min(380px,calc(100% - 350px));padding:10px 14px 10px 10px;border-radius:999px;background:rgba(255,255,255,.95);box-shadow:0 0 0 1px rgba(22,18,27,.06),0 14px 28px -16px rgba(60,20,90,.35)}
-.dm-tl button{flex:none;display:grid;place-items:center;width:34px;height:34px;border:0;border-radius:50%;background:var(--ink);color:#FFFFFF;font-size:12px;cursor:pointer}
-.dm-tl input{flex:1;min-width:0;accent-color:var(--violet)}
-.dm-tl output{flex:none;width:64px;font-size:12.5px;font-weight:700;color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
-.dm-stat{position:absolute;z-index:2;left:18px;top:64px;display:flex;flex-direction:column;gap:2px;font-size:12px;color:var(--mute);pointer-events:none}
-.dm-stat b{font:italic 900 22px/1.1 var(--round);color:var(--ink)}
-.dm-tip{position:absolute;z-index:3;max-width:240px;padding:8px 11px;border-radius:12px;background:rgba(22,18,27,.92);color:#FFFFFF;font-size:12.5px;line-height:1.5;pointer-events:none;opacity:0;transition:opacity .15s ease;word-break:keep-all}
-.dm-tip.on{opacity:1}
-.dm-tip small{display:block;color:#C9BEDA;font-size:11.5px}
-.dm-bk{list-style:none;margin:8px 0 0;padding:10px 12px;border-radius:12px;background:#F7F4FA;display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--ink-2)}
-.dm-bk li{display:flex;justify-content:space-between;gap:8px}
-.dm-bk li b{font-variant-numeric:tabular-nums}
-.dm-bk li.t{border-top:1px solid rgba(22,18,27,.08);padding-top:4px;margin-top:2px;font-weight:700;color:var(--ink)}
-.dm-gt{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.dm-gt span{font-size:11.5px;font-weight:700;padding:3px 8px;border-radius:8px;background:#F1EEF5;color:var(--mute)}
-.dm-gt span.ok{background:#F1E4FD;color:#7A2BC2}
-.dm-days{display:grid;grid-template-columns:repeat(21,1fr);gap:2px;margin-top:8px}
-.dm-days i{aspect-ratio:1;border-radius:2px;background:#EEE9F3}
-.dm-mix{display:flex;height:6px;border-radius:3px;overflow:hidden;margin-top:6px;background:#EEE9F3}
-@media (max-width:900px){.dm-tl{position:relative;left:auto;bottom:auto;width:auto;margin:0 12px 10px}.dm-stat{top:60px}}
-@media (max-width:900px){.dmap{grid-template-columns:1fr}.dm-pan{gap:12px}.dm-tys{flex-direction:row;flex-wrap:wrap}.dm-ty{width:auto}.dm-ty .n,.dm-ty .sw{display:none}.dm-ty[aria-pressed="false"]{opacity:.45}.dm-pp{display:none}.dm-svg{height:480px}.dm-card{position:relative;right:auto;bottom:auto;width:auto;margin:0 12px 12px}}
+/* 06 friends · relationship ontology preview: the simulator's map replayed from the day the app was installed, with a way into /relationship-ontology/ */
+.ro{margin-top:clamp(36px,4vw,56px);display:grid;grid-template-columns:minmax(0,1fr) 340px;border-radius:28px;overflow:hidden;background:#FFFFFF;box-shadow:0 0 0 1px rgba(22,18,27,.06),0 30px 60px -40px rgba(60,20,90,.35)}
+.ro-st{position:relative;min-width:0;height:clamp(480px,42vw,600px);background:radial-gradient(60% 60% at 50% 50%,#FFFFFF 0%,#F6F0FB 62%,#EFE5FA 100%)}
+.ro-cv{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
+.ro-cv.drag{cursor:grabbing}
+.ro-hud{position:absolute;left:22px;top:18px;display:flex;flex-direction:column;gap:2px;pointer-events:none}
+.ro-hud b{font:italic 900 34px/1.05 var(--round);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.ro-hud span{font-size:12.5px;font-weight:600;color:var(--mute)}
+.ro-leg{position:absolute;left:22px;right:22px;bottom:30px;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;font-weight:600;color:var(--mute);pointer-events:none}
+.ro-leg span{display:inline-flex;align-items:center;gap:5px}
+.ro-leg i{width:8px;height:8px;border-radius:50%}
+.ro-bar{position:absolute;left:22px;right:22px;bottom:18px;height:4px;border-radius:99px;background:rgba(22,18,27,.08);overflow:hidden;pointer-events:none}
+.ro-bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#AA4AF4,#E569C6)}
+.ro-tip{position:absolute;z-index:3;max-width:230px;padding:8px 11px;border-radius:12px;background:rgba(22,18,27,.92);color:#FFFFFF;font-size:12.5px;line-height:1.4;pointer-events:none;opacity:0;transition:opacity .15s}
+.ro-tip.on{opacity:1}
+.ro-tip small{display:block;color:#C9BEDA;font-size:11.5px}
+.ro-sd{display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:30px 26px 26px;border-left:1px solid rgba(22,18,27,.06)}
+.ro-sd h3{font-size:clamp(24px,2.2vw,30px);font-weight:700;letter-spacing:-.035em;line-height:1.25}
+.ro-sd > p{font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+.ro-seg{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:#FFFFFF;box-shadow:0 0 0 1px rgba(22,18,27,.08)}
+.ro-seg button{height:34px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--ink-2);font:600 13.5px/1 var(--kr);cursor:pointer;white-space:nowrap}
+.ro-seg button[aria-pressed="true"]{background:var(--ink);color:#FFFFFF}
+.ro-n{align-self:stretch;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ro-n div{padding:14px;border-radius:18px;background:var(--bg-2)}
+.ro-n div.dit{background:linear-gradient(135deg,#F1E4FC,#FBE8F5)}
+.ro-n b{display:block;font:italic 900 30px/1.1 var(--round);color:var(--ink);font-variant-numeric:tabular-nums}
+.ro-n b small{margin-left:3px;font:600 12px/1 var(--kr);color:var(--mute)}
+.ro-n span{display:block;margin-top:4px;font-size:12px;line-height:1.4;color:var(--mute)}
+.ro-sd .btn{margin-top:auto}
+.ro-sd .ro-note{font-size:12.5px;line-height:1.5;color:var(--mute)}
+@media (max-width:900px){.ro{grid-template-columns:1fr}.ro-sd{border-left:0;border-top:1px solid rgba(22,18,27,.06);padding:22px 20px}.ro-st{height:440px}.ro-leg{display:none}}
 </style>
 <title>Ditto! IYKYK Place</title>
 <meta name="description" content="내 공간을 꾸미고 친구들과 공유하세요. 친구의 위젯을 꾹 눌러 가져오며 함께 나누는 iOS 앱, 우리만의 공간 Ditto!">
@@ -2971,21 +2913,22 @@ html{background:var(--edge-b,var(--bg))}
       <span class="lab"><b>06</b>Friends</span>
       <div><h2 class="h-xl" id="fr-h">서로 디토하다 보면,<br><mark>친구가 돼요.</mark></h2><p class="lead">친구 신청은 아무 때나 열리지 않아요. 앱에서 실제로 거치는 다섯 걸음이에요.</p></div>
     </div>
-    <div class="dmap rv" id="dmap">
-      <aside class="dm-pan">
-        <div><h4>교류 종류 <small>켜고 끄기</small></h4><div class="dm-tys" id="dmTys"></div></div>
-        <div class="dm-pp"><h4>사람 <small id="dmCnt"></small></h4><input class="dm-q" id="dmQ" type="search" placeholder="이름 찾기" aria-label="사람 이름 찾기"><ul class="dm-ppl" id="dmPpl"></ul></div>
-      </aside>
-      <div class="dm-board">
-        <div class="dm-top">
-          <div class="dm-seg" role="tablist" aria-label="디토 지도 보기"><button type="button" role="tab" aria-selected="true" data-v="map">디토 지도</button><button type="button" role="tab" aria-selected="false" data-v="schema">구조</button></div>
-          <div class="dm-rings" aria-hidden="true"><span><i style="background:linear-gradient(135deg,#C79BFF,#AA4AF4,#FA97E2)"></i>나 (지우)</span><span><i style="background:#CDC3DA"></i>친구</span><span><i style="background:#2BC4A8"></i>친구의 친구 · 주파수</span></div>
-        </div>
-        <svg class="dm-svg" id="dmSvg" role="img" aria-label="지우(나)를 가운데 둔 디토 지도. 안쪽에 친구 다섯, 바깥에 친구의 친구 넷이 있고, 그 사이를 디토·댓글·방명록·그룹 대화·방문이 잇고 있어요. 끌어서 돌려 볼 수 있어요."></svg>
-        <div class="dm-stat" id="dmStat" aria-hidden="true"></div>
-        <div class="dm-tl"><button type="button" id="dmPlay" aria-label="앱 설치한 날부터 다시 재생">▶</button><input type="range" id="dmT" min="0" max="30" step="1" value="30" aria-label="설치 후 며칠째 모습 보기"><output id="dmTo">30일째</output></div>
-        <div class="dm-card" id="dmInfo" aria-live="polite"></div>
-        <div class="dm-tip" id="dmTip" role="tooltip"></div>
+    <div class="ro rv" id="ro">
+      <div class="ro-st">
+        <canvas class="ro-cv" id="roCv" role="img" aria-label="대학교 1학년 채원을 가운데 둔 관계 지도. 앱을 깐 날부터 6개월 동안 안쪽에 친구, 바깥에 친구의 친구가 생기고, 그 사이를 교류 구슬이 이어요. 사람을 누르면 그 관계의 자세한 이야기로 가요."></canvas>
+        <div class="ro-hud" aria-hidden="true"><b id="roDay">D+0</b><span id="roPh">앱을 깐 날</span></div>
+        <div class="ro-leg" aria-hidden="true"><span><i style="background:#07E7B4"></i>친구 맺기</span><span><i style="background:#AA4AF4"></i>디토</span><span><i style="background:#48B5F4"></i>그룹 대화</span><span><i style="background:#FF2CBF"></i>댓글</span><span><i style="background:#F9F871"></i>방명록</span><span><i style="background:#FF925D"></i>댓글 리액션</span></div>
+        <div class="ro-bar" aria-hidden="true"><i id="roBar"></i></div>
+        <div class="ro-tip" id="roTip" role="tooltip"></div>
+      </div>
+      <div class="ro-sd">
+        <span class="lab"><b>Map</b>Relationship Ontology</span>
+        <h3>Ditto!로 6개월,<br><mark>친구 30명</mark>이 되기까지</h3>
+        <p>앱을 깐 날부터 6개월을 그대로 돌려 봐요. 원래 알던 친구는 초대장으로 이어지고, 처음 보는 친구의 친구는 Ditto!로 주파수가 쌓여 친구가 돼요.</p>
+        <div class="ro-seg" role="group" aria-label="누구의 6개월을 볼까요" id="roSeg"><button type="button" data-v="uni" aria-pressed="true">대학교 1학년 채원</button><button type="button" data-v="high" aria-pressed="false">고등학교 1학년 시우</button></div>
+        <div class="ro-n"><div><b id="roF">0<small>명</small></b><span>친구</span></div><div class="dit"><b id="roD">0<small>명</small></b><span>Ditto!로 이어진 친구의 친구</span></div></div>
+        <a class="btn" id="roGo" href="/relationship-ontology/chaewon/">자세히 보러가기 <span class="ar" aria-hidden="true">→</span></a>
+        <p class="ro-note">지도에서 사람을 누르면 그 친구와 언제, 어떻게 친해졌는지 바로 열려요.</p>
       </div>
     </div>
     <ol class="fsteps" tabindex="0" aria-label="친구가 되는 다섯 걸음">
@@ -3789,255 +3732,122 @@ html{background:var(--edge-b,var(--bg))}
   })();
 
 
-  /* ---- 06 friends · ditto sphere: me at the centre, friends inside, friends of friends outside, every interaction a node between two people.
-     Frequencies are worked out here with the v2 rule (weights, 21-day decay, the three gates) so the 21-day replay fills them for real ---- */
+  /* ---- 06 friends · relationship ontology preview: loads the simulator's model once the section is near, replays six months
+     on a sphere (me in the middle as a profile, friends inside, friends of friends outside, each interaction a ball between two people)
+     and links every person to their own page under /relationship-ontology/ ---- */
   (function(){
-    const svg = document.getElementById('dmSvg'); if (!svg) return;
+    const box = document.getElementById('ro'); if (!box) return;
+    const cv = document.getElementById('roCv'), ctx = cv.getContext('2d'), tip = document.getElementById('roTip');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const STAGE = { calm: ['잔잔', '#8E919E', '#5A5D68'], clear: ['선명', '#2BC4A8', '#138A76'], near: ['곧 열림', '#5A5BF2', '#4446D0'], open: ['열림', '#AA4AF4', '#7A2BC2'] };
-    // people: ring 0 = me, 1 = friends, 2 = friends of friends
-    const P = {
-      me: { n: '지우', h: 'jiuallday', av: 'jiu-1', r: 0, since: 30 },
-      sora: { n: '소라', h: 'soramaybe', av: 'sora', r: 1, since: 29 }, jaemin: { n: '재민', h: 'jaeminarchive', av: 'jaemin', r: 1, since: 25 }, jun: { n: '준', h: 'junishere', av: 'jun', r: 1, since: 22 },
-      nari: { n: '나리', h: 'nariday', av: 'nari-1', r: 1, since: 27 }, dohyun: { n: '도현', h: 'dohyunlinks', av: 'dohyun', r: 1, since: 19 },
-      haeun: { n: '하은', h: 'haeunzip', av: 'haeun', r: 2, via: ['sora', 'nari'] }, yeseo: { n: '예서', h: 'yeseofilm', av: 'yeseo', r: 2, via: ['jaemin', 'dohyun'] },
-      seoyun: { n: '서윤', h: 'seoyunpalette', av: 'seoyun', r: 2, via: ['nari'] }, rian: { n: '리안', h: 'rianafterdark', av: 'rian', r: 2, via: ['jun'] }
-    };
-    const FR = [['me', 'sora'], ['me', 'jaemin'], ['me', 'jun'], ['me', 'nari'], ['me', 'dohyun'], ['sora', 'jun'], ['jaemin', 'jun'], ['jaemin', 'dohyun'], ['nari', 'dohyun'], ['haeun', 'sora'], ['haeun', 'nari'], ['rian', 'jun'], ['seoyun', 'nari'], ['yeseo', 'jaemin'], ['yeseo', 'dohyun']];
-    const TY = { ditto: ['디토', '#AA4AF4', '♥'], comment: ['댓글', '#F07AB4', '…'], guest: ['방명록', '#F2A541', '✎'], group: ['그룹 대화', '#4C8DF6', '#'], reaction: ['댓글 리액션', '#FF8A5B', '☺'], visit: ['방문', '#9C93A8', '›'] };
-    // [type, a, b, days ago, title, photo] — for a ditto, a took b's widget; a reaction is a on b's comment. 'me' is 지우. Day 30 is the day I installed the app
-    const EV = [
-      ['ditto', 'me', 'sora', 3, '🧺 간식 부자', 'ws-snack'], ['comment', 'me', 'sora', 1], ['guest', 'sora', 'me', 5], ['group', 'me', 'sora', 0], ['visit', 'sora', 'me', 8],
-      ['ditto', 'jun', 'me', 6, '🩰 한 번 더', 'ws-jiu'], ['comment', 'me', 'jun', 2], ['visit', 'jun', 'me', 11],
-      ['ditto', 'me', 'jaemin', 4, '🚃 창밖 저장', 'ws-image'], ['guest', 'jaemin', 'me', 9], ['group', 'me', 'jaemin', 1],
-      ['guest', 'nari', 'me', 3], ['comment', 'me', 'nari', 10], ['ditto', 'me', 'nari', 13, '☕ 내 첫 컵', 'ws-cup'],
-      ['visit', 'dohyun', 'me', 5], ['group', 'me', 'dohyun', 2], ['comment', 'dohyun', 'me', 16],
-      ['ditto', 'me', 'haeun', 2, '창가 한 컷', 'ws-haeun'], ['ditto', 'haeun', 'me', 5, '🩰 한 번 더', 'ws-jiu'], ['comment', 'haeun', 'me', 1], ['group', 'me', 'haeun', 3], ['visit', 'haeun', 'me', 0], ['visit', 'me', 'haeun', 6],
-      ['ditto', 'me', 'yeseo', 4, '🎞️ 필름 한 롤'], ['comment', 'yeseo', 'me', 2], ['comment', 'me', 'yeseo', 6], ['visit', 'yeseo', 'me', 1], ['group', 'me', 'yeseo', 9],
-      ['comment', 'seoyun', 'me', 3], ['visit', 'seoyun', 'me', 1], ['visit', 'me', 'seoyun', 4], ['comment', 'me', 'seoyun', 10], ['group', 'me', 'seoyun', 12],
-      ['visit', 'rian', 'me', 2], ['visit', 'rian', 'me', 15],
-      ['ditto', 'haeun', 'sora', 3, '🧺 간식 부자', 'ws-snack'], ['comment', 'sora', 'haeun', 4], ['group', 'sora', 'jun', 6],
-      ['ditto', 'jun', 'jaemin', 5, '🚃 창밖 저장', 'ws-image'], ['guest', 'jaemin', 'dohyun', 8], ['comment', 'nari', 'haeun', 2], ['ditto', 'haeun', 'nari', 12, '☕ 내 첫 컵', 'ws-cup'],
-      ['visit', 'dohyun', 'nari', 7], ['group', 'jaemin', 'jun', 1], ['ditto', 'yeseo', 'jaemin', 9, '🚃 창밖 저장', 'ws-image'],
-      ['guest', 'seoyun', 'nari', 6], ['visit', 'rian', 'jun', 3], ['comment', 'yeseo', 'dohyun', 5],
-      ['reaction', 'me', 'sora', 2], ['reaction', 'haeun', 'me', 4], ['reaction', 'yeseo', 'me', 3], ['reaction', 'me', 'seoyun', 2], ['reaction', 'rian', 'me', 5], ['reaction', 'nari', 'dohyun', 4], ['reaction', 'jun', 'sora', 1],
-      // the first weeks: friends arrive one by one
-      ['comment', 'sora', 'me', 29], ['ditto', 'me', 'sora', 28, '🍓 딸기 시루'], ['visit', 'nari', 'me', 27], ['guest', 'nari', 'me', 26], ['reaction', 'me', 'nari', 26], ['comment', 'me', 'jaemin', 25],
-      ['group', 'me', 'sora', 23], ['comment', 'sora', 'jun', 22], ['ditto', 'jaemin', 'me', 22, '🩰 한 번 더', 'ws-jiu'], ['reaction', 'jun', 'me', 21], ['group', 'jaemin', 'jun', 21], ['comment', 'me', 'jun', 21],
-      ['visit', 'dohyun', 'me', 19], ['visit', 'dohyun', 'nari', 19], ['group', 'me', 'dohyun', 18], ['reaction', 'me', 'nari', 18], ['comment', 'me', 'jaemin', 17]
-    ];
-    // friends of friends show up with their first interaction
-    Object.keys(P).filter(k => P[k].r === 2).forEach(k => { P[k].since = Math.max(...EV.filter(e => e[1] === k || e[2] === k).map(e => e[3])); });
-    const alive = (k, t) => t <= P[k].since;
-    // frequency v2 between me and someone who isn't a friend, as it stood t days ago
-    const W8 = { ditto: 3, comment: 1.5, guest: 1.5, group: 2, reaction: .5, visit: .3 };
-    const decay = a => a < 7 ? 1 : a < 14 ? .6 : a < 21 ? .3 : 0;
-    function freq(k, t){
-      const es = EV.filter(e => e[3] >= t && e[3] - t < 21 && ((e[1] === k && e[2] === 'me') || (e[2] === k && e[1] === 'me')));
-      const by = {}, days = new Set(); let score = 0;
-      es.forEach(e => { const v = W8[e[0]] * decay(e[3] - t); by[e[0]] = (by[e[0]] || 0) + v; score += v; days.add(e[3]); });
-      const both = es.some(e => e[0] === 'ditto' && e[1] === 'me') && es.some(e => e[0] === 'ditto' && e[2] === 'me');
-      if (both) { by.mutual = 2; score += 2; }
-      const kinds = Object.keys(by).filter(x => x !== 'mutual').length; if (kinds >= 3) { by.kinds = 1; score += 1; }
-      const together = both || es.some(e => e[0] === 'comment' || e[0] === 'group' || e[0] === 'guest');
-      const g = [score >= 10, days.size >= 4, together], left = g.filter(x => !x).length;
-      const st = !left ? 'open' : left === 1 && together && ((!g[0] && 10 - score <= 2) || (!g[1] && days.size === 3)) ? 'near' : score >= 4 ? 'clear' : 'calm';
-      return { score, days: days.size, together, g, st, by, n: es.length };
+    const BASE = '/relationship-ontology/', SLUG = { uni: 'chaewon', high: 'siwoo' }, DAYS = 180, PLAY = 14000;
+    const BALL = ['invite', 'ditto', 'group', 'comment', 'guest', 'reaction'], BSZ = { ditto: 6.6, invite: 5.6, group: 4.2, comment: 3.6, guest: 3.8, reaction: 2.4 };
+    const STG = { calm: ['잔잔', '#8E919E'], clear: ['선명', '#2BC4A8'], near: ['곧 열림', '#5A5BF2'], open: ['열림', '#AA4AF4'] };
+    let S = null, r = null, pk = 'uni', T = 0, t0 = 0, playing = false, inView = false, started = false;
+    let W = 0, H = 0, DPR = 1, CX = 0, CY = 0, R0 = 0, rotY = .5, rotX = -.28, vy = 0, drag = null, idleAt = 0, hits = [], hover = null, lastD = -1;
+    const avImg = {}, SPR = {};
+    const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+    const mix = (a, b, t) => { const x = hex(a), y = hex(b); return `rgb(${x.map((v, i) => Math.round(v + (y[i] - v) * t)).join(',')})`; };
+    const norm = v => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; };
+    const mul = seed => () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+    const font = getComputedStyle(document.body).fontFamily;
+    function load(cb){ if (window.DittoSim) return cb(); const s = document.createElement('script'); s.src = BASE + 'sim.js'; s.onload = cb; document.head.appendChild(s); }
+    function img(k){ if (!avImg[k]) { avImg[k] = new Image(); avImg[k].src = BASE + 'assets/' + k + '.svg'; } return avImg[k]; }
+    function start(k){
+      pk = k; r = S.simulate(pk, { activity: 'active', gate: 'v2', protect: true });
+      r.ids.forEach((id, i) => { const n = r.ids.length, y = 1 - (i + .5) / n * 2, rr = Math.sqrt(1 - y * y), a = i * 2.39996 + .4; r.people[id].dir = [Math.cos(a) * rr, y * .88, Math.sin(a) * rr]; r.people[id].rad = 0; img(r.people[id].av); });
+      img(r.me.av);
+      r.EV.forEach((e, i) => { const R = mul(i + 1); e.j = [R() * 2 - 1, R() * 2 - 1, R() * 2 - 1]; e.rr = .66 + R() * .32; e.v = false; e.born = -1e9; });
+      box.querySelectorAll('#roSeg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === pk));
+      document.getElementById('roGo').href = BASE + SLUG[pk] + '/';
+      cv.setAttribute('aria-label', `${r.P.label} ${r.me.n}을 가운데 둔 관계 지도. 앱을 깐 날부터 6개월 동안 안쪽에 친구, 바깥에 친구의 친구가 생기고, 그 사이를 교류 구슬이 이어요. 사람을 누르면 그 관계의 자세한 이야기로 가요.`);
+      T = reduce ? DAYS : 0; playing = !reduce; t0 = performance.now(); lastD = -1;
     }
-    // positions: golden-spiral shells; events just outside the midpoint of their two people
-    const shell = (ids, R, tw) => ids.forEach((k, i) => { const n = ids.length, y = 1 - (i + .5) / n * 2, rr = Math.sqrt(1 - y * y), t = i * 2.39996 + tw; P[k].p = [Math.cos(t) * rr * R, y * R * .9, Math.sin(t) * rr * R]; });
-    P.me.p = [0, 0, 0];
-    shell(Object.keys(P).filter(k => P[k].r === 1), .62, .3);
-    shell(Object.keys(P).filter(k => P[k].r === 2), 1, 1.1);
-    EV.forEach((e, i) => { const a = P[e[1]].p, b = P[e[2]].p, m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2], L = Math.hypot(...m) || 1, R = Math.max(L, .3) + .1 + (i % 3) * .05, j = (i * 1.7) % 1 - .5; e.p = [m[0] / L * R + j * .08, m[1] / L * R + ((i * 7) % 5 - 2) * .03, m[2] / L * R - j * .08]; });
-
-    const on = { ditto: true, comment: true, guest: true, group: true, reaction: true, visit: true }, shown = {}; Object.keys(P).forEach(k => { shown[k] = true; });
-    const NS = 'http://www.w3.org/2000/svg';
-    const mk = (tag, at) => { const el = document.createElementNS(NS, tag); for (const k in at) el.setAttribute(k, at[k]); return el; };
-    const pair = (a, b) => EV.filter(e => (e[1] === a && e[2] === b) || (e[1] === b && e[2] === a));
-    let view = 'map', sel = null, rotY = .4, rotX = -.25, vy = 0, W = 0, H = 0, R0 = 0, T = 0, nodes = [], lines = [], guide;
-    const tip = document.getElementById('dmTip');
-    function build(){
-      svg.innerHTML = ''; nodes = []; lines = [];
-      const defs = mk('defs', {}); svg.appendChild(defs);
-      defs.innerHTML = `<radialGradient id="dmMe" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#E8C8FF"/><stop offset=".5" stop-color="#AA4AF4"/><stop offset="1" stop-color="#6655D2"/></radialGradient><linearGradient id="dmRing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C79BFF"/><stop offset=".6" stop-color="#AA4AF4"/><stop offset="1" stop-color="#FA97E2"/></linearGradient><clipPath id="dmCirc" clipPathUnits="objectBoundingBox"><circle cx=".5" cy=".5" r=".5"/></clipPath><clipPath id="dmSq" clipPathUnits="objectBoundingBox"><rect width="1" height="1" rx=".22"/></clipPath>`;
-      guide = mk('g', {}); svg.appendChild(guide);
-      for (let i = 0; i < 3; i++) guide.appendChild(mk('ellipse', { class: 'guide' }));
-      [['친구', .62], ['친구의 친구', 1]].forEach(([t, r]) => { const c = mk('circle', { class: 'orbit' }); c._r = r; const l = mk('text', { class: 'orbit-l' }); l._r = r; l.textContent = t; guide.appendChild(c); guide.appendChild(l); });
-      const lg = mk('g', {}); svg.appendChild(lg);
-      FR.forEach(([a, b]) => { const l = mk('path', { class: 'ln' }); l._a = a; l._b = b; l._k = 'friend'; l._w = pair(a, b).length; lg.appendChild(l); lines.push(l); });
-      Object.keys(P).filter(k => P[k].r === 2).forEach(k => { const l = mk('path', { class: 'ln strand' }); l._a = 'me'; l._b = k; l._k = 'strand'; lg.appendChild(l); lines.push(l); });
-      EV.forEach((e, i) => [e[1], e[2]].forEach(k => { const l = mk('line', { class: 'ln' }); l._a = k; l._e = i; l._k = e[0]; lg.appendChild(l); lines.push(l); }));
-      const ng = mk('g', {}); svg.appendChild(ng); svg._ng = ng;
-      EV.forEach((e, i) => {
-        const g = mk('g', { class: 'ev' }); g._e = i; g._p = e.p;
-        g.innerHTML = e[5] ? `<rect x="-11" y="-14" width="22" height="28" rx="6" fill="#FFFFFF" stroke="${TY.ditto[1]}" stroke-width="2"/><image href="assets/${e[5]}.webp" x="-9" y="-12" width="18" height="24" preserveAspectRatio="xMidYMid slice" clip-path="url(#dmSq)"/>`
-          : `<rect x="-8" y="-8" width="16" height="16" rx="5" fill="${TY[e[0]][1]}"/><text>${TY[e[0]][2]}</text>`;
-        g.addEventListener('pointerenter', ev => showTip(ev, i)); g.addEventListener('pointerleave', () => tip.classList.remove('on'));
-        ng.appendChild(g); nodes.push(g);
+    function size(){ const b = cv.getBoundingClientRect(); W = b.width; H = b.height; DPR = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); CX = W / 2; CY = H / 2 + 6; R0 = Math.min(W, H - 90) * .42; }
+    function hud(){
+      const d = Math.min(DAYS, Math.floor(T)); if (d === lastD) return; lastD = d;
+      const s = r.snap[d], ph = r.P.phases.find(p => d >= p[0] && d <= p[1]), dt = r.dateOf(d);
+      document.getElementById('roDay').textContent = `D+${d}`;
+      document.getElementById('roPh').textContent = `${dt.getMonth() + 1}월 ${dt.getDate()}일 · ${ph ? ph[2] : ''}`;
+      document.getElementById('roF').innerHTML = `${s.nFriends}<small>명</small>`;
+      document.getElementById('roD').innerHTML = `${s.nFof}<small>명</small>`;
+      document.getElementById('roBar').style.width = (d / DAYS * 100).toFixed(1) + '%';
+    }
+    function frame(now){
+      const s = r.snap[Math.min(DAYS, Math.floor(T))], cy = Math.cos(rotY), sy = Math.sin(rotY), cx = Math.cos(rotX), sx = Math.sin(rotX);
+      const proj = p => { let x = p[0] * cy - p[2] * sy, z = p[0] * sy + p[2] * cy; const y = p[1] * cx - z * sx; z = p[1] * sx + z * cx; const f = 3.2 / (3.2 - z); return [CX + x * R0 * f, CY + y * R0 * f, z, f]; };
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H);
+      const pos = { me: [0, 0, 0] }, alive = { me: true };
+      r.ids.forEach(id => { const p = r.people[id], q = s.p[id], tg = !q.vis && !q.fr ? 0 : q.fr ? (q.cl ? .4 : .66) : .94; p.rad += (tg - p.rad) * (reduce ? 1 : .08); if (tg === 0 && p.rad < .02) p.rad = 0; alive[id] = p.rad > .02 || tg > 0; const rr = p.rad || tg; pos[id] = [p.dir[0] * rr, p.dir[1] * rr, p.dir[2] * rr]; });
+      const pq = {}; Object.keys(pos).forEach(k => { pq[k] = proj(pos[k]); });
+      ctx.lineWidth = 1; ctx.setLineDash([2, 6]); ctx.strokeStyle = 'rgba(138,63,184,.18)';
+      [.4, .66, .94].forEach(rr => { ctx.beginPath(); ctx.arc(CX, CY, R0 * rr, 0, 7); ctx.stroke(); });
+      ctx.setLineDash([]);
+      const F = hover && hover.id && hover.id !== 'me' ? hover.id : null, items = [];
+      r.EV.forEach(e => {
+        const vis = e.t !== 'visit' && e.d <= T && (T - e.d < 21 || e.t === 'ditto') && alive[e.a] && alive[e.b];
+        if (vis && !e.v) e.born = playing && !reduce ? now : -1e9; e.v = vis; if (!vis) return;
+        const a = pos[e.a], b = pos[e.b], m = norm([(a[0] + b[0]) / 2 + 1e-4, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2]), d = norm([m[0] + e.j[0] * .7, m[1] + e.j[1] * .7, m[2] + e.j[2] * .7]);
+        const q = proj([d[0] * e.rr, d[1] * e.rr, d[2] * e.rr]), age = T - e.d, dep = (q[2] + 1.1) / 2.2;
+        let a0 = age < 7 ? 1 : age < 14 ? .7 : age < 21 ? .45 : .3; if (F && e.a !== F && e.b !== F) a0 *= .08; else if (F) a0 = Math.min(1, a0 * 1.6);
+        const flash = Math.max(0, 1 - (now - e.born) / 1100), la = e.t === 'ditto' ? (.1 + .3 * dep) * a0 : (.04 + .12 * dep) * a0;
+        ctx.strokeStyle = e.t === 'ditto' || flash > 0 ? S.TYPES[e.t].c : '#5B4A70'; ctx.lineWidth = e.t === 'ditto' ? .8 : .5;
+        [e.a, e.b].forEach(k => { const o = pq[k]; ctx.globalAlpha = Math.min(1, la + .7 * flash); ctx.beginPath(); ctx.moveTo(o[0], o[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); });
+        ctx.globalAlpha = 1; items.push({ z: q[2], e, q, a0 });
       });
-      Object.entries(P).forEach(([k, p]) => {
-        const g = mk('g', { class: 'pn', tabindex: '0', role: 'button', 'aria-label': p.n }); g._k = k; g._p = p.p; const r = k === 'me' ? 26 : p.r === 1 ? 17 : 15; g._r = r; if (k === 'me') g.classList.add('me');
-        if (k === 'me') g.innerHTML = `<circle r="${r + 16}" fill="#AA4AF4" opacity=".1"/><circle r="${r + 5}" fill="none" stroke="url(#dmRing)" stroke-width="4"/><circle r="${r + 1}" fill="#FFFFFF"/><image href="assets/rooms/rav-${p.av}.webp" x="${-r}" y="${-r}" width="${r * 2}" height="${r * 2}" clip-path="url(#dmCirc)"/><g transform="translate(${r * .74} ${r * .74})"><circle r="9.5" fill="#AA4AF4" stroke="#FFFFFF" stroke-width="2.5"/><text y="3.8" style="fill:#FFFFFF;stroke:none;font-size:9.5px;font-weight:800">나</text></g><text y="${r + 20}" style="font-size:12.5px">${p.n}</text>`;
-        else {
-          const C = 2 * Math.PI * (r + 4);
-          g.innerHTML = (p.r === 2 ? `<circle class="halo" r="${r + 9}" fill="#AA4AF4" opacity="0" style="transform-box:fill-box;transform-origin:center"/><circle r="${r + 4}" fill="none" stroke="rgba(22,18,27,.07)" stroke-width="2.5"/><circle class="arc" r="${r + 4}" stroke-width="2.5" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${C.toFixed(1)}" transform="rotate(-90)"/>` : '')
-            + `<circle r="${r + 2}" fill="#FFFFFF" stroke="rgba(22,18,27,.08)"/><image href="assets/rooms/rav-${p.av}.webp" x="${-r}" y="${-r}" width="${r * 2}" height="${r * 2}" clip-path="url(#dmCirc)"/><text y="${r + 16}">${p.n}</text>${p.r === 2 ? `<text class="sc" y="${r + 28}"></text>` : ''}`;
-          g._C = C;
+      r.ids.concat('me').forEach(id => { if (alive[id] && !(id !== 'me' && r.people[id].hidden)) items.push({ z: pq[id][2] + (id === 'me' ? 9 : .05), id }); });
+      items.sort((a, b) => a.z - b.z); hits = [];
+      const ease = k => k >= 1 ? 1 : 1 + 2.4 * Math.pow(k - 1, 3) + 1.4 * Math.pow(k - 1, 2);
+      items.forEach(it => {
+        if (it.e) {
+          const e = it.e, q = it.q, pop = ease(Math.min(1, (now - e.born) / 600)); if (pop <= 0) return;
+          const rad = (e.t === 'ditto' && T - e.d >= 21 ? 4 : BSZ[e.t]) * q[3] * pop;
+          if (e.t === 'ditto' && T - e.d < 21) { const g = ctx.createRadialGradient(q[0], q[1], rad * .5, q[0], q[1], rad * 2.8); g.addColorStop(0, `rgba(170,74,244,${(.4 * it.a0).toFixed(3)})`); g.addColorStop(1, 'rgba(170,74,244,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], rad * 2.8, 0, 7); ctx.fill(); }
+          ctx.globalAlpha = Math.max(.08, .35 + .65 * it.a0); ctx.drawImage(SPR[e.t], q[0] - rad, q[1] - rad, rad * 2, rad * 2); ctx.globalAlpha = 1; return;
         }
-        g.addEventListener('click', e => { e.stopPropagation(); pick(sel === k ? null : k); });
-        g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(sel === k ? null : k); } });
-        ng.appendChild(g); nodes.push(g);
+        const id = it.id, p = id === 'me' ? r.me : r.people[id], q = pq[id], qs = id === 'me' ? null : s.p[id];
+        const z = (id === 'me' ? 32 : qs.fr ? (qs.cl ? 20 : 17) : 14) * q[3] * (id === F ? 1.25 : 1), x0 = q[0] - z / 2, y0 = q[1] - z / 2;
+        ctx.globalAlpha = F && id !== F && id !== 'me' ? .2 : qs && !qs.fr ? .85 : 1;
+        if (qs && !qs.fr && (qs.st === 'near' || qs.st === 'open')) { const g = ctx.createRadialGradient(q[0], q[1], z * .5, q[0], q[1], z * 1.9); g.addColorStop(0, qs.st === 'open' ? 'rgba(170,74,244,.35)' : 'rgba(90,91,242,.25)'); g.addColorStop(1, 'rgba(170,74,244,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], z * 1.9, 0, 7); ctx.fill(); }
+        const rr = (x, y, w, h, k) => { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, k); else ctx.rect(x, y, w, h); };
+        if (id === F) { ctx.strokeStyle = '#16121B'; ctx.lineWidth = 1.5; rr(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
+        ctx.save(); rr(x0, y0, z, z, z * .25); ctx.clip(); const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#E4DDEC'; ctx.fillRect(x0, y0, z, z); } ctx.restore();
+        ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 600} ${id === 'me' ? 13 : 11}px ${font}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.92)'; ctx.fillStyle = '#16121B';
+        const ly = q[1] + z / 2 + 13; ctx.strokeText(p.n, q[0], ly); ctx.fillText(p.n, q[0], ly);
+        if (qs && !qs.fr && qs.st) { ctx.font = `600 10px ${font}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }
+        ctx.globalAlpha = 1; hits.push({ x: q[0], y: q[1], r: z / 2 + 8, id });
       });
-      size(); setT(T);
     }
-    function size(){ const b = svg.getBoundingClientRect(); W = b.width; H = b.height; R0 = Math.min(W, H) * .45; svg.setAttribute('viewBox', `${-W / 2} ${-H / 2 + 10} ${W} ${H}`); }
-    function proj(p){
-      const cy = Math.cos(rotY), sy = Math.sin(rotY), cx = Math.cos(rotX), sx = Math.sin(rotX);
-      let x = p[0] * cy - p[2] * sy, z = p[0] * sy + p[2] * cy, y = p[1] * cx - z * sx; z = p[1] * sx + z * cx;
-      const f = 3.2 / (3.2 - z); return [x * R0 * f, y * R0 * f, z, f];
-    }
-    // arcs that bow outward, so links between people read as paths over the sphere
-    const arc = (pa, pb) => { const a = proj(pa), b = proj(pb), m = [(pa[0] + pb[0]) / 2, (pa[1] + pb[1]) / 2, (pa[2] + pb[2]) / 2], L = Math.hypot(...m) || 1, R = Math.max(Math.hypot(...pa), Math.hypot(...pb)) * 1.08, c = proj([m[0] / L * R, m[1] / L * R, m[2] / L * R]); return [`M${a[0].toFixed(1)} ${a[1].toFixed(1)} Q${c[0].toFixed(1)} ${c[1].toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`, (a[2] + b[2] + 2) / 4]; };
-    function frame(){
-      if (view !== 'map') return;
-      const pos = new Map();
-      nodes.forEach(g => { const q = proj(g._p); pos.set(g, q); g._z = q[2]; const k0 = Math.min(1, (performance.now() - (g._born || 0)) / 520), pop = k0 >= 1 ? 1 : 1 + 2.2 * Math.pow(k0 - 1, 3) + 1.2 * Math.pow(k0 - 1, 2); g.setAttribute('transform', `translate(${q[0].toFixed(1)} ${q[1].toFixed(1)}) scale(${(q[3] * (g._e !== undefined ? .78 : 1) * Math.max(0, pop)).toFixed(3)})`); if (!g.classList.contains('dim')) g.style.opacity = ((.4 + .6 * (q[2] + 1) / 2) * (g._fade ?? 1)).toFixed(2); });
-      const at = k => pos.get(nodes.find(g => g._k === k)), ev = i => pos.get(nodes[i]);
-      lines.forEach(l => {
-        if (l._e !== undefined) { const a = at(l._a), b = ev(l._e); l.setAttribute('x1', a[0].toFixed(1)); l.setAttribute('y1', a[1].toFixed(1)); l.setAttribute('x2', b[0].toFixed(1)); l.setAttribute('y2', b[1].toFixed(1)); const d = (a[2] + b[2] + 2) / 4; l.style.stroke = TY[l._k][1]; l.style.strokeOpacity = ((.18 + .5 * d) * (nodes[l._e]._fade ?? 1)).toFixed(2); l.style.strokeWidth = .45; return; }
-        const [d, dep] = arc(P[l._a].p, P[l._b].p); l.setAttribute('d', d);
-        if (l._k === 'friend') { l.style.stroke = l._a === 'me' ? `rgba(170,74,244,${(.3 + .4 * dep).toFixed(2)})` : `rgba(120,100,140,${(.14 + .3 * dep).toFixed(2)})`; l.style.strokeWidth = (l._a === 'me' ? .85 : .55).toFixed(2); }
-        else { const f = P[l._b].f; l.style.stroke = STAGE[f.st][1]; l.style.strokeOpacity = (.45 + .5 * dep).toFixed(2); l.style.strokeWidth = .8; }
-      });
-      [...nodes].sort((a, b) => (a._k === 'me') - (b._k === 'me') || a._z - b._z).forEach(g => svg._ng.appendChild(g));
-      const meG = nodes.find(g => g._k === 'me'); meG.style.opacity = 1; meG.classList.remove('dim');
-      // whatever passes right behind me steps back, so my face and name stay clean
-      const mp = pos.get(meG); nodes.forEach(g => { if (g === meG) return; const q = pos.get(g); g.classList.toggle('behind', q[2] < mp[2] && Math.hypot(q[0] - mp[0], q[1] - mp[1] - 10) < 62); });
-      guide.querySelectorAll('.orbit').forEach(c => c.setAttribute('r', (R0 * c._r).toFixed(1)));
-      guide.querySelectorAll('.orbit-l').forEach(l => { l.setAttribute('x', 0); l.setAttribute('y', (-R0 * l._r - 6).toFixed(1)); });
-      const gs = guide.children; for (let i = 0; i < 3; i++) { const e = gs[i]; e.setAttribute('rx', (R0 * 1.03 * (i === 1 ? 1 : Math.abs(Math.cos(rotY + i)))).toFixed(1)); e.setAttribute('ry', (R0 * (i === 1 ? Math.abs(Math.sin(rotX)) + .05 : .95)).toFixed(1)); }
-    }
-    // time: t days ago. Events not yet happened disappear; older ones fade with the decay; rings fill to the score
-    function setT(t){
-      T = t;
-      const now = performance.now();
-      nodes.forEach(g => { let live; if (g._e !== undefined) { const e = EV[g._e]; live = e[3] >= t && alive(e[1], t) && alive(e[2], t); g._fade = live ? Math.max(.2, decay(e[3] - t) || .2) : 0; } else { live = alive(g._k, t); g._alive = live; } if (live && !g._was) g._born = now; g._was = live; });
-      Object.keys(P).filter(k => P[k].r === 2).forEach(k => {
-        const f = P[k].f = freq(k, t), g = nodes.find(x => x._k === k), c = STAGE[f.st][1];
-        const a = g.querySelector('.arc'); a.style.stroke = c; a.style.strokeDashoffset = (g._C * (1 - Math.min(1, f.score / 10))).toFixed(1);
-        g.querySelector('.sc').textContent = `${f.score.toFixed(1)}점 · ${f.days}일`;
-        g.classList.toggle('open', f.st === 'open'); g.querySelector('.halo').setAttribute('opacity', f.st === 'open' ? '.25' : '0');
-      });
-      document.getElementById('dmTo').textContent = t === 30 ? '설치한 날' : `${30 - t}일째`;
-      document.getElementById('dmT').value = 30 - t;
-      const live = EV.filter(e => e[3] >= t && e[3] - t < 21 && alive(e[1], t) && alive(e[2], t)), opened = Object.keys(P).filter(k => alive(k, t) && P[k].f && P[k].f.st === 'open').length, nf = Object.keys(P).filter(k => P[k].r === 1 && alive(k, t)).length;
-      document.getElementById('dmStat').innerHTML = `<b>${nf}</b>친구<b style="margin-top:6px">${live.length}</b>최근 21일 교류<b style="margin-top:6px">${opened}</b>주파수 열림`;
-      apply(); info(sel); frame();
-    }
-    function apply(){
-      const vis = el => { if (el._k) return shown[el._k] && el._alive; const e = EV[el._e]; return on[e[0]] && shown[e[1]] && shown[e[2]] && el._fade > 0; };
-      nodes.forEach(g => { g.style.display = vis(g) ? '' : 'none'; });
-      lines.forEach(l => { const ok = l._e !== undefined ? vis(nodes[l._e]) : shown[l._a] && shown[l._b] && alive(l._a, T) && alive(l._b, T); l.style.display = ok ? '' : 'none'; });
-      focus();
-    }
-    function focus(){
-      if (!sel) { nodes.concat(lines).forEach(el => el.classList.remove('dim')); return; }
-      const near = new Set([sel]); FR.forEach(([a, b]) => { if (a === sel) near.add(b); if (b === sel) near.add(a); });
-      EV.forEach(e => { if (e[1] === sel) near.add(e[2]); if (e[2] === sel) near.add(e[1]); });
-      if (P[sel].r === 2) near.add('me');
-      nodes.forEach(g => g.classList.toggle('dim', g._k ? !near.has(g._k) : !(EV[g._e][1] === sel || EV[g._e][2] === sel)));
-      lines.forEach(l => l.classList.toggle('dim', l._e !== undefined ? !(EV[l._e][1] === sel || EV[l._e][2] === sel) : !(l._a === sel || l._b === sel)));
-    }
-    function showTip(ev, i){
-      const e = EV[i], A = e[1] === 'me' ? '나' : P[e[1]].n, B = e[2] === 'me' ? '나' : P[e[2]].n, ago = e[3] - T, when = ago ? `${ago}일 전` : '오늘', w = decay(ago);
-      const what = e[0] === 'ditto' ? `${A === '나' ? '내가' : A + '이(가)'} ${B === '나' ? '내' : B + '의'} ‘${e[4]}’을 디토` : e[0] === 'visit' ? `${A === '나' ? '내가' : A + '이(가)'} ${B === '나' ? '내' : B + '의'} 방에 들름` : e[0] === 'guest' ? `${A === '나' ? '내가' : A + '이(가)'} ${B === '나' ? '내' : B + '의'} 방명록에 글` : e[0] === 'group' ? `${A}·${B} 같은 날 그룹 대화` : e[0] === 'reaction' ? `${A === '나' ? '내가' : A + '이(가)'} ${B === '나' ? '내' : B + '의'} 댓글에 리액션` : `${A}·${B} 같은 위젯에 댓글`;
-      tip.innerHTML = `${what}<small>${TY[e[0]][0]} · ${when}${(e[1] === 'me' || e[2] === 'me') && (P[e[1]].r === 2 || P[e[2]].r === 2) ? ` · 주파수 ${(W8[e[0]] * w).toFixed(1)}점${w < 1 ? ` (×${w})` : ''}` : ''}</small>`;
-      const b = svg.parentNode.getBoundingClientRect(); tip.style.left = Math.min(b.width - 250, ev.clientX - b.left + 14) + 'px'; tip.style.top = (ev.clientY - b.top + 14) + 'px'; tip.classList.add('on');
-    }
-    // the card: one person — friends, a 21-day strip, the mix of what passed between us, and (outside the friend ring) how the frequency adds up
-    const infoEl = document.getElementById('dmInfo');
-    function strip(es){ const by = {}; es.forEach(e => { by[e[3]] = e[0]; }); return `<div class="dm-days" title="왼쪽이 21일 전, 오른쪽이 오늘">${Array.from({ length: 21 }, (_, i) => { const d = 20 - i, t = by[d]; return `<i style="${t && d >= T ? `background:${TY[t][1]}` : d < T ? 'opacity:.35' : ''}"></i>`; }).join('')}</div>`; }
-    function mix(es){ const n = es.length || 1; return `<div class="dm-mix">${Object.keys(TY).map(t => { const c = es.filter(e => e[0] === t).length; return c ? `<i style="width:${c / n * 100}%;background:${TY[t][1]}"></i>` : ''; }).join('')}</div>`; }
-    function info(k){
-      const live = EV.filter(e => e[3] >= T && e[3] - T < 21 && alive(e[1], T) && alive(e[2], T));
-      if (!k) { infoEl.innerHTML = `<h5>내 디토 지도 · ${T === 30 ? '설치한 날' : `설치 후 ${30 - T}일째`}</h5>${mix(live)}<ul class="dm-facts"><li><em>교류</em><span>${Object.entries(TY).map(([t, v]) => `${v[0]} ${live.filter(e => e[0] === t).length}`).join(' · ')}</span></li><li><em>주파수</em><span>${Object.values(P).filter(p => p.f).map(p => `<span class="dm-chip" style="background:${STAGE[p.f.st][1]}1F;color:${STAGE[p.f.st][2]}">${p.n} ${STAGE[p.f.st][0]}</span>`).join('')}</span></li></ul><p class="dm-note" style="margin-top:8px;font-size:12px;color:var(--mute)">▶를 누르면 친구가 0명이던 앱 설치한 날부터 30일째까지 다시 보여 줘요. 교류 노드에 올리면 무슨 일이었는지 나와요.</p>`; return; }
-      const p = P[k], fr = FR.filter(f => f.includes(k)).map(f => P[f[0] === k ? f[1] : f[0]].n), withMe = live.filter(e => (e[1] === k && e[2] === 'me') || (e[2] === k && e[1] === 'me'));
-      const head = `<div class="dm-who">${k === 'me' ? '' : `<img src="assets/rooms/rav-${p.av}.webp" alt="" width="42" height="42">`}<span><b>${p.n}</b><small>@${p.h} · ${k === 'me' ? '나' : p.r === 1 ? '친구' : (p.via.map(v => P[v].n).join('·') + '의 친구')}</small></span></div>`;
-      if (k === 'me') { infoEl.innerHTML = head + mix(live.filter(e => e[1] === 'me' || e[2] === 'me')) + strip(live.filter(e => e[1] === 'me' || e[2] === 'me')) + `<ul class="dm-facts"><li><em>친구</em><span>${fr.join(', ')}</span></li></ul>`; return; }
-      let body = `<ul class="dm-facts"><li><em>친구</em><span>${fr.join(', ')}</span></li><li><em>나와</em><span>${Object.entries(TY).map(([t, v]) => [v[0], withMe.filter(e => e[0] === t).length]).filter(x => x[1]).map(x => `${x[0]} ${x[1]}`).join(' · ') || '—'}</span></li></ul>${strip(withMe)}`;
-      if (p.f) { const f = p.f, L = { ditto: '디토', comment: '댓글', guest: '방명록', group: '그룹 대화', reaction: '댓글 리액션', visit: '방문', mutual: '주고받은 디토', kinds: '교류 종류 3가지 이상' };
-        body += `<ul class="dm-bk">${Object.entries(f.by).map(([t, v]) => `<li><span>${L[t]}</span><b>+${v.toFixed(1)}</b></li>`).join('')}<li class="t"><span>주파수 <span class="dm-chip" style="background:${STAGE[f.st][1]}1F;color:${STAGE[f.st][2]};margin:0 0 0 4px">${STAGE[f.st][0]}</span></span><b>${f.score.toFixed(1)} / 10</b></li></ul><div class="dm-gt"><span class="${f.g[0] ? 'ok' : ''}">${f.g[0] ? '✓' : '○'} 10점</span><span class="${f.g[1] ? 'ok' : ''}">${f.g[1] ? '✓' : '○'} 4일 (${f.days}일)</span><span class="${f.g[2] ? 'ok' : ''}">${f.g[2] ? '✓' : '○'} 함께한 교류</span></div>`; }
-      infoEl.innerHTML = head + body;
-    }
-    function pick(k){ sel = k; focus(); info(k); syncList(); }
-    // panel
-    const tys = document.getElementById('dmTys');
-    tys.innerHTML = Object.entries(TY).map(([t, v]) => `<button type="button" class="dm-ty" data-t="${t}" aria-pressed="true"><span class="ic" style="background:${v[1]}">${v[2]}</span>${v[0]}<span class="n">${EV.filter(e => e[0] === t).length}</span><span class="sw"></span></button>`).join('');
-    tys.querySelectorAll('.dm-ty').forEach(b => b.addEventListener('click', () => { on[b.dataset.t] = !on[b.dataset.t]; b.setAttribute('aria-pressed', on[b.dataset.t]); apply(); }));
-    const ppl = document.getElementById('dmPpl'), q = document.getElementById('dmQ');
-    function list(){
-      ppl.innerHTML = Object.entries(P).filter(([k]) => k !== 'me').map(([k, p]) => `<li data-k="${k}"><label><input type="checkbox" ${shown[k] ? 'checked' : ''} data-k="${k}"><img src="assets/rooms/rav-${p.av}.webp" alt="" width="24" height="24">${p.n}${p.f ? `<span class="tg" style="background:${STAGE[p.f.st][1]}33;color:${p.f.st === 'calm' ? '#C9C3D2' : STAGE[p.f.st][1]}">${STAGE[p.f.st][0]}</span>` : '<span class="tg" style="color:#7E7290">친구</span>'}</label></li>`).join('');
-      ppl.querySelectorAll('input').forEach(c => c.addEventListener('change', () => { shown[c.dataset.k] = c.checked; if (!c.checked && sel === c.dataset.k) pick(null); apply(); syncList(); }));
-    }
-    q.addEventListener('input', () => { const v = q.value.trim(); ppl.querySelectorAll('li').forEach(li => { li.hidden = !!v && !P[li.dataset.k].n.includes(v); }); });
-    function syncList(){ document.getElementById('dmCnt').textContent = `${Object.keys(P).filter(k => k !== 'me' && shown[k]).length} / ${Object.keys(P).length - 1}`; }
-    // the 21-day replay
-    const play = document.getElementById('dmPlay'), slider = document.getElementById('dmT'); let playing = 0;
-    function stopPlay(){ clearInterval(playing); playing = 0; play.textContent = '▶'; }
-    function replay(){ stopPlay(); let t = 30; play.textContent = '❚❚'; setT(t); list(); playing = setInterval(() => { t--; setT(t); list(); if (t <= 0) stopPlay(); }, reduce ? 30 : 420); }
-    play.addEventListener('click', () => { if (playing) return stopPlay(); replay(); });
-    slider.addEventListener('input', () => { stopPlay(); setT(30 - slider.value); list(); });
-    // drag to turn, a little momentum, a slow drift of its own
-    let drag = null, idle = 0, inView = false, last = 0;
-    svg.addEventListener('pointerdown', e => { if (view !== 'map') return; drag = { x: e.clientX, y: e.clientY, ry: rotY, rx: rotX, moved: false }; });
-    addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (!drag.moved && Math.hypot(dx, dy) > 5) { drag.moved = true; svg.classList.add('drag'); tip.classList.remove('on'); try { svg.setPointerCapture(e.pointerId); } catch (er) {} } if (drag.moved) { const nr = drag.ry + dx * .006; vy = (nr - rotY) * .6; rotY = nr; rotX = Math.max(-1.2, Math.min(1.2, drag.rx + dy * .004)); idle = performance.now(); } });
-    addEventListener('pointerup', () => { if (!drag) return; const m = drag.moved; drag = null; svg.classList.remove('drag'); if (m) svg._justDragged = true; setTimeout(() => { svg._justDragged = false; }, 0); });
-    svg.addEventListener('click', () => { if (!svg._justDragged && sel) pick(null); });
-    function tick(t){
-      const dt = Math.min(50, t - (last || t)); last = t;
-      if (!drag && view === 'map') { vy *= .94; rotY += vy; if (!reduce && inView && !document.hidden && t - idle > 2500) rotY += dt * .0001; }
-      if (inView || drag) frame();
+    function hitAt(x, y){ let best = null, bd = 1e9; hits.forEach(h => { const d = Math.hypot(h.x - x, h.y - y); if (d < h.r && d < bd) { best = h; bd = d; } }); return best; }
+    const href = id => BASE + SLUG[pk] + '/' + (id && id !== 'me' ? id + '/' : '');
+    cv.addEventListener('pointermove', e => {
+      if (!r || (drag && drag.moved)) return; const b = cv.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top, h = hitAt(x, y);
+      hover = h; cv.style.cursor = h ? 'pointer' : ''; if (!h) { tip.classList.remove('on'); return; }
+      const q = h.id === 'me' ? null : r.snap[Math.floor(T)].p[h.id], p = h.id === 'me' ? r.me : r.people[h.id];
+      tip.innerHTML = h.id === 'me' ? `<b>${p.n}</b> · ${r.P.label}<small>눌러서 ${p.n}의 6개월 보기</small>` : `<b>${p.n}</b> · ${q.fr ? (p.path === 'freq' ? 'Ditto!로 이어진 친구' : '친구') : '친구의 친구'}<small>눌러서 둘이 친해진 과정 보기</small>`;
+      tip.style.left = Math.min(W - 240, x + 14) + 'px'; tip.style.top = Math.min(H - 70, y + 14) + 'px'; tip.classList.add('on');
+    });
+    cv.addEventListener('pointerleave', () => { hover = null; tip.classList.remove('on'); });
+    cv.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY, ry: rotY, rx: rotX, moved: false, id: e.pointerId }; });
+    addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (!drag.moved && Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) { drag.moved = true; cv.classList.add('drag'); tip.classList.remove('on'); try { cv.setPointerCapture(drag.id); } catch (er) {} } if (drag.moved) { const n = drag.ry + dx * .006; vy = (n - rotY) * .5; rotY = n; rotX = Math.max(-1.1, Math.min(1.1, drag.rx + dy * .004)); } });
+    addEventListener('pointerup', e => { if (!drag) return; const moved = drag.moved; drag = null; cv.classList.remove('drag'); idleAt = performance.now(); if (moved || e.target !== cv || !r) return; const b = cv.getBoundingClientRect(), h = hitAt(e.clientX - b.left, e.clientY - b.top); if (h) location.href = href(h.id); });
+    addEventListener('pointercancel', () => { drag = null; cv.classList.remove('drag'); });
+    box.querySelectorAll('#roSeg button').forEach(b => b.addEventListener('click', () => { if (S && b.dataset.v !== pk) start(b.dataset.v); }));
+    function tick(now){
+      if (inView && r) {
+        if (playing) { T = Math.max(0, Math.min(DAYS, (now - t0) / PLAY * DAYS)); if (T >= DAYS) playing = false; }
+        if (!drag) { vy *= .93; rotY += vy; if (!reduce && now - idleAt > 2000) rotY += .0009; }
+        frame(now); hud();
+      }
       requestAnimationFrame(tick);
     }
-    function drawSchema(){
-      const T2 = (x, y, t, st) => `<text x="${x}" y="${y}" style="${st}">${t}</text>`;
-      const av = (x, y, k, r, ring) => `<circle cx="${x}" cy="${y}" r="${r + 3}" fill="#FFFFFF" stroke="${ring || 'rgba(22,18,27,.08)'}" stroke-width="${ring ? 2.5 : 1}"/><image href="assets/rooms/rav-${k}.webp" x="${x - r}" y="${y - r}" width="${r * 2}" height="${r * 2}" clip-path="url(#dsC)"/>`;
-      const card = (x, y, w, h) => `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="26" fill="#FFFFFF" stroke="rgba(22,18,27,.06)" style="filter:drop-shadow(0 16px 28px rgba(60,20,90,.14))"/>`;
-      const pill = (x, y, t, c, bg) => { const w = 22 + t.length * 12.5; return `<rect x="${x - w / 2}" y="${y - 13}" width="${w}" height="26" rx="13" fill="${bg || '#FFFFFF'}" stroke="${bg ? 'none' : c}" stroke-width="1"/><text x="${x}" y="${y + 4.5}" style="font-size:12.5px;font-weight:700;fill:${bg ? '#FFFFFF' : c};text-anchor:middle">${t}</text>`; };
-      const H = 'font-size:19px;font-weight:800;fill:#16121B;text-anchor:middle', S = 'font-size:12px;fill:#6E6578;text-anchor:middle', K = 'font-size:11px;font-weight:700;letter-spacing:.06em;fill:#A99DB8';
-      svg.innerHTML = `<defs><clipPath id="dsC" clipPathUnits="objectBoundingBox"><circle cx=".5" cy=".5" r=".5"/></clipPath><clipPath id="dsW" clipPathUnits="objectBoundingBox"><rect width="1" height="1" rx=".18"/></clipPath>
-          <marker id="dsA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L9 5L0 9z" fill="#AA4AF4"/></marker>
-          <marker id="dsB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L9 5L0 9z" fill="#9C93A8"/></marker>
-          <linearGradient id="dsF" x1="0" x2="1"><stop offset="0" stop-color="#8E919E"/><stop offset=".35" stop-color="#2BC4A8"/><stop offset=".65" stop-color="#5A5BF2"/><stop offset="1" stop-color="#AA4AF4"/></linearGradient></defs>
-        ${T2(60, 100, '무엇이 무엇과 이어지나', K)}
-        <line x1="270" y1="190" x2="398" y2="190" stroke="#9C93A8" stroke-width="1.2" marker-end="url(#dsB)"/>${pill(334, 166, '올림', '#6E6578')}
-        <path d="M250 297 C 270 330, 380 330, 410 280" fill="none" stroke="#AA4AF4" stroke-width="1.6" stroke-dasharray="5 5" marker-end="url(#dsA)"/>${pill(334, 334, '디토 · 출처가 남아요', '#AA4AF4', '#AA4AF4')}
-        <line x1="602" y1="212" x2="728" y2="212" stroke="#9C93A8" stroke-width="1.2" marker-end="url(#dsB)"/>${pill(665, 188, '놓임', '#6E6578')}
-        ${card(170, 212, 200, 170)}${av(132, 178, 'jiu-1', 22, '#AA4AF4')}${av(170, 172, 'sora', 22)}${av(208, 178, 'haeun', 22)}${T2(170, 236, '사람', H)}${T2(170, 258, '나 · 친구 · 친구의 친구', S)}
-        ${card(500, 212, 200, 170)}<g transform="translate(500 168)"><g transform="rotate(-10) translate(-42 0)"><rect x="-21" y="-28" width="42" height="56" rx="9" fill="#FFFFFF" style="filter:drop-shadow(0 6px 10px rgba(60,20,90,.2))"/><image href="assets/ws-snack.webp" x="-19" y="-26" width="38" height="52" preserveAspectRatio="xMidYMid slice" clip-path="url(#dsW)"/></g><g transform="rotate(8) translate(40 0)"><rect x="-23" y="-23" width="46" height="46" rx="9" fill="#FFFFFF" style="filter:drop-shadow(0 6px 10px rgba(60,20,90,.2))"/><image href="assets/ws-dday.webp" x="-21" y="-21" width="42" height="42" clip-path="url(#dsW)"/></g><g><rect x="-25" y="-27" width="50" height="54" rx="10" fill="#FFFFFF" style="filter:drop-shadow(0 8px 12px rgba(60,20,90,.25))"/><image href="assets/ws-image.webp" x="-23" y="-25" width="46" height="50" preserveAspectRatio="xMidYMid slice" clip-path="url(#dsW)"/></g></g>${T2(500, 236, '위젯', H)}${T2(500, 258, '사진 · 음악 · D-Day 등 14가지', S)}
-        ${card(830, 212, 200, 170)}<g transform="translate(830 170)"><rect x="-44" y="-36" width="88" height="72" rx="12" fill="#F6F4F8" stroke="rgba(22,18,27,.06)"/><rect x="-38" y="-30" width="76" height="13" rx="5" fill="#D7C3F6"/><rect x="-38" y="-12" width="36" height="42" rx="6" fill="#FFFFFF" stroke="rgba(22,18,27,.06)"/><rect x="2" y="-12" width="36" height="19" rx="6" fill="#FFFFFF" stroke="rgba(22,18,27,.06)"/><rect x="2" y="11" width="36" height="19" rx="6" fill="#EFE5FB" stroke="#C79BFF" stroke-dasharray="3 3"/></g>${T2(830, 236, '플래터', H)}${T2(830, 258, '내 방 · 대표 · 라이프', S)}
-        <line x1="60" y1="372" x2="940" y2="372" stroke="rgba(22,18,27,.06)"/>
-        ${T2(60, 404, '사람과 사람', K)}
-        <line x1="290" y1="452" x2="460" y2="452" stroke="#AA4AF4" stroke-width="1.4"/>${pill(375, 428, '친구 · 15명까지', '#7A2BC2')}
-        <line x1="540" y1="452" x2="710" y2="452" stroke="#9C93A8" stroke-width="1.2"/>${pill(625, 428, '친구', '#6E6578')}
-        <path d="M262 482 Q500 600 738 482" fill="none" stroke="url(#dsF)" stroke-width="2" stroke-dasharray="1.5 6" stroke-linecap="round"/>
-        ${av(250, 452, 'jiu-1', 26, '#AA4AF4')}${T2(250, 506, '나', 'font-size:13px;font-weight:700;fill:#16121B;text-anchor:middle')}
-        ${av(500, 452, 'sora', 24)}${T2(500, 504, '친구', 'font-size:13px;font-weight:700;fill:#16121B;text-anchor:middle')}
-        ${av(750, 452, 'haeun', 22, '#AA4AF4')}${T2(750, 502, '친구의 친구', 'font-size:13px;font-weight:700;fill:#16121B;text-anchor:middle')}
-        ${pill(500, 548, '주파수 · 21일 교류 점수', '#4446D0')}
-        <g transform="translate(500 586)">${[['잔잔', '#8E919E'], ['선명', '#2BC4A8'], ['곧 열림', '#5A5BF2'], ['열림 → 친구 신청', '#AA4AF4']].map(([t, c], i, a) => { const x = (i - (a.length - 1) / 2) * 108; return `<circle cx="${x - 30}" cy="0" r="4.5" fill="${c}"/><text x="${x - 21}" y="4" style="font-size:12px;font-weight:600;fill:#4A4352">${t}</text>`; }).join('')}</g>`;
+    function boot(){
+      S = window.DittoSim;
+      BALL.forEach(t => { const col = S.TYPES[t].c, c = document.createElement('canvas'); c.width = c.height = 96; const g = c.getContext('2d'), gr = g.createRadialGradient(34, 30, 1, 48, 48, 47); gr.addColorStop(0, mix(col, '#FFFFFF', .92)); gr.addColorStop(.16, mix(col, '#FFFFFF', .45)); gr.addColorStop(.55, col); gr.addColorStop(1, mix(col, '#000000', .6)); g.fillStyle = gr; g.beginPath(); g.arc(48, 48, 47, 0, 7); g.fill(); SPR[t] = c; });
+      size(); start('uni'); requestAnimationFrame(tick);
     }
-    function setView(v){
-      view = v; document.querySelectorAll('.dm-seg button').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
-      ['.dm-rings', '.dm-tl', '.dm-stat', '.dm-card'].forEach(s => { document.querySelector(s).style.visibility = v === 'map' ? '' : 'hidden'; });
-      if (v === 'map') build(); else { svg.setAttribute('viewBox', '0 0 1000 620'); drawSchema(); }
-    }
-    document.querySelectorAll('.dm-seg button').forEach(b => b.addEventListener('click', () => setView(b.dataset.v)));
-    let grown = false;
-    if ('IntersectionObserver' in window) new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView && !grown && view === 'map') { grown = true; if (!reduce) replay(); } }, { threshold: .35 }).observe(svg); else inView = true;
-    addEventListener('resize', () => { if (view === 'map') { size(); frame(); } });
-    build(); list(); syncList(); requestAnimationFrame(tick);
+    addEventListener('resize', () => { if (r) size(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { inView = es[0].isIntersecting; if (inView && !started) { started = true; load(boot); } else if (inView && r && !reduce && T >= DAYS && performance.now() - t0 > 60000) { T = 0; t0 = performance.now(); playing = true; r.EV.forEach(e => { e.v = false; }); } }, { rootMargin: '200px 0px', threshold: 0 }).observe(box);
+    else { inView = true; started = true; load(boot); }
   })();
 
   /* ---- 06 friends: start the little loops when a step scrolls in ---- */
