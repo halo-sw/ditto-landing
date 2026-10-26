@@ -100,7 +100,7 @@
     "post-widget": "news-roll", "sticker-board": "sticker-pack",
     patterns: "letter", voice: "radios", writing: "diary",
     brand: "logo-charm", "brand-graphics": "appicon-pink", assets: "card-box", "og-images": "card-printer",
-    resources: "card-box", tokens: "diary", mapping: "magnifier", roadmap: "news-roll", audit: "computer", backlog: "todo"
+    resources: "card-box", "app-flow": "computer", tokens: "diary", mapping: "magnifier", roadmap: "news-roll", audit: "computer", backlog: "todo"
   };
   function seed(key) { var h = 0; for (var i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0; return h; }
   function fluidFor(group, key) {

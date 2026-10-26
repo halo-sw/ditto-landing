@@ -463,6 +463,7 @@
       <a href="#widget-system">위젯 크기와 구성</a>
       <a href="#widget-catalog">위젯 추가와 편집</a>
       <a href="#navigation">상단 바와 바텀시트</a>
+      <a href="#app-flow">앱 흐름·코드 대조</a>
       <a href="#roadmap">변경 기록</a>
     </nav>
   </div>
@@ -474,7 +475,7 @@
       <a href="#widgets"><span class="index-number" aria-hidden="true">03</span><span><strong>위젯</strong><small>크기와 배치, 추가와 편집, 디토 허용, 위젯별 규격</small></span><b aria-hidden="true">→</b></a>
       <a href="#patterns"><span class="index-number" aria-hidden="true">04</span><span><strong>글쓰기</strong><small>관계를 표현하는 말과 상황별 문구</small></span><b aria-hidden="true">→</b></a>
       <a href="#brand"><span class="index-number" aria-hidden="true">05</span><span><strong>브랜드</strong><small>브랜드 그래픽과 팔레트, 원본 파일, 링크 미리보기</small></span><b aria-hidden="true">→</b></a>
-      <a href="#resources"><span class="index-number" aria-hidden="true">06</span><span><strong>자료</strong><small>공통 설정값, 기존 화면 변경 가이드, 변경 기록</small></span><b aria-hidden="true">→</b></a>
+      <a href="#resources"><span class="index-number" aria-hidden="true">06</span><span><strong>자료</strong><small>앱 흐름·코드 대조, 공통 설정값, 변경 가이드와 기록</small></span><b aria-hidden="true">→</b></a>
     </div>
   </nav>
 </article>
@@ -1895,14 +1896,27 @@
     <a href="#og-images"><span class="index-number">03</span><span class="index-copy"><strong>OG 이미지</strong><small>링크 미리보기 규격과 ditto.place의 실제 이미지</small></span><b aria-hidden="true">→</b></a>
   </div>
 </article><article class="page docs-index" id="page-resources" hidden>
-  <div class="crumb">Splup / 자료</div><h1>자료</h1><p class="desc">여러 화면이 함께 쓰는 설정값과 기존 화면을 옮기는 방법, 문서가 바뀐 기록이에요.</p>
+  <div class="crumb">Splup / 자료</div><h1>자료</h1><p class="desc">현재 앱의 흐름과 코드를 대조하고, 공통 설정값과 화면 변경 가이드, 문서가 바뀐 기록을 찾아봐요.</p>
   <div class="docs-index-list">
-    <a href="#tokens"><span class="index-number">01</span><span class="index-copy"><strong>공통 설정값</strong><small>색·간격·반경의 이름과 실제 값</small></span><b aria-hidden="true">→</b></a>
-    <a href="#mapping"><span class="index-number">02</span><span class="index-copy"><strong>기존 화면 변경 가이드</strong><small>기존 규격을 새 기준으로 옮기는 순서</small></span><b aria-hidden="true">→</b></a>
-    <a href="#roadmap"><span class="index-number">03</span><span class="index-copy"><strong>변경 기록</strong><small>반영된 내용과 확인이 필요한 항목</small></span><b aria-hidden="true">→</b></a>
-    <a href="#audit"><span class="index-number">04</span><span class="index-copy"><strong>기존 구현 검토</strong><small>2026-08 코드 전수 검토 기록</small></span><b aria-hidden="true">→</b></a>
-    <a href="#backlog"><span class="index-number">05</span><span class="index-copy"><strong>추가 작업 목록</strong><small>추가·보강할 항목</small></span><b aria-hidden="true">→</b></a>
+    <a href="#app-flow"><span class="index-number">01</span><span class="index-copy"><strong>앱 흐름·코드 대조</strong><small>화면과 이동 경로, 연결된 코드 확인 · 접근 코드 필요</small></span><b aria-hidden="true">→</b></a>
+    <a href="#tokens"><span class="index-number">02</span><span class="index-copy"><strong>공통 설정값</strong><small>색·간격·반경의 이름과 실제 값</small></span><b aria-hidden="true">→</b></a>
+    <a href="#mapping"><span class="index-number">03</span><span class="index-copy"><strong>기존 화면 변경 가이드</strong><small>기존 규격을 새 기준으로 옮기는 순서</small></span><b aria-hidden="true">→</b></a>
+    <a href="#roadmap"><span class="index-number">04</span><span class="index-copy"><strong>변경 기록</strong><small>반영된 내용과 확인이 필요한 항목</small></span><b aria-hidden="true">→</b></a>
+    <a href="#audit"><span class="index-number">05</span><span class="index-copy"><strong>기존 구현 검토</strong><small>2026-08 코드 전수 검토 기록</small></span><b aria-hidden="true">→</b></a>
+    <a href="#backlog"><span class="index-number">06</span><span class="index-copy"><strong>추가 작업 목록</strong><small>추가·보강할 항목</small></span><b aria-hidden="true">→</b></a>
   </div>
+</article>
+<article class="page content-max" id="page-app-flow" hidden>
+  <div class="crumb">자료 / 앱 흐름·코드 대조</div>
+  <h1>앱 흐름·코드 대조</h1>
+  <p class="desc">현재 앱의 화면과 이동 경로를 한눈에 살펴봐요. 화면을 눌러 어떤 행동으로 이어지는지, 해당 동작이 코드에 어떻게 연결되어 있는지 확인할 수 있어요.</p>
+  <h2>사용자의 흐름을 따라 확인해요</h2>
+  <p>가입과 입장, 플래터 꾸미기, 친구의 위젯 가져오기처럼 하나의 여정을 골라 시작해요. 화면을 확대하거나 순서대로 넘기며 조건에 따른 분기와 확인할 부분을 함께 살펴볼 수 있어요.</p>
+  <div class="callout info"><div>공유받은 접근 코드를 입력하면 검토 화면이 열려요.</div></div>
+  <nav class="page-nav" aria-label="앱 흐름 검토">
+    <a class="next" href="../flow-review/"><span class="dir">접근 코드 입력</span>앱 흐름 열기</a>
+  </nav>
+  <div class="docs-related"><span>함께 보기</span><a href="#navigation">상단 바와 바텀시트 →</a><a href="#widget-catalog">위젯 추가와 편집 →</a></div>
 </article>
 <article class="page content-max og-doc" id="page-og-images" hidden>
   <div class="crumb">자료 / <b>OG 이미지</b></div>
@@ -2652,7 +2666,7 @@
 
 <script>
   (function () {
-    var pages = ["widget-system", "widget-catalog", "widget-todo", "widget-ditto", "widget-guestbook", "profile-avatars", "profile-handles", "foundations", "components", "widgets", "patterns", "brand", "resources", "overview", "color", "brand-graphics", "color-application", "ditto-action", "inputs", "photo-picker", "navigation", "chips", "menu", "feedback", "dialog", "comments", "chat", "music-search", "widget-manage", "post-widget", "sticker-board", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "og-images", "roadmap"];
+    var pages = ["widget-system", "widget-catalog", "widget-todo", "widget-ditto", "widget-guestbook", "profile-avatars", "profile-handles", "foundations", "components", "widgets", "patterns", "brand", "resources", "app-flow", "overview", "color", "brand-graphics", "color-application", "ditto-action", "inputs", "photo-picker", "navigation", "chips", "menu", "feedback", "dialog", "comments", "chat", "music-search", "widget-manage", "post-widget", "sticker-board", "typography", "spacing", "radius", "motion", "interaction", "zindex", "darkmode", "grid", "buttons", "voice", "writing", "assets", "mapping", "audit", "backlog", "tokens", "og-images", "roadmap"];
     var tocEl = document.getElementById("toc");
     var tocList = document.getElementById("tocList");
     var mobileToc = document.getElementById("mobileToc");
@@ -2724,7 +2738,7 @@
       "music-search": "widgets", "widget-manage": "widgets", "post-widget": "widgets", "sticker-board": "widgets",
       patterns: "writing", voice: "writing", writing: "writing",
       brand: "brand", "brand-graphics": "brand", assets: "brand", "og-images": "brand",
-      resources: "reference", tokens: "reference", mapping: "reference", roadmap: "reference", audit: "reference", backlog: "reference"
+      resources: "reference", "app-flow": "reference", tokens: "reference", mapping: "reference", roadmap: "reference", audit: "reference", backlog: "reference"
     };
     var GROUP_HOME = { start: "overview", foundations: "foundations", components: "components", widgets: "widgets", writing: "patterns", brand: "brand", reference: "resources" };
     var GROUP_NAME = { foundations: "파운데이션", components: "컴포넌트", widgets: "위젯", writing: "글쓰기", brand: "브랜드", reference: "자료" };

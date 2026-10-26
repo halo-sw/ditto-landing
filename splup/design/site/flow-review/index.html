@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; frame-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>앱 흐름 · 코드 대조 | Ditto 디자인 시스템</title>
+  <link rel="stylesheet" href="gate.css">
+  <script src="gate.js" defer></script>
+</head>
+<body>
+  <header class="gate-header"><a href="../splup-ds-v3/#app-flow">← 디자인 시스템</a><span>DITTO! <i>/</i> APP REVIEW</span><button id="lock" hidden>다시 잠그기</button></header>
+  <main id="gate">
+    <section class="introduction"><p class="eyebrow">화면에서 코드까지</p><h1>앱의 흐름을 보고,<br>구현을 확인해요.</h1><p class="lead">실제 앱 화면과 사용자 여정,<br>그 화면을 만드는 코드를 함께 살펴보는 공간이에요.</p><div class="flow-outline" aria-hidden="true"><div class="abstract-screen"><span></span><i></i><b></b></div><div class="connector">→</div><div class="abstract-screen second"><span></span><i></i><b></b></div><div class="connector">→</div><div class="abstract-code"><span>화면</span><i></i><i></i><span>코드</span><i></i></div></div></section>
+    <section class="access" aria-labelledby="access-title"><span class="access-label">검토용 공간</span><h2 id="access-title">접근 코드를 입력해 주세요</h2><p>전달받은 4자리 코드로 열 수 있어요.</p><form id="unlock-form"><label for="access-code">접근 코드</label><input id="access-code" name="code" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="off" required aria-describedby="access-message" placeholder="••••"><button id="unlock" type="submit">검토 화면 열기 →</button><p id="access-message" role="status" aria-live="polite"></p></form><p class="session-note">새로고침하거나 다시 잠그면 코드를 다시 입력해요.</p></section>
+  </main>
+  <section id="review-host" aria-label="앱 흐름과 코드 대조" hidden></section>
+</body>
+</html>
