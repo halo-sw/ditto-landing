@@ -1,7 +1,7 @@
 window.SPLUP_COLORGRAPHY = {
   "version": "1.0.0",
   "date": "2026-10-05",
-  "colorSystemVersion": "3.3.0",
+  "colorSystemVersion": "3.4.0",
   "naming": "color/{property}/{role}-{variant}-{state}",
   "compatibility": "Documentation aliases resolve to existing semantic keys. Existing keys and color values are preserved.",
   "tokens": [

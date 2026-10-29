@@ -78,48 +78,74 @@
     });
   }
 
-  /* ── Cover cards: a Ditto object on the section's Fluid surface ── */
-  // Section → Fluid palette (base + three colours, design/tokens/color-system.json brand.fluidPalettes).
-  var FLUID = {
-    foundations: ["#d5eefc", "#48B5F4", "#27E5F2", "#398FE8"],
-    components: ["#dcd8f5", "#6655D2", "#7841C4", "#AA4AF4"],
-    widgets: ["#fee7f8", "#FA97E2", "#FF2CBF", "#FF5488"],
-    writing: ["#ffe6da", "#FF925D", "#F9F871", "#FA97E2"],
-    brand: ["#ebd5fc", "#AA4AF4", "#6655D2", "#FA97E2"],
-    reference: ["#c6f9ee", "#07E7B4", "#F9F871", "#39B9CC"]
-  };
-  // Page → object (cover-assets/*.webp, from the App Graphics and widget picker objects).
+  /* ── Cover cards: each cover shows a real sample of what the page documents ──
+     Component pages use their Figma component capture, widget pages use the app's widget tile,
+     foundation and reference pages draw a small specimen from the same values the page describes.
+     No metaphor objects: if a reader can't tell the page from its cover, the cover is wrong. */
+  var C = { brand: "#AA4AF4", deep: "#6655D2", pink: "#FA97E2", night: "#8C2BD6", rose: "#FF5488", coral: "#FF925D" };
+  function img(src, cls) { return '<img class="cv-img ' + (cls || "") + '" src="' + src + '" alt="" loading="lazy" decoding="async">'; }
+  var shot = function (n, cls) { return img((/^cmp-/.test(n) ? "cover-assets/real/" + n + ".webp" : "component-assets/" + n + ".png"), cls || "cv-shot"); };
+  var tile = function (n) { return img("cover-assets/real/" + n + ".webp", "cv-tile"); };
+  var tiles = function (ns) { return '<span class="cv-row">' + ns.map(tile).join("") + "</span>"; };
+  var sw = function (list) { return '<span class="cv-row">' + list.map(function (c) { return '<span class="cv-sw" style="background:' + c + '"></span>'; }).join("") + "</span>"; };
+  var btn = function (label, st) { return '<span class="cv-btn ' + (st || "") + '">' + label + "</span>"; };
+  var row = function (a, b) { return '<span class="cv-line"><span class="k">' + a + '</span><span class="v">' + b + "</span></span>"; };
   var COVER = {
-    foundations: "appicon-purple", color: "sticker-pack", "color-application": "cds", typography: "newspaper", spacing: "diary",
-    radius: "smiley", motion: "frequency", interaction: "camera", zindex: "memo-board", darkmode: "dday",
-    components: "card-printer", buttons: "bell", "ditto-action": "logo-charm", chips: "todo", menu: "diary", inputs: "letter",
-    "photo-picker": "vintage-camera", feedback: "computer", dialog: "mailbox", navigation: "magnifier", comments: "rolling-paper",
-    chat: "radios", "profile-handles": "keyring", "profile-avatars": "mascot",
-    widgets: "house", "widget-system": "house-silver", grid: "memo-board", "widget-catalog": "keyring", "widget-ditto": "logo-charm",
-    "widget-todo": "todo", "widget-guestbook": "rolling-paper", "music-search": "cds", "widget-manage": "card-box",
-    "post-widget": "news-roll", "sticker-board": "sticker-pack",
-    patterns: "letter", voice: "radios", writing: "diary",
-    brand: "logo-charm", "brand-graphics": "appicon-pink", assets: "card-box", "og-images": "card-printer",
-    resources: "card-box", "app-flow": "computer", tokens: "diary", mapping: "magnifier", roadmap: "news-roll", audit: "computer", backlog: "todo"
+    /* 파운데이션 */
+    foundations: '<span class="cv-stack">' + sw([C.brand, C.deep, C.pink, C.rose, C.coral]) + '<span class="cv-type">가 Aa</span></span>',
+    color: '<span class="cv-stack">' + sw([C.brand, C.deep, C.pink, C.night]) + '<span class="cv-cap">#AA4AF4 · #6655D2 · #FA97E2 · #8C2BD6</span></span>',
+    "color-application": '<span class="cv-stack">' + btn("추가하기") + '<span class="cv-chip">선택됨</span></span>',
+    typography: '<span class="cv-stack cv-left"><span style="font-size:30px;font-weight:700;letter-spacing:-.02em">통하면 디토해</span><span style="font-size:18px;font-weight:600">통하면 디토해</span><span style="font-size:13px">통하면 디토해 · 24 / 18 / 13</span></span>',
+    spacing: '<span class="cv-gaps">' + [4, 8, 16, 24].map(function (g) { return '<span><i style="width:' + g * 2 + 'px"></i><em>' + g + "</em></span>"; }).join("") + "</span>",
+    radius: '<span class="cv-row">' + [8, 14, 20].map(function (r) { return '<span class="cv-rad" style="border-radius:' + r + 'px"><em>' + r + "</em></span>"; }).join("") + "</span>",
+    motion: '<svg class="cv-svg" viewBox="0 0 160 90" aria-hidden="true"><path d="M8 82 C 70 82, 70 8, 152 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="8" cy="82" r="4" fill="' + C.brand + '"/><circle cx="152" cy="8" r="4" fill="' + C.brand + '"/></svg>',
+    interaction: '<span class="cv-row">' + btn("기본") + btn("눌림", "is-press") + btn("비활성", "is-off") + "</span>",
+    zindex: '<span class="cv-layers"><span>화면</span><span>시트</span><span>토스트</span></span>',
+    darkmode: '<span class="cv-split"><span>Aa</span><span>Aa</span></span>',
+    /* 컴포넌트: Figma 컴포넌트 캡처 그대로 */
+    components: '<span class="cv-stack">' + shot("button-primary") + shot("cmp-chip-filter", "cv-shot cv-small") + "</span>",
+    buttons: shot("button-primary"), "ditto-action": shot("cmp-ditto-hold"), chips: shot("cmp-chip-filter", "cv-shot cv-small"),
+    menu: shot("menu-row-toggle"), inputs: shot("cmp-editor-field"), "photo-picker": shot("cmp-sheet"),
+    feedback: shot("cmp-toast"), dialog: shot("cmp-dialog"), navigation: shot("cmp-top-bar"),
+    comments: shot("cmp-comment-row"), chat: shot("cmp-chat-bubble"),
+    "profile-handles": '<span class="cv-handle">' + img("cover-assets/mascot.webp", "cv-avatar") + "<b>지우</b><i></i></span>",
+    "profile-avatars": img("cover-assets/mascot.webp", "cv-mascot"),
+    /* 위젯: 앱 위젯 타일 */
+    widgets: tiles(["wg-image", "wg-music", "wg-todo"]),
+    "widget-system": '<span class="cv-grid"><span style="grid-column:span 2;grid-row:span 2"></span><span style="grid-column:span 4;grid-row:span 2"></span><span style="grid-column:span 4;grid-row:span 4"></span><span style="grid-column:span 2;grid-row:span 4"></span></span>',
+    grid: '<span class="cv-grid cv-dots"><span style="grid-column:1/5;grid-row:1/3"></span><span style="grid-column:5/7;grid-row:1/5"></span><span style="grid-column:1/3;grid-row:3/5"></span></span>',
+    "widget-catalog": tiles(["wg-text", "wg-music", "wg-dday"]),
+    "widget-ditto": '<span class="cv-stack">' + tile("wg-image") + '<span class="cv-chip">디토 허용 3개</span></span>',
+    "widget-todo": tiles(["wg-todo"]), "widget-guestbook": tiles(["wg-guestbook"]),
+    "music-search": shot("cmp-music-search-row"), "widget-manage": shot("manage-ditto-allow"),
+    "post-widget": shot("cmp-post-card"), "sticker-board": tiles(["wg-sticker"]),
+    /* 글쓰기: 문서에 실린 예시 문장 */
+    patterns: '<span class="cv-bubbles"><span>내 플래터에 담았어요.</span><span class="me">변경 내용을 저장했어요.</span></span>',
+    voice: '<span class="cv-bubbles"><span>디토 · 주파수 · 플래터</span><span class="me">내 플래터에 담았어요.</span></span>',
+    writing: '<span class="cv-bubbles"><span class="me">변경 내용을 저장했어요.</span></span>',
+    /* 브랜드 */
+    brand: '<span class="cv-wm"></span>',
+    "brand-graphics": img("cover-assets/appicon-purple.webp", "cv-icon"),
+    assets: '<span class="cv-files"><span>wordmark-black.svg</span><span>wordmark-white.svg</span><span>appicon.png</span></span>',
+    "og-images": img("cover-assets/real/og-guide-splup.webp", "cv-og"),
+    /* 자료 */
+    resources: '<span class="cv-list">' + row("color.brand.splup", "#AA4AF4") + row("t7", "20 / 27") + row("10.25", "다크 지면 무채색") + "</span>",
+    "app-flow": '<span class="cv-flow"><span>가입</span><i></i><span>플래터</span><i></i><span>디토</span></span>',
+    tokens: '<span class="cv-list">' + row("color.brand.splup", "#AA4AF4") + row("color.brand.deep", "#6655D2") + row("color.brand.platterPink", "#FA97E2") + "</span>",
+    mapping: '<span class="cv-map"><s>19</s><span class="ar">→</span><span class="to">20</span><em>기존 제목 크기 → t7</em></span>',
+    roadmap: '<span class="cv-list">' + row("10.25", "다크 지면 무채색") + row("10.19", "정보 구조 6묶음") + row("10.13", "컬러 3.3.3") + "</span>",
+    audit: '<span class="cv-list">' + row("2026-08", "코드 전수 검토") + "</span>",
+    backlog: '<span class="cv-list cv-checks">' + row("☐", "추가할 문서") + row("☐", "보강할 규격") + "</span>"
   };
-  function seed(key) { var h = 0; for (var i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0; return h; }
-  function fluidFor(group, key) {
-    var f = FLUID[group] || FLUID.brand, h = seed(key);
-    var x1 = 12 + h % 26, y1 = 8 + (h >> 5) % 24, x2 = 70 + (h >> 9) % 22, y2 = 18 + (h >> 13) % 30, x3 = 35 + (h >> 17) % 40;
-    return "radial-gradient(62% 78% at " + x1 + "% " + y1 + "%, " + f[1] + "8c, transparent 70%)," +
-      "radial-gradient(58% 72% at " + x2 + "% " + y2 + "%, " + f[3] + "80, transparent 70%)," +
-      "radial-gradient(80% 70% at " + x3 + "% 104%, " + f[2] + "73, transparent 72%)," + f[0];
-  }
+  var KIND = { foundations: "spec", components: "shot", widgets: "tile", writing: "spec", brand: "art", reference: "spec" };
   function coverFor(href) {
     var key = href.replace(/^.*[#/]/, "").replace(/\.html$/, "");
     var span = document.createElement("span");
-    span.className = "docs-cover";
-    span.style.background = fluidFor(pageToGroup[key], key);
-    var img = document.createElement("img");
-    img.src = "cover-assets/" + (COVER[key] || "logo-charm") + ".webp";
-    if (/^appicon/.test(COVER[key] || "")) img.className = "is-icon";
-    img.alt = ""; img.loading = "lazy"; img.decoding = "async";
-    span.appendChild(img);
+    span.className = "docs-cover cv-" + (KIND[pageToGroup[key]] || "spec") + (key === "brand" ? " cv-brand" : "");
+    span.setAttribute("aria-hidden", "true");
+    span.innerHTML = COVER[key] || "";
+    var wm = span.querySelector(".cv-wm"), logo = document.querySelector(".topbar .logo .wm");
+    if (wm && logo) wm.appendChild(logo.cloneNode(true));
     return span;
   }
   document.querySelectorAll(".docs-index-list > a, .docs-topic-list > a").forEach(function (a) {

@@ -1,6 +1,6 @@
 {
-  "version": "3.3.3",
-  "date": "2026-10-11",
+  "version": "3.4.0",
+  "date": "2026-10-25",
   "figma": "https://www.figma.com/design/XG8Cm5nLScPoNc9NAXX1DD?node-id=1581-129639",
   "primitive": {
     "purple": {
@@ -29,6 +29,17 @@
       "900": "#2D2435",
       "950": "#1C1722"
     },
+    "neutral": {
+      "50": "#FAFAFA",
+      "200": "#E6E6E6",
+      "400": "#AEAEAE",
+      "600": "#6C6C6C",
+      "800": "#424242",
+      "850": "#333333",
+      "900": "#2A2A2A",
+      "925": "#242424",
+      "950": "#181818"
+    },
     "danger": {
       "50": "#FFF3F7",
       "100": "#FFE3ED",
@@ -46,11 +57,11 @@
   "semantic": {
     "bg/default": {
       "Light": "#FFFFFF",
-      "Dark": "#1C1722"
+      "Dark": "#181818"
     },
     "bg/subtle": {
       "Light": "#FAF9FC",
-      "Dark": "#2D2435"
+      "Dark": "#242424"
     },
     "bg/brand-subtle": {
       "Light": "#F9F4FF",
@@ -58,23 +69,23 @@
     },
     "bg/inverse": {
       "Light": "#2D2435",
-      "Dark": "#F3F0F7"
+      "Dark": "#FAFAFA"
     },
     "layer/basement": {
       "Light": "#F3F0F7",
-      "Dark": "#1C1722"
+      "Dark": "#181818"
     },
     "layer/default": {
       "Light": "#FFFFFF",
-      "Dark": "#2D2435"
+      "Dark": "#242424"
     },
     "layer/floating": {
       "Light": "#FFFFFF",
-      "Dark": "#443651"
+      "Dark": "#2A2A2A"
     },
     "layer/modal": {
       "Light": "#FFFFFF",
-      "Dark": "#443651"
+      "Dark": "#2A2A2A"
     },
     "fill/brand": {
       "Light": "#AA4AF4",
@@ -90,27 +101,27 @@
     },
     "fill/subtle": {
       "Light": "#F3F0F7",
-      "Dark": "#443651"
+      "Dark": "#333333"
     },
     "fill/disabled": {
       "Light": "#E7E1EE",
-      "Dark": "#584A68"
+      "Dark": "#424242"
     },
     "text/strong": {
       "Light": "#1C1722",
-      "Dark": "#FAF9FC"
+      "Dark": "#FAFAFA"
     },
     "text/default": {
       "Light": "#443651",
-      "Dark": "#E7E1EE"
+      "Dark": "#E6E6E6"
     },
     "text/subtle": {
       "Light": "#6D5F7D",
-      "Dark": "#B2A7BF"
+      "Dark": "#AEAEAE"
     },
     "text/disabled": {
       "Light": "#B2A7BF",
-      "Dark": "#6D5F7D"
+      "Dark": "#6C6C6C"
     },
     "text/brand": {
       "Light": "#862FC6",
@@ -122,15 +133,15 @@
     },
     "text/inverse": {
       "Light": "#FAF9FC",
-      "Dark": "#2D2435"
+      "Dark": "#242424"
     },
     "border/default": {
       "Light": "#E7E1EE",
-      "Dark": "#443651"
+      "Dark": "#333333"
     },
     "border/strong": {
       "Light": "#D5CCDF",
-      "Dark": "#584A68"
+      "Dark": "#424242"
     },
     "border/brand": {
       "Light": "#AA4AF4",
@@ -142,23 +153,23 @@
     },
     "text/placeholder": {
       "Light": "#6D5F7D",
-      "Dark": "#B2A7BF"
+      "Dark": "#AEAEAE"
     },
     "icon/default": {
       "Light": "#6D5F7D",
-      "Dark": "#E7E1EE"
+      "Dark": "#E6E6E6"
     },
     "icon/subtle": {
       "Light": "#897B99",
-      "Dark": "#B2A7BF"
+      "Dark": "#AEAEAE"
     },
     "icon/disabled": {
       "Light": "#B2A7BF",
-      "Dark": "#6D5F7D"
+      "Dark": "#6C6C6C"
     },
     "border/control": {
       "Light": "#897B99",
-      "Dark": "#897B99"
+      "Dark": "#6C6C6C"
     },
     "border/focus": {
       "Light": "#862FC6",
@@ -178,15 +189,15 @@
     },
     "unselected/bg": {
       "Light": "#FFFFFF",
-      "Dark": "#2D2435"
+      "Dark": "#242424"
     },
     "unselected/fg": {
       "Light": "#6D5F7D",
-      "Dark": "#B2A7BF"
+      "Dark": "#AEAEAE"
     },
     "unselected/border": {
       "Light": "#897B99",
-      "Dark": "#897B99"
+      "Dark": "#6C6C6C"
     },
     "action/primary/bg": {
       "Light": "#9D3EE4",
@@ -222,31 +233,31 @@
     },
     "action/neutral/bg": {
       "Light": "#F3F0F7",
-      "Dark": "#443651"
+      "Dark": "#333333"
     },
     "action/neutral/hover": {
       "Light": "#E7E1EE",
-      "Dark": "#584A68"
+      "Dark": "#424242"
     },
     "action/neutral/pressed": {
       "Light": "#D5CCDF",
-      "Dark": "#6D5F7D"
+      "Dark": "#6C6C6C"
     },
     "action/neutral/fg": {
       "Light": "#443651",
-      "Dark": "#FAF9FC"
+      "Dark": "#FAFAFA"
     },
     "action/ghost/bg": {
       "Light": "#FFFFFF",
-      "Dark": "#1C1722"
+      "Dark": "#181818"
     },
     "action/ghost/hover": {
       "Light": "#F3F0F7",
-      "Dark": "#2D2435"
+      "Dark": "#242424"
     },
     "action/ghost/pressed": {
       "Light": "#E7E1EE",
-      "Dark": "#443651"
+      "Dark": "#333333"
     },
     "action/ghost/fg": {
       "Light": "#862FC6",
@@ -270,11 +281,11 @@
     },
     "action/disabled/bg": {
       "Light": "#E7E1EE",
-      "Dark": "#584A68"
+      "Dark": "#424242"
     },
     "action/disabled/fg": {
       "Light": "#897B99",
-      "Dark": "#B2A7BF"
+      "Dark": "#AEAEAE"
     },
     "status/success/bg": {
       "Light": "#ECFCEF",
@@ -3512,5 +3523,9 @@
       ]
     }
   },
-  "updatedAt": "2026-10-11"
+  "updatedAt": "2026-10-25",
+  "darkSurfaces": {
+    "note": "다크 모드 지면·글자·테두리는 무채색 gray950 #181818 계열(다크 모드 규칙). 보라는 brand·selection·action/primary·secondary·강조 글자에만. 2026-10-25 사용자 확정.",
+    "ramp": "color.primitive.neutral"
+  }
 }
