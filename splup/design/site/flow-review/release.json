@@ -1,11 +1,11 @@
 {
   "format": "DITTOF01",
-  "generatedAt": "2026-10-26T12:35:45.717Z",
-  "sourceGeneratedAt": "2026-10-26T12:35:45.279Z",
-  "appBuild": "31",
-  "flowCount": 9,
-  "screenCount": 34,
-  "currentCaptureCount": 32,
-  "bytes": 6417910,
-  "sha256": "97f177046dc1596ef9512deb9b9bb39a90af9d739b8d35c06529a14633bd6640"
+  "generatedAt": "2026-10-29T10:01:43.576Z",
+  "sourceGeneratedAt": "2026-10-29T07:21:37.434Z",
+  "appBuild": "44",
+  "flowCount": 14,
+  "screenCount": 49,
+  "currentCaptureCount": 47,
+  "bytes": 8616741,
+  "sha256": "eedd155cbf14d8f2c30fe9c5cbb106f383d9a2221c4f70ce35bf7c01180ce5ef"
 }
