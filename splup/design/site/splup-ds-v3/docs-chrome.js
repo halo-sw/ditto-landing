@@ -108,8 +108,8 @@
     menu: shot("menu-row-toggle"), inputs: shot("cmp-editor-field"), "photo-picker": shot("cmp-sheet"),
     feedback: shot("cmp-toast"), dialog: shot("cmp-dialog"), navigation: shot("cmp-top-bar"),
     comments: shot("cmp-comment-row"), chat: shot("cmp-chat-bubble"),
-    "profile-handles": '<span class="cv-handle">' + img("cover-assets/mascot.webp", "cv-avatar") + "<b>지우</b><i></i></span>",
-    "profile-avatars": img("cover-assets/mascot.webp", "cv-mascot"),
+    "profile-handles": '<span class="cv-handles">' + ["rep", "life"].map(function (k) { return '<span class="cv-handle ' + k + '"><span class="cv-av">' + img("cover-assets/real/person-fallback.svg") + '</span><span class="cv-hn"><span>하은</span><span>@haeunzip</span></span></span>'; }).join("") + "</span>",
+    "profile-avatars": '<span class="cv-avs">' + img("cover-assets/real/avatar-photo.webp") + '<span class="cv-av-fb">' + img("cover-assets/real/person-fallback.svg") + "</span>" + img("cover-assets/real/av-flare-1.webp") + "</span>",
     /* 위젯: 앱 위젯 타일 */
     widgets: tiles(["wg-image", "wg-music", "wg-todo"]),
     "widget-system": '<span class="cv-grid"><span style="grid-column:span 2;grid-row:span 2"></span><span style="grid-column:span 4;grid-row:span 2"></span><span style="grid-column:span 4;grid-row:span 4"></span><span style="grid-column:span 2;grid-row:span 4"></span></span>',

@@ -59,3 +59,23 @@
 .avatar-resize-art { width: var(--avatar-preview-width,96px); height: var(--avatar-preview-height,96px); border-radius: var(--avatar-preview-radius,24px); overflow: hidden; }
 .avatar-resize-art img { display: block; width: 100%; height: 100%; object-fit: fill; }
 .avatar-resize-status { color: var(--ink-soft); font-size: 12px; margin: 0; }
+
+/* 2026-10-29 · 앱 기준으로 다시 쓴 프로필 아바타 페이지 */
+.av-cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0 8px; }
+.av-cases section { display: grid; gap: 10px; align-content: start; padding: 20px; border-radius: 16px; background: var(--surface-soft); min-width: 0; }
+.av-cases h3 { margin: 0 0 4px; }
+.av-cases p { margin: 4px 0 0; font-size: 13px; color: var(--ink-soft); }
+.av-cases .handle-avatar.avatar-art { overflow: hidden; background: #D9D9D9; }
+.av-cases .handle-avatar.avatar-art img { width: 100%; height: 100%; object-fit: cover; }
+.av-sizes { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-end; margin: 20px 0 8px; padding: 24px; border-radius: 16px; background: var(--surface-soft); }
+.av-sizes figure { margin: 0; display: grid; gap: 10px; justify-items: start; }
+.av-shape { display: block; width: var(--s); height: var(--s); border-radius: var(--r); overflow: hidden; background: #D9D9D9; }
+.av-shape img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.av-sizes figcaption { font-size: 12px; line-height: 1.5; color: var(--ink-soft); }
+.av-sizes figcaption b { display: block; color: var(--ink); font-size: 13px; }
+.av-flares { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 8px; }
+.av-flares img { width: 48px; height: 48px; border-radius: 12px; }
+.av-gaps { margin: 16px 0; padding: 18px 20px; border-radius: 12px; background: var(--surface-soft); border-left: 3px solid var(--accent-text); }
+.av-gaps p { margin: 0 0 10px; }
+.av-gaps ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 13px; }
+.av-gaps li b { display: block; }

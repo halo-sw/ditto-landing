@@ -176,10 +176,6 @@
 .docs-cover .cv-split { display: flex; width: 70%; height: 64%; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px var(--hairline); }
 .docs-cover .cv-split span { flex: 1; display: grid; place-items: center; font-size: 28px; font-weight: 700; background: #FFFFFF; color: #1C1722; }
 .docs-cover .cv-split span + span { background: #181818; color: #FAFAFA; }
-.docs-cover .cv-handle { display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; width: 72%; border-radius: 18px; background: linear-gradient(135deg, #F2E8FF, #FCE6F6); color: #171719; box-shadow: 0 6px 16px rgba(20,12,30,.10); }
-.page .docs-cover .cv-handle .cv-avatar { width: 40px !important; }
-.docs-cover .cv-handle b { flex: 1; font-size: 15px; }
-.docs-cover .cv-handle i { width: 28px; height: 28px; border-radius: 50%; background: #fff; }
 .docs-cover .cv-grid { display: grid; grid-template-columns: repeat(6, 16px); grid-auto-rows: 16px; gap: 4px; grid-auto-flow: dense; }
 .docs-cover .cv-grid span { border-radius: 6px; background: rgba(170,74,244,.18); box-shadow: inset 0 0 0 1.5px rgba(170,74,244,.55); }
 .docs-cover .cv-grid.cv-dots { grid-template-rows: repeat(4, 16px); background-image: radial-gradient(var(--ink-soft) 1px, transparent 1.5px); background-size: 20px 20px; background-position: -2px -2px; }
@@ -213,3 +209,20 @@
 .shell .docs-footer { margin-left: auto; margin-right: auto; align-items: baseline; }
 .shell[data-page="overview"] .docs-footer { max-width: 1180px; }
 .docs-cover em { font-style: normal; }
+
+/* 프로필 커버: 핸들 v2 실제 규격(라벤더 대표·라이프, 높이 64·R16·사방 8, 아바타 48·R12, 사진 없으면 #F1F2F4+사람 아이콘) */
+.docs-cover .cv-handles { display: grid; gap: 6px; width: min(66%, 220px); }
+.docs-cover .cv-handle { display: flex; align-items: center; gap: 6px; padding: 5px; border-radius: 11px; color: #171719; }
+.docs-cover .cv-handle.rep { background: linear-gradient(180deg, #CAB7F2, #B092ED); box-shadow: 0 4px 12px rgba(20,12,30,.10), inset 0 1px 0 rgba(255,255,255,.35); }
+.docs-cover .cv-handle.life { background: #C8B3F2; }
+.docs-cover .cv-av { flex: none; width: 32px; height: 32px; border-radius: 8px; background: #F1F2F4; display: grid; place-items: center; }
+.page .docs-cover .cv-av img { width: 16px !important; height: 16px; }
+.docs-cover .cv-hn { display: grid; gap: 1px; min-width: 0; text-align: left; }
+.docs-cover .cv-hn span:first-child { font-size: 12px; font-weight: 500; line-height: 1.3; }
+.docs-cover .cv-hn span:last-child { font-size: 9.5px; opacity: .85; line-height: 1.3; }
+/* 기본 아바타 커버: 문서의 아바타 에셋 그대로(48·R12 라운드 사각) */
+.docs-cover .cv-avs { display: flex; gap: 10px; }
+.page .docs-cover .cv-avs img { position: static; width: 48px !important; height: 48px !important; max-width: none !important; max-height: none; border-radius: 12px !important; object-fit: cover; filter: none; }
+.page .docs-cover .cv-avs img[src*="av-flare"] { border-radius: 50% !important; }
+.docs-cover .cv-av-fb { width: 48px; height: 48px; border-radius: 12px; background: #F1F2F4; box-shadow: inset 0 0 0 1px rgba(23,23,25,.08); display: grid; place-items: center; }
+.page .docs-cover .cv-avs .cv-av-fb img { width: 24px !important; height: 24px !important; border-radius: 0 !important; }
