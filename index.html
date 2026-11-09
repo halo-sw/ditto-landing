@@ -206,6 +206,7 @@ p{text-wrap:pretty}
 .gnb .cta{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:999px;background:linear-gradient(135deg,#AA4AF4,#8A3FB8);color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:-.02em;box-shadow:0 6px 16px -8px rgba(110,30,170,.7),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .35s var(--ease),filter .3s}
 .gnb .cta:hover{transform:translateY(-1px);filter:brightness(1.06)}
 .gnb .cta:focus-visible{outline-offset:2px}
+.gnb .cta.store{background:var(--night)}
 @media (max-width:860px){:root{--gnb:64px}
 .gnb{top:calc(10px + env(safe-area-inset-top,0px));width:calc(100% - 24px);height:50px;gap:4px;padding:0 5px 0 14px}
 .gnb .logo img{height:20px}
@@ -213,7 +214,8 @@ p{text-wrap:pretty}
 .tabs-nav ul{padding:0 10px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 18px),transparent)}
 .tabs-nav a{height:34px;padding:0 11px;font-size:13px}
 .gnb .cta{height:40px;padding:0 13px;font-size:13.5px}
-.gnb .cta .ar2{display:none}}
+.gnb .cta .ar2{display:none}
+.gnb .cta.invite{display:none}}
 /* ---------- hero ---------- */
 .hero{position:relative;isolation:isolate;overflow:hidden;overflow:clip;height:max(100svh,640px);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:calc(var(--gnb) + clamp(20px,5.5svh,64px)) 0 0;text-align:center;
   background:radial-gradient(58% 46% at 12% 6%,rgba(180,108,224,.95),rgba(180,108,224,0) 70%),radial-gradient(52% 44% at 90% 10%,rgba(224,135,230,.95),rgba(224,135,230,0) 70%),radial-gradient(70% 46% at 50% 52%,rgba(247,159,223,.85),rgba(247,159,223,0) 72%),linear-gradient(180deg,#C07FE6 0%,#EE9FE3 40%,#FBD3EE 70%,#FFFFFF 96%)}
@@ -2340,7 +2342,8 @@ html{background:var(--edge-b,var(--bg))}
       <li><a href="/splup/">Guide</a></li>
     </ul>
   </nav>
-  <a class="cta" href="#tm">초대장 받기 <span class="ar2" aria-hidden="true">↓</span></a>
+  <a class="cta store" href="https://apps.apple.com/kr/app/id6824991758">앱 받기</a>
+  <a class="cta invite" href="#tm">초대장 받기 <span class="ar2" aria-hidden="true">↓</span></a>
 </header>
 
 <main>
@@ -2358,7 +2361,7 @@ html{background:var(--edge-b,var(--bg))}
   <div class="hc-head">
     <p class="hc-k">친한 친구와 만들어 가는 우리만의 공간</p>
     <h1 id="hc-h"><img class="hc-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"></h1>
-    <div class="row hc-row"><a class="btn hc-cta" href="#tm">초대장 받기 <span class="ar" aria-hidden="true">→</span></a><a class="btn line hc-line" href="#verbs">둘러보기</a></div>
+    <div class="row hc-row"><a class="btn hc-cta" href="#tm">초대장 받기 <span class="ar" aria-hidden="true">→</span></a><a class="btn hc-cta" href="https://apps.apple.com/kr/app/id6824991758">App Store에서 받기 <span class="ar" aria-hidden="true">↗</span></a><a class="btn line hc-line" href="#verbs">둘러보기</a></div>
   </div>
   <div class="hc-stage" id="hcStage">
     <div class="hcp hc-ticket" data-d=".35" style="--r:-8deg" aria-hidden="true"><span class="hct-svg" id="hcTicket"></span></div>
@@ -3008,7 +3011,7 @@ html{background:var(--edge-b,var(--bg))}
         <div class="faq-i" data-g="friend"><h3 class="faq-h"><button type="button" class="faq-b" id="qb4" aria-expanded="false" aria-controls="qa4"><span>친구 신청을 거절하면 알려지나요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa4" role="region" aria-labelledby="qb4"><div><p>아니요. 받은 사람은 거절과 수락 중에 고를 수 있고, 거절해도 보낸 사람에게 알림이 가지 않아요. 모르는 사람이면 차단해서 다시 못 보내게 할 수 있어요.</p></div></div></div>
         <div class="faq-i" data-g="space"><h3 class="faq-h"><button type="button" class="faq-b" id="qb5" aria-expanded="false" aria-controls="qa5"><span>내 플래터는 누가 볼 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa5" role="region" aria-labelledby="qb5"><div><p>친구로 연결된 사람만 볼 수 있어요. 친구 신청을 수락하면 서로의 플래터를 함께 볼 수 있어요.</p></div></div></div>
         <div class="faq-i" data-g="space"><h3 class="faq-h"><button type="button" class="faq-b" id="qb7" aria-expanded="false" aria-controls="qa7"><span>디토는 몇 개까지 열어 둘 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa7" role="region" aria-labelledby="qb7"><div><p>내 위젯 중 세 개까지예요. 사진, GIF, 음악, 영상을 열어 둘 수 있고, 열어 둔 위젯은 뒤에서 은은하게 빛나서 친구가 알아볼 수 있어요.</p></div></div></div>
-        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb6" aria-expanded="false" aria-controls="qa6"><span>언제 써 볼 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa6" role="region" aria-labelledby="qb6"><div><p>졸업전시 현장에서 iPhone으로 바로 체험할 수 있어요. 아래에서 출시 초대장을 뽑아 이메일을 남기면, 출시 날 가장 먼저 초대 메일을 보내 드려요. 선착순 1,000석이에요.</p></div></div></div>
+        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb6" aria-expanded="false" aria-controls="qa6"><span>언제 써 볼 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa6" role="region" aria-labelledby="qb6"><div><p>지금 <a href="https://apps.apple.com/kr/app/id6824991758">App Store</a>에서 받을 수 있어요. iPhone 앱이고, 졸업전시 현장에서도 바로 체험할 수 있어요. 아래에서 출시 초대장을 뽑아 이메일을 남기면 초대 메일을 보내 드려요. 선착순 1,000석이에요.</p></div></div></div>
         <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb8" aria-expanded="false" aria-controls="qa8"><span>초대장을 뽑으면 뭐가 남아요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa8" role="region" aria-labelledby="qb8"><div><p>좌석 번호와 초대 코드가 발급되고, 고른 아이디가 출시 때까지 예약돼요. 이메일은 출시 초대 메일을 보내는 데만 쓰고, 출시 후 3개월이 지나면 지워요.</p></div></div></div>
         <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb9" aria-expanded="false" aria-controls="qa9"><span>스티커 보드는 누가 고칠 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa9" role="region" aria-labelledby="qb9"><div><p>붙인 사람만요. 붙였던 기기와 브라우저에서 내 스티커를 누르면 옮기고, 돌리고, 크기를 바꾸거나 떼어 버릴 수 있어요. 다른 사람의 스티커는 구경만 할 수 있어요.</p></div></div></div>
         </div>
@@ -3216,7 +3219,7 @@ html{background:var(--edge-b,var(--bg))}
     <p class="foot-brand"><img src="assets/wordmark.svg" alt="Ditto!" width="66" height="24" loading="lazy"><span>우리만의 공간</span></p>
     <nav class="foot-nav" aria-label="푸터">
       <ul class="foot-links"><li><a href="#verbs">Why</a></li><li><a href="#solution">Solution</a></li><li><a href="#concept">Concept</a></li><li><a href="#widgets">Widgets</a></li><li><a href="#wx-rooms">Rooms</a></li><li><a href="#friends">Friends</a></li><li><a href="#qa">Q&amp;A</a></li><li><a href="#tm">Invite</a></li></ul>
-      <ul class="foot-ext"><li><a href="/splup/">Guide</a></li><li><a class="kr" href="/privacy/">개인정보 처리방침</a></li><li><a class="kr" href="/terms/">이용약관</a></li></ul>
+      <ul class="foot-ext"><li><a href="https://apps.apple.com/kr/app/id6824991758">App Store</a></li><li><a href="/splup/">Guide</a></li><li><a class="kr" href="/privacy/">개인정보 처리방침</a></li><li><a class="kr" href="/terms/">이용약관</a></li></ul>
     </nav>
   </div></div>
   <div class="foot-glow"><span class="grain" aria-hidden="true"></span>
