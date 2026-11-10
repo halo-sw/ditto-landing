@@ -15,7 +15,6 @@
 .v6r.in{opacity:1;filter:none;transform:none}
 
 /* ---------- menu: reading progress along the pill ---------- */
-.gnb::after{content:"";position:absolute;left:22px;right:22px;bottom:3px;height:2px;border-radius:2px;background:linear-gradient(90deg,#AA4AF4,#FA97E2 60%,#FFB199);transform-origin:0 50%;transform:scaleX(var(--sp,0));opacity:.9;pointer-events:none}
 
 /* ---------- hero: a soft wash of the brand colours behind the belt ---------- */
 .hx{isolation:isolate}
@@ -147,11 +146,7 @@
   .h6-s,.h6-w img{animation:none}
 }
 
-/* ---------- 메뉴의 앱 받기: 첫 화면에서는 조용히(바로 아래 큰 버튼이 주인공), 그 버튼이 지나가면 채워진다 ---------- */
-.gnb .cta.store{height:36px;margin-right:2px;padding:0 14px 0 6px;gap:7px;background:rgba(28,23,34,.06);color:var(--ink);font-size:13.5px;font-weight:600;box-shadow:none;transition:background .35s ease,color .35s ease,transform .35s var(--ease)}
-.gnb .cta.store img{width:24px;height:24px;border-radius:7px;display:block}
-.gnb .cta.store:hover{background:rgba(28,23,34,.1);filter:none}
-.gnb.past .cta.store{background:var(--ink);color:#fff}
-.gnb.past .cta.store:hover{background:#2A2333}
-.gnb.dark .cta.store,.gnb.dark .cta.store:hover{background:#fff;color:var(--ink)}
-@media (max-width:760px){.gnb .cta.store{height:34px;padding:0 12px 0 5px;font-size:13px}}
+/* ---------- 메뉴의 앱 받기: 띠 안에서 하나뿐인 색(디토 보라). 검은 알약은 지금 보고 있는 메뉴에만 쓴다 ---------- */
+.gnb .cta.store,.gnb.dark .cta.store{height:36px;margin-right:2px;padding:0 16px;background:#AA4AF4;color:#fff;font-size:13.5px;font-weight:700;box-shadow:none;transition:background .3s ease,transform .35s var(--ease)}
+.gnb .cta.store:hover,.gnb.dark .cta.store:hover{background:#9A3BE6;filter:none}
+@media (max-width:760px){.gnb .cta.store,.gnb.dark .cta.store{height:34px;padding:0 13px;font-size:13px}}

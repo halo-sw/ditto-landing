@@ -5,11 +5,6 @@
   var IO = 'IntersectionObserver' in window;
   var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
 
-  /* reading progress along the floating menu */
-  var gnb = document.getElementById('gnb'), tk = false;
-  function prog() { tk = false; var h = document.documentElement.scrollHeight - innerHeight; if (gnb) gnb.style.setProperty('--sp', h > 0 ? Math.min(1, scrollY / h).toFixed(4) : 0); }
-  addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(prog); } }, { passive: true }); prog();
-
   if (reduce || !IO) return;
 
   var once = function (el, fn, opt) { new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { fn(); o.disconnect(); } }, opt || { rootMargin: '0px 0px -8% 0px', threshold: .1 }).observe(el); };
@@ -66,13 +61,6 @@
   function update() { tk = false; if (hero && !reduce) hero.style.setProperty('--hp', Math.max(0, Math.min(1, scrollY / (innerHeight * .85))).toFixed(4)); }
   addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', update); update();
-
-  /* menu download button: quiet while the hero's own button is on screen, filled once it has scrolled away */
-  var gnb = $('gnb'), act = document.querySelector('.hx-act');
-  if (gnb && act) {
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { gnb.classList.toggle('past', !es[0].isIntersecting); }).observe(act);
-    else gnb.classList.add('past');
-  }
 
   /* the reasons: folded until asked for */
   var btn = $('why6B'), pane = $('why6P');
