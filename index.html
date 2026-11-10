@@ -36,7 +36,7 @@
   --ink:#16121B;--body:#4A4453;--mute:#8B8494;--faint:#C9C5CF;--line:#ECEAF0;
   --bg:#FFFFFF;--soft:#FAF9FC;--card:#F4F3F6;
   --violet:#AA4AF4;--indigo:#6655D2;--pink:#FA97E2;--mint:#2BC4A8;
-  --pad:clamp(20px,4vw,48px);--max:1240px;--hd:64px;
+  --pad:clamp(20px,4vw,48px);--max:1280px;--hd:78px;
   --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
   --disp:"PP Pangram Rounded","Pretendard Variable",Pretendard,sans-serif;
   --ease:cubic-bezier(.2,.7,.2,1);
@@ -59,21 +59,24 @@ ul,ol{list-style:none}
 [data-rv]{opacity:0;filter:blur(14px);transform:translateY(18px);transition:opacity .9s var(--ease),filter .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--d,0) * 90ms)}
 [data-rv].in{opacity:1;filter:none;transform:none}
 
-/* ---------- 헤더 ---------- */
-.hd{position:fixed;z-index:50;inset:0 0 auto;height:var(--hd);display:flex;align-items:center;gap:24px;padding:0 var(--pad);transition:background .3s,box-shadow .3s,color .3s}
-.hd.solid{background:rgba(255,255,255,.82);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 1px 0 var(--line)}
+/* ---------- 헤더: 떠 있는 띠 ---------- */
+.hd{position:fixed;z-index:50;left:0;right:0;top:calc(12px + env(safe-area-inset-top,0px));display:flex;justify-content:center;padding:0 12px;pointer-events:none}
+.hd-in{pointer-events:auto;position:relative;display:flex;align-items:center;max-width:100%;height:54px;padding:0 7px 0 20px;border-radius:999px;background:rgba(255,255,255,.7);-webkit-backdrop-filter:saturate(1.8) blur(22px);backdrop-filter:saturate(1.8) blur(22px);box-shadow:0 0 0 1px rgba(22,18,27,.06),0 14px 34px -18px rgba(40,10,60,.32);transition:background .4s,color .4s,box-shadow .4s}
 .hd-logo{flex:none;display:block}
-.hd-logo img{width:62px;height:auto;transition:filter .3s}
-.hd-nav{flex:1;display:flex;justify-content:center}
-.hd-nav ul{display:flex;gap:clamp(14px,2.6vw,36px)}
-.hd-nav a{display:block;padding:8px 2px;font:600 13.5px/1 var(--disp);font-style:italic;letter-spacing:.03em;text-transform:uppercase;color:#B4AFBB;transition:color .25s}
+.hd-logo img{width:58px;height:auto;transition:filter .4s}
+.hd-nav{position:relative;flex:1;min-width:0;margin:0 8px 0 14px;overflow-x:auto;scrollbar-width:none}
+.hd-nav::-webkit-scrollbar{display:none}
+.hd-nav ul{position:relative;display:flex;width:max-content}
+.hd-nav a{position:relative;z-index:1;display:block;padding:11px 14px;font:600 13.5px/1 var(--disp);font-style:italic;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;color:var(--mute);transition:color .3s}
 .hd-nav a:hover,.hd-nav a.on{color:var(--ink)}
-.hd-cta{flex:none;display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:13px;transition:transform .2s var(--ease),background .3s,color .3s}
-.hd-cta:hover{transform:translateY(-1px)}
-.hd.onfilm{color:#fff}
+.hd-ind{position:absolute;z-index:0;left:0;top:50%;width:0;height:34px;margin-top:-17px;border-radius:999px;background:rgba(22,18,27,.07);opacity:0;transition:transform .5s var(--ease),width .5s var(--ease),opacity .3s,background .4s}
+.hd-cta{flex:none;display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:13.5px;white-space:nowrap;transition:transform .25s var(--ease),background .4s,color .4s}
+.hd-cta:hover{transform:scale(1.04)}
+.hd.onfilm .hd-in{background:rgba(40,18,70,.36);color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.18),0 14px 34px -18px rgba(40,10,60,.5)}
 .hd.onfilm .hd-logo img{filter:brightness(0) invert(1)}
-.hd.onfilm .hd-nav a{color:rgba(255,255,255,.55)}
-.hd.onfilm .hd-nav a:hover{color:#fff}
+.hd.onfilm .hd-nav a{color:rgba(255,255,255,.62)}
+.hd.onfilm .hd-nav a:hover,.hd.onfilm .hd-nav a.on{color:#fff}
+.hd.onfilm .hd-ind{background:rgba(255,255,255,.18)}
 .hd.onfilm .hd-cta{background:#fff;color:var(--ink)}
 
 /* ---------- 버튼 ---------- */
@@ -352,10 +355,7 @@ ul,ol{list-style:none}
 
 /* ---------- 좁은 화면 ---------- */
 @media (max-width:860px){
-  :root{--hd:56px}
-  .hd-nav{display:none}
-  .hd{justify-content:space-between}
-  .now{display:block}
+  :root{--hd:72px}
   .two{grid-template-columns:1fr;gap:20px}
   .three-g{grid-template-columns:1fr}
   .three-g b{margin-top:14px}
@@ -388,6 +388,133 @@ ul,ol{list-style:none}
   .booth-v{order:2}
   .booth-t{padding-bottom:0}
 }
+/* ================= 2차 다듬기 ================= */
+body{font-size:16px}
+.bar{align-items:flex-end;padding-top:20px}
+.bar span:last-child{font-size:clamp(44px,6vw,88px);line-height:.8;color:var(--ink);letter-spacing:-.02em}
+.lead{padding:clamp(40px,6vw,80px) 0 clamp(40px,6vw,80px)}
+.lead.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.lead h2{font-size:clamp(26px,3.3vw,46px);line-height:1.2;letter-spacing:-.04em}
+.lead p{font-size:clamp(15px,1.3vw,18px);line-height:1.75}
+.state{font-size:clamp(30px,4.6vw,66px);line-height:1.16;letter-spacing:-.045em}
+.intro-h{font-size:clamp(22px,2.6vw,34px)}
+.intro-p{font-size:clamp(15px,1.3vw,18px);line-height:1.75}
+.stats b{font-size:clamp(40px,5.4vw,72px)}
+.stats span{font-size:14px}
+/* 줄 단위 등장 */
+.ln{display:block;overflow:hidden;padding:0 .08em .16em;margin:0 -.08em -.16em}
+.ln>span{display:block;transform:translateY(112%) rotate(3deg);transform-origin:0 100%;transition:transform 1.1s var(--ease);transition-delay:calc(var(--l) * 120ms + 60ms)}
+.in .ln>span{transform:none}
+/* 히어로 */
+.hero{padding-top:calc(var(--hd) + 8px);isolation:isolate}
+.aura{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.aura i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:drift 16s ease-in-out infinite alternate}
+.aura i:nth-child(1){width:44vw;height:44vw;left:-10vw;top:-8vw;background:#D9C2FF}
+.aura i:nth-child(2){width:38vw;height:38vw;right:-8vw;top:6vw;background:#FFC9EE;animation-duration:20s;animation-delay:-6s}
+.aura i:nth-child(3){width:34vw;height:34vw;left:34vw;bottom:-18vw;background:#C9D4FF;animation-duration:24s;animation-delay:-11s}
+@keyframes drift{to{transform:translate(6vw,4vw) scale(1.15)}}
+.cf{height:clamp(270px,41vh,430px)}
+.cf-t img{height:clamp(240px,37vh,390px)}
+.cf-t.ic img{height:clamp(112px,17vh,176px)}
+.cf-t.ob img{width:clamp(160px,16vw,250px)}
+.hero h1{font-size:clamp(36px,5.2vw,76px);line-height:1.08;letter-spacing:-.05em;margin-top:12px}
+.hero-b{font-size:clamp(15px,1.35vw,18px);max-width:32em}
+.hero-tx{padding-top:clamp(8px,2vh,24px)}
+/* 손 + 세 가지 생각 */
+.handx{padding-bottom:clamp(40px,6vw,72px)}
+.hand{position:relative;height:clamp(440px,82vh,780px);border-radius:clamp(24px,3vw,44px);overflow:hidden;background:#DFDFDF;margin:0}
+.hand img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% 50%;transform:scale(1.14);will-change:transform}
+.hand-tx{position:absolute;left:clamp(24px,5vw,76px);top:50%;transform:translateY(-50%);width:min(36%,480px)}
+.hand-tx .state{font-size:clamp(26px,3.4vw,48px)}
+.hand-tx p{margin-top:18px;max-width:19em;color:var(--body);font-size:clamp(15px,1.3vw,18px)}
+.three-g{margin-top:12px}
+.three-g a{position:relative;padding:26px 28px 30px;border-radius:24px;min-height:clamp(190px,17vw,240px);display:flex;flex-direction:column}
+.three-g a:nth-child(1){background:#F3ECFE}.three-g a:nth-child(2){background:#FDEAF7}.three-g a:nth-child(3){background:#E7F6F2}
+.three-g a:hover{background:var(--ink);color:#fff;transform:translateY(-4px)}
+.three-g a:hover span,.three-g a:hover i{color:rgba(255,255,255,.7)}
+.three-g b{margin-top:auto;padding-top:28px;font-size:clamp(24px,2.6vw,34px)}
+.three-g span{font-size:15px;transition:color .3s}
+.three-g s{position:absolute;right:24px;top:22px;text-decoration:none;font-size:22px;transition:transform .35s var(--ease)}
+.three-g a:hover s{transform:translate(4px,4px)}
+/* 플래터 모으기 */
+.gather-st::before{content:"";position:absolute;left:50%;top:47%;width:min(78vw,96vh);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(170,74,244,.26),rgba(250,151,226,.14) 55%,rgba(250,151,226,0));filter:blur(24px);opacity:var(--gp,0)}
+.gw{width:clamp(84px,10.5vw,152px);margin:calc(clamp(84px,10.5vw,152px) / -2) 0 0 calc(clamp(84px,10.5vw,152px) / -2)}
+.gw img{animation:bob 5.2s ease-in-out infinite;animation-delay:calc(var(--i) * -.41s)}
+@keyframes bob{50%{transform:translateY(-10px) rotate(2deg)}}
+.gather-cap{font-size:clamp(19px,2.3vw,32px);letter-spacing:-.04em}
+.cmp-c h3{font-size:22px}.cmp-c p{font-size:15px}
+/* 디토 스텝 */
+.steps-l li{font-size:clamp(26px,3.9vw,54px);line-height:1.22;letter-spacing:-.045em}
+.steps-d{font-size:clamp(15px,1.25vw,17px)}
+.stage{box-shadow:0 60px 80px -60px rgba(120,60,200,.45)}
+/* 주파수: 어두운 판 위에서 빛나는 점 */
+.fq-card{background:#16121B;color:#fff;box-shadow:0 60px 80px -60px rgba(90,60,200,.55)}
+.fq-ds{color:rgba(255,255,255,.6)}
+.fq-nm{font-size:clamp(30px,4vw,56px)}
+.fq-tabs{background:rgba(255,255,255,.07)}
+.fq-tabs button{color:rgba(255,255,255,.55)}
+.fq-tabs button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+.fq-tabs i s{background:rgba(255,255,255,.2)}
+.fq-tabs button[aria-pressed="true"] i s{background:rgba(22,18,27,.14)}
+.fq-ph{background:linear-gradient(160deg,#EFE8FD,#FDEAF7)}
+.fq-ph img,.duo img,.bn-v{transition:transform .5s var(--ease);will-change:transform}
+.sig h3,.duo figcaption b{font-size:21px}
+.sig p,.duo figcaption span,.bn-d{font-size:15px}
+/* 키워드 띠 */
+.kw{padding:clamp(72px,10vw,128px) clamp(12px,2vw,24px) 0}
+.kw-in{border-radius:clamp(28px,4vw,48px);background:radial-gradient(80% 120% at 20% 0%,#4A1F80 0%,#2A1247 60%,#1E0D36 100%);padding:clamp(40px,6vw,84px) 0;overflow:hidden;display:grid;gap:clamp(12px,1.6vw,22px)}
+.kw-r{display:flex;width:max-content;animation:mq 34s linear infinite}
+.kw-r.rv{animation-direction:reverse;animation-duration:42s}
+.kw-r>div{display:flex;gap:clamp(10px,1.4vw,20px);padding-right:clamp(10px,1.4vw,20px)}
+.kw-r span{padding:.42em .9em .5em;border-radius:999px;font-size:clamp(22px,3.6vw,54px);font-weight:700;letter-spacing:-.04em;white-space:nowrap;line-height:1.1}
+.k-v{background:#AA4AF4;color:#fff}.k-p{background:#FA97E2;color:#2A1247}.k-w{background:#fff;color:#2A1247}.k-l{background:#D9C2FF;color:#2A1247}.k-y{background:#F3D27C;color:#2A1247}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* 주요 기능 */
+.bn h3{font-size:clamp(24px,2.7vw,36px)}
+.bn{transition:background .4s}
+.bn:hover{background:#F4EEFD}
+.rail h3{font-size:22px}
+.booth-t h3{font-size:clamp(26px,3.2vw,44px);line-height:1.2}
+/* 마무리 */
+.end{padding:clamp(72px,10vw,128px) clamp(12px,2vw,24px) 12px}
+.end .wrap{position:relative;max-width:none;overflow:hidden;border-radius:clamp(28px,4vw,48px);padding:clamp(96px,14vw,200px) 24px;color:#fff;
+  background:radial-gradient(60% 55% at 88% 100%,#F9B9A0 0%,rgba(249,185,160,0) 70%),radial-gradient(50% 40% at 8% 96%,#F9A6F0 0%,rgba(249,166,240,0) 70%),linear-gradient(180deg,#7F6EF0 0%,#996CE3 20%,#BD6DD0 42%,#E078D9 64%,#F38DE3 82%,#F7A5CF 100%)}
+.end .wrap::before,.end .wrap::after{content:"";position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.7),rgba(255,255,255,0));filter:blur(22px);pointer-events:none}
+.end .wrap::before{width:44vw;height:22vw;right:-8vw;top:8%}
+.end .wrap::after{width:36vw;height:18vw;left:-8vw;bottom:6%}
+.end img,.end img.in{position:relative;z-index:1;filter:brightness(0) invert(1);width:clamp(200px,30vw,440px)}
+.end h2{position:relative;z-index:1;font-size:clamp(30px,5vw,72px);letter-spacing:-.045em}
+.end p{position:relative;z-index:1;color:rgba(255,255,255,.88);font-size:clamp(15px,1.3vw,18px)}
+.end .pill{position:relative;z-index:1;background:#fff;color:var(--ink)}
+.ft{border-top:0;padding-top:20px}
+@media (max-width:860px){
+  .hd-in{height:50px;padding:0 6px 0 14px}
+  .hd-logo img{width:48px}
+  .hd-nav{margin:0 4px 0 8px;-webkit-mask:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent);mask:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 14px),transparent)}
+  .hd-nav a{padding:10px 10px;font-size:12.5px}
+  .hd-ind{height:30px;margin-top:-15px}
+  .hd-cta{height:38px;padding:0 14px;font-size:13px}
+  .cf{height:290px}
+  .cf-t img{height:250px}
+  .cf-t.ic img{height:100px}
+  .cf-t.ob img{width:124px}
+  .aura i{filter:blur(46px)}
+  .aura i:nth-child(1){width:80vw;height:80vw}.aura i:nth-child(2){width:70vw;height:70vw;top:40vw}.aura i:nth-child(3){width:70vw;height:70vw;left:10vw}
+  .hand{height:auto;display:flex;flex-direction:column-reverse}
+  .hand{background:#E1E1E1}
+  .hand img{position:relative;inset:auto;height:112vw;object-position:74% 50%;transform-origin:50% 100%;-webkit-mask:linear-gradient(transparent 4%,#000 30%);mask:linear-gradient(transparent 4%,#000 30%)}
+  .hand-tx{position:relative;z-index:1;left:auto;top:auto;width:auto;transform:none;padding:30px 22px 0}
+  .hand-tx p{max-width:none}
+  .lead.two{grid-template-columns:1fr}
+  .gw{width:18vw;margin:-9vw 0 0 -9vw}
+  .gather-cap{font-size:18px}
+  .steps-l li{font-size:clamp(21px,5.8vw,30px)}
+  .three-g a{min-height:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .ln>span{transform:none;transition:none}
+  .aura i,.gw img,.kw-r{animation:none}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   [data-rv]{opacity:1;filter:none;transform:none;transition:none}
@@ -400,23 +527,27 @@ ul,ol{list-style:none}
 <body>
 
 <header class="hd" id="hd">
-  <a class="hd-logo" href="#top" aria-label="Ditto! 처음으로"><img src="assets/wordmark.svg" alt="Ditto!" width="62" height="22"></a>
-  <nav class="hd-nav" aria-label="챕터">
-    <ul>
-      <li><a href="#platter" data-ch="platter">Platter</a></li>
-      <li><a href="#ditto" data-ch="ditto">Ditto</a></li>
-      <li><a href="#frequency" data-ch="frequency">Frequency</a></li>
-      <li><a href="#map" data-ch="map">Map</a></li>
-      <li><a href="#features" data-ch="features">Features</a></li>
-    </ul>
-  </nav>
-  <a class="hd-cta" href="https://apps.apple.com/kr/app/id6824991758">앱 받기</a>
+  <div class="hd-in">
+    <a class="hd-logo" href="#top" aria-label="Ditto! 처음으로"><img src="assets/wordmark.svg" alt="Ditto!" width="58" height="21"></a>
+    <nav class="hd-nav" id="hdNav" aria-label="챕터">
+      <ul>
+        <li aria-hidden="true"><i class="hd-ind" id="hdInd"></i></li>
+        <li><a href="#platter" data-ch="platter">Platter</a></li>
+        <li><a href="#ditto" data-ch="ditto">Ditto</a></li>
+        <li><a href="#frequency" data-ch="frequency">Frequency</a></li>
+        <li><a href="#map" data-ch="map">Map</a></li>
+        <li><a href="#features" data-ch="features">Features</a></li>
+      </ul>
+    </nav>
+    <a class="hd-cta" href="https://apps.apple.com/kr/app/id6824991758">앱 받기</a>
+  </div>
 </header>
 
 <main>
 
 <!-- 00 히어로 -->
 <section class="hero" id="top" aria-labelledby="hero-h">
+  <div class="aura" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="cf" id="cf" aria-hidden="true">
     <div class="cf-t tp"><img src="assets/v2/ph-platter.webp" alt="" width="720" height="1529"></div>
     <div class="cf-t ic"><img src="assets/wa-music.webp" alt="" width="320" height="320"></div>
@@ -430,10 +561,10 @@ ul,ol{list-style:none}
     <div class="cf-t ic"><img src="assets/wa-dday.webp" alt="" width="320" height="320"></div>
   </div>
   <div class="hero-tx">
-    <p class="hero-k">Ditto! · IYKYK Place</p>
-    <h1 id="hero-h">우리로부터 시작되는 작은 공간</h1>
-    <p class="hero-b">피드 대신 각자의 플래터를 꾸미고, 친구의 취향을 디토로 간직해요. 그렇게 쌓인 작은 교류가 주파수가 됩니다.</p>
-    <div class="hero-cta">
+    <p class="hero-k" data-rv>Ditto! · IYKYK Place</p>
+    <h1 id="hero-h" data-sp>우리로부터 시작되는<br>작은 공간</h1>
+    <p class="hero-b" data-rv style="--d:3">피드 대신 각자의 플래터를 꾸미고, 친구의 취향을 디토로 간직해요. 그렇게 쌓인 작은 교류가 주파수가 됩니다.</p>
+    <div class="hero-cta" data-rv style="--d:4">
       <a class="pill" href="https://apps.apple.com/kr/app/id6824991758">App Store에서 받기 <span class="ar" aria-hidden="true">→</span></a>
       <a class="pill ghost" href="#about">둘러보기 <span class="ar" aria-hidden="true">↓</span></a>
     </div>
@@ -470,16 +601,19 @@ ul,ol{list-style:none}
   </div>
 </section>
 
-<figure class="hand" data-rv><img src="assets/v2/hand.webp" alt="한 손에 든 휴대폰 속 디토 플래터" width="2400" height="1600" loading="lazy"></figure>
-
-<section class="three" aria-labelledby="three-h">
+<section class="handx" aria-labelledby="three-h">
   <div class="wrap">
-    <h2 class="state" id="three-h" data-rv>세 가지 작은 생각,<br>하나의 함께하는 공간.</h2>
-    <p class="three-p" data-rv style="--d:1">작은 교류가 쌓이면 새 우정의 시작을 알리는 신호가 됩니다. 순위도, 팔로워 수도 없습니다.</p>
+    <div class="hand" id="hand" data-rv>
+      <img src="assets/v2/hand.webp" alt="한 손에 든 휴대폰 속 디토 플래터" width="2400" height="1600" loading="lazy">
+      <div class="hand-tx">
+        <h2 class="state" id="three-h">세 가지 작은 생각,<br>하나의 함께하는 공간.</h2>
+        <p>작은 교류가 쌓이면 새 우정의 시작을 알리는 신호가 됩니다. 순위도, 팔로워 수도 없습니다.</p>
+      </div>
+    </div>
     <div class="three-g">
-      <a href="#platter" data-rv><i class="num">01</i><b>플래터</b><span>직접 배치한 위젯으로 꾸미는 나만의 작은 방.</span></a>
-      <a href="#ditto" data-rv style="--d:1"><i class="num">02</i><b>디토!</b><span>내 취향과 닮은 위젯을 출처와 함께 간직해요.</span></a>
-      <a href="#frequency" data-rv style="--d:2"><i class="num">03</i><b>주파수</b><span>함께한 순간으로 쌓이는 친밀함. 숫자로 보여주지 않아요.</span></a>
+      <a href="#platter" data-rv><i class="num">01</i><b>플래터</b><span>직접 배치한 위젯으로 꾸미는 나만의 작은 방.</span><s aria-hidden="true">↘</s></a>
+      <a href="#ditto" data-rv style="--d:1"><i class="num">02</i><b>디토!</b><span>내 취향과 닮은 위젯을 출처와 함께 간직해요.</span><s aria-hidden="true">↘</s></a>
+      <a href="#frequency" data-rv style="--d:2"><i class="num">03</i><b>주파수</b><span>함께한 순간으로 쌓이는 친밀함. 숫자로 보여주지 않아요.</span><s aria-hidden="true">↘</s></a>
     </div>
   </div>
 </section>
@@ -489,7 +623,7 @@ ul,ol{list-style:none}
   <div class="wrap">
     <div class="bar"><span>Platter · Widget</span><span>01</span></div>
     <div class="lead two">
-      <h2 id="platter-h" data-rv>게시물 대신,<br>위젯으로 꾸미는 내 방</h2>
+      <h2 id="platter-h" data-sp>게시물 대신,<br>위젯으로 꾸미는 내 방</h2>
       <div class="lead-r" data-rv style="--d:1">
         <p>플래터는 위젯을 직접 배치해 꾸미는 나만의 판이에요. 사진, 음악, 글, 디데이, 상태, 스티커까지 15가지 위젯을 원하는 크기로 붙여요.</p>
         <p>남에게 잘 보이기보다 나답게 표현하는 공간이에요.</p>
@@ -525,7 +659,7 @@ ul,ol{list-style:none}
   <div class="wrap">
     <div class="bar"><span>Ditto</span><span>02</span></div>
     <div class="lead two">
-      <h2 id="ditto-h" data-rv>좋아요 대신,<br>“나도.”</h2>
+      <h2 id="ditto-h" data-sp>좋아요 대신,<br>“나도.”</h2>
       <div class="lead-r" data-rv style="--d:1">
         <p>친구의 플래터에서 내 취향을 발견하면 ‘디토’로 출처가 담긴 사본을 내 공간에 간직해요. 누르고 지나가는 반응이 아니라, 내 방에 오래 남는 조각이에요.</p>
       </div>
@@ -569,7 +703,7 @@ ul,ol{list-style:none}
   <div class="wrap">
     <div class="bar"><span>Frequency</span><span>03</span></div>
     <div class="lead two">
-      <h2 id="freq-h" data-rv>우정은 팔로우 한 번으로<br>시작되지 않습니다</h2>
+      <h2 id="freq-h" data-sp>우정은 팔로우 한 번으로<br>시작되지 않습니다</h2>
       <div class="lead-r" data-rv style="--d:1">
         <p>팔로우는 한 번이면 되지만, 잊히는 것도 그만큼 쉽습니다. 디토는 낯선 사람과 한 번의 터치로 친구가 되게 하지 않습니다.</p>
         <p>일상의 교류, 직접 받은 초대, 오프라인에서 함께한 시간을 함께 살피고, 실제 접점이 생겼을 때 우정이 시작되도록 합니다.</p>
@@ -605,7 +739,7 @@ ul,ol{list-style:none}
   <div class="wrap">
     <div class="bar"><span>Relationship Map</span><span>04</span></div>
     <div class="lead two">
-      <h2 id="map-h" data-rv>Ditto!로 6개월,<br>친구 30명이 되기까지</h2>
+      <h2 id="map-h" data-sp>Ditto!로 6개월,<br>친구 30명이 되기까지</h2>
       <div class="lead-r" data-rv style="--d:1">
         <p>앱을 깐 날부터 6개월을 그대로 돌려 봐요. 원래 알던 친구는 초대장으로 이어지고, 처음 보는 친구의 친구는 디토로 주파수가 쌓여 친구가 돼요.</p>
         <p>지도를 끌어 돌려 보고, 사람을 누르면 그 친구와 언제 어떻게 친해졌는지 열려요.</p>
@@ -637,12 +771,20 @@ ul,ol{list-style:none}
   </div>
 </section>
 
+<!-- 브랜드 키워드 -->
+<section class="kw" aria-label="브랜드 키워드: 장난스러운, 만지고 싶은, 모으고 싶은, 나만의, 함께하는, 추억을 떠올리는, 부드러운, 친숙한, 가까운">
+  <div class="kw-in" aria-hidden="true">
+    <div class="kw-r"><div><span class="k-v">장난스러운</span><span class="k-p">만지고 싶은</span><span class="k-w">모으고 싶은</span><span class="k-l">나만의</span><span class="k-v">함께하는</span><span class="k-v">장난스러운</span><span class="k-p">만지고 싶은</span><span class="k-w">모으고 싶은</span><span class="k-l">나만의</span><span class="k-v">함께하는</span></div><div><span class="k-v">장난스러운</span><span class="k-p">만지고 싶은</span><span class="k-w">모으고 싶은</span><span class="k-l">나만의</span><span class="k-v">함께하는</span><span class="k-v">장난스러운</span><span class="k-p">만지고 싶은</span><span class="k-w">모으고 싶은</span><span class="k-l">나만의</span><span class="k-v">함께하는</span></div></div>
+    <div class="kw-r rv"><div><span class="k-y">추억을 떠올리는</span><span class="k-y">부드러운</span><span class="k-p">친숙한</span><span class="k-v">가까운</span><span class="k-v">장난스러운</span><span class="k-p">만지고 싶은</span><span class="k-y">추억을 떠올리는</span><span class="k-y">부드러운</span><span class="k-p">친숙한</span><span class="k-v">가까운</span><span class="k-v">장난스러운</span><span class="k-p">만지고 싶은</span></div><div><span class="k-y">추억을 떠올리는</span><span class="k-y">부드러운</span><span class="k-p">친숙한</span><span class="k-v">가까운</span><span class="k-v">장난스러운</span><span class="k-p">만지고 싶은</span><span class="k-y">추억을 떠올리는</span><span class="k-y">부드러운</span><span class="k-p">친숙한</span><span class="k-v">가까운</span><span class="k-v">장난스러운</span><span class="k-p">만지고 싶은</span></div></div>
+  </div>
+</section>
+
 <!-- 05 주요 기능 -->
 <section class="ch" id="features" data-ch="features" data-nm="Features" aria-labelledby="fx-h">
   <div class="wrap">
     <div class="bar"><span>Features</span><span>05</span></div>
     <div class="fx-h">
-      <h2 class="state" id="fx-h" data-rv>나를 표현하고, 가까이 지내고,<br>추억을 간직해요.</h2>
+      <h2 class="state" id="fx-h" data-sp>나를 표현하고, 가까이 지내고,<br>추억을 간직해요.</h2>
       <p data-rv style="--d:1">디토는 친구에게 나를 표현하고, 한 사람 한 사람과의 관계에 집중하며, 추억을 함께 쌓는 공간입니다.</p>
     </div>
     <div class="bento">
@@ -688,7 +830,7 @@ ul,ol{list-style:none}
   <div class="ana">
     <div class="wrap">
       <div class="lead two">
-        <h2 data-rv>아날로그의 즐거움을<br>스마트폰에서 새롭게</h2>
+        <h2 data-sp>아날로그의 즐거움을<br>스마트폰에서 새롭게</h2>
         <div class="lead-r" data-rv style="--d:1">
           <p>디토는 30년 전 사랑받던 사진 부스, 캠코더, 무전기, 편지, 방명록을 스마트폰 안에 다시 구현합니다. 새롭게 느껴지는 이 다섯 가지 경험은 친구들이 직접 만날 이유를 만들어줍니다.</p>
         </div>
@@ -724,7 +866,7 @@ ul,ol{list-style:none}
 <section class="end" id="get" aria-labelledby="end-h">
   <div class="wrap">
     <img src="assets/wordmark.svg" alt="Ditto!" width="360" height="130" loading="lazy" data-rv>
-    <h2 id="end-h" data-rv style="--d:1">통하면, 디토해!</h2>
+    <h2 id="end-h" data-sp>통하면, 디토해!</h2>
     <p data-rv style="--d:2">친한 친구와 만들어 가는 우리만의 공간.</p>
     <a class="pill" href="https://apps.apple.com/kr/app/id6824991758" data-rv style="--d:3">App Store에서 받기 <span class="ar" aria-hidden="true">→</span></a>
   </div>
@@ -745,7 +887,6 @@ ul,ol{list-style:none}
   </div>
 </footer>
 
-<p class="now" id="now" aria-hidden="true"></p>
 
 <script>
 (function(){
@@ -762,17 +903,31 @@ ul,ol{list-style:none}
     $$('[data-rv]').forEach(function(el){ rv.observe(el); });
   } else $$('[data-rv]').forEach(function(el){ el.classList.add('in'); });
 
+  /* ---- 제목: 줄마다 아래에서 올라온다 ---- */
+  $$('[data-sp]').forEach(function(el){
+    el.innerHTML = el.innerHTML.split(/<br\s*\/?>/i).map(function(l, i){ return '<span class="ln" style="--l:' + i + '"><span>' + l + '</span></span>'; }).join('');
+    if (reduce || !IO) { el.classList.add('in'); return; }
+    new IntersectionObserver(function(es, o){ if (es[0].isIntersecting) { el.classList.add('in'); o.disconnect(); } }, { rootMargin: '0px 0px -8% 0px', threshold: .1 }).observe(el);
+  });
+
+  /* ---- 화면들이 포인터를 따라 살짝 기운다 ---- */
+  if (!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches) $$('.bn, .duo figure, .fq-ph').forEach(function(card){
+    var tg = card.querySelector('.bn-v') || card.querySelector('img'); if (!tg) return;
+    card.addEventListener('pointermove', function(e){ var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; tg.style.transform = 'perspective(1100px) rotateY(' + (x * 9).toFixed(2) + 'deg) rotateX(' + (y * -7).toFixed(2) + 'deg) translateY(-6px)'; });
+    card.addEventListener('pointerleave', function(){ tg.style.transform = ''; });
+  });
+
   /* ---- 00 히어로 커버플로: 멈추지 않고 흐르되 가운데에서만 머문다 ---- */
   (function(){
     var box = $('#cf'); if (!box) return;
     var tiles = $$('.cf-t', box), n = tiles.length, PERIOD = 2300, on = true;
     var ease = function(t){ return t < .5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2; };
     function draw(now){
-      var k = now / PERIOD, pos = Math.floor(k) + ease(k - Math.floor(k)), w = box.clientWidth, g = w <= 860 ? w * .43 : clamp(w * .19, 150, 260);
+      var k = now / PERIOD, pos = Math.floor(k) + ease(k - Math.floor(k)), w = box.clientWidth, g = w <= 860 ? w * .45 : clamp(w * .17, 170, 300);
       tiles.forEach(function(el, i){
         var d = ((i - pos) % n + n) % n; if (d > n / 2) d -= n;
-        var a = Math.abs(d), s = 1 - Math.min(a, 2) * .15;
-        el.style.transform = 'translate(-50%,-50%) translateX(' + (d * g).toFixed(1) + 'px) scale(' + s.toFixed(3) + ')';
+        var a = Math.abs(d), s = 1 - Math.min(a, 2.4) * .17;
+        el.style.transform = 'translate(-50%,-50%) translate(' + (d * g).toFixed(1) + 'px,' + (a * a * 7).toFixed(1) + 'px) rotate(' + (d * 3.2).toFixed(2) + 'deg) scale(' + s.toFixed(3) + ')';
         el.style.opacity = clamp(3.6 - a, 0, 1).toFixed(2);
         el.style.zIndex = String(10 - Math.round(a));
       });
@@ -788,11 +943,12 @@ ul,ol{list-style:none}
   /* 흩어진 자리 (화면 중심 기준 vw, vh) 와 기울기 */
   var GP = [[-38,-30,-8],[-22,-36,6],[24,-34,-5],[39,-26,9],[-43,-4,5],[42,2,-7],[-31,22,-10],[33,26,7],[-16,33,4],[17,35,-6],[-44,34,8],[45,-40,4],[0,-41,-3],[2,40,5]];
   var gws = $('#gws'), gEls = [];
-  if (gws) GW.forEach(function(nm){ var d = document.createElement('div'); d.className = 'gw'; d.innerHTML = '<img src="assets/wa-' + nm + '.webp" alt="" width="320" height="320" loading="lazy">'; gws.appendChild(d); gEls.push(d); });
+  if (gws) GW.forEach(function(nm){ var d = document.createElement('div'); d.className = 'gw'; d.style.setProperty('--i', gEls.length); d.innerHTML = '<img src="assets/wa-' + nm + '.webp" alt="" width="320" height="320" loading="lazy">'; gws.appendChild(d); gEls.push(d); });
 
   /* ---- 스크롤로 움직이는 구간들 ---- */
   var hd = $('#hd'), film = $('#film'), filmC = $('#filmC'), gather = $('#gather'), gPh = $('#gatherPh'), gcA = $('#gcA'), gcB = $('#gcB');
   var steps = $('#steps'), stage = $('#stage'), sL = $$('#stepsL li'), sD = $$('#stepsD p'), sP = $$('.stage-p', stage), sK = $('#stepsK'), sI = -1;
+  var hand = $('#hand'), handI = hand && hand.querySelector('img');
   var prog = function(el){ var r = el.getBoundingClientRect(), span = r.height - innerHeight; return span > 0 ? clamp(-r.top / span, 0, 1) : (r.top < innerHeight * .5 ? 1 : 0); };
   var eo = function(t){ return 1 - Math.pow(1 - t, 3); };
   function setStep(i){ if (i === sI) return; sI = i; stage.dataset.i = i; sK.textContent = 'Ditto 0' + (i + 1); [sL, sD, sP].forEach(function(a){ a.forEach(function(el, k){ el.classList.toggle('on', k === i); }); }); }
@@ -804,10 +960,9 @@ ul,ol{list-style:none}
     var fr = film.getBoundingClientRect(), fp = reduce ? 1 : prog(film);
     filmC.style.setProperty('--p', eo(clamp(fp / .7, 0, 1)).toFixed(4));
     filmC.querySelector('.film-tx').style.setProperty('--t', clamp((fp - .32) / .3, 0, 1).toFixed(3));
-    var onFilm = fr.top < 32 && fr.bottom > 64 && fp > .55;
+    var onFilm = fr.top < 40 && fr.bottom > 70 && fp > .5;
     hd.classList.toggle('onfilm', onFilm);
-    hd.classList.toggle('solid', !onFilm && y > 24 && !(fr.top < 32 && fr.bottom > 64));
-    /* 플래터 모으기 */
+        /* 플래터 모으기 */
     var gp = reduce ? 1 : prog(gather), vw = innerWidth / 100, vhh = vh / 100, mob = innerWidth <= 860;
     gEls.forEach(function(el, i){
       var e = eo(clamp(gp * 1.5 - i * .028, 0, 1)), P = GP[i], sx = mob ? .92 : 1;
@@ -815,10 +970,13 @@ ul,ol{list-style:none}
       el.style.opacity = clamp((1 - e) / .22, 0, 1).toFixed(2);
     });
     var pe = eo(clamp((gp - .3) / .45, 0, 1));
+    gather.style.setProperty('--gp', pe.toFixed(3));
     gPh.style.opacity = pe.toFixed(3);
     gPh.style.transform = 'translate(-50%,-50%) scale(' + (.82 + .18 * pe).toFixed(3) + ')';
     gPh.style.filter = pe < 1 ? 'blur(' + ((1 - pe) * 12).toFixed(1) + 'px)' : '';
     gcA.classList.toggle('off', gp > .55); gcB.classList.toggle('off', gp <= .55);
+    /* 손 사진: 살짝 느리게 따라온다 */
+    if (handI && !reduce) { var hr = hand.getBoundingClientRect(), hp = clamp((vh - hr.top) / (vh + hr.height), 0, 1); handI.style.transform = 'scale(1.14) translate(' + (innerWidth > 860 ? 6 : 0) + '%,' + ((hp - .5) * -9).toFixed(2) + '%)'; }
     /* 디토 스텝 */
     setStep(reduce ? 0 : Math.min(2, Math.floor(prog(steps) * 3)));
   }
@@ -827,17 +985,23 @@ ul,ol{list-style:none}
 
   /* ---- 현재 챕터 ---- */
   (function(){
-    var secs = $$('section[data-ch]'), links = $$('.hd-nav a'), now = $('#now'), cur = '';
-    function set(id, nm){ if (id === cur) return; cur = id; links.forEach(function(a){ a.classList.toggle('on', a.dataset.ch === id); }); now.textContent = nm || ''; now.classList.toggle('on', !!id); }
-    function pick(){ var mid = innerHeight * .45, hit = null; secs.forEach(function(s){ var r = s.getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) hit = s; }); if (hit) set(hit.dataset.ch, hit.dataset.nm); else set('', ''); }
-    addEventListener('scroll', pick, { passive: true }); pick();
+    var secs = $$('section[data-ch]'), links = $$('.hd-nav a'), nav = $('#hdNav'), ind = $('#hdInd'), cur = null;
+    function set(id){
+      if (id === cur) return; cur = id; var a = null;
+      links.forEach(function(l){ var on = l.dataset.ch === id; l.classList.toggle('on', on); if (on) a = l; });
+      if (!a) { ind.style.opacity = 0; return; }
+      ind.style.opacity = 1; ind.style.width = a.offsetWidth + 'px'; ind.style.transform = 'translateX(' + a.offsetLeft + 'px)';
+      if (nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    function pick(){ var mid = innerHeight * .45, hit = null; secs.forEach(function(s){ var r = s.getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) hit = s; }); set(hit ? hit.dataset.ch : ''); }
+    addEventListener('scroll', pick, { passive: true }); addEventListener('resize', function(){ var c = cur; cur = null; set(c); }); pick();
   })();
 
   /* ---- 03 주파수: 점 파형 ---- */
   (function(){
     var card = $('#fq'), cv = $('#fqCv'); if (!card || !cv) return;
     var ctx = cv.getContext('2d'), tabs = $$('#fqTabs button'), nm = $('#fqNm'), ds = $('#fqDs');
-    var ST = [['고요함','아직 스치는 사이','#8E919E',.26,.5],['선명함','교류가 쌓이는 중','#2BC4A8',.42,.9],['곧 열림','한 번 더 함께하면','#5A5BF2',.68,1.4],['열림','친구가 될 수 있어요','#AA4AF4',.95,2]];
+    var ST = [['고요함','아직 스치는 사이','#8E919E',.36,.6],['선명함','교류가 쌓이는 중','#2BC4A8',.42,.9],['곧 열림','한 번 더 함께하면','#5A5BF2',.68,1.4],['열림','친구가 될 수 있어요','#AA4AF4',.95,2]];
     var s = 0, amp = ST[0][3], col = [142,145,158], W = 0, H = 0, D = 1, seen = false, auto = true, timer = 0, t = 0, last = 0;
     var rgb = function(h){ return [1,3,5].map(function(i){ return parseInt(h.slice(i, i + 2), 16); }); };
     function size(){ var b = cv.getBoundingClientRect(); W = b.width; H = b.height; D = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * D); cv.height = Math.round(H * D); }
@@ -857,8 +1021,10 @@ ul,ol{list-style:none}
         var h = (c % 3 === 1 ? 1 : .42) * env * amp * (.35 + .65 * w) * mid;
         for (var r = 0; r < rows; r++) {
           var dy = Math.abs(r - mid), on = dy <= h + .001, edge = on ? 1 - dy / (mid + 1) * .25 : 0;
-          ctx.fillStyle = on ? 'rgba(' + col.map(Math.round).join(',') + ',' + (.55 + .45 * edge).toFixed(2) + ')' : 'rgba(22,18,27,.07)';
-          ctx.beginPath(); ctx.arc(x0 + c * gap, y0 + (r - mid) * gap, on ? gap * .3 : gap * .16, 0, 6.3); ctx.fill();
+          var cs = col.map(Math.round).join(',');
+          ctx.shadowBlur = on ? gap * 1.1 : 0; ctx.shadowColor = 'rgba(' + cs + ',.9)';
+          ctx.fillStyle = on ? 'rgba(' + cs + ',' + (.6 + .4 * edge).toFixed(2) + ')' : 'rgba(255,255,255,.09)';
+          ctx.beginPath(); ctx.arc(x0 + c * gap, y0 + (r - mid) * gap, on ? gap * .32 : gap * .13, 0, 6.3); ctx.fill();
         }
       }
     }
