@@ -67,6 +67,13 @@
   addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', update); update();
 
+  /* menu download button: quiet while the hero's own button is on screen, filled once it has scrolled away */
+  var gnb = $('gnb'), act = document.querySelector('.hx-act');
+  if (gnb && act) {
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { gnb.classList.toggle('past', !es[0].isIntersecting); }).observe(act);
+    else gnb.classList.add('past');
+  }
+
   /* the reasons: folded until asked for */
   var btn = $('why6B'), pane = $('why6P');
   if (btn && pane) {
