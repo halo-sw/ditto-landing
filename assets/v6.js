@@ -17,7 +17,7 @@
   });
 
   /* blocks come into focus, staggered within their row */
-  $$('.cell, .card, .rit article, .two > div, .big, .tagline, .gc, .cs, .cs2, .cs-row figure, .ed-b, .t3-k, .t3-t, .t3-i, .why6-k, .why6 h2, .why6-d, .why6-b').forEach(function (el) {
+  $$('.cell, .card, .rit article, .two > div, .big, .tagline, .gc, .cs, .cs2, .cs-row figure, .ed-b, .t3-k, .t3-t, .get-b, .why6-k, .why6 h2, .why6-d, .why6-b').forEach(function (el) {
     var i = [].indexOf.call(el.parentNode.children, el);
     el.classList.add('v6r'); el.style.setProperty('--d', Math.min(i, 5));
     once(el, function () { el.classList.add('in'); });
@@ -61,6 +61,10 @@
   function update() { tk = false; if (hero && !reduce) hero.style.setProperty('--hp', Math.max(0, Math.min(1, scrollY / (innerHeight * .85))).toFixed(4)); }
   addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', update); update();
+
+  /* the three words: when one scene has played through, the next word takes over */
+  var cxp = $('cxPanel');
+  if (cxp) cxp.addEventListener('cx:end', function (e) { if (window.__cxQA) window.__cxQA((e.detail + 1) % 3); });
 
   /* the reasons: folded until asked for */
   var btn = $('why6B'), pane = $('why6P');
