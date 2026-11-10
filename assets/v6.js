@@ -58,21 +58,14 @@
   (function tick() { x += (tx - x) * .22; y += (ty - y) * .22; c.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)'; requestAnimationFrame(tick); })();
 })();
 
-/* v6 2차: 첫 화면이 영상 구간으로 이어지고, 만든 이유는 접어 둔다 */
+/* v6 2차: 첫 화면이 사진 구간으로 이어지고, 만든 이유는 접어 둔다 */
 (function () {
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, IO = 'IntersectionObserver' in window;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (id) { return document.getElementById(id); };
   var hero = $('top'), tk = false;
   function update() { tk = false; if (hero && !reduce) hero.style.setProperty('--hp', Math.max(0, Math.min(1, scrollY / (innerHeight * .85))).toFixed(4)); }
   addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener('resize', update); update();
-
-  /* film: plays only while it is on screen */
-  var v = $('filmV');
-  if (v) {
-    if (reduce || !IO) v.setAttribute('controls', '');
-    else new IntersectionObserver(function (es) { if (es[0].isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); }, { threshold: .15 }).observe(v);
-  }
 
   /* the reasons: folded until asked for */
   var btn = $('why6B'), pane = $('why6P');

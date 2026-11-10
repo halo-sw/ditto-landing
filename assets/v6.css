@@ -101,9 +101,6 @@
 @keyframes v6pop2{from{opacity:0;transform:scale(.6) translateY(30px)}}
 @keyframes v6float{50%{translate:0 -8px}}
 
-/* ---------- 영상 ---------- */
-.film-f video{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.72)}
-
 /* ---------- 짧은 선언 + 세 단어: 한 화면, 자세한 내용은 아래 구간이 맡는다 ---------- */
 .t3{background:#fff;padding-bottom:clamp(72px,9vw,128px)}
 .t3-say{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(24px,6vw,96px);padding-block:clamp(96px,13vw,184px) clamp(56px,7vw,96px)}
