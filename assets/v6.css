@@ -1,0 +1,82 @@
+/* Ditto landing v6: motion and feel on top of v5. Loaded after v5.css.
+   No copy, section or asset changes here. One typeface (Pretendard), real UI only. */
+
+/* ---------- type: a little more presence ---------- */
+/* (section headings keep v5's sizes: they are set to fit two lines in the left column) */
+.hx h1{font-size:clamp(32px,4.4vw,66px);line-height:1.14;letter-spacing:-.045em}
+
+/* headings rise line by line */
+.ln{display:block;overflow:hidden;padding:0 .08em .16em;margin:0 -.08em -.16em}
+.ln>span{display:block;transform:translateY(112%) rotate(3deg);transform-origin:0 100%;transition:transform 1.1s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--l,0) * 120ms + 60ms)}
+.in .ln>span{transform:none}
+
+/* blocks come into focus */
+.v6r{opacity:0;filter:blur(14px);transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),filter .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--d,0) * 90ms)}
+.v6r.in{opacity:1;filter:none;transform:none}
+
+/* ---------- menu: reading progress along the pill ---------- */
+.gnb::after{content:"";position:absolute;left:22px;right:22px;bottom:3px;height:2px;border-radius:2px;background:linear-gradient(90deg,#AA4AF4,#FA97E2 60%,#FFB199);transform-origin:0 50%;transform:scaleX(var(--sp,0));opacity:.9;pointer-events:none}
+
+/* ---------- hero: a soft wash of the brand colours behind the belt ---------- */
+.hx{isolation:isolate}
+.hx::before,.hx::after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(72px);pointer-events:none;animation:v6drift 18s ease-in-out infinite alternate}
+.hx::before{width:46vw;height:46vw;left:-12vw;top:-10vw;background:#D9C2FF;opacity:.55}
+.hx::after{width:40vw;height:40vw;right:-10vw;top:14vh;background:#FFC9EE;opacity:.5;animation-duration:23s;animation-delay:-7s}
+@keyframes v6drift{to{transform:translate(6vw,4vw) scale(1.15)}}
+.hx-t{border-radius:16px;box-shadow:0 30px 44px -30px rgba(60,20,90,.45)}
+.hx-ic{animation:v6pop 1s cubic-bezier(.2,1.4,.4,1) .15s both}
+@keyframes v6pop{from{transform:scale(.4) rotate(-14deg);opacity:0}}
+.hx h1,.hx p.hx-d,.hx-act{animation:v6up 1s cubic-bezier(.2,.7,.2,1) both}
+.hx h1{animation-delay:.25s}.hx p.hx-d{animation-delay:.38s}.hx-act{animation-delay:.5s}
+@keyframes v6up{from{opacity:0;filter:blur(12px);transform:translateY(22px)}}
+
+/* the arrow on main buttons keeps nudging */
+.btn .ar{display:inline-block;animation:v6ar 2.6s cubic-bezier(.2,.7,.2,1) infinite}
+@keyframes v6ar{0%,55%{transform:none;opacity:1}72%{transform:translate(7px,-7px);opacity:0}73%{transform:translate(-7px,7px);opacity:0}100%{transform:none;opacity:1}}
+.btn{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 26px -14px rgba(22,18,27,.55)}
+
+/* ---------- why: the number carries the colour ---------- */
+.big b{background:linear-gradient(100deg,#16121B 18%,#7B2FD0 58%,#F06FCB 96%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.cell{transition:transform .45s cubic-bezier(.2,.7,.2,1),background-color .45s,box-shadow .45s}
+.cell:hover{transform:translateY(-6px);background:#F3ECFE;box-shadow:0 26px 40px -30px rgba(120,60,200,.6)}
+
+/* ---------- shift: the dark scene arrives as a rounded panel ---------- */
+.shift{border-radius:clamp(22px,3vw,44px);margin-inline:clamp(6px,.9vw,14px);overflow:clip}
+
+/* ---------- cards and screens answer the pointer ---------- */
+.card figure,.rit figure{transition:background-color .5s}
+.card figure img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.rit figure img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.rit article:hover figure{background:#EDE4FB}
+.rit article:hover figure img{transform:scale(1.08) rotate(-3deg)}
+.two div{transition:background-color .4s,transform .4s cubic-bezier(.2,.7,.2,1)}
+.two div:hover{background:#F3ECFE;transform:translateY(-4px)}
+.cs-row figure,.gc-ph .phone,.cs2-p{transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .4s}
+@media (hover:hover) and (pointer:fine){
+  .cards:hover .card:not(:hover){opacity:.5}
+  .card{transition:opacity .4s}
+  .card:hover figure{background:#EFE8FD}
+  .card:hover figure img{transform:translateY(-10px) scale(1.04)}
+  .cs-row:hover figure:not(:hover){opacity:.45}
+  .cs-row figure:hover{transform:translateY(-12px) scale(1.04)}
+}
+.v6t{transition:transform .5s cubic-bezier(.2,.7,.2,1);will-change:transform}
+.gc,.cs{background:linear-gradient(160deg,#F6F2FC,#F4F3F6 55%,#FBEFF7)}
+
+/* ---------- pointer dot ---------- */
+.v6cur{position:fixed;z-index:9999;left:0;top:0;width:0;height:0;pointer-events:none;opacity:0;transition:opacity .3s;mix-blend-mode:difference}
+.v6cur.on{opacity:1}
+.v6cur b{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#fff;display:grid;place-items:center;font:600 0/1 var(--kr,inherit);letter-spacing:.02em;color:#fff;transition:width .35s cubic-bezier(.2,.7,.2,1),height .35s cubic-bezier(.2,.7,.2,1),left .35s cubic-bezier(.2,.7,.2,1),top .35s cubic-bezier(.2,.7,.2,1),background-color .3s,font-size .2s}
+.v6cur.lg b{left:-22px;top:-22px;width:44px;height:44px}
+.v6cur.lb{mix-blend-mode:normal}
+.v6cur.lb b{left:-36px;top:-36px;width:72px;height:72px;background:#AA4AF4;font-size:13px}
+
+@media (max-width:860px){
+  .hx::before{width:84vw;height:84vw}.hx::after{width:74vw;height:74vw;top:36vh}
+  .shift{border-radius:22px;margin-inline:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .ln>span,.v6r{transform:none;opacity:1;filter:none;transition:none}
+  .hx::before,.hx::after,.hx-ic,.hx h1,.hx p.hx-d,.hx-act,.btn .ar{animation:none}
+}
