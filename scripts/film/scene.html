@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Pretendard;src:url(../../assets/font-2.woff2);font-weight:100 900}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1280px;height:720px;overflow:hidden;background:#0D0914;font-family:Pretendard,sans-serif}
+.shot{position:absolute;inset:0;overflow:hidden;opacity:0;will-change:opacity}
+.shot>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.grad{position:absolute;inset:0}
+.glow{position:absolute;border-radius:50%}
+.scr{position:absolute;overflow:hidden;border-radius:38px;background:#F4F3F6;box-shadow:0 0 0 8px rgba(255,255,255,.92),0 50px 90px -30px rgba(0,0,0,.7)}
+.scr img{display:block;width:102.6%;margin:-.4% -1.3% 0}
+.w{position:absolute;border-radius:22px;box-shadow:0 30px 50px -22px rgba(0,0,0,.65);will-change:transform,opacity}
+.w img{display:block;width:100%;border-radius:inherit}
+.av{position:absolute;border-radius:32%;overflow:hidden;box-shadow:0 0 0 4px rgba(255,255,255,.9),0 20px 40px -14px rgba(0,0,0,.7)}
+.av img{display:block;width:100%}
+.vig{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 45%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42) 100%);pointer-events:none}
+#ring{position:absolute;left:0;top:0}
+#badge{position:absolute;width:74px;height:74px}
+#fq{position:absolute;left:0;top:0}
+#grain{position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay}
+</style></head><body>
+
+<!-- A: 친구들 -->
+<div class="shot" id="A"><img class="bg" id="Aimg" src="../../assets/bg-friends.jpg"><div class="vig"></div></div>
+
+<!-- B: 플래터에 위젯이 놓인다 -->
+<div class="shot" id="B">
+  <div class="grad" style="background:linear-gradient(160deg,#1C1330 0%,#2A1A4A 55%,#3A1C4E 100%)"></div>
+  <div class="glow" style="left:340px;top:120px;width:600px;height:600px;background:radial-gradient(closest-side,rgba(201,168,251,.5),rgba(201,168,251,0))"></div>
+  <div class="scr" id="Bscr" style="left:500px;top:96px;width:280px"><img src="../../assets/rooms/room-04-jaemin.webp"></div>
+  <div class="w" data-x="150" data-y="130" data-w="250" data-r="-6" data-fx="-520" data-fy="-80" data-i="0"><img src="../../assets/widget-card/music.webp"></div>
+  <div class="w" data-x="212" data-y="412" data-w="170" data-r="5" data-fx="-460" data-fy="260" data-i="2"><img src="../../assets/widget-card/dday.webp"></div>
+  <div class="w" data-x="872" data-y="118" data-w="250" data-r="6" data-fx="520" data-fy="-120" data-i="1"><img src="../../assets/widget-card/mood.webp"></div>
+  <div class="w" data-x="900" data-y="380" data-w="200" data-r="-5" data-fx="480" data-fy="280" data-i="3"><img src="../../assets/widget-card/image.webp"></div>
+</div>
+
+<!-- C: 꾹 눌러 디토 -->
+<div class="shot" id="C">
+  <div class="grad" style="background:linear-gradient(160deg,#2A1230 0%,#33163F 55%,#1F1436 100%)"></div>
+  <div class="glow" id="Cglow" style="left:240px;top:60px;width:600px;height:600px;background:radial-gradient(closest-side,rgba(170,74,244,.55),rgba(170,74,244,0))"></div>
+  <div class="av" id="Cav1" style="left:226px;top:96px;width:84px"><img src="../../assets/rooms/rav-sora.webp"></div>
+  <div class="av" id="Cav2" style="left:970px;top:96px;width:84px"><img src="../../assets/rooms/rav-jiu.webp"></div>
+  <div class="scr" id="Cslot" style="left:842px;top:214px;width:340px;height:420px;border-radius:34px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)"></div>
+  <div class="w" id="Ccard" style="left:0;top:0;width:330px;border-radius:30px"><img src="../../assets/dw-picnic.webp" style="aspect-ratio:552/680;object-fit:cover"></div>
+  <canvas id="ring" width="1280" height="720"></canvas>
+  <img id="badge" src="../../assets/dittobadge-32.svg">
+</div>
+
+<!-- D: 주파수 -->
+<div class="shot" id="D">
+  <div class="grad" style="background:#120C1C"></div>
+  <div class="glow" id="Dglow" style="left:290px;top:10px;width:700px;height:700px"></div>
+  <canvas id="fq" width="1280" height="720"></canvas>
+  <div class="av" id="Dav1" style="top:296px;width:128px"><img src="../../assets/rooms/rav-jiu.webp"></div>
+  <div class="av" id="Dav2" style="top:296px;width:128px"><img src="../../assets/rooms/rav-haeun.webp"></div>
+</div>
+<canvas id="grain" width="320" height="180" style="width:1280px;height:720px"></canvas>
+
+<script>
+const T = 12, $ = id => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const eo = t => 1 - Math.pow(1 - t, 3), eio = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const back = t => { const c = 1.9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+const mix = (a, b, k) => a + (b - a) * k;
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mixc = (a, b, k) => { const x = hex(a), y = hex(b); return x.map((v, i) => Math.round(mix(v, y[i], k))); };
+// shot windows [in, out] with .5s crossfades
+const win = { A: [0, 3.2], B: [2.8, 6.2], C: [5.8, 9.2], D: [8.8, 12] };
+function alpha(k, t) { const [a, b] = win[k]; if (k === 'A') return t < 1 ? 1 : 1 - seg(t, b - .4, b); return Math.min(seg(t, a, a + .4), 1 - (k === 'D' ? 0 : seg(t, b - .4, b))); }
+
+const ws = [...document.querySelectorAll('#B .w')];
+const ring = $('ring').getContext('2d'), fq = $('fq').getContext('2d'), gr = $('grain').getContext('2d');
+let seed = 1; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+function render(t) {
+  t = ((t % T) + T) % T;
+  // A — friends photo, slow push-in. Also sits under the end of D so the loop closes.
+  const aA = Math.max(alpha('A', t), seg(t, 11.5, 12));
+  const tA = t > 6 ? 0 : t;
+  $('A').style.opacity = aA; $('A').style.zIndex = t > 6 ? 5 : 1;
+  $('Aimg').style.transform = `scale(${(1.06 + tA * .034).toFixed(4)}) translate(${(-tA * .5).toFixed(2)}%,${(tA * .35).toFixed(2)}%)`;
+
+  // B — the platter rises, widgets settle one by one
+  const aB = alpha('B', t), tb = t - win.B[0];
+  $('B').style.opacity = aB; $('B').style.zIndex = 2;
+  const rise = eo(seg(tb, 0, 1.1));
+  $('Bscr').style.transform = `translateY(${((1 - rise) * 160 + tb * -6).toFixed(1)}px) scale(${(.92 + .08 * rise).toFixed(3)})`;
+  ws.forEach(el => {
+    const d = el.dataset, k = seg(tb, .55 + d.i * .28, 1.35 + d.i * .28), e = back(k), drift = Math.sin(tb * 1.3 + d.i) * 5;
+    el.style.width = d.w + 'px';
+    el.style.transform = `translate(${(+d.x + d.fx * (1 - e)).toFixed(1)}px,${(+d.y + d.fy * (1 - e) + drift).toFixed(1)}px) rotate(${(d.r * (.4 + .6 * e) + (1 - e) * 24).toFixed(2)}deg) scale(${(.6 + .4 * e).toFixed(3)})`;
+    el.style.opacity = seg(k, 0, .25);
+  });
+
+  // C — press and hold: the ring fills, the card travels to my platter with a badge
+  const aC = alpha('C', t), tc = t - win.C[0];
+  $('C').style.opacity = aC; $('C').style.zIndex = 3;
+  const hold = seg(tc, .5, 1.9), fly = eio(seg(tc, 1.95, 2.75)), press = hold > 0 && hold < 1 ? 1 : 0;
+  const cx = mix(268, 847, fly), cy = mix(180, 220, fly), cs = mix(1, .97, fly) * (1 - .035 * press * Math.sin(hold * Math.PI));
+  $('Ccard').style.transform = `translate(${cx.toFixed(1)}px,${cy.toFixed(1)}px) rotate(${mix(-3, 0, fly).toFixed(2)}deg) scale(${cs.toFixed(3)})`;
+  $('Cglow').style.opacity = (hold * (1 - fly)).toFixed(3);
+  $('Cglow').style.transform = `scale(${(.6 + .5 * hold).toFixed(3)})`;
+  ring.clearRect(0, 0, 1280, 720);
+  if (hold > 0 && fly < 1) {
+    const rx = 433, ry = 524, R = 46, o = 1 - seg(fly, 0, .35);
+    ring.globalAlpha = o;
+    ring.beginPath(); ring.arc(rx, ry, R - 12 - 4 * Math.sin(hold * Math.PI), 0, 7); ring.fillStyle = 'rgba(255,255,255,.92)'; ring.fill();
+    ring.lineWidth = 9; ring.lineCap = 'round';
+    ring.beginPath(); ring.arc(rx, ry, R, 0, 7); ring.strokeStyle = 'rgba(255,255,255,.5)'; ring.stroke();
+    ring.beginPath(); ring.arc(rx, ry, R, -Math.PI / 2, -Math.PI / 2 + hold * Math.PI * 2); ring.strokeStyle = '#C77DFF'; ring.stroke();
+    ring.globalAlpha = 1;
+  }
+  const pop = back(seg(tc, 2.7, 3.15));
+  $('badge').style.transform = `translate(${1128}px,${188}px) scale(${Math.max(0, pop).toFixed(3)}) rotate(${((1 - pop) * -40).toFixed(1)}deg)`;
+  $('Cslot').style.opacity = (.35 + .65 * seg(tc, .2, .8)) * (1 - .6 * fly);
+
+  // D — frequency: grey → mint → indigo → lilac as two people move closer
+  const aD = alpha('D', t) * (1 - seg(t, 11.5, 12)), td = t - win.D[0];
+  $('D').style.opacity = aD; $('D').style.zIndex = 4;
+  const stage = seg(td, .3, 2.7) * 3, si = Math.min(2, Math.floor(stage)), sk = stage - si;
+  const COL = ['#8E919E', '#2BC4A8', '#5A5BF2', '#C77DFF'], col = mixc(COL[si], COL[si + 1], eio(sk));
+  const amp = mix(.14, 1, eio(seg(td, .2, 2.7))), near = eio(seg(td, .2, 2.9));
+  $('Dav1').style.left = mix(150, 250, near) + 'px'; $('Dav2').style.left = mix(1002, 902, near) + 'px';
+  $('Dglow').style.background = `radial-gradient(closest-side,rgba(${col.join(',')},${(.5 * amp).toFixed(2)}),rgba(${col.join(',')},0))`;
+  fq.clearRect(0, 0, 1280, 720);
+  const x0 = mix(310, 410, near), x1 = mix(970, 870, near), gap = 15, cols = Math.floor((x1 - x0) / gap), rows = 15, mid = 7, ox = (x0 + x1) / 2 - (cols - 1) * gap / 2;
+  for (let c = 0; c < cols; c++) {
+    const u = c / (cols - 1), env = Math.pow(Math.sin(Math.PI * u), 1.1);
+    const wv = (Math.sin(c * .55 + td * 4.2) * .5 + Math.sin(c * 1.37 - td * 2.6) * .3 + Math.sin(c * .21 + td * 1.4) * .2) * .5 + .5;
+    const h = (c % 3 === 1 ? 1 : .45) * env * amp * (.35 + .65 * wv) * mid;
+    for (let r = 0; r < rows; r++) {
+      const dy = Math.abs(r - mid), on = dy <= h + .001;
+      fq.shadowBlur = on ? 16 : 0; fq.shadowColor = `rgba(${col.join(',')},.9)`;
+      fq.fillStyle = on ? `rgba(${col.join(',')},${(.65 + .35 * (1 - dy / 8)).toFixed(2)})` : 'rgba(255,255,255,.09)';
+      fq.beginPath(); fq.arc(ox + c * gap, 360 + (r - mid) * gap, on ? 4.9 : 2, 0, 7); fq.fill();
+    }
+  }
+  // film grain, reseeded per frame
+  seed = 1 + Math.floor(t * 30);
+  const im = gr.createImageData(320, 180);
+  for (let i = 0; i < im.data.length; i += 4) { const v = 255 * rnd(); im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; }
+  gr.putImageData(im, 0, 0);
+}
+window.render = render; render(0);
+</script></body></html>
