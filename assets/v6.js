@@ -17,7 +17,7 @@
   });
 
   /* blocks come into focus, staggered within their row */
-  $$('.cell, .card, .rit article, .two > div, .big, .tagline, .gc, .cs, .cs2, .cs-row figure, .ed-b, .t3-k, .t3-t, .get-b, .why6-k, .why6 h2, .why6-d, .why6-b').forEach(function (el) {
+  $$('.cell, .card, .rit article, .two > div, .big, .tagline, .gc, .cs, .cs2, .cs-row figure, .ed-b, .t3-k, .t3-t, .get-b, .pg-c > *, .ro-read li, .bridge, .why6-k, .why6 h2, .why6-d, .why6-b').forEach(function (el) {
     var i = [].indexOf.call(el.parentNode.children, el);
     el.classList.add('v6r'); el.style.setProperty('--d', Math.min(i, 5));
     once(el, function () { el.classList.add('in'); });
@@ -65,6 +65,19 @@
   /* the three words: when one scene has played through, the next word takes over */
   var cxp = $('cxPanel');
   if (cxp) cxp.addEventListener('cx:end', function (e) { if (window.__cxQA) window.__cxQA((e.detail + 1) % 3); });
+
+  /* platter grid: tiles settle into their cells, then the size chips light up the widgets of that size */
+  var pg = $('pgB');
+  if (pg) {
+    var chips = [].slice.call(document.querySelectorAll('.pg-sz button')), pi = -1, pt = 0, touched = false;
+    var pick = function (i) { pi = i; chips.forEach(function (c, k) { c.setAttribute('aria-pressed', k === i); }); if (i < 0) pg.removeAttribute('data-on'); else pg.dataset.on = chips[i].dataset.sz; };
+    chips.forEach(function (c, k) { c.addEventListener('click', function () { touched = true; clearInterval(pt); pick(pi === k ? -1 : k); }); });
+    if (reduce || !('IntersectionObserver' in window)) pg.classList.add('in');
+    else new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { pg.classList.add('in'); if (!touched && !pt) pt = setInterval(function () { pick(pi + 1 < chips.length ? pi + 1 : -1); }, 2200); }
+      else { clearInterval(pt); pt = 0; }
+    }, { threshold: .35 }).observe(pg);
+  }
 
   /* the reasons: folded until asked for */
   var btn = $('why6B'), pane = $('why6P');
