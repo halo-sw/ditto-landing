@@ -117,9 +117,9 @@ ul,ol{list-style:none}
 .film-ph{position:absolute;bottom:0;will-change:transform}
 .film-ph img{width:100%}
 .film-ph.p1 img,.film-ph.p2 img{filter:drop-shadow(0 30px 60px rgba(60,20,90,.35))}
-.film-ph.p1{left:50%;width:min(31vw,46vh);margin-left:calc(min(31vw,46vh) * -.5);transform:translateY(calc(84% - var(--p,0) * 46%))}
-.film-ph.p2{left:50%;width:min(24vw,36vh);margin-left:calc(min(31vw,46vh) * .62);transform:translateY(calc(104% - var(--p,0) * 52%))}
-.film-ph.p3{left:50%;width:min(24vw,36vh);margin-left:calc(min(31vw,46vh) * -.62 - min(24vw,36vh));transform:translateY(calc(108% - var(--p,0) * 50%))}
+.film-ph.p1{left:50%;width:min(31vw,46vh);margin-left:calc(min(31vw,46vh) * -.5);transform:translate(calc(var(--mx,0) * -12px),calc(84% - var(--p,0) * 46% + var(--my,0) * -6px))}
+.film-ph.p2{left:50%;width:min(24vw,36vh);margin-left:calc(min(31vw,46vh) * .62);transform:translate(calc(var(--mx,0) * -30px),calc(104% - var(--p,0) * 52% + var(--my,0) * -12px))}
+.film-ph.p3{left:50%;width:min(24vw,36vh);margin-left:calc(min(31vw,46vh) * -.62 - min(24vw,36vh));transform:translate(calc(var(--mx,0) * -30px),calc(108% - var(--p,0) * 50% + var(--my,0) * -12px))}
 .film-tx{position:absolute;inset:calc(var(--hd) + 6vh) var(--pad) auto;text-align:center;color:#fff;opacity:var(--t,0);transform:translateY(calc((1 - var(--t,0)) * 24px));filter:blur(calc((1 - var(--t,0)) * 10px))}
 .film-tx small{display:block;font:600 13px/1 var(--disp);font-style:italic;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
 .film-tx b{display:block;margin-top:14px;font-size:clamp(34px,5.6vw,80px);line-height:1.08;font-weight:700;letter-spacing:-.04em}
@@ -511,6 +511,100 @@ body{font-size:16px}
   .steps-l li{font-size:clamp(21px,5.8vw,30px)}
   .three-g a{min-height:0}
 }
+/* ================= 3차: 레퍼런스 인터랙션 보강 ================= */
+/* CTA 화살표가 계속 튀어나온다 */
+.pill .ar{animation:arw 2.6s var(--ease) infinite}
+.pill .ar.dn{animation-name:arwd}
+@keyframes arw{0%,55%{transform:none;opacity:1}72%{transform:translateX(9px);opacity:0}73%{transform:translateX(-9px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes arwd{0%,55%{transform:none;opacity:1}72%{transform:translateY(9px);opacity:0}73%{transform:translateY(-9px);opacity:0}100%{transform:none;opacity:1}}
+/* 필름 구름 */
+.film-cl{animation:cl 18s ease-in-out infinite alternate}
+.film-cl.b{animation-duration:24s;animation-direction:alternate-reverse}
+.film-cl.c{animation-duration:30s}
+@keyframes cl{to{transform:translateX(6vw) scale(1.08)}}
+.film-ph{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+/* 플래터: 조각들 한가운데 떠오르는 타이틀 */
+.gather-k{inset:auto;left:0;right:0;top:47%;transform:translateY(-50%) scale(calc(1 - var(--gp,0) * .12));font-size:clamp(44px,10vw,156px);line-height:.9;letter-spacing:-.03em;text-transform:uppercase;color:var(--ink);opacity:calc(1 - var(--gp,0) * 2.2);filter:blur(calc(var(--gp,0) * 16px))}
+/* 격자 피드 → 플래터 */
+.mo{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,80px);align-items:center;border-radius:clamp(24px,3vw,40px);padding:clamp(28px,5vw,72px);margin-bottom:clamp(24px,4vw,48px);background:color-mix(in srgb,#F3ECFE calc(var(--m,0) * 100%),var(--card))}
+.mo-k{font-size:13px;letter-spacing:.06em;color:var(--mute);text-transform:uppercase}
+.mo-h{position:relative;margin-top:16px;height:1.2em;font-size:clamp(30px,4.6vw,64px);line-height:1.2;font-weight:700;letter-spacing:-.045em}
+.mo-d{position:relative;margin-top:14px;min-height:3.6em;max-width:24em;color:var(--body);font-size:clamp(15px,1.3vw,18px)}
+.mo-h span,.mo-d span{position:absolute;inset:0 0 auto;transition:opacity .5s,filter .5s,transform .6s var(--ease)}
+.mo-h span.off,.mo-d span.off{opacity:0;filter:blur(8px);transform:translateY(10px)}
+.mo.ok .mo-h{color:#7B2FD0}
+.mo-v{position:relative;width:clamp(200px,26vw,340px);aspect-ratio:1}
+.mo-v i{position:absolute;left:calc(var(--x0) * 1% + (var(--x1) - var(--x0)) * var(--m,0) * 1%);top:calc(var(--y0) * 1% + (var(--y1) - var(--y0)) * var(--m,0) * 1%);width:calc(30% + (var(--w1) - 30) * var(--m,0) * 1%);height:calc(30% + (var(--h1) - 30) * var(--m,0) * 1%);border-radius:calc(8% + var(--m,0) * 6%);background:color-mix(in srgb,var(--c) calc(var(--m,0) * 100%),#DEDBE3);border-radius:clamp(10px,1.6vw,22px)}
+.mo-v i.go{opacity:calc(1 - var(--m,0) * 2.4);transform:scale(calc(1 - var(--m,0) * .5))}
+.mo-b{position:absolute;right:-12px;top:-12px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:17px;background:#55505C;transition:background .4s,transform .5s var(--ease)}
+.mo.ok .mo-b{background:var(--violet);transform:scale(1.15) rotate(360deg)}
+/* 주요 기능 탐색기 */
+.fxs{position:relative;height:360vh}
+.fxs-s{position:sticky;top:0;height:100vh;height:100svh;display:grid;align-items:center;padding-top:var(--hd)}
+.fxs-g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,72px);align-items:center}
+.fxs-l{display:grid;gap:10px}
+.fxs-b{position:relative;display:block;width:100%;text-align:left;padding:22px 26px;border-radius:24px;background:var(--card);transition:background .5s var(--ease),color .5s var(--ease),transform .5s var(--ease)}
+.fxs-b:hover{transform:translateX(4px)}
+.fxs-b i{position:absolute;right:24px;top:24px;font-size:13px;color:var(--mute);transition:color .4s}
+.fxs-h{display:block;font-size:clamp(20px,2.2vw,30px);font-weight:700;letter-spacing:-.04em}
+.fxs-u{display:block;margin-top:2px;font-size:15px;color:var(--mute);transition:color .4s}
+.fxs-d{display:grid;grid-template-rows:0fr;overflow:hidden;font-size:15px;line-height:1.7;opacity:0;transition:grid-template-rows .6s var(--ease),opacity .5s,margin .6s var(--ease)}
+.fxs-d::before{content:"";min-height:0;grid-row:1}
+.fxs-d{display:block;max-height:0}
+.fxs-b.on{background:var(--ink);color:#fff}
+.fxs-b.on i{color:rgba(255,255,255,.5)}
+.fxs-b.on .fxs-u{color:rgba(255,255,255,.6)}
+.fxs-b.on .fxs-d{max-height:8em;opacity:.86;margin-top:14px}
+.fxs-d{transition:max-height .7s var(--ease),opacity .5s,margin .6s var(--ease)}
+.fxs-v{position:relative;height:min(76vh,720px);border-radius:clamp(24px,3vw,40px);background:linear-gradient(160deg,#EFE8FD,#FDEAF7 70%,#FFEFE6);overflow:hidden}
+.fxs-p{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-start;gap:clamp(14px,2.4vw,36px);padding-top:6%;pointer-events:none}
+.fxs-p figure{width:min(40%,34vh);transition:opacity .6s var(--ease),transform .9s var(--ease),filter .6s}
+.fxs-p figure:nth-child(2){margin-top:11%;transition-delay:.08s}
+.fxs-p figcaption{text-align:center;font-size:13px;font-weight:600;color:#6B5A86;margin-bottom:12px}
+.fxs-p:not(.on) figure{opacity:0;transform:translateY(12%) rotate(4deg) scale(.94);filter:blur(10px)}
+.fxs-p:not(.on) figure:nth-child(2){transform:translateY(16%) rotate(-4deg) scale(.94)}
+.fxs-m{display:none}
+.note2{margin-top:clamp(24px,4vw,48px)}
+/* 왼쪽 미니 인덱스 */
+.ix{position:fixed;z-index:45;left:16px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:2px;color:var(--ink);transition:color .4s}
+.ix.lt{color:#fff}
+.ix a{display:flex;align-items:center;gap:10px;height:16px}
+.ix i{display:block;width:14px;height:2px;border-radius:2px;background:currentColor;opacity:.22;transition:width .4s var(--ease),opacity .3s,background .3s}
+.ix span{font:600 11px/1 var(--disp);font-style:italic;letter-spacing:.06em;text-transform:uppercase;opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .4s var(--ease);white-space:nowrap}
+.ix a.on i{width:26px;opacity:1;background:#FF2CBF}
+.ix:hover span,.ix a.on span{opacity:.75;transform:none}
+.ix a:hover i{opacity:.7;width:22px}
+@media (min-width:1180px){.ix{display:flex}}
+/* 커서 점 */
+.cur{position:fixed;z-index:90;left:0;top:0;width:0;height:0;pointer-events:none;opacity:0;transition:opacity .3s}
+.cur.on{opacity:1}
+.cur b{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#fff;mix-blend-mode:difference;display:grid;place-items:center;font:600 0/1 var(--disp);font-style:italic;letter-spacing:.06em;text-transform:uppercase;color:#fff;transition:width .35s var(--ease),height .35s var(--ease),left .35s var(--ease),top .35s var(--ease),background .3s,font-size .2s}
+.cur.lg b{left:-22px;top:-22px;width:44px;height:44px}
+.cur.lb b{left:-36px;top:-36px;width:72px;height:72px;background:var(--violet);mix-blend-mode:normal;font-size:12px}
+.cur{mix-blend-mode:difference}
+.cur.lb{mix-blend-mode:normal}
+@media (max-width:860px){
+  .mo{grid-template-columns:1fr;gap:28px}
+  .mo-v{width:min(64vw,260px);margin:0 auto}
+  .fxs{height:auto}
+  .fxs-s{position:relative;height:auto;padding-top:0}
+  .fxs-g{grid-template-columns:1fr;gap:14px}
+  .fxs-l{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 calc(var(--pad) * -1);padding:0 var(--pad)}
+  .fxs-l::-webkit-scrollbar{display:none}
+  .fxs-b{flex:none;width:auto;padding:12px 18px;border-radius:999px}
+  .fxs-b:hover{transform:none}
+  .fxs-b i,.fxs-u,.fxs-d{display:none}
+  .fxs-h{font-size:15px;white-space:nowrap}
+  .fxs-v{height:auto;overflow:visible;background:none;border-radius:0}
+  .fxs-p{position:relative;inset:auto;display:none;border-radius:28px;background:linear-gradient(160deg,#EFE8FD,#FDEAF7 70%,#FFEFE6);padding:24px 18px 0;height:118vw;overflow:hidden}
+  .fxs-p.on{display:flex}
+  .fxs-p figure{width:46%}
+  .fxs-m{display:block;margin-top:14px;font-size:15px;color:var(--body)}
+}
+@media (prefers-reduced-motion:reduce){
+  .pill .ar,.film-cl{animation:none}
+  .fxs{height:auto}.fxs-s{position:relative;height:auto}
+}
 @media (prefers-reduced-motion:reduce){
   .ln>span{transform:none;transition:none}
   .aura i,.gw img,.kw-r{animation:none}
@@ -566,7 +660,7 @@ body{font-size:16px}
     <p class="hero-b" data-rv style="--d:3">피드 대신 각자의 플래터를 꾸미고, 친구의 취향을 디토로 간직해요. 그렇게 쌓인 작은 교류가 주파수가 됩니다.</p>
     <div class="hero-cta" data-rv style="--d:4">
       <a class="pill" href="https://apps.apple.com/kr/app/id6824991758">App Store에서 받기 <span class="ar" aria-hidden="true">→</span></a>
-      <a class="pill ghost" href="#about">둘러보기 <span class="ar" aria-hidden="true">↓</span></a>
+      <a class="pill ghost" href="#about">둘러보기 <span class="ar dn" aria-hidden="true">↓</span></a>
     </div>
   </div>
 </section>
@@ -593,9 +687,9 @@ body{font-size:16px}
       <p class="intro-p" data-rv style="--d:1">디토는 두 사람이 기획하고 만든 초대 기반 iOS 소셜 앱입니다. 피드 대신 각자의 ‘플래터’를 꾸밉니다. 사진, 음악, 일정, 기분을 위젯으로 담아 친구가 놀러 올 수 있는 작은 방처럼 만드는 공간입니다.</p>
       <p class="intro-p" data-rv style="--d:2">어느 때보다 많이 연결되어 있지만 더 외로운 세대를 위해 디토를 만들었습니다. 남에게 보여주기보다 함께하는 시간에 집중합니다. 시작은 언제나 이미 알고 지내는 사람의 초대입니다.</p>
       <dl class="stats" data-rv style="--d:3">
-        <div><dt class="sr">출시 위젯</dt><dd><b>15</b><span>출시 위젯</span></dd></div>
-        <div><dt class="sr">채팅 속 3D 카메라</dt><dd><b>33</b><span>채팅 속 3D 카메라</span></dd></div>
-        <div><dt class="sr">첫 공개 초대 인원</dt><dd><b>1,000</b><span>첫 공개 초대 인원</span></dd></div>
+        <div><dt class="sr">출시 위젯</dt><dd><b data-n="15">15</b><span>출시 위젯</span></dd></div>
+        <div><dt class="sr">채팅 속 3D 카메라</dt><dd><b data-n="33">33</b><span>채팅 속 3D 카메라</span></dd></div>
+        <div><dt class="sr">첫 공개 초대 인원</dt><dd><b data-n="1000">1,000</b><span>첫 공개 초대 인원</span></dd></div>
       </dl>
     </div>
   </div>
@@ -633,7 +727,7 @@ body{font-size:16px}
   <div class="gather" id="gather">
     <div class="gather-s">
       <div class="gather-st">
-        <p class="gather-k">15 Widgets → 1 Platter</p>
+        <p class="gather-k num" aria-hidden="true">15 Widgets</p>
         <div class="gather-ph" id="gatherPh"><img src="assets/v2/ph-platter.webp" alt="위젯으로 채운 sunny의 플래터. 음악, 사진, 글, 디데이 위젯이 서로 다른 크기로 놓여 있어요" width="720" height="1529" loading="lazy"></div>
         <div id="gws" aria-hidden="true"></div>
         <p class="gather-cap"><span id="gcA">사진, 음악, 일정, 기분 — 흩어져 있던 조각들을</span><span id="gcB" class="off">하나의 플래터에 담아요.</span></p>
@@ -641,15 +735,13 @@ body{font-size:16px}
     </div>
   </div>
   <div class="wrap">
-    <div class="cmp">
-      <div class="cmp-c" data-rv>
-        <div class="mini grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="mini-b">✕</span></div>
-        <div><h3>격자형 피드</h3><p>같은 크기의 칸, 좋아요와 팔로워 수. 보여주기 위한 공간.</p></div>
+    <div class="mo" id="mo">
+      <div class="mo-t">
+        <p class="mo-k num">Feed → Platter</p>
+        <h3 class="mo-h"><span id="moA">격자형 피드</span><span id="moB" class="off">플래터</span></h3>
+        <p class="mo-d"><span id="moDA">같은 크기의 칸, 좋아요와 팔로워 수. 보여주기 위한 공간.</span><span id="moDB" class="off">좋아요·팔로워 수 없이, 다양한 크기의 위젯을 직접 배치해요.</span></p>
       </div>
-      <div class="cmp-c ok" data-rv style="--d:1">
-        <div class="mini plat" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><span class="mini-b">✓</span></div>
-        <div><h3>플래터</h3><p>좋아요·팔로워 수 없이, 다양한 크기의 위젯을 직접 배치해요.</p></div>
-      </div>
+      <div class="mo-v" aria-hidden="true"><i style="--x0:0;--y0:0;--x1:0;--y1:0;--w1:65;--h1:41;--c:#D6ACFB"></i><i class="go" style="--x0:35;--y0:0;--x1:35;--y1:0;--w1:30;--h1:30;--c:#DEDBE3"></i><i style="--x0:70;--y0:0;--x1:70;--y1:0;--w1:30;--h1:41;--c:#F796E0"></i><i style="--x0:0;--y0:35;--x1:0;--y1:46;--w1:30;--h1:54;--c:#9FD0DF"></i><i style="--x0:35;--y0:35;--x1:35;--y1:46;--w1:65;--h1:30;--c:#B2E02F"></i><i class="go" style="--x0:70;--y0:35;--x1:70;--y1:35;--w1:30;--h1:30;--c:#DEDBE3"></i><i class="go" style="--x0:0;--y0:70;--x1:0;--y1:70;--w1:30;--h1:30;--c:#DEDBE3"></i><i style="--x0:35;--y0:70;--x1:35;--y1:81;--w1:30;--h1:19;--c:#E3D0FD"></i><i style="--x0:70;--y0:70;--x1:70;--y1:81;--w1:30;--h1:19;--c:#FF9455"></i><b class="mo-b" id="moBd">✕</b></div>
     </div>
   </div>
 </section>
@@ -747,7 +839,7 @@ body{font-size:16px}
     </div>
     <div class="ro" id="ro" data-rv>
       <div class="ro-st">
-        <canvas class="ro-cv" id="roCv" role="img" aria-label="대학교 1학년 채원을 가운데 둔 관계 지도. 앱을 깐 날부터 6개월 동안 안쪽에 친구, 바깥에 친구의 친구가 생기고, 그 사이를 교류 구슬이 이어요. 사람을 누르면 그 관계의 자세한 이야기로 가요."></canvas>
+        <canvas class="ro-cv" id="roCv" data-cur="Drag" role="img" aria-label="대학교 1학년 채원을 가운데 둔 관계 지도. 앱을 깐 날부터 6개월 동안 안쪽에 친구, 바깥에 친구의 친구가 생기고, 그 사이를 교류 구슬이 이어요. 사람을 누르면 그 관계의 자세한 이야기로 가요."></canvas>
         <div class="ro-hud" aria-hidden="true"><b id="roDay">D+0</b><span id="roPh">앱을 깐 날</span></div>
         <div class="ro-leg" aria-hidden="true"><span><i style="background:#07E7B4"></i>친구 맺기</span><span><i style="background:#AA4AF4"></i>디토</span><span><i style="background:#48B5F4"></i>그룹 대화</span><span><i style="background:#FF2CBF"></i>댓글</span><span><i style="background:#F9F871"></i>방명록</span><span><i style="background:#FF925D"></i>댓글 리액션</span></div>
         <div class="ro-ctl">
@@ -787,40 +879,16 @@ body{font-size:16px}
       <h2 class="state" id="fx-h" data-sp>나를 표현하고, 가까이 지내고,<br>추억을 간직해요.</h2>
       <p data-rv style="--d:1">디토는 친구에게 나를 표현하고, 한 사람 한 사람과의 관계에 집중하며, 추억을 함께 쌓는 공간입니다.</p>
     </div>
-    <div class="bento">
-      <article class="bn" data-rv>
-        <i class="num">A</i><h3>나를 표현해요</h3><p>게시물 대신 위젯으로 꾸미는 내 방.</p>
-        <p class="bn-d">게시물 대신 15가지 위젯으로 플래터를 꾸며요. 초대 코드와 이름이 새겨진 카드, 앱이 추천하는 첫 위젯으로 쉽게 시작해요.</p>
-        <div class="bn-v">
-          <figure><figcaption>내 공간</figcaption><img class="sc" src="assets/v2/s-myspace.webp" alt="내 플래터 화면" width="600" height="1279" loading="lazy"></figure>
-          <figure><figcaption>친구의 플래터</figcaption><img class="sc" src="assets/v2/s-friend.webp" alt="친구 지민의 플래터 화면" width="600" height="1279" loading="lazy"></figure>
-        </div>
-      </article>
-      <article class="bn" data-rv style="--d:1">
-        <i class="num">B</i><h3>가까이 지내요</h3><p>친구의 취향을 보고 이야기를 나눠요.</p>
-        <p class="bn-d">친구의 새 위젯을 보고 댓글을 남겨요. 그룹 채팅에 카드로 공유하며 대화를 시작해요.</p>
-        <div class="bn-v">
-          <figure><figcaption>친구 피드</figcaption><img class="sc" src="assets/v2/s-feed.webp" alt="친구 피드 화면" width="600" height="1279" loading="lazy"></figure>
-          <figure><figcaption>그룹 채팅</figcaption><img class="sc" src="assets/v2/s-chat.webp" alt="그룹 채팅 화면. 위젯이 카드로 공유돼 있어요" width="600" height="1279" loading="lazy"></figure>
-        </div>
-      </article>
-      <article class="bn" data-rv>
-        <i class="num">C</i><h3>친구의 친구를 만나요</h3><p>취향은 친구를 따라 전해져요.</p>
-        <p class="bn-d">디토에는 내 이름이 담겨 친구의 플래터로 전해져요. 닮은 취향으로 연결되고 새로운 사람을 발견해요.</p>
-        <div class="bn-v">
-          <figure><figcaption>디토하기</figcaption><img class="sc" src="assets/v2/s-ditto.webp" alt="친구의 위젯을 내 플래터로 디토하는 화면" width="600" height="1279" loading="lazy"></figure>
-          <figure><figcaption>주파수</figcaption><img class="sc" src="assets/v2/s-freq.webp" alt="주파수 화면" width="600" height="1279" loading="lazy"></figure>
-        </div>
-      </article>
-      <article class="bn" data-rv style="--d:1">
-        <i class="num">D</i><h3>추억을 간직해요</h3><p>함께 나눈 모든 것을 한곳에.</p>
-        <p class="bn-d">모든 디토에는 출처가 남아요. 네컷 사진, 함께 찍은 필름, 방명록으로 다시 보고 싶은 추억을 간직해요.</p>
-        <div class="bn-v">
-          <figure><figcaption>네컷 사진</figcaption><img class="sc" src="assets/v2/s-nekut.webp" alt="네컷 사진이 놓인 플래터 화면" width="600" height="1279" loading="lazy"></figure>
-          <figure><figcaption>방명록</figcaption><img class="sc" src="assets/v2/s-guestbook.webp" alt="방명록 화면" width="600" height="1279" loading="lazy"></figure>
-        </div>
-      </article>
+  </div>
+  <div class="fxs" id="fxs">
+    <div class="fxs-s">
+      <div class="wrap fxs-g">
+        <div class="fxs-l" role="tablist" aria-label="주요 기능"><button type="button" class="fxs-b on" role="tab" aria-selected="true" aria-controls="fxp0" id="fxb0"><i class="num">A</i><span class="fxs-h">나를 표현해요</span><span class="fxs-u">게시물 대신 위젯으로 꾸미는 내 방.</span><span class="fxs-d">게시물 대신 15가지 위젯으로 플래터를 꾸며요. 초대 코드와 이름이 새겨진 카드, 앱이 추천하는 첫 위젯으로 쉽게 시작해요.</span></button><button type="button" class="fxs-b" role="tab" aria-selected="false" aria-controls="fxp1" id="fxb1"><i class="num">B</i><span class="fxs-h">가까이 지내요</span><span class="fxs-u">친구의 취향을 보고 이야기를 나눠요.</span><span class="fxs-d">친구의 새 위젯을 보고 댓글을 남겨요. 그룹 채팅에 카드로 공유하며 대화를 시작해요.</span></button><button type="button" class="fxs-b" role="tab" aria-selected="false" aria-controls="fxp2" id="fxb2"><i class="num">C</i><span class="fxs-h">친구의 친구를 만나요</span><span class="fxs-u">취향은 친구를 따라 전해져요.</span><span class="fxs-d">디토에는 내 이름이 담겨 친구의 플래터로 전해져요. 닮은 취향으로 연결되고 새로운 사람을 발견해요.</span></button><button type="button" class="fxs-b" role="tab" aria-selected="false" aria-controls="fxp3" id="fxb3"><i class="num">D</i><span class="fxs-h">추억을 간직해요</span><span class="fxs-u">함께 나눈 모든 것을 한곳에.</span><span class="fxs-d">모든 디토에는 출처가 남아요. 네컷 사진, 함께 찍은 필름, 방명록으로 다시 보고 싶은 추억을 간직해요.</span></button></div>
+        <div class="fxs-v"><div class="fxs-p on" role="tabpanel" id="fxp0" aria-labelledby="fxb0"><figure><figcaption>내 공간</figcaption><img class="sc" src="assets/v2/s-myspace.webp" alt="내 플래터 화면" width="600" height="1279" loading="lazy"></figure><figure><figcaption>친구의 플래터</figcaption><img class="sc" src="assets/v2/s-friend.webp" alt="친구 지민의 플래터 화면" width="600" height="1279" loading="lazy"></figure></div><div class="fxs-p" role="tabpanel" id="fxp1" aria-labelledby="fxb1"><figure><figcaption>친구 피드</figcaption><img class="sc" src="assets/v2/s-feed.webp" alt="친구 피드 화면" width="600" height="1279" loading="lazy"></figure><figure><figcaption>그룹 채팅</figcaption><img class="sc" src="assets/v2/s-chat.webp" alt="그룹 채팅 화면. 위젯이 카드로 공유돼 있어요" width="600" height="1279" loading="lazy"></figure></div><div class="fxs-p" role="tabpanel" id="fxp2" aria-labelledby="fxb2"><figure><figcaption>디토하기</figcaption><img class="sc" src="assets/v2/s-ditto.webp" alt="친구의 위젯을 내 플래터로 디토하는 화면" width="600" height="1279" loading="lazy"></figure><figure><figcaption>주파수</figcaption><img class="sc" src="assets/v2/s-freq.webp" alt="주파수 화면" width="600" height="1279" loading="lazy"></figure></div><div class="fxs-p" role="tabpanel" id="fxp3" aria-labelledby="fxb3"><figure><figcaption>네컷 사진</figcaption><img class="sc" src="assets/v2/s-nekut.webp" alt="네컷 사진이 놓인 플래터 화면" width="600" height="1279" loading="lazy"></figure><figure><figcaption>방명록</figcaption><img class="sc" src="assets/v2/s-guestbook.webp" alt="방명록 화면" width="600" height="1279" loading="lazy"></figure></div><p class="fxs-m" id="fxsM" aria-hidden="true"></p></div>
+      </div>
     </div>
+  </div>
+  <div class="wrap">
     <div class="note2">
       <p data-rv><b>쉽게 시작해요</b>초대 코드와 이름이 새겨진 카드, 나의 이름, 앱이 추천하는 첫 위젯으로 시작해요.</p>
       <p data-rv style="--d:1"><b>누구나 편하게</b>주파수는 색뿐 아니라 밝기로도 구분해요. ‘동작 줄이기’를 켜면 움직임을 멈춰요.</p>
@@ -835,7 +903,7 @@ body{font-size:16px}
           <p>디토는 30년 전 사랑받던 사진 부스, 캠코더, 무전기, 편지, 방명록을 스마트폰 안에 다시 구현합니다. 새롭게 느껴지는 이 다섯 가지 경험은 친구들이 직접 만날 이유를 만들어줍니다.</p>
         </div>
       </div>
-      <ul class="rail" id="rail" data-rv>
+      <ul class="rail" id="rail" data-cur="Drag" data-rv>
         <li><div class="rail-v"><img src="assets/v2/o-booth.webp" alt="" width="256" height="450" loading="lazy"></div><h3>사진 부스</h3><small>함께 찍는 네컷 사진</small><p>친구를 최대 3명 태그하고 3초 간격으로 네 장을 찍어요. 날짜가 찍힌 사진은 플래터에 놓여요.</p></li>
         <li><div class="rail-v"><img src="assets/v2/o-camcorder.webp" alt="" width="520" height="273" loading="lazy"></div><h3>캠코더</h3><small>채팅 카메라 속 캠코더</small><p>핸디캠과 VHS를 포함한 33종의 채팅 카메라를 골라요. 테이프 같은 색감과 화면 속 날짜를 담았어요.</p></li>
         <li><div class="rail-v"><img src="assets/v2/o-walkie.webp" alt="" width="520" height="523" loading="lazy"></div><h3>무전기</h3><small>우리끼리 모이는 그룹 채팅</small><p>초대한 친구들만 함께하는 채널이에요. 위젯은 채팅 카드가 되고 24시간 동안 고정돼요.</p></li>
@@ -887,6 +955,9 @@ body{font-size:16px}
   </div>
 </footer>
 
+<nav class="ix" id="ix" aria-label="페이지 위치"></nav>
+<i class="cur" id="cur" aria-hidden="true"><b></b></i>
+
 
 <script>
 (function(){
@@ -911,7 +982,7 @@ body{font-size:16px}
   });
 
   /* ---- 화면들이 포인터를 따라 살짝 기운다 ---- */
-  if (!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches) $$('.bn, .duo figure, .fq-ph').forEach(function(card){
+  if (!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches) $$('.duo figure, .fq-ph').forEach(function(card){
     var tg = card.querySelector('.bn-v') || card.querySelector('img'); if (!tg) return;
     card.addEventListener('pointermove', function(e){ var r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; tg.style.transform = 'perspective(1100px) rotateY(' + (x * 9).toFixed(2) + 'deg) rotateX(' + (y * -7).toFixed(2) + 'deg) translateY(-6px)'; });
     card.addEventListener('pointerleave', function(){ tg.style.transform = ''; });
@@ -949,6 +1020,9 @@ body{font-size:16px}
   var hd = $('#hd'), film = $('#film'), filmC = $('#filmC'), gather = $('#gather'), gPh = $('#gatherPh'), gcA = $('#gcA'), gcB = $('#gcB');
   var steps = $('#steps'), stage = $('#stage'), sL = $$('#stepsL li'), sD = $$('#stepsD p'), sP = $$('.stage-p', stage), sK = $('#stepsK'), sI = -1;
   var hand = $('#hand'), handI = hand && hand.querySelector('img');
+  var mo = $('#mo'), moS = -1, fxs = $('#fxs'), fxB = $$('.fxs-b'), fxP = $$('.fxs-p'), fxM = $('#fxsM'), fxI = -1;
+  function setFx(i){ if (i === fxI) return; fxI = i; fxB.forEach(function(b, k){ b.classList.toggle('on', k === i); b.setAttribute('aria-selected', k === i); }); fxP.forEach(function(x, k){ x.classList.toggle('on', k === i); }); fxM.textContent = fxB[i].querySelector('.fxs-d').textContent; }
+  var wide = function(){ return innerWidth > 860; };
   var prog = function(el){ var r = el.getBoundingClientRect(), span = r.height - innerHeight; return span > 0 ? clamp(-r.top / span, 0, 1) : (r.top < innerHeight * .5 ? 1 : 0); };
   var eo = function(t){ return 1 - Math.pow(1 - t, 3); };
   function setStep(i){ if (i === sI) return; sI = i; stage.dataset.i = i; sK.textContent = 'Ditto 0' + (i + 1); [sL, sD, sP].forEach(function(a){ a.forEach(function(el, k){ el.classList.toggle('on', k === i); }); }); }
@@ -977,11 +1051,55 @@ body{font-size:16px}
     gcA.classList.toggle('off', gp > .55); gcB.classList.toggle('off', gp <= .55);
     /* 손 사진: 살짝 느리게 따라온다 */
     if (handI && !reduce) { var hr = hand.getBoundingClientRect(), hp = clamp((vh - hr.top) / (vh + hr.height), 0, 1); handI.style.transform = 'scale(1.14) translate(' + (innerWidth > 860 ? 6 : 0) + '%,' + ((hp - .5) * -9).toFixed(2) + '%)'; }
+    /* 격자 피드가 플래터로 바뀐다 */
+    var mr = mo.getBoundingClientRect(), mp = reduce ? 1 : clamp((vh * .82 - mr.top) / (vh * .5), 0, 1), me = mp < .5 ? 4 * mp * mp * mp : 1 - Math.pow(-2 * mp + 2, 3) / 2;
+    mo.style.setProperty('--m', me.toFixed(4));
+    var ms = me > .5 ? 1 : 0; if (ms !== moS) { moS = ms; mo.classList.toggle('ok', !!ms); ['moA', 'moDA'].forEach(function(id){ $('#' + id).classList.toggle('off', !!ms); }); ['moB', 'moDB'].forEach(function(id){ $('#' + id).classList.toggle('off', !ms); }); $('#moBd').textContent = ms ? '✓' : '✕'; }
+    /* 주요 기능 탐색기 */
+    if (wide() && !reduce) setFx(Math.min(3, Math.floor(prog(fxs) * 4))); else if (fxI < 0) setFx(0);
     /* 디토 스텝 */
     setStep(reduce ? 0 : Math.min(2, Math.floor(prog(steps) * 3)));
   }
   function onScroll(){ if (!tk) { tk = true; requestAnimationFrame(update); } }
   addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); update();
+
+  fxB.forEach(function(b, i){ b.addEventListener('click', function(){
+    if (wide() && !reduce) { var r = fxs.getBoundingClientRect(); scrollTo({ top: r.top + scrollY + (i + .5) / 4 * (r.height - innerHeight), behavior: 'smooth' }); } else setFx(i);
+  }); });
+
+  /* ---- 필름: 포인터를 따라 살짝 어긋난다 ---- */
+  if (!reduce && matchMedia('(hover:hover) and (pointer:fine)').matches) film.addEventListener('pointermove', function(e){ filmC.style.setProperty('--mx', (e.clientX / innerWidth * 2 - 1).toFixed(3)); filmC.style.setProperty('--my', (e.clientY / innerHeight * 2 - 1).toFixed(3)); });
+
+  /* ---- 숫자가 올라간다 ---- */
+  (function(){
+    var box = $('.stats'), ns = $$('.stats b[data-n]'); if (!box || reduce || !IO) return;
+    var fmt = function(v){ return Math.round(v).toLocaleString('en-US'); };
+    ns.forEach(function(b){ b.textContent = '0'; });
+    new IntersectionObserver(function(es, o){ if (!es[0].isIntersecting) return; o.disconnect(); var t0 = performance.now();
+      (function step(now){ var k = Math.min(1, (now - t0) / 1500), e = 1 - Math.pow(1 - k, 4); ns.forEach(function(b){ b.textContent = fmt(+b.dataset.n * e); }); if (k < 1) requestAnimationFrame(step); })(t0);
+    }, { threshold: .4 }).observe(box);
+  })();
+
+  /* ---- 커서 점: 누를 수 있는 곳에서 커지고, 끌 수 있는 곳에선 이름표가 된다 ---- */
+  (function(){
+    var c = $('#cur'); if (!c || reduce || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    var lb = c.firstChild, x = 0, y = 0, tx = 0, ty = 0, shown = false;
+    addEventListener('pointermove', function(e){ if (e.pointerType !== 'mouse') return; tx = e.clientX; ty = e.clientY; if (!shown) { shown = true; x = tx; y = ty; c.classList.add('on'); }
+      var el = e.target.closest ? e.target.closest('[data-cur],a,button') : null, lab = el && el.dataset.cur;
+      c.classList.toggle('lb', !!lab); c.classList.toggle('lg', !!el && !lab); if (lab && lb.textContent !== lab) lb.textContent = lab;
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function(){ shown = false; c.classList.remove('on'); });
+    (function tick(){ x += (tx - x) * .22; y += (ty - y) * .22; c.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)'; requestAnimationFrame(tick); })();
+  })();
+
+  /* ---- 왼쪽 미니 인덱스 ---- */
+  (function(){
+    var ix = $('#ix'); if (!ix) return;
+    var L = [['top','Intro'],['about','About'],['platter','Platter'],['ditto','Ditto'],['frequency','Frequency'],['map','Map'],['features','Features'],['get','Download']];
+    var els = L.map(function(l){ return $('#' + l[0]); }), as = L.map(function(l){ var a = document.createElement('a'); a.href = '#' + l[0]; a.innerHTML = '<i></i><span>' + l[1] + '</span>'; ix.appendChild(a); return a; }), cur = -1;
+    function pick(){ var mid = innerHeight * .45, k = 0; els.forEach(function(el, i){ if (el.getBoundingClientRect().top <= mid) k = i; }); if (k !== cur) { cur = k; as.forEach(function(a, i){ a.classList.toggle('on', i === k); }); } ix.classList.toggle('lt', hd.classList.contains('onfilm')); }
+    addEventListener('scroll', pick, { passive: true }); pick();
+  })();
 
   /* ---- 현재 챕터 ---- */
   (function(){
