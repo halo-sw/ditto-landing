@@ -44,7 +44,8 @@
 .wx-part#wx-samples.has-spin:not(.open-all) .wcat,.wx-part#wx-samples.has-spin:not(.open-all) .wc-note{display:none}
 /* letters that turn into stickers for a beat */
 .fx .ch{position:relative;display:inline-block;transition:margin .35s var(--ease)}
-.fx .ch .g{display:inline-block;font-style:normal;transition:opacity .2s ease,transform .3s var(--ease),filter .3s ease}
+mark.fx{background:none}
+.fx .ch .g{display:inline-block;font-style:normal;color:var(--ch);transition:opacity .2s ease,transform .3s var(--ease),filter .3s ease}
 .fx .ch .o{position:absolute;left:50%;top:50%;width:1.3em;height:1.3em;object-fit:contain;transform:translate(-50%,-50%) scale(0) rotate(-24deg);opacity:0;transition:transform .5s cubic-bezier(.3,1.6,.5,1),opacity .15s ease;pointer-events:none;filter:drop-shadow(0 .08em .1em rgba(40,10,60,.25))}
 .fx .ch.on{margin:0 .12em}
 .fx .ch.on .g{opacity:0;transform:scale(.3);filter:blur(4px)}
@@ -2326,24 +2327,20 @@ html{background:var(--edge-b,var(--bg))}
 .rm.is-3d .rm-ph{transition:box-shadow .4s ease}
 .rm.is-3d .rm-ph[aria-pressed="true"]{box-shadow:0 0 0 3px var(--violet),0 30px 50px -26px rgba(70,20,100,.5)}
 </style>
-</head><body>
+<link rel="stylesheet" href="assets/v5.css"></head><body>
 <header class="gnb" id="gnb">
   <a class="logo" href="#top" aria-label="Ditto! 처음으로"><img src="assets/wordmark.svg" alt="Ditto!" width="66" height="24"></a>
   <nav class="tabs-nav" aria-label="섹션">
     <ul id="tabs">
-      <li><a href="#verbs" data-s="verbs,background">Why</a></li>
-      <li><a href="#solution" data-s="solution">Solution</a></li>
-      <li><a href="#concept" data-s="concept">Concept</a></li>
-      <li><a href="#widgets" data-s="widgets">Widgets</a></li>
-      <li><a href="#wx-rooms" data-s="wx-rooms">Rooms</a></li>
-      <li><a href="#friends" data-s="friends">Friends</a></li>
-      <li><a href="#qa" data-s="qa,play">Q&amp;A</a></li>
-      <li><a href="#tm" data-s="close">Invite</a></li>
-      <li><a href="/splup/">Guide</a></li>
+      <li><a href="#why" data-s="why,shift">왜 디토</a></li>
+      <li><a href="#concept" data-s="concept,platter">플래터</a></li>
+      <li><a href="#widgets" data-s="widgets">위젯</a></li>
+      <li><a href="#solution" data-s="solution,become,friends">친구</a></li>
+      <li><a href="#impact" data-s="impact,analog,features">이야기</a></li>
+      <li><a href="#qa" data-s="qa,close,play">초대장</a></li>
     </ul>
   </nav>
   <a class="cta store" href="https://apps.apple.com/kr/app/id6824991758">앱 받기</a>
-  <a class="cta invite" href="#tm">초대장 받기 <span class="ar2" aria-hidden="true">↓</span></a>
 </header>
 
 <main>
@@ -2357,141 +2354,18 @@ html{background:var(--edge-b,var(--bg))}
   </svg>
 
 <div class="edge edge-t" aria-hidden="true"></div><div class="edge edge-b" aria-hidden="true"></div>
-<section class="hc" id="top" aria-labelledby="hc-h" data-edge="#7752DA">
-  <div class="hc-head">
-    <p class="hc-k">친한 친구와 만들어 가는 우리만의 공간</p>
-    <h1 id="hc-h"><img class="hc-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"></h1>
-    <div class="row hc-row"><a class="btn hc-cta" href="#tm">초대장 받기 <span class="ar" aria-hidden="true">→</span></a><a class="btn hc-cta" href="https://apps.apple.com/kr/app/id6824991758">App Store에서 받기 <span class="ar" aria-hidden="true">↗</span></a><a class="btn line hc-line" href="#verbs">둘러보기</a></div>
-  </div>
-  <div class="hc-stage" id="hcStage">
-    <div class="hcp hc-ticket" data-d=".35" style="--r:-8deg" aria-hidden="true"><span class="hct-svg" id="hcTicket"></span></div>
-    <div class="hcp hc-cdp" data-d=".6" style="--r:-6deg" aria-hidden="true">
-      <span class="cdp-body"><span class="cdp-disc"><img src="assets/stk/ai-rx002.webp" alt="" width="240" height="240"></span><span class="cdp-hub"></span></span>
-      <span class="cdp-lcd">▶ CRASH</span>
-    </div>
-    <div class="hcp hc-photoL" data-d=".45" style="--r:0deg"><img src="assets/bg-friends.jpg" alt="촛불 앞에 모인 지우·소라·나리" width="1200" height="900" loading="eager"></div>
-    <p class="hcp hc-pill hc-pillL" data-d=".25" style="--r:0deg" aria-hidden="true">초는 늘 내 담당</p>
-    <div class="hcp hc-stk hc-stk1" data-d=".8" style="--r:-12deg" aria-hidden="true"><img src="assets/stk/ai-044.webp" alt="" width="160" height="160"></div>
-    
-    <div class="hcp hc-dw" data-d=".4" style="--r:4deg"><figure class="dw2" role="img" aria-label="소라에게서 디토해 온 위젯. 지우와 함께 간 피크닉 사진 ‘🧺 간식 부자’, 오른쪽 위 디토 배지, 아래 @soramaybe 출처">
-      <img class="dw2-ph" src="assets/dw-picnic.webp" alt="" width="552" height="740" loading="eager">
-      <img class="dw2-badge" src="assets/dittobadge-32.svg" alt="" width="32" height="32">
-      <figcaption class="dw2-foot"><b>🧺 간식 부자</b><span class="dw2-src"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="eager">@soramaybe</span></figcaption>
-    </figure></div>
-    <p class="hcp hc-nado" data-d=".9" style="--r:-6deg" aria-hidden="true"><svg viewBox="0 0 156 92"><defs><linearGradient id="ndG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C77DFF"/><stop offset=".55" stop-color="#AA4AF4"/><stop offset="1" stop-color="#7B4FE0"/></linearGradient></defs><path d="M30 6H126a24 24 0 0 1 24 24V44a24 24 0 0 1-24 24H52L30 86L34 68H30A24 24 0 0 1 6 44V30A24 24 0 0 1 30 6Z" fill="url(#ndG)" stroke="#fff" stroke-width="6" stroke-linejoin="round"/><text x="78" y="49" text-anchor="middle" font-family="'Pretendard Variable',Pretendard,sans-serif" font-weight="800" font-size="30" letter-spacing="-.5" fill="#fff">나도!</text></svg></p>
-    <p class="hcp hc-pill hc-pillR" data-d=".55" style="--r:0deg" aria-hidden="true">오늘 공강 개꿀</p>
-    <div class="hcp hc-heart" data-d=".75" style="--r:14deg" aria-hidden="true"><svg viewBox="0 0 200 180"><path d="M100 170C40 128 6 96 6 58a46 46 0 0 1 94-20 46 46 0 0 1 94 20c0 38-34 70-94 112z" fill="#fff"/></svg><span>IYKYK</span></div>
-    <div class="hcp hc-photoR" data-d=".5" style="--r:0deg"><img src="assets/tp-sora.webp" alt="꽃집 앞을 지나는 소라" width="603" height="804" loading="eager"></div>
-    <span class="hc-ring" aria-hidden="true"></span><div class="hc-phone"><div class="phone shadowed ip17"><i class="ip17-btn ip17-act" aria-hidden="true"></i><i class="ip17-btn ip17-vu" aria-hidden="true"></i><i class="ip17-btn ip17-vd" aria-hidden="true"></i><i class="ip17-btn ip17-side" aria-hidden="true"></i><i class="ip17-btn ip17-cam" aria-hidden="true"></i><div class="scr"><div class="ip17-sb" aria-hidden="true"><span class="ip17-t">9:41</span><span class="ip17-di"></span><span class="ip17-ic"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.6c2.2 0 4.2.9 5.7 2.3l1.1-1.2A9.6 9.6 0 0 0 8 1 9.6 9.6 0 0 0 1.2 3.7l1.1 1.2A8 8 0 0 1 8 2.6zm0 3.2c1.3 0 2.5.5 3.4 1.3l1.1-1.2A6.5 6.5 0 0 0 8 4.2c-1.7 0-3.3.6-4.5 1.7l1.1 1.2c.9-.8 2.1-1.3 3.4-1.3zm0 3.2c.5 0 .9.2 1.2.5L8 11 6.8 9.5c.3-.3.7-.5 1.2-.5z"/></svg><svg class="ip17-bat" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.6" fill="none" stroke="currentColor" opacity=".4"/><rect x="2.2" y="2.2" width="19.6" height="8.6" rx="2.2"/><path d="M25 4.4v4.2c.8-.3 1.4-1.1 1.4-2.1S25.8 4.7 25 4.4z" opacity=".45"/></svg></span></div><img src="assets/hero-jiu-v3.webp" alt="지우(@jiuallday)의 플래터 화면. 친구들과 모인 ‘🎂 초는 내가’ 사진, 목 20시, 🎀💿 상태, ‘🩰 한 번 더’ 사진, ALLDAY PROJECT ‘CRASH’ 음악, 쇼케이스 D−16, ‘🧺 각자 좋아하는 간식 하나’, ‘GO · 연출 참고’ 영상, 방명록이 붙어 있어요" width="804" height="1748" fetchpriority="high"></div></div></div>
-  </div>
-  </section>
-
-
-<section class="verbs" id="verbs" aria-labelledby="verbs-h">
-  <div class="verbs-stage">
-    <div>
-      <span class="lab"><b>01</b>Me too</span>
-      <h2 class="me-too" id="verbs-h"><img class="mt-wm" src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"> <span class="mt-eq">= 나도.</span></h2>
-      <p class="me-ko">너와 친구들이 순간을 공유할 수 있는 공간을 만들어나가봐!</p>
-      <ol class="vlist" id="vlist">
-        <li class="on"><span class="w">꾸미기</span><span class="c">사진·음악·글·D-Day 같은 위젯을 붙여 나만의 플래터를 꾸며요.</span></li>
-        <li><span class="w">살펴보기</span><span class="c">친구와 친구의 친구 플래터를 알고리즘 없이 구경해요. 다녀간 발자국은 주인에게 남아요.</span></li>
-        <li><span class="w">가져오기</span><span class="c">친구가 열어 둔 빛나는 위젯을 꾹 눌러 내 플래터로 가져와요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</span></li>
-        <li><span class="w">퍼뜨리기</span><span class="c">디토된 위젯은 친구를 거쳐 친구의 친구에게까지 퍼져요. 멀리 갈수록 이름 대신 횟수만 보여요.</span></li>
-        <li><span class="w">맞추기</span><span class="c">친구의 친구와 같은 글에 댓글을 달고, 같은 그룹에서 이야기하고, 디토를 주고받으면 3주 동안 주파수가 쌓여요. 회색에서 민트, 인디고, 라일락으로 물들어요.</span></li>
-        <li><span class="w">친구되기</span><span class="c">주파수가 충분하고, 4일 넘게 이어지고, 함께한 교류가 있으면 친구 신청이 열려요. 편지와 애칭을 담아 보내고, 상대가 수락하면 친구예요.</span></li>
-      </ol>
-      <p class="vcap" id="vCap" aria-hidden="true">사진·음악·글·D-Day 같은 위젯을 붙여 나만의 플래터를 꾸며요.</p>
-      <p class="v-count" aria-hidden="true"><b id="vNum">01</b> / 06</p>
-    </div>
-    <div class="cube" aria-hidden="true">
-      <div class="face on"><div class="sc s-deco">
-        <span class="mb dots" style="left:12%;top:13%;width:76%;height:70%"></span>
-        <span class="t" style="left:16%;top:18%;width:17%;--dx:-60cqw;--dy:-30cqw;--r:-20deg;--d:0s"><img loading="lazy" src="assets/f-jiu-status.webp" alt=""></span>
-        <span class="t" style="left:36%;top:18%;width:37%;--dx:10cqw;--dy:-60cqw;--r:10deg;--d:.25s"><img loading="lazy" src="assets/f-haeun-welcome.webp" alt=""></span>
-        <span class="t" style="left:16%;top:39%;width:37%;--dx:-70cqw;--dy:10cqw;--r:-12deg;--d:.5s"><img loading="lazy" src="assets/f-sora-status.webp" alt=""></span>
-        <span class="t" style="left:56%;top:39%;width:17%;--dx:60cqw;--dy:-10cqw;--r:18deg;--d:.75s"><img loading="lazy" src="assets/f-dohyun-status.webp" alt=""></span>
-        <span class="t" style="left:16%;top:60%;width:37%;--dx:-40cqw;--dy:60cqw;--r:8deg;--d:1s"><img loading="lazy" src="assets/f-seoyun-note.webp" alt=""></span>
-        <span class="slot" style="left:56%;top:60%;width:17%;height:17%"></span>
-        <span class="cp k" style="left:52%;top:79%">+ 위젯 추가하기</span>
-      </div><span class="en">Decorate</span></div>
-
-      <div class="face"><div class="sc s-look">
-        <div class="grp">
-          <span class="mb dots" style="left:20%;top:12%;width:62%;height:76%"></span>
-          <span class="mh" style="left:23%;top:15.5%;width:56%;height:9%"><i style="background-image:url(assets/rooms/rav-jaemin.webp)"></i>재민의 플래터</span>
-          <span class="t" style="left:23%;top:27%;width:27.4%"><img loading="lazy" src="assets/f-jaemin-train.webp" alt=""></span>
-          <span class="t" style="left:51.6%;top:27%;width:27.4%"><img loading="lazy" src="assets/f-jaemin-voice.webp" alt=""></span>
-          <span class="t" style="left:51.6%;top:41.4%;width:27.4%"><img loading="lazy" src="assets/f-jaemin-song.webp" alt=""></span>
-          <span class="t" style="left:23%;top:62.7%;width:27.4%"><img loading="lazy" src="assets/f-jaemin-guestbook.webp" alt=""></span>
-        </div>
-        <span class="em" style="left:8%;top:10%">👀</span>
-        <span class="cp k" style="left:56%;top:84%">알고리즘 없이 구경</span>
-      </div><span class="en">Look in</span></div>
-
-      <div class="face"><div class="sc s-take">
-        <span class="mb dots" style="left:4%;top:12%;width:43%;height:74%"></span>
-        <span class="mh" style="left:6.5%;top:15%;width:38%;height:9%"><i style="background-image:url(assets/rooms/rav-jiu.webp)"></i>내 라이프</span>
-        <span class="mb dots" style="left:53%;top:12%;width:43%;height:74%"></span>
-        <span class="mh" style="left:55.5%;top:15%;width:38%;height:9%"><i style="background-image:url(assets/rooms/rav-sora.webp)"></i>소라의 플래터</span>
-        <span class="tk-slot"><b>+</b></span>
-        <span class="tk-src beam"><img loading="lazy" src="assets/ws-snack.webp" alt=""></span>
-        <span class="tk-hold"><i class="tk-fill"></i><span><svg viewBox="0 0 214 204" aria-hidden="true"><use href="#mk"/></svg>내 플래터에 디토하기</span></span>
-        <span class="tk-finger">👆</span>
-        <span class="tk-fly"><span class="dw"><img loading="lazy" src="assets/ws-snack.webp" alt=""><img class="dw-b" loading="lazy" src="assets/dittobadge-32.svg" alt=""><span class="dw-s"><i></i>@sora.maybe</span></span></span>
-        <span class="cp k tk-from"><i></i>소라에게서 가져옴</span>
-      </div><span class="en">Ditto</span></div>
-
-      <div class="face"><div class="sc s-spread">
-        <div class="sp-card">
-          <p class="sp-head"><span>주파수 확산 경로</span><b>🧺 간식 부자</b></p>
-          <div class="sp-row">
-            <span class="sp-track"><i></i></span>
-            <span class="sp-n"><i class="sp-av" style="background-image:url(assets/rooms/rav-sora.webp)"></i><b>나</b><small>소라</small></span>
-            <span class="sp-n h1"><span class="sp-tick">디토 ✓</span><i class="sp-av" style="background-image:url(assets/rooms/rav-jiu.webp)"></i><b>친구</b><small>지우</small></span>
-            <span class="sp-n h2"><span class="sp-tick">디토 ✓</span><i class="sp-av" style="background-image:url(assets/rooms/rav-haeun.webp)"></i><b>친구의 친구</b><small>하은</small></span>
-            <span class="sp-n h3 anon"><span class="sp-tick">디토 ✓</span><img class="sp-av" src="assets/dittobadge-32.svg" alt="" loading="lazy"><b>그 너머</b><em class="sp-more">+2 더</em></span>
-            <span class="sp-w"><img loading="lazy" src="assets/ws-snack.webp" alt=""></span>
-          </div>
-          <p class="sp-foot"><span class="sp-cnt">2명이 가져감</span><span class="sp-note">멀리 갈수록 이름 대신 횟수만</span></p>
-        </div>
-      </div><span class="en">Spread</span></div>
-
-      <div class="face"><div class="sc s-tune2">
-        <div class="tn-card">
-          <p class="tn-h"><span class="tn-live"></span>라이브 주파수</p>
-          <div class="tn-who"><span class="tn-p a"><img src="assets/rooms/rav-jiu.webp" alt="">지우</span><span class="tn-vs"></span><span class="tn-p b"><img src="assets/rooms/rav-haeun.webp" alt="">하은</span></div>
-          <canvas class="tn-cv"></canvas>
-          <p class="tn-st"><span class="s0">잔잔하게 이어지는 중</span><span class="s1">선명하게 이어지는 중</span><span class="s2">곧 친구 신청이 열려요</span><span class="s3">친구 신청이 열렸어요</span></p>
-        </div>
-        <span class="cp k" style="left:28%;top:85%">주파수가 맞아요</span>
-      </div><span class="en">In tune</span></div>
-
-      <div class="face"><div class="sc s-near">
-        <span class="avt l" style="left:16%;top:26%;width:26%;height:26%;background-image:url(assets/rooms/rav-jiu.webp)"></span>
-        <span class="avt r" style="left:58%;top:26%;width:26%;height:26%;background-image:url(assets/rooms/rav-haeun.webp)"></span>
-        <svg class="bdg" style="left:44.5%;top:33%" viewBox="0 0 181 181"><use href="#badge"/></svg>
-        <span class="cp k" style="left:19%;top:56%">지우</span>
-        <span class="cp k" style="left:63%;top:56%">하은</span>
-        <span class="cp k nr-open" style="left:50%;top:11%;transform:translateX(-50%)">친구 신청이 열렸어요</span>
-        <span class="cp p" style="left:50%;top:70%;transform:translateX(-50%)">친구 신청</span>
-        <span class="cp k nr-note" style="left:50%;top:84%;transform:translateX(-50%)">💌 편지 · 애칭 → 수락하면 친구</span>
-      </div><span class="en">Closer</span></div>
-    </div>
-  </div>
-
-  <div class="vcards cr" data-cr>
-    <ol class="cr-track" tabindex="0" aria-label="여섯 가지 동사, 앱 화면으로 보기">
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-add.webp" alt="위젯 추가 시트. 기본, 기록, 함께, 미디어 갈래와 소셜, 상태, 텍스트, 이미지 위젯 카드" width="603" height="1311" loading="lazy" style="--op:50% 30%"></div><p><b><span class="vc-n">01</span>꾸미기.</b> 사진·음악·글·D-Day 같은 위젯을 붙여 나만의 플래터를 꾸며요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-friends.webp" alt="친구 탭. 친구가 새로 붙인 위젯이 카드로 올라온 피드" width="603" height="1311" loading="lazy" style="--op:50% 28%"></div><p><b><span class="vc-n">02</span>살펴보기.</b> 친구와 친구의 친구 플래터를 알고리즘 없이 구경해요. 다녀간 발자국은 주인에게 남아요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittohold.webp" alt="디토 시트. 라이프를 고르고 디토 버튼을 꾹 누르는 중" width="603" height="1311" loading="lazy" style="--op:50% 88%"></div><p><b><span class="vc-n">03</span>가져오기.</b> 친구가 열어 둔 빛나는 위젯을 꾹 눌러 내 플래터로 가져와요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-dittotab.webp" alt="디토 탭. 내 위젯을 지민, 유나, 도현 외 17명이 가져갔다는 카드" width="603" height="1311" loading="lazy" style="--op:50% 30%"></div><p><b><span class="vc-n">04</span>퍼뜨리기.</b> 디토된 위젯은 친구를 거쳐 친구의 친구에게까지 퍼져요. 멀리 갈수록 이름 대신 횟수만 보여요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-freq.webp" alt="주파수 화면. 라이브 주파수와 내 주변 주파수 목록의 파형" width="603" height="1311" loading="lazy" style="--op:50% 34%"></div><p><b><span class="vc-n">05</span>맞추기.</b> 친구의 친구와 같은 글에 댓글을 달고, 같은 그룹에서 이야기하고, 디토를 주고받으면 3주 동안 주파수가 쌓여요. 회색에서 민트, 인디고, 라일락으로 물들어요.</p></li>
-      <li class="cr-card vc"><div class="vc-m"><img src="assets/app-freqsheet.webp" alt="주파수 시트. 친구 신청이 열렸어요라는 문구와 친구 신청 버튼" width="603" height="1311" loading="lazy" style="--op:50% 92%"></div><p><b><span class="vc-n">06</span>친구되기.</b> 주파수가 충분하고, 4일 넘게 이어지고, 함께한 교류가 있으면 친구 신청이 열려요. 편지와 애칭을 담아 보내고, 상대가 수락하면 친구예요.</p></li>
-    </ol>
-    <div class="cr-ctl" hidden><button type="button" class="cr-prev" aria-label="이전 카드">←</button><button type="button" class="cr-next" aria-label="다음 카드">→</button></div>
+<section class="hx" id="top" aria-labelledby="hx-h" data-edge="#F4F3F6">
+  <div class="hx-belt" id="hxBelt" aria-hidden="true"><div class="hx-t" style="--w:clamp(120px,17vw,300px);--ar:3/4;--op:50% 25%"><img src="assets/tp-sora.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,17vw,300px);--ar:3/4;--op:50% 8%;--z:1.07"><img src="assets/rooms/room-04-jaemin.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,21vw,300px);--ar:4/3;--op:50% 50%"><img src="assets/p-coast.jpg" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,15vw,300px);--ar:1;--op:50% 50%"><img src="assets/hw-photo.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,17vw,300px);--ar:3/4;--op:50% 40%"><img src="assets/dw-picnic.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,17vw,300px);--ar:3/4;--op:50% 8%;--z:1.07"><img src="assets/rooms/room-05-nari.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,17vw,300px);--ar:3/4;--op:50% 25%"><img src="assets/tp-jiu.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,17vw,300px);--ar:3/4;--op:50% 6%"><img src="assets/home.jpg" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,21vw,300px);--ar:4/3;--op:50% 60%"><img src="assets/tp-seoyun.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,16vw,300px);--ar:3/4;--op:50% 30%"><img src="assets/hw-dance.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,17vw,300px);--ar:3/4;--op:50% 8%;--z:1.07"><img src="assets/rooms/room-10-yeseo.webp" alt="" loading="eager" decoding="async"></div><div class="hx-t" style="--w:clamp(120px,17vw,300px);--ar:3/4;--op:50% 30%"><img src="assets/tp-jaemin.webp" alt="" loading="eager" decoding="async"></div></div>
+  <div class="hx-copy">
+    <img class="hx-ic" src="assets/v5-appicon.webp" alt="Ditto!" width="216" height="216">
+    <h1 id="hx-h">우리로부터 시작되는 <br class="m">작은 공간.</h1>
+    <p class="hx-d">피드 대신 각자의 플래터를 꾸며요. 사진, 음악, 일정, 기분을 위젯으로 담아<br class="d"> 친구가 놀러 올 수 있는 작은 방처럼 만드는 공간이에요.</p>
+    <div class="hx-act"><a class="btn" href="https://apps.apple.com/kr/app/id6824991758">App Store에서 받기 <span class="ar" aria-hidden="true">↗</span></a><a class="tl" href="#tm">초대장 뽑기</a></div>
   </div>
 </section>
+
+
+
 
 <div class="seam2" id="seam" aria-hidden="true">
   <canvas class="sm-cv"></canvas>
@@ -2501,7 +2375,50 @@ html{background:var(--edge-b,var(--bg))}
   </svg>
 </div>
 
-<section class="bgx" id="background" aria-labelledby="bg-h">
+<section class="film" id="film" aria-label="친구들 사진">
+  <div class="film-st"><figure class="film-f"><img src="assets/bg-friends.jpg" alt="촛불 앞에 모여 웃고 박수 치는 친구들" width="1200" height="900" loading="lazy"></figure><p class="film-t">보여주고 싶은 사람은<br>결국, 이 몇 명이에요.</p></div>
+</section>
+
+<section class="v5" id="why" aria-labelledby="why-h"><div class="wrap">
+  <div class="ed">
+    <p class="ed-k"><span>문제</span><span>01</span></p>
+    <h2 id="why-h">가장 많이 연결된 세대가<br>가장 외로워요.</h2>
+    <div class="ed-b"><p>오늘의 청소년과 청년은 이전 어느 세대보다 쉽게 연락할 수 있지만, 모든 연령대 중 가장 높은 외로움을 호소해요. 친구와 함께하는 시간은 크게 줄었고, 공개 피드는 일상 공유를 남에게 보여주는 일로 바꿨어요. 많은 사람이 조용히 공유를 멈추는 이유예요.</p></div>
+  </div>
+  <div class="big"><b aria-label="20.9퍼센트"><span data-count="20.9" data-dec="1">20.9</span>%</b><p>13~17세가 외로움을 느껴요.<br>전 세계 연령대 중 가장 높은 비율이에요.<cite>세계보건기구, 2025</cite></p></div>
+  <h3 class="why-h">가까워지기 어려워지는 이유</h3>
+  <div class="cells">
+    <article class="cell"><h3>줄어드는<br>함께하는 시간</h3><b>150<i aria-label="에서">→</i>40<small>분</small></b><p>미국 15~24세가 친구와 보내는 하루 평균 시간 변화 (2003~2020년)</p></article>
+    <article class="cell"><h3>보여주기 위한<br>일상 공유</h3><b>71<small>%</small></b><p>페이스북 이용자가 게시물을 쓰고도 공유하지 않은 경험이 있어요.</p></article>
+    <article class="cell"><h3>연락처는 많지만<br>친구는 적게</h3><b>4.1<small>명</small></b><p>페이스북 친구 약 150명 중 위기 때 도움을 줄 친구는 평균 이 정도에 그쳐요.</p></article>
+    <article class="cell"><h3>한국에서도<br>마찬가지예요</h3><b>32.2<small>%</small></b><p>한국의 20대가 평소 외롭다고 답했어요. (통계청, 2025)</p></article>
+  </div>
+  <p class="tagline">디토는 이미 알고 지내는 친구들을 위한 작은 공간이에요.</p>
+  <details class="src"><summary>출처 보기</summary><p>세계보건기구, 「외로움에서 사회적 연결로」(2025) · 미국 공중보건서비스단장, 「외로움과 고립의 유행」(2023) · Das·Kramer, 「페이스북에서의 자기검열」, ICWSM(2013) · Dunbar, 「온라인 소셜미디어는 오프라인 관계망의 규모 제약을 넘어설 수 있는가?」, Royal Society Open Science 3:150292(2016) · 통계청, 「2025년 사회조사」</p></details>
+</div></section>
+
+<section class="shift" id="shift" aria-labelledby="shift-k">
+  <div class="shift-st">
+    <p class="shift-k" id="shift-k">무엇이 달라지나요</p>
+    <div class="sx">
+      <ol class="shift-l">
+        <li><s>한 번 눌러 팔로우</s><b>주파수로 맺는 친구</b></li>
+        <li><s>좋아요와 공개된 숫자</s><b>출처를 남기는 디토</b></li>
+        <li><s>끝없이 이어지는 피드</s><b>친구마다 하나의 플래터</b></li>
+        <li><s>화면 앞에서 보내는 시간</s><b>함께 보내는 시간</b></li>
+      </ol>
+      <div class="sx-s" aria-hidden="true">
+        <div class="sc s1"><div class="sx-p"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><span><b>하은</b><small>친구의 친구</small></span><em>팔로우</em></div><canvas class="sxw"></canvas><p class="ok">친구 신청이 열렸어요</p></div>
+        <div class="sc s2"><figure><img src="assets/ws-snack.webp" alt="" width="402" height="543" loading="lazy"><svg class="bd" viewBox="0 0 181 181"><use href="#badge"/></svg></figure><p class="cnt"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.5 8.6 2.3 5 5.8 5c2.3 0 4 1.2 6.2 3.6C14.200 6.200 15.900 5 18.200 5c3.500 0 5.300 3.600 3.800 6.700C19.500 16.400 12 21 12 21z"/></svg>12,480</p><p class="from"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">소라에게서 가져옴</p></div>
+        <div class="sc s3"><div class="hb"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><span><b>하은</b><small>@haeun</small></span></div><img class="t" style="--x:6;--y:21;--w:42" src="assets/ws-image.webp" alt="" loading="lazy"><img class="t" style="--x:52;--y:21;--w:20" src="assets/ws-dday.webp" alt="" loading="lazy"><img class="t" style="--x:74;--y:21;--w:20" src="assets/pa-gif.webp" alt="" loading="lazy"><img class="t" style="--x:52;--y:43;--w:42" src="assets/ws-status.webp" alt="" loading="lazy"><img class="t" style="--x:6;--y:65;--w:42" src="assets/ws-music.webp" alt="" loading="lazy"><img class="t" style="--x:52;--y:65;--w:42" src="assets/ws-post.webp" alt="" loading="lazy"></div>
+        <div class="sc s4"><div class="ph"><i></i><i></i><i></i><i></i><i></i><i></i></div><img class="tg" src="assets/v5-w-together.webp" alt="" width="401" height="827" loading="lazy"><p class="wi"><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><img src="assets/rooms/rav-sora.webp" alt="" width="144" height="144" loading="lazy">함께 찍었어요</p></div>
+      </div>
+    </div>
+    <p class="shift-e">소셜 앱의 네 가지 습관을 바꿔 우정이 자라도록 해요.</p>
+  </div>
+</section>
+
+<section class="bgx" id="background" hidden aria-labelledby="bg-h">
   <div class="wrap">
     <div class="open rv">
       <span class="lab"><b>02</b>Background</span>
@@ -2557,42 +2474,15 @@ html{background:var(--edge-b,var(--bg))}
   </div>
 </section>
 
-<section class="insight" id="solution" aria-labelledby="solution-h">
-  <div class="wrap">
-    <div class="ins-panel">
-      <div class="ins-copy">
-        <span class="lab"><b>03</b>Solution</span>
-        <h2 id="solution-h" class="ins-wm"><img src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"></h2>
-        <p class="lead">좋아요는 누르면 끝나요. 친구와 함께 소중한 추억들을 내 공간 안에 들여놓으면 둘 사이에 공통점이 생기고 자연스럽게 대화를 시작할 수 있어요.</p>
-      </div>
-      <div class="burst" id="burst">
-        <div class="bs-stage">
-          <span class="bs-line" aria-hidden="true"></span>
-          <span class="bs-av bs-me"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b></span>
-          <span class="bs-av bs-fr"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b></span>
-          <figure class="bs-w" id="bsW"><img class="bs-card bs-ph" src="assets/ws-image.webp" alt="재민의 ‘🚃 창밖 저장’ 사진 위젯" width="543" height="543"><svg class="bs-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></figure>
-          <span class="bs-tag" aria-hidden="true">같은 조각 +1</span>
-        </div>
-        <div class="hb-wrap" id="hbWrap">
-          <span class="hb-glow" aria-hidden="true"></span>
-          <button class="hb" id="hold" type="button" aria-describedby="holdNote">
-            <canvas id="hbCanvas" aria-hidden="true"></canvas>
-            <span class="hb-depth" aria-hidden="true"></span>
-            <span class="hb-sheen" aria-hidden="true"></span>
-            <span class="hb-lbl"><svg aria-hidden="true"><use href="#mk"/></svg><span id="holdText">꾹 눌러 디토하기</span></span>
-          </button>
-        </div>
-        <p class="hold-note" id="holdNote" role="status">준이 재민의 ‘🚃 창밖 저장’ 사진을 디토하는 순간이에요. 3초 동안 꾹 눌러 보세요. 키보드는 스페이스나 엔터를 누르고 있으면 돼요.</p>
-      </div>
-    </div>
-  </div>
-</section>
+
+
+
 
 <section class="cx" id="concept" aria-labelledby="cx-h">
   <div class="wrap">
     <div class="open rv">
-      <span class="lab"><b>04</b>Concept</span>
-      <div><h2 class="h-xl" id="cx-h">플래터, 디토, <mark>주파수.</mark></h2><p class="lead">Ditto!는 이 세 가지로 움직여요. 하나씩 눌러 보세요.</p></div>
+      <span class="lab">플래터 · 디토 · 주파수</span>
+      <div><h2 class="h-xl" id="cx-h">세 가지 작은 생각,<br>하나의 함께하는 공간.</h2><p class="lead">디토는 친구들과 나누는 순간을 오래 남겨요. 작은 교류가 쌓이면 새 우정의 시작을 알리는 ‘주파수’가 돼요. 순위도, 팔로워 수를 세는 일도 없어요.</p></div>
     </div>
     <div class="cx-panel" id="cxPanel">
       <div class="cx-side">
@@ -2600,15 +2490,15 @@ html{background:var(--edge-b,var(--bg))}
         <ul class="cx-list">
           <li class="cx-item is-on">
             <button type="button" class="cx-pill" id="cx-b0" aria-expanded="true" aria-controls="cx-d0"><span class="pl" aria-hidden="true"></span>플래터</button>
-            <div class="cx-card" id="cx-d0"><p><b>내 방이 곧 플래터예요.</b> 사진, 음악, 기분, 글을 위젯으로 붙여 꾸미는 나만의 판이에요. 첫인상은 대표 판에, 요즘 이야기는 라이프 판에 둬요.</p></div>
+            <div class="cx-card" id="cx-d0"><p><b>직접 배치한 위젯으로 꾸미는 나만의 작은 방.</b> 사진, 음악, 기분, 글을 위젯으로 붙여 꾸며요.</p></div>
           </li>
           <li class="cx-item">
             <button type="button" class="cx-pill" id="cx-b1" aria-expanded="true" aria-controls="cx-d1"><span class="pl" aria-hidden="true"></span>디토</button>
-            <div class="cx-card" id="cx-d1"><p><b>꾹 눌러, 나도.</b> 친구 방에서 나도 함께한 순간이 빛나고 있으면, 대표와 라이프 중 둘 곳을 정하고 3초 동안 꾹 누르면 내 플래터로 와요. 누구에게서 왔는지 그대로 남아요.</p></div>
+            <div class="cx-card" id="cx-d1"><p><b>내 취향과 닮은 위젯을 출처와 함께 간직해요.</b> 친구 방에서 빛나는 위젯을 3초 동안 꾹 누르면 내 플래터로 와요. 누구에게서 왔는지 그대로 남아요.</p></div>
           </li>
           <li class="cx-item">
             <button type="button" class="cx-pill" id="cx-b2" aria-expanded="true" aria-controls="cx-d2"><span class="pl" aria-hidden="true"></span>주파수</button>
-            <div class="cx-card" id="cx-d2"><p><b>함께한 순간이 쌓이면 주파수가 맞아요.</b> 친구의 친구와 같은 글에 댓글을 달고, 같은 그룹에서 이야기하고, 서로 디토할수록 점 파형이 회색에서 민트로, 곧 열릴 즈음엔 인디고로 바뀌어요. 여러 날에 걸쳐 주고받으면 파형이 라일락으로 물들며 친구 신청 버튼이 생겨요.</p></div>
+            <div class="cx-card" id="cx-d2"><p><b>함께한 순간으로 쌓이는 친밀함.</b> 숫자로 보여 주지 않아요. 여러 날에 걸쳐 주고받을수록 색이 선명해져요.</p></div>
           </li>
         </ul>
       </div>
@@ -2691,19 +2581,26 @@ html{background:var(--edge-b,var(--bg))}
   </div>
 </section>
 
+<section class="gather" id="platter" aria-labelledby="platter-h">
+  <div class="gather-st">
+    <div class="gather-f" aria-hidden="true"><div class="gt" style="--x:3%;--y:11%;--w:max(17vw,104px);--ar:3/4" data-dx="-34" data-dy="-30"><img src="assets/dw-picnic.webp" alt="" loading="lazy"></div><div class="gt" style="--x:24%;--y:5%;--w:max(12vw,104px);--ar:3/4" data-dx="-14" data-dy="-44"><img src="assets/hw-dance.webp" alt="" loading="lazy"></div><div class="gt" style="--x:61%;--y:7%;--w:max(19vw,104px);--ar:4/3" data-dx="18" data-dy="-44"><img src="assets/p-coast.jpg" alt="" loading="lazy"></div><div class="gt" style="--x:83%;--y:12%;--w:max(14vw,104px);--ar:3/4" data-dx="36" data-dy="-28"><img src="assets/tp-seoyun.webp" alt="" loading="lazy"></div><div class="gt" style="--x:5%;--y:60%;--w:max(14vw,104px);--ar:3/4" data-dx="-38" data-dy="14"><img src="assets/tp-jaemin.webp" alt="" loading="lazy"></div><div class="gt" style="--x:24%;--y:69%;--w:max(12vw,104px);--ar:1" data-dx="-18" data-dy="42"><img src="assets/hw-photo.webp" alt="" loading="lazy"></div><div class="gt" style="--x:44%;--y:75%;--w:max(11vw,104px);--ar:1" data-dx="0" data-dy="48"><img src="assets/hw-dday.webp" alt="" loading="lazy"></div><div class="gt" style="--x:61%;--y:65%;--w:max(13vw,104px);--ar:3/4" data-dx="16" data-dy="40"><img src="assets/tp-sora.webp" alt="" loading="lazy"></div><div class="gt" style="--x:78%;--y:63%;--w:max(18vw,104px);--ar:4/3" data-dx="36" data-dy="20"><img src="assets/w-photo.webp" alt="" loading="lazy"></div></div>
+    <div class="gather-c"><h2 id="platter-h">게시물 대신,<br>내 방을 꾸며요.</h2><p>좋아요·팔로워 수 없이, 다양한 크기의 위젯을 직접 배치해요.</p></div>
+  </div>
+</section>
+
 <section class="wx" id="widgets" aria-labelledby="wx-h">
   <div class="wrap">
     <div class="open rv">
-      <span class="lab"><b>05</b>Widgets</span>
+      <span class="lab">위젯</span>
       <div>
         <h2 class="h-xl" id="wx-h">위젯은<br><mark>내 방의 한 조각</mark>이에요.</h2>
-        <p class="lead">위젯 추가에서 기본, 기록, 함께, 미디어 네 갈래, 열네 가지 위젯을 골라 붙여요.</p>
+        <p class="lead">위젯 추가에서 기본, 기록, 함께, 미디어 네 갈래, 열다섯 가지 위젯을 골라 붙여요.</p>
       </div>
     </div>
 
     <div class="wx-part" id="wx-samples">
       <div class="wsp" id="wsp" aria-label="위젯 골라 보기">
-        <div class="wsp-tabs" role="group" aria-label="갈래별로 골라 보기"><button type="button" class="wc-tab" data-g="all" aria-pressed="true">전체<small>14</small></button><button type="button" class="wc-tab" data-g="basic" aria-pressed="false">기본<small>6</small></button><button type="button" class="wc-tab" data-g="record" aria-pressed="false">기록<small>3</small></button><button type="button" class="wc-tab" data-g="together" aria-pressed="false">함께<small>3</small></button><button type="button" class="wc-tab" data-g="media" aria-pressed="false">미디어<small>2</small></button></div>
+        <div class="wsp-tabs" role="group" aria-label="갈래별로 골라 보기"><button type="button" class="wc-tab" data-g="all" aria-pressed="true">전체<small>15</small></button><button type="button" class="wc-tab" data-g="basic" aria-pressed="false">기본<small>6</small></button><button type="button" class="wc-tab" data-g="record" aria-pressed="false">기록<small>4</small></button><button type="button" class="wc-tab" data-g="together" aria-pressed="false">함께<small>3</small></button><button type="button" class="wc-tab" data-g="media" aria-pressed="false">미디어<small>2</small></button></div>
         <p class="wsp-hint">위젯을 누르거나 옆으로 돌려서 골라 보세요</p>
         <div class="wsp-st" id="wspSt">
           <div class="wsp-belt" id="wspRing"></div>
@@ -2712,18 +2609,18 @@ html{background:var(--edge-b,var(--bg))}
             <div class="wsp-bot"><div class="wsp-bar"><img src="apple-touch-icon.png" alt="" width="32" height="32"><span><b>내 방</b><small>@myroom</small></span></div><div class="wsp-mini"><img src="assets/ws-dday.webp" alt=""><img src="assets/hw-gif.webp" alt=""></div></div>
           </div>
         </div>
-        <div class="wsp-card" id="wspCard" aria-live="polite"><div class="hd"><em class="wc-g"></em><h4></h4></div><div class="tx"><p class="d"></p><p class="ex"></p><p class="sz"></p></div></div>
+        <div class="wsp-card" id="wspCard" aria-live="polite"><div class="wv"><img alt="" decoding="async"></div><div class="tx"><div class="hd"><h4></h4><em class="wc-g"></em></div><p class="d"></p><dl><div><dt>친구는</dt><dd class="f"></dd></div><div class="z"><dt>크기</dt><dd class="sz"></dd></div></dl></div></div>
       </div>
       <div class="wcat" id="wcat">
-        <div class="wc-top"><p class="wc-title"><span class="wc-plus" aria-hidden="true">+</span>위젯 추가하기 <small>14</small></p><div class="wc-tabs" role="group" aria-label="갈래별로 비춰 보기" hidden><button type="button" class="wc-tab" data-g="all" aria-pressed="true">전체<small>14</small></button><button type="button" class="wc-tab" data-g="basic" aria-pressed="false">기본<small>6</small></button><button type="button" class="wc-tab" data-g="record" aria-pressed="false">기록<small>3</small></button><button type="button" class="wc-tab" data-g="together" aria-pressed="false">함께<small>3</small></button><button type="button" class="wc-tab" data-g="media" aria-pressed="false">미디어<small>2</small></button></div></div>
-        <ul class="wc-grid" id="wcGrid"><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-social.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>소셜</b><span>여러 SNS 계정을 프로필에 연결해요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-status.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>상태</b><span>이모지나 한 줄로 지금 기분·상태를 나눠요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-text.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>텍스트</b><span>한 줄 메모를 가볍게 남겨요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-image.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>이미지</b><span>사진으로 추억을 나눠요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-music.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>음악</b><span>요즘 자주 듣는 노래를 담아요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-video.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>영상</b><span>짧은 영상으로 일상을 전해요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-todo.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>To-do</b><span>카테고리별 할 일과 이번 주 기록</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-dday.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>D-Day</b><span>기다리는 날까지 함께 세요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-post.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>포스트</b><span>블로그 글을 쓰고 플래터에 카드로 보여줘요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-guestbook.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>방명록</b><span>친구가 남긴 안부에 답글을 달아요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-sticker.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>스티커 보드</b><span>친구들이 스티커를 붙여줘요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-together.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>Together</b><span>친구를 태그하고 같이 찍은 네 컷을 올려요</span></li><li class="wc-i" data-g="media"><span class="wc-art"><img src="assets/wa-gif.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">미디어</em><b>GIF</b><span>움직이는 반짝임을 더해요</span></li><li class="wc-i" data-g="media"><span class="wc-art"><img src="assets/wa-playlist.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">미디어</em><b>플레이리스트</b><span>곡을 모아 들려줘요</span></li></ul>
+        <div class="wc-top"><p class="wc-title"><span class="wc-plus" aria-hidden="true">+</span>위젯 추가하기 <small>15</small></p><div class="wc-tabs" role="group" aria-label="갈래별로 비춰 보기" hidden><button type="button" class="wc-tab" data-g="all" aria-pressed="true">전체<small>15</small></button><button type="button" class="wc-tab" data-g="basic" aria-pressed="false">기본<small>6</small></button><button type="button" class="wc-tab" data-g="record" aria-pressed="false">기록<small>4</small></button><button type="button" class="wc-tab" data-g="together" aria-pressed="false">함께<small>3</small></button><button type="button" class="wc-tab" data-g="media" aria-pressed="false">미디어<small>2</small></button></div></div>
+        <ul class="wc-grid" id="wcGrid"><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-social.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>소셜</b><span>여러 SNS 계정을 프로필에 연결해요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-status.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>상태</b><span>이모지나 한 줄로 지금 기분·상태를 나눠요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-text.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>텍스트</b><span>한 줄 메모를 가볍게 남겨요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-image.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>이미지</b><span>사진으로 추억을 나눠요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-music.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>음악</b><span>요즘 자주 듣는 노래를 담아요</span></li><li class="wc-i" data-g="basic"><span class="wc-art"><img src="assets/wa-video.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기본</em><b>영상</b><span>짧은 영상으로 일상을 전해요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-todo.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>To-do</b><span>카테고리별 할 일과 이번 주 기록</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-dday.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>D-Day</b><span>기다리는 날까지 함께 세요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-post.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>포스트</b><span>블로그 글을 쓰고 플래터에 카드로 보여줘요</span></li><li class="wc-i" data-g="record"><span class="wc-art"><img src="assets/wa-mood.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">기록</em><b>기분</b><span>오늘 기분 하나와 짧은 한 줄을 남겨요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-guestbook.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>방명록</b><span>친구가 남긴 안부에 답글을 달아요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-sticker.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>스티커 보드</b><span>친구들이 스티커를 붙여줘요</span></li><li class="wc-i" data-g="together"><span class="wc-art"><img src="assets/wa-together.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">함께</em><b>Together</b><span>친구를 태그하고 같이 찍은 네 컷을 올려요</span></li><li class="wc-i" data-g="media"><span class="wc-art"><img src="assets/wa-gif.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">미디어</em><b>GIF</b><span>움직이는 반짝임을 더해요</span></li><li class="wc-i" data-g="media"><span class="wc-art"><img src="assets/wa-playlist.webp" alt="" width="320" height="320" loading="lazy" decoding="async"></span><em class="wc-g">미디어</em><b>플레이리스트</b><span>곡을 모아 들려줘요</span></li></ul>
       </div>
       <p class="wc-note">지금 앱의 위젯 추가 화면과 같은 구성이에요. 갈래를 누르면 그 위젯들만 비추고, 위젯을 누르면 실제 모습을 미리 볼 수 있어요. ‘곧 열려요’ 위젯은 뺐어요.</p>
     </div>
 
     <div class="wx-part" id="wx-ditto">
       <div class="wx-ph">
-        <span class="lab"><b>5.2</b>Ditto</span>
+        <span class="lab">디토</span>
         <div><h3 class="h-l">나도 함께한 사진이 <mark>빛나면</mark>, 디토할 수 있어요</h3><p class="lead">그날의 나도 거기 있었다는 표시예요. 가져온 조각에는 누구에게서 왔는지가 그대로 붙어 있어요.</p></div>
       </div>
       <div class="cr cr-4" data-cr data-dots>
@@ -2925,12 +2822,83 @@ html{background:var(--edge-b,var(--bg))}
   </div>
 </section>
 
-<section class="frx" id="friends" aria-labelledby="fr-h">
+<section class="insight" id="solution" aria-labelledby="solution-h">
   <div class="wrap">
-    <div class="open rv">
-      <span class="lab"><b>06</b>Friends</span>
-      <div><h2 class="h-xl" id="fr-h">서로 디토하다 보면,<br><mark>친구가 돼요.</mark></h2><p class="lead">친구 신청은 아무 때나 열리지 않아요. 앱에서 실제로 거치는 다섯 걸음이에요.</p></div>
+    <div class="ins-panel">
+      <div class="ins-copy">
+        <span class="lab">디토</span>
+        <h2 id="solution-h" class="ins-wm"><img src="assets/wordmark.svg" alt="Ditto!" width="370" height="134"> <span class="ins-eq">= 나도.</span></h2>
+        <p class="lead">좋아요는 누르면 끝나요. 친구와 함께 소중한 추억들을 내 공간 안에 들여놓으면 둘 사이에 공통점이 생기고 자연스럽게 대화를 시작할 수 있어요.</p>
+      </div>
+      <div class="burst" id="burst">
+        <div class="bs-stage">
+          <span class="bs-line" aria-hidden="true"></span>
+          <span class="bs-av bs-me"><img src="assets/rooms/rav-jun.webp" alt="" width="144" height="144" loading="lazy"><b>준</b></span>
+          <span class="bs-av bs-fr"><img src="assets/rooms/rav-jaemin.webp" alt="" width="144" height="144" loading="lazy"><b>재민</b></span>
+          <figure class="bs-w" id="bsW"><img class="bs-card bs-ph" src="assets/ws-image.webp" alt="재민의 ‘🚃 창밖 저장’ 사진 위젯" width="543" height="543"><svg class="bs-badge" viewBox="0 0 181 181" aria-hidden="true"><use href="#badge"/></svg></figure>
+          <span class="bs-tag" aria-hidden="true">같은 조각 +1</span>
+        </div>
+        <div class="hb-wrap" id="hbWrap">
+          <span class="hb-glow" aria-hidden="true"></span>
+          <button class="hb" id="hold" type="button" aria-describedby="holdNote">
+            <canvas id="hbCanvas" aria-hidden="true"></canvas>
+            <span class="hb-depth" aria-hidden="true"></span>
+            <span class="hb-sheen" aria-hidden="true"></span>
+            <span class="hb-lbl"><svg aria-hidden="true"><use href="#mk"/></svg><span id="holdText">꾹 눌러 디토하기</span></span>
+          </button>
+        </div>
+        <p class="hold-note" id="holdNote" role="status">준이 재민의 ‘🚃 창밖 저장’ 사진을 디토하는 순간이에요. 3초 동안 꾹 눌러 보세요. 키보드는 스페이스나 엔터를 누르고 있으면 돼요.</p>
+      </div>
     </div>
+    <div class="sig ins-sig">
+      <article><h3>살펴보기</h3><p>친구와 친구의 친구 플래터를 알고리즘 없이 구경해요. 다녀간 발자국은 주인에게 남아요.</p></article>
+      <article><h3>가져오기</h3><p>친구가 열어 둔 빛나는 위젯을 꾹 눌러 내 플래터로 가져와요. 한 사람이 열어 둘 수 있는 건 세 개까지예요.</p></article>
+      <article><h3>퍼뜨리기</h3><p>디토된 위젯은 친구를 거쳐 친구의 친구에게까지 퍼져요. 멀리 갈수록 이름 대신 횟수만 보여요.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="v5" id="become" aria-labelledby="become-h"><div class="wrap">
+  <div class="ed">
+    <p class="ed-k"><span>친구</span><span>02</span></p>
+    <h2 id="become-h">우정은 팔로우 한 번으로<br>시작되지 않아요.</h2>
+    <div class="ed-b"><p>팔로우는 한 번이면 되지만, 잊히는 것도 그만큼 쉬워요. 디토는 낯선 사람과 한 번의 터치로 친구가 되게 하지 않아요. 실제 접점이 생겼을 때 우정이 시작되도록 해요.</p></div>
+  </div>
+</div>
+<div class="fp" id="fp" aria-label="지우와 하은이 3주 동안 주파수를 쌓아 친구 신청이 열리기까지">
+  <div class="fp-st"><div class="fp-in wrap">
+    <div class="fp-l">
+      <p class="fp-k">지우와 하은의 3주</p>
+      <p class="fp-d"><b id="fpDay">21</b>일째</p>
+      <ol class="fp-log" id="fpLog"></ol>
+    </div>
+    <div class="fp-p">
+      <div class="fp-who"><span><img src="assets/rooms/rav-jiu.webp" alt="" width="144" height="144" loading="lazy"><b>지우</b></span><canvas id="fpWave"></canvas><span><img src="assets/rooms/rav-haeun.webp" alt="" width="144" height="144" loading="lazy"><b>하은</b></span></div>
+      <ol class="fp-sg" id="fpStage">
+        <li style="--c:#8E919E"><i></i><b>고요함</b><span>아직 스치는 사이</span></li>
+        <li style="--c:#2BC4A8"><i></i><b>선명함</b><span>교류가 쌓이는 중</span></li>
+        <li style="--c:#5A5BF2"><i></i><b>곧 열림</b><span>한 번 더 함께하면</span></li>
+        <li style="--c:#AA4AF4"><i></i><b>열림</b><span>친구가 될 수 있어요</span></li>
+      </ol>
+      <div class="fp-tk" id="fpTicks" aria-hidden="true"></div>
+      <p class="fp-tl" aria-hidden="true"><span>1일</span><span>최근 21일만 세요</span><span>21일</span></p>
+      <div class="fp-f"><p id="fpMsg">친구 신청이 열렸어요</p><span class="fp-b on" id="fpBtn">친구 신청</span></div>
+    </div>
+  </div></div>
+</div>
+<div class="wrap">
+  <p class="stage-n">점수 대신 색으로 표현하며, 나에게만 보여요. 점수만 높다고 열리지 않아요. 여러 날에 걸쳐 만나고, 함께한 교류가 있어야 열려요.</p>
+  <details class="src"><summary>최근 21일 동안 반영하는 교류</summary><p>방문 하루 0.3 · 함께한 반응 0.5 · 함께한 댓글 1.5 · 같은 날 그룹 대화 하루 2 · 디토 3 · 서로 디토 +2 · 3종 이상 교류 +1</p></details>
+  <div class="sig">
+    <article><h3>일상 속 작은 교류</h3><p>방문, 함께 남긴 댓글, 같은 날의 그룹 대화, 디토가 천천히 쌓여 주파수가 돼요.</p></article>
+    <article><h3>직접 받은 초대</h3><p>나를 이미 아는 사람이 나를 소개해요. 처음 10명의 친구는 초대를 통해 바로 연결될 수 있어요.</p></article>
+    <article><h3>직접 만나 함께한 시간</h3><p>같은 장소에 있는 사람은 ‘주변 찾기’로 서로를 발견하고, 함께 있는 동안 친구를 신청할 수 있어요.</p><p>두 사람 모두 이 화면을 켜 둔 동안만 작동하고, 위치는 공유하지 않아요.</p></article>
+  </div>
+  <p class="quote">놀이터에서 자꾸 함께 놀던 아이가 진짜 친구가 되었듯, 디토의 우정도 다시 찾아가는 시간 속에서 자라요.</p>
+</div></section>
+
+<section class="frx" id="friends" aria-label="관계 지도">
+  <div class="wrap">
     <div class="ro rv" id="ro">
       <div class="ro-st">
         <canvas class="ro-cv" id="roCv" role="img" aria-label="대학교 1학년 채원을 가운데 둔 관계 지도. 앱을 깐 날부터 6개월 동안 안쪽에 친구, 바깥에 친구의 친구가 생기고, 그 사이를 교류 구슬이 이어요. 사람을 누르면 그 관계의 자세한 이야기로 가요."></canvas>
@@ -2944,7 +2912,7 @@ html{background:var(--edge-b,var(--bg))}
         <div class="ro-tip" id="roTip" role="tooltip"></div>
       </div>
       <div class="ro-sd">
-        <span class="lab"><b>Map</b>Relationship Ontology</span>
+        <span class="lab">관계 지도</span>
         <h3>Ditto!로 6개월,<br><mark>친구 30명</mark>이 되기까지</h3>
         <p>앱을 깐 날부터 6개월을 그대로 돌려 봐요. 원래 알던 친구는 초대장으로 이어지고, 처음 보는 친구의 친구는 Ditto!로 주파수가 쌓여 친구가 돼요.</p>
         <div class="ro-seg" role="group" aria-label="누구의 6개월을 볼까요" id="roSeg"><button type="button" data-v="uni" aria-pressed="true">대학교 1학년 채원</button><button type="button" data-v="high" aria-pressed="false">고등학교 1학년 시우</button></div>
@@ -2993,17 +2961,104 @@ html{background:var(--edge-b,var(--bg))}
   </div>
 </section>
 
+<section class="v5" id="impact" aria-labelledby="impact-h"><div class="wrap">
+  <div class="ed">
+    <p class="ed-k"><span>사회적 영향</span><span>03</span></p>
+    <h2 id="impact-h">작은 교류가<br>우정으로 자라는 방식.</h2>
+    <div class="ed-b"><p>디지털 앱은 한 세대가 만나고, 대화하고, 가까워지는 방식에 영향을 줘요. 디토는 그 힘을 우정에 사용해요. 도달 범위보다 관계에 집중하면 소셜 앱은 진짜 친구를 만나고 우정을 키우는 공간이 될 수 있어요. 위젯을 나누고, 찾아가고, 디토할 때마다 관계가 조금씩 자라요.</p></div>
+  </div>
+  <div class="dgw"><figure class="dg" role="img" aria-label="친구와 사회 사이를 디토가 잇는 도표. 친구는 플래터에서 위젯을 나누고, 방문·댓글·디토가 쌓여 주파수가 돼요. 직접 만나 오프라인에서도 우정을 이어 가고, 친구의 초대로 새로운 사람이 찾아와요.">
+    <svg class="dg-l" viewBox="0 0 1620 436" fill="none" aria-hidden="true"><g stroke="#B2A7BF" stroke-width="2" stroke-dasharray="7 7" stroke-linejoin="round"><path d="M412 186H704"/><path d="M705 250H413"/><path d="M915 186H1209"/><path d="M1210 250H916"/><path d="M1430 122V20H190V121"/><path d="M190 314V416H1430V315"/></g><g stroke="#B2A7BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M698 180l7 6-7 6"/><path d="M419 244l-7 6 7 6"/><path d="M1203 180l7 6-7 6"/><path d="M922 244l-7 6 7 6"/><path d="M184 115l6 7 6-7"/><path d="M1424 321l6-7 6 7"/></g></svg>
+    <div class="dg-n a">친구<img src="assets/v5-dg-house.webp" alt="" width="282" height="282" loading="lazy"></div>
+    <div class="dg-n b">사회</div>
+    <div class="dg-c"><img class="wm" src="assets/v5-dg-wordmark.svg" alt="" width="112" height="41" loading="lazy"><img class="ic" src="assets/v5-dg-icon.webp" alt="디토" width="396" height="396" loading="lazy"></div>
+    <figcaption>
+      <p class="dg-t t1">피드에 글을 올리기보다<br>플래터에서 위젯을 나눠요</p>
+      <p class="dg-t t2">방문·댓글·디토가 쌓여<br>주파수가 돼요</p>
+      <p class="dg-t t3">직접 만나 함께 촬영하며<br>오프라인에서도 우정을 이어가요</p>
+      <p class="dg-t t4">친구의 초대를 통해<br>새로운 사람이 찾아와요</p>
+      <p class="dg-p p1">소셜 앱은 우정을 더 좋은 방향으로 바꿀 수 있어요</p>
+      <p class="dg-p p2">가까운 우정이 쌓이면 사회의 외로움도 줄어들어요</p>
+    </figcaption>
+  </figure></div>
+
+  <details class="src"><summary>참고 문헌</summary><p>Hall, J. A. (2019). 「친구가 되려면 얼마나 많은 시간이 필요할까?」, Journal of Social and Personal Relationships, 36(4) · Dunbar, R. I. M. (2016). Royal Society Open Science, 3:150292 · 미국 공중보건서비스단장(2023). 「외로움과 고립의 유행」</p></details>
+</div></section>
+
+<section class="v5" id="analog" aria-labelledby="analog-h" style="padding-top:0"><div class="wrap">
+  <div class="ed">
+    <p class="ed-k"><span>아날로그</span><span>04</span></p>
+    <h2 id="analog-h">아날로그의 즐거움을<br>스마트폰에서 새롭게.</h2>
+    <div class="ed-b"><p>Z세대와 알파세대는 직접 경험하지 못했던 아날로그를 새롭게 발견하고 있어요. 디토는 30년 전 사랑받던 사진 부스, 캠코더, 무전기, 편지, 방명록을 스마트폰 안에 다시 담았어요. 새롭게 느껴지는 이 경험들은 친구들이 직접 만날 이유를 만들어 줘요.</p></div>
+  </div>
+  <h3 class="why-h rit-h">앱 안에 다시 담은 다섯 가지 아날로그 경험</h3>
+  <div class="rit"><article><figure><img src="assets/v5-art-booth.webp" alt="" loading="lazy" decoding="async"></figure><em>함께 찍는 네컷 사진</em><h4>사진 부스</h4><p>친구를 최대 3명 태그하고 3초 간격으로 네 장을 찍어요. 날짜가 찍힌 사진은 플래터에 놓여요.</p></article><article><figure><img src="assets/v5-art-camcorder.webp" alt="" loading="lazy" decoding="async"></figure><em>채팅 카메라 속 캠코더</em><h4>캠코더</h4><p>핸디캠과 VHS를 포함한 33종의 채팅 카메라를 골라요. 테이프 같은 색감과 화면 속 날짜를 담았어요.</p></article><article><figure><img src="assets/v5-art-walkie.webp" alt="" loading="lazy" decoding="async"></figure><em>우리끼리 모이는 그룹 채팅</em><h4>무전기</h4><p>초대한 친구들만 함께하는 채널이에요. 위젯은 채팅 카드가 되고 24시간 동안 고정돼요.</p></article><article><figure><img src="assets/v5-art-envelope.webp" alt="" loading="lazy" decoding="async"></figure><em>편지로 전하는 친구 신청</em><h4>편지</h4><p>애칭과 짧은 편지를 담아 친구를 신청해요. 초대장은 번호가 새겨진 봉인된 편지로 도착해요.</p></article><article><figure class=w><img src="assets/ws-guestbook.webp" alt="" loading="lazy" decoding="async"></figure><em>친구가 남기고 가는 한마디</em><h4>방명록</h4><p>친구가 왔다 간 흔적이 말로 남아요. 이름을 걸고 짧은 안부를 남기면, 나는 답글을 달아요.</p></article></div>
+
+  <div class="gc" id="groupchat">
+    <div>
+      <h3 class="cs-t">친구들과 나누는 대화는,<br>그룹 채팅에서.</h3>
+      <p class="cs-d">방을 만들고 친구를 초대해 메신저처럼 이야기해요. 방마다 친구들이 올린 위젯이 모여 함께 쌓여요.</p>
+      <ul class="gc-l">
+        <li><b>답장과 반응</b><span>밀어서 답장하고, 두 번 눌러 하트를 남겨요.</span></li>
+        <li><b>대화 중에 바로 찍기</b><span>사진과 스티커를 대화 속으로 바로 보내요.</span></li>
+        <li><b>공유 보드</b><span>방에 올린 위젯은 공유 보드에 모여요.</span></li>
+      </ul>
+    </div>
+    <div class="gc-ph">
+      <div class="phone"><img src="assets/app/chatlist.webp" alt="친구들과 만든 채팅방 목록" width="603" height="1311" loading="lazy" decoding="async"></div>
+      <div class="phone"><img src="assets/app/chatroom.webp" alt="답장과 반응이 오가는 그룹 채팅방" width="603" height="1311" loading="lazy" decoding="async"></div>
+    </div>
+  </div>
+
+  <div class="cs" id="cameras">
+    <div class="cs-h">
+      <h3 class="cs-t">다양한 카메라로,<br>같은 순간을 다르게.</h3>
+      <p class="cs-d">일회용 필름부터 캠코더, 폴더폰까지. 고른 카메라에 따라 셔터와 화면 표시, 사진의 색감이 달라져요.</p>
+    </div>
+    <div class="cs-row" tabindex="0" aria-label="카메라별 실제 화면"><figure><div class="phone"><img src="assets/app/cam-toss-27.webp" alt="토스 27 카메라로 찍는 화면" width="603" height="1311" loading="lazy" decoding="async"></div><figcaption><b>토스 27</b><span>1999 · 일회용 필름 카메라</span></figcaption></figure><figure><div class="phone"><img src="assets/app/cam-vhs-cam.webp" alt="VHS 캠 카메라로 찍는 화면" width="603" height="1311" loading="lazy" decoding="async"></div><figcaption><b>VHS 캠</b><span>1980 · 어깨형 VHS 캠코더</span></figcaption></figure><figure><div class="phone"><img src="assets/app/cam-pixel-pal.webp" alt="픽셀 팔 카메라로 찍는 화면" width="603" height="1311" loading="lazy" decoding="async"></div><figcaption><b>픽셀 팔</b><span>1998 · 휴대용 게임 카메라</span></figcaption></figure><figure><div class="phone"><img src="assets/app/cam-analog-booth.webp" alt="아날로그 포토부스 카메라로 찍는 화면" width="603" height="1311" loading="lazy" decoding="async"></div><figcaption><b>아날로그 포토부스</b><span>1980 · 은염 인화 포토부스</span></figcaption></figure><figure><div class="phone"><img src="assets/app/cam-clamshell-05.webp" alt="클램셸 05 카메라로 찍는 화면" width="603" height="1311" loading="lazy" decoding="async"></div><figcaption><b>클램셸 05</b><span>2005 · 폴더폰</span></figcaption></figure></div>
+  </div>
+
+  <div class="cs2">
+    <div class="cs2-a">
+      <h3 class="cs-t">우정이 자라는<br>오프라인으로</h3>
+      <p class="after">이 경험들은 혼자보다 함께할 때 빛나요. 친구가 만나면 디토는 함께할 거리를 건네요. 함께 만든 결과는 플래터와 그룹 채팅에 남아 다음 만남으로 이어져요.</p>
+      <div class="chain" aria-label="진행 과정"><span>만나기</span><i>→</i><span>함께 찍기</span><i>→</i><span>플래터에 간직하기</span><i>→</i><span>다시 만나기</span></div>
+    </div>
+    <div class="phone cs2-p" id="cstP"><div class="cs2-sc"><img class="on" src="assets/v5-together-shoot.webp" alt="3초 간격으로 네 장을 찍는 사진 부스 화면" loading="lazy" decoding="async"><img src="assets/app/sc-start.webp" alt="카메라와 친구, 장수를 고르는 같이 찍기 화면" loading="lazy" decoding="async"><img src="assets/app/sc-reveal.webp" alt="밤사이 현상된 필름 봉투가 도착한 화면" loading="lazy" decoding="async"></div></div>
+    <ol class="cst" id="cst">
+      <li><button type="button" aria-pressed="true"><h4>사진 부스에서 네 컷</h4><p>함께 포즈를 바꾸며 네 장을 찍고, 프레임과 한 줄 문구로 사진을 꾸며요.</p></button></li>
+      <li><button type="button" aria-pressed="false"><h4>함께 쓰는 카메라</h4><p>카메라를 고르고 함께 있는 친구를 초대해요. 12·24·36장을 선택하고, 현상 전에는 사진을 볼 수 없어요.</p></button></li>
+      <li><button type="button" aria-pressed="false"><h4>아침 7시에 공개</h4><p>자정까지 찍은 필름은 다음 날 아침 모두에게 한꺼번에 공개돼요. 인화한 사진을 찾으러 가는 것처럼요.</p></button></li>
+    </ol>
+  </div>
+</div></section>
+
+<section class="v5" id="features" aria-labelledby="features-h" style="padding-top:0"><div class="wrap">
+  <div class="ed">
+    <p class="ed-k"><span>주요 기능</span><span>05</span></p>
+    <h2 id="features-h">나를 표현하고, 가까이 지내고,<br>추억을 간직해요.</h2>
+    <div class="ed-b"><p>디토는 친구에게 나를 표현하고, 한 사람 한 사람과의 관계에 집중하며, 추억을 함께 쌓는 공간이에요. 게시물 대신 나만의 방을 꾸미고, 친구의 취향을 보며 대화해요. 닮은 취향으로 친구의 친구를 만나고, 이 모든 이야기를 하나의 앱에 간직해요.</p></div>
+  </div>
+  <div class="cards">
+    <article class="card"><figure><img src="assets/v5-friend-platter.webp" alt="위젯으로 꾸민 플래터" loading="lazy"></figure><h3>나를 표현해요</h3><p>게시물 대신 15가지 위젯으로 플래터를 꾸며요. 남에게 잘 보이기보다 나답게 표현하는 공간이에요.</p></article>
+    <article class="card"><figure><img src="assets/v5-feed.webp" alt="친구 소식 피드" loading="lazy"></figure><h3>가까이 지내요</h3><p>친구의 새 위젯을 보고 댓글을 남겨요. 그룹 채팅에 카드로 공유하며 대화를 시작해요.</p></article>
+    <article class="card"><figure><img src="assets/v5-freq.webp" alt="주파수 화면" loading="lazy"></figure><h3>친구의 친구를 만나요</h3><p>디토에는 내 이름이 담겨 친구의 플래터로 전해져요. 닮은 취향으로 연결되고 새로운 사람을 발견해요.</p></article>
+    <article class="card"><figure><img src="assets/v5-together-placed.webp" alt="플래터에 놓인 네컷 사진" loading="lazy"></figure><h3>추억을 간직해요</h3><p>모든 디토에는 출처가 남아요. 네컷 사진, 함께 찍은 필름, 방명록으로 다시 보고 싶은 추억을 간직해요.</p></article>
+  </div>
+  <div class="two"><div><b>쉽게 시작해요</b><p>초대 코드와 이름이 새겨진 카드, 나의 이름, 앱이 추천하는 첫 위젯으로 시작해요.</p></div><div><b>누구나 편하게</b><p>주파수는 색뿐 아니라 밝기로도 구분해요. ‘동작 줄이기’를 켜면 움직임을 멈춰요.</p></div></div>
+</div></section>
+
 <section class="qa" id="qa" aria-labelledby="qa-h">
   <div class="wrap">
     <div class="faq">
       <div class="faq-side rv">
         <span class="lab"><b>07</b>Q&amp;A</span>
         <h2 class="h-xl" id="qa-h">자주 묻는<br><mark>질문</mark></h2>
-        <p class="lead">친구, 디토, 출시 초대장까지. 가장 많이 물어본 것만 모았어요.</p>
-        <div class="faq-help"><p>찾는 답이 없나요?<br><a href="mailto:support@ditto.place">support@ditto.place</a>로 보내 주세요.</p><a class="faq-cta" href="#tm">초대장 먼저 받아 두기 <span aria-hidden="true">→</span></a></div>
+        <p class="lead">친구, 디토, 초대장까지. 가장 많이 물어본 것만 모았어요.</p>
+        <div class="faq-help"><p>찾는 답이 없나요?<br><a href="mailto:support@ditto.place">support@ditto.place</a>로 보내 주세요.</p><a class="faq-cta" href="https://apps.apple.com/kr/app/id6824991758">App Store에서 받기 <span aria-hidden="true">↗</span></a></div>
       </div>
       <div class="faq-main">
-        <div class="faq-tabs" role="toolbar" aria-label="질문 갈래" hidden><button type="button" data-g="all" aria-pressed="true">전체</button><button type="button" data-g="friend" aria-pressed="false">친구</button><button type="button" data-g="space" aria-pressed="false">플래터·디토</button><button type="button" data-g="launch" aria-pressed="false">출시·초대장</button></div>
+        <div class="faq-tabs" role="toolbar" aria-label="질문 갈래" hidden><button type="button" data-g="all" aria-pressed="true">전체</button><button type="button" data-g="friend" aria-pressed="false">친구</button><button type="button" data-g="space" aria-pressed="false">플래터·디토</button><button type="button" data-g="launch" aria-pressed="false">앱·초대장</button></div>
         <div class="faq-list" id="qgrid">
         <div class="faq-i" data-g="friend"><h3 class="faq-h"><button type="button" class="faq-b" id="qb1" aria-expanded="false" aria-controls="qa1"><span>왜 친구가 15명까지인가요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa1" role="region" aria-labelledby="qb1"><div><p>사람이 가깝게 챙길 수 있는 관계가 15명 안팎이라는 던바의 연구를 따랐어요. 숫자를 늘리는 대신 이미 소중한 사람과의 거리를 좁혀요.</p></div></div></div>
         <div class="faq-i" data-g="friend"><h3 class="faq-h"><button type="button" class="faq-b" id="qb2" aria-expanded="false" aria-controls="qa2"><span>친구 신청은 언제 열려요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa2" role="region" aria-labelledby="qb2"><div><p>최근 3주 동안 함께 단 댓글, 같은 그룹에서의 대화, 주고받은 디토가 쌓이면 주파수가 선명해져요. 4일 이상 여러 날에 걸쳐 둘이 함께 주고받은 순간이 있어야 친구 신청이 열려요. 이미 아는 사이라면 아이디나 QR로 바로 신청할 수 있어요.</p></div></div></div>
@@ -3011,8 +3066,8 @@ html{background:var(--edge-b,var(--bg))}
         <div class="faq-i" data-g="friend"><h3 class="faq-h"><button type="button" class="faq-b" id="qb4" aria-expanded="false" aria-controls="qa4"><span>친구 신청을 거절하면 알려지나요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa4" role="region" aria-labelledby="qb4"><div><p>아니요. 받은 사람은 거절과 수락 중에 고를 수 있고, 거절해도 보낸 사람에게 알림이 가지 않아요. 모르는 사람이면 차단해서 다시 못 보내게 할 수 있어요.</p></div></div></div>
         <div class="faq-i" data-g="space"><h3 class="faq-h"><button type="button" class="faq-b" id="qb5" aria-expanded="false" aria-controls="qa5"><span>내 플래터는 누가 볼 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa5" role="region" aria-labelledby="qb5"><div><p>친구로 연결된 사람만 볼 수 있어요. 친구 신청을 수락하면 서로의 플래터를 함께 볼 수 있어요.</p></div></div></div>
         <div class="faq-i" data-g="space"><h3 class="faq-h"><button type="button" class="faq-b" id="qb7" aria-expanded="false" aria-controls="qa7"><span>디토는 몇 개까지 열어 둘 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa7" role="region" aria-labelledby="qb7"><div><p>내 위젯 중 세 개까지예요. 사진, GIF, 음악, 영상을 열어 둘 수 있고, 열어 둔 위젯은 뒤에서 은은하게 빛나서 친구가 알아볼 수 있어요.</p></div></div></div>
-        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb6" aria-expanded="false" aria-controls="qa6"><span>언제 써 볼 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa6" role="region" aria-labelledby="qb6"><div><p>지금 <a href="https://apps.apple.com/kr/app/id6824991758">App Store</a>에서 받을 수 있어요. iPhone 앱이고, 졸업전시 현장에서도 바로 체험할 수 있어요. 아래에서 출시 초대장을 뽑아 이메일을 남기면 초대 메일을 보내 드려요. 선착순 1,000석이에요.</p></div></div></div>
-        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb8" aria-expanded="false" aria-controls="qa8"><span>초대장을 뽑으면 뭐가 남아요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa8" role="region" aria-labelledby="qb8"><div><p>좌석 번호와 초대 코드가 발급되고, 고른 아이디가 출시 때까지 예약돼요. 이메일은 출시 초대 메일을 보내는 데만 쓰고, 출시 후 3개월이 지나면 지워요.</p></div></div></div>
+        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb6" aria-expanded="false" aria-controls="qa6"><span>어디서 받을 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa6" role="region" aria-labelledby="qb6"><div><p>지금 <a href="https://apps.apple.com/kr/app/id6824991758">App Store</a>에서 받을 수 있어요. iPhone 앱이에요. 초대장은 아래에서 뽑을 수 있고, 선착순 1,000석이에요.</p></div></div></div>
+        <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb8" aria-expanded="false" aria-controls="qa8"><span>초대장을 뽑으면 뭐가 남아요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa8" role="region" aria-labelledby="qb8"><div><p>좌석 번호와 초대 코드를 받고, 고른 아이디를 맡아 둬요. 이메일은 초대 메일을 보내는 데만 쓰고, 출시 후 3개월이 지나면 지워요.</p></div></div></div>
         <div class="faq-i" data-g="launch"><h3 class="faq-h"><button type="button" class="faq-b" id="qb9" aria-expanded="false" aria-controls="qa9"><span>스티커 보드는 누가 고칠 수 있어요?</span><i aria-hidden="true"></i></button></h3><div class="faq-a" id="qa9" role="region" aria-labelledby="qb9"><div><p>붙인 사람만요. 붙였던 기기와 브라우저에서 내 스티커를 누르면 옮기고, 돌리고, 크기를 바꾸거나 떼어 버릴 수 있어요. 다른 사람의 스티커는 구경만 할 수 있어요.</p></div></div></div>
         </div>
       </div>
@@ -3025,7 +3080,7 @@ html{background:var(--edge-b,var(--bg))}
   <div class="wrap">
     <p class="emo" id="emo" aria-hidden="true"><span class="reel"><span class="rl">🎧</span></span><span class="reel"><span class="rl">🍓</span></span><span class="reel"><span class="rl">📸</span></span><span class="reel"><span class="rl">🌙</span></span><span class="reel"><span class="rl">🛼</span></span></p>
     <h2 class="close-h" id="close-h"><span class="ch-t">통하면,</span> <button type="button" class="ch-mark" id="chMark" aria-label="Ditto! — 누르면 색이 바뀌고 위 이모지가 돌아가요"><svg class="cm-svg" viewBox="-30 -30 274 274" aria-hidden="true" focusable="false"><defs><linearGradient id="cmFill" x1="0" y1="0" x2=".7" y2="1"><stop offset="0" style="stop-color:var(--mc1)"/><stop offset=".36" style="stop-color:var(--mc1)"/><stop offset="1" style="stop-color:var(--mc2)"/></linearGradient><filter id="cmLit" x="-30%" y="-30%" width="160%" height="170%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="6.1" result="h"/><feDiffuseLighting in="h" surfaceScale="9.2" diffuseConstant="1.1" lighting-color="#fff" result="d"><feDistantLight class="cm-lt" azimuth="235" elevation="52"/></feDiffuseLighting><feColorMatrix in="d" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -.62 0 0 0 .55" result="sa"/><feFlood class="cm-tint" flood-opacity="1"/><feComposite in2="sa" operator="in" result="shade"/><feComposite in="shade" in2="SourceGraphic" operator="over" result="body"/><feSpecularLighting in="h" surfaceScale="9.2" specularConstant=".9" specularExponent="30" lighting-color="#fff" result="sp"><feDistantLight class="cm-lt" azimuth="235" elevation="58"/></feSpecularLighting><feComposite in="body" in2="sp" operator="arithmetic" k2="1" k3=".45" result="lit"/><feComposite in="lit" in2="SourceAlpha" operator="in" result="mark"/><feGaussianBlur in="SourceAlpha" stdDeviation="7.1" result="sb"/><feOffset in="sb" dy="7.1" result="so"/><feFlood class="cm-tint" flood-opacity=".3"/><feComposite in2="so" operator="in" result="drop"/><feMerge><feMergeNode in="drop"/><feMergeNode in="mark"/></feMerge></filter></defs><g filter="url(#cmLit)"><path fill="url(#cmFill)" d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path fill="url(#cmFill)" d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle fill="url(#cmFill)" cx="141.594" cy="187.204" r="16.75"/></g></svg></button></h2>
-    <p class="t">친한 친구와 만들어나가는 우리만의 공간. 마음에 드는 조각을 꾹 눌러봐!</p>
+    <p class="t">친한 친구와 만들어 가는 우리만의 공간. 마음에 드는 조각을 꾹 눌러 보세요.</p>
     <div class="tm" id="tm">
       <div class="tm-mach" id="tmMach">
         <div class="tm-body">
@@ -3088,6 +3143,7 @@ html{background:var(--edge-b,var(--bg))}
       </div>
     </div>
 
+    <div class="more-b"><button type="button" class="btn" id="moreOpen">좌석표와 스티커 보드 보기</button></div>
     <div class="smap" id="smap">
       <div class="smap-head">
         <p class="smap-k">Seat map_</p>
@@ -3109,7 +3165,7 @@ html{background:var(--edge-b,var(--bg))}
       <div class="sb-head">
         <div>
           <p class="sb-k">Sticker board_</p>
-          <h3 class="sb-t">디토를 기다리는 스티커 보드</h3>
+          <h3 class="sb-t">함께 꾸미는 스티커 보드</h3>
           <p class="sb-c">스티커 팩에서 고르거나, 글씨나 사진으로 직접 만들어 붙여요. 붙은 스티커는 누구나 떼어서 옮길 수 있어요. <span id="sbCount" aria-live="polite"></span></p>
         </div>
         <button type="button" class="btn sb-open" id="sbOpen" aria-expanded="false" aria-controls="sbMake">스티커 만들기 <span class="ar" aria-hidden="true">+</span></button>
@@ -3215,10 +3271,17 @@ html{background:var(--edge-b,var(--bg))}
 
 
 <footer class="foot" id="foot">
-  <div class="wrap"><div class="foot-top">
+  <div class="wrap"><div class="f5">
+    <p class="f5-s">우리로부터 시작되는<br>작은 공간.</p>
+    <div><h4>디토</h4><ul><li><a href="#why">왜 디토</a></li><li><a href="#concept">플래터</a></li><li><a href="#widgets">위젯</a></li><li><a href="#solution">친구</a></li></ul></div>
+    <div><h4>시작하기</h4><ul><li><a href="https://apps.apple.com/kr/app/id6824991758">App Store</a></li><li><a href="#tm">초대장 뽑기</a></li><li><a href="#qa">자주 묻는 질문</a></li></ul></div>
+    <div><h4>안내</h4><ul><li><a href="/splup/">디자인 가이드</a></li><li><a href="/privacy/">개인정보 처리방침</a></li><li><a href="/terms/">이용약관</a></li></ul></div>
+  </div>
+  <p class="f5-c">© 2026 Ditto! · Halo Studio (Sangwook Park). All rights reserved.</p></div>
+  <div hidden><div class="foot-top">
     <p class="foot-brand"><img src="assets/wordmark.svg" alt="Ditto!" width="66" height="24" loading="lazy"><span>우리만의 공간</span></p>
     <nav class="foot-nav" aria-label="푸터">
-      <ul class="foot-links"><li><a href="#verbs">Why</a></li><li><a href="#solution">Solution</a></li><li><a href="#concept">Concept</a></li><li><a href="#widgets">Widgets</a></li><li><a href="#wx-rooms">Rooms</a></li><li><a href="#friends">Friends</a></li><li><a href="#qa">Q&amp;A</a></li><li><a href="#tm">Invite</a></li></ul>
+      <ul class="foot-links"><li><a href="#solution">Why</a></li><li><a href="#solution">Solution</a></li><li><a href="#concept">Concept</a></li><li><a href="#widgets">Widgets</a></li><li><a href="#wx-rooms">Rooms</a></li><li><a href="#friends">Friends</a></li><li><a href="#qa">Q&amp;A</a></li><li><a href="#tm">Invite</a></li></ul>
       <ul class="foot-ext"><li><a href="https://apps.apple.com/kr/app/id6824991758">App Store</a></li><li><a href="/splup/">Guide</a></li><li><a class="kr" href="/privacy/">개인정보 처리방침</a></li><li><a class="kr" href="/terms/">이용약관</a></li></ul>
     </nav>
   </div></div>
@@ -3289,7 +3352,7 @@ html{background:var(--edge-b,var(--bg))}
   /* ---- 01 verbs: pinned list + living scenes (wide screens only; phones get the screen carousel) ---- */
   (function(){
     const wide = matchMedia('(min-width: 861px)');
-    const sec = document.getElementById('verbs'), items = [...document.querySelectorAll('#vlist li')], faces = [...sec.querySelectorAll('.face')], num = document.getElementById('vNum'), capEl = document.getElementById('vCap');
+    const sec = document.getElementById('verbs'); if (!sec) return; const items = [...document.querySelectorAll('#vlist li')], faces = [...sec.querySelectorAll('.face')], num = document.getElementById('vNum'), capEl = document.getElementById('vCap');
     let cur = 0;
     mods.push(vh => {
       if (reduce || !wide.matches) return;
@@ -3612,20 +3675,21 @@ html{background:var(--edge-b,var(--bg))}
     sel('all');
     // preview: the real widget as the app draws it (Social and Together show their icon until a capture lands)
     const PV = [
-      { d: '여러 SNS 계정을 한곳에 모아 프로필에 연결해 둬요.', ex: '쓰는 계정들을 한 위젯에 모아 두기' },
-      { img: 'ws-status.webp', d: '이모지 하나와 짧은 한 줄로 지금 상태를 걸어 둬요.', ex: '🍒 돗자리 챙겨 둠' },
-      { img: 'ws-text.webp', d: '한 줄 메모를 플래터에 붙여 둬요. 친구에게 남기는 말로도 좋아요.', ex: '🍕 늦어도 와, 자리 비워둘게' },
-      { img: 'ws-image.webp', d: '사진 한 장에 제목을 달아 붙여요. 함께한 사진이면 디토를 열어 둘 수도 있어요.', ex: '재민의 🚃 창밖 저장' },
-      { img: 'ws-music.webp', d: '요즘 자주 듣는 노래를 앨범 아트와 함께 보여 줘요.', ex: 'You and I · HANRORO' },
-      { img: 'ws-video.webp', d: '짧은 영상 한 편으로 오늘을 전해요.', ex: '쉬는 날 빵집 투어' },
-      { img: 'ws-todo.webp', d: '카테고리별 할 일을 적고 이번 주에 해낸 것을 모아 봐요.', ex: '📚 이번 주 작은 일', sz: '크기 네 가지 중에서 골라요.' },
-      { img: 'ws-dday.webp', d: '기다리는 날을 정해 두면 남은 날을 함께 세요.', ex: 'D-3 다음 피크닉' },
-      { img: 'ws-post.webp', d: '블로그처럼 글을 쓰면 플래터에는 카드로 보여요.', ex: '도현의 ‘돌아오는 기차에서’' },
-      { img: 'ws-guestbook.webp', d: '친구가 남긴 안부가 쌓이고, 나는 답글을 달아요.', ex: '퇴근하고 바로 갈게, 7시 반 🙌 — from. 준' },
-      { img: 'ws-sticker.webp', d: '친구들이 들러서 스티커를 붙이고 가요. 내 보드는 친구만 꾸밀 수 있어요.', ex: '친구들이 놓고 간 것' },
-      { d: '같이 찍은 네 컷을 올리고 함께한 친구를 태그해요.', ex: '친구와 찍은 네 컷 한 장', sz: '네 컷 방향에 맞춘 크기로 놓여요.' },
-      { img: 'pa-gif.webp', d: '움직이는 사진 한 장으로 플래터에 반짝임을 더해요.', ex: '연습실 거울 앞 한 컷' },
-      { img: 'ws-playlist.webp', d: '좋아하는 곡을 모아 목록으로 보여 줘요.', ex: '📊 전시 보고 나서' }
+      { img: 'widget-card/social.webp', d: '디토 밖의 나를 궁금해하는 친구에게 문을 하나 열어 둬요. 쓰는 계정을 모아 알리되, 팔로워 숫자는 보여 주지 않아요.', f: '누르면 앱 밖으로 나가기 전에 시트에서 한 번 더 확인해요.', ex: '쓰는 계정들을 한 위젯에 모아 두기' },
+      { img: 'widget-card/status.webp', d: '길게 쓰지 않아도 이모지와 한 줄로 요즘 나를 알려요. 배경색과 보여 줄 시간도 정할 수 있어요.', f: '상태를 보고 반응을 남기거나 댓글로 말을 걸어요.', ex: '🍒 돗자리 챙겨 둠' },
+      { img: 'widget-card/text.webp', d: '사진 없이도 요즘 마음을 플래터에 남겨요. 고쳐 쓰면 친구 소식에 떠요.', f: '글을 읽고 댓글로 답해요. 잘린 긴 글은 열어서 끝까지 읽어요.', ex: '🍕 늦어도 와, 자리 비워둘게' },
+      { img: 'widget-card/image.webp', d: '사진 한 장과 한 줄로 오늘을 붙여 둬요. 바꾸면 친구 소식에 떠요.', f: '마음에 들면 꾹 눌러 디토해요. 올린 사람의 이름이 늘 함께 따라가요.', ex: '재민의 🚃 창밖 저장' },
+      { img: 'widget-card/music.webp', d: '요즘 듣는 곡을 앨범 아트와 함께 걸어 둬요. 들려줄 구간도 고를 수 있어요.', f: '작은 칸에서는 미리 듣고, 큰 칸에서는 영상으로 봐요.', ex: 'You and I · HANRORO' },
+      { img: 'widget-card/video.webp', d: '말보다 짧은 장면 하나로 요즘 빠진 것을 보여 줘요.', f: '누르면 칸 안에서 재생돼요. 꾹 눌러 상세를 열고 디토해요.', ex: '쉬는 날 빵집 투어' },
+      { img: 'widget-card/todo.webp', d: '이번 주 할 일을 적고 체크해요. 내 하루의 리듬이 친구에게 조용히 보여요.', f: '읽기만 할 수 있어요. 응원은 댓글로 남겨요.', sz: '네 가지 크기 중에서 골라요.', ex: '📚 이번 주 작은 일' },
+      { img: 'widget-card/dday.webp', d: '제목 하나와 날짜 하나를 세요. 다가오는 날은 D−N, 지난 날은 D+N으로 보여요.', f: '친구가 무엇을 기다리는지 알게 돼요. 그날이 되면 소식으로 조용히 알려요.', ex: 'D-3 다음 피크닉' },
+      { img: 'widget-card/post.webp', d: '위젯 한 칸으로 다 못 하는 이야기를 글로 이어 써요. 최신 글이 플래터에 카드로 놓여요.', f: '카드를 누르면 글 목록으로 들어가 읽고 댓글을 남겨요.', ex: '도현의 ‘돌아오는 기차에서’' },
+      { img: 'widget-card/mood.webp', d: '쓸 말이 없는 날도 오늘 기분 하나와 짧은 한 줄로 하루를 남겨요.', f: '오늘의 기분을 보고 댓글로 말을 걸어요.', ex: '마음이 가벼워' },
+      { img: 'widget-card/guestbook.webp', d: '친구가 왔다 갔다는 사실이 말로 남는 현관이에요. 나는 답글을 달아요.', f: '이름을 걸고 짧은 안부를 남기고 가요.', ex: '퇴근하고 바로 갈게, 7시 반 🙌 — from. 준' },
+      { img: 'widget-card/sticker.webp', d: '내 보드는 친구만 꾸밀 수 있어요. 나는 누가 붙였는지 보고, 떼어 낼 수 있어요.', f: '자기 사진이나 디토 스티커를 골라 질감과 테두리를 입혀 붙여요.', ex: '친구들이 놓고 간 것' },
+      { img: 'widget-card/together.webp', d: '친구를 최대 3명 태그하고 3초 간격으로 네 컷을 찍어요. 날짜가 찍혀 플래터에 놓여요.', f: '태그된 친구에게 알림이 가고, 쌓인 네 컷을 넘겨 봐요.', sz: '네 컷 방향에 맞춘 크기로 놓여요.', ex: '친구와 찍은 네 컷 한 장' },
+      { img: 'widget-card/gif.webp', d: '말보다 빠른 반응이에요. 움직이는 사진 하나로 플래터에 반짝임을 더해요.', f: '같은 기분이면 꾹 눌러 디토해요.', ex: '연습실 거울 앞 한 컷' },
+      { img: 'widget-card/playlist.webp', d: '지금의 나를 설명하는 곡을 모아 목록으로 놓아요.', f: '곡을 차례로 들어 보며 내 취향을 알아가요.', ex: '📊 전시 보고 나서' }
     ];
     const grid = cat.querySelector('.wc-grid');
     const pv = document.createElement('li'); pv.className = 'wc-pv'; pv.id = 'wcPv'; pv.hidden = true; pv.setAttribute('aria-live', 'polite');
@@ -3696,7 +3760,7 @@ html{background:var(--edge-b,var(--bg))}
       function land(i){
         cur = i; const w = W[i];
         card.querySelector('.wc-g').textContent = w.gl; card.querySelector('h4').textContent = w.n;
-        card.querySelector('.d').textContent = w.d; card.querySelector('.ex').innerHTML = `<span class="exw${w.img ? '' : ' ic'}"><img src="assets/${w.img || w.icon.replace(/^assets\//, '')}" alt="${w.n} 위젯 실제 모습"></span><span><b>예시</b>${w.ex}</span>`; card.querySelector('.sz').textContent = w.sz || '플래터에서 크기를 바꿀 수 있어요.';
+        const wi = card.querySelector('.wv img'); wi.src = 'assets/' + w.img; wi.alt = w.n + ' 위젯'; card.querySelector('.d').textContent = w.d; card.querySelector('.f').textContent = w.f; card.querySelector('.z').hidden = !w.sz; card.querySelector('.sz').textContent = w.sz || '';
         if (used) { card.classList.remove('swap'); void card.offsetWidth; card.classList.add('swap'); }
       }
       function tick(t){
@@ -3730,6 +3794,9 @@ html{background:var(--edge-b,var(--bg))}
       nodes.forEach(nd => { const f = document.createDocumentFragment(); [...nd.textContent].forEach(c => { if (c === ' ') { f.append(' '); return; } const sp = document.createElement('span'); sp.className = 'ch'; sp.innerHTML = '<i class="g"></i>'; sp.firstChild.textContent = c; f.append(sp); }); nd.replaceWith(f); });
       h.setAttribute('aria-label', h.textContent); [...h.children].forEach(c => c.setAttribute('aria-hidden', 'true'));
       const chs = [...h.querySelectorAll('.ch')];
+      // inline-block letters escape the parent's background-clip:text, so each letter carries its own stop of the same gradient
+      const INK = [[123, 59, 196], [170, 74, 244], [229, 105, 198]];
+      chs.forEach((c, i) => { const t = chs.length > 1 ? i / (chs.length - 1) : 0, s = t < .48 ? 0 : 1, f = s ? (t - .48) / .52 : t / .48, a = INK[s], b = INK[s + 1]; c.style.setProperty('--ch', `rgb(${a.map((v, k) => Math.round(v + (b[k] - v) * f)).join()})`); });
       (function again(){
         setTimeout(again, 4800); if (document.hidden) return;
         const pick = chs.slice().sort(() => Math.random() - .5).slice(0, 2), pool = OBJ.slice().sort(() => Math.random() - .5);
@@ -4887,4 +4954,4 @@ html{background:var(--edge-b,var(--bg))}
 })();
 </script>
 
-</body></html>
+<script src="assets/v5.js" defer></script></body></html>
