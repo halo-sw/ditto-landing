@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ditto.place/</loc></url>
+  <url><loc>https://ditto.place/platter/</loc></url>
+  <url><loc>https://ditto.place/ditto/</loc></url>
+  <url><loc>https://ditto.place/frequency/</loc></url>
+  <url><loc>https://ditto.place/play/</loc></url>
+  <url><loc>https://ditto.place/story/</loc></url>
   <url><loc>https://ditto.place/new/</loc></url>
   <url><loc>https://ditto.place/privacy/</loc></url>
   <url><loc>https://ditto.place/terms/</loc></url>

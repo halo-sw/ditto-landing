@@ -16,6 +16,10 @@ ROOT = Path(__file__).resolve().parent.parent
 src = sys.argv[1]
 chars = set(map(chr, range(0x20, 0x7F))) | set("·…—–‘’“”→←↑↓↗✕✓×©®™❚▶•°%₩")
 chars |= set((ROOT / "index.html").read_text(encoding="utf-8"))
+for sub in ("platter", "ditto", "frequency", "play", "story"):
+    f = ROOT / sub / "index.html"
+    if f.exists():
+        chars |= set(f.read_text(encoding="utf-8"))
 # 지금 서브셋에 있는 글자는 그대로 품는다 (v5.js 등 스크립트가 넣는 글자 포함)
 old = ROOT / "assets/pretendard-ditto.woff2"
 if old.exists():

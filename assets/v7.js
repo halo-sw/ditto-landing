@@ -6,7 +6,7 @@
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
 
   /* 등장 */
-  var els = [].slice.call(document.querySelectorAll('.k-ch .k-intro > *, .k-ch .k-st > *, .k-ch .k-nm li, .k-ch .hd, .k-ch .k-pl li'));
+  var els = [].slice.call(document.querySelectorAll('.k-ch .k-intro > *, .k-ch .k-st > *, .k-ch .k-nm li, .k-ch .hd, .k-ch .k-pl li, .k-ch .ci-l li'));
   els.forEach(function (el) { el.setAttribute('data-rv', ''); });
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { var sib = [].indexOf.call(e.target.parentNode.children, e.target); e.target.style.transitionDelay = Math.min(sib, 8) * 50 + 'ms'; e.target.classList.add('on'); io.unobserve(e.target); } });
@@ -32,7 +32,7 @@
   }
 
   /* 스크롤 장면 */
-  var say = $('k-say'), pin = $('kPin'), col = $('kCol'), railS = $('n-play'), rail = $('kRail'), fqW = $('n-freq'), lastY = scrollY, lastT = performance.now(), pinN = $('kPinN'), NAMES = ['플래터 01', '디토 02', '주파수 03'], tk = false;
+  var pin = $('kPin'), say = $('k-say'), col = $('kCol'), railS = $('n-play'), rail = $('kRail'), fqW = $('n-freq'), lastY = scrollY, lastT = performance.now(), pinN = $('kPinN'), NAMES = (pin && pin.dataset.names) ? pin.dataset.names.split('|') : ['플래터 01', '디토 02', '주파수 03'], tk = false;
   var prog = function (el) { var r = el.getBoundingClientRect(); return clamp(-r.top / (r.height - innerHeight)); };
   var onScroll = function () {
     tk = false;
@@ -83,51 +83,68 @@
     }, { threshold: 0.4 }).observe(nm);
   }
 
-  /* 주파수: 화면 뒤의 세로 막대. 단계가 오를수록 길어지고 색이 선명해진다 */
+  /* 주파수: 위에서 내려오는 막대(나)와 아래에서 올라오는 막대(친구)가 단계마다 서로에게 닿아 간다 */
   var fq = $('fq'), fqWrap = $('n-freq'), cv = $('fqC');
   if (fq && cv && cv.getContext) {
-    var ctx = cv.getContext('2d'), W = 0, H = 0, D = 1, cols = [], GAP = 20;
-    var COL = [[142, 136, 154], [7, 231, 180], [127, 128, 255], [199, 123, 255]], AMP = [0.1, 0.34, 0.6, 0.92], DAY = [1, 8, 15, 21];
-    var SAY = ['아직 스치는 사이예요', '교류가 쌓이는 중이에요', '한 번 더 함께하면 열려요', '친구 신청을 보낼 수 있어요'];
-    var st = 0, amp = AMP[0], rgb = COL[0].slice(), mx = -9999, live = false, rafF = 0, vel = 0;
-    var btns = [].slice.call(fq.querySelectorAll('.fq-st button')), dayEl = $('fqD'), sayEl = $('fqS');
+    var ctx = cv.getContext('2d'), W = 0, H = 0, D = 1, cols = [], GAP = 18;
+    var COL = [[142, 136, 154], [7, 231, 180], [127, 128, 255], [199, 123, 255]], SYNC = [0.04, 0.38, 0.72, 1], DAY = [1, 8, 15, 21];
+    var NAME = ['고요함', '선명함', '곧 열림', '열림'], SAY = ['아직 스치는 사이예요', '교류가 쌓이는 중이에요', '한 번 더 함께하면 열려요', '친구 신청이 열렸어요'];
+    var st = 0, sy = SYNC[0], rgb = COL[0].slice(), mx = -9999, live = false, rafF = 0, vel = 0, dayNow = 1;
+    var btns = [].slice.call(fq.querySelectorAll('.fq-st button')), dayEl = $('fqD'), sayEl = $('fqS'), nameEl = $('fqN'), daysEl = $('fqDays'), ticks = [];
+    if (daysEl) for (var q = 0; q < 21; q++) { var li = document.createElement('li'); daysEl.appendChild(li); ticks.push(li); }
     var rnd = function (i) { var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
     var size = function () {
       var r = fq.getBoundingClientRect(); D = Math.min(devicePixelRatio || 1, 2); W = r.width; H = r.height;
       cv.width = Math.round(W * D); cv.height = Math.round(H * D); cols = [];
-      for (var i = 0, n = Math.ceil(W / GAP) + 1; i < n; i++) cols.push({ a: rnd(i), b: rnd(i + 99), c: rnd(i + 777), thick: rnd(i + 31) > 0.42 });
+      for (var i = 0, n = Math.ceil(W / GAP) + 1; i < n; i++) cols.push({ a: rnd(i), b: rnd(i + 99), c: rnd(i + 777), ta: rnd(i + 31) > 0.36, tb: rnd(i + 57) > 0.36 });
       if (!live) draw(performance.now());
     };
-    var rr = function (x, y, w, h) { var r = w / 2; ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); ctx.fill(); };
+    var cap = function (x, y, w, h) { if (h < w) h = w; var r = w / 2; ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); ctx.fill(); };
     var draw = function (now) {
-      var t = now / 1000, k = 0.045;
-      vel *= 0.93; amp += (AMP[st] - amp) * k; for (var j = 0; j < 3; j++) rgb[j] += (COL[st][j] - rgb[j]) * k;
-      var c = Math.round(rgb[0]) + ',' + Math.round(rgb[1]) + ',' + Math.round(rgb[2]);
+      var t = now / 1000, k = 0.04; vel *= 0.93;
+      sy += (SYNC[st] - sy) * k; for (var j = 0; j < 3; j++) rgb[j] += (COL[st][j] - rgb[j]) * k;
+      var cA = Math.round(rgb[0]) + ',' + Math.round(rgb[1]) + ',' + Math.round(rgb[2]);
+      var cB = Math.round(rgb[0] + (255 - rgb[0]) * 0.55) + ',' + Math.round(rgb[1] + (255 - rgb[1]) * 0.55) + ',' + Math.round(rgb[2] + (255 - rgb[2]) * 0.55);
       ctx.setTransform(D, 0, 0, D, 0, 0); ctx.clearRect(0, 0, W, H);
       for (var i = 0; i < cols.length; i++) {
-        var o = cols[i], x = i * GAP + 0.5, near = Math.exp(-Math.pow((x - mx) / 110, 2));
-        var wave = 0.5 + 0.5 * Math.sin(t * (0.5 + o.a * 0.9) + o.b * 6.28), a = Math.min(1, amp * (0.35 + 0.65 * wave) + near * 0.28 + vel * 0.22 * o.b);
-        var yc = H * (0.5 + (o.c - 0.5) * 0.5 + Math.sin(t * 0.21 + o.a * 6.28) * 0.05), len = H * a * (0.25 + o.b * 0.75);
-        ctx.fillStyle = 'rgba(' + c + ',' + (0.2 + a * 0.3).toFixed(3) + ')'; ctx.fillRect(x, yc - len / 2, 1, len);
-        if (o.thick) { var th = Math.max(8, len * (0.12 + o.a * 0.42)), ty = yc - len / 2 + (len - th) * (0.5 + 0.5 * Math.sin(t * (0.3 + o.c * 0.5) + o.a * 9)); ctx.fillStyle = 'rgba(' + c + ',' + (0.3 + a * 0.6).toFixed(3) + ')'; rr(x - 3.5, ty, 8, th); }
+        var o = cols[i], x = i * GAP + 0.5, near = Math.exp(-Math.pow((x - mx) / 120, 2));
+        /* 두 사람이 만나는 선: 화면 가운데를 천천히 굽이친다 */
+        var meet = H * (0.5 + 0.11 * Math.sin(i * 0.21 + t * 0.45) + 0.045 * Math.sin(i * 0.63 - t * 0.7));
+        var wa = 0.5 + 0.5 * Math.sin(t * (0.45 + o.a * 0.8) + o.b * 6.28), wb = 0.5 + 0.5 * Math.sin(t * (0.5 + o.c * 0.8) + o.a * 6.28);
+        var gap = H * (1 - sy) * (0.5 + 0.36 * o.b) + 5 - near * H * 0.05 - vel * H * 0.04; if (gap < 5) gap = 5;
+        var off = (1 - sy) * H * 0.16;
+        var tipA = meet - gap / 2 - off * wa * o.a, tipB = meet + gap / 2 + off * wb * o.c;
+        var al = 0.16 + sy * 0.34 + near * 0.2;
+        ctx.fillStyle = 'rgba(' + cA + ',' + al.toFixed(3) + ')'; ctx.fillRect(x, 0, 1, Math.max(0, tipA));
+        ctx.fillStyle = 'rgba(' + cB + ',' + (al * 0.8).toFixed(3) + ')'; ctx.fillRect(x, tipB, 1, Math.max(0, H - tipB));
+        var th = 10 + (H * 0.16 * sy + 14) * (0.3 + 0.7 * o.b);
+        if (o.ta) { ctx.fillStyle = 'rgba(' + cA + ',' + (0.4 + sy * 0.55).toFixed(3) + ')'; cap(x - 3.5, tipA - th, 8, th); }
+        if (o.tb) { ctx.fillStyle = 'rgba(' + cB + ',' + (0.34 + sy * 0.5).toFixed(3) + ')'; cap(x - 3.5, tipB, 8, th * (0.6 + 0.4 * o.c)); }
+        /* 닿는 순간: 만나는 자리에 작은 빛 */
+        if (sy > 0.9 && o.ta && o.tb) { var g = (sy - 0.9) * 10 * (0.5 + 0.5 * Math.sin(t * 2 + i)); ctx.fillStyle = 'rgba(255,255,255,' + (0.5 * g).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(x + 0.5, meet, 2.2 + g * 1.6, 0, 6.3); ctx.fill(); }
       }
       if (live && !reduce) rafF = requestAnimationFrame(draw);
     };
+    var paintDays = function (dn) { ticks.forEach(function (li, i) { li.className = i < dn ? 'on' : ''; }); };
     var setSt = function (s) {
-      st = s; fq.dataset.st = s; dayEl.textContent = DAY[s]; sayEl.textContent = SAY[s];
+      st = s; fq.dataset.st = s; sayEl.textContent = SAY[s]; if (nameEl) nameEl.textContent = NAME[s];
       btns.forEach(function (b, i) { b.setAttribute('aria-pressed', i === s); });
-      if (reduce) { amp = AMP[s]; rgb = COL[s].slice(); draw(0); }
+      if (reduce) { sy = SYNC[s]; rgb = COL[s].slice(); dayEl.textContent = DAY[s]; paintDays(DAY[s]); draw(0); }
     };
-    /* 스크롤이 시간표: 구간을 내려갈수록 단계가 오른다. 버튼은 그 단계의 위치로 데려간다 */
+    /* 스크롤이 시간표: 내려갈수록 날이 가고 단계가 오른다. 버튼은 그 단계의 위치로 데려간다 */
     btns.forEach(function (b, i) { b.addEventListener('click', function () {
       if (reduce) { setSt(i); return; }
       var r = fqWrap.getBoundingClientRect(), top = r.top + scrollY, span = r.height - innerHeight;
       scrollTo({ top: top + span * (i * 0.25 + 0.12), behavior: 'smooth' });
     }); });
-    window.__fqStage = function (p, v) { var s = Math.min(3, Math.floor(p * 4)); if (s !== st) setSt(s); vel = Math.min(1, vel + v * 0.25); };
+    window.__fqStage = function (p, v) {
+      var s = Math.min(3, Math.floor(p * 4)); if (s !== st) setSt(s);
+      var dn = Math.max(1, Math.min(21, Math.round(1 + p * 21.5))); if (dn !== dayNow) { dayNow = dn; dayEl.textContent = dn; paintDays(dn); }
+      vel = Math.min(1, vel + v * 0.25);
+    };
     fq.addEventListener('pointermove', function (e) { mx = e.clientX - fq.getBoundingClientRect().left; });
     fq.addEventListener('pointerleave', function () { mx = -9999; });
-    addEventListener('resize', size); size(); setSt(reduce ? 3 : 0);
+    addEventListener('resize', size); size(); setSt(reduce ? 3 : 0); paintDays(reduce ? 21 : 1);
     new IntersectionObserver(function (es) {
       var on = es[0].isIntersecting; cancelAnimationFrame(rafF); live = on;
       if (on && !reduce) rafF = requestAnimationFrame(draw);

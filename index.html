@@ -2334,12 +2334,12 @@ html{background:var(--edge-b,var(--bg))}
   <a class="logo" href="#top" aria-label="Ditto! 처음으로"><img src="assets/wordmark.svg" alt="Ditto!" width="66" height="24"></a>
   <nav class="tabs-nav" aria-label="섹션">
     <ul id="tabs">
-      <li><a href="#n-platter" data-s="k-say,n-platter,k-num">플래터</a></li>
-      <li><a href="#n-ditto" data-s="n-ditto">디토</a></li>
-      <li><a href="#n-freq" data-s="n-freq">주파수</a></li>
-      <li><a href="#friends" data-s="friends">관계 지도</a></li>
-      <li><a href="#n-play" data-s="n-play">놀이</a></li>
-      <li><a href="#qa" data-s="why6,widgets,solution,become,analog,deeper,together,features,why,shift,impact,qa,close,play,get">초대장</a></li>
+      <li><a href="/platter/" data-s="k-say,n-platter">플래터</a></li>
+      <li><a href="/ditto/" data-s="n-ditto">디토</a></li>
+      <li><a href="/frequency/" data-s="n-freq,friends">주파수</a></li>
+      <li><a href="/play/" data-s="k-index">놀이</a></li>
+      <li><a href="/story/" data-s="k-index">이야기</a></li>
+      <li><a href="#tm" data-s="qa,close,play,get">초대장</a></li>
     </ul>
   </nav>
   <a class="cta store" href="https://apps.apple.com/kr/app/id6824991758" aria-label="App Store에서 앱 받기">앱 받기</a>
@@ -2376,16 +2376,16 @@ html{background:var(--edge-b,var(--bg))}
     <div class="k-pin-st"><div class="wrap k-pin-in">
       <div class="k-pin-l">
         <p class="k-lab"><span id="kPinN">플래터 01</span></p>
-        <p class="k-ln">요즘의 나를 플래터에 올려 두고,</p>
-        <p class="k-ln">친구의 조각을 꾹 눌러 디토하면,</p>
-        <p class="k-ln">둘 사이에 주파수가 차올라요.</p>
+        <p class="k-ln"><a href="/platter/">요즘의 나를 플래터에 올려 두고,</a></p>
+        <p class="k-ln"><a href="/ditto/">친구의 조각을 꾹 눌러 디토하면,</a></p>
+        <p class="k-ln"><a href="/frequency/">둘 사이에 주파수가 차올라요.</a></p>
       </div>
       <div class="k-sq"><figure class="ph" data-n="01" style="--t:#E7DBFD"><figcaption><span>플래터 화면</span><i>1:1</i></figcaption></figure><figure class="ph" data-n="02" style="--t:#07E7B4"><figcaption><span>디토하는 화면</span><i>1:1</i></figcaption></figure><figure class="ph ph-w" data-n="03" style="--t:#4A4BC0"><figcaption><span>주파수 화면</span><i>1:1</i></figcaption></figure></div>
     </div></div>
   </div>
 </section>
 
-<section class="k-ch" id="k-num" aria-labelledby="kn-h">
+<section class="k-ch" id="k-num" aria-labelledby="kn-h" hidden>
   <div class="wrap k-st"><h2 id="kn-h">숫자 네 개로 보는<br>디토.</h2></div>
   <div class="wrap"><ul class="k-nm" id="kNm">
     <li><p class="k-nm-n"><b data-to="3">3</b><i>초</i></p><h3>꾹 누르는 시간</h3><p>마음에 든 조각을 3초 동안 누르면 내 방으로 와요.</p></li>
@@ -2409,14 +2409,12 @@ html{background:var(--edge-b,var(--bg))}
 <section class="fq-w" id="n-freq" aria-labelledby="nf-h"><div class="fq" id="fq" data-st="0">
   <canvas class="fq-cv" id="fqC" aria-hidden="true"></canvas>
   <div class="fq-c">
-    <p class="fq-k">주파수 · <b id="fqD">1</b>일째</p>
+    <p class="fq-k"><b id="fqD">1</b>일째 · <span id="fqN">고요함</span></p>
     <h2 id="nf-h">주고받을수록,<br>색이 선명해져요.</h2>
-    <p class="fq-d">숫자로 보여 주지 않아요. 방문, 함께 단 댓글, 그룹 대화, 디토가 여러 날에 걸쳐 쌓이고, 다 차오르면 친구 신청이 열려요.</p>
-    <div class="fq-st" id="fqSt" role="group" aria-label="주파수 단계">
-      <button type="button" aria-pressed="true">고요함</button><button type="button" aria-pressed="false">선명함</button><button type="button" aria-pressed="false">곧 열림</button><button type="button" aria-pressed="false">열림</button>
-    </div>
     <p class="fq-s" id="fqS" aria-live="polite">아직 스치는 사이예요</p>
+    <div class="fq-st" id="fqSt" role="group" aria-label="주파수 단계"><button type="button" aria-pressed="true">고요함</button><button type="button" aria-pressed="false">선명함</button><button type="button" aria-pressed="false">곧 열림</button><button type="button" aria-pressed="false">열림</button></div>
   </div>
+  <ol class="fq-days" id="fqDays" aria-hidden="true"></ol>
 </div></section>
 
 <section class="frx" id="friends" aria-label="관계 지도">
@@ -2452,7 +2450,19 @@ html{background:var(--edge-b,var(--bg))}
   </div>
 </section>
 
-<section class="k-ch k-rail" id="n-play" aria-labelledby="npl-h">
+<section class="k-ch ci" id="k-index" aria-labelledby="ci-h">
+  <div class="wrap k-st"><h2 id="ci-h">더 깊이 보고 싶다면,<br>한 장씩 펼쳐 보세요.</h2></div>
+  <div class="wrap"><ol class="ci-l">
+    <li><a href="/platter/"><i>01</i><b>플래터</b><span>요즘의 나를 올려 두는 접시. 꾸미는 법과 열다섯 가지 위젯.</span><em aria-hidden="true">→</em></a></li>
+    <li><a href="/ditto/"><i>02</i><b>디토</b><span>좋아요 대신 “나도.” 3초 동안 꾹 눌러 가져오는 법.</span><em aria-hidden="true">→</em></a></li>
+    <li><a href="/frequency/"><i>03</i><b>주파수</b><span>주고받을수록 선명해지는 색. 친구가 되는 다섯 걸음.</span><em aria-hidden="true">→</em></a></li>
+    <li><a href="/play/"><i>04</i><b>놀이</b><span>사진 부스, 카메라, 그룹 채팅. 만나면 더 재밌는 것들.</span><em aria-hidden="true">→</em></a></li>
+    <li><a href="/story/"><i>05</i><b>이야기</b><span>디토를 만든 이유와, 달라지는 것.</span><em aria-hidden="true">→</em></a></li>
+  </ol></div>
+</section>
+
+
+<section class="k-ch k-rail" id="n-play" aria-labelledby="npl-h" hidden>
   <div class="k-rail-st">
     <div class="wrap k-st"><h2 id="npl-h">만나면,<br>더 재밌어요.</h2><p>사진 부스, 캠코더, 무전기, 편지, 방명록. 오래 사랑받던 다섯 가지 놀이를 앱 안에 다시 담았어요.</p></div>
     <ul class="k-pl" id="kRail"><li><figure class="ph" data-n="13" style="--t:#E7DBFD"><figcaption><span>사진 부스 장면</span><i>4:5</i></figcaption></figure><b>사진 부스</b><span>함께 찍는 네컷 사진</span></li><li><figure class="ph" data-n="14" style="--t:#ECEAF0"><figcaption><span>캠코더 장면</span><i>4:5</i></figcaption></figure><b>캠코더</b><span>그 시절 화면 그대로</span></li><li><figure class="ph" data-n="15" style="--t:#CFF6EC"><figcaption><span>무전기 장면</span><i>4:5</i></figcaption></figure><b>무전기</b><span>우리끼리 모이는 그룹 채팅</span></li><li><figure class="ph" data-n="16" style="--t:#DCDDF7"><figcaption><span>편지 장면</span><i>4:5</i></figcaption></figure><b>편지</b><span>편지로 전하는 친구 신청</span></li><li><figure class="ph" data-n="17" style="--t:#ECEAF0"><figcaption><span>방명록 장면</span><i>4:5</i></figcaption></figure><b>방명록</b><span>친구가 남기고 가는 한마디</span></li></ul>
@@ -2468,7 +2478,7 @@ html{background:var(--edge-b,var(--bg))}
   <div class="film-st"><figure class="film-f"><img src="assets/bg-friends.jpg" alt="촛불 앞에 모여 웃고 박수 치는 친구들" width="1200" height="900" loading="lazy"></figure><p class="film-t">보여주고 싶은 사람은<br>결국, 이 몇 명이에요.</p></div>
 </section>
 
-<section class="why6" id="why6" aria-labelledby="why6-h"><div class="wrap">
+<section class="why6" id="why6" aria-labelledby="why6-h" hidden><div class="wrap">
   <p class="why6-k">더 알아보기</p>
   <h2 id="why6-h">화면 속이 아니라,<br>곁에 있고 싶어서요.</h2>
   <p class="why6-d">친구가 되는 다섯 걸음, 그룹 채팅과 카메라, 디토를 만든 이유까지. 더 궁금할 때 펼쳐 보세요.</p>
@@ -3178,7 +3188,7 @@ html{background:var(--edge-b,var(--bg))}
 <footer class="foot" id="foot">
   <div class="wrap"><div class="f5">
     <p class="f5-s">우리로부터 시작되는<br>작은 공간.</p>
-    <div><h4>디토</h4><ul><li><a href="#why6">만든 이유</a></li><li><a href="#n-platter">플래터</a></li><li><a href="#widgets">위젯</a></li><li><a href="#solution">친구</a></li></ul></div>
+    <div><h4>디토</h4><ul><li><a href="/platter/">플래터</a></li><li><a href="/ditto/">디토</a></li><li><a href="/frequency/">주파수</a></li><li><a href="/play/">놀이</a></li><li><a href="/story/">이야기</a></li></ul></div>
     <div><h4>시작하기</h4><ul><li><a href="https://apps.apple.com/kr/app/id6824991758">App Store</a></li><li><a href="#tm">초대장 뽑기</a></li><li><a href="#qa">자주 묻는 질문</a></li></ul></div>
     <div><h4>안내</h4><ul><li><a href="/splup/">디자인 가이드</a></li><li><a href="/privacy/">개인정보 처리방침</a></li><li><a href="/terms/">이용약관</a></li></ul></div>
   </div>
