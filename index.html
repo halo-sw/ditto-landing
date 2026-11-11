@@ -2407,20 +2407,16 @@ html{background:var(--edge-b,var(--bg))}
   </div>
 </section>
 
-<section class="k-ch" id="n-freq" aria-labelledby="nf-h">
-  <div class="wrap k-intro"><p class="k-lab">Frequency</p><p class="k-intro-t">주파수는 두 사람 사이에 쌓인 마음이에요. 숫자로 보여 주지 않고, 색으로만 보여 줘요.</p></div>
-  <div class="wrap k-st"><h2 id="nf-h">주고받을수록,<br>색이 선명해져요.</h2><p>방문, 함께 단 댓글, 그룹 대화, 디토가 여러 날에 걸쳐 쌓여요. 다 차오르면 친구 신청이 열려요.</p></div>
-  <div class="wrap">
-    <div class="fz" id="fz" data-st="0">
-      <div class="fz-top"><span class="fz-p"><u aria-hidden="true">A</u>지우</span><b class="fz-day"><i id="fzD">1</i>일째</b><span class="fz-p">하은<u aria-hidden="true">B</u></span></div>
-      <svg class="fz-w" id="fzW" viewBox="0 0 490 110" role="img" aria-label="지우와 하은 사이의 주파수 파형. 교류가 쌓일수록 색이 선명해져요"></svg>
-      <div class="fz-st" role="group" aria-label="주파수 단계">
-        <button type="button" aria-pressed="true"><b>고요함</b><small>아직 스치는 사이예요</small></button>
-        <button type="button" aria-pressed="false"><b>선명함</b><small>교류가 쌓이는 중이에요</small></button>
-        <button type="button" aria-pressed="false"><b>곧 열림</b><small>한 번 더 함께하면 열려요</small></button>
-        <button type="button" aria-pressed="false"><b>열림</b><small>친구 신청을 보낼 수 있어요</small></button>
-      </div>
+<section class="fq" id="n-freq" data-st="0" aria-labelledby="nf-h">
+  <canvas class="fq-cv" id="fqC" aria-hidden="true"></canvas>
+  <div class="fq-c">
+    <p class="fq-k">주파수 · <b id="fqD">1</b>일째</p>
+    <h2 id="nf-h">주고받을수록,<br>색이 선명해져요.</h2>
+    <p class="fq-d">숫자로 보여 주지 않아요. 방문, 함께 단 댓글, 그룹 대화, 디토가 여러 날에 걸쳐 쌓이고, 다 차오르면 친구 신청이 열려요.</p>
+    <div class="fq-st" id="fqSt" role="group" aria-label="주파수 단계">
+      <button type="button" aria-pressed="true">고요함</button><button type="button" aria-pressed="false">선명함</button><button type="button" aria-pressed="false">곧 열림</button><button type="button" aria-pressed="false">열림</button>
     </div>
+    <p class="fq-s" id="fqS" aria-live="polite">아직 스치는 사이예요</p>
   </div>
 </section>
 

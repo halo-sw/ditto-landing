@@ -6,7 +6,7 @@
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
 
   /* 등장 */
-  var els = [].slice.call(document.querySelectorAll('.k-ch .k-intro > *, .k-ch .k-st > *, .k-ch .k-nm li, .k-ch .hd, .k-ch .fz, .k-ch .k-pl li'));
+  var els = [].slice.call(document.querySelectorAll('.k-ch .k-intro > *, .k-ch .k-st > *, .k-ch .k-nm li, .k-ch .hd, .k-ch .k-pl li'));
   els.forEach(function (el) { el.setAttribute('data-rv', ''); });
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { var sib = [].indexOf.call(e.target.parentNode.children, e.target); e.target.style.transitionDelay = Math.min(sib, 8) * 50 + 'ms'; e.target.classList.add('on'); io.unobserve(e.target); } });
@@ -81,39 +81,48 @@
     }, { threshold: 0.4 }).observe(nm);
   }
 
-  /* 주파수: 점으로 된 파형이 단계마다 차오른다 */
-  var fz = $('fz'), svg = $('fzW');
-  if (fz && svg) {
-    var COLS = 49, ROWS = 11, NS = 'http://www.w3.org/2000/svg', dots = [];
-    for (var c = 0; c < COLS; c++) {
-      dots[c] = [];
-      for (var r = 0; r < ROWS; r++) {
-        var d = document.createElementNS(NS, 'circle');
-        d.setAttribute('cx', 5 + c * 10); d.setAttribute('cy', 5 + r * 10); d.setAttribute('r', 2);
-        svg.appendChild(d); dots[c][r] = d;
-      }
-    }
-    var shape = function (c) { var x = c / (COLS - 1), env = Math.pow(Math.sin(x * Math.PI), 0.7); return env * (0.25 + 0.75 * Math.abs(Math.sin(c * 1.9 + 0.5) * Math.cos(c * 0.37))) + 0.08; };
-    var AMP = [0.14, 0.5, 0.78, 1.05], DAY = [1, 8, 15, 21];
-    var btns = [].slice.call(fz.querySelectorAll('.fz-st button')), day = $('fzD'), cur = -1, timer = 0, mineF = false;
-    var set = function (s) {
-      cur = s; fz.dataset.st = s; day.textContent = DAY[s];
-      btns.forEach(function (b, k) { b.setAttribute('aria-pressed', k === s); });
-      var mid = (ROWS - 1) / 2;
-      for (var c = 0; c < COLS; c++) {
-        var h = Math.round(shape(c) * AMP[s] * mid);
-        for (var r = 0; r < ROWS; r++) {
-          var on = Math.abs(r - mid) <= h, el = dots[c][r];
-          el.classList.toggle('on', on); el.setAttribute('r', on ? 3.6 : 2);
-          el.style.transitionDelay = (c * 9) + 'ms';
-        }
-      }
+  /* 주파수: 화면 뒤의 세로 막대. 단계가 오를수록 길어지고 색이 선명해진다 */
+  var fq = $('n-freq'), cv = $('fqC');
+  if (fq && cv && cv.getContext) {
+    var ctx = cv.getContext('2d'), W = 0, H = 0, D = 1, cols = [], GAP = 20;
+    var COL = [[142, 136, 154], [7, 231, 180], [127, 128, 255], [199, 123, 255]], AMP = [0.1, 0.34, 0.6, 0.92], DAY = [1, 8, 15, 21];
+    var SAY = ['아직 스치는 사이예요', '교류가 쌓이는 중이에요', '한 번 더 함께하면 열려요', '친구 신청을 보낼 수 있어요'];
+    var st = 0, amp = AMP[0], rgb = COL[0].slice(), mx = -9999, live = false, rafF = 0, timerF = 0, mineF = false;
+    var btns = [].slice.call(fq.querySelectorAll('.fq-st button')), dayEl = $('fqD'), sayEl = $('fqS');
+    var rnd = function (i) { var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+    var size = function () {
+      var r = fq.getBoundingClientRect(); D = Math.min(devicePixelRatio || 1, 2); W = r.width; H = r.height;
+      cv.width = Math.round(W * D); cv.height = Math.round(H * D); cols = [];
+      for (var i = 0, n = Math.ceil(W / GAP) + 1; i < n; i++) cols.push({ a: rnd(i), b: rnd(i + 99), c: rnd(i + 777), thick: rnd(i + 31) > 0.42 });
+      if (!live) draw(performance.now());
     };
-    btns.forEach(function (b, k) { b.addEventListener('click', function () { mineF = true; clearInterval(timer); set(k); }); });
-    set(reduce ? 3 : 0);
-    if (!reduce) new IntersectionObserver(function (es) {
-      clearInterval(timer);
-      if (es[0].isIntersecting && !mineF) timer = setInterval(function () { set((cur + 1) % 4); }, 2200);
-    }, { threshold: 0.5 }).observe(fz);
+    var rr = function (x, y, w, h) { var r = w / 2; ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); ctx.fill(); };
+    var draw = function (now) {
+      var t = now / 1000, k = 0.045;
+      amp += (AMP[st] - amp) * k; for (var j = 0; j < 3; j++) rgb[j] += (COL[st][j] - rgb[j]) * k;
+      var c = Math.round(rgb[0]) + ',' + Math.round(rgb[1]) + ',' + Math.round(rgb[2]);
+      ctx.setTransform(D, 0, 0, D, 0, 0); ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < cols.length; i++) {
+        var o = cols[i], x = i * GAP + 0.5, near = Math.exp(-Math.pow((x - mx) / 110, 2));
+        var wave = 0.5 + 0.5 * Math.sin(t * (0.5 + o.a * 0.9) + o.b * 6.28), a = Math.min(1, amp * (0.35 + 0.65 * wave) + near * 0.28);
+        var yc = H * (0.5 + (o.c - 0.5) * 0.5 + Math.sin(t * 0.21 + o.a * 6.28) * 0.05), len = H * a * (0.25 + o.b * 0.75);
+        ctx.fillStyle = 'rgba(' + c + ',' + (0.2 + a * 0.3).toFixed(3) + ')'; ctx.fillRect(x, yc - len / 2, 1, len);
+        if (o.thick) { var th = Math.max(8, len * (0.12 + o.a * 0.42)), ty = yc - len / 2 + (len - th) * (0.5 + 0.5 * Math.sin(t * (0.3 + o.c * 0.5) + o.a * 9)); ctx.fillStyle = 'rgba(' + c + ',' + (0.3 + a * 0.6).toFixed(3) + ')'; rr(x - 3.5, ty, 8, th); }
+      }
+      if (live && !reduce) rafF = requestAnimationFrame(draw);
+    };
+    var setSt = function (s) {
+      st = s; fq.dataset.st = s; dayEl.textContent = DAY[s]; sayEl.textContent = SAY[s];
+      btns.forEach(function (b, i) { b.setAttribute('aria-pressed', i === s); });
+      if (reduce) { amp = AMP[s]; rgb = COL[s].slice(); draw(0); }
+    };
+    btns.forEach(function (b, i) { b.addEventListener('click', function () { mineF = true; clearInterval(timerF); setSt(i); }); });
+    fq.addEventListener('pointermove', function (e) { mx = e.clientX - fq.getBoundingClientRect().left; });
+    fq.addEventListener('pointerleave', function () { mx = -9999; });
+    addEventListener('resize', size); size(); setSt(reduce ? 3 : 0);
+    new IntersectionObserver(function (es) {
+      var on = es[0].isIntersecting; clearInterval(timerF); cancelAnimationFrame(rafF); live = on;
+      if (on && !reduce) { rafF = requestAnimationFrame(draw); if (!mineF) timerF = setInterval(function () { setSt((st + 1) % 4); }, 2600); }
+    }, { threshold: 0.25 }).observe(fq);
   }
 })();
