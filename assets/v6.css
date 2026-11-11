@@ -265,3 +265,19 @@
 #analog{padding-bottom:var(--sec)}
 .mo .wrap>*+*{margin-top:clamp(56px,7vw,104px)}
 .mo .fs-w{margin-top:clamp(56px,7vw,104px)}
+
+/* ---------- 한 가지 문법: 모든 구간의 머리말은 라벨 · 제목 · 한 줄 ---------- */
+.sh{margin:0 0 clamp(36px,4.4vw,64px)}
+.sh-k,.pg .pg-k,.t3-k{margin:0 0 14px;font-size:14px;font-weight:600;letter-spacing:-.01em;color:#7B2FD0}
+.sh h2,.pg .pg-c h2{margin:0;font-size:clamp(30px,3.9vw,56px);line-height:1.14;letter-spacing:-.05em;font-weight:700;word-break:keep-all}
+.sh-d,.pg .pg-d{margin:18px 0 0;max-width:30em;font-size:clamp(16px,1.25vw,18px);line-height:1.7;color:var(--ink-2);word-break:keep-all}
+#widgets .sh-k{color:#C79BFF}#widgets .sh h2{color:#fff}#widgets .sh-d{color:rgba(255,255,255,.66)}
+.t3-say{display:block;padding-block:clamp(72px,9vw,128px) clamp(40px,5vw,72px)}
+.t3-t{font-size:clamp(26px,3.3vw,48px);line-height:1.3;letter-spacing:-.045em;font-weight:700}
+#become,#friends,#analog{padding-top:var(--sec)}
+#become .fp{margin-top:0}
+@media (min-width:861px) and (prefers-reduced-motion:no-preference){#become .fp{margin-block:-10vh -6vh}}
+.ins-copy .lab,.faq-side .lab{font-size:14px;font-weight:600;color:#7B2FD0}
+.faq-side .h-xl{font-size:clamp(30px,3.9vw,56px);line-height:1.14;letter-spacing:-.05em;font-weight:700}
+.why6 h2,.close-h{letter-spacing:-.05em}
+.why6-k{color:#7B2FD0}
