@@ -89,7 +89,7 @@
       if (open && jump) requestAnimationFrame(function () { var y = pane.getBoundingClientRect().top + scrollY - 70; scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); });
     };
     btn.addEventListener('click', function () { set(pane.hidden, true); });
-    var need = function () { return /^#(deeper|together|groupchat|cameras|features|why|shift|impact)$/.test(location.hash); };
+    var need = function () { return /^#(widgets|solution|become|analog|deeper|together|groupchat|cameras|features|why|shift|impact)$/.test(location.hash); };
     if (need()) { set(true); var el = document.querySelector(location.hash); if (el) el.scrollIntoView(); }
     addEventListener('hashchange', function () { if (need() && pane.hidden) { set(true); var el = document.querySelector(location.hash); if (el) el.scrollIntoView(); } });
   }
