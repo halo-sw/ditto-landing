@@ -32,12 +32,14 @@
   }
 
   /* 스크롤 장면 */
-  var say = $('k-say'), pin = $('kPin'), col = $('kCol'), pinN = $('kPinN'), NAMES = ['플래터 01', '디토 02', '주파수 03'], tk = false;
+  var say = $('k-say'), pin = $('kPin'), col = $('kCol'), railS = $('n-play'), rail = $('kRail'), fqW = $('n-freq'), lastY = scrollY, lastT = performance.now(), pinN = $('kPinN'), NAMES = ['플래터 01', '디토 02', '주파수 03'], tk = false;
   var prog = function (el) { var r = el.getBoundingClientRect(); return clamp(-r.top / (r.height - innerHeight)); };
   var onScroll = function () {
     tk = false;
     if (say) { var p = prog(say); say.style.setProperty('--p', clamp(p / 0.55)); say.style.setProperty('--q', clamp((p - 0.5) / 0.3)); }
     if (pin) { var i = Math.min(2, Math.floor(prog(pin) * 3)); if (pin.dataset.i != i) { pin.dataset.i = i; pinN.textContent = NAMES[i]; } }
+    if (rail) { rail.style.setProperty('--rx', (prog(railS) * Math.max(0, rail.scrollWidth - innerWidth)).toFixed(1)); }
+    if (fqW && window.__fqStage) { var now = performance.now(), v = Math.abs(scrollY - lastY) / Math.max(16, now - lastT); lastY = scrollY; lastT = now; window.__fqStage(prog(fqW), v); }
     if (col) { var r = col.getBoundingClientRect(), pc = clamp((innerHeight - r.top) / (r.height + innerHeight)); col.style.setProperty('--p', pc); col.style.setProperty('--q', clamp((prog(col) - 0.15) / 0.35)); }
   };
   if (!reduce) { addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(onScroll); } }, { passive: true }); addEventListener('resize', onScroll); onScroll(); }
@@ -82,12 +84,12 @@
   }
 
   /* 주파수: 화면 뒤의 세로 막대. 단계가 오를수록 길어지고 색이 선명해진다 */
-  var fq = $('n-freq'), cv = $('fqC');
+  var fq = $('fq'), fqWrap = $('n-freq'), cv = $('fqC');
   if (fq && cv && cv.getContext) {
     var ctx = cv.getContext('2d'), W = 0, H = 0, D = 1, cols = [], GAP = 20;
     var COL = [[142, 136, 154], [7, 231, 180], [127, 128, 255], [199, 123, 255]], AMP = [0.1, 0.34, 0.6, 0.92], DAY = [1, 8, 15, 21];
     var SAY = ['아직 스치는 사이예요', '교류가 쌓이는 중이에요', '한 번 더 함께하면 열려요', '친구 신청을 보낼 수 있어요'];
-    var st = 0, amp = AMP[0], rgb = COL[0].slice(), mx = -9999, live = false, rafF = 0, timerF = 0, mineF = false;
+    var st = 0, amp = AMP[0], rgb = COL[0].slice(), mx = -9999, live = false, rafF = 0, vel = 0;
     var btns = [].slice.call(fq.querySelectorAll('.fq-st button')), dayEl = $('fqD'), sayEl = $('fqS');
     var rnd = function (i) { var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
     var size = function () {
@@ -99,12 +101,12 @@
     var rr = function (x, y, w, h) { var r = w / 2; ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); ctx.fill(); };
     var draw = function (now) {
       var t = now / 1000, k = 0.045;
-      amp += (AMP[st] - amp) * k; for (var j = 0; j < 3; j++) rgb[j] += (COL[st][j] - rgb[j]) * k;
+      vel *= 0.93; amp += (AMP[st] - amp) * k; for (var j = 0; j < 3; j++) rgb[j] += (COL[st][j] - rgb[j]) * k;
       var c = Math.round(rgb[0]) + ',' + Math.round(rgb[1]) + ',' + Math.round(rgb[2]);
       ctx.setTransform(D, 0, 0, D, 0, 0); ctx.clearRect(0, 0, W, H);
       for (var i = 0; i < cols.length; i++) {
         var o = cols[i], x = i * GAP + 0.5, near = Math.exp(-Math.pow((x - mx) / 110, 2));
-        var wave = 0.5 + 0.5 * Math.sin(t * (0.5 + o.a * 0.9) + o.b * 6.28), a = Math.min(1, amp * (0.35 + 0.65 * wave) + near * 0.28);
+        var wave = 0.5 + 0.5 * Math.sin(t * (0.5 + o.a * 0.9) + o.b * 6.28), a = Math.min(1, amp * (0.35 + 0.65 * wave) + near * 0.28 + vel * 0.22 * o.b);
         var yc = H * (0.5 + (o.c - 0.5) * 0.5 + Math.sin(t * 0.21 + o.a * 6.28) * 0.05), len = H * a * (0.25 + o.b * 0.75);
         ctx.fillStyle = 'rgba(' + c + ',' + (0.2 + a * 0.3).toFixed(3) + ')'; ctx.fillRect(x, yc - len / 2, 1, len);
         if (o.thick) { var th = Math.max(8, len * (0.12 + o.a * 0.42)), ty = yc - len / 2 + (len - th) * (0.5 + 0.5 * Math.sin(t * (0.3 + o.c * 0.5) + o.a * 9)); ctx.fillStyle = 'rgba(' + c + ',' + (0.3 + a * 0.6).toFixed(3) + ')'; rr(x - 3.5, ty, 8, th); }
@@ -116,13 +118,19 @@
       btns.forEach(function (b, i) { b.setAttribute('aria-pressed', i === s); });
       if (reduce) { amp = AMP[s]; rgb = COL[s].slice(); draw(0); }
     };
-    btns.forEach(function (b, i) { b.addEventListener('click', function () { mineF = true; clearInterval(timerF); setSt(i); }); });
+    /* 스크롤이 시간표: 구간을 내려갈수록 단계가 오른다. 버튼은 그 단계의 위치로 데려간다 */
+    btns.forEach(function (b, i) { b.addEventListener('click', function () {
+      if (reduce) { setSt(i); return; }
+      var r = fqWrap.getBoundingClientRect(), top = r.top + scrollY, span = r.height - innerHeight;
+      scrollTo({ top: top + span * (i * 0.25 + 0.12), behavior: 'smooth' });
+    }); });
+    window.__fqStage = function (p, v) { var s = Math.min(3, Math.floor(p * 4)); if (s !== st) setSt(s); vel = Math.min(1, vel + v * 0.25); };
     fq.addEventListener('pointermove', function (e) { mx = e.clientX - fq.getBoundingClientRect().left; });
     fq.addEventListener('pointerleave', function () { mx = -9999; });
     addEventListener('resize', size); size(); setSt(reduce ? 3 : 0);
     new IntersectionObserver(function (es) {
-      var on = es[0].isIntersecting; clearInterval(timerF); cancelAnimationFrame(rafF); live = on;
-      if (on && !reduce) { rafF = requestAnimationFrame(draw); if (!mineF) timerF = setInterval(function () { setSt((st + 1) % 4); }, 2600); }
-    }, { threshold: 0.25 }).observe(fq);
+      var on = es[0].isIntersecting; cancelAnimationFrame(rafF); live = on;
+      if (on && !reduce) rafF = requestAnimationFrame(draw);
+    }, { threshold: 0.05 }).observe(fq);
   }
 })();
