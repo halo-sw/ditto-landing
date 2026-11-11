@@ -84,12 +84,12 @@
   if (btn && pane) {
     var label = btn.querySelector('span');
     var set = function (open, jump) {
-      pane.hidden = !open; btn.setAttribute('aria-expanded', open); label.textContent = open ? '이야기 접기' : '이야기 펼쳐 보기';
+      pane.hidden = !open; btn.setAttribute('aria-expanded', open); label.textContent = open ? '접기' : '자세히 펼쳐 보기';
       window.dispatchEvent(new Event('resize'));
       if (open && jump) requestAnimationFrame(function () { var y = pane.getBoundingClientRect().top + scrollY - 70; scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); });
     };
     btn.addEventListener('click', function () { set(pane.hidden, true); });
-    var need = function () { return /^#(why|shift|impact)$/.test(location.hash); };
+    var need = function () { return /^#(deeper|together|groupchat|cameras|features|why|shift|impact)$/.test(location.hash); };
     if (need()) { set(true); var el = document.querySelector(location.hash); if (el) el.scrollIntoView(); }
     addEventListener('hashchange', function () { if (need() && pane.hidden) { set(true); var el = document.querySelector(location.hash); if (el) el.scrollIntoView(); } });
   }
