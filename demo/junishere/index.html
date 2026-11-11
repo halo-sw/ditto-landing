@@ -312,6 +312,7 @@
     .w[role=button] { transition: none; }
   }
 </style>
+<script src="/assets/web-count.js" data-page="demo" defer></script>
 </head>
 <body>
 <main class="app">
@@ -362,7 +363,7 @@
 <script>
 (function () {
   // 앱 다운로드 유도 모달. 출시 후 APP_STORE_URL만 채우면 App Store로 바로 연결된다. 비어 있으면 출시 알림 신청(/download/)으로 보낸다.
-  var APP_STORE_URL = "https://apps.apple.com/kr/app/id6824991758";
+  var APP_STORE_URL = "https://apps.apple.com/kr/app/id6824991758?ct=profile_modal&mt=8";
   var $ = function (id) { return document.getElementById(id); };
   var dl = $("dl"), scrim = $("dlScrim"), lastFocus = null, shown = false;
   $("dlStore").href = APP_STORE_URL || "/download/";

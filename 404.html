@@ -493,6 +493,7 @@
     .w[role=button] { transition: none; }
   }
 </style>
+<script src="/assets/web-count.js" data-page="profile" defer></script>
 </head>
 <body>
 <main class="app">
@@ -574,7 +575,7 @@
 (function () {
   // 앱 다운로드 유도 모달. 출시 후 APP_STORE_URL만 채우면 App Store로 바로 연결된다.
   // 비어 있는 동안(출시 전)은 모달 안에서 바로 사전등록(출시 알림)을 받는다 — download/index.html과 같은 waitlist 주소·키·본문.
-  var APP_STORE_URL = "https://apps.apple.com/kr/app/id6824991758";
+  var APP_STORE_URL = "https://apps.apple.com/kr/app/id6824991758?ct=profile_modal&mt=8";
   var WL = "https://lisqekczixwzshmpewzq.supabase.co/rest/v1/waitlist";
   var WL_KEY = "sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf";
   var STORE = "ditto.waitlist";   // 이 브라우저에서 사전등록했는지 (가린 이메일 · 날짜만, 편의용)
