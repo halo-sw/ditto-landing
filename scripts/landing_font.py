@@ -20,6 +20,9 @@ for sub in ("platter", "ditto", "frequency", "play", "story"):
     f = ROOT / sub / "index.html"
     if f.exists():
         chars |= set(f.read_text(encoding="utf-8"))
+# v8: 스크립트가 화면에 넣는 글자 (위젯 문구 · 위젯 이름과 설명 · 장면 설명)
+for f in sorted((ROOT / "assets/v8").glob("*.js")):
+    chars |= set(f.read_text(encoding="utf-8"))
 # 지금 서브셋에 있는 글자는 그대로 품는다 (v5.js 등 스크립트가 넣는 글자 포함)
 old = ROOT / "assets/pretendard-ditto.woff2"
 if old.exists():
