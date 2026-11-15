@@ -542,7 +542,7 @@
 .fx-egg-l{right:calc(100% + 22px)}
 .fx-egg-r{left:calc(100% + 22px)}
 .fx-egg .o{position:absolute;opacity:0;transform:scale(.55) rotate(var(--r,0deg));transition:opacity .16s ease,transform .2s ease}
-.fx-egg.on .o{opacity:1;transform:scale(1) rotate(var(--r,0deg));transition:opacity .22s ease,transform .62s cubic-bezier(.2,1.5,.4,1);transition-delay:var(--dl,0ms)}
+.fx-egg.on .o{opacity:1;transform:scale(1) rotate(var(--r,0deg));transition:opacity .22s ease,transform .62s cubic-bezier(.22,.61,.36,1);transition-delay:var(--dl,0ms)}
 /* 가까운 친구: 여덟이 나타났다가 몇은 흐려진다 */
 .fx-egg .av{width:27cqw;height:27cqw;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1.2cqw #fff,0 6cqw 9cqw -5cqw rgba(40,10,60,.45)}
 .fx-egg-l .av:nth-child(1){left:52%;top:6%;--r:-6deg}
@@ -670,7 +670,7 @@
 .h8-dt3-mid{display:grid;justify-items:center;gap:10px;width:clamp(56px,7vw,96px);margin-top:44px;opacity:.28;transition:opacity .6s ease}
 .h8-dt3-mid i{width:100%;border-top:2px dashed #D8CFE6}
 .h8-dt3-mid span{font-size:12.5px;font-weight:700;line-height:1.35;letter-spacing:-.02em;color:#7B2FD0;text-align:center;word-break:keep-all}
-.h8-dt3-mid em{width:clamp(44px,5vw,68px);aspect-ratio:3/4;border-radius:12px;background:#DDD8E6 center/cover no-repeat;box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(22,18,27,.08),0 16px 24px -14px rgba(40,10,60,.5);opacity:0;transform:scale(.6) rotate(-6deg);transition:opacity .3s ease,transform .7s cubic-bezier(.2,1.5,.4,1)}
+.h8-dt3-mid em{width:clamp(44px,5vw,68px);aspect-ratio:3/4;border-radius:12px;background:#DDD8E6 center/cover no-repeat;box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(22,18,27,.08),0 16px 24px -14px rgba(40,10,60,.5);opacity:0;transform:scale(.6) rotate(-6deg);transition:opacity .3s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
 /* 단계: 0 처음 · 1 지우가 가져감 · 2 그룹 채팅에 카드 · 3 하은이 가져감 · 4 주파수 */
 .h8-dt3[data-s="0"] .h8-dt3-col:nth-child(n+3){opacity:.45}
 .h8-dt3[data-s="1"] .h8-dt3-col:nth-child(5){opacity:.45}
@@ -702,16 +702,16 @@
 .h8-rl-row{list-style:none;display:flex;align-items:flex-start;justify-content:center;gap:clamp(6px,1vw,16px);margin:0;padding:0}
 .h8-rl-st{flex:none;display:grid;justify-items:center;gap:clamp(16px,1.8vw,24px);transition:opacity .7s ease}
 .h8-rl-who{display:grid;justify-items:center;gap:3px;margin:0;text-align:center}
-.h8-rl-who img{width:clamp(48px,4.6vw,64px);height:clamp(48px,4.6vw,64px);margin-bottom:8px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(22,18,27,.08);transition:box-shadow .5s ease,transform .7s cubic-bezier(.2,1.5,.4,1)}
+.h8-rl-who img{width:clamp(48px,4.6vw,64px);height:clamp(48px,4.6vw,64px);margin-bottom:8px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(22,18,27,.08);transition:box-shadow .5s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
 .h8-rl-who b{font-size:clamp(15px,1.3vw,18px);font-weight:700;letter-spacing:-.03em}
 .h8-rl-who span{font-size:13px;color:#8E889A;letter-spacing:-.02em}
 /* 자리: 사진 위젯 한 장 크기. 비어 있을 땐 점선 */
-.h8-rl-slot{position:relative;width:var(--cw);aspect-ratio:129.25/175;border-radius:calc(var(--cw) * .12);transition:transform .8s cubic-bezier(.2,1.4,.4,1)}
+.h8-rl-slot{position:relative;width:var(--cw);aspect-ratio:129.25/175;border-radius:calc(var(--cw) * .12);transition:transform .8s cubic-bezier(.22,.61,.36,1)}
 .h8-rl-slot::before{content:"";position:absolute;inset:0;border-radius:inherit;border:2px dashed #D3CBE0;transition:opacity .4s ease}
 .h8-rl-slot.has::before{opacity:0}
 .h8-rl-slot .dpl{position:absolute;left:0;top:0;width:calc(var(--cw) * 358 / 129.25);height:100%}
 .h8-rl-slot .dw{box-shadow:0 0 0 1px rgba(22,18,27,.05),0 30px 44px -28px rgba(40,10,60,.5)}
-.h8-rl-slot.has .dw{animation:fx-land .7s cubic-bezier(.2,1.5,.4,1) both}
+.h8-rl-slot.has .dw{animation:fx-land .7s cubic-bezier(.22,.61,.36,1) both}
 .h8-rl .rs1 .h8-rl-slot{transform:rotate(-3deg)}
 .h8-rl .rs2 .h8-rl-slot{transform:translateY(clamp(10px,2vw,28px)) rotate(2.5deg)}
 .h8-rl .rs3 .h8-rl-slot{transform:rotate(-2deg)}
@@ -726,7 +726,7 @@
 .h8-rl-via i{position:relative;width:100%;height:2px;background:repeating-linear-gradient(90deg,#D3CBE0 0 6px,transparent 6px 12px)}
 .h8-rl-via i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#AA4AF4,#FA97E2);transform:scaleX(0);transform-origin:0 50%;transition:transform 1s cubic-bezier(.45,0,.2,1)}
 .h8-rl-via span{font-size:12.5px;font-weight:700;line-height:1.35;letter-spacing:-.02em;color:#A49EB0;text-align:center;word-break:keep-all;transition:color .5s ease}
-.h8-rl-via em{position:absolute;top:calc(100% + 12px);width:clamp(40px,4.4vw,60px);aspect-ratio:3/4;border-radius:10px;background:#DDD8E6 center/cover no-repeat;box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(22,18,27,.08),0 16px 24px -14px rgba(40,10,60,.5);opacity:0;transform:scale(.6) rotate(-6deg);transition:opacity .3s ease,transform .7s cubic-bezier(.2,1.5,.4,1)}
+.h8-rl-via em{position:absolute;top:calc(100% + 12px);width:clamp(40px,4.4vw,60px);aspect-ratio:3/4;border-radius:10px;background:#DDD8E6 center/cover no-repeat;box-shadow:0 0 0 3px #fff,0 0 0 4px rgba(22,18,27,.08),0 16px 24px -14px rgba(40,10,60,.5);opacity:0;transform:scale(.6) rotate(-6deg);transition:opacity .3s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
 .h8-rl-more{flex:none;display:flex;align-items:center;margin-top:clamp(8px,.8vw,12px);padding-left:clamp(8px,1.2vw,18px);opacity:0;transform:translateX(-12px);transition:opacity .8s ease,transform 1s var(--fx-e)}
 .h8-rl-more i{width:clamp(20px,3vw,48px);height:2px;margin-right:10px;background:repeating-linear-gradient(90deg,#D3CBE0 0 6px,transparent 6px 12px)}
 .h8-rl-more img{width:clamp(30px,3vw,42px);height:clamp(30px,3vw,42px);border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #F4F3F6}
@@ -781,7 +781,7 @@
 .h8-rl-via i,.h8-rl-more i{display:none}
 /* 프로필은 카드 위에 겹쳐 붙는다 */
 .h8-rl-st{gap:clamp(34px,3.6vw,48px)}
-.h8-rl-av{position:absolute;left:50%;top:0;z-index:6;width:clamp(44px,4.2vw,58px);height:clamp(44px,4.2vw,58px);border-radius:50%;object-fit:cover;transform:translate(-50%,-58%);box-shadow:0 0 0 3px #F4F3F6,0 8px 16px -8px rgba(40,10,60,.5);transition:box-shadow .5s ease,transform .7s cubic-bezier(.2,1.5,.4,1)}
+.h8-rl-av{position:absolute;left:50%;top:0;z-index:6;width:clamp(44px,4.2vw,58px);height:clamp(44px,4.2vw,58px);border-radius:50%;object-fit:cover;transform:translate(-50%,-58%);box-shadow:0 0 0 3px #F4F3F6,0 8px 16px -8px rgba(40,10,60,.5);transition:box-shadow .5s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
 .h8-rl[data-s="1"] .rs2 .h8-rl-av,.h8-rl[data-s="3"] .rs3 .h8-rl-av{box-shadow:0 0 0 3px #F4F3F6,0 0 0 6px #AA4AF4;transform:translate(-50%,-58%) scale(1.1)}
 /* 구슬: 실 한가운데에 얹힌 말 */
 .h8-rl:not(.vert) .h8-rl-via{position:static;margin-top:0;align-self:stretch}
