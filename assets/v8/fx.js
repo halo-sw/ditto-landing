@@ -174,22 +174,33 @@
       hls.forEach(function (h) { var on = !!key && h.dataset.egg === key; h.classList.toggle('on', on); h.setAttribute('aria-pressed', on); });
       ps.forEach(function (p) { var mine = !!key && !!p.querySelector('.fx-egg.on'); p.classList.toggle('egg', mine); if (mine) ps.forEach(function (q) { q.classList.toggle('cur', q === p); }); });   // 누른 문장이 읽는 문장이 된다
     }
+    var auto = '', hover = '';
+    function paint() { show(pinned || hover || auto); }
     hls.forEach(function (h) {
       h.insertAdjacentHTML('beforeend', '<svg class="fx-ring" viewBox="0 0 120 50" preserveAspectRatio="none" aria-hidden="true"><path d="M9 27C10 13 34 5 63 5c29 0 50 8 49 21-1 13-25 20-54 20C30 46 8 40 9 27Z" pathLength="1"/></svg>');
-      h.addEventListener('click', function () { var k = h.dataset.egg; pinned = pinned === k ? '' : k; show(pinned); });
+      h.addEventListener('click', function () { var k = h.dataset.egg; pinned = pinned === k ? '' : k; paint(); });
       if (FINE) {
-        h.addEventListener('pointerenter', function () { show(h.dataset.egg); });
-        h.addEventListener('pointerleave', function () { show(pinned); });
+        h.addEventListener('pointerenter', function () { hover = h.dataset.egg; paint(); });
+        h.addEventListener('pointerleave', function () { hover = ''; paint(); });
       }
     });
     if (ps.length < 2 || RM) return;
-    var last = -1;
+    /* 스크롤에 맞춰 낱말이 차례로 켜진다: 첫 낱말은 화면 70% 높이에서, 마지막 낱말은 30% 높이에서 켜지도록 기준선이 미끄러진다
+       (낱말들이 64px 간격으로 붙어 있어도 한 낱말마다 150px쯤 머문다). 그림을 누르거나 올려 둔 낱말이 있으면 그쪽이 먼저다 */
+    var n = hls.length;
     onScroll.push(function (vh) {
-      var box = ps[0].parentNode.getBoundingClientRect(); if (box.bottom < -200 || box.top > vh + 200) { if (pinned) { pinned = ''; show(''); } return; }
-      var best = 0, bd = 1e9;
-      ps.forEach(function (p, i) { var r = p.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - vh * 0.5); if (d < bd) { bd = d; best = i; } });
-      if (best !== last) { last = best; if (pinned) { pinned = ''; show(''); } }       // 다른 문장으로 넘어가면 접는다
-      ps.forEach(function (p, i) { p.classList.toggle('cur', i === best); });
+      var box = ps[0].parentNode.getBoundingClientRect();
+      if (box.bottom < -200 || box.top > vh + 200) { if (pinned || auto) { pinned = ''; auto = ''; paint(); } return; }
+      var best = -1, bd = 1e9;
+      hls.forEach(function (h, k) { var r = h.getBoundingClientRect(), y = r.top + r.height / 2, line = vh * (0.7 - 0.4 * (n > 1 ? k / (n - 1) : 0)), d = Math.abs(y - line); if (d < bd) { bd = d; best = k; } });
+      var f = hls[0].getBoundingClientRect(), l = hls[n - 1].getBoundingClientRect();
+      if (f.top > vh * 0.86 || l.bottom < vh * 0.14) best = -1;            // 아직 안 왔거나 이미 지나갔다
+      var key = best < 0 ? '' : hls[best].dataset.egg;
+      if (key !== auto) { auto = key; pinned = ''; paint(); }
+      if (!key) {            // 켜진 낱말이 없을 때는 가운데에 가장 가까운 문장이 읽는 문장
+        var bp = 0, pd = 1e9; ps.forEach(function (q, i) { var r = q.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - vh * 0.5); if (d < pd) { pd = d; bp = i; } });
+        ps.forEach(function (q, i) { q.classList.toggle('cur', i === bp); });
+      }
     });
   }
 
