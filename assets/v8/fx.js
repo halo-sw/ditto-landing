@@ -197,6 +197,13 @@
       if (f.top > vh * 0.86 || l.bottom < vh * 0.14) best = -1;            // 아직 안 왔거나 이미 지나갔다
       var key = best < 0 ? '' : hls[best].dataset.egg;
       if (key !== auto) { auto = key; pinned = ''; paint(); }
+      var eg = eggs.filter(function (e) { return e.classList.contains('on'); })[0];
+      if (eg) {
+        var pr = eg.parentNode.getBoundingClientRect(), pc = pr.top + pr.height / 2, hh = 0;
+        [].forEach.call(eg.children, function (c) { hh = Math.max(hh, c.offsetHeight); });
+        var lo = Math.max(88 + hh / 2, vh * 0.36), hi = Math.min(vh - 24 - hh / 2, vh * 0.6); if (hi < lo) lo = hi = vh / 2 + 32;            // 그림은 화면 가운데 띠 안에 머문다
+        eg.style.setProperty('--ey', (Math.max(lo, Math.min(hi, pc)) - pc).toFixed(1) + 'px');
+      }
       if (!key) {            // 켜진 낱말이 없을 때는 가운데에 가장 가까운 문장이 읽는 문장
         var bp = 0, pd = 1e9; ps.forEach(function (q, i) { var r = q.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - vh * 0.5); if (d < pd) { pd = d; bp = i; } });
         ps.forEach(function (q, i) { q.classList.toggle('cur', i === bp); });

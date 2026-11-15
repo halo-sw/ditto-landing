@@ -3862,7 +3862,7 @@ html{background:var(--edge-b,var(--bg))}
       cv.setAttribute('aria-label', `${r.P.label} ${r.me.n}을 가운데 둔 관계 지도. 앱을 깐 날부터 6개월 동안 안쪽에 친구, 바깥에 친구의 친구가 생기고, 그 사이를 교류 구슬이 이어요. 사람을 누르면 그 관계의 자세한 이야기로 가요.`);
       T = reduce ? DAYS : 0; setPlay(!reduce); t0 = performance.now(); lastD = -1; fTop = -2;
     }
-    function size(){ const b = cv.getBoundingClientRect(); W = b.width; H = b.height; DPR = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); CX = W / 2; CY = H / 2 + 6; R0 = Math.min(W, H - 90) * .46; }
+    function size(){ const b = cv.getBoundingClientRect(); W = b.width; H = b.height; DPR = Math.min(b.width < 600 ? 1.5 : 2, devicePixelRatio || 1); cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); CX = W / 2; CY = H / 2 + 6; R0 = Math.min(W, H - 90) * .46; }
     function hud(){
       const d = Math.min(DAYS, Math.floor(T)); if (d === lastD) return; lastD = d;
       const s = r.snap[d], ph = r.P.phases.find(p => d >= p[0] && d <= p[1]), dt = r.dateOf(d);
