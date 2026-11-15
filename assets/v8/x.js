@@ -218,7 +218,7 @@
         if (!end) requestAnimationFrame(f); else dot.remove();
       })(t0);
     }
-    function wloop(now) { wraf = 0; if (!wlive) return; wraf = requestAnimationFrame(wloop); var dt = Math.min(0.1, (now - wt) / 1000 || 0); wt = now; if (done > 0) { phase += dt * 5; waves(); } }
+    function wloop() { wraf = 0; }            // 길은 곧은 곡선이라 프레임마다 다시 그릴 것이 없다
     function press(ms) {
       if (RM) return Promise.resolve();
       return new Promise(function (res) {
@@ -483,8 +483,9 @@
     size(); draw(0); seen(el, function () { el.classList.add('in'); }, 0.2);
     addEventListener('resize', function () { size(); draw(performance.now() / 1000); });
     if (RM) return;
-    visible(el, function (v) { live = v; if (v && !raf) raf = requestAnimationFrame(tick); });
-    var tk = false; addEventListener('scroll', function () { if (tk) return; tk = true; requestAnimationFrame(function () { tk = false; var r = el.getBoundingClientRect(); if (r.bottom < -100 || r.top > innerHeight + 100) return; q = clamp((innerHeight * 0.35 - r.top) / (r.height * 0.9)); }); }, { passive: true });
+    var lite = window.matchMedia && matchMedia('(max-width: 760px)').matches;            // 휴대폰: 떠다니는 움직임 없이 스크롤할 때만 다시 그린다
+    visible(el, function (v) { live = v && !lite; if (live && !raf) raf = requestAnimationFrame(tick); });
+    var tk = false; addEventListener('scroll', function () { if (tk) return; tk = true; requestAnimationFrame(function () { tk = false; var r = el.getBoundingClientRect(); if (r.bottom < -100 || r.top > innerHeight + 100) return; q = clamp((innerHeight * 0.35 - r.top) / (r.height * 0.9)); if (lite) draw(0); }); }, { passive: true });
   }
 
   /* ── 초대장 받는 순서: 사진 → 이름·아이디 → 뽑기 → 코드. 지금 하고 있는 칸이 켜진다 ── */
@@ -595,7 +596,10 @@
     set();
   }
 
-  var fns = [widgets, ditto, island, warp, heroType, stickers, wall, cover, far, flow, android, roll, wish, heroOut];
+  /* ── 사진은 화면에 그릴 때 따로 풀게 한다 (스크롤 중에 사진을 푸느라 멈칫하지 않게) ── */
+  function lazyDecode() { $$('img').forEach(function (im) { if (!im.complete) im.decoding = 'async'; }); }
+
+  var fns = [widgets, ditto, island, warp, heroType, stickers, wall, cover, far, flow, android, roll, wish, heroOut, lazyDecode];
   window.__dittoX = fns;
   function boot() { fns.forEach(function (fn) { try { fn(); } catch (e) { if (window.console) console.error('[v8 x]', fn.name, e); } }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

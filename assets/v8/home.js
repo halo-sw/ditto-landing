@@ -429,7 +429,7 @@
     var GR = []; for (var gi = 0; gi < 12; gi++) { var gt = gi / 11; GR.push('rgb(' + Math.round(170 + 80 * gt) + ',' + Math.round(74 + 77 * gt) + ',' + Math.round(244 - 18 * gt) + ')'); }   // #AA4AF4 → #FA97E2
     function rn(a, b) { var x = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return x - Math.floor(x); }
     function build() {
-      var r = box.getBoundingClientRect(); W = r.width; H = r.height; D = Math.min(window.devicePixelRatio || 1, 2); small = W < 700;
+      var r = box.getBoundingClientRect(); W = r.width; H = r.height; D = Math.min(window.devicePixelRatio || 1, r.width < 700 ? 1.5 : 2); small = W < 700;
       cv.width = Math.round(W * D); cv.height = Math.round(H * D);
       var mh = H * (small ? 0.27 : 0.4), mw = mh * 214 / 204; if (mw > W * 0.78) { mw = W * 0.78; mh = mw * 204 / 214; }
       MK = { cx: W * 0.5, cy: H * (small ? 0.36 : 0.38), w: mw, h: mh };
@@ -549,7 +549,7 @@
       logs.forEach(function (li, i) { li.classList.toggle('old', i < last - 1); });
       endEl.classList.toggle('on', ps > 0.9);
     }
-    function loop(now) { raf = 0; if (!live) return; raf = requestAnimationFrame(loop); paint(now); }
+    function loop(now) { raf = 0; if (!live) return; raf = requestAnimationFrame(loop); if (small && (loop.skip = !loop.skip)) return; paint(now); }            // 휴대폰에서는 한 프레임 걸러 그린다
     function onScroll() { var r = wrap.getBoundingClientRect(), span = r.height - innerHeight; p = RM ? 1 : span > 0 ? clamp(-r.top / span) : 1; }
     btns.forEach(function (b, i) { b.addEventListener('click', function () {
       var r = wrap.getBoundingClientRect(), span = r.height - innerHeight; if (span <= 0) return;

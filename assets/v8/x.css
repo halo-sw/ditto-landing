@@ -916,3 +916,21 @@
 .fx-egg.on .o{transform:scale(1) rotate(var(--r,0deg));transition:opacity .2s ease,transform .5s cubic-bezier(.2,1.3,.4,1);transition-delay:var(--dl,0ms)}
 /* 프로필 월 배경: 점 격자 대신 가운데에서 번지는 빛과 옅은 동심원 (끌면 같이 움직이고, 확대하면 같이 커진다) */
 .x-wall-cv{background-image:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(233,216,251,.8) 0,rgba(252,227,244,.4) 30%,rgba(246,244,249,0) 60%),repeating-radial-gradient(circle at var(--gx,50%) var(--gy,50%),transparent 0 calc(var(--gs,28px) * 4.2 - 1.2px),rgba(150,110,200,.16) calc(var(--gs,28px) * 4.2 - 1.2px) calc(var(--gs,28px) * 4.2));background-size:auto;background-position:0 0;background-color:#F7F5FA}
+
+/* ══ v8.21 ══ */
+/* 낱말 그림 묶음: 문장 옆에 있되 화면 밖으로 나가지 않게 스크립트가 --ey 만큼 당긴다 */
+.fx-egg-l,.fx-egg-r{transform:translateY(calc(-50% + var(--ey,0px)))}
+/* 휴대폰 스크롤이 가볍도록: 화면에 붙어 있는 흐림 · 끝없이 다시 칠하는 것들을 걷는다 */
+@media (max-width:760px){
+  .x-isl-box{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.96)}
+  .fx-trio.x-roll>.x-roll-i{filter:none;transition:transform .7s var(--tx-e),opacity .5s ease}
+  .fx-trio.x-roll>.x-roll-i[data-p="s"]{opacity:.28}
+  .x-tk3-glow{animation:none;filter:blur(22px)}
+  .fx-foot-in{animation:none}
+  .x-cov-c img{filter:none}
+  .x-home{transition:none}
+  .x-map .x-dt-row>li:not(.has):not(.next) .x-home{filter:none;opacity:.7}
+  .x-far svg,.x-wish-col,.x-hp-c{will-change:auto}
+}
+/* 넘김에서 보이지 않는 플래터는 그리지도 않는다 */
+.fx-trio.x-roll>.x-roll-i[data-p="h"]{visibility:hidden;transition:transform .9s var(--tx-e),opacity .6s ease,filter .6s ease,visibility 0s .6s}
