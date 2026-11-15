@@ -1,0 +1,16 @@
+/* 홈 한 장 정리 (v8.1) — 본문 글은 소개 문안만. 장면 안의 설명 줄은 접는다. */
+main > section[hidden], .tm-f[hidden], .more-b[hidden] { display: none !important; }
+
+/* 플래터 · 디토: 설명 줄 */
+.h8-hint, .h8-dt-cap { display: none; }
+/* 위젯 진열: 이름만 */
+.h8-wc-t span, .h8-wc-t > i { display: none; }
+/* 카메라 색감: 이름만 */
+.h8-looks button div span, .h8-looks button > i { display: none; }
+
+/* 푸터 한 줄 */
+.f5.f5-one { display: block; }
+.f5 .f5-row { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+
+/* 마지막 받기 구간 · 푸터 */
+.foot .f5-row a::after { content: none; }

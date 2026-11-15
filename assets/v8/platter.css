@@ -1,0 +1,324 @@
+/* ditto.place v8 — platter widgets (assets/v8/platter-render.js → window.DittoWidgets)
+ *
+ *   .dpl          platter root. container-type:inline-size, so 100cqw = platter width.
+ *                 Design width 358 (app Grid.width on a 390pt screen) · 8 columns · pitch 45.75 · gutter 8.
+ *   .dw           one widget box, positioned by the caller (DittoWidgets.applyBox / box / platter do it for you).
+ *   .dw-<kind>    kind on the box · .dw-hl = 1px line (not ditto-able) · .dw-glow = halo (open for ditto)
+ *   .dw-c         the content element DittoWidgets.render() returns. Fills the box.
+ *   .dw-*         everything inside. Nothing here styles a class that does not start with "dpl" or "dw".
+ *
+ *   Every length is a multiple of --u (= 1 design px = 100cqw / 358), so a platter scales to any width and is 1:1 with the
+ *   app at 358. Hairlines are max(1px, 1 design px): never thinner than a device-independent pixel.
+ *   Ported from scripts/platter.py + its page CSS (demo pages) and assets/platter/render.js + scripts/profile.html
+ *   (the app-following renderer), cross-checked with the Swift views in prj_Ditto!/DittoPrototype/Views.
+ */
+
+.dpl { position: relative; width: 100%; container-type: inline-size; }
+.dpl, .dw, .dw-c { --u: calc(100cqw / 358); --dw-hair: max(1px, calc(100cqw / 358)); }
+
+.dw { position: absolute; overflow: hidden; isolation: isolate; -webkit-tap-highlight-color: transparent; }
+.dw.dw-hl::after { content: ""; position: absolute; inset: 0; z-index: 9; border-radius: inherit; box-shadow: inset 0 0 0 var(--dw-hair) #E7E1EE; pointer-events: none; }
+.dw.dw-glow { box-shadow: 0 0 calc(16 * var(--u)) calc(3 * var(--u)) rgba(170,74,244,.30); }
+
+.dw-c { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; isolation: isolate;
+  font-family: "Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  font-size: calc(16 * var(--u)); font-weight: 400; font-style: normal; line-height: normal; letter-spacing: -0.01em;
+  text-align: left; text-transform: none; text-decoration: none; text-indent: 0; white-space: normal; word-break: normal; word-spacing: normal;
+  color: #171719; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+  -webkit-user-select: none; user-select: none; }
+.dw-c, .dw-c *, .dw-c *::before, .dw-c *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.dw-c i, .dw-c em { font-style: normal; }
+.dw-c img { max-width: none; border: 0; }
+.dw-c svg { display: block; width: 100%; height: 100%; }
+/* colour emoji keep their own colour when the text colour is translucent (app look only) */
+.dw-emo { color: #000; -webkit-text-fill-color: #000; font-style: normal; }
+
+.dw-cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.dw-soft { position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 calc(18 * var(--u)) rgba(255,255,255,.95), inset calc(1 * var(--u)) calc(2 * var(--u)) calc(7 * var(--u)) rgba(255,255,255,.25); pointer-events: none; }
+.dw-grow { flex: 1 1 auto; }
+
+/* ── 사진 ── */
+.dw-ph { position: absolute; inset: 0; display: grid; place-items: center; color: #8a8792; }
+.dw-ph svg { width: 22%; height: auto; }
+.dw-im-title { position: absolute; left: 0; right: 0; top: 0; color: #fff; font-weight: 600; background: linear-gradient(rgba(28,23,33,.72), rgba(28,23,33,.35) 58%, rgba(28,23,33,0)); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.dw-im-cap { position: absolute; left: 0; right: 0; top: 0; background: linear-gradient(rgba(28,23,33,.6), rgba(28,23,33,.38) 58%, rgba(28,23,33,0)); }
+.dw-im-cap.dw-b { top: auto; bottom: 0; background: linear-gradient(0deg, rgba(28,23,33,.6), rgba(28,23,33,.38) 58%, rgba(28,23,33,0)); }
+.dw-im-cap.dw-m { bottom: 0; display: flex; align-items: center; background: rgba(28,23,33,.38); }
+.dw-im-cap.dw-m p { flex: 1 1 auto; }
+.dw-im-cap p { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-line; }
+
+/* ── 텍스트 ── */
+.dw-tx { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.dw-tx p { max-width: 100%; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-line; }
+
+/* ── 상태 · 가운데 정렬 타일 ── */
+.dw-ss { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: calc(8 * var(--u)); }
+.dw-ss.dw-ss-h { flex-direction: row; justify-content: flex-start; }
+.dw-ss span { line-height: 1.1; }
+.dw-ss b { font-weight: 600; color: #171719; white-space: pre-line; }
+.dw-ss.dw-app b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden; word-break: keep-all; }
+.dw-ss.dw-ss-h.dw-app b { text-align: left; }
+.dw-ss .dw-sub { font-weight: 500; opacity: .6; color: inherit; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-ep { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.dw-ep > span { display: flex; line-height: 1; }
+.dw-ep i { line-height: 1.15; }
+.dw-wt b { font-weight: 600; color: rgba(18,18,18,.72); }
+.dw-wt .dw-sub, .dw-gf .dw-sub { color: rgba(18,18,18,.9); opacity: .55; }
+.dw-gf .dw-sub { letter-spacing: .07em; }
+
+/* ── 영상 ── */
+.dw-vd-shade { position: absolute; left: 0; right: 0; top: 0; }
+.dw-vd-shade.dw-web { height: 57%; background: linear-gradient(#111, rgba(17,17,17,0)); }
+.dw-vd-shade.dw-app { background: linear-gradient(rgba(28,23,34,.6), rgba(28,23,34,.38) 58%, rgba(28,23,34,0)); }
+.dw-vd-title { position: absolute; left: 0; right: 0; top: 0; color: #fff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.dw-vd-title.dw-web { font-weight: 700; }
+.dw-vd-title.dw-app { font-weight: 600; word-break: keep-all; overflow-wrap: anywhere; }
+.dw-vd-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(102,85,210,.6); display: grid; place-items: center; }
+.dw-vd-play i { display: block; transform: translateX(7%); }
+.dw-vd-yt { position: absolute; }
+.dw-vd-poster { position: absolute; }
+
+/* ── 음악 (CDP) ── */
+.dw-k-music { box-shadow: inset 0 0 0 var(--dw-hair) #c8c9ce, inset 0 calc(1 * var(--u)) calc(6 * var(--u)) rgba(255,255,255,.6); }
+.dw-cd { position: absolute; border-radius: 50%; background: #bec1c7; box-shadow: 0 0 0 var(--dw-hair) rgba(255,255,255,.8), 0 calc(3 * var(--u)) calc(8 * var(--u)) rgba(30,20,50,.18); }
+.dw-cd-rot { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: conic-gradient(from 15deg, #4c607e, #8294b5, #e5e6ed, #8396b6, #384968, #8395ac, #e2e4ee, #a2afc6, #495c7c, #7890ab, #4c607e); }
+.dw-cd-rot img { position: absolute; inset: 3%; width: 94%; height: 94%; border-radius: 50%; object-fit: cover; }
+.dw-cd-grooves { position: absolute; inset: 4.5%; border-radius: 50%; background: repeating-radial-gradient(circle, rgba(255,255,255,0) 0 3.4%, rgba(255,255,255,.05) 3.6% 3.8%); }
+.dw-cd-sheen { position: absolute; inset: 3%; border-radius: 50%; opacity: .22; background: conic-gradient(from 22deg, transparent 0 7.5%, rgba(255,183,205,.72) 14%, rgba(174,160,242,.8) 17%, rgba(119,210,242,.86) 20%, rgba(163,239,210,.72) 23%, transparent 29% 55%, rgba(244,161,205,.78) 63%, rgba(163,172,248,.8) 67%, rgba(115,219,221,.85) 71%, rgba(173,240,184,.6) 75%, transparent 81%); box-shadow: inset 0 0 0 calc(1.5 * var(--u)) rgba(46,63,90,.5); }
+.dw-cd-hub { position: absolute; left: 36.25%; top: 36.25%; width: 27.5%; height: 27.5%; border-radius: 50%; background: linear-gradient(135deg, #fff, #8b909b 50%, #f5f5f8); box-shadow: 0 0 0 var(--dw-hair) #252d3c, 0 0 0 calc(2.5 * var(--u)) #fff; }
+.dw-cd-hole { position: absolute; left: 43.75%; top: 43.75%; width: 12.5%; height: 12.5%; border-radius: 50%; background: #dadcdf; box-shadow: inset 0 0 0 var(--dw-hair) #949ba7; }
+.dw-c.dw-playing .dw-cd-rot { animation: dw-spin 3.2s linear infinite; }
+@keyframes dw-spin { to { transform: rotate(360deg); } }
+.dw-mu-info { position: absolute; display: flex; flex-direction: column; gap: calc(2 * var(--u)); min-width: 0; }
+.dw-mu-info.dw-ctr { align-items: center; text-align: center; }
+.dw-mu-info > b, .dw-mu-info > span { max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-mu-info > b { font-weight: 600; color: #1c1722; }
+.dw-mu-info > span { font-weight: 400; color: #443651; }
+.dw-mu-info > b.dw-ml { display: -webkit-box; -webkit-box-orient: vertical; white-space: normal; word-break: keep-all; overflow-wrap: anywhere; }
+.dw-mu-src { position: absolute; display: flex; align-items: center; color: #443651; white-space: nowrap; line-height: normal; }
+.dw-mu-src.dw-ctr { justify-content: center; }
+.dw-mu-info > .dw-mu-src { position: static; overflow: visible; flex: none; }
+.dw-mu-src b { font-weight: 600; color: #443651; }
+.dw-mu-src span { font-weight: 400; color: #443651; }
+.dw-mu-mk { flex: none; display: grid; place-items: center; }
+.dw-mu-mk.dw-am { background: #FA2D48; color: #fff; }
+.dw-mu-mk.dw-am b { display: block; color: #fff; }
+.dw-mu-mk.dw-pv { color: #443651; }
+.dw-mu-prog { position: absolute; display: flex; flex-direction: column; }
+.dw-mu-track { position: relative; display: block; border-radius: calc(99 * var(--u)); background: #B8ACB4; }
+.dw-mu-track i { position: absolute; left: 0; top: 50%; width: calc(6 * var(--u)); height: calc(6 * var(--u)); margin-top: calc(-3 * var(--u)); margin-left: calc(-3 * var(--u)); border-radius: 50%; background: #6B5579; }
+.dw-mu-time { display: flex; justify-content: space-between; align-items: center; color: #443651; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.dw-mu-vid { position: absolute; left: 0; right: 0; top: 0; overflow: hidden; background: #29272C; }
+.dw-mu-vid img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.dw-mu-vid i { position: absolute; inset: 0; background: linear-gradient(rgba(20,18,26,0) 55%, rgba(20,18,26,.42)); }
+.dw-mu-vid em { position: absolute; color: #fff; line-height: calc(13 * var(--u)); }
+.dw-mu-bar { position: absolute; border-radius: calc(3 * var(--u)); background: rgba(28,23,34,.14); overflow: hidden; opacity: 0; }
+.dw-mu-bar i { display: block; height: 100%; width: 0; background: #6b5579; border-radius: inherit; }
+.dw-c.dw-playing .dw-mu-bar { opacity: 1; }
+
+/* ── 서비스 타일 (방명록 · 폴라로이드 · 파파라치) ── */
+.dw-st { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.dw-st-label { display: flex; align-items: center; justify-content: space-between; font-weight: 500; color: #77727c; }
+.dw-st-label svg { width: .9em; height: .9em; }
+.dw-st.dw-st-w { flex-direction: row; align-items: center; }
+.dw-st-w .dw-st-body { align-self: stretch; }
+.dw-st-col { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.dw-st-body { flex: 1 1 auto; min-height: 0; display: flex; }
+.dw-st-title { font-weight: 700; color: #232127; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; }
+.dw-st-sub { font-weight: 400; color: #77727c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-gb { flex: 1 1 auto; align-self: stretch; width: 100%; background: #FAF6ED; color: #443A30; font-weight: 400; overflow: hidden; word-break: keep-all; }
+.dw-gb.dw-gb-on { display: flex; flex-direction: column; justify-content: space-between; }
+.dw-gb-on p { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+.dw-gb-from { display: flex; align-items: center; color: #77727c; font-weight: 500; white-space: nowrap; overflow: hidden; }
+.dw-gb-av { flex: none; object-fit: cover; }
+.dw-pol { flex: 1 1 auto; display: flex; flex-direction: column; margin: calc(2 * var(--u)); padding: calc(6 * var(--u)) calc(6 * var(--u)) 0; background: #fff; box-shadow: 0 0 0 var(--dw-hair) #ebe6ed; }
+.dw-pol-chin { height: calc(12 * var(--u)); flex: none; }
+.dw-pol-photo, .dw-pap-photo { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; background: #eee9ee; }
+.dw-pol-photo img, .dw-pap-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.dw-pol-photo.dw-empty, .dw-pap-photo.dw-empty { display: grid; place-items: center; color: #918694; }
+.dw-pol-photo.dw-empty i, .dw-pap-photo.dw-empty i { display: block; }
+.dw-pap { flex: 1 1 auto; display: flex; border-radius: calc(10 * var(--u)); overflow: hidden; }
+.dw-fl-count { position: absolute; right: calc(6 * var(--u)); bottom: calc(6 * var(--u)); padding: calc(2 * var(--u)) calc(6 * var(--u)); border-radius: calc(8 * var(--u)); background: rgba(0,0,0,.45); color: #fff; font-size: calc(10 * var(--u)); font-weight: 600; }
+
+/* ── 글 블록 (platter.py 모양 · look "web") ── */
+.dw-k-block.dw-web { box-shadow: inset 0 0 0 var(--dw-hair) rgba(94,96,104,.12); }
+.dw-bl { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.dw-bl-main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+.dw-bl-h .dw-bl-main { flex-direction: row; align-items: center; gap: calc(8 * var(--u)); }
+.dw-bl-emoji { display: flex; align-items: center; line-height: 1; }
+.dw-bl-text { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-line; font-weight: 500; color: #171719; }
+.dw-bl-src { display: flex; gap: calc(4 * var(--u)); font-weight: 500; color: #70737c; }
+.dw-bl-src span { flex: 1 1 auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+/* ── 포스트 (kind block · 앱 PostWidgetTile) ── */
+.dw-po-col { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.dw-po-row { display: flex; }
+.dw-po-fill { position: absolute; inset: 0; }
+.dw-po-col.dw-mid { flex: 1 1 auto; justify-content: center; }
+.dw-po-ph { position: relative; flex: none; overflow: hidden; background: #EEEDF2; }
+.dw-po-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.dw-po-eb { flex: none; display: flex; align-items: center; min-width: 0; font-weight: 500; line-height: 1.3; color: #862FC6; white-space: nowrap; }
+.dw-po-eb i { flex: none; display: block; }
+.dw-po-eb b { font-weight: 500; }
+.dw-po-eb em { color: #989ba2; }
+.dw-po-eb span { color: #70737c; overflow: hidden; text-overflow: ellipsis; }
+.dw-po-eb.dw-on, .dw-po-eb.dw-on em, .dw-po-eb.dw-on span { color: #fff; }
+.dw-po-eb.dw-on em { opacity: .6; }
+.dw-po-eb.dw-on span { opacity: .85; }
+.dw-po-t, .dw-po-b { flex: none; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; letter-spacing: -.01em; }
+.dw-po-b { font-weight: 400; }
+.dw-po-shade { position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0) 25%, rgba(0,0,0,.6)); }
+.dw-po-cov { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; }
+.dw-po-pen { flex: none; display: block; color: #862FC6; }
+.dw-po-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; }
+.dw-po-empty.dw-ctr { align-items: center; justify-content: center; }
+.dw-po-ico { border-radius: 50%; background: #F2E8FF; color: #862FC6; display: grid; place-items: center; }
+.dw-po-ico i { display: block; }
+.dw-po-empty b { font-weight: 600; color: #70737c; line-height: 1; }
+
+/* ── D-Day (앱 DDayTile) ── */
+.dw-dd2 { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; }
+.dw-dd2.dw-photo { justify-content: flex-end; }
+.dw-dd-h { display: flex; flex-direction: column; min-width: 0; max-width: 100%; }
+.dw-dd-t { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-dd-n { display: flex; font-weight: 800; line-height: 1.05; letter-spacing: -.03em; white-space: nowrap; }
+.dw-dd-n.dw-stack { flex-direction: column; }
+.dw-dd-d { font-weight: 500; white-space: nowrap; line-height: 1.3; }
+.dw-dd-row { display: flex; align-items: center; width: 100%; }
+.dw-dd-col { display: flex; flex-direction: column; width: 100%; }
+.dw-dd-bar { position: relative; display: block; width: 100%; border-radius: calc(99 * var(--u)); overflow: hidden; }
+.dw-dd-bar i { display: block; height: 100%; border-radius: inherit; }
+.dw-dd-dots, .dw-dd-grid > span { display: flex; }
+.dw-dd-dots i, .dw-dd-grid i { flex: none; display: block; border-radius: 50%; }
+.dw-dd-grid { display: flex; flex-direction: column; }
+.dw-dd-scrim { position: absolute; inset: 0; background: linear-gradient(rgba(6,10,20,0), rgba(6,10,20,.02) 30%, rgba(6,10,20,.8)); }
+/* 옛 D-Day (platter.py) */
+.dw-dd { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #4a3f8f; padding: calc(6 * var(--u)); }
+.dw-dd b { font-family: "New York", "Iowan Old Style", Georgia, "Times New Roman", serif; font-style: italic; font-weight: 700; line-height: 1.1; white-space: nowrap; }
+.dw-dd span { font-weight: 500; opacity: .7; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── To-do (앱 TodoTile) ── */
+.dw-td { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.dw-td-h { flex: none; display: flex; align-items: center; min-width: 0; }
+.dw-td-h b { min-width: 0; font-weight: 600; color: #171719; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-td-h em { flex: none; max-width: 55%; font-weight: 500; color: #989ba2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-td-g { flex: none; display: grid; grid-template-columns: repeat(2, auto); align-content: center; justify-content: center; }
+.dw-td-g i { display: block; border-radius: 50%; }
+.dw-td-w { flex: none; display: flex; }
+.dw-td-d { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(3 * var(--u)); border-radius: calc(8 * var(--u)); }
+.dw-td-d.dw-on { background: rgba(243,240,247,.6); }
+.dw-td-d b { font-weight: 600; line-height: 1; }
+.dw-td-bl { position: relative; display: grid; place-items: center; }
+.dw-td-e { display: block; background: #F3F0F7; }
+.dw-td-b { position: absolute; left: 50%; top: 50%; border-radius: 50%; display: grid; place-items: center; }
+.dw-td-b svg, .dw-td-cb svg { width: 60%; height: 60%; }
+.dw-td-cb { flex: none; display: grid; place-items: center; }
+.dw-td-l { display: flex; flex-direction: column; min-width: 0; }
+.dw-td-r { display: flex; align-items: center; min-width: 0; }
+.dw-td-r span { min-width: 0; font-weight: 500; line-height: 1.3; color: #171719; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-td-c { display: flex; align-items: center; }
+.dw-td-c b { display: inline-flex; align-items: center; border-radius: calc(99 * var(--u)); font-weight: 600; white-space: nowrap; line-height: 1; }
+.dw-td-m { flex: none; font-weight: 500; white-space: nowrap; }
+
+/* ── 소셜 ── */
+.dw-so-shade { position: absolute; left: 0; right: 0; top: 0; height: 57%; background: linear-gradient(#111, rgba(17,17,17,0)); }
+.dw-so-t { position: absolute; left: 0; right: 0; top: 0; font-weight: 700; color: #fff; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+.dw-so-ig { position: absolute; border: solid #fff; }
+.dw-so-ig::before { content: ""; position: absolute; left: 50%; top: 50%; width: 50%; height: 50%; transform: translate(-50%, -50%); border: inherit; border-radius: 50%; }
+.dw-so-ig::after { content: ""; position: absolute; left: 74%; top: 26%; width: 13%; height: 13%; transform: translate(-50%, -50%); background: #fff; border-radius: 50%; }
+
+/* ── 스티커 보드 (앱 StickerBoardTile) ── */
+.dw-sb { position: absolute; inset: 0; border-radius: inherit; }
+.dw-sb.dw-paper { background: #FAF9FC; box-shadow: inset 0 0 0 var(--dw-hair) #E7E1EE; }
+.dw-sb-s { position: absolute; display: grid; place-items: center; transform: translate(-50%, -50%) rotate(var(--r, 0deg)); line-height: 1; }
+.dw-sb-s img { display: block; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 calc(2 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.14)); }
+.dw-sb-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 calc(12 * var(--u)); }
+.dw-sb-mark { flex: none; display: grid; place-items: center; border-radius: 50%; background: #F2E8FF; color: #6F26A4; border: solid #fff; }
+.dw-sb-mark i { display: block; width: 56%; height: 56%; }
+.dw-sb-empty b { font-weight: 600; color: #6D5F7D; }
+.dw-sb-empty span { font-weight: 400; color: #897B99; }
+.dw-sb-txt { display: flex; flex-direction: column; }
+
+/* ── Together 네컷 (앱 TogetherBoothTile) ── */
+.dw-tg { position: absolute; inset: 0; display: grid; place-items: center; }
+.dw-tg-strip { display: flex; flex-direction: column; }
+.dw-tg-strip.dw-row { flex-direction: row; }
+.dw-tg-strip.dw-line { box-shadow: inset 0 0 0 var(--dw-hair) rgba(0,0,0,.06); }
+.dw-tg-cell { flex: none; position: relative; overflow: hidden; background: #E7E1EE; }
+.dw-tg-cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.dw-tg-with { position: absolute; display: flex; align-items: center; max-width: calc(100% - 12 * var(--u)); border-radius: calc(99 * var(--u)); background: rgba(0,0,0,.55); color: #fff; font-weight: 500; white-space: nowrap; overflow: hidden; }
+.dw-tg-with span { overflow: hidden; text-overflow: ellipsis; }
+.dw-tg-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #443651; }
+.dw-tg-empty b { font-weight: 600; }
+.dw-tg-empty span { font-weight: 500; opacity: .7; }
+
+/* ── 오늘의 기분 · 한줄일기 · 음성 · 지금 듣는 중 · 플레이리스트 · 콜렉션 ── */
+.dw-md { position: absolute; inset: 0; display: flex; align-items: center; }
+.dw-md-e { flex: none; line-height: 1.2; }
+.dw-md-col { min-width: 0; display: flex; flex-direction: column; }
+.dw-md-col b { font-weight: 600; color: rgba(18,18,18,.75); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; white-space: pre-line; }
+.dw-md-col span { font-weight: 500; color: rgba(18,18,18,.4); }
+.dw-dy { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.dw-dy-k { display: flex; justify-content: space-between; gap: calc(6 * var(--u)); font-weight: 500; color: rgba(18,18,18,.42); white-space: nowrap; min-width: 0; }
+.dw-dy-k span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.dw-dy-t { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-line; font-style: italic; font-weight: 400; color: rgba(18,18,18,.75); }
+.dw-vo { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.dw-vo-bars { display: flex; align-items: center; }
+.dw-vo-bars i { display: block; width: calc(3 * var(--u)); border-radius: calc(2 * var(--u)); background: #c98a2e; }
+.dw-vo-t { display: flex; align-items: center; font-weight: 500; color: #8a5d16; }
+.dw-np { position: absolute; inset: 0; display: flex; align-items: center; color: #fff; }
+.dw-np-bars { flex: none; display: flex; align-items: flex-end; }
+.dw-np-bars i { display: block; width: calc(3 * var(--u)); border-radius: calc(2 * var(--u)); background: #AA4AF4; transform-origin: bottom; }
+.dw-np.dw-live .dw-np-bars i { animation: dw-eq 1.1s ease-in-out infinite; }
+.dw-np-bars i:nth-child(2) { animation-delay: -.3s; } .dw-np-bars i:nth-child(3) { animation-delay: -.6s; } .dw-np-bars i:nth-child(4) { animation-delay: -.15s; }
+@keyframes dw-eq { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.45); } }
+.dw-np-col { min-width: 0; display: flex; flex-direction: column; }
+.dw-np-col b, .dw-np-col span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-np-col b { font-weight: 600; }
+.dw-np-col span { font-weight: 500; color: rgba(255,255,255,.55); }
+.dw-pls { position: absolute; inset: 0; display: flex; flex-direction: column; color: #fff; }
+.dw-pls-h { display: flex; align-items: center; font-weight: 600; min-width: 0; }
+.dw-pls-h b { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
+.dw-pls-h .dw-np-bars i { width: calc(2.5 * var(--u)); }
+.dw-pls-r { display: flex; align-items: center; font-weight: 500; min-width: 0; }
+.dw-pls-r span { flex: none; color: rgba(255,255,255,.38); }
+.dw-pls-r b { min-width: 0; font-weight: 500; color: rgba(255,255,255,.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-pls-f { font-weight: 500; color: rgba(255,255,255,.38); }
+.dw-cl { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.dw-cl > p { font-weight: 500; color: rgba(255,255,255,.85); }
+.dw-cl-g { display: grid; grid-template-columns: repeat(3, 1fr); }
+.dw-cl-c { aspect-ratio: .78; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,.1); min-width: 0; }
+.dw-cl-c i { line-height: 1.3; }
+.dw-cl-c b { font-weight: 500; color: rgba(255,255,255,.85); max-width: 92%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── Ask ── */
+.dw-ask { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.dw-ask.dw-ask-h { flex-direction: row; align-items: center; }
+.dw-ask-col { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; }
+.dw-ask-k { display: flex; align-items: center; justify-content: space-between; font-weight: 600; color: #70737c; }
+.dw-ask-k svg { width: .9em; height: .9em; }
+.dw-ask-artbox { flex: none; display: flex; justify-content: center; }
+.dw-ask-art { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+.dw-ask-h .dw-ask-art { width: 100%; height: auto; }
+.dw-ask-t { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-line; font-weight: 700; color: #171719; letter-spacing: -.02em; }
+.dw-ask-q { background: #f5f0fa; color: #70737c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-ask-a { color: #70737c; font-weight: 500; }
+
+/* ── 디토 위젯 (가져온 사본) ── */
+.dw-dt-emoji, .dw-dt-title { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.4; }
+.dw-dt-title { font-weight: 600; color: #1C1722; white-space: pre-line; }
+.dw-dt-src { position: absolute; display: flex; align-items: center; background: #fff; color: #1C1722; font-weight: 500; }
+.dw-dt-src b { flex: 1 1 auto; min-width: 0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dw-dt-src.dw-dt-src-n { flex-direction: column; justify-content: center; text-align: center; }
+.dw-dt-src-n b { flex: none; max-width: 100%; }
+.dw-dt-av { flex: none; display: block; background: #E7E1EE; object-fit: cover; }
+.dw-dt-cap { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; color: #fff; }
+.dw-dt-cap.dw-on { background: linear-gradient(rgba(28,23,34,0), rgba(28,23,34,.18) 42%, rgba(28,23,34,.72)); }
+.dw-dt-cap b { font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.dw-dt-cap span { display: flex; align-items: center; font-weight: 500; }
+.dw-dt-badge { position: absolute; z-index: 2; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-c.dw-playing .dw-cd-rot { animation: none; }
+  .dw-np.dw-live .dw-np-bars i { animation: none; }
+}

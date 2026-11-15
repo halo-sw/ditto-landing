@@ -1,0 +1,444 @@
+/* All rules belong to this example, including its responsive variants.
+   Copied from examples/phone-touch (fitness.css) and re-dressed as Ditto!: the stage size, the phone's
+   pin and bottom bleed, the card-to-screen open and the button's press are the gold's; the look is the app's
+   (Pretendard, profile handle 56 high with a 16 radius, 16-radius widgets, a 60-high Ditto button with a 12 radius). */
+.dd {
+  & .ss-stage {
+    --ss-accent: #aa4af4;
+    --ss-accent-2: #fa97e2;
+    --ss-accent-soft: rgba(170, 74, 244, 0.12);
+    /* The card opening: quick off the tap, long soft settle, as iOS does */
+    --dd-open: cubic-bezier(0.3, 0.75, 0.1, 1);
+    /* The host page can recolor the button (the guide's handle palette) */
+    --dd-base: var(--splup-demo-base, #a25ad6);
+    --dd-c0: var(--splup-demo-c0, #aa4af4);
+    --dd-c1: var(--splup-demo-c1, #6655d2);
+    --dd-c2: var(--splup-demo-c2, #fa97e2);
+    overflow: hidden;
+    /* The tile is the ground: no plate, no radius of its own */
+    background: transparent;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  }
+
+  /* Pinned, bottom bleed: inset one gutter from the top, centered, runs off the bottom */
+  .dd-phone {
+    position: absolute;
+    top: 48px;
+    left: 50px;
+  }
+
+  .dd-phone .ss-phone__status {
+    transition: color 0.35s ease;
+  }
+
+  .dd-phone[data-open] .ss-phone__status {
+    color: #fff;
+  }
+
+  /* ---- The platter ---- */
+
+  .dd-list {
+    position: absolute;
+    inset: 0;
+    background: #f4f4f5;
+    /* Recedes by dimming only: a scale would land its text with a hop */
+    transition: opacity 0.6s ease;
+  }
+
+  .dd-list[data-back] {
+    opacity: 0.55;
+  }
+
+  /* The profile handle: the owner's color, a rounded-square photo, name over id */
+  .dd-handle {
+    position: absolute;
+    top: 66px;
+    right: 16px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 56px;
+    padding: 0 10px;
+    border-radius: 16px;
+    background: linear-gradient(#c5d593, #a5be57);
+  }
+
+  .dd-handle__av {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .dd-handle__id {
+    display: grid;
+    /* A title over its subtitle reads as one item */
+    gap: 2px;
+  }
+
+  .dd-handle__name {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    color: #171719;
+  }
+
+  .dd-handle__at {
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(23, 23, 25, 0.72);
+  }
+
+  .dd-row,
+  .dd-slot {
+    position: absolute;
+    left: 16px;
+    width: calc(100% - 32px);
+    height: 132px;
+    border-radius: 22px;
+  }
+
+  /* Two widgets side by side, one wider than the other */
+  .dd-row {
+    display: grid;
+    grid-template-columns: 132px 1fr;
+    gap: 10px;
+  }
+
+  .dd-row[data-flip] {
+    grid-template-columns: 1fr 132px;
+  }
+
+  .dd-tile {
+    display: grid;
+    align-content: start;
+    gap: 9px;
+    overflow: hidden;
+    padding: 18px 16px;
+    border-radius: 22px;
+    background: #fff;
+  }
+
+  /* Widget art: soft light in the app's own family */
+  .dd-tile--disc {
+    place-content: center;
+    padding: 0;
+    background:
+      radial-gradient(70% 90% at 80% 10%, #d9e2f3 0%, transparent 60%),
+      linear-gradient(160deg, #b9c6e4 0%, #cfd6c4 100%);
+  }
+
+  .dd-disc {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, #f4f4f5 0 9%, #8f98b3 9.5% 13%, transparent 13.5%),
+      conic-gradient(from 20deg, #eef1f8, #c9d2e8, #f3eef9, #cfd8ee, #eef1f8);
+    box-shadow: 0 6px 14px -8px rgba(40, 50, 90, 0.5);
+  }
+
+  .dd-tile--rose {
+    background:
+      radial-gradient(70% 90% at 85% 10%, #fbd3e6 0%, transparent 60%),
+      linear-gradient(160deg, #f1a9cb 0%, #e37ca2 100%);
+  }
+
+  .dd-tile--sky {
+    background:
+      radial-gradient(70% 90% at 85% 10%, #d6ecf6 0%, transparent 60%),
+      linear-gradient(160deg, #add5e5 0%, #79bbd4 100%);
+  }
+
+  .dd-tabs {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    height: 83px;
+    padding: 10px 24px 0;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+    background: rgba(249, 249, 249, 0.94);
+  }
+
+  .dd-tab {
+    display: grid;
+    gap: 6px;
+    justify-items: center;
+  }
+
+  .dd-tab__icon {
+    width: 26px;
+    height: 22px;
+    border-radius: 7px;
+    background: #c4c4c7;
+  }
+
+  .dd-tab__label {
+    width: 36px;
+    height: 6px;
+    border-radius: 3px;
+    background: #d6d6d9;
+  }
+
+  .dd-tab[data-on] .dd-tab__icon {
+    background: #171719;
+  }
+
+  /* ---- The widget that becomes its detail ---- */
+
+  /* Press and expansion have separate owners: Expand's inline clip transition
+     must not replace the card's transform feedback. */
+  .dd-press {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.2s ease;
+    will-change: transform;
+  }
+
+  .dd-detail {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  /* iOS cards give a little under the finger */
+  .dd-phone:has(.dd-slot[data-pressed]) .dd-press {
+    transform: scale(0.97);
+  }
+
+  .dd-detail__inner {
+    /* Expand carries the card; this kept layer reveals the header from its foot. */
+    position: relative;
+    background: #fff;
+    min-height: 100%;
+    will-change: transform;
+    transition: transform 0.62s var(--dd-open), background-color 0.18s ease-out;
+  }
+
+  /* Closing, the clip and the screen shrink from different heights, so the
+     body would show in the card for half the move: it and its ground fade out
+     first, and the card lands as only its photo. Opening reveals it as before */
+  .dd-detail:not([data-open]) .dd-detail__inner {
+    background-color: transparent;
+    transition: transform 0.62s var(--dd-open), background-color 0.16s ease-out 0.08s;
+  }
+
+  .dd-detail:not([data-open]) .dd-body {
+    opacity: 0;
+    transition: opacity 0.08s ease-out;
+  }
+
+  .dd-hero {
+    position: relative;
+    /* Its own rounded foot, moving with the card's clip, so the photo lands as
+       the card's shape rather than a flat bottom inside the rounded one */
+    transition: clip-path 0.62s var(--dd-open);
+    height: 300px;
+    background: #cfd6c4 center 72% / cover no-repeat;
+  }
+
+  /* The caption needs a quiet foot under it, as the app draws on photos */
+  .dd-hero::after {
+    content: '';
+    position: absolute;
+    inset: 55% 0 0;
+    background: linear-gradient(transparent, rgba(20, 24, 16, 0.5));
+  }
+
+  .dd-hero__text {
+    position: absolute;
+    z-index: 1;
+    bottom: 18px;
+    left: 20px;
+    display: grid;
+    justify-items: start;
+    will-change: transform;
+    transition: transform 0.62s var(--dd-open);
+  }
+
+  .dd-hero__title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+
+  .dd-close {
+    position: absolute;
+    z-index: 1;
+    top: 62px;
+    right: 20px;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(20, 24, 16, 0.36);
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.15s ease;
+  }
+
+  .dd-detail[data-open] .dd-close {
+    opacity: 1;
+    transition-delay: 0.25s, 0s;
+  }
+
+  .dd-close[data-pressed] {
+    transform: scale(0.9);
+  }
+
+  .dd-body {
+    display: grid;
+    gap: 20px;
+    padding: 20px 20px 0;
+  }
+
+  /* The body needs no fade: the opening card reveals it, full, as it grows */
+
+  .dd-from {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dd-from__av {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .dd-from__lines {
+    display: grid;
+    gap: 7px;
+    justify-items: start;
+  }
+
+  /* The Ditto button: 60 high, 12 radius. Held, its whole material deepens
+     with time (never a directional fill) and the label holds still */
+  .dd-hold {
+    display: grid;
+    place-items: center;
+    height: 60px;
+    position: relative;
+    isolation: isolate;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Every label sits in the same even-width cell, so the glyph beside it never lands on a half pixel */
+  .dd-hold .ss-states__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 230px;
+  }
+
+  .dd-hold svg {
+    flex: none;
+  }
+
+  /* The opened card stays on its own layer, so its text does not hop as it lands */
+  .dd-detail .ss-expand__content {
+    will-change: transform;
+  }
+
+  .dd-hold::before,
+  .dd-hold::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+  }
+
+  /* Rest: the family's base color with a soft inner sheen, floating on its shadow */
+  .dd-hold::before {
+    background: var(--dd-base);
+    box-shadow: inset 0 0 8px 2px rgba(255, 255, 255, 0.22), inset 0 1.5px 2px rgba(255, 255, 255, 0.28), 0 8px 12px -6px rgba(60, 20, 100, 0.35);
+    transition: transform 0.11s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  }
+
+  /* The fill: three blurred colors of the family, revealed from the leading edge by a soft mask */
+  .dd-hold::after {
+    background:
+      radial-gradient(42% 90% at 14% 50%, var(--dd-c0), transparent 72%),
+      radial-gradient(42% 90% at 50% 50%, var(--dd-c1), transparent 72%),
+      radial-gradient(42% 90% at 86% 50%, var(--dd-c2), transparent 72%);
+    -webkit-mask: linear-gradient(90deg, #000 0, #000 52%, transparent 66%) 100% 0 / 300% 100% no-repeat;
+    mask: linear-gradient(90deg, #000 0, #000 52%, transparent 66%) 100% 0 / 300% 100% no-repeat;
+    transition: -webkit-mask-position 0.36s ease-out, mask-position 0.36s ease-out, transform 0.11s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Held and asking: it sits down (a little narrower, clearly flatter) and the fill travels for the three seconds */
+  .dd-hold[data-phase='holding']::before,
+  .dd-hold[data-phase='pending']::before,
+  .dd-hold[data-phase='holding']::after,
+  .dd-hold[data-phase='pending']::after {
+    transform: translateY(1.5px) scale(0.985, 0.94);
+  }
+
+  .dd-hold[data-phase='holding']::before,
+  .dd-hold[data-phase='pending']::before {
+    box-shadow: inset 0 0 8px 2px rgba(255, 255, 255, 0.06), inset 0 3px 6px rgba(0, 0, 0, 0.28), 0 3px 5px -3px rgba(60, 20, 100, 0.3);
+  }
+
+  .dd-hold[data-phase='holding']::after,
+  .dd-hold[data-phase='pending']::after {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    transition: -webkit-mask-position 3s cubic-bezier(0.3, 0.6, 0.45, 1), mask-position 3s cubic-bezier(0.3, 0.6, 0.45, 1), transform 0.11s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* The app's toast: it drops in under the island and says the widget was kept */
+  .dd-toast {
+    position: absolute;
+    z-index: 3;
+    top: 64px;
+    right: 0;
+    left: 0;
+    display: grid;
+    justify-items: center;
+    pointer-events: none;
+  }
+
+  .dd-notes {
+    display: grid;
+    gap: 18px;
+    padding-top: 6px;
+  }
+
+  .dd-note {
+    display: grid;
+    grid-template-columns: 24px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    justify-items: start;
+  }
+
+  .dd-note__dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    background: #e3e3e7;
+  }
+
+  & .ss-stage[data-layout='compact'] .dd-phone { top: 16px; left: 16px; }
+}
+
+/* Compact: the id line is set for the phone column, not shrunk from the wide design */
+.dd .ss-stage[data-layout='compact'] .dd-handle__at { font-size: 13.5px; line-height: 17px; }
+
+/* The toast keeps readable type in both designs */
+.dd .dd-toast .ss-toast { font-size: 14px; }
