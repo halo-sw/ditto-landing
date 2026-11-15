@@ -326,6 +326,7 @@ def profile_page(fill, row, key, wordmark, outdir, url, og_path, og_url, platter
         "AVATAR": html.escape(avatar) if avatar_ok else "",
         "AVATAR_HIDDEN": "" if avatar_ok else " hidden", "FALLBACK_HIDDEN": " hidden" if avatar_ok else "", "KEY": key,
         "PLATTER": platter_html, "WRAP_CLASS": " has-platter" if platter_html else "",
+        "COUNT_PAGE": "demo" if "/demo/" in url else "profile",   # 웹사이트 자체 집계의 페이지 이름 (assets/web-count.js)
         "HANDLE_STYLE": platter.handle_style(row.get("handle_color")),   # 앱과 같은 핸들 색 (profiles.handle_color)
     })
     (outdir / "index.html").write_text(page)
@@ -401,7 +402,7 @@ def main():
   location.replace("https://i.ditto.place/" + m[1].toUpperCase() + "?" + q.toString()); })();
 </script>
 """
-    page404 = fill({"TITLE": "ditto!", "URL": SITE + "/", "OG_IMAGE": SITE + "/assets/og/brand-404.png",
+    page404 = fill({"COUNT_PAGE": "profile", "TITLE": "ditto!", "URL": SITE + "/", "OG_IMAGE": SITE + "/assets/og/brand-404.png",
                     "PROFILE_HIDDEN": " hidden", "AVATAR_HIDDEN": " hidden", "KEY": key, "PLATTER": "",
                     "HANDLE_STYLE": platter.handle_style(None)})
     (OUT / "404.html").write_text(page404.replace("<head>\n", "<head>\n" + invite_redirect, 1))
