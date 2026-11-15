@@ -80,7 +80,7 @@
     if (RM || !('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('on'); }); return; }
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.04, rootMargin: '0px 0px -6% 0px' });
     els.forEach(function (e) { io.observe(e); });
   }
 

@@ -586,7 +586,16 @@
     count(); build();
   }
 
-  var fns = [widgets, ditto, island, warp, heroType, stickers, wall, cover, far, flow, android, roll, wish];
+  /* ── 첫 화면 글: 내려가는 만큼 위로 흐려지며 물러난다 (toss.im 첫 화면의 물러남: 40px · 투명도) ── */
+  function heroOut() {
+    var t = $('.fx-hero3-t'), sec = $('#top'); if (!t || !sec || RM) return;
+    var tick = false;
+    function set() { tick = false; var h = Math.max(1, sec.offsetHeight * 0.55), q = clamp((scrollY - 40) / h); t.style.setProperty('--out', (q * q * (3 - 2 * q)).toFixed(3)); }
+    addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(set); } }, { passive: true });
+    set();
+  }
+
+  var fns = [widgets, ditto, island, warp, heroType, stickers, wall, cover, far, flow, android, roll, wish, heroOut];
   window.__dittoX = fns;
   function boot() { fns.forEach(function (fn) { try { fn(); } catch (e) { if (window.console) console.error('[v8 x]', fn.name, e); } }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

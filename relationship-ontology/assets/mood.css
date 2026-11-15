@@ -1,0 +1,61 @@
+/* 관계 온톨로지 — ditto.place 홈(v8)의 분위기에 맞춘 겉모습 (2026-11-16)
+   모든 쪽이 같은 틀과 같은 색 변수를 쓰므로, 여기서 변수만 밝은 값으로 바꾸고 틀을 둥근 카드로 만든다.
+   지도와 그래프는 캔버스에 밝은 글자로 그리므로 그 칸(.stage · .box)만 어두운 값을 그대로 쓴다 — 홈의 관계 지도와 같은 구성(밝은 쪽 + 어두운 지도). */
+:root{
+  --bg:#F4F3F6; --bg-2:#F6F4F9; --bg-3:#ECEAF1; --card:#FFFFFF; --card-2:#F1EFF5;
+  --ink:#16121B; --ink-2:#2B2532; --mute:#6C6676; --faint:#9A93A6;
+  --line:#E6E3EA; --line-2:#DAD6E2;
+  --sel:#F3E8FF; --on-sel:#7B2FD0; --sel-line:#C99AF5;
+  --brand:#AA4AF4; --on-brand:#FFFFFF; --brand-text:#862FC6; --brand-subtle:#AA4AF41F; --tonal:#F3E8FF;
+  --violet:#AA4AF4; --violet-d:#862FC6;
+  --scrim:rgba(22,18,27,.4);
+  --shadow:0 18px 40px -24px rgba(40,10,60,.35);
+  --r-lg:20px; --r-md:12px; --r-sheet:28px;
+  --kr:"Pretendard Sim","Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  --ease:cubic-bezier(.25,.1,.25,1);
+  color-scheme:light;
+}
+body{background:#F4F3F6;letter-spacing:-.01em}
+
+/* 머리: 홈의 메뉴처럼 떠 있는 흰 띠 */
+.top{margin:12px 12px 0;padding:10px 18px;border:0;border-radius:24px;background:#fff;box-shadow:0 0 0 1px rgba(22,18,27,.05),0 14px 28px -22px rgba(40,10,60,.4)}
+.top .brand img{filter:brightness(0)}
+.top h1{letter-spacing:-.03em}
+
+/* 세 칸: 사이를 띄운 둥근 카드 */
+.main{gap:12px;padding:12px}
+.pane{border-radius:24px;background:#fff;box-shadow:0 0 0 1px rgba(22,18,27,.05),0 14px 28px -24px rgba(40,10,60,.3)}
+
+/* 지도 칸과 그래프 칸은 어두운 값 그대로 (캔버스의 글자가 밝은 색이다) */
+.stage,.box,.tip,.rm-m,.rm-st{
+  --bg:#17131C; --bg-2:#221C29; --bg-3:#332B3D; --card:#2A2331; --card-2:#3A3344;
+  --ink:#FAFAFA; --ink-2:#E6E6E6; --mute:#B9B2C4; --faint:#7F778B;
+  --line:#332B3D; --line-2:#3A3344;
+  --sel:#582082; --on-sel:#F2E8FF; --sel-line:#D6AEFF;
+  --brand:#C588FF; --on-brand:#421763; --brand-text:#D6AEFF; --tonal:#582082;
+  --violet:#C588FF; --violet-d:#D6AEFF;
+  color:var(--ink);color-scheme:dark;
+}
+.stage{border-radius:24px;background:#17131C;overflow:hidden;box-shadow:0 18px 36px -26px rgba(22,18,27,.7)}
+.box{border-radius:20px;background:#1D1823}
+/* 둘 사이를 보는 창: 왼쪽 지도는 어둡게, 오른쪽 설명은 밝게 */
+.rm-st{background:#17131C}
+.rm{overflow:hidden}
+
+/* 단계 꼬리표: 밝은 바탕에 맞는 옅은 색 */
+.lv0{background:#EFEDF3;color:#55505E}
+.lv1{background:#E3F1FB;color:#1F6FA3}
+.lv2{background:#DFF5EE;color:#0E7C63}
+.lv3{background:#F3E8FF;color:#7B2FD0}
+.lv4{background:#FDE7EF;color:#B5345F}
+.stage .lv0,.box .lv0,.rm-st .lv0{background:#333333;color:#E6E6E6}
+.stage .lv1,.box .lv1,.rm-st .lv1{background:#123240;color:#A2DAF6}
+.stage .lv2,.box .lv2,.rm-st .lv2{background:#0F352E;color:#9FE1D1}
+.stage .lv3,.box .lv3,.rm-st .lv3{background:#302942;color:#D4C8FA}
+.stage .lv4,.box .lv4,.rm-st .lv4{background:#41242B;color:#FABECB}
+
+@media (max-width:900px){
+  .top{margin:8px 8px 0;border-radius:20px}
+  .main{gap:8px;padding:8px}
+  .pane,.stage{border-radius:20px}
+}
