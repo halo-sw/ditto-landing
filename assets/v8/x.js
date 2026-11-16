@@ -364,11 +364,20 @@
      실제 연결 전에는 예시 사진을 쓴다. 서버가 준비되면 window.DITTO_WALL = ['사진 주소', …] 로 넘기면 된다 (아이디 · 이름은 받지도 그리지도 않는다) */
   function wall() {
     var box = $('#xWall'), cv = $('#xWallCv'), inner = $('#xWallIn'); if (!box || !cv || !inner) return;
-    var real = window.DITTO_WALL && window.DITTO_WALL.length ? window.DITTO_WALL : null, list = real ? real.slice(0, 400) : [];
-    if (!real) {
-      ['jiu-1', 'sora', 'haeun', 'nari-1', 'jun', 'dohyun', 'jaemin', 'seoyun', 'rian', 'yeseo', 'jiu', 'nari'].forEach(function (n) { list.push('assets/rooms/rav-' + n + '.webp'); });
-      for (var k = 1; k <= 40; k++) list.splice((k * 7) % (list.length + 1), 0, 'assets/app/av-flare-' + k + '.jpg');
-    } else { var nt = $('#xWallNote'); if (nt) nt.textContent = ''; }
+    /* 실제 프로필 사진(window.DITTO_WALL — 공개에 동의한 사람의 사진 주소만)과 예시 그림을 섞는다.
+       실제 2 : 예시 1 비율로 번갈아 놓고, 실제가 적으면 예시로 52칸까지 채운다. 실제가 없으면 전부 예시 */
+    /* 지금은 전부 더미 — 다만 그라데이션 원이 아니라 프로필처럼 보이는 사진으로 채운다 (견본 인물 사진 12장 + 견본 사진에서 잘라 만든 25장).
+       동의 받은 실제 프로필 사진 목록이 생기면 window.DITTO_WALL 로 넘긴다 — 그때는 실제 2 : 더미 1 로 섞인다 */
+    var given = window.DITTO_WALL && window.DITTO_WALL.length ? window.DITTO_WALL : null;
+    var real = (given || []).slice(0, 400), dummy = [], list = [];
+    ['jiu-1', 'sora', 'haeun', 'nari-1', 'jun', 'dohyun', 'jaemin', 'seoyun', 'rian', 'yeseo', 'jiu', 'nari'].forEach(function (n) { dummy.push('assets/rooms/rav-' + n + '.webp'); });
+    for (var k = 1; k <= 25; k++) dummy.splice((k * 7) % (dummy.length + 1), 0, 'assets/v8/wall/w' + (k < 10 ? '0' : '') + k + '.webp');
+    if (real.length) {
+      var need = Math.max(52, Math.ceil(real.length * 1.5)), ri = 0, di = 0;
+      for (var q = 0; q < need; q++) { if (ri < real.length && (q % 3 !== 2 || di >= dummy.length)) list.push(real[ri++]); else list.push(dummy[di++ % dummy.length]); }
+      var nt = $('#xWallNote'); if (nt) nt.textContent = '실제 프로필과 예시 사진이 함께 보여요.';
+    } else list = dummy;
+    real = real.length ? real : null;
     var hash = function (i, s) { var x = Math.sin(i * 127.1 + s * 311.7) * 43758.5453; return x - Math.floor(x); };
     list.forEach(function (src, i) {
       var im = document.createElement('img'), rr = 66 * Math.sqrt(i + 0.55), a = i * 2.39996, s = 58 + Math.round(hash(i, 1) * 34);
@@ -377,7 +386,7 @@
       im.style.setProperty('--r', ((hash(i, 2) - 0.5) * 18).toFixed(1) + 'deg'); im.style.setProperty('--s', s + 'px'); im.style.setProperty('--d', Math.min(i * 22, 1400) + 'ms');
       inner.appendChild(im);
     });
-    if (real) $('#xWallN').textContent = list.length; else $('#xWallN').parentNode.textContent = '예시';            // 예시 사진일 때는 사람 수를 세지 않는다
+    if (given) $('#xWallN').textContent = real.length; else $('#xWallN').parentNode.textContent = '예시';            // 실제 가입자 수는 동의 받은 목록이 연결된 뒤에만 센다            // 예시 사진일 때는 사람 수를 세지 않는다
     var Z0 = cv.clientWidth < 520 ? 0.62 : 1, x = 0, y = 0, z = Z0, vx = 0, vy = 0, drag = null, raf = 0, zEl = $('#xWallZ');
     function apply() { inner.style.setProperty('--x', x.toFixed(1) + 'px'); inner.style.setProperty('--y', y.toFixed(1) + 'px'); inner.style.setProperty('--z', z.toFixed(3)); cv.style.setProperty('--gs', (28 * z).toFixed(1) + 'px'); cv.style.setProperty('--gx', (x + cv.clientWidth / 2).toFixed(1) + 'px'); cv.style.setProperty('--gy', (y + cv.clientHeight / 2).toFixed(1) + 'px'); zEl.textContent = Math.round(z * 100) + '%'; }
     function glide() { raf = 0; if (drag) return; vx *= 0.93; vy *= 0.93; if (Math.abs(vx) + Math.abs(vy) < 0.15) return; x += vx; y += vy; apply(); raf = requestAnimationFrame(glide); }
