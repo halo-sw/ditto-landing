@@ -934,3 +934,23 @@
 }
 /* 넘김에서 보이지 않는 플래터는 그리지도 않는다 */
 .fx-trio.x-roll>.x-roll-i[data-p="h"]{visibility:hidden;transition:transform .9s var(--tx-e),opacity .6s ease,filter .6s ease,visibility 0s .6s}
+
+/* ══ v8.24 ══ 첫 화면 아래쪽 다듬기 */
+/* ① 양옆 플래터: 뿌옇게 번지던 흐림을 걷고, 또렷한 채로 작고 옅게 물러나 있게 한다. 줄 양 끝은 흰 바탕으로 스민다 */
+.fx-trio.x-roll>.x-roll-i{filter:none;transition:transform .9s var(--tx-e),opacity .6s ease}
+.fx-trio.x-roll>.x-roll-i[data-p="s"]{opacity:.46}
+.fx-trio.x-roll>.x-roll-i[data-p="h"]{transition:transform .9s var(--tx-e),opacity .6s ease,visibility 0s .6s}
+.fx-trio.x-roll{-webkit-mask-image:linear-gradient(#000 62%,transparent),linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(#000 62%,transparent),linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}
+@media (max-width:760px){.fx-trio.x-roll>.x-roll-i[data-p="s"]{opacity:.28}.fx-trio.x-roll>.x-roll-i{transition:transform .7s var(--tx-e),opacity .5s ease}}
+/* ② 보라 말풍선이 오른쪽 사진 뒤로 잘리던 것: 넷째 사진을 다섯째보다 위에 그린다 */
+.x-hp-c:nth-child(4){z-index:2}
+/* ③ 소개 문구: 첫 문장은 본문 검정으로 또렷하게, 설명은 넓은 화면에서 문장 단위로 줄을 나눈다 */
+.fx-hero3 .x-hero-d .h8-hero-d{gap:14px}
+.fx-hero3 .x-hero-d .h8-hero-d p:first-child{font-size:clamp(17px,1.5vw,22px);line-height:1.5;letter-spacing:-.03em;color:#16121B}
+.fx-hero3 .x-hero-d .h8-hero-d p+p{color:#5E5868}
+@media (min-width:900px){
+  .fx-hero3 .x-hero-d .h8-hero-d{max-width:780px}
+  .fx-hero3 .x-hero-d .h8-hero-d p+p{text-wrap:wrap}
+  .x-ln{display:block}
+}
+@media (prefers-reduced-motion:reduce){.fx-trio.x-roll>.x-roll-i,.fx-trio.x-roll>.x-roll-i[data-p="h"]{transition:none}}
