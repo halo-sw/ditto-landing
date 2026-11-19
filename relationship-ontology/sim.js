@@ -34,7 +34,7 @@
      fof:    [id, name, via[], taste, age, widget] */
   const PERSONAS = {
     uni: {
-      key: 'uni', label: '대학교 1학년', me: { n: '채원', h: 'chaewon.frame', av: 'purple-pink', age: 19 },
+      key: 'uni', label: '대학교 1학년', me: { n: '채원', h: 'chaewon.frame', portrait: 'chaewon.webp?v=cf88af49', av: 'purple-pink', age: 19 },
       bio: '19 · 시각디자인과 26학번 · 대전에서 올라와 기숙사 2인실',
       type: 'Curator · 취향이 분명한 사람',
       start: '2026-03-03',
@@ -85,7 +85,7 @@
         ['raon', '라온', ['taerin'], .8, 20, '🎹 연습실 녹음'],
         ['ria', '리아', ['yuna'], .78, 19, '🍰 대전 빵집 지도'],
         ['jian', '지안', ['woojin', 'sieun'], .75, 20, '📷 필름 스캔 실패작', { grp: '동아리 연합 출사 모임', note: '다른 학교 사진 동아리. 연합 출사 그룹에서 같이 대화해요.' }],
-        ['soi', '소이', ['jungwon'], .7, 20, '🎬 이번 주 본 영화'],
+        ['soi', '소이', ['jungwon'], .7, 20, '🎬 이번 주 본 영화', { portrait: 'soi.webp?v=27a26488' }],
         ['dain', '다인', ['sieun'], .68, 19, '🌱 창틀 화분'],
         ['hajin', '하진', ['seojin', 'minho'], .62, 19, '🏸 배드민턴 동호회', { grp: '서진이 만든 배드민턴 그룹' }],
         ['yeonwoo', '연우', ['bomi'], .6, 21, '📐 모형 만드는 밤'],
@@ -168,7 +168,7 @@
     const P = PERSONAS[pk], R = rng((pk === 'uni' ? 2603 : 2611) + (opt.seed || 0) * 7919), A = ACT[opt.activity];
     const phaseOf = d => P.phases.find(p => d >= p[0] && d <= p[1]) || P.phases[P.phases.length - 1];
     const people = {};
-    const me = { id: 'me', n: P.me.n, h: P.me.h, av: P.me.av, me: true };
+    const me = { id: 'me', n: P.me.n, h: P.me.h, av: P.me.av, portrait: P.me.portrait, me: true };
     P.people.forEach(([id, n, ctx, H0, hw, inv, aff, extra], i) => {
       people[id] = Object.assign({ id, n, ctx, H0, hw, inv, aff, kind: 'known', av: AV[(i * 3 + 1) % 10], met: H0 > 0 || P.ctx[ctx].from === undefined || false, widget: null }, extra || {});
     });
@@ -320,5 +320,18 @@
     return { P, me, people, ids, EV, NOTE, MS, snap, stats, dateOf, opt, TYPES, LEVELS };
   }
 
-  root.DittoSim = { simulate, PERSONAS, TYPES, LEVELS, ACT, J };
+  const portraits = new Map();
+  function avatarURL(person) {
+    return '/relationship-ontology/assets/' + (person.portrait || person.av + '.svg');
+  }
+  function avatarImage(person) {
+    const url = avatarURL(person);
+    if (!portraits.has(url)) {
+      const image = new Image();
+      image.src = url;
+      portraits.set(url, image);
+    }
+    return portraits.get(url);
+  }
+  root.DittoSim = { avatarURL, avatarImage, simulate, PERSONAS, TYPES, LEVELS, ACT, J };
 })(typeof window !== 'undefined' ? window : globalThis);

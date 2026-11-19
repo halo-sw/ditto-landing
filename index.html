@@ -3844,18 +3844,17 @@ html{background:var(--edge-b,var(--bg))}
     const STG = { calm: ['잔잔', '#8E919E'], clear: ['선명', '#2BC4A8'], near: ['곧 열림', '#5A5BF2'], open: ['열림', '#AA4AF4'] };
     let S = null, r = null, pk = 'uni', T = 0, t0 = 0, last = 0, spd = 1, playing = false, inView = false, started = false;
     let W = 0, H = 0, DPR = 1, CX = 0, CY = 0, R0 = 0, rotY = .5, rotX = -.28, vy = 0, drag = null, idleAt = 0, hits = [], hover = null, lastD = -1;
-    const avImg = {}, SPR = {};
+    const SPR = {};
     const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
     const mix = (a, b, t) => { const x = hex(a), y = hex(b); return `rgb(${x.map((v, i) => Math.round(v + (y[i] - v) * t)).join(',')})`; };
     const norm = v => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; };
     const mul = seed => () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
     const font = '"LINE Seed Ro", ' + getComputedStyle(document.body).fontFamily;
-    function load(cb){ if (window.DittoSim) return cb(); const s = document.createElement('script'); s.src = BASE + 'sim.js'; s.onload = cb; document.head.appendChild(s); }
-    function img(k){ if (!avImg[k]) { avImg[k] = new Image(); avImg[k].src = BASE + 'assets/' + k + '.svg'; } return avImg[k]; }
+    function load(cb){ if (window.DittoSim) return cb(); const s = document.createElement('script'); s.src = BASE + 'sim.js?v=portraits-bc101a4f'; s.onload = cb; document.head.appendChild(s); }
     function start(k){
       pk = k; r = S.simulate(pk, { activity: 'active', gate: 'v2', protect: true });
-      r.ids.forEach((id, i) => { const n = r.ids.length, y = 1 - (i + .5) / n * 2, rr = Math.sqrt(1 - y * y), a = i * 2.39996 + .4; r.people[id].dir = [Math.cos(a) * rr, y * .88, Math.sin(a) * rr]; r.people[id].rad = 0; img(r.people[id].av); });
-      img(r.me.av);
+      r.ids.forEach((id, i) => { const n = r.ids.length, y = 1 - (i + .5) / n * 2, rr = Math.sqrt(1 - y * y), a = i * 2.39996 + .4; r.people[id].dir = [Math.cos(a) * rr, y * .88, Math.sin(a) * rr]; r.people[id].rad = 0; S.avatarImage(r.people[id]); });
+      S.avatarImage(r.me);
       r.EV.forEach((e, i) => { const R = mul(i + 1); e.j = [R() * 2 - 1, R() * 2 - 1, R() * 2 - 1]; e.rr = .66 + R() * .32; e.v = false; e.born = -1e9; });
       box.querySelectorAll('#roSeg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === pk));
       document.getElementById('roGo').href = BASE + SLUG[pk] + '/';
@@ -3911,7 +3910,7 @@ html{background:var(--edge-b,var(--bg))}
         if (qs && !qs.fr && (qs.st === 'near' || qs.st === 'open')) { const g = ctx.createRadialGradient(q[0], q[1], z * .5, q[0], q[1], z * 1.9); g.addColorStop(0, qs.st === 'open' ? 'rgba(170,74,244,.35)' : 'rgba(90,91,242,.25)'); g.addColorStop(1, 'rgba(170,74,244,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(q[0], q[1], z * 1.9, 0, 7); ctx.fill(); }
         const rr = (x, y, w, h, k) => { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, k); else ctx.rect(x, y, w, h); };
         if (id === F) { ctx.strokeStyle = '#FAFAFA'; ctx.lineWidth = 1.5; rr(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
-        ctx.save(); rr(x0, y0, z, z, z * .25); ctx.clip(); const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#333333'; ctx.fillRect(x0, y0, z, z); } ctx.restore();
+        ctx.save(); rr(x0, y0, z, z, z * .25); ctx.clip(); const im = S.avatarImage(p); if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#333333'; ctx.fillRect(x0, y0, z, z); } ctx.restore();
         ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 14 : 12}px ${font}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(24,24,24,.9)'; ctx.fillStyle = '#FAFAFA';
         const ly = q[1] + z / 2 + 13; ctx.strokeText(p.n, q[0], ly); ctx.fillText(p.n, q[0], ly);
         if (qs && !qs.fr && qs.st && W >= 560) { ctx.font = `500 11px ${font}`; ctx.fillStyle = STG[qs.st][1]; ctx.strokeText(STG[qs.st][0], q[0], ly + 12); ctx.fillText(STG[qs.st][0], q[0], ly + 12); }

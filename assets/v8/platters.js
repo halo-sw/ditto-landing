@@ -14,7 +14,7 @@
     "dohyunlinks": {
       "name": "도현",
       "handle": "dohyunlinks",
-      "avatar": "https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/5dd3e385-8c88-4640-b6fb-da84aaa76e2d/avatar-r23.jpg",
+      "avatar": "/assets/rooms/rav-dohyun.webp",
       "handleStyle": {"top": "#EDAE91", "bottom": "#E07B4C", "ink": "#171719", "sub": "rgba(23,23,25,.85)"},
       "rows": 16,
       "widgets": [
@@ -31,7 +31,7 @@
     "haeunzip": {
       "name": "하은",
       "handle": "haeunzip",
-      "avatar": "https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/2f86af59-7247-4a97-9972-2d8fbc091e48/avatar-r23.jpg",
+      "avatar": "/assets/rooms/rav-haeun.webp",
       "handleStyle": {"top": "#CAB7F2", "bottom": "#B092ED", "ink": "#171719", "sub": "rgba(23,23,25,.85)"},
       "rows": 14,
       "widgets": [
@@ -47,7 +47,7 @@
     "jaeminarchive": {
       "name": "재민",
       "handle": "jaeminarchive",
-      "avatar": "https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/099b3e79-e86f-47a1-83c5-5167e23b5e61/avatar-r23.jpg",
+      "avatar": "/assets/rooms/rav-jaemin.webp",
       "handleStyle": {"top": "#8FB2BD", "bottom": "#5C8F9F", "ink": "#171719", "sub": "rgba(23,23,25,.85)"},
       "rows": 16,
       "widgets": [
@@ -62,7 +62,7 @@
     "jiuallday": {
       "name": "지우",
       "handle": "jiuallday",
-      "avatar": "https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/640c4517-bc81-4f9e-a497-4b16d2bd421b/avatar-r23.jpg",
+      "avatar": "/assets/rooms/rav-jiu.webp",
       "handleStyle": {"top": "#EEAFC7", "bottom": "#E37CA2", "ink": "#171719", "sub": "rgba(23,23,25,.85)"},
       "rows": 16,
       "widgets": [
@@ -81,7 +81,7 @@
     "junishere": {
       "name": "준",
       "handle": "junishere",
-      "avatar": "https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/6a33ebc6-6a11-4353-af51-118c95ed7103/avatar-r23.jpg",
+      "avatar": "/assets/rooms/rav-jun.webp",
       "handleStyle": {"top": "#A8B3BF", "bottom": "#79899B", "ink": "#171719", "sub": "rgba(23,23,25,.85)"},
       "rows": 15,
       "widgets": [
@@ -97,7 +97,7 @@
     "nariday": {
       "name": "나리",
       "handle": "nariday",
-      "avatar": "https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/7bffb239-6346-4343-a6bf-ed58398c653b/avatar-r23.jpg",
+      "avatar": "/assets/rooms/rav-nari.webp",
       "handleStyle": {"top": "#D5C194", "bottom": "#BF9F5B", "ink": "#171719", "sub": "rgba(23,23,25,.85)"},
       "rows": 14,
       "widgets": [
@@ -146,7 +146,7 @@
     "soramaybe": {
       "name": "소라",
       "handle": "soramaybe",
-      "avatar": "https://lisqekczixwzshmpewzq.supabase.co/storage/v1/object/public/avatars/17a92f8a-df22-400d-ab2d-0592f2460750/avatar-r23.jpg",
+      "avatar": "/assets/rooms/rav-sora.webp",
       "handleStyle": {"top": "#C5D593", "bottom": "#A5BE57", "ink": "#171719", "sub": "rgba(23,23,25,.85)"},
       "rows": 14,
       "widgets": [

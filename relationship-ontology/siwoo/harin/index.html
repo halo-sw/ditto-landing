@@ -376,7 +376,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
 </div>
 <div id="modal"></div>
 
-<script src="sim.js"></script>
+<script src="sim.js?v=portraits-bc101a4f"></script>
 <script>
 (function(){
   const S = window.DittoSim, $ = id => document.getElementById(id);
@@ -388,8 +388,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
   const st = { pk: 'uni', period: 180, activity: 'active', gate: 'v2', protect: true, world: 'with' };
   let r = null, T = 180, Tt = 180, playing = false, focus = null, order = [], openId = null, lastFocusEl = null;
   const on = {}; BALL.concat('visit').forEach(t => { on[t] = true; });
-  const avImg = {}; Object.keys(PAL).forEach(k => { const im = new Image(); im.src = `assets/${k}.svg`; avImg[k] = im; });
-  const av = (p, size) => `<img class="av" src="assets/${p.av}.svg" alt="" width="${size}" height="${size}">`;
+  const av = (p, size) => `<img class="av" src="${S.avatarURL(p)}" alt="" width="${size}" height="${size}">`;
   const md = d => { const t = r.dateOf(Math.floor(d)); return `${t.getMonth() + 1}월 ${t.getDate()}일`; };
   const mdw = d => { const t = r.dateOf(Math.floor(d)); return `${md(d)} (${'일월화수목금토'[t.getDay()]})`; };
   const ctxKr = p => p.kind === 'fof' ? `${p.via.map(v => r.people[v].n).join('·')}의 친구${p.grp ? ` · ${p.grp}` : ''}` : r.P.ctx[p.ctx].kr;
@@ -484,7 +483,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
       const x0 = q[0] - z / 2, y0 = q[1] - z / 2, rrect = (x, y, w, h, rd) => { ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, rd); else ctx.rect(x, y, w, h); };
       if (id === F) { ctx.strokeStyle = '#FAFAFA'; ctx.lineWidth = 1.5; rrect(x0 - 4, y0 - 4, z + 8, z + 8, (z + 8) * .25); ctx.stroke(); }
       ctx.save(); rrect(x0, y0, z, z, z * .25); ctx.clip();
-      const im = avImg[p.av]; if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#333333'; ctx.fillRect(x0, y0, z, z); }
+      const im = S.avatarImage(p); if (im && im.complete && im.naturalWidth) ctx.drawImage(im, x0, y0, z, z); else { ctx.fillStyle = '#333333'; ctx.fillRect(x0, y0, z, z); }
       ctx.restore();
       ctx.textAlign = 'center'; ctx.font = `${id === 'me' ? 700 : 500} ${id === 'me' ? 13 : 11}px ${K}`; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(24,24,24,.9)'; ctx.fillStyle = '#FAFAFA';
       const ly = q[1] + z / 2 + 13; ctx.strokeText(p.n, q[0], ly); ctx.fillText(p.n, q[0], ly);
@@ -751,7 +750,7 @@ mark{padding:0;background:none;color:var(--brand-text)}
       g.globalAlpha = a; const x0 = pt[0] - z / 2, y0 = pt[1] - z / 2;
       if (ring) { g.lineWidth = 2.5; g.strokeStyle = 'rgba(255,255,255,.08)'; g.beginPath(); g.arc(pt[0], pt[1], z * .5 + 9, 0, 7); g.stroke(); g.strokeStyle = ring[1]; g.lineCap = 'round'; g.beginPath(); g.arc(pt[0], pt[1], z * .5 + 9, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(.02, Math.min(1, ring[0]))); g.stroke(); g.lineCap = 'butt'; }
       g.save(); g.beginPath(); if (g.roundRect) g.roundRect(x0, y0, z, z, z * .25); else g.rect(x0, y0, z, z); g.clip();
-      const im = avImg[person.av]; if (im && im.complete && im.naturalWidth) g.drawImage(im, x0, y0, z, z); else { g.fillStyle = '#333333'; g.fillRect(x0, y0, z, z); }
+      const im = S.avatarImage(person); if (im && im.complete && im.naturalWidth) g.drawImage(im, x0, y0, z, z); else { g.fillStyle = '#333333'; g.fillRect(x0, y0, z, z); }
       g.restore();
       g.textAlign = 'center'; g.font = `700 ${z > 40 ? 14 : 12}px ${K}`; g.fillStyle = '#FAFAFA'; g.lineWidth = 3; g.strokeStyle = 'rgba(24,24,24,.9)';
       const ly = pt[1] + z / 2 + (ring ? 26 : 18); g.strokeText(person.n, pt[0], ly); g.fillText(person.n, pt[0], ly);
