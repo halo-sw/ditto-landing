@@ -1,6 +1,6 @@
 /* ditto.place v8 — 홈 장면 (2026-11-12)
    1) 처음 화면의 실제 플래터   2) 3줄 격자 ↔ 플래터 · 직접 옮기고 크기 바꾸기   3) 위젯 14종 진열
-   4) 디토가 이어지는 길 (소라 → 지우 → 하은)   5) 글자로 그린 주파수   6) 카메라 → 초대장 사진
+   4) 디토가 이어지는 길 (태율 → 봄 → 누리)   5) 글자로 그린 주파수   6) 카메라 → 초대장 사진
    위젯과 격자 규칙은 platter-render.js · platter-grid.js · platter.js (앱 규격 그대로)가 맡는다. */
 (function () {
   'use strict';
@@ -22,8 +22,7 @@
     if (!('IntersectionObserver' in window)) { fn(true); return; }
     new IntersectionObserver(function (es) { fn(es[0].isIntersecting); }, { threshold: 0.02 }).observe(el);
   }
-  var AV = { jiuallday: 'jiu', soramaybe: 'sora', haeunzip: 'haeun', nariday: 'nari', junishere: 'jun', dohyunlinks: 'dohyun', jaeminarchive: 'jaemin', seoyunpalette: 'seoyun', rianafterdark: 'rian', yeseofilm: 'yeseo' };
-  var av = function (h) { return '/assets/rooms/rav-' + AV[h] + '.webp'; };
+  var av = function (h) { return P[h].avatar; };
   var MARK = ['M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z',
     'M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z'];
 
@@ -84,8 +83,9 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
-  /* ── ① 처음: 지우의 플래터 ── */
+  /* ── ① 처음: 봄의 플래터 ── */
   function hero() {
+    var P = window.DittoIntroPlatters;
     var root = $('#h8HeroPl'); if (!root || !DP || !P.jiuallday) return;
     DP.create(root, { widgets: clone(P.jiuallday.widgets), editable: false, removable: false });
     $$('.dpl-card', root).forEach(function (el, i) { el.style.setProperty('--i', i); });
@@ -98,7 +98,7 @@
   function strip() {
     var root = $('#fxStrip'); if (!root || !DW) return;
     var OK = { image: 1, music: 1, status: 1, text: 1, video: 1, guestbook: 1 }, cap = { image: 9, music: 2, status: 2, text: 2, video: 2, guestbook: 1 }, got = {}, pick = [];
-    var hs = ['jiuallday', 'soramaybe', 'haeunzip', 'nariday', 'yeseofilm', 'seoyunpalette', 'dohyunlinks', 'junishere', 'jaeminarchive', 'rianafterdark'].filter(function (h) { return P[h]; });
+    var hs = Object.keys(P);
     for (var round = 0; round < 4 && pick.length < 16; round++) hs.forEach(function (h) {
       if (pick.length >= 16) return;
       var w = P[h].widgets.filter(function (x) { return OK[x.kind] && x.w <= 6 && x.h <= 6 && !x._s && (got[x.kind] || 0) < cap[x.kind] && (x.kind !== 'image' || (x.data && x.data.img)); })[0];
@@ -121,17 +121,14 @@
 
   /* ── ③-1 플래터: 프로필 격자(같은 크기 사진만) → 플래터. 진행도 q(0→1)로 한 장면을 그린다 ── */
   function lab() {
-    var st = $('#h8Stage'), root = $('#h8LabPl'), feed = $('#h8Feed'); if (!st || !root || !feed || !DP || !P.jiuallday) return;
+    var st = $('#h8Stage'), root = $('#h8LabPl'), feed = $('#h8Feed'); if (!st || !root || !feed || !DP || !P.bomcut) return;
     var scr = st.closest('.h8-scr'), pin = $('.fx-plpin');
-    var W0 = clone(P.jiuallday.widgets), PRE = 'fs-07-jiu-';
-    var LAY = [null,
-      { birthday: [4, 0, 4, 3], song: [0, 0, 4, 3], day: [0, 3, 2, 2], status: [2, 3, 2, 2], 'from-sora': [4, 3, 4, 2], dance: [0, 5, 4, 6], flash: [4, 5, 4, 3], flowers: [4, 8, 4, 3], video: [0, 11, 4, 3], stickers: [4, 11, 4, 3] },
-      { flowers: [0, 0, 3, 4], dance: [3, 0, 3, 4], day: [6, 0, 2, 2], status: [6, 2, 2, 2], stickers: [0, 4, 4, 3], song: [4, 4, 4, 3], birthday: [0, 7, 6, 4], 'from-sora': [6, 7, 2, 4], video: [0, 11, 4, 3], flash: [4, 11, 4, 4] }];
+    var W0 = clone(P.bomcut.widgets), PRE = 'bom-';
     var inst = DP.create(root, { widgets: clone(W0), editable: false, removable: false, minRows: 16 });
-    var PHOTO = ['birthday', 'dance', 'flash', 'flowers', 'video', 'song'], VIEWS = { dance: '1.2만', video: '8,431', flowers: '2,907' };
-    var tiles = PHOTO.map(function (k) {
+    var PHOTO = ['friends','meme','practice','post','video','song'], VIEWS = { practice: '1.2만', video: '8,431', pocket: '2,907' };
+    var tiles = PHOTO.map(function (k, index) {
       var w = W0.filter(function (x) { return x.id === PRE + k; })[0], el = document.createElement('i');
-      el.className = 'h8-ft'; el.style.backgroundImage = 'url("' + w.data.img + '")'; if (VIEWS[k]) el.dataset.v = VIEWS[k]; feed.appendChild(el);
+      el.className = 'h8-ft'; el.style.backgroundImage = 'url("' + window.DittoScenes.grid[index] + '")'; if (VIEWS[k]) el.dataset.v = VIEWS[k]; feed.appendChild(el);
       return { id: w.id, kind: w.kind, el: el };
     });
     var ghosts = []; for (var gi = 0; gi < 12; gi++) { var ge = document.createElement('i'); ge.className = 'h8-fg'; feed.appendChild(ge); ghosts.push(ge); }
@@ -160,7 +157,15 @@
         }
         return;
       }
-      if (done) { done = false; inst.select(null); inst.setEditable(false); feed.hidden = false; btns(); }
+      if (done) {
+        done = false;
+        if (cur !== 'bomcut' || swT) {
+          clearTimeout(swT); swT = 0; cur = 'bomcut';
+          labelBoard(cur); renderBoard(cur, false);
+          if (scr) scr.classList.remove('sw');
+        }
+        inst.select(null); inst.setEditable(false); feed.hidden = false; btns();
+      }
       var sw = clamp((v - 0.9) / 0.1);                 // 끝에서 사진 조각이 실제 위젯으로 바뀐다
       tiles.forEach(function (t, i) {
         put(t.el, mix(cell(i), plat(t), ease(clamp((v - i * 0.04) / 0.7)))); t.el.style.opacity = 1 - sw;
@@ -170,19 +175,23 @@
       others.forEach(function (id, i) { var e = item(id); if (e) e.style.opacity = clamp((v - 0.5 - i * 0.03) / 0.3); });
     }
     /* 다 바뀐 뒤에는 다른 친구들의 플래터로 넘겨 볼 수 있다 */
-    var chips = $$('#h8Who button'), hb = scr ? $('.h8-top .h8-hb', scr) : null, cur = 'jiuallday', swT = 0, autoT = 0, seenNow = false, userSet = false;
+    var chips = $$('#h8Who button'), hb = scr ? $('.h8-top .h8-hb', scr) : null, cur = 'bomcut', swT = 0, autoT = 0, seenNow = false, userSet = false;
+    function labelBoard(h) {
+      var openPlatter = $('#castOpenPlatter');
+      if (openPlatter) { openPlatter.href = '/demo/' + h + '/'; openPlatter.textContent = P[h].name + '의 플래터 열기 ↗'; }
+      chips.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.h === h); });
+    }
+    function renderBoard(h, editable) {
+        var pr = P[h], hs = pr.handleStyle || {};
+        inst.select(null); inst.destroy();
+        inst = DP.create(root, { widgets: clone(pr.widgets), editable: editable, removable: false, minRows: 16 });
+        if (hb) { hb.style.setProperty('--hb-a', hs.top || '#EEAFC7'); hb.style.setProperty('--hb-b', hs.bottom || '#E37CA2'); $('img', hb).src = av(h); $('b', hb).textContent = pr.name; $('span', hb).textContent = '@' + pr.handle; }
+    }
     function swap(h, user) {
       if (user) { userSet = true; clearInterval(autoT); autoT = 0; }
       if (!done || h === cur || !P[h]) return; cur = h;
-      chips.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.h === h); });
-      if (scr) scr.classList.add('sw');
-      clearTimeout(swT); swT = setTimeout(function () {
-        var pr = P[h], hs = pr.handleStyle || {};
-        inst.select(null); inst.destroy();
-        inst = DP.create(root, { widgets: clone(pr.widgets), editable: true, removable: false, minRows: 16 });
-        if (hb) { hb.style.setProperty('--hb-a', hs.top || '#EEAFC7'); hb.style.setProperty('--hb-b', hs.bottom || '#E37CA2'); $('img', hb).src = av(h); $('b', hb).textContent = pr.name; $('span', hb).textContent = '@' + pr.handle; }
-        requestAnimationFrame(function () { requestAnimationFrame(function () { if (scr) scr.classList.remove('sw'); }); });
-      }, RM ? 0 : 230);
+      labelBoard(h);
+      renderBoard(h, true);
     }
     function auto() {
       clearInterval(autoT); autoT = 0; if (RM || userSet || !done || !seenNow || chips.length < 2) return;
@@ -243,7 +252,7 @@
   /* ── 아날로그 카드: 방명록은 실제 위젯 세 장 · 캠코더는 앱의 VHS 캠 색감 그대로 ── */
   function guestbook() {
     var root = $('#fxGb'); if (!root || !DW) return;
-    ['jiuallday', 'soramaybe'].concat(Object.keys(P)).filter(function (h, i, a) { return a.indexOf(h) === i; })
+    ['bomcut', 'rollbytae'].concat(Object.keys(P)).filter(function (h, i, a) { return a.indexOf(h) === i; })
       .map(function (h) { return P[h] && P[h].widgets.filter(function (w) { return w.kind === 'guestbook'; })[0]; })
       .filter(Boolean).slice(0, 3).forEach(function (src, i) {
         var note = document.createElement('div'), d = document.createElement('div'); note.className = 'fx-gb-n'; note.style.setProperty('--k', i); d.className = 'dpl'; note.appendChild(d); root.appendChild(note);
@@ -252,15 +261,14 @@
       });
   }
   function camcorder() {
-    var cv = $('#fxCamc'); if (!cv || !cv.getContext || !P.soramaybe) return;
-    var src = P.soramaybe.widgets.filter(function (w) { return w.id === 'fs-03-sora-picnic'; })[0]; if (!src) return;
+    var cv = $('#fxCamc'); if (!cv || !cv.getContext || !P.rollbytae) return;
     var im = new Image();
     im.onload = function () {
       var W = cv.width, H = cv.height, ctx = cv.getContext('2d', { willReadFrequently: true }), k = Math.max(W / im.width, H / im.height), sw = W / k, sh = H / k;
       ctx.drawImage(im, (im.width - sw) / 2, (im.height - sh) / 2, sw, sh, 0, 0, W, H);
       try { ctx.putImageData(grade(ctx.getImageData(0, 0, W, H), LOOKS[1]), 0, 0); } catch (e) { /* 그대로 둔다 */ }
     };
-    im.src = src.data.img;
+    im.src = window.DittoScenes.camcorder.img;
   }
 
   /* ── 점 매트릭스 파형 (앱 DotMatrixWave: 17열 × 9행, 봉우리 2·1·3·1·2) ── */
@@ -286,17 +294,17 @@
     return paint;
   }
 
-  /* ── ③-2 디토: 사진 한 장이 사람에서 사람으로 건너간다 (소라 → 지우 → 하은, 그리고 그 너머).
-     사본마다 출처(@soramaybe)가 남는다. 하은은 지우의 그룹 채팅에 올라온 원본 카드에서 디토한다 (가져온 사본은 다시 디토할 수 없다 — 앱 규칙) ── */
+  /* ── ③-2 디토: 사진 한 장이 사람에서 사람으로 건너간다 (태율 → 봄 → 누리, 그리고 그 너머).
+     사본마다 출처(@rollbytae)가 남는다. 누리는 봄의 그룹 채팅에 올라온 원본 카드에서 디토한다 (가져온 사본은 다시 디토할 수 없다 — 앱 규칙) ── */
   function ditto() {
-    var root = $('#h8Dt'), sA = $('#h8RlA'), sB = $('#h8RlB'), sC = $('#h8RlC'); if (!root || !sA || !sB || !sC || !DW || !P.soramaybe) return;
-    var src = P.soramaybe.widgets.filter(function (w) { return w.id === 'fs-03-sora-picnic'; })[0]; if (!src) return;
+    var root = $('#h8Dt'), sA = $('#h8RlA'), sB = $('#h8RlB'), sC = $('#h8RlC'); if (!root || !sA || !sB || !sC || !DW || !P.rollbytae) return;
+    var src = P.rollbytae.widgets.filter(function (w) { return w.id === 'taeyul-friends'; })[0]; if (!src) return;
     var ring = $('#h8Hold'), card = $('#h8DtCard'), T = [], gen = 0, busy = false, PW = 3 * 45.75 - 8, PH = 4 * 45.75 - 8;
     if (card) card.style.backgroundImage = 'url("' + src.data.img + '")';
     function put(slot, k) {              // 실제 이미지 위젯을 그 자리에 그린다. k > 0 이면 출처가 붙은 사본
       var d = $('.dpl', slot); d.innerHTML = '';
       var wd = { id: 'rl-' + k, kind: src.kind, x: 0, y: 0, w: 3, h: 4, data: clone(src.data), ditto: !k };
-      if (k) wd.source = { name: '소라', handle: 'soramaybe', avatar: av('soramaybe') };
+      if (k) wd.source = { name: '태율', handle: 'rollbytae', avatar: av('rollbytae') };
       var box = DW.box(wd); d.appendChild(box); centre(box, wd, PW / 2, PH / 2);
       slot.classList.toggle('has', true);
     }
@@ -326,16 +334,16 @@
     function run() {
       if (busy) return; busy = true; var g0 = gen, ok = function () { return g0 === gen; };
       if (RM) { put(sB, 1); put(sC, 2); set(4); return; }
-      press().then(function () { if (ok()) { set(1); return fly($('.dpl', sA).parentNode, sB, 1); } })          // ① 소라 → 지우
+      press().then(function () { if (ok()) { set(1); return fly($('.dpl', sA).parentNode, sB, 1); } })          // ① 태율 → 봄
         .then(function () { if (ok()) return wait(1000); })
-        .then(function () { if (!ok()) return; set(2); return wait(1300); })                                    // ② 지우의 그룹 채팅에 원본 카드가 올라온다
-        .then(function () { if (ok()) { set(3); return fly(card, sC, 2); } })                                   // ③ 카드 → 하은
+        .then(function () { if (!ok()) return; set(2); return wait(1300); })                                    // ② 봄의 그룹 채팅에 원본 카드가 올라온다
+        .then(function () { if (ok()) { set(3); return fly(card, sC, 2); } })                                   // ③ 카드 → 누리
         .then(function () { if (ok()) return wait(900); })
-        .then(function () { if (ok()) set(4); });                                                               // ④ 하은과 소라 사이에 주파수, 그 너머로 이어진다
+        .then(function () { if (ok()) set(4); });                                                               // ④ 누리와 태율 사이에 주파수, 그 너머로 이어진다
     }
     function play() { reset(); if (RM) { run(); return; } T.push(setTimeout(run, 1100)); }
     put(sA, 0);
-    /* 카드 세 장을 꿰는 실: 바탕은 점선, 디토가 건너간 구간은 보라 → 분홍으로 채워진다. 끝에는 하은 → 소라로 돌아오는 주파수 곡선 */
+    /* 카드 세 장을 꿰는 실: 바탕은 점선, 디토가 건너간 구간은 보라 → 분홍으로 채워진다. 끝에는 누리 → 소라로 돌아오는 주파수 곡선 */
     var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'), more = $('.h8-rl-more', root), fq = $('#h8DtFq'), vias = $$('.h8-rl-via', root);
     svg.setAttribute('class', 'h8-rl-th'); svg.setAttribute('aria-hidden', 'true');
     svg.innerHTML = '<defs><linearGradient id="h8RlG" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0"><stop offset="0" stop-color="#AA4AF4"/><stop offset="1" stop-color="#FA97E2"/></linearGradient></defs>'
@@ -379,7 +387,7 @@
         var b = bez(SEG[i].c, 0.5); v.style.setProperty('--x', b[0].toFixed(1) + 'px'); v.style.setProperty('--y', b[1].toFixed(1) + 'px');
       });
       if (vert) { ARC = null; pf.setAttribute('d', ''); if (fq) { fq.style.removeProperty('--x'); fq.style.removeProperty('--y'); } waves(); return; }
-      var y0 = Math.max(A.y + A.h / 2, B.y + B.h / 2, C.y + C.h / 2), dip = Math.min(96, A.h * 0.36), ya = A.y + A.h / 2 - 8, yc = C.y + C.h / 2 - 8;      // 하은 → 소라: 카드 아래로 돌아오는 곡선
+      var y0 = Math.max(A.y + A.h / 2, B.y + B.h / 2, C.y + C.h / 2), dip = Math.min(96, A.h * 0.36), ya = A.y + A.h / 2 - 8, yc = C.y + C.h / 2 - 8;      // 누리 → 태율: 카드 아래로 돌아오는 곡선
       ARC = { c: [C.x, yc, C.x, y0 + dip * 1.3, A.x, y0 + dip * 1.3, A.x, ya], len: Math.abs(C.x - A.x) * 1.25 };
       if (fq) { fq.style.setProperty('--x', ((A.x + C.x) / 2).toFixed(1) + 'px'); fq.style.setProperty('--y', (y0 + dip * 0.98).toFixed(1) + 'px'); }
       waves();
@@ -578,7 +586,7 @@
     { id: 'pocket-ccd', name: '포켓 CCD', look: '한밤의 직광', type: 'CCD 디카', grain: 0.35, fall: 0.09 },
     { id: 'toss-27', name: '토스 27', look: '끝나지 않은 소풍', type: '일회용 필름 카메라', grain: 0.95, fall: 0.035 },
     { id: 'analog-booth', name: '아날로그 포토부스', look: '커튼 뒤 네 번의 플래시', type: '은염 인화 포토부스', grain: 1.3, fall: 0.07 }];
-  LOOKS.forEach(function (L) { L.c = NC; L.lut = '/assets/v8/looks/lut-' + L.id + '.png'; L.th = '/assets/v8/looks/th-' + L.id + '.webp'; });
+  LOOKS.forEach(function (L) { L.c = NC; L.lut = '/assets/v8/looks/lut-' + L.id + '.png'; L.th = '/assets/cast/cameras/' + L.id + '.webp?v=front3'; });
   function loadLut(L, cb) {
     if (L._lut || L._ld) return; L._ld = 1;
     var im = new Image(); im.onload = function () { var c = document.createElement('canvas'); c.width = 1089; c.height = 33; var x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(im, 0, 0); L._lut = x.getImageData(0, 0, 1089, 33).data; if (cb) cb(L); }; im.src = L.lut;
@@ -632,12 +640,15 @@
     var cur = LOOKS[0], stream = null, raf = 0, last = 0, raw = null, shot = null, PW = 360, PH = 480, SW = 720, SH = 960;
     LOOKS.forEach(function (L, i) {
       var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', i === 0);
-      b.innerHTML = '<u style="background:url(' + L.th + ') center/cover"></u><div><b></b><span></span></div><i></i>';
+      b.innerHTML = '<u style="background:url(' + L.th + ') center/contain no-repeat"></u><div><b></b><span></span></div><i></i>';
       $('b', b).textContent = L.name; $('span', b).textContent = L.look; $('i', b).textContent = L.type;
       b.addEventListener('click', function () { cur = L; $$('button', list).forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); hud(); if (raw) develop(); });
       li.appendChild(b); list.appendChild(li);
     });
-    function hud() { hudA.textContent = cur.name; hudB.textContent = cur.type; }
+    function hud() {
+      hudA.textContent = cur.name;
+      hudB.textContent = cur.type;
+    }
     function cover(src, sw, sh, dst, dw, dh, mirror) {
       var k = Math.max(dw / sw, dh / sh), w = dw / k, h = dh / k, c = dst.getContext('2d');
       c.save(); if (mirror) { c.translate(dw, 0); c.scale(-1, 1); } c.drawImage(src, (sw - w) / 2, (sh - h) / 2, w, h, 0, 0, dw, dh); c.restore();

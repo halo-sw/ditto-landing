@@ -36,7 +36,7 @@
  *     x,y,w,h   grid cells (8 columns; pitch 45.75 design px incl. 8 gutter; a w×h widget is w*45.75−8 by h*45.75−8)
  *     ditto     the owner opened it for ditto → halo (boxStyle.glow). Only image · gif · video · polaroid can be opened.
  *     source    it is a ditto copy → drawn as the app's DittoWidgetTile (photo/emoji/title + white source chip +
- *               DittoBadge top-right) whatever its kind. name is shown as given ("@jiuallday" or "지우");
+ *               DittoBadge top-right) whatever its kind. name is shown as given ("@bomcut" or "봄");
  *               handle (without @) wins over name when present.
  *
  * ── data per kind ────────────────────────────────────────────────────────────────────────────────────────
@@ -164,15 +164,15 @@
   var CAMERA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2l1.4-2h6.2l1.4 2h2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
   var YT_WEB = '<svg viewBox="0 0 20 14.4" aria-hidden="true"><rect width="20" height="14.4" rx="5.6" fill="#f00"/><path d="M8.4 4.4v5.6l4.6-2.8z" fill="#fff"/></svg>';
   var YT = '<svg viewBox="0 0 20 14.4" aria-hidden="true"><rect width="20" height="14.4" rx="5.6" fill="#f00"/><path d="M7.4 4.2v6l5.2-3z" fill="#fff"/></svg>';   // YouTubeBadge: 1 × .72, r .28, triangle .26 × .3
-  var PENCIL = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 2.3a1.6 1.6 0 0 1 2.3 0l.8.8a1.6 1.6 0 0 1 0 2.3l-7.6 7.6-3.4.9.9-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.4 3.6l3 3" stroke="currentColor" stroke-width="1.6"/></svg>';
+  var PENCIL = '<svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="m10.7 1.9 1.2-1.2a1.4 1.4 0 0 1 2 0l1.4 1.4a1.4 1.4 0 0 1 0 2L14.1 5.3zM9.8 2.8l3.4 3.4-7.5 7.5-4.4 1 1-4.4z"/></svg>';
   var CHECK = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.6 6.3 5 8.6l4.4-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var NOTE = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4.6 9.2V3l5-1.2v6.1" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><circle cx="3.5" cy="9.3" r="1.4" fill="currentColor"/><circle cx="8.5" cy="8.1" r="1.4" fill="currentColor"/></svg>';
   var PLAY = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.6 1.9v8.2L10 6z" fill="#fff"/></svg>';
   var BOOTH = '<svg viewBox="0 0 28 24" aria-hidden="true"><rect x="7.5" y="1.5" width="19" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 9.5h-1a1.5 1.5 0 0 0-1.5 1.5v9A2.5 2.5 0 0 0 3.5 22.5h13A2.5 2.5 0 0 0 19 20v-.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="8.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
   // ditto mark (app asset ditto-appicon-mark, 214 × 204)
   var MARK = '<svg viewBox="0 0 214 204" aria-hidden="true"><g fill="currentColor"><path d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><path d="M141.594 204C150.822 204 158.303 196.48 158.303 187.204C158.303 177.927 150.822 170.407 141.594 170.407C132.366 170.407 124.885 177.927 124.885 187.204C124.885 196.48 132.366 204 141.594 204Z"/></g></svg>';
-  var BADGE_SRC = '/assets/dittobadge-32.svg';
-  var ASK_ART = '/assets/platter/ask-mailbox.png';
+  var BADGE_SRC = '/assets/cast/pack-stickers/00-ditto-basic/sticker-app-icon-purple.webp';
+  var ASK_ART = '/assets/cast/objects/ask-box.webp';
 
   // ───────────────────────── shared pieces ─────────────────────────
 
@@ -212,6 +212,15 @@
 
   // ── 텍스트 — WidgetContent.textView: 13 Medium · padding 12 · style (colour · weight · decoration · align · position)
   R.text = function (w, W, H, d) {
+    if (d.note) {
+      var compact = w.w <= 2;
+      var inset = compact ? 10 : 12, gap = compact ? 2 : 5;
+      var line = compact ? 16 : 20;
+      var lines = Math.max(1, Math.floor((H - 2 * inset - 13 - gap) / line));
+      var memoStyle = 'color:' + fg(d, '#332c23') + ';padding:' + u(inset) + ';gap:' + u(gap);
+      var bodyStyle = 'font-size:' + u(compact ? 13 : 15) + ';line-height:' + u(line) + ';-webkit-line-clamp:' + lines;
+      return '<div class="dw-memo" style="' + memoStyle + '"><span>메모</span><p style="' + bodyStyle + '">' + E(d.text) + '</p></div>';
+    }
     var st = styleOf(d), pos = TEXT_POS[st.pos] || TEXT_POS.tl, dc = deco(st);
     var align = st.align === 'center' || st.align === 'right' ? st.align : 'left';
     var css = 'padding:' + u(12) + ';font-size:' + u(13) + ';line-height:' + u(app() ? 22.6 : 20) + ';color:' + fg(d, 'rgba(18,18,18,.72)') + ';' +
@@ -237,6 +246,7 @@
     return [st[0], st[1], lines, cw <= 2 ? 8 : cw <= 4 ? 12 : 16];
   }
   R.image = function (w, W, H, d) {
+    if (d.meme) return memeImage(d);
     var title = trim(d.title);
     var inner = d.img ? imgTag('dw-cover', d.img) + '<span class="dw-soft"></span>' : '<span class="dw-ph">' + CAMERA + '</span>';
     if (!title) return inner;
@@ -351,6 +361,7 @@
     var big = Math.min(W, H) >= 200 && !!d.ytId;     // MusicPlayback.usesVideo
     var provider = d.provider || (big ? 'YouTube' : /deezer/.test(media) ? 'Deezer' : /apple|itunes|mzstatic/.test(media) ? 'Apple Music' : '미리듣기');
     function mark(s) {
+      if (provider === 'YouTube Music') return '<i class="dw-mu-mk" style="width:' + u(s) + ';height:' + u(s) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#f00"/><circle cx="12" cy="12" r="7.25" fill="none" stroke="#fff"/><path d="M10 8.5v7l5.6-3.5z" fill="#fff"/></svg></i>';
       if (provider === 'YouTube') return '<i class="dw-mu-mk" style="width:' + u(s) + ';height:' + u(s * 0.72) + '">' + YT + '</i>';
       if (provider === 'Apple Music') return '<i class="dw-mu-mk dw-am" style="width:' + u(s) + ';height:' + u(s) + ';border-radius:' + u(s * 0.24) + '"><b style="width:' + u(s * 0.6) + ';height:' + u(s * 0.6) + '">' + NOTE + '</b></i>';
       return '<i class="dw-mu-mk dw-pv" style="width:' + u(s * 0.7) + ';height:' + u(s * 0.7) + '">' + NOTE + '</i>';
@@ -388,36 +399,23 @@
 
   // ── 방명록 — StandardServiceTiles.SpecialGuestbookTile
   R.guestbook = function (w, W, H, d) {
-    var a = app();
-    var entries = (Array.isArray(d.entries) ? d.entries : []).filter(function (e) { return e && trim(e.message); });
-    var small = W < 110, fs = small ? 9 : 12, pad = small ? 6 : 10, rad = a ? 12 : 10, lh = fs * (a ? 1.3 : 1.45);
-    var title = d.title || '다녀간 마음';
-    var lines = H < 150 ? 2 : small ? 6 : 3;
-    if (a && W / Math.max(H, 1) < 1.7) {
-      // SwiftUI only shows the lines that fit the card: work out the card height the ServiceTile leaves
-      var tiny = small && H < 120, inset = tiny ? 7 : small ? 8 : 12, gap = tiny ? 3 : 6, ts = tiny ? 10 : W < 150 ? 13 : 17;
-      var tl = small && !tiny ? lineCount(title, ts, 700, W - inset * 2, 2) : 1;
-      var cardH = H - inset * 2 - (H >= 160 ? 11 * 1.2 + gap : 0) - tl * ts * 1.2 - gap - (!tiny && H >= 160 ? 11 * 1.2 + gap : 0);
-      if (cardH < pad * 2 + lh) pad = Math.max(3, (cardH - lh) / 2);
-      lines = Math.max(1, Math.min(lines, Math.floor((cardH - pad * 2 + 1) / lh)));
+    var entry = Array.isArray(d.entries) && d.entries[0];
+    var tiny = w.w <= 2 && w.h <= 2, strip = w.h <= 2 && !tiny;
+    var pad = Math.min(W, H) < 100 ? 8 : 12;
+    if (!entry || !trim(entry.message)) {
+      return '<div class="dw-note-preview' + (strip ? ' horizontal' : '') + '" style="padding:' + u(pad) + '">' +
+        imgTag('', '/assets/cast/objects/guestbook-note.webp') + '<b>방명록</b></div>';
     }
-    if (!entries.length) {
-      var txt = a ? '아직 안부가 없어요.<br>들렀다는 한 줄이면 충분해요.' : '첫 안부를 기다려요.<br>짧은 한 줄을 남겨봐.';
-      var content0 = a
-        ? '<div class="dw-gb dw-gb-on" style="padding:' + u(pad) + ';border-radius:' + u(rad) + '"><p style="font-size:' + u(fs) + ';line-height:' + u(lh) + ';-webkit-line-clamp:' + lines + '">' + txt + '</p></div>'
-        : '<p class="dw-gb" style="font-size:' + u(fs) + ';line-height:' + u(lh) + ';padding:' + u(pad) + ';border-radius:' + u(rad) + '">' + txt + '</p>';
-      return serviceTile(W, H, '방명록', title, a ? '안부 남기기' : '첫 안부를 남겨봐', content0);
-    }
-    var e = entries[0], name = trim(e.name);
-    // platter.py draws "from. 이름" (+ avatar when there is room) inside the card; the app's tile shows the message only
-    var av = !a && e.avatar && !small && H >= 160 ? imgTag('dw-gb-av', e.avatar, ' style="width:' + u(16) + ';height:' + u(16) + ';border-radius:' + u(5) + '"') : '';
-    var who = !a && H >= 150 ? '<span class="dw-gb-from" style="font-size:' + u(small ? 10 : 11) + ';gap:' + u(4) + '">' + av + 'from. ' + esc(name) + '</span>' : '';
-    var content = '<div class="dw-gb dw-gb-on" style="padding:' + u(pad) + ';border-radius:' + u(rad) + ';gap:' + u(4) + '">' +
-      '<p style="font-size:' + u(fs) + ';line-height:' + u(lh) + ';-webkit-line-clamp:' + lines + '">' + E(trim(e.message)) + '</p>' + who + '</div>';
-    return serviceTile(W, H, '방명록', title, 'from. ' + name + ' · 안부 남기기', content);
+    var face = imgTag('dw-visit-face', entry.avatar || d.ownerAvatar || d.img || '/assets/app/av-flare-1.jpg');
+    var name = '<b>' + esc(entry.name || '친구') + '</b>';
+    var title = tiny || strip ? '' : '<strong>방명록</strong>';
+    var body = tiny ? face + name : title + '<div class="dw-visit-row">' + face + name +
+      '</div><p class="dw-visit-bubble"><span>' + esc(entry.message) + '</span></p>';
+    var lines = strip ? 1 : Math.max(1, Math.floor((H - 2 * pad - 76) / 17));
+    return '<div class="dw-visit dw-visit-' + (tiny ? 'tiny' : strip ? 'strip' : 'stack') +
+      '" style="padding:' + u(pad) + ';--face:' + u(tiny ? 30 : 24) + ';--lines:' + lines + '">' + body + '</div>';
   };
 
-  // ── 포스트 (data type "block") — app: Views/PostWidget.swift · web: platter.py r_block (the older callout card)
   function blockWeb(w, W, H, d) {
     var tiny = w.w <= 2 && w.h <= 2, large = w.w >= 6 && w.h >= 4, horizontal = w.h <= 2 && !tiny, compact = w.h <= 3;
     var pad = tiny ? 8 : large ? 16 : 12;
@@ -434,10 +432,12 @@
     return { html: '<div class="dw-bl' + (horizontal ? ' dw-bl-h' : '') + '" style="padding:' + u(pad) + ';gap:' + u(tiny ? 4 : 8) + '"><div class="dw-bl-main">' + e + body + '</div>' + src + '</div>', cls: 'dw-web' };
   }
   R.block = function (w, W, H, d) {
-    if (!app()) return blockWeb(w, W, H, d);
+    if (!d.collection && !app()) return blockWeb(w, W, H, d);
     var title = trim(d.title), excerpt = trim(String(d.text || '').replace(/\n+/g, ' '));
     var photo = isStr(d.img) && d.img ? d.img : null, label = trim(d.count);
     var head = title || excerpt, body = title ? excerpt : '';
+    var characters = Array.from(body);
+    if (characters.length > 36) body = characters.slice(0, 36).join('').trimEnd() + '…';
     var pad = Math.min(W, H) < 100 ? 12 : 16;
     function eyebrow(onPhoto, count) {
       var c = count !== false && label && W >= 140;
@@ -742,10 +742,10 @@
   R.social = function (w, W, H, d) {
     var wide = w.w >= 3, fs = wide ? 17 : 15, label = trim(d.label);
     if (!wide) { var tw = textW(label, fs, 700), room = W - 24; if (tw > room) fs = Math.max(fs * 0.7, fs * room / tw); }   // minimumScaleFactor(0.7), one line
-    var bw = 20 * 0.11;
+    var badge = Math.min(25, Math.max(16, Math.min(W, H) / 7));
     return (d.img ? imgTag('dw-cover', d.img) : '') + '<span class="dw-so-shade"></span>' +
       '<p class="dw-so-t" style="font-size:' + u(fs) + ';line-height:1.25;padding:' + u(wide ? 14 : 10) + ' ' + u(12) + ' 0;-webkit-line-clamp:' + (wide ? 2 : 1) + ';color:' + fg(d, '#fff') + (wide ? '' : ';white-space:nowrap') + '">' + E(label) + '</p>' +
-      '<i class="dw-so-ig" style="right:' + u(14) + ';bottom:' + u(12) + ';width:' + u(20) + ';height:' + u(20) + ';border-width:' + u(bw) + ';border-radius:' + u(20 * 0.28) + '"></i>';
+      '<img class="dw-so-ig" src="/assets/cast/shared/instagram.svg" alt="" style="right:' + u(wide ? 14 : 8) + ';bottom:' + u(wide ? 12 : 7) + ';width:' + u(badge) + ';height:' + u(badge) + '">';
   };
 
   // ── 스티커 보드 — Views/StickerBoard.swift StickerBoardTile (Figma Splup/Widget/StickerBoard)
@@ -792,19 +792,42 @@
   };
 
   // ── GIF — WidgetContent.gifView
+  function memeImage(d) {
+    return '<picture class="dw-meme' + (d.fit === 'cover' ? ' dw-meme-fill' : '') + '"><source media="(prefers-reduced-motion: reduce)" srcset="' + esc(d.still || d.img) + '">' + imgTag('', d.img) + '</picture>';
+  }
   R.gif = function (w, W, H, d) {
+    if (d.meme) return memeImage(d);
     if (d.img) return imgTag('dw-cover', d.img);
     return '<div class="dw-ss dw-gf" style="gap:' + u(5) + '"><span style="font-size:' + u(28) + '">' + esc(d.emoji) + '</span><span class="dw-sub" style="font-size:' + u(11) + '">GIF</span></div>';
   };
 
-  // ── 플레이리스트 — WidgetContent.playlistView
+  // LP sleeves use the app's TasteShelf vinyl footprint: one square jacket plus the exposed disc.
+  function recordLayout(width, height, count, gap) {
+    var best = { side: 0, cols: 1 };
+    for (var cols = 1; cols <= count; cols++) {
+      var rows = Math.ceil(count / cols);
+      var side = Math.min((width - gap * (cols - 1)) / (1.32 * cols), (height - gap * (rows - 1)) / rows);
+      if (side > best.side) best = { side: side, cols: cols };
+    }
+    return best;
+  }
   R.playlist = function (w, W, H, d) {
-    var songs = (Array.isArray(d.songs) ? d.songs : String(d.text || '').split('\n')).filter(function (t) { return trim(t); });
-    var max = Math.max(0, Math.min(3, Math.floor((H - 24 - 13 - 8 - 14.3 + 8) / (14.3 + 8))));
-    var bars = [8, 13, 6].map(function (h) { return '<i style="height:' + u(h) + '"></i>'; }).join('');
-    var rows = songs.slice(0, max).map(function (t, i) { return '<p class="dw-pls-r" style="font-size:' + u(11) + ';line-height:1.3;gap:' + u(7) + '"><span>' + (i + 1) + '</span><b>' + esc(trim(t)) + '</b></p>'; }).join('');
-    return '<div class="dw-pls" style="padding:' + u(12) + ';gap:' + u(8) + '"><p class="dw-pls-h" style="gap:' + u(5) + ';font-size:' + u(13) + ';line-height:1"><span class="dw-np-bars" style="gap:' + u(2) + ';height:' + u(13) + '">' + bars + '</span><b>' + esc(d.title || '플레이리스트') + '</b></p>' +
-      rows + '<span class="dw-grow"></span>' + (H >= 70 ? '<p class="dw-pls-f" style="font-size:' + u(11) + ';line-height:1.3">탭해서 듣기</p>' : '') + '</div>';
+    var songs = (Array.isArray(d.songs) ? d.songs : String(d.text || '').split('\n'))
+      .map(function (song) { return isStr(song) ? {title: song} : song; })
+      .filter(function (song) { return song && trim(song.title); });
+    var area = w.w * w.h, pad = area <= 4 ? 12 : area <= 12 ? 16 : area <= 24 ? 20 : 24;
+    var showTitle = W >= 120 && H >= 120, gap = 4, width = W - 2 * pad, height = H - 2 * pad - (showTitle ? 24 : 0);
+    var count = Math.min(songs.length, 10), grid = recordLayout(width, height, count, gap);
+    while (count > 1 && grid.side < 30) grid = recordLayout(width, height, --count, gap);
+    var title = trim(d.title) || '플레이리스트';
+    var heading = showTitle ? '<b class="dw-lp-heading">' + esc(title) + '</b>' : '';
+    var rows = songs.slice(0, count).map(function (song, i) {
+      var sleeve = trim(song.art) ? imgTag('', song.art) : '<span class="dw-lp-type">' + esc(song.title) + '</span>';
+      return '<li aria-label="' + esc(song.title) + '" title="' + esc(song.title) + '"><span class="dw-lp-jacket">' +
+        sleeve + '</span><b class="dw-lp-rank" aria-hidden="true">' + (i + 1) + '</b></li>';
+    }).join('');
+    return '<div class="dw-lp" style="padding:' + u(pad) + ';--side:' + u(grid.side) + ';--cols:' + grid.cols + '">' + heading +
+      (count ? '<ol aria-label="' + esc(title) + '">' + rows + '</ol>' : '<span class="dw-lp-empty">아직 담은 곡이 없어요</span>') + '</div>';
   };
 
   // ── kinds outside the launch set (ported from scripts/platter.py) ──
@@ -846,6 +869,9 @@
     if (isStr(d.img) && d.img && refs.indexOf(d.img) < 0) refs.unshift(d.img);
     return refs;
   }
+  R.vintageCamera = function (w, W, H, d) {
+    return serviceTile(W, H, '빈티지 카메라', d.title || '느린 주말', '빈티지 앨범 보기', imgTag('dw-vintage-camera', '/assets/cast/objects/vintage-camera.webp'));
+  };
   R.polaroid = function (w, W, H, d) {
     var frames = framesOf(d), cap = trim(d.caption);
     return serviceTile(W, H, '폴라로이드', frames.length ? '폴라로이드' : '첫 장을 남겨봐', cap || '한 장의 순간', '<div class="dw-pol">' + flipBox(frames, 'dw-pol-photo') + '<div class="dw-pol-chin"></div></div>');
@@ -854,9 +880,9 @@
     return serviceTile(W, H, '파파라치', d.title || '친구가 담은 나', d.by ? 'photo by. ' + d.by : '친구의 시선으로 남은 순간', '<div class="dw-pap">' + flipBox(framesOf(d), 'dw-pap-photo') + '</div>');
   };
   R.ask = function (w, W, H, d) {
-    var title = d.text || '무엇이든 물어봐', inset = Math.min(16, Math.max(8, W * 0.065));
+    var title = d.text || '뭐든 물어봐', inset = Math.min(16, Math.max(8, W * 0.065));
     var art = '<img class="dw-ask-art" src="' + ASK_ART + '" alt="" draggable="false">';
-    var preview = '<p class="dw-ask-q" style="font-size:' + u(11) + ';padding:' + u(6) + ' ' + u(7) + ';border-radius:' + u(8) + '">첫 질문을 남겨봐</p>';
+    var preview = '<p class="dw-ask-q" style="font-size:' + u(11) + ';padding:' + u(6) + ' ' + u(7) + ';border-radius:' + u(8) + '">궁금한 걸 이름 없이 물어보세요</p>';
     if (W / Math.max(H, 1) >= 1.7) {
       return '<div class="dw-ask dw-ask-h" style="padding:' + u(inset) + ';gap:' + u(8) + '"><div style="width:' + u(Math.min(H * 0.9, W * 0.3)) + '">' + art + '</div><div class="dw-ask-col" style="gap:' + u(4) + '">' +
         '<p class="dw-ask-k" style="font-size:' + u(9) + '">ASK</p><p class="dw-ask-t" style="font-size:' + u(Math.min(18, Math.max(12, W * 0.055))) + '">' + esc(title) + '</p>' + preview + '</div></div>';
@@ -916,11 +942,11 @@
   // ───────────────────────── box rules ─────────────────────────
 
   // AppState.widgetBg — style.bg wins when present
-  var BG = { block: '#fff', todo: '#fff', video: '#1C1722', sticker: '#FAF9FC',
+  var BG = { vintageCamera: '#fff', block: '#fff', todo: '#fff', video: '#1C1722', sticker: '#FAF9FC',
     polaroid: '#fff', paparazzi: '#fff', ask: '#fff', ditto: '#e9d8f5', image: '#e7e4ee', status: '#fff',
     mood: '#f1e3a7', text: '#f3eefb', guestbook: '#fff', qna: '#fff', diary: '#d7e39d', dday: '#F2E8FF',
     nowplaying: '#141317', place: '#b8e9df', weather: 'linear-gradient(#d7effe,#d1e2fd 33%,#bfcdf6 68%,#a0c6f1 84%,#d8e7f9)',
-    voice: '#fdf1d7', gif: '#f1e3a7', collection: '#1d1e24', playlist: '#17181d',
+    voice: '#fdf1d7', gif: '#f1e3a7', collection: '#1d1e24', playlist: '#f5f3ef',
     social: 'radial-gradient(circle at 27% 108%,#ffdd55 0,#ffdd55 8.4cqw,#ff543e 41.9cqw,#c837ab 83.8cqw)',   // DGrad.instagram (radius 300)
     together: 'linear-gradient(to bottom right,#F1EAFF,#E4D8FB)' };
   // scripts/platter.py BG (look 'web')
@@ -949,6 +975,14 @@
     return BG[k] || '#f1eaff';
   }
   /** design px at 358. border = 1px line drawn over the content edge (not ditto-able); glow = halo behind (open for ditto). */
+  function limitAvailable(widgets, used) {
+    var count = used || 0;
+    return widgets.map(function (w) {
+      if (!w.ditto) return w;
+      if (!w.priv && !w.source && DITTOABLE[w.kind] && count < 3) { count++; return w; }
+      return Object.assign({}, w, {ditto:false});
+    });
+  }
   function boxStyle(w) {
     var k = kindOf(w);
     var open = !!(w && w.ditto === true && !w.source && DITTOABLE[k]);
@@ -1023,7 +1057,7 @@
     else if (k === 'status') extra = trim(d.label) || trim(d.emoji);
     else if (k === 'ditto') extra = w.source ? 'from. ' + (trim(w.source.handle) ? '@' + trim(w.source.handle).replace(/^@+/, '') : trim(w.source.name)) : '';
     else extra = trim(d.title) || trim(d.text) || trim(d.label);
-    return (A11Y[k] || '위젯') + (extra ? ', ' + extra : '');
+    return (A11Y[k] || '위젯') + (extra ? ', ' + extra : '') + (w.ditto && !w.source && DITTOABLE[k] ? ', 디토 가능' : '');
   }
   function box(w) {
     var el = document.createElement('div');
@@ -1038,6 +1072,7 @@
   function platter(p, opts) {
     var list = Array.isArray(p) ? p : (p && Array.isArray(p.widgets) ? p.widgets : []);
     var rows = (opts && opts.rows) || (p && !Array.isArray(p) && p.rows) || 0;
+    list = limitAvailable(list);
     list.forEach(function (w) { if (!w.priv) rows = Math.max(rows, (+w.y || 0) + (+w.h || 0)); });
     var gridH = Math.max(1, rows) * UNIT - GUT;
     var root = document.createElement('div');
@@ -1063,33 +1098,33 @@
   var DEMO = '/demo/';
   var catalog = [
     { kind: 'social', name: '소셜', group: G_MINE, section: '기본', desc: '여러 SNS 계정을 프로필에 연결해요', sizes: sz(ALL12), defaultSize: { w: 2, h: 2 }, freeResize: true,
-      sample: { label: '@jiuallday' } },
+      sample: {"label": "@halosw_", "img": "/assets/cast/shared/halosw-instagram.webp", "url": "https://www.instagram.com/halosw_/"} },
     { kind: 'todo', name: 'To-do', group: G_MINE, section: '기록', desc: '카테고리별 할 일과 이번 주 기록', sizes: sz([[4, 4], [4, 3], [6, 2], [3, 4]]), defaultSize: { w: 3, h: 4 }, freeResize: true,
-      sample: { title: '🎞️ 이번 주', cats: [{ id: 'c1', name: '취향', color: 'purple' }], items: [{ text: '📌 필름 두 롤 맡기기', done: true, cat: 'c1' }, { text: '💌 서윤에게 전시 링크', done: false, cat: 'c1' }, { text: '🫧 꽃집 문 닫는 시간 확인', done: false, cat: 'c1' }], week: [[], ['purple'], [], [], [], [], []] } },
+      sample: {"title": "누리의 교환 책", "cats": [{"id": "read", "name": "책", "color": "purple"}], "items": [{"text": "마당을 나온 암탉 읽기", "cat": "read", "done": true}, {"text": "여울에게 책갈피 건네기", "cat": "read", "done": false}]} },
     { kind: 'guestbook', name: '방명록', group: G_MINE, section: '함께', desc: '친구가 남긴 안부에 답글을 달아요', sizes: sz(ALL12), defaultSize: { w: 4, h: 3 }, freeResize: true,
-      sample: { title: '방명록', entries: [{ name: '준', handle: 'junishere', message: '퇴근하고 바로 갈게, 7시 반 🙌', avatar: DEMO + 'dohyunlinks/media/35f6d18d2833.jpg' }, { name: '재민', handle: 'jaeminarchive', message: '준도 불렀어! 둘이 같이 감 👋' }] } },
+      sample: {"title": "방명록", "ownerAvatar": "/assets/cast/scenes/gallery-notebook-owner.webp"} },
     { kind: 'dday', name: 'D-Day', group: G_MINE, section: '기록', desc: '기다리는 날까지 함께 세요', sizes: sz(ALL12), defaultSize: { w: 4, h: 2 }, freeResize: true,
-      sample: { title: '여름 여행', inDays: 30 } },
+      sample: {"title": "다음 합주", "inDays": 4} },
     { kind: 'sticker', name: '스티커 보드', group: G_MINE, section: '함께', desc: '친구들이 스티커를 붙여 줘요', sizes: sz(ALL12), defaultSize: { w: 4, h: 4 }, freeResize: true,
-      sample: { stickers: [{ img: '/assets/app/sticker-ditto-appicon.png', x: 0.27, y: 0.3, r: -8 }, { img: '/assets/stk/strawberry.webp', x: 0.72, y: 0.26, r: 10 }, { img: '/assets/stk/sparkling_heart.webp', x: 0.5, y: 0.6, r: -4 }, { img: '/assets/stk/teddy_bear.webp', x: 0.24, y: 0.76, r: 7 }, { img: '/assets/app/sticker-d-logo-pink.png', x: 0.76, y: 0.74, r: -12 }] } },
+      sample: {"stickers": [{"img": "/assets/cast/found/mp3-player.webp", "x": 0.23, "y": 0.34, "r": -12, "s": 1.3}, {"img": "/assets/cast/found/lp-record.webp", "x": 0.72, "y": 0.34, "r": 12, "s": 1.3}, {"img": "/assets/cast/found/ref-tape.webp", "x": 0.24, "y": 0.8, "r": -14, "s": 0.91}, {"img": "/assets/cast/found/jelly-bear.webp", "x": 0.66, "y": 0.77, "r": 8, "s": 1.05}, {"img": "/assets/cast/found/ref-heart.webp", "x": 0.46, "y": 0.58, "r": 9, "s": 0.54}]} },
     { kind: 'block', name: '포스트', group: G_MINE, section: '기록', desc: '블로그 글을 쓰고 플래터에 카드로 보여 줘요', sizes: sz(ALL12), defaultSize: { w: 4, h: 3 }, freeResize: true,
-      sample: { title: '안 걸린 벽도 🪞', text: '작품보다 빈 벽 앞에 오래 서 있었다. 아무것도 없는 쪽이 오늘은 더 마음에 남았다 🪞', count: '글 2개' } },
+      sample: {"title": "나의 인터뷰 함", "text": "처음이라서 설레기도 어렵기도 무섭기도 하던 그 모든 감정이… 소중한 거라고 말해주고 싶어요. 그 안에서 좋아하는 걸 찾고소중한 것을 곁에 뒀던 것까지도. 그냥 참 잘했다, 잘하고 있다.", "collection": true, "count": "글 1개"} },
     { kind: 'gif', name: 'GIF', group: G_GROUP, section: '미디어', desc: '움직이는 짤을 걸어 둬요', sizes: sz(ALL12), defaultSize: { w: 2, h: 2 }, freeResize: true,
-      sample: { img: '/assets/rooms/gif/rg-haeun-reading.webp' } },
+      sample: {"img": "/assets/cast/shared/usagi-chiikawa.gif", "still": "/assets/cast/shared/usagi-chiikawa-still.webp", "title": "치이카와 · 달려가는 우사기", "fit": "cover", "meme": true} },
     { kind: 'status', name: '상태', group: G_GROUP, section: '기본', desc: '이모지나 한 줄로 지금 기분·상태를 나눠요', sizes: sz([[2, 2], [3, 3], [4, 4], [6, 6], [4, 2], [6, 2]]), defaultSize: { w: 2, h: 2 }, freeResize: true,
-      sample: { emoji: '🍒', label: '돗자리 챙겨 둠', style: { bg: '#FFFFFF' } } },
+      sample: {"emoji": "🎧", "label": "킥 소리 고르는 중", "style": {"bg": "#ECE8DF"}} },
     { kind: 'playlist', name: '플레이리스트', group: G_GROUP, section: '미디어', desc: '곡을 모아 들려줘요', sizes: sz(ALL12), defaultSize: { w: 3, h: 4 }, freeResize: true,
-      sample: { title: '산책할 때', songs: ['봄날', '밤편지', 'Hype Boy'] } },
+      sample: {"title": "합주 끝나고 집 가는 길", "songs": [{"title": "From The Start", "art": "/assets/cast/scenes/album-from-start.webp"}, {"title": "Glue Song", "art": "/assets/cast/scenes/album-glue-song.webp"}, {"title": "Snooze", "art": "/assets/cast/scenes/album-snooze.webp"}, {"title": "EVERYTHING", "art": "/assets/cast/scenes/album-everything.webp"}]} },
     { kind: 'text', name: '텍스트', group: G_GROUP, section: '기본', desc: '한 줄 메모를 가볍게 남겨요', sizes: sz(ALL12), defaultSize: { w: 4, h: 2 }, freeResize: true,
-      sample: { text: '🧺 각자 좋아하는 간식 하나', style: { bg: '#EFEFF1' } } },
+      sample: {"text": "장갑은 골대 뒤에", "note": true, "style": {"bg": "#FBF3CB", "fg": "#332C23"}} },
     { kind: 'together', name: 'Together', group: G_GROUP, section: '함께', desc: '친구를 태그하고 같이 찍은 네 컷을 올려요', sizes: sz([[6, 2], [2, 4], [3, 6], [4, 8]]), defaultSize: { w: 2, h: 4 }, freeResize: false,
-      sample: { shots: [DEMO + 'jiuallday/media/8be73b82fef7.jpg', DEMO + 'jiuallday/media/7df2d7589f14.jpg', DEMO + 'jiuallday/media/85cb664eedb9.jpg', DEMO + 'jiuallday/media/ab220d8a9375.jpg'], frame: '#FFFFFF', tagged: ['소라', '나리'] } },
+      sample: {"shots": ["/assets/cast/scenes/strip-birthday.webp", "/assets/cast/scenes/strip-picnic.webp", "/assets/cast/scenes/strip-garden.webp", "/assets/cast/scenes/strip-steps.webp"], "frame": "#F6F2F0", "tagged": []} },
     { kind: 'image', name: '이미지', group: G_GROUP, section: '기본', desc: '어제 찍은 사진을 그대로 걸어요', sizes: sz(ALL12), defaultSize: { w: 4, h: 4 }, freeResize: true,
-      sample: { img: DEMO + 'jiuallday/media/8be73b82fef7.jpg', title: '🎂 초는 내가' } },
+      sample: {"img": "/assets/cast/scenes/golden-leaves.webp", "title": "은행잎이 쌓인 날"} },
     { kind: 'music', name: '음악', group: G_GROUP, section: '기본', desc: '요즘 자주 듣는 노래를 담아요', sizes: sz(ALL12), defaultSize: { w: 4, h: 2 }, freeResize: true,
-      sample: { title: '1111', artist: 'HANRORO', img: DEMO + 'haeunzip/media/cd2471a3e72a.jpg', palette: ['#f3e2e5', '#eed6da', '#b4b9bc'], audio: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e3/53/56/e35356dc-1230-65e1-7600-cd2d112610d8/mzaf_12660985028670842405.plus.aac.p.m4a', album: 'LOVE&HATE - Single', ytId: 'Gofn_ULNd5Q' } },
+      sample: {"title": "Psycho", "artist": "Red Velvet", "album": "The ReVe Festival Finale", "url": "https://music.youtube.com/watch?v=uR8Mrt1IpXg", "img": "/assets/cast/bom/psycho-album.webp", "provider": "YouTube Music", "palette": ["#bed9d3", "#a3cac1", "#debab5"], "audio": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/01/0d/cb/010dcb95-4d2e-c56d-66b6-aa32d244d604/mzaf_10666588273897692200.plus.aac.p.m4a", "poster": "/assets/cast/bom/psycho.webp", "ytId": "uR8Mrt1IpXg", "playback": "youtube", "format": "뮤직비디오"} },
     { kind: 'video', name: '영상', group: G_GROUP, section: '기본', desc: '짧은 영상으로 일상을 전해요', sizes: sz(ALL12), defaultSize: { w: 4, h: 3 }, freeResize: true,
-      sample: { img: DEMO + 'haeunzip/media/11e796c2fa3d.jpg', letterbox: true, title: '🍮 책 덮고 한 편', ytId: 'pbQQAwSQUX4' } }
+      sample: {"ytId": "i6d3K6ln-d4", "url": "https://www.youtube.com/watch?v=i6d3K6ln-d4", "img": "/assets/cast/scenes/chiikawa-sphinx.webp", "title": "치이카와 2화 · 스핑크스", "channel": "めざましテレビチャンネル", "ip": "치이카와"} }
   ];
   catalog.forEach(function (c) { c.dittoable = !!DITTOABLE[c.kind]; });
 
@@ -1097,7 +1132,7 @@
     render: render, update: update, boxStyle: boxStyle, catalog: catalog,
     kinds: Object.keys(R),
     applyBox: applyBox, place: place, box: box, platter: platter, rect: rect, radius: radius, label: label,
-    cq: u, dittoable: function (kind) { return !!DITTOABLE[kind]; },
+    limitAvailable: limitAvailable, label: label, cq: u, dittoable: function (kind) { return !!DITTOABLE[kind]; },
     metrics: { width: DW, unit: UNIT, gutter: GUT, cols: COLS, minW: 2, maxW: 6, minH: 2, maxH: 8 },
     config: config
   };

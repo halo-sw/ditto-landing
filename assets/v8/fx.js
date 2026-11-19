@@ -149,12 +149,12 @@
 
   /* ── 6) 앱 화면 세 장: 탭을 누르면 가운데 폰이 바뀐다 (양옆에 이전 · 다음 화면이 흐릿하게) ── */
   function shots() {
-    var tabs = $$('#fxTabs [role="tab"]'), ims = $$('#fxTabV img'); if (tabs.length < 3 || ims.length !== tabs.length) return;
+    var tabs = $$('#fxTabs [role="tab"]'), ims = $$('#fxTabV .fx-device'); if (tabs.length < 3 || ims.length !== tabs.length) return;
     var n = tabs.length, cur = 0, tm = 0;
     function show(k, user) {
       cur = k;
       tabs.forEach(function (t, i) { t.setAttribute('aria-selected', i === k); });
-      ims.forEach(function (im, i) { var d = (i - k + n) % n; im.className = d === 0 ? 'c' : d === 1 ? 'r' : 'l'; });
+      ims.forEach(function (im, i) { var d = (i - k + n) % n; im.className = 'fx-device ' + (d === 0 ? 'c' : d === 1 ? 'r' : 'l'); });
       if (user) { clearInterval(tm); tm = 0; }
     }
     tabs.forEach(function (t, i) { t.addEventListener('click', function () { show(i, true); }); });

@@ -1,0 +1,123 @@
+{
+  "stickers": {
+    "cassette": "https://giphy.com/stickers/tape-gravitando-fita-cassete-RJPKCyLPVQI4CX7UD1",
+    "film": "https://giphy.com/stickers/film-35mm-kodak-OINeN1oOHAtbggJcJ8",
+    "cat": "https://giphy.com/stickers/book-reading-read-3lYFwKPvMNpnbwSlmX",
+    "daisy": "https://giphy.com/stickers/white-flower-daisy-daisie-hOdf4P1UH3deddfnP1",
+    "bead": "https://giphy.com/stickers/justbeaditbyrachel-jewelry-beads-beaded-pIBf5sfAiLkycuLXLI",
+    "buds": "https://giphy.com/stickers/music-volume-jams-s5NrxNq4uLsRJIOcfH",
+    "moon": "https://giphy.com/stickers/8vUF9TFFZjNaguWejR",
+    "tape": "https://giphy.com/stickers/tape-washitape-priscilarts-QYkShbiKVnCCRwhlU8",
+    "cherry": "https://giphy.com/stickers/transparent-cherry-haninnaqib-njZj4JzxZgjHqguEQI",
+    "ribbon": "https://giphy.com/stickers/bow-ribbon-mariten-u3YwUeU5UCSmZhhUq8",
+    "clover": "https://giphy.com/stickers/clover-four-leaf-4-TNDqBlxtIjDMvsyWgC",
+    "radio": "https://giphy.com/stickers/radios-rugged-QsUmM9sjVquDQKeYVd",
+    "camcorder": "https://giphy.com/stickers/transparent-rec-ayaxdetal-egIpqXrJaY8bwK17q8",
+    "envelope": "https://giphy.com/stickers/envelope-love-letter-moli-fernyx-1XcAoSZAndlplFEVD3",
+    "camera": "https://giphy.com/stickers/camera-madebyesther-made-by-esther-DLuYanIB7JI8zXGU6Y",
+    "lace": "https://giphy.com/stickers/shoe-shoelaces-tying-hWvKBYHw41BCAi77yY",
+    "cd": "https://giphy.com/stickers/yacht-cd-beos-compactdisc-auFRaqeqVXuZC5mYHH"
+  },
+  "memes": {
+    "bom": "https://jjalbot.com/jjals/55G5Alahk",
+    "taeyul": "https://tenor.com/view/dog-cute-funny-tillman-skateboarding-gif-3446788",
+    "nuri": "https://giphy.com/gifs/moominofficial-moomintroll-little-my-moominous-W2i4B1Kn8r4cvPXJ3y",
+    "gyeol": "https://jjalbot.com/jjals/Vfo_Gwzfy",
+    "yeoul": "https://jjalbot.com/jjals/Cu3BylbsH",
+    "ian": "https://jjalbot.com/jjals/BkGihupLC",
+    "seori": "https://jjalbot.com/jjals/sS9TG8GYt"
+  },
+  "shape-sources": {
+    "paw": "https://github.com/microsoft/fluentui-emoji/tree/main/assets/Paw%20prints",
+    "whale": "https://github.com/microsoft/fluentui-emoji/tree/main/assets/Spouting%20whale",
+    "cloud": "https://github.com/microsoft/fluentui-emoji/tree/main/assets/Cloud",
+    "shell": "https://github.com/microsoft/fluentui-emoji/tree/main/assets/Spiral%20shell",
+    "puzzle": "https://github.com/microsoft/fluentui-emoji/tree/main/assets/Puzzle%20piece",
+    "ghost": "https://github.com/microsoft/fluentui-emoji/tree/main/assets/Ghost",
+    "peach": "https://github.com/microsoft/fluentui-emoji/tree/main/assets/Peach"
+  },
+  "clips": {
+    "bom": {
+      "ytId": "O3Uc26tXML8",
+      "url": "https://www.youtube.com/watch?v=O3Uc26tXML8",
+      "img": "/assets/cast/bom/clip.webp",
+      "title": "Just Dance 3 | Rasputin",
+      "channel": "Just Dance"
+    },
+    "taeyul": {
+      "ytId": "PwLPmpEesCc",
+      "url": "https://www.youtube.com/watch?v=PwLPmpEesCc",
+      "img": "/assets/cast/taeyul/clip.webp",
+      "title": "The Skateboard - Shaun the Sheep",
+      "channel": "Shaun the Sheep & Friends"
+    },
+    "nuri": {
+      "ytId": "2ikFARLiJIQ",
+      "url": "https://www.youtube.com/watch?v=2ikFARLiJIQ",
+      "img": "/assets/cast/nuri/clip.webp",
+      "title": "Let's Create Art Together Woodstock! | The Snoopy Show Clip | Apple TV+",
+      "channel": "Snoopy"
+    },
+    "gyeol": {
+      "ytId": "3AZz9TSjZCM",
+      "url": "https://www.youtube.com/watch?v=3AZz9TSjZCM",
+      "img": "/assets/cast/gyeol/clip.webp",
+      "title": "Dave Grohl and Animal Drum Battle - The Muppets",
+      "channel": "ABC"
+    },
+    "yeoul": {
+      "ytId": "IDjozwcjR20",
+      "url": "https://www.youtube.com/watch?v=IDjozwcjR20",
+      "img": "/assets/cast/yeoul/clip.webp",
+      "title": "Is Mayonnaise an Instrument? We’re Breaking Down the Episode: Band Geeks #TBT | SpongeBob",
+      "channel": "SpongeBob SquarePants Official"
+    },
+    "ian": {
+      "ytId": "CNmRw7FvMMI",
+      "url": "https://www.youtube.com/watch?v=CNmRw7FvMMI",
+      "img": "/assets/cast/ian/clip.webp",
+      "title": "Kick It with Tom and Jerry! ⚽️ Sports Moments | Tom & Jerry | #KidsCartoons @wbkids",
+      "channel": "WB Kids"
+    },
+    "seori": {
+      "ytId": "A99vXoRR0eo",
+      "url": "https://www.youtube.com/watch?v=A99vXoRR0eo",
+      "img": "/assets/cast/seori/clip.webp",
+      "title": "Kuromi’s Fancy Pants | Hello Kitty and Friends Supercute Adventures S9 EP10",
+      "channel": "Hello Kitty and Friends"
+    }
+  },
+  "platter-stickers": {
+    "mp3-player": {
+      "source": "https://commons.wikimedia.org/wiki/File:IPod_nano.png",
+      "credit": "Matthieu Riegler, Wikimedia Commons",
+      "license": "https://creativecommons.org/licenses/by/3.0/",
+      "edit": "앞면만 잘라 크기를 조정했습니다."
+    },
+    "jelly-bear": {
+      "source": "https://giphy.com/stickers/bear-jelly-gummy-iiWaX0v44l3ADIpiW0",
+      "credit": "tracheotommy",
+      "edit": "첫 프레임을 추출했습니다."
+    },
+    "butterfly": {
+      "source": "https://giphy.com/stickers/glamnetic-butterfly-y2k-glamneticy2k-Tv2Bwo1uftvPmFr861",
+      "credit": "glamnetic",
+      "edit": "첫 프레임을 추출했습니다."
+    },
+    "lp-record": {
+      "source": "Ditto / onboarding-objects-v1 / vinyl"
+    },
+    "headphones": {
+      "source": "Ditto / platter-pocket-headphones"
+    },
+    "pocket-tape": {
+      "source": "Ditto / platter-pocket-cassette"
+    },
+    "jelly-drop": {
+      "source": "Ditto / assets/stk/ai-034"
+    },
+    "pressed-daisy": {
+      "source": "Ditto / 플래터 스티커 원본 / pressed-daisy"
+    }
+  }
+}

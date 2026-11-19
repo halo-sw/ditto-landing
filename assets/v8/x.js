@@ -34,32 +34,78 @@
     return out;
   }
 
-  /* ── 위젯 14가지: 같은 규격의 타일 → 누르면 자세히. 그 뒤에 곧 나올 위젯은 흐릿한 타일로 ──
+  /* ── 위젯 모음: 같은 규격의 타일 → 누르면 자세히. 그 뒤에 곧 나올 위젯은 흐릿한 타일로 ──
      상세의 움직임: 누른 타일에서 위젯이 날아와 커지고(열기) · 크기를 고르면 앞 모양이 다음 모양으로 녹아들고(비율) · 이전/다음은 옆으로 밀려 바뀐다 */
   function widgets() {
     var ul = $('#xWg'), dlg = $('#xWd'); if (!ul || !dlg || !DW || !DW.catalog) return;
     var stage = $('#xWdSt'), card = $('.x-wd-in', dlg), text = $('.x-wd-t', dlg), nameEl = $('#xWdN'), descEl = $('#xWdD'), cntEl = $('#xWdC'), szEl = $('#xWdSz');
     var cur = 0, k = 0, wrap = null, busy = false, EASE = 'cubic-bezier(.32,.72,0,1)', can = !RM && !!document.body.animate;
-    var items = DW.catalog.map(function (c, idx) {
-      var sizes = c.sizes.filter(function (s) { return s.w <= 6 && s.h <= 6; });
-      var base = sizes.filter(function (s) { return s.w === 4 && s.h === 4; })[0] || c.defaultSize;      // 타일은 모두 4×4 (Together만 세로 네 컷 2×4)
+    var captureRoot = '/assets/cast/widgets/build65/';
+    var nativeWidgets = [
+      {kind:'ask', name:'Ask', desc:'친구에게 질문을 받아요', defaultSize:{w:3,h:4}},
+      {kind:'collection', name:'취향 콜렉션', desc:'앨범·영화·책 내 Top 10을 꽂아 둬요', defaultSize:{w:4,h:4}},
+      {kind:'qna', name:'연말 문답', desc:'D-50부터 하루 한 문답으로 올해의 나를 모아요', defaultSize:{w:4,h:4}}
+    ];
+    // Build 65 uses the same twelve service sizes as the image widget.
+    var serviceSizes = DW.catalog.find(function (item) { return item.kind === 'image'; }).sizes;
+    nativeWidgets.forEach(function (item) { item.sizes = serviceSizes; item.nativePreview = true; });
+    function capture(item, size, extent) {
+      var img = document.createElement('img');
+      img.src = captureRoot + item.kind + '-' + size.w + 'x' + size.h + '.webp?v=examples2';
+      // Reserve the native tile's ratio before the image decodes, including during the opening animation.
+      img.width = Math.round((size.w * 45.75 - 8) * 4);
+      img.height = Math.round((size.h * 45.75 - 8) * 4);
+      var longest = Math.max(img.width, img.height);
+      img.style.setProperty('--tile-width', extent * img.width / longest + '%');
+      img.style.setProperty('--tile-height', extent * img.height / longest + '%');
+      img.alt = item.name + ' ' + size.w + '×' + size.h;
+      return img;
+    }
+    var items = DW.catalog.concat(nativeWidgets).map(function (c, idx) {
+      var sizes = c.sizes;
+      var base = c.defaultSize;
       var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.className = 'x-wg-t';
       b.innerHTML = '<span class="x-wg-st"><span class="dpl"></span></span><b></b>';
       $('b', b).textContent = c.name; b.setAttribute('aria-label', c.name + ' 위젯 자세히 보기');
-      var wd = { id: 'xw-' + c.kind, kind: c.kind, x: 0, y: 0, w: base.w, h: base.h, data: clone(c.sample || {}) }, box = DW.box(wd);
-      $('.dpl', b).appendChild(box); DW.applyBox(box, wd); DW.update(box.firstElementChild, wd); centre(box, base, 179, 179);
+      var box;
+      if (c.nativePreview) {
+        box = capture(c, base, 82); box.loading = 'lazy';
+        box.className = 'x-native-preview';
+        $('.dpl', b).replaceWith(box);
+      } else {
+        var wd = { id: 'xw-' + c.kind, kind: c.kind, x: 0, y: 0, w: base.w, h: base.h, data: clone(c.sample || {}) };
+        box = DW.box(wd);
+        $('.dpl', b).appendChild(box); DW.applyBox(box, wd); DW.update(box.firstElementChild, wd); centre(box, base, 179, 179);
+      }
       b.addEventListener('click', function () { if (li.classList.contains('mid') || !ul.classList.contains('x-fan')) open(idx, box); });
       li.dataset.n = c.name; li.dataset.d = c.desc; li.appendChild(b); ul.appendChild(li);
       return { c: c, sizes: sizes, base: base };
     });
-    [['Camera', 'assets/app/cam-toss-27.webp', '50% 34%'], ['포토부스', 'assets/v5-art-booth.webp', '50% 50%'], ['오늘 테이프', 'assets/v5-art-camcorder.webp', '50% 50%'], ['롤링페이퍼', 'assets/v5-art-envelope.webp', '50% 50%'], ['문답', 'assets/platter/ask-mailbox.png', '50% 50%']].forEach(function (s) {
+    var upcoming = [
+      ['diary', '한줄일기'], ['bucket', '버킷리스트'],
+      ['secret', '비밀게시글'], ['paparazzi', '파파라치']
+    ];
+    upcoming.forEach(function (entry) {
       var li = document.createElement('li'); li.className = 'soon';
-      li.innerHTML = '<div class="x-wg-t" aria-label="' + s[0] + ' 위젯, 곧 나와요"><span class="x-wg-st"><img src="' + s[1] + '" alt="" loading="lazy" style="object-position:' + s[2] + '"><em lang="en">Coming soon</em></span><b>' + s[0] + '</b></div>';
-      li.dataset.n = s[0]; li.dataset.d = '곧 나와요'; ul.appendChild(li);
+      li.dataset.n = entry[1]; li.dataset.d = '곧 오픈 예정';
+      li.innerHTML = '<div class="x-wg-t"><span class="x-wg-st"><em>곧 오픈 예정</em></span><b></b></div>';
+      $('b', li).textContent = entry[1];
+      var art = document.createElement('img');
+      art.alt = '';
+      art.loading = 'lazy';
+      art.src = '/assets/cast/widgets/soon/' + entry[0] + '.webp?v=native7';
+      $('.x-wg-st', li).prepend(art);
+      ul.appendChild(li);
     });
     var n = items.length;
     function make(it, s) {            // 그 크기의 위젯 한 장 (어떤 크기든 무대를 비슷하게 채운다)
       var w = document.createElement('span'); w.className = 'x-wd-w';
+      if (it.c.nativePreview) {
+        var art = capture(it.c, s, 76);
+        art.className = 'x-native-detail'; art.loading = 'eager';
+        w.appendChild(art); w._box = art;
+        return w;
+      }
       var d = document.createElement('span'); d.className = 'dpl'; d.style.width = (358 / Math.max(s.w * 45.75 - 8, s.h * 45.75 - 8) * 76).toFixed(1) + '%'; w.appendChild(d);
       var wd = { id: 'xwd-' + it.c.kind + s.w + s.h, kind: it.c.kind, x: 0, y: 0, w: s.w, h: s.h, data: clone(it.c.sample || {}) }, box = DW.box(wd);
       d.appendChild(box); DW.applyBox(box, wd); DW.update(box.firstElementChild, wd); centre(box, s, 179, 179); w._box = box;
@@ -81,7 +127,17 @@
     }
     function fill(i) {
       cur = (i % n + n) % n; var it = items[cur];
-      nameEl.textContent = it.c.name; descEl.textContent = it.c.desc; cntEl.textContent = it.sizes.length + '가지';
+      var sample = it.c.sample || {}, link = $('#xWdLink');
+      nameEl.textContent = it.c.name;
+      descEl.textContent = it.c.desc;
+      var youtubeMusic = it.c.kind === 'music' && /^https:\/\/music\.youtube\.com\//.test(sample.url || '');
+      var target = youtubeMusic ? sample.url : sample.ytId ? 'https://www.youtube.com/watch?v=' + sample.ytId : sample.sourceURL || (it.c.kind === 'social' ? sample.url : '');
+      link.hidden = !target;
+      if (target) {
+        link.href = target; link.target = '_blank'; link.rel = 'noopener noreferrer';
+        link.textContent = youtubeMusic ? 'YouTube Music에서 듣기' : sample.ytId ? 'YouTube에서 보기' : sample.sourceURL ? (sample.creator ? sample.creator + ' · ' : '') + '짤 원본 보기' : sample.label + ' 인스타그램 보기';
+      } else link.removeAttribute('href');
+      cntEl.textContent = it.sizes.length + '가지';
       k = 0; it.sizes.forEach(function (s, q) { if (s.w === it.base.w && s.h === it.base.h) k = q; });
       szEl.innerHTML = '';
       it.sizes.forEach(function (s, q) {
@@ -131,7 +187,7 @@
       lis.forEach(function (li, i) {
         var d = wrap(i - pos), ad = Math.abs(d), jump = li._d != null && Math.abs(d - li._d) > n / 2;
         li.style.transition = !anim || jump ? 'none' : ''; li._d = d;
-        li.style.transform = 'translate(-50%,-50%) translate3d(' + (d * s * (1 - Math.min(ad, 5) * 0.035)).toFixed(1) + 'px,' + (ad * ad * 10).toFixed(1) + 'px,0) rotate(' + (d * 5).toFixed(2) + 'deg) scale(' + Math.max(0.56, 1.22 - ad * 0.2).toFixed(3) + ')';
+        li.style.transform = 'translate(-50%,-50%) translate3d(' + (d * s * (1 - Math.min(ad, 5) * 0.035)).toFixed(1) + 'px,' + (ad * ad * 10).toFixed(1) + 'px,0) rotate(' + (d * 5).toFixed(2) + 'deg) scale(' + (1.22 * Math.max(0.88, 1 - ad * 0.04)).toFixed(3) + ')';
         li.style.opacity = ad > 3.8 ? 0 : ad > 2.8 ? (3.8 - ad).toFixed(2) : 1; li.style.zIndex = 100 - Math.round(ad * 10);
         var mid = ad < 0.5; li.classList.toggle('mid', mid);
         if (mid && cap && cap._k !== i) { cap._k = i; $('b', cap).textContent = li.dataset.n || ''; $('span', cap).textContent = li.dataset.d || ''; }
@@ -160,22 +216,22 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { live = es[0].isIntersecting; auto(); }, { threshold: 0.35 }).observe(ul);
   }
 
-  /* ── 디토: 소라의 사진 한 장이 다섯 명에게 번진다. 누가 가져갈 때마다 소라에게 알림이 온다 (가져간 사람을 소라가 알게 된다) ──
-     사본마다 출처(@soramaybe)가 남는다. 친구의 친구는 그룹 채팅에 올라온 원본 카드에서 디토한다 (가져온 사본은 다시 디토할 수 없다 — 앱 규칙) */
+  /* ── 디토: 태율의 사진 한 장이 다섯 명에게 번진다. 누가 가져갈 때마다 태율에게 알림이 온다 (가져간 사람을 태율이 알게 된다) ──
+     사본마다 출처(@rollbytae)가 남는다. 친구의 친구는 그룹 채팅에 올라온 원본 카드에서 디토한다 (가져온 사본은 다시 디토할 수 없다 — 앱 규칙) */
   function ditto() {
-    var root = $('#xDt'), srcSlot = $('#xDtSrc'), rows = $$('#xDtRow > li'); if (!root || !srcSlot || !rows.length || !DW || !P.soramaybe) return;
-    var src = P.soramaybe.widgets.filter(function (w) { return w.id === 'fs-03-sora-picnic'; })[0]; if (!src) return;
+    var root = $('#xDt'), srcSlot = $('#xDtSrc'), rows = $$('#xDtRow > li'); if (!root || !srcSlot || !rows.length || !DW || !P.rollbytae) return;
+    var src = P.rollbytae.widgets.filter(function (w) { return w.id === 'taeyul-friends'; })[0]; if (!src) return;
     var ring = $('#xDtHold'), noti = $('#xDtNoti'), cnt = $('#xDtCnt'), sayEl = $('#xDtSay'), T = [], gen = 0, busy = false, done = 0, PW = 3 * 45.75 - 8, PH = 4 * 45.75 - 8;
     var slots = rows.map(function (li) { return $('.x-dt-slot', li); });
     function put(slot, copy, w, h) {            // 사본은 받은 사람이 놓고 싶은 크기로 놓인다 (위젯은 크기를 바꿀 수 있다)
       var d = $('.dpl', slot); d.innerHTML = ''; w = w || 3; h = h || 4;
-      var wd = { id: 'xd-' + (copy ? 'c' : 'o'), kind: src.kind, x: 0, y: 0, w: w, h: h, data: clone(src.data), ditto: !copy };
-      if (copy) wd.source = { name: '소라', handle: 'soramaybe', avatar: '/assets/rooms/rav-sora.webp' };
+      var wd = { id: 'xd-' + (copy ? 'c' : 'o'), kind: src.kind, x: 0, y: 0, w: w, h: h, data: window.DittoScenes.ditto, ditto: !copy };
+      if (copy) wd.source = { name: '태율', handle: 'rollbytae', avatar: P.rollbytae.avatar };
       var box = DW.box(wd); d.appendChild(box); centre(box, wd, (w * 45.75 - 8) / 2, (h * 45.75 - 8) / 2); slot.classList.add('has');
     }
     function clear(slot) { $('.dpl', slot).innerHTML = ''; slot.classList.remove('has'); }
     function say(a, b) { if (!sayEl) return; sayEl.innerHTML = a + '<i></i>'; $('i', sayEl).textContent = b; sayEl.classList.remove('sw'); void sayEl.offsetWidth; sayEl.classList.add('sw'); }
-    /* 소라의 카드에서 다섯 자리로 뻗는 선: 바탕은 점선, 디토가 닿으면 보라 → 분홍 파동이 흐른다 */
+    /* 태율의 카드에서 다섯 자리로 뻗는 선: 바탕은 점선, 디토가 닿으면 보라 → 분홍 파동이 흐른다 */
     var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'x-dt-th'); svg.setAttribute('aria-hidden', 'true');
     svg.innerHTML = '<defs><linearGradient id="xDtG" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="100"><stop offset="0" stop-color="#AA4AF4"/><stop offset="1" stop-color="#FA97E2"/></linearGradient></defs>'
       + rows.map(function () { return '<path class="k"/>'; }).join('') + rows.map(function () { return '<path class="b"/>'; }).join('') + rows.map(function () { return '<path class="a" pathLength="1"/>'; }).join('');
@@ -193,7 +249,7 @@
       for (var i = 0; i <= N; i++) { var t = i / N, b = bez(c, t), off = amp * Math.sin(t * Math.PI) * Math.sin(t * wn * 6.2832 - ph); d += (i ? 'L' : 'M') + (b[0] + b[2] * off).toFixed(1) + ' ' + (b[1] + b[3] * off).toFixed(1); }
       return d;
     }
-    function thread() {            // 길: 소라의 집 → 친구의 집, 친구의 집 → 그 친구의 친구 집 (그룹 채팅으로 건너간 길)
+    function thread() {            // 길: 태율의 집 → 친구의 집, 친구의 집 → 그 친구의 친구 집 (그룹 채팅으로 건너간 길)
       var R = mapEl.getBoundingClientRect(); if (!R.width) return;
       svg.setAttribute('viewBox', '0 0 ' + R.width.toFixed(1) + ' ' + R.height.toFixed(1));
       var mid = function (el) { var r = el.getBoundingClientRect(); return [r.left - R.left + r.width / 2, r.top - R.top + r.height / 2]; };
@@ -209,7 +265,7 @@
       waves();
     }
     function waves() { SEG.forEach(function (g, i) { pa[i].setAttribute('d', plain(g.c)); }); }
-    function pulse(i) {            // 받은 사람 → 소라: 빛 한 점이 길을 거슬러 간다 (친구의 친구는 친구의 집을 거쳐서)
+    function pulse(i) {            // 받은 사람 → 태율: 빛 한 점이 길을 거슬러 간다 (친구의 친구는 친구의 집을 거쳐서)
       if (RM || !SEG[i]) return; var chain = [i]; if (FROM[i] >= 0) chain.push(FROM[i]);
       var dot = document.createElementNS(NS, 'circle'); dot.setAttribute('r', 6); dot.setAttribute('class', 'p'); svg.appendChild(dot);
       var t0 = performance.now(), D = 560; (function f(now) {
@@ -238,15 +294,15 @@
         g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: 'forwards' }).finished.then(function () { g.remove(); });
       });
     }
-    function tell(i) {            // 소라의 알림함에 한 줄 — 가져간 사람이 소라에게 보인다
+    function tell(i) {            // 태율의 알림함에 한 줄 — 가져간 사람이 태율에게 보인다
       pulse(i); var li = rows[i], el = document.createElement('li'), im = $('.h8-hb img', li) || $('img', li);
       el.innerHTML = '<img src="' + im.getAttribute('src') + '" alt="" width="64" height="64"><span><b></b> 님이 사진을 디토했어요<i></i></span>';
       $('b', el).textContent = li.dataset.n; $('i', el).textContent = li.dataset.r + (li.dataset.fof === '1' ? ' · 처음 만난 사람' : '');
       if (li.dataset.fof === '1') el.className = 'fof';
       noti.insertBefore(el, noti.firstChild);
       cnt.textContent = '디토 ' + (i + 1); root.classList.remove('ping'); void root.offsetWidth; root.classList.add('ping');
-      if (i === rows.length - 1) { var g1 = gen; T.push(setTimeout(function () { if (g1 === gen) say('<b>다섯 명</b>이 같은 사진을 간직했어요.', '소라는 다섯 명 모두를 알아봐요.'); }, RM ? 0 : 1500)); }
-      say('<b>' + li.dataset.n + '</b>' + li.dataset.p + ' ' + li.dataset.via + ' 디토했어요.', li.dataset.fof === '1' ? '소라와는 처음이지만, 이제 서로를 알아요.' : '소라는 누가 가져갔는지 바로 알아요.');
+      if (i === rows.length - 1) { var g1 = gen; T.push(setTimeout(function () { if (g1 === gen) say('<b>다섯 명</b>이 같은 사진을 간직했어요.', '태율은 다섯 명 모두를 알아봐요.'); }, RM ? 0 : 1500)); }
+      say('<b>' + li.dataset.n + '</b>' + li.dataset.p + ' ' + li.dataset.via + ' 디토했어요.', li.dataset.fof === '1' ? '태율과는 처음이지만, 이제 서로를 알아요.' : '태율은 누가 가져갔는지 바로 알아요.');
     }
     function land(i) { put(slots[i], true, +rows[i].dataset.w, +rows[i].dataset.h); rows[i].classList.add('has'); pa[i].classList.add('on'); done = i + 1; root.dataset.n = done; }
     function step(i, fast) {
@@ -256,7 +312,7 @@
         .then(function () { if (!ok()) return; rows[i].classList.remove('next'); land(i); return wait(RM ? 0 : fast ? 320 : 520); })
         .then(function () { if (!ok()) return; tell(i); return wait(RM ? 0 : fast ? 420 : 760); });
     }
-    function reset() { gen++; T.forEach(clearTimeout); T = []; busy = false; done = 0; ring.style.setProperty('--p', 0); $$('.h8-ghost').forEach(function (g) { g.remove(); }); slots.forEach(clear); rows.forEach(function (li) { li.classList.remove('has', 'next'); }); pa.forEach(function (p) { p.classList.remove('on'); }); noti.innerHTML = ''; cnt.textContent = '디토 0'; root.dataset.n = 0; root.classList.remove('ping'); say('<b>소라</b>가 소풍 사진을 올렸어요.', '친구들이 소라의 플래터에서 이 사진을 봐요.'); }
+    function reset() { gen++; T.forEach(clearTimeout); T = []; busy = false; done = 0; ring.style.setProperty('--p', 0); $$('.h8-ghost').forEach(function (g) { g.remove(); }); slots.forEach(clear); rows.forEach(function (li) { li.classList.remove('has', 'next'); }); pa.forEach(function (p) { p.classList.remove('on'); }); noti.innerHTML = ''; cnt.textContent = '디토 0'; root.dataset.n = 0; root.classList.remove('ping'); say('<b>태율</b>이 골목 거울 사진을 올렸어요.', '친구들이 태율의 플래터에서 이 사진을 봐요.'); }
     function run(from) {
       if (busy) return; busy = true; var g0 = gen, seq = Promise.resolve();
       rows.forEach(function (li, i) { if (i < from) return; seq = seq.then(function () { if (g0 === gen) return step(i, i > from); }); });
@@ -288,15 +344,26 @@
       (function f(now) { var e = now - t0; gh = h0 + (to - h0) * ez((e - dh) / D); gw = w0 + (to - w0) * ez((e - dw) / D); glyph.setAttribute('d', gpath(gh, gw)); if (e < Math.max(dh, dw) + D) graf = requestAnimationFrame(f); })(t0);
     }
     function name() { var a = links.filter(function (l) { return l.getAttribute('aria-current') === 'true'; })[0]; return a ? a.firstChild.textContent : '메뉴'; }
+    function preview(a) {
+      if (!a || !pic) return;
+      links.forEach(function (link) { link.classList.toggle('hot', link === a); });
+      var im = $('img', pic);
+      if (!im || im.getAttribute('src') === a.dataset.img) return;
+      $('source', pic).srcset = a.dataset.img.replace('.webp', '-narrow.webp');
+      im.src = a.dataset.img;
+      if (!RM && im.animate) im.animate([{opacity:0.55},{opacity:1}], {duration:150});
+    }
     function set(v) {
-      if (open === v) return; open = v; box.classList.toggle('open', v); btn.setAttribute('aria-expanded', v); panel.inert = !v;
+      if (open === v) return;
+      if (v) preview(links.find(function (a) { return a.getAttribute('aria-current') === 'true'; }) || links[0]);
+      open = v; box.classList.toggle('open', v); btn.setAttribute('aria-expanded', v); panel.inert = !v;
       clearTimeout(tm); tm = setTimeout(function () { label.textContent = open ? '닫기' : name(); }, RM ? 0 : open ? 250 : 620); tween();
     }
     links.forEach(function (a, i) {
       a.style.setProperty('--i', i);
       a.insertAdjacentHTML('beforeend', '<i lang="en">' + (a.dataset.e || '') + '</i>');
-      var show = function () { if (!pic || !a.dataset.img) return; var im = $('img', pic); if (im.getAttribute('src') === a.dataset.img) return; var nx = im.cloneNode(); nx.src = a.dataset.img; nx.className = 'in'; pic.appendChild(nx); setTimeout(function () { im.remove(); nx.className = ''; }, 200); links.forEach(function (l) { l.classList.toggle('hot', l === a); }); };
-      a.addEventListener('pointerenter', show); a.addEventListener('focus', show);
+      a.addEventListener('pointerenter', function () { if (open) preview(a); });
+      a.addEventListener('focus', function () { if (open) preview(a); });
       a.addEventListener('click', function () { set(false); });
     });
     btn.addEventListener('click', function () { set(!open); });
@@ -351,13 +418,96 @@
   /* ── 스티커 띠: 앱의 스티커를 한 줄로. 누르면 통 튄다 ── */
   function stickers() {
     var el = $('#xStk'); if (!el) return;
-    [0, 9, 1, 13, 2, 10, 3, 17, 4, 14, 5, 18, 6, 12, 7, 16].forEach(function (id, i) {
-      var im = document.createElement('img'); im.src = 'assets/stk/ai-0' + (id < 10 ? '0' : '') + id + '.webp'; im.alt = ''; im.loading = 'lazy'; im.width = 160; im.height = 160; im.draggable = false;
-      im.style.setProperty('--r', ((i * 37 % 23) - 11) + 'deg'); im.style.setProperty('--y', ((i * 53 % 29) - 14) + 'px'); im.style.setProperty('--i', i);
-      im.addEventListener('click', function () { im.classList.remove('pop'); void im.offsetWidth; im.classList.add('pop'); });
-      el.appendChild(im);
+    var packs = window.DITTO_STICKER_PACKS;
+    if (!packs || !packs.length) return;
+    var run = document.createElement('div'), set = document.createElement('div');
+    run.className = 'x-stk-run'; set.className = 'x-stk-set';
+    var classic = window.DITTO_PLATTER_STICKERS || [];
+    var count = 0;
+    function appendSticker(item, folder, theme) {
+      var im = document.createElement('img');
+      im.src = folder + item[0] + '.webp';
+      im.alt = theme + ' · ' + item[1];
+      im.loading = 'lazy'; im.width = im.height = 120; im.draggable = false;
+      im.style.setProperty('--r', (count * 37 % 23 - 11) + 'deg');
+      im.style.setProperty('--y', (count * 53 % 21 - 10) + 'px');
+      set.appendChild(im); count++;
+    }
+    // 같은 테마가 연속해서 보이지 않도록 각 팩에서 한 장씩 섞는다.
+    var oldIndex = 0;
+    var rows = Math.max.apply(null, packs.map(function (pack) { return pack.items.length; }));
+    for (var row = 0; row < rows; row++) {
+      packs.forEach(function (pack, col) {
+        if (col % 2 === 0 && oldIndex < classic.length)
+          appendSticker(classic[oldIndex++], '/assets/cast/found/', '플래터');
+        if (pack.items[row])
+          appendSticker(pack.items[row], '/assets/cast/pack-stickers/' + pack.id + '/', pack.title);
+      });
+    }
+    while (oldIndex < classic.length) appendSticker(classic[oldIndex++], '/assets/cast/found/', '플래터');
+    var repeat = set.cloneNode(true);
+    repeat.setAttribute('aria-hidden', 'true');
+    run.appendChild(set); run.appendChild(repeat); el.appendChild(run);
+    el.classList.add('in');
+    var frame = 0, last = 0, fraction = 0, held = null, drag = null, touching = false, resumeAt = 0;
+    function coolDown() { resumeAt = performance.now() + 650; }
+    function tick(now) {
+      if (last && held === null && !touching && now >= resumeAt && !document.hidden) {
+        fraction += Math.min(now - last, 64) * .038;
+        var step = Math.floor(fraction);
+        var width = set.getBoundingClientRect().width;
+        if (step && width) {
+          el.scrollLeft = (el.scrollLeft + step) % width;
+          fraction -= step;
+        }
+      }
+      last = now;
+      frame = requestAnimationFrame(tick);
+    }
+    el.addEventListener('pointerdown', function (ev) {
+      if (!ev.isPrimary || ev.button !== 0) return;
+      held = ev.pointerId;
+      if (ev.pointerType === 'mouse') {
+        drag = {origin: ev.clientX, left: el.scrollLeft};
+        el.classList.add('is-dragging');
+        el.setPointerCapture(ev.pointerId);
+      }
     });
-    seen(el, function () { el.classList.add('in'); }, 0.4);
+    el.addEventListener('pointermove', function (ev) {
+      if (drag && held === ev.pointerId) el.scrollLeft = drag.left + drag.origin - ev.clientX;
+    });
+    function release(ev) {
+      if (ev.pointerId !== held) return;
+      held = null; drag = null;
+      el.classList.remove('is-dragging');
+      coolDown();
+    }
+    window.addEventListener('pointerup', release);
+    window.addEventListener('pointercancel', release);
+    el.addEventListener('lostpointercapture', release);
+    // On touch screens the browser takes over the pan and cancels the pointer
+    // before the finger lifts. Wait for the actual touch and momentum to end.
+    el.addEventListener('touchstart', function () { touching = true; }, {passive:true});
+    function touchEnd(ev) {
+      touching = ev.touches.length > 0;
+      if (!touching) coolDown();
+    }
+    el.addEventListener('touchend', touchEnd, {passive:true});
+    el.addEventListener('touchcancel', touchEnd, {passive:true});
+    el.addEventListener('scroll', function () {
+      if (performance.now() < resumeAt) coolDown();
+    }, {passive:true});
+    el.addEventListener('wheel', coolDown, {passive:true});
+    el.addEventListener('keydown', coolDown);
+    var motion = window.matchMedia('(prefers-reduced-motion: reduce)'), inView = false;
+    function update() {
+      if (inView && !motion.matches && !document.hidden) {
+        if (!frame) { last = 0; frame = requestAnimationFrame(tick); }
+      } else { cancelAnimationFrame(frame); frame = 0; }
+    }
+    visible(el, function (on) { inView = on; update(); });
+    motion.addEventListener('change', update);
+    document.addEventListener('visibilitychange', update);
   }
 
   /* ── 프로필 월: 끝없는 판 위에 프로필 사진이 스티커처럼 붙는다. 끌어서 둘러보고 버튼으로 확대 · 축소 ──
@@ -366,12 +516,14 @@
     var box = $('#xWall'), cv = $('#xWallCv'), inner = $('#xWallIn'); if (!box || !cv || !inner) return;
     /* 실제 프로필 사진(window.DITTO_WALL — 공개에 동의한 사람의 사진 주소만)과 예시 그림을 섞는다.
        실제 2 : 예시 1 비율로 번갈아 놓고, 실제가 적으면 예시로 52칸까지 채운다. 실제가 없으면 전부 예시 */
-    /* 지금은 전부 더미 — 다만 그라데이션 원이 아니라 프로필처럼 보이는 사진으로 채운다 (견본 인물 사진 12장 + 견본 사진에서 잘라 만든 25장).
-       동의 받은 실제 프로필 사진 목록이 생기면 window.DITTO_WALL 로 넘긴다 — 그때는 실제 2 : 더미 1 로 섞인다 */
-    var given = window.DITTO_WALL && window.DITTO_WALL.length ? window.DITTO_WALL : null;
+    var given = Array.isArray(window.DITTO_WALL) && window.DITTO_WALL.length ? window.DITTO_WALL : null;
     var real = (given || []).slice(0, 400), dummy = [], list = [];
-    ['jiu-1', 'sora', 'haeun', 'nari-1', 'jun', 'dohyun', 'jaemin', 'seoyun', 'rian', 'yeseo', 'jiu', 'nari'].forEach(function (n) { dummy.push('assets/rooms/rav-' + n + '.webp'); });
-    for (var k = 1; k <= 25; k++) dummy.splice((k * 7) % (dummy.length + 1), 0, 'assets/v8/wall/w' + (k < 10 ? '0' : '') + k + '.webp');
+    var palette = ['purple-pink','cyan-blue','peach-yellow','mint-lime','coral-red','deep-purple','lime-green','gold-yellow','pink-coral','neutral-gray'];
+    var gradients = 0;
+    for (var friend = 1; friend <= 16; friend++) {
+      dummy.push('/assets/cast/wall/friend-' + String(friend).padStart(2,'0') + '.webp');
+      if (friend % 3 !== 2 && gradients < palette.length) dummy.push('/assets/cast/wall/gradient-' + palette[gradients++] + '.webp');
+    }
     if (real.length) {
       var need = Math.max(52, Math.ceil(real.length * 1.5)), ri = 0, di = 0;
       for (var q = 0; q < need; q++) { if (ri < real.length && (q % 3 !== 2 || di >= dummy.length)) list.push(real[ri++]); else list.push(dummy[di++ % dummy.length]); }
@@ -424,9 +576,35 @@
   function cover() {
     var box = $('#xCov'), stage = box && $('.x-cov-st', box); if (!stage) return;
     var cards = $$('.x-cov-c', stage), n = cards.length; if (n < 2) return;
-    var STEP = 0.17, SHOW = 5, PERIOD = 2200, HOLD = 1600, base = [], lastF = 0, kEl = $('#xCovK');
+    // The rolling strip has its own selections. The gallery and its size picker share their original samples.
+    function selection(handle, kind, id) {
+      var profile = P[handle];
+      var widget = profile && profile.widgets.find(function (w) { return w.kind === kind && (!id || w.id === id); });
+      return widget && widget.data;
+    }
+    var selections = {
+      image: window.DittoScenes.roll.image,
+      music: window.DittoScenes.roll.music,
+      video: Object.assign({}, selection('rollbytae','video'), {img:window.DittoScenes.roll.video}),
+      gif: window.DittoScenes.roll.gif,
+      guestbook: window.DittoScenes.roll.guestbook,
+      status: {emoji:'🛹', label:'보드 타는 중'},
+      playlist: window.DittoScenes.roll.playlist,
+      together: window.DittoScenes.roll.together
+    };
+    if (DW) cards.forEach(function (card) {
+      var item = DW.catalog.find(function (c) { return c.kind === card.dataset.kind; });
+      if (!item) return;
+      var size = item.sizes.find(function (s) { return s.w === +card.dataset.w && s.h === +card.dataset.h; }) || item.defaultSize;
+      var widget = { kind:item.kind, x:0, y:0, w:size.w, h:size.h, data:selections[item.kind] || item.sample };
+      var rect = DW.rect(widget);
+      card.style.width = DW.cq(rect.w);
+      card.style.height = DW.cq(rect.h);
+      card.replaceChildren(DW.box(widget));
+    });
+    var STEP = 0.04, SHOW = 5, PERIOD = 2200, HOLD = 1600, base = [], lastF = 0, kEl = $('#xCovK');
     function quint(t) { return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2; }
-    function sc(ax) { return Math.max(0.5, 1 - ax * STEP); }
+    function sc(ax) { return Math.max(0.88, 1 - ax * STEP); }
     function rel(r) { while (r > n / 2) r -= n; while (r < -n / 2) r += n; return r; }
     function measure() { for (var i = 0; i < n; i++) base[i] = cards[i].offsetWidth || 1; }
     function render(f) {
@@ -451,11 +629,15 @@
       if (kEl && kEl.textContent !== c.dataset.k) { kEl.textContent = c.dataset.k; kEl.classList.remove('sw'); void kEl.offsetWidth; kEl.classList.add('sw'); }
       if (window.__dittoWord) window.__dittoWord(c.dataset.v);
     }
+    if (RM) {
+      box.classList.add('x-cov-static');
+      cards.forEach(function (card) { card.addEventListener('focus', function () { active(card); }); });
+      return;
+    }
     addEventListener('resize', function () { measure(); render(lastF); });
     measure(); render(0);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); render(lastF); });
-    cards.forEach(function (c) { $('img', c).addEventListener('load', function () { measure(); render(lastF); }); });
-    if (RM) return;
+
     var t0 = null, raf = 0, live = false, acc = 0, prev = 0;
     function tick(now) {
       raf = 0; if (!live) return; if (t0 === null) { t0 = now; prev = now; }
@@ -529,6 +711,7 @@
 
   /* ── 첫 화면: 여러 사람의 플래터가 한 장씩 넘어간다. 옆 플래터를 누르면 가운데로 온다 ── */
   function roll() {
+    var P = window.DittoIntroPlatters;
     var trio = $('.fx-trio'), DP = window.DittoPlatter; if (!trio || !DP) return;
     var ORDER = [['soramaybe', 'sora'], ['jiuallday', 'jiu'], ['haeunzip', 'haeun'], ['junishere', 'jun'], ['yeseofilm', 'yeseo'], ['rianafterdark', 'rian'], ['nariday', 'nari'], ['dohyunlinks', 'dohyun']];
     var kids = [].slice.call(trio.children), items = [];

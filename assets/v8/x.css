@@ -13,7 +13,7 @@
 .x-wg-st{position:relative;display:block;aspect-ratio:1;border-radius:clamp(16px,1.8vw,26px);background:#F4F3F6;overflow:hidden;transition:transform .4s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease}
 .x-wg-st .dpl{position:absolute;left:50%;top:50%;display:block;width:158%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
 .x-wg-st .dw{box-shadow:0 0 0 1px rgba(22,18,27,.05),0 16px 26px -18px rgba(40,10,60,.38)}
-.x-wg-t b{font-size:clamp(12.5px,1.05vw,14.5px);font-weight:600;letter-spacing:-.03em}
+.x-wg-t>b{font-size:clamp(12.5px,1.05vw,14.5px);font-weight:600;letter-spacing:-.03em}
 .x-wg-t:active .x-wg-st{transform:scale(.96)}
 .x-wg-t:focus-visible{outline:0}.x-wg-t:focus-visible .x-wg-st{box-shadow:0 0 0 3px var(--ink)}
 @media (hover:hover){.x-wg-t:hover .x-wg-st{transform:translateY(-4px) scale(1.03);box-shadow:0 22px 32px -24px rgba(40,10,60,.5)}}
@@ -171,7 +171,7 @@
 .x-isl-box.open .x-isl-p a{opacity:1;transform:none;filter:none;transition:opacity .42s cubic-bezier(.4,0,.2,1) calc(.5s + var(--i) * 50ms),transform .42s cubic-bezier(.4,0,.2,1) calc(.5s + var(--i) * 50ms),filter .42s ease calc(.5s + var(--i) * 50ms),color .2s ease}
 .x-isl-pic{position:relative;align-self:stretch;border-radius:16px;background:#F4F3F6;overflow:hidden;opacity:0;transform:translateY(8px) scale(.96);transition:opacity .2s ease,transform .2s ease}
 .x-isl-box.open .x-isl-pic{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.4,0,.2,1) .62s,transform .5s cubic-bezier(.4,0,.2,1) .62s}
-.x-isl-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:opacity .18s ease,transform .18s ease}
+.x-isl-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:opacity .18s ease,transform .18s ease}
 .x-isl-pic img.in{opacity:0;transform:scale(1.04)}
 @media (max-width:480px){.x-isl-box{--bh:50px;--ph:272px}.x-isl-bar{padding:0 5px 0 14px}.x-isl-p{grid-template-columns:1fr auto}.x-isl-pic{width:112px}.x-isl-p a,.x-isl-p a[aria-current="true"]{font-size:23px}}
 @media (prefers-reduced-motion:reduce){.x-isl-box,.x-isl-box.open,.x-isl-p,.x-isl-box.open .x-isl-p,.x-isl-p a,.x-isl-box.open .x-isl-p a,.x-isl-pic,.x-isl-box.open .x-isl-pic{transition:none}}
@@ -218,19 +218,16 @@
 @keyframes x-say{from{opacity:0;transform:translateY(8px)}}
 @media (max-width:760px){.x-dt-say{display:none}}
 
-/* ── 초대장: 빛나는 배경 앞에서 도는 3D 초대장 ── */
-.x-tk3{--tm-a:#AA4AF4;--tm-b:#FA97E2;position:relative;display:grid;place-items:center;height:clamp(250px,30vw,400px);margin:clamp(12px,2vw,28px) auto clamp(8px,1.6vw,20px)}
-.x-tk3-glow{position:absolute;left:50%;top:50%;width:min(86vw,760px);aspect-ratio:1.9;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--tm-a) 50%,transparent),color-mix(in srgb,var(--tm-b) 34%,transparent) 46%,rgba(255,190,150,.16) 70%,rgba(255,255,255,0));filter:blur(34px);animation:x-glow 5.2s ease-in-out infinite alternate}
-@keyframes x-glow{from{opacity:.62;transform:translate(-50%,-50%) scale(.92) rotate(-4deg)}to{opacity:1;transform:translate(-50%,-50%) scale(1.07) rotate(5deg)}}
-/* 카드 = 실제 초대장(.tk-face) 그대로. cqw 기준이 되는 칸과 도는 칸을 나눈다(컨테이너와 preserve-3d를 한 요소에 두지 않기) */
-.x-tk3-card{--hx:30%;--hy:20%;position:relative;width:min(76vw,480px);aspect-ratio:3/2;container-type:inline-size;perspective:1400px}
-.x-tk3-in{position:absolute;inset:0;transform-style:preserve-3d;animation:x-turn 11s linear infinite}
-@keyframes x-turn{from{transform:rotateX(9deg) rotateY(0deg)}to{transform:rotateX(9deg) rotateY(360deg)}}
-.x-tk3:hover .x-tk3-in{animation-play-state:paused}
+/* 초대장 미리보기 */
+.x-tk3{--tm-a:#AA4AF4;--tm-b:#FA97E2;position:relative;isolation:isolate;display:grid;place-items:center;margin:clamp(24px,4vw,44px) auto}
+.x-tk3-card{--hx:30%;--hy:20%;position:relative;width:min(76vw,360px);aspect-ratio:3/2;container-type:inline-size}
+.x-tk3-in{position:absolute;inset:0}
+.x-tk3-card .tk-back{display:none}
+.x-tk3-glow{position:absolute;z-index:-1;inset:8% 0;margin:auto;width:min(78vw,380px);border-radius:50%;background:radial-gradient(ellipse,var(--tm-b),transparent 72%);opacity:.35;filter:blur(16px);pointer-events:none}
 .x-tk3-card .tk-stamp{opacity:.85}
 .x-tk3-card .tk-holo{animation:x-holo 3.6s linear infinite}
 @keyframes x-holo{from{background-position:110% 20%}to{background-position:-10% 60%}}
-@media (prefers-reduced-motion:reduce){.x-tk3-in{animation:none;transform:rotateX(8deg) rotateY(-18deg)}.x-tk3-glow,.x-tk3-card .tk-holo{animation:none}}
+@media (prefers-reduced-motion:reduce){.x-tk3-glow,.x-tk3-card .tk-holo{animation:none}}
 
 /* ── 카메라 + 출력기 = 한 장치 ── */
 .tm.x-unit{display:block;max-width:none;margin-top:clamp(24px,3vw,44px)}
@@ -300,11 +297,11 @@
 
 /* 위젯: 곧 나올 타일은 흐릿하게 */
 .x-wg-l>li.soon .x-wg-t{cursor:default}
-.x-wg-l>li.soon .x-wg-st{display:grid;place-items:center}
-.x-wg-l>li.soon .x-wg-st img{position:absolute;inset:14%;width:72%;height:72%;object-fit:cover;border-radius:18%;filter:blur(7px) saturate(.9);opacity:.6;transform:scale(1.04)}
-.x-wg-l>li.soon .x-wg-st em{position:relative;z-index:1;display:inline-flex;align-items:center;height:26px;padding:0 11px;border-radius:999px;background:rgba(255,255,255,.86);font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.01em;color:#6D5F7D;white-space:nowrap;box-shadow:0 4px 12px -6px rgba(40,10,60,.3)}
+.x-wg-l>li.soon .x-wg-st{container-type:inline-size}
+.x-wg-l>li.soon .x-wg-st>img{position:absolute;left:7%;top:22%;width:86%;height:72%;object-fit:contain}
+.x-native-preview,.x-native-detail{position:absolute;inset:0;margin:auto;width:var(--tile-width);height:var(--tile-height);object-fit:contain}
+.x-wg-l>li.soon .x-wg-st em{position:absolute;left:4%;top:4%;height:13%;padding:0 4%;display:inline-flex;align-items:center;border-radius:999px;background:#39353d;color:white;font:inherit;font-size:6.3cqw;font-weight:700;white-space:nowrap}
 .x-wg-l>li.soon b{color:#A39AAF}
-@media (max-width:640px){.x-wg-l>li.soon .x-wg-st em{height:22px;padding:0 8px;font-size:10px}}
 
 /* 위젯 상세: 한 장씩 겹쳐 놓고 바꾼다 */
 .x-wd[open] .x-wd-in{animation:none}
@@ -360,8 +357,6 @@
 @media (max-width:520px){.x-four{gap:8px}.x-four-t{padding:12px 12px 14px}.x-four-t b{font-size:17px}.x-four-t>span{font-size:12.5px}.x-four li.on a{transform:translateY(-4px)}}
 @media (prefers-reduced-motion:reduce){.x-four a,.x-four img,.v-hold .c{transition:none}}
 .x-wd-st .x-wd-w .dpl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
-.x-wg-l>li.soon .x-wg-st img{filter:blur(5px) saturate(.95);opacity:.78}
-@media (max-width:640px){.x-wg-l>li.soon .x-wg-st em{height:20px;padding:0 6px;font-size:9px;letter-spacing:0}}
 
 /* ═════════ v8.12 ═════════ */
 /* 디토: 꾹 대신 디토 로고 */
@@ -444,10 +439,13 @@
 /* 선언문 끝: 사진 띠 (skeep.site 메인 구간 방식) — 가운데가 크고 양옆으로 갈수록 작아진다 */
 .fx-mf-e.x-orb-s{padding-top:clamp(28px,4vw,56px);overflow:hidden}
 .x-cov{position:relative;display:flex;align-items:center;justify-content:center;width:100vw;height:clamp(300px,46vh,520px);margin:0 0 clamp(18px,2.6vh,36px)}
-.x-cov-st{position:relative;width:clamp(252px,34.5vw,458px);height:clamp(252px,34.5vw,458px)}
+.x-cov-st{position:relative;container-type:inline-size;width:min(95vw,510px);height:min(95vw,510px)}
 .x-cov-c{position:absolute;left:50%;top:50%;width:auto;transform:translate(-50%,-50%);transform-origin:center center;transition:opacity .18s linear;will-change:transform;pointer-events:none;-webkit-tap-highlight-color:transparent}
 .x-cov-c.on{pointer-events:auto}
-.x-cov-c img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;border-radius:clamp(10px,1.2vw,18px);background:#fff;-webkit-user-select:none;user-select:none}
+.x-cov-static {overflow-x:auto;justify-content:start;scroll-snap-type:x proximity}
+.x-cov-static .x-cov-st {display:flex;align-items:center;gap:24px;flex:none;margin-inline:16px;height:100%}
+.x-cov-static .x-cov-c {position:relative;inset:auto;flex:none;transform:none;pointer-events:auto;scroll-snap-align:center}
+.x-cov-c > img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;border-radius:clamp(10px,1.2vw,18px);background:#fff;-webkit-user-select:none;user-select:none}
 .x-orb-k{min-height:1.4em;text-transform:uppercase;letter-spacing:.04em;color:#9FA1A2;transition:color .6s ease}
 .x-orb-k.sw{animation:x-kin .5s cubic-bezier(.22,.61,.36,1)}
 @keyframes x-kin{from{opacity:0;transform:translateY(6px)}}
@@ -518,7 +516,7 @@
 /* ═════════ v8.14 ═════════ */
 /* 사진 띠: 화면 한가운데에 맞춘다 */
 .x-cov{justify-self:start;margin-left:calc(50% - 50vw)}
-.x-cov-c img{border-radius:clamp(14px,1.6vw,24px);object-fit:contain;background:none;filter:drop-shadow(0 16px 20px rgba(40,10,60,.14))}
+.x-cov-c > img{border-radius:clamp(14px,1.6vw,24px);object-fit:contain;background:none;filter:drop-shadow(0 16px 20px rgba(40,10,60,.14))}
 
 /* 지도 범례: 중요도 순으로 크기가 다르다 */
 .ro-leg.x-leg .l1 .x-ic{width:30px;height:30px}
@@ -532,7 +530,7 @@
 .x-wg-l.x-fan{position:relative;display:block;width:100vw;max-width:none;height:clamp(300px,33vw,430px);margin:clamp(8px,1.4vw,20px) 0 0 calc(50% - 50vw);overflow:hidden;overflow:clip;touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
 .x-wg-l.x-fan:active{cursor:grabbing}
 .x-wg-l.x-fan>li{position:absolute;left:50%;top:42%;flex:none;width:clamp(150px,15.4vw,214px);transition:transform .7s cubic-bezier(.3,1,.3,1),opacity .4s ease;will-change:transform}
-.x-fan .x-wg-t b{display:none}
+.x-fan .x-wg-t>b{display:none}
 .x-fan .x-wg-t{cursor:inherit}
 .x-fan>li.mid .x-wg-t{cursor:pointer}
 .x-fan .x-wg-st{box-shadow:0 22px 34px -24px rgba(40,10,60,.45)}
@@ -892,12 +890,12 @@
 .x-hp-o.noti em{font-style:normal;font-weight:700}
 .x-hp-o.chip{right:calc(14px * var(--k));top:calc(14px * var(--k));display:inline-flex;align-items:center;gap:3px;height:28px;padding:0 10px;border:1px solid rgba(170,74,244,.4);border-radius:999px;background:#F3E8FF;font-size:14px;line-height:1;color:#7B2FD0}
 .x-hp-o.chip i{font-style:normal;font-size:12px}
-.x-hp-o.chip.fq{right:auto;left:calc(-22px * var(--k));top:auto;bottom:calc(26px * var(--k));height:32px;padding:0 13px;border:0;background:#16121B;font-size:13px;font-weight:600;letter-spacing:-.02em;color:#fff}
+.x-hp-o.chip:is(.x-hp-freq,.fq){right:auto;left:calc(-22px * var(--k));top:auto;bottom:calc(26px * var(--k));height:32px;padding:0 13px;border:0;background:#16121B;font-size:13px;font-weight:600;letter-spacing:-.02em;color:#fff}
 .x-hero-d{display:grid;justify-items:center;text-align:center;padding-top:clamp(20px,3vh,36px)}
 .fx-hero3 .x-hero-d .h8-hero-d{margin-top:0;animation:none}
 .fx-hero3 .fx-trio{margin-top:clamp(28px,4vh,48px)}
 @media (max-width:1100px){.x-hp{--k:.82}}
-@media (max-width:760px){.x-hp{--k:.6}.x-hp-o.say{font-size:13.5px;padding:8px 12px;border-radius:17px}.x-hp-o.noti{font-size:12.5px;padding:6px 12px 6px 6px}.x-hp-o.noti b{width:24px;height:24px}.x-hp-o.chip.fq{display:none}.x-hp-o.chip{height:24px;font-size:12px}}
+@media (max-width:760px){.x-hp{--k:.6}.x-hp-o.say{font-size:13.5px;padding:8px 12px;border-radius:17px}.x-hp-o.noti{font-size:12.5px;padding:6px 12px 6px 6px}.x-hp-o.noti b{width:24px;height:24px}.x-hp-o.chip:is(.x-hp-freq,.fq){display:none}.x-hp-o.chip{height:24px;font-size:12px}}
 @media (prefers-reduced-motion:reduce){.x-hp-c,.x-hp-o{animation:none}}
 
 /* 휴대폰에서 쓸어 내릴 때 걸리던 곳 */
@@ -927,7 +925,7 @@
   .fx-trio.x-roll>.x-roll-i[data-p="s"]{opacity:.28}
   .x-tk3-glow{animation:none;filter:blur(22px)}
   .fx-foot-in{animation:none}
-  .x-cov-c img{filter:none}
+  .x-cov-c > img{filter:none}
   .x-home{transition:none}
   .x-map .x-dt-row>li:not(.has):not(.next) .x-home{filter:none;opacity:.7}
   .x-far svg,.x-wish-col,.x-hp-c{will-change:auto}
@@ -954,3 +952,33 @@
   .x-ln{display:block}
 }
 @media (prefers-reduced-motion:reduce){.fx-trio.x-roll>.x-roll-i,.fx-trio.x-roll>.x-roll-i[data-p="h"]{transition:none}}
+
+.h8-cam-v:not(.live):not(.shot) .h8-cam-off {
+  background:#25212d;
+}
+.x-stk img { object-fit: contain; }
+
+#castOpenPlatter{display:inline-block;margin-top:12px;color:#7238a2;font-size:14px;font-weight:600;text-underline-offset:3px}
+
+.h8-cam-off .cast-camera{display:block;width:44px;height:44px;margin:0 auto 8px;object-fit:contain;filter:brightness(0) invert(1);opacity:.85}
+.fx-ex.fx-ex-booth .fx-ex-v{inset:10% 6% 32%;overflow:visible}
+.fx-ex.fx-ex-booth .fx-b1{left:15%;top:9%;height:86%;width:auto;object-fit:contain}
+.fx-ex.fx-ex-booth .fx-b2{right:14%;top:1%;height:98%;width:auto;object-fit:contain;rotate:4deg}
+.x-stk{display:block;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;max-width:100%;touch-action:pan-x pan-y}
+.x-stk::-webkit-scrollbar{display:none}
+.x-stk-run{display:flex;width:max-content;height:100%;align-items:center}
+.x-stk-set{display:flex;align-items:center;gap:clamp(30px,4vw,64px);padding-right:clamp(30px,4vw,64px)}
+.x-stk .x-stk-set img{width:clamp(65px,6.5vw,102px);margin:0;opacity:1;transition-delay:0s}
+.x-stk-set img[data-squish]{filter:drop-shadow(0 4px 4px #40364816)}
+#xWdLink{color:#7133a3;text-underline-offset:3px}
+
+/* 아날로그 기능의 실물 그래픽은 같은 영역 안에서 원래 비율을 유지한다. */
+.h8-an .fx-ex .feature-art{inset:17% 10% 30%;display:grid;place-items:center;padding:0}
+.h8-an .fx-ex .feature-art img{position:static;display:block;width:100%;height:100%;min-height:0;object-fit:contain;transform:none;border-radius:0;box-shadow:none}
+.x-stk{cursor:grab;scroll-behavior:auto;overscroll-behavior-x:contain}
+.x-stk.is-dragging,.x-stk.is-dragging img{cursor:grabbing}
+
+.fx-an .fx-ex.fx-ex-booth .fx-ex-v{inset:15% 7% 30%;overflow:visible}
+.fx-an .fx-ex.fx-ex-booth .fx-b1{left:0;top:0;width:76%;height:100%;object-fit:contain;rotate:0deg;border-radius:0;box-shadow:none}
+.fx-an .fx-ex.fx-ex-booth .fx-b2{right:5%;top:15%;width:auto;height:79%;rotate:5deg;filter:grayscale(.86) sepia(.14);box-shadow:0 4px 9px #2920282a}
+@media(max-width:500px){#roSeg{max-width:100%;flex-wrap:wrap;justify-content:center;border-radius:18px}#roSeg button{height:32px;padding-inline:8px;font-size:12px}}

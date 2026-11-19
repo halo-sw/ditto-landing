@@ -496,14 +496,14 @@
 .fx-tabs button:active{transform:scale(.96)}
 .fx-tabs button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(22,18,27,.07),0 12px 24px -14px rgba(40,10,60,.4)}
 .fx-tabv{position:relative;height:clamp(440px,48vw,680px);overflow:hidden;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
-.fx-tabv img{position:absolute;left:50%;top:10px;width:clamp(230px,24vw,340px);height:auto;border-radius:clamp(26px,2.6vw,38px);box-shadow:0 0 0 1px rgba(22,18,27,.07),0 60px 90px -60px rgba(50,16,80,.5);transition:transform 1s var(--fx-e),opacity .7s ease,filter .7s ease;cursor:pointer}
-.fx-tabv img.c{transform:translateX(-50%);z-index:2;cursor:default}
-.fx-tabv img.l{transform:translateX(calc(-50% - clamp(210px,24vw,360px))) translateY(40px) scale(.88);opacity:.45;filter:blur(6px)}
-.fx-tabv img.r{transform:translateX(calc(-50% + clamp(210px,24vw,360px))) translateY(40px) scale(.88);opacity:.45;filter:blur(6px)}
+.fx-tabv .fx-device{position:absolute;left:50%;top:10px;width:clamp(230px,24vw,340px);height:auto;border-radius:clamp(26px,2.6vw,38px);box-shadow:0 0 0 1px rgba(22,18,27,.07),0 60px 90px -60px rgba(50,16,80,.5);transition:transform 1s var(--fx-e),opacity .7s ease,filter .7s ease;cursor:pointer}
+.fx-tabv .fx-device.c{transform:translateX(-50%);z-index:2;cursor:default}
+.fx-tabv .fx-device.l{transform:translateX(calc(-50% - clamp(210px,24vw,360px))) translateY(40px) scale(.88);opacity:.72}
+.fx-tabv .fx-device.r{transform:translateX(calc(-50% + clamp(210px,24vw,360px))) translateY(40px) scale(.88);opacity:.72}
 
 @media (prefers-reduced-motion:reduce){
   .fx-trio .h8-scr{animation:none}
-  .fx-tabv img,.h8-shelf>li{transition:none}
+  .fx-tabv .fx-device,.h8-shelf>li{transition:none}
 }
 /* 위젯 띠: 위젯이 또렷이 보이는 크기로 */
 .h8-shelf{gap:clamp(18px,2.2vw,34px)}
@@ -863,9 +863,9 @@
   #h8-life .h8-head p{max-width:29em}
   #h8-life .fx-tabs{grid-column:1;grid-row:2;justify-content:flex-start;margin:0 0 0 -6px}
   #h8-life .fx-tabv{grid-column:2;grid-row:1 / 4;align-self:center;height:min(80vh,720px)}
-  #h8-life .fx-tabv img{top:8px;width:auto;height:106%}
-  #h8-life .fx-tabv img.l{transform:translateX(-112%) translateY(7%) scale(.86)}
-  #h8-life .fx-tabv img.r{transform:translateX(12%) translateY(7%) scale(.86)}
+  #h8-life .fx-tabv .fx-device{top:8px;width:auto;height:calc(100% - 22px)}
+  #h8-life .fx-tabv .fx-device.l{transform:translateX(-112%) translateY(7%) scale(.86)}
+  #h8-life .fx-tabv .fx-device.r{transform:translateX(12%) translateY(7%) scale(.86)}
 }
 
 /* 아날로그: 옆으로 넘기는 캐로셀 */
@@ -876,7 +876,7 @@
 
 /* 마지막: 그라데이션을 꽉 채운 푸터와 워드마크 */
 .foot.fx-foot{padding:0 clamp(8px,1vw,14px) clamp(8px,1vw,14px);background:#fff;overflow:visible}
-.fx-foot-in{position:relative;display:grid;justify-items:center;align-content:center;gap:clamp(22px,2.6vw,36px);min-height:clamp(440px,56vw,820px);padding:clamp(72px,9vw,140px) 24px clamp(96px,10vw,140px);border-radius:clamp(20px,2.2vw,32px);background:#D7A6DE url(foot-sky.jpg) center/106% 112% no-repeat;overflow:hidden;text-align:center}
+.fx-foot-in{position:relative;display:grid;justify-items:center;align-content:center;gap:clamp(22px,2.6vw,36px);min-height:clamp(440px,56vw,820px);padding:clamp(72px,9vw,140px) 24px clamp(96px,10vw,140px);border-radius:clamp(20px,2.2vw,32px);background:#D7A6DE url(../cast/shared/sky.webp) center/106% 112% no-repeat;overflow:hidden;text-align:center}
 .fx-foot-wm{width:min(56vw,620px);height:auto;filter:brightness(0) invert(1) drop-shadow(0 14px 40px rgba(110,40,160,.28))}
 .fx-foot .dl.dl-w{height:46px;padding:0 20px 0 16px;box-shadow:0 14px 30px -14px rgba(110,40,160,.5)}
 .fx-foot-b{position:absolute;left:0;right:0;bottom:clamp(20px,2.4vw,32px);display:grid;justify-items:center;gap:10px;padding:0 20px;color:#fff}
@@ -892,3 +892,8 @@
 .h8-rl:not(.vert) .h8-rl-via{min-width:clamp(60px,7.4vw,112px);max-width:112px}
 .h8-rl:not(.vert) .h8-rl-more{padding-left:0;margin-right:clamp(4px,1vw,16px)}
 .h8-rl:not(.vert) .h8-rl-via{min-width:clamp(72px,10vw,164px);max-width:164px}
+
+.fx-tabv{height:clamp(525px,64vw,720px);mask-image:none;-webkit-mask-image:none}
+.fx-tabv .fx-device{display:block;box-sizing:border-box;aspect-ratio:1206/2622;width:auto;height:calc(100% - 24px);padding:clamp(4px,.5vw,7px);border:1px solid #959598;border-radius:clamp(33px,4vw,51px);background:#171719;box-shadow:inset 0 0 0 1px #505053,0 4px 10px #15131d20;overflow:hidden}
+.fx-device img{display:block;width:100%;height:100%;object-fit:cover;border-radius:clamp(27px,3.6vw,44px)}
+.fx-device::after{content:"";position:absolute;top:1.6%;left:50%;transform:translateX(-50%);width:23%;height:3.65%;border-radius:30px;background:#08080a;pointer-events:none}

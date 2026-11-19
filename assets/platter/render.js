@@ -493,7 +493,7 @@
   function r_ask(w, W, H, m) {
     var title = or(get(w, "text"), "무엇이든 물어봐");
     var inset = Math.min(16, Math.max(8, W * 0.065));
-    var art = '<img class="ask-art" src="/assets/platter/ask-mailbox.png" alt="">';
+    var art = '<img class="ask-art" src="/assets/cast/objects/ask-box.webp" alt="">';
     var preview = '<p class="ask-q" style="font-size:' + u(11) + ";padding:" + u(6) + " " + u(7) + ";border-radius:" + u(8) + '">첫 질문을 남겨봐</p>';
     var inner;
     if (W / Math.max(H, 1) >= 1.7) {

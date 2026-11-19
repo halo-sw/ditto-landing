@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<title>디토 관계 지도</title>
+<link rel="canonical" href="/relationship-ontology/">
+<script>
+  const params = new URLSearchParams(location.search);
+  const persona = params.get('p');
+  const slug = persona === 'uni' ? 'chaewon/' : persona === 'high' ? 'siwoo/' : '';
+  location.replace('/relationship-ontology/' + slug);
+</script>
+<a href="/relationship-ontology/">디토 관계 지도 열기</a>
+</html>

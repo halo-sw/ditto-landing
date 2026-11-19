@@ -180,7 +180,7 @@
     function layout() { return items.map(plain); }
     function syncWidget(it) { it.widget.x = it.x; it.widget.y = it.y; it.widget.w = it.w; it.widget.h = it.h; }
     function label(it) {      // B:226 — "열 n, 행 n, w×h"
-      var name = it.widget.name || (it.widget.data && (it.widget.data.title || it.widget.data.text)) || it.kind;
+      var name = (RND && RND.label ? RND.label(it.widget) : it.widget.name) || (it.widget.data && (it.widget.data.title || it.widget.data.text)) || it.kind;
       it.el.setAttribute('aria-label', String(name).slice(0, 40) + ' · 열 ' + (it.x + 1) + ', 행 ' + (it.y + 1) + ', ' + it.w + '×' + it.h);
     }
     function applyBox(it) {
@@ -730,6 +730,10 @@
         var full = {};
         for (var k in wd) if (Object.prototype.hasOwnProperty.call(wd, k)) full[k] = wd[k];
         full.x = placed.x; full.y = placed.y; full.w = placed.w; full.h = placed.h;
+        if (RND && RND.limitAvailable) {
+          var used = items.filter(function (item) { return item.widget.ditto === true; }).length;
+          full = RND.limitAvailable([full], used)[0];
+        }
         var it = makeItem(full);
         root.appendChild(it.el);
         items.push(it);
@@ -877,7 +881,8 @@
     };
 
     // 처음 그리기
-    var first = (opts.widgets || []).map(function (w) { return w; });
+    var first = opts.widgets || [];
+    if (RND && RND.limitAvailable) first = RND.limitAvailable(first);
     first.forEach(function (w) { var it = makeItem(w); root.appendChild(it.el); items.push(it); });
     setHeight(shownRows(layout()), false);
     if (opts.showGrid) setGridVisible(true);
