@@ -434,6 +434,9 @@
 <link rel="stylesheet" href="widget-app.css">
 <link rel="stylesheet" href="play-tiles.css">
 <link rel="stylesheet" href="play-stage.css">
+<link rel="stylesheet" href="/assets/v8/platter-grid.css">
+<link rel="stylesheet" href="/assets/v8/platter.css">
+<link rel="stylesheet" href="xwall.css">
 <header class="topbar">
   <div class="tb-lead"><a class="logo tb-logo" href="#overview" aria-label="Splup 디자인 가이드 처음으로"><svg class="wm" viewBox="0 0 370 134" aria-hidden="true"><use href="#wm-ditto"/></svg><span class="logo-label tb-title">Splup <small>디자인 가이드</small></span></a></div>
   <nav class="top-nav" id="topNav" aria-label="주요 카테고리">
@@ -468,49 +471,222 @@
       <a href="#roadmap">변경 기록</a>
     </nav>
   </div>
-  <section class="xds-play" aria-labelledby="xds-play-h">
+  <section class="xds-play xw-on" aria-labelledby="xds-play-h">
     <h2 id="xds-play-h" class="xk-sr">컴포넌트 견본판</h2>
-    <div class="xb" id="xp">
-      <div class="xb-canvas" aria-label="컴포넌트 견본">
-        <div class="xb-s" style="--w:300px"><a class="xb-l" href="#chips">선택 탭</a><div class="xk-sz" id="xpSz" role="group" aria-label="위젯 규격"><button type="button" data-w="2" data-h="2" aria-pressed="false">2×2</button><button type="button" data-w="3" data-h="3" aria-pressed="false">3×3</button><button type="button" data-w="4" data-h="4" aria-pressed="false">4×4</button><button type="button" data-w="4" data-h="2" aria-pressed="true">4×2</button><button type="button" data-w="4" data-h="3" aria-pressed="false">4×3</button><button type="button" data-w="6" data-h="2" aria-pressed="false">6×2</button></div></div>
-        <div class="xb-s" style="--w:150px"><a class="xb-l" href="#chips">칩</a><div class="xb-chips"><button type="button" aria-pressed="true">기본</button><button type="button" aria-pressed="false">기본</button></div></div>
-        <div class="xb-s" style="--w:226px"><a class="xb-l" href="#menu">스위치</a><div class="xb-sws"><button type="button" class="xb-sw" role="switch" aria-checked="false" aria-label="꺼짐"><i></i></button><button type="button" class="xb-sw" role="switch" aria-checked="true" aria-label="켜짐"><i></i></button><button type="button" class="xb-sw" role="switch" aria-checked="true" aria-label="켜짐 · 조작 불가" disabled><i></i></button></div></div>
-        <div class="xb-s" style="--w:330px"><a class="xb-l" href="#inputs">텍스트 입력</a><label class="xp-f" for="xpIn"><span class="xp-fi"><input id="xpIn" type="text" value="오늘의 안부" maxlength="12" autocomplete="off" aria-label="표시 제목"><i id="xpCnt">6/12</i></span></label><span class="xk-sr" id="xpInCap">텍스트 입력 / 기본</span></div>
-        <div class="xb-s" style="--w:370px"><a class="xb-l" href="#buttons">버튼 · Primary</a><button type="button" class="xb-btn p">위젯 추가</button></div>
-        <div class="xb-s" style="--w:300px"><a class="xb-l" href="#profile-handles">프로필 핸들</a><div class="xp-h" id="xkH" style="--a:#AD6BE7;--b:#9E7FDA"><span class="av" aria-hidden="true"></span><span class="id"><b>지우</b><i>@jiwoo</i></span><span class="ic i1" aria-hidden="true"></span><span class="ic i2" aria-hidden="true"></span></div><div class="xk-dots" id="xpPal" role="group" aria-label="핸들 색"><button type="button" class="xk-dot" style="--a:#AD6BE7;--b:#9E7FDA" aria-pressed="true" aria-label="퍼플 · 핑크"></button><button type="button" class="xk-dot" style="--a:#8C73DA;--b:#9882D2" aria-pressed="false" aria-label="딥 퍼플 · 바이올렛"></button><button type="button" class="xk-dot" style="--a:#F877C8;--b:#EE86C1" aria-pressed="false" aria-label="핑크 · 코랄"></button><button type="button" class="xk-dot" style="--a:#FC9460;--b:#F3A276" aria-pressed="false" aria-label="피치 · 옐로"></button><button type="button" class="xk-dot" style="--a:#4BB1E8;--b:#64B2DC" aria-pressed="false" aria-label="시안 · 블루"></button><button type="button" class="xk-dot" style="--a:#22CFA6;--b:#40C6AC" aria-pressed="false" aria-label="민트 · 라임"></button></div></div>
-        <div class="xb-s" style="--w:190px"><a class="xb-l" href="#buttons">Secondary</a><button type="button" class="xb-btn s">앨범에서 선택</button></div>
-        <div class="xb-s" style="--w:104px"><a class="xb-l" href="#buttons">Neutral</a><button type="button" class="xb-btn n">적용하기</button></div>
-        <div class="xb-s" style="--w:82px"><a class="xb-l" href="#buttons">Outline</a><button type="button" class="xb-btn o">취소</button></div>
-        <div class="xb-s" style="--w:370px"><a class="xb-l" href="#ditto-action">디토하기 버튼</a><button type="button" class="xa-hold" id="xaHold" data-state="idle" aria-label="내 플래터에 디토하기. 3초 동안 길게 누르세요."><span class="glow" aria-hidden="true"></span><span class="bg" aria-hidden="true"><span class="fl"></span><span class="core"></span></span><svg viewBox="0 0 214 204" aria-hidden="true"><path fill="currentColor" d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path fill="currentColor" d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle fill="currentColor" cx="141.594" cy="187.204" r="16.75"/></svg><span class="lb" id="xaHoldL">내 플래터에 디토하기</span></button><span class="xk-sr" id="xpDittoCap" aria-live="polite">디토하기 / 기본</span></div>
-        <div class="xb-s" style="--w:330px"><a class="xb-l" href="#feedback">토스트</a><div class="xb-toast" id="xpTz" aria-live="polite"><p class="xp-toast"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7.6"/><path d="M6.6 10.2l2.3 2.3 4.5-4.8"/></svg><span>링크를 복사했어요</span></p></div></div>
-        <div class="xb-s" style="--w:336px"><a class="xb-l" href="#dialog">알럿</a><div class="xb-alert" role="group" aria-label="알럿 견본"><b>작성 중인 내용이 있어요</b><p>지금 나가면 작성한 내용이 사라져요.</p><div><button type="button">취소</button><button type="button" class="ok">확인</button></div></div></div>
-        <div class="xb-s" style="--w:364px"><a class="xb-l" href="#chat">반응</a><div class="xb-react" role="group" aria-label="반응 고르기"><button type="button">❤️</button><button type="button">😂</button><button type="button">🥹</button><button type="button">😮</button><button type="button">🔥</button><button type="button">👍</button><button type="button" class="more" aria-label="다른 이모지 고르기"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg></button></div>
-          <a class="xb-l" href="#chat">말풍선</a><div class="xb-bub"><span class="o">헐 이거 디토 각인데?</span><span class="chips"><button type="button" class="chip mine" aria-pressed="true">❤️<i>2</i></button><button type="button" class="chip" aria-pressed="false">🔥</button></span><span class="me">플래터에 박제하자 📌</span></div>
-          <a class="xb-l" href="#menu">메뉴 행</a><div class="xb-rows"><button type="button">수정하기</button><button type="button" class="d">삭제하기</button></div></div>
-        <div class="xb-s" style="--w:336px"><a class="xb-l" href="#feedback">스켈레톤</a><div class="xb-sk" aria-hidden="true"><span><i></i><i></i><i></i></span><b></b><u></u></div></div>
-        <div class="xb-s" style="--w:364px"><a class="xb-l" href="#navigation">상단 바</a><div class="xb-top" role="group" aria-label="상단 바 견본"><button type="button" aria-label="뒤로"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5L7 10l5.5 5.5"/></svg></button><b>위젯 추가</b><button type="button" class="x" aria-label="닫기"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div></div>
-      </div>
-      <article class="xb-t xb-demo">
-        <p class="xb-cap"><b>디토하기.</b> 3초 꾹 누르면 내 플래터에 담겨요.</p>
+    <div class="xb xw" id="xp" aria-label="컴포넌트 견본. 모두 눌러 볼 수 있어요.">
+
+      <article class="xw-t xw-wide xw-pl" data-span="3">
+        <div class="xw-pl-side">
+          <a class="xw-l" href="#widget-catalog">플래터</a>
+          <p class="xw-h">꾹 눌러 옮기고,<br>모서리를 끌어 크기를 바꿔요.</p>
+          <p class="xw-s">앱과 같은 6칸 격자예요. 음악과 영상은 누르면 재생돼요.</p>
+          <ul class="xw-kinds" id="xwKinds" aria-label="이 플래터에 놓인 위젯"></ul>
+          <dl class="xw-spec" aria-label="위젯 공통 규격"><div><dt>모서리</dt><dd>모든 위젯 20</dd></div><div><dt>안쪽 여백</dt><dd>칸 수에 따라 12, 16, 20, 24</dd></div><div><dt>글자</dt><dd>제목 13, 항목 12, 메타 11</dd></div><div><dt>크기</dt><dd>모두 바꿀 수 있어요. To-do와 Together만 예외</dd></div></dl><button type="button" class="xw-ghost" id="xwPlReset">처음 배치로</button>
+        </div>
+        <div class="xw-phone xw-pl-ph"><div class="xw-pl-hd"><span class="xw-pl-av"></span><span><b>봄</b><i>@bomcut</i></span></div><div class="dpl" id="xwPlatter"></div></div>
+      </article>
+
+      <article class="xw-t xw-wide xw-demo" data-span="2">
+        <div class="xw-pl-side">
+          <a class="xw-l" href="#ditto-action">디토하기 시연</a>
+          <p class="xw-h">친구 위젯을 열고<br>3초 꾹 누르면 내 플래터로.</p>
+          <p class="xw-s">출처가 담긴 사본이 놓이고, 원래 주인은 누가 가져갔는지 알게 돼요.</p>
+        </div>
         <div class="xk-stage" id="xkStage" role="img" aria-label="소라의 플래터에서 사진 위젯을 열고, 디토하기 버튼을 3초 동안 눌러 내 플래터에 담는 시연"></div>
       </article>
-      <article class="xb-t xb-icons">
-        <p class="xb-cap"><b>앱 아이콘 컬러.</b> 여섯 색, 글래스와 플레인.</p>
-        <div class="xb-icon-g"><img src="play-assets/appicon-Default.webp" alt="기본 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-PurpleGlass.webp" alt="퍼플 글래스 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-PinkGlass.webp" alt="핑크 글래스 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-PeachGlass.webp" alt="피치 글래스 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-CyanGlass.webp" alt="시안 글래스 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-MintGlass.webp" alt="민트 글래스 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-DeepPurpleGlass.webp" alt="딥 퍼플 글래스 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-PurplePlain.webp" alt="퍼플 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-PinkPlain.webp" alt="핑크 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-PeachPlain.webp" alt="피치 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-CyanPlain.webp" alt="시안 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-MintPlain.webp" alt="민트 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"><img src="play-assets/appicon-DeepPurplePlain.webp" alt="딥 퍼플 앱 아이콘" width="120" height="120" loading="lazy" decoding="async"></div>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#ditto-action">디토하기 버튼</a>
+        <button type="button" class="xa-hold" id="xaHold" data-state="idle" aria-label="내 플래터에 디토하기. 3초 동안 길게 누르세요."><span class="glow" aria-hidden="true"></span><span class="bg" aria-hidden="true"><span class="fl"></span><span class="core"></span></span><svg viewBox="0 0 214 204" aria-hidden="true"><path fill="currentColor" d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path fill="currentColor" d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle fill="currentColor" cx="141.594" cy="187.204" r="16.75"/></svg><span class="lb" id="xaHoldL">내 플래터에 디토하기</span></button>
+        <span class="xk-sr" id="xpDittoCap" aria-live="polite">디토하기 / 기본</span>
+        <div class="xw-fam" id="xwFam" role="radiogroup" aria-label="앱 아이콘 계열"></div>
+        <p class="xw-cap">3초 꾹 누르면 담겨요. 색은 앱 아이콘 계열을 따라가요.</p>
       </article>
-      <article class="xb-t xb-shelf">
-        <p class="xb-cap"><b>위젯.</b> 플래터를 채우는 조각들이에요.</p>
-        <div class="xk-row"><img src="/assets/widget-card/image.webp" alt="이미지 위젯" loading="lazy" decoding="async"><img src="/assets/widget-card/music.webp" alt="음악 위젯" loading="lazy" decoding="async"><img src="/assets/widget-card/video.webp" alt="영상 위젯" loading="lazy" decoding="async"><img src="/assets/widget-card/gif.webp" alt="GIF 위젯" loading="lazy" decoding="async"><img src="/assets/widget-card/together.webp" alt="Together 위젯" loading="lazy" decoding="async"><img src="/assets/widget-card/playlist.webp" alt="플레이리스트 위젯" loading="lazy" decoding="async"><img src="/assets/widget-card/guestbook.webp" alt="방명록 위젯" loading="lazy" decoding="async"><img src="/assets/widget-card/status.webp" alt="기분 위젯" loading="lazy" decoding="async"></div>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#profile-handles">프로필 핸들</a>
+        <div class="xp-h xw-hd" id="xwH"><span class="av" aria-hidden="true"></span><span class="id"><b>지우</b><i>@jiwoo</i></span><span class="ic i1" aria-hidden="true"></span><span class="ic i2" aria-hidden="true"></span></div>
+        <div class="xw-tones" id="xwTones" role="radiogroup" aria-label="핸들 색 10가지"></div>
+        <p class="xw-cap" id="xwToneCap">인디고 · 위 #B3AAE9 → 아래 #6655D2</p>
       </article>
-      <article class="xb-t xb-sheet">
-        <p class="xb-cap"><b>바텀시트.</b> 내 위젯을 누르면 열려요.</p>
+
+      <article class="xw-t xw-chat">
+        <a class="xw-l" href="#chat">채팅방</a>
+        <div class="xw-phone xw-room">
+          <div class="xw-rm-hd"><button type="button" aria-label="뒤로"><svg viewBox="0 0 20 20"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button><span class="xw-stack"><img src="/assets/cast/bom/avatar.webp" alt=""><img src="/assets/cast/nuri/avatar.webp" alt=""></span><span class="t"><b>주말 피크닉</b><i>4명</i></span><button type="button" aria-label="채팅방 메뉴"><svg viewBox="0 0 20 20"><circle cx="4.5" cy="10" r="1.4"/><circle cx="10" cy="10" r="1.4"/><circle cx="15.5" cy="10" r="1.4"/></svg></button></div>
+          <div class="xw-rm-body" id="xwRoom">
+            <p class="xw-day">오늘</p>
+            <div class="xw-msg o first"><img class="av" src="/assets/cast/bom/avatar.webp" alt=""><div><b class="nm">봄</b><span class="bb">헐 이거 디토 각인데?</span></div></div>
+            <div class="xw-msg o last"><span class="av"></span><div><span class="bb ph"><img src="/assets/cast/scenes/rooftop-group.webp" alt="옥상 단체 사진"></span><span class="xw-rx"><button type="button" class="on" aria-pressed="true">❤️<i>2</i></button><button type="button" aria-pressed="false">🔥<i>1</i></button></span></div><time>오후 3:12</time></div>
+            <div class="xw-msg me first"><time>오후 3:13 <u>1</u></time><span class="bb">플래터에 박제하자 📌</span></div>
+            <div class="xw-msg me last"><time></time><span class="bb">방금 디토했어</span></div>
+          </div>
+          <div class="xw-rbar" id="xwRbar" role="group" aria-label="반응 고르기" hidden><button type="button">❤️</button><button type="button">😂</button><button type="button">🥹</button><button type="button">😮</button><button type="button">🔥</button><button type="button">👍</button></div>
+          <form class="xw-rm-in" id="xwRoomIn"><button type="button" class="pl" aria-label="사진·위젯 보내기"><svg viewBox="0 0 20 20"><path d="M10 4v12M4 10h12"/></svg></button><input type="text" placeholder="메시지 보내기" maxlength="40" aria-label="메시지 보내기" autocomplete="off"><button type="submit" class="go" aria-label="보내기" disabled><svg viewBox="0 0 20 20"><path d="M3.5 9.6 16.2 4l-5.6 12.7-1.6-5.5z"/></svg></button></form>
+        </div>
+        <p class="xw-cap">말풍선을 꾹 누르면 반응을 고를 수 있어요.</p>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#buttons">버튼</a>
+        <div class="xw-btns">
+          <button type="button" class="xb-btn p">위젯 추가</button>
+          <div><button type="button" class="xb-btn s">앨범에서 선택</button><button type="button" class="xb-btn n">적용하기</button></div>
+          <div><button type="button" class="xb-btn o">취소</button><button type="button" class="xb-btn p" disabled>완료</button></div>
+        </div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#widget-system">위젯 규격</a>
+        <div class="xk-sz" id="xpSz" role="group" aria-label="위젯 규격"><button type="button" data-w="2" data-h="2" aria-pressed="false">2×2</button><button type="button" data-w="3" data-h="3" aria-pressed="false">3×3</button><button type="button" data-w="4" data-h="2" aria-pressed="true">4×2</button><button type="button" data-w="4" data-h="4" aria-pressed="false">4×4</button><button type="button" data-w="6" data-h="2" aria-pressed="false">6×2</button></div>
+        <div class="xp-pv"><div class="xp-w" id="xpW" style="--w:4;--h:2"><span>오늘의 안부</span></div></div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#inputs">텍스트 입력</a>
+        <label class="xp-f" for="xpIn"><span class="xp-fi"><input id="xpIn" type="text" value="오늘의 안부" maxlength="12" autocomplete="off" aria-label="표시 제목"><i id="xpCnt">6/12</i></span></label><span class="xk-sr" id="xpInCap">텍스트 입력 / 기본</span>
+        <label class="xw-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.6"/><path d="m13.2 13.2 3.6 3.6"/></svg><input type="search" placeholder="곡, 가수 검색" aria-label="곡, 가수 검색" id="xwQ"><kbd>⌘K</kbd></label>
+        <label class="xw-err"><span class="xp-fi"><input type="text" value="ditto 친구" aria-invalid="true" aria-describedby="xwErrT" aria-label="아이디"></span><small id="xwErrT">아이디는 영문, 숫자, 밑줄(_)만 쓸 수 있어요.</small></label>
+        <p class="xw-cap">글자 수는 칸 안 오른쪽에 회색으로 보여요.</p>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#inputs">초대 코드</a>
+        <p class="xw-h sm">초대 코드 6자리</p>
+        <div class="xw-otp" id="xwOtp" role="group" aria-label="초대 코드 6자리"></div>
+        <p class="xw-cap" id="xwOtpCap">받은 코드를 그대로 넣어요. 붙여 넣어도 돼요.</p>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#chips">칩과 스위치</a>
+        <div class="xw-filter" role="radiogroup" aria-label="종류"><button type="button" aria-checked="true" role="radio">전체</button><button type="button" aria-checked="false" role="radio">사진</button><button type="button" aria-checked="false" role="radio">음악</button><button type="button" aria-checked="false" role="radio">영상</button><button type="button" aria-checked="false" role="radio">글</button></div>
+        <div class="xb-chips"><button type="button" aria-pressed="true">기본</button><button type="button" aria-pressed="false">기본</button></div>
+        <div class="xb-sws"><button type="button" class="xb-sw" role="switch" aria-checked="false" aria-label="꺼짐"><i></i></button><button type="button" class="xb-sw" role="switch" aria-checked="true" aria-label="켜짐"><i></i></button><button type="button" class="xb-sw" role="switch" aria-checked="true" aria-label="켜짐, 조작 불가" disabled><i></i></button></div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#feedback">토스트</a>
+        <div class="xb-toast" id="xpTz" aria-live="polite"><p class="xp-toast"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7.6"/><path d="M6.6 10.2l2.3 2.3 4.5-4.8"/></svg><span>링크를 복사했어요</span></p></div>
+        <p class="xw-toast2"><span>위젯을 지웠어요</span><button type="button" id="xwUndo">되돌리기</button></p>
+        <p class="xw-toast2 er"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7.6"/><path d="M10 6.2v4.6M10 13.6v.1"/></svg><span>인터넷 연결을 확인해 주세요</span></p>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#dialog">알럿</a>
+        <div class="xb-alert" role="group" aria-label="알럿 견본"><b>작성 중인 내용이 있어요</b><p>지금 나가면 작성한 내용이 사라져요.</p><div><button type="button">취소</button><button type="button" class="ok">확인</button></div></div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#components">알림</a>
+        <ul class="xw-noti" id="xwNoti">
+          <li><img src="/assets/cast/nuri/avatar.webp" alt=""><p><b>누리</b>님이 내 '옥상 단체 사진' 위젯을 디토했어요.<time>방금</time></p><span class="dot" aria-label="읽지 않음"></span></li>
+          <li><img src="/assets/cast/gyeol/avatar.webp" alt=""><p><b>결</b>님이 친구 신청을 보냈어요.<time>5분 전</time></p><button type="button" class="xw-acc">수락</button></li>
+          <li><img src="/assets/cast/seori/avatar.webp" alt=""><p><b>서리</b>님이 댓글을 남겼어요.<span class="q">여기 어디야? 나도 가 보고 싶다</span><time>1시간 전</time></p></li>
+        </ul>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#comments">댓글</a>
+        <ul class="xw-cm">
+          <li><img src="/assets/cast/ian/avatar.webp" alt=""><div><p><b>이안</b><time>2시간 전</time></p><p>여기 어디야? 나도 가 보고 싶다</p><button type="button" class="rp">답글 달기</button></div><button type="button" class="hz" aria-pressed="false" aria-label="좋아요"><svg viewBox="0 0 20 20"><path d="M10 16.5s-6-3.6-6-8.1A3.4 3.4 0 0 1 10 6.2a3.4 3.4 0 0 1 6 2.2c0 4.5-6 8.1-6 8.1z"/></svg></button></li>
+          <li class="re"><img src="/assets/cast/taeyul/avatar.webp" alt=""><div><p><b>태율</b><time>1시간 전</time></p><p>성수 옥상이야 다음에 같이 가자</p><button type="button" class="rp">답글 달기</button></div><button type="button" class="hz" aria-pressed="true" aria-label="좋아요"><svg viewBox="0 0 20 20"><path d="M10 16.5s-6-3.6-6-8.1A3.4 3.4 0 0 1 10 6.2a3.4 3.4 0 0 1 6 2.2c0 4.5-6 8.1-6 8.1z"/></svg></button></li>
+        </ul>
+      </article>
+
+      <article class="xw-t xw-ic">
+        <a class="xw-l" href="#brand-graphics">앱 아이콘</a>
+        <div class="xw-icons" id="xwIcons" role="radiogroup" aria-label="앱 아이콘"></div>
+        <p class="xw-cap">아이콘을 고르면 디토하기 버튼 색이 같은 계열로 바뀌어요.</p>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#menu">메뉴 행</a>
+        <div class="xw-menu">
+          <button type="button" class="nv"><span>알림 설정</span><u>›</u></button>
+          <div class="tg"><span>디토 허용</span><button type="button" class="xb-sw" role="switch" aria-checked="true" aria-label="디토 허용"><i></i></button></div>
+          <button type="button">수정하기</button>
+          <button type="button" class="d">삭제하기</button>
+        </div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#navigation">상단 바</a>
+        <div class="xb-top" role="group" aria-label="상단 바 견본"><button type="button" aria-label="뒤로"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5L7 10l5.5 5.5"/></svg></button><b>위젯 추가</b><button type="button" class="x" aria-label="닫기"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div>
+        <div class="xb-top xw-top2" role="group" aria-label="상단 바 견본, 완료 버튼"><button type="button" aria-label="뒤로"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5L7 10l5.5 5.5"/></svg></button><b>프로필 수정</b><button type="button" class="dn">완료</button></div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#navigation">탭 바</a>
+        <div class="xw-tab" id="xwTab" role="tablist" aria-label="탭 바"><button type="button" role="tab" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M4 10.6 12 4l8 6.6V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg>홈</button><button type="button" role="tab" aria-selected="false"><svg class="mk" viewBox="0 0 214 204" aria-hidden="true"><path fill="currentColor" d="M176.502 20.1889C176.502 20.1889 151.492 0.354846 97.6641 0C94.3642 19.1617 88.339 51.3127 81.3034 89.5053C79.088 54.665 59.1585 48.6326 48.2761 50.8924C21.3295 56.5046 -9.02822 106.398 2.52162 142.172C14.1642 178.236 66.5 169.869 87.9867 165.452C87.9497 165.34 87.9219 165.228 87.8848 165.125C87.4862 128.819 92.0468 78.7012 124.629 47.6988C139.08 33.9532 161.782 21.2254 176.511 20.1982L176.502 20.1889ZM67.0839 146.169C62.5604 151.146 52.4473 144.413 43.4095 132.572C24.8334 108.209 25.7047 80.905 39.1641 80.7369C46.45 80.6435 53.6153 86.1997 61.2256 109.106C65.7121 122.618 69.7906 143.181 67.0747 146.169H67.0839Z"/><path fill="currentColor" d="M153.996 156.046C151.332 158.734 147.415 158.93 145.465 153.751C144.379 150.849 141.687 144.093 134.633 134.976C130.845 130.077 123.716 122.659 119.186 114.046C114.332 104.817 113.375 99.5919 114.146 91.7629C115.158 81.6385 125.257 69.1251 139.33 69.993C164.012 71.514 162.165 103.922 162.165 103.922C162.165 103.922 176.803 73.0536 200.279 83.1595C213.209 88.7303 215.892 105.275 212.875 114.046C206.953 131.253 185 138.009 176.608 142.068C163.965 148.171 160.494 149.496 153.987 156.046H153.996Z"/><circle fill="currentColor" cx="141.594" cy="187.204" r="16.75"/></svg>Ditto!</button><button type="button" role="tab" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="9.5" cy="8.5" r="3.6"/><path d="M3 19.5c.6-3.6 3.2-5.6 6.5-5.6s5.9 2 6.5 5.6z"/><circle cx="17" cy="7" r="2.4"/><path d="M16.6 12.4c2.6.2 4.2 1.9 4.6 4.6h-3.6"/></svg>친구</button></div>
+      </article>
+
+      <article class="xw-t xw-shot">
+        <a class="xw-l" href="#photo-picker">카메라</a>
+        <div class="xw-cam"><span class="xw-film">토스 27</span><button type="button" class="xw-sh" aria-label="사진 찍기"></button><span class="xw-n" id="xwShotN">0장</span></div>
+        <div class="xw-split" role="radiogroup" aria-label="화면 나누기"><button type="button" role="radio" aria-checked="true">독사진</button><button type="button" role="radio" aria-checked="false">두 컷</button><button type="button" role="radio" aria-checked="false">네 컷</button></div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#feedback">빈 화면</a>
+        <div class="xw-empty"><img src="play-assets/empty-group.webp" alt="" width="96" height="96" loading="lazy"><b>아직 아무것도 없어요</b><p>첫 번째 항목을 만들면 여기에 보여요.</p><button type="button" class="xb-btn s">시작하기</button></div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#feedback">올리는 중</a>
+        <div class="xw-up" id="xwUp"><img src="/assets/cast/scenes/rooftop-group.webp" alt=""><div><b>사진 올리는 중</b><span><i></i></span><small>0%</small></div></div>
+        <a class="xw-l" href="#feedback">스켈레톤</a>
+        <div class="xb-sk" aria-hidden="true"><span><i></i><i></i><i></i></span><b></b><u></u></div>
+      </article>
+
+      <article class="xw-t xw-dk" id="xwDk">
+        <a class="xw-l" href="#darkmode">다크 모드</a>
+        <button type="button" class="xw-mode" role="switch" aria-checked="false" aria-label="어두운 화면"><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg><b>밝은 화면</b><i></i></button>
+        <div class="xw-dk-card"><img src="/assets/cast/yeoul/avatar.webp" alt=""><span><b>여울</b><i>@yeoulbass</i></span><button type="button" class="xw-req" aria-pressed="false">친구 신청</button></div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#profile-avatars">프로필 사진</a>
+        <div class="xw-avs"><img src="/assets/cast/bom/avatar.webp" alt="" class="s72"><img src="/assets/cast/seori/avatar.webp" alt="" class="s56"><img src="/assets/cast/nuri/avatar.webp" alt="" class="s40"><img src="/assets/cast/gyeol/avatar.webp" alt="" class="s32"><img src="/assets/cast/ian/avatar.webp" alt="" class="s24"></div>
+        <div class="xw-fr"><span class="xw-stack lg"><img src="/assets/cast/taeyul/avatar.webp" alt=""><img src="/assets/cast/yeoul/avatar.webp" alt=""><img src="/assets/cast/bom/avatar.webp" alt=""><em>+9</em></span><span><b>친구 12명</b><i>최대 15명까지 이어져요</i></span></div>
+        <div class="xw-cap-bar"><i style="--p:80%"></i></div>
+      </article>
+
+      <article class="xw-t xw-fq">
+        <a class="xw-l" href="#interaction">주파수</a>
+        <canvas id="xwFq" width="240" height="96" aria-label="주파수 점 물결"></canvas>
+        <p class="xw-fq-t"><b>결</b>과 함께한 날 <em>21</em>일</p>
+        <p class="xw-cap">점수 대신 색이 차올라요. 여러 날에 걸쳐 오간 마음만 쌓여요.</p>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#color">컬러</a>
+        <div class="xw-sw" id="xwSw"></div>
+        <p class="xw-cap">눌러서 색 값을 복사해요.</p>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#typography">글자 스타일</a>
+        <div class="xw-type"><p class="t1">통하면 디토해!</p><p class="t2">친구의 순간을 내 플래터에</p><p class="t3">Pretendard 24, 18, 13</p></div>
+        <div class="xw-rad"><span style="--r:8px">8</span><span style="--r:12px">12</span><span style="--r:16px">16</span><span style="--r:20px">20</span></div>
+        <div class="xw-sp"><i style="--s:4px"></i><i style="--s:8px"></i><i style="--s:16px"></i><i style="--s:24px"></i><span>간격 4, 8, 16, 24</span></div>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#sticker-board">스티커</a>
+        <div class="xw-stk" id="xwStk"></div>
+        <p class="xw-cap">젤리 팩. 눌러 보세요.</p>
+      </article>
+
+      <article class="xw-t">
+        <a class="xw-l" href="#widget-manage">바텀시트</a>
         <div class="xb-bs" role="group" aria-label="위젯 관리 시트 견본">
           <i class="g" aria-hidden="true"></i>
-          <button type="button" class="r e"><span class="pen" aria-hidden="true"></span><b>내용 수정</b><small>사진 · 캡션</small><u aria-hidden="true">›</u></button>
+          <button type="button" class="r e"><span class="pen" aria-hidden="true"></span><b>내용 수정</b><small>사진, 캡션</small><u aria-hidden="true">›</u></button>
           <div class="r t"><span><b>디토 허용</b><small>친구가 이 위젯을 자기 플래터로 가져갈 수 있어요</small></span><button type="button" class="xb-sw" role="switch" aria-checked="true" aria-label="디토 허용"><i></i></button></div>
           <button type="button" class="r x">위젯 삭제</button>
         </div>
       </article>
+
     </div>
     <nav class="xk-idx" aria-label="핵심 컴포넌트 문서"><a href="#buttons"><i>01</i><span><b>버튼</b><small>저장·추가·완료 같은 행동을 바로 실행해요.</small></span><u aria-hidden="true">→</u></a><a href="#ditto-action"><i>02</i><span><b>디토하기 버튼</b><small>친구의 위젯을 내 플래터에 가져와요.</small></span><u aria-hidden="true">→</u></a><a href="#chips"><i>03</i><span><b>칩과 선택 탭</b><small>여러 값 중 하나를 고르거나 목록을 걸러요.</small></span><u aria-hidden="true">→</u></a><a href="#menu"><i>04</i><span><b>메뉴 행과 스위치</b><small>행동과 설정을 한 줄씩 보여 줘요.</small></span><u aria-hidden="true">→</u></a><a href="#inputs"><i>05</i><span><b>텍스트 입력</b><small>한 줄 칸과 여러 줄 칸, 두 가지만 써요.</small></span><u aria-hidden="true">→</u></a><a href="#dialog"><i>06</i><span><b>다이얼로그</b><small>흐름을 잠깐 멈추고 확인을 받아요.</small></span><u aria-hidden="true">→</u></a><a href="#feedback"><i>07</i><span><b>빈 화면·오류·토스트</b><small>내용이 없거나 결과를 알릴 때 써요.</small></span><u aria-hidden="true">→</u></a><a href="#comments"><i>08</i><span><b>댓글</b><small>댓글 한 줄과 입력 바예요.</small></span><u aria-hidden="true">→</u></a><a href="#chat"><i>09</i><span><b>그룹 채팅</b><small>목록, 말풍선, 반응, 답장을 만들어요.</small></span><u aria-hidden="true">→</u></a><a href="#photo-picker"><i>10</i><span><b>이미지 셀렉터</b><small>사진을 고르는 화면은 하나로 통일해요.</small></span><u aria-hidden="true">→</u></a><a href="#profile-handles"><i>11</i><span><b>프로필 구성</b><small>핸들의 색과 오른쪽 버튼을 정해요.</small></span><u aria-hidden="true">→</u></a><a href="#widget-system"><i>12</i><span><b>위젯 크기와 구성</b><small>유형별 콘텐츠와 글자 크기를 정해요.</small></span><u aria-hidden="true">→</u></a></nav>
   </section>
@@ -3181,6 +3357,12 @@
 
 <script src="visual-docs.js"></script>
 <script src="play-tiles.js"></script>
+<script src="/assets/v8/platter-grid.js"></script>
+<script src="/assets/v8/platter-render.js"></script>
+<script src="/assets/v8/platters.js"></script>
+<script src="/assets/v8/platter.js"></script>
+<script src="/assets/v8/media.js" defer></script>
+<script src="xwall.js"></script>
 <script defer src="play-stage.js"></script>
 
 <script src="profile-handle-recipes.js"></script>
