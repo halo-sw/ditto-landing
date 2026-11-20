@@ -11,6 +11,12 @@
   var clone = function (o) { return JSON.parse(JSON.stringify(o)); };
   var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+  /* 서버(Supabase) 함수 부르기 — 공개(publishable) 키. 함수가 아직 없으면(운영 미적용) 거절되고, 화면은 예전 방식으로 남는다 */
+  var SB = 'https://lisqekczixwzshmpewzq.supabase.co', SBKEY = 'sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf';
+  function rpc(fn, body) {
+    return fetch(SB + '/rest/v1/rpc/' + fn, { method: 'POST', headers: { apikey: SBKEY, Authorization: 'Bearer ' + SBKEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) })
+      .then(function (r) { return r.json().catch(function () { return null; }).then(function (d) { if (!r.ok) { var er = new Error((d && d.message) || String(r.status)); er.code = d && d.code; er.status = r.status; throw er; } return d; }); });
+  }
   function seen(el, fn, th) {
     if (!el) return;
     if (!('IntersectionObserver' in window)) { fn(); return; }
@@ -624,6 +630,67 @@
     seen(box, function () { box.classList.add('in'); }, 0.25);
   }
 
+  /* ── 지금 디토에 있는 친구들: 가입 순서대로 자리가 채워지는 좌석표 (서버 landing_members).
+     자리 하나 = 한 사람(No. = 들어온 순서). 사진 · 이름은 웹 프로필 공개를 켠 사람만, 끈 사람은 첫 글자만. 아이디는 보이지 않는다.
+     서버 함수가 아직 없으면 아래 예시 판(프로필 월)을 그대로 둔다 ── */
+  function members() {
+    var sec = $('#x-wall'), wallBox = $('#xWall'); if (!sec || !wallBox) return;
+    var pad = function (n) { return String(n).padStart(4, '0'); };
+    var PAL = ['#AA4AF4', '#FA97E2', '#48B5F4', '#07E7B4', '#FF925D', '#6655D2', '#F9C85A', '#E37CA2'];
+    function ago(t) {
+      var m = Math.max(0, (Date.now() - new Date(t).getTime()) / 60000);
+      if (m < 1) return '방금'; if (m < 60) return Math.floor(m) + '분 전'; if (m < 1440) return Math.floor(m / 60) + '시간 전';
+      var d = new Date(t); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+    }
+    function initial(el, r) { el.textContent = Array.from(r.nick || '디')[0]; }
+    function face(r, cls) {
+      var el = document.createElement('span'); el.className = cls;
+      var src = r.avatar && (/^https?:\/\//.test(r.avatar) ? r.avatar : SB + '/storage/v1/object/public/avatars/' + String(r.avatar).replace(/^\/+/, ''));
+      initial(el, r);          // 첫 글자를 먼저 깔고, 사진이 오면 그 위에 덮는다
+      if (src) { var im = document.createElement('img'); im.alt = ''; im.loading = 'lazy'; im.decoding = 'async'; im.onerror = function () { im.remove(); }; im.src = src; el.appendChild(im); }
+      el.style.setProperty('--c', /^#[0-9a-f]{6}$/i.test(r.color || '') ? r.color : PAL[r.no % PAL.length]);
+      return el;
+    }
+    function who(r) { var t = document.createElement('div'); t.appendChild(document.createElement('b')); t.appendChild(document.createElement('span')); return t; }
+    seen(sec, function () {
+      rpc('landing_members', { p_limit: 160 }).then(function (r) {
+        var rows = (r && r.rows) || [], total = (r && r.total) || 0; if (!total || !rows.length) return;
+        var box = document.createElement('div'); box.className = 'x-mem';
+        box.innerHTML = '<div class="x-mem-top"><p class="x-mem-n"><b id="xMemN">0</b><span>명</span></p><p class="x-mem-s"></p></div>' +
+          '<div class="x-mem-b"><ol class="x-mem-g" aria-label="들어온 순서대로 채워진 자리"></ol><div class="x-mem-r"><p class="x-mem-k">최근 들어온 친구</p><ol></ol></div></div>' +
+          '<div class="x-mem-card" role="status" aria-live="polite" hidden></div>';
+        $('.x-mem-s', box).textContent = (r.today ? '오늘 ' + r.today + '명이 새로 들어왔어요. ' : '') + '들어온 순서대로 자리가 채워져요.';
+        var g = $('.x-mem-g', box), card = $('.x-mem-card', box), first = rows[0].no;
+        if (first > 1) { var more = document.createElement('li'); more.className = 'x-mem-more'; more.textContent = 'No.0001 – ' + pad(first - 1); g.appendChild(more); }
+        rows.forEach(function (m, i) {
+          var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button';
+          b.setAttribute('aria-label', 'No.' + pad(m.no) + ' ' + m.nick); b.style.setProperty('--d', Math.min(i * 14, 1600) + 'ms');
+          b.appendChild(face(m, 'x-mem-f'));
+          b.addEventListener('click', function () {
+            card.hidden = false; card.textContent = '';
+            var t = who(); $('b', t).textContent = 'No.' + pad(m.no) + ' ' + m.nick; $('span', t).textContent = ago(m.at) + ' 들어왔어요';
+            card.appendChild(face(m, 'x-mem-f')); card.appendChild(t);
+            $$('button[aria-pressed]', g).forEach(function (x) { x.removeAttribute('aria-pressed'); }); b.setAttribute('aria-pressed', 'true');
+          });
+          li.appendChild(b); g.appendChild(li);
+        });
+        var empty = (24 - rows.length % 24) % 24; if (empty < 8) empty += 24;          // 다음 자리는 비어 있다(곧 채워질 자리). 24칸 단위라 12칸 · 8칸 줄 모두 딱 맞는다
+        for (var k = 0; k < empty; k++) { var e = document.createElement('li'); e.className = 'x-mem-e'; if (!k) e.innerHTML = '<span>No.' + pad(total + 1) + '</span>'; g.appendChild(e); }
+        var rl = $('.x-mem-r ol', box);
+        rows.slice(-5).reverse().forEach(function (m) {
+          var li = document.createElement('li'), t = who(); li.appendChild(face(m, 'x-mem-f'));
+          $('b', t).textContent = m.nick; $('span', t).textContent = ago(m.at); li.appendChild(t);
+          var no = document.createElement('i'); no.textContent = 'No.' + pad(m.no); li.appendChild(no); rl.appendChild(li);
+        });
+        wallBox.hidden = true; wallBox.parentNode.insertBefore(box, wallBox);
+        var hp = $('header p:not(.h8-k)', sec); if (hp) hp.textContent = '앱을 받은 친구들이 들어온 순서대로 자리를 채워요. 자리를 누르면 누가 언제 들어왔는지 보여요. 아이디는 보이지 않아요.';
+        var nEl = $('#xMemN', box), t0 = 0, dur = RM ? 0 : 1400;
+        function tick(now) { if (!t0) t0 = now; var k = dur ? clamp((now - t0) / dur) : 1, e = 1 - Math.pow(1 - k, 3); nEl.textContent = Math.round(total * e).toLocaleString('ko-KR'); if (k < 1) requestAnimationFrame(tick); }
+        requestAnimationFrame(function () { box.classList.add('in'); requestAnimationFrame(tick); });
+      }, function () { /* 서버 함수가 없으면 예시 판을 그대로 둔다 */ });
+    }, 0.05);
+  }
+
   /* 소개 카드 속 작은 주파수 (점 물결) */
   function fourFq() {
     var cv = $('#xFourFq'); if (!cv || !cv.getContext) return;
@@ -836,16 +903,40 @@
     calc();
   }
 
-  /* ── 안드로이드 사전 예약: 지금은 메일로 받는다. 스토어 사전 등록 주소가 생기면 window.DITTO_ANDROID_URL 로 넘기면 버튼이 그 주소로 간다 ── */
+  /* ── 안드로이드 사전 예약: 이메일을 남기면 출시 알림을 보낸다 (서버 join_android_waitlist).
+     서버 함수가 아직 없으면 예전처럼 메일 앱으로 보내게 둔다. 스토어 사전 등록 주소가 생기면 window.DITTO_ANDROID_URL 로 넘기면 그 주소로 간다 ── */
   function android() {
     var btn = $('#xAndBtn'); if (!btn) return;
     if (window.DITTO_ANDROID_URL) { btn.addEventListener('click', function () { location.href = window.DITTO_ANDROID_URL; }); return; }
     var d = document.createElement('dialog'); d.className = 'x-and'; d.id = 'xAnd'; d.setAttribute('aria-labelledby', 'xAndH');
     var mail = 'mailto:support@ditto.place?subject=' + encodeURIComponent('안드로이드 사전 예약') + '&body=' + encodeURIComponent('안드로이드 앱이 나오면 이 주소로 알려 주세요.');
-    d.innerHTML = '<div class="x-and-in"><img src="assets/v8/appicon.webp" alt="" width="104" height="104"><h4 id="xAndH">안드로이드는 준비하고 있어요</h4><p>앱이 나오면 메일로 가장 먼저 알려 드릴게요. 아래 버튼을 누르면 메일 앱이 열려요. 적힌 그대로 보내 주시면 예약이 끝나요.</p><div class="x-and-a"><a href="' + mail + '">메일로 사전 예약하기</a><button type="button">닫기</button></div></div>';
+    d.innerHTML = '<form class="x-and-in" novalidate><img src="assets/v8/appicon.webp" alt="" width="104" height="104"><h4 id="xAndH">안드로이드는 준비하고 있어요</h4>' +
+      '<p>이메일을 남겨 주시면 안드로이드 앱이 나올 때 가장 먼저 알려 드릴게요.</p>' +
+      '<label class="x-and-f"><span class="x-sr">이메일</span><input type="email" id="xAndE" inputmode="email" autocomplete="email" placeholder="이메일 주소" maxlength="254" required></label>' +
+      '<label class="x-and-c"><input type="checkbox" id="xAndOk"><span>안드로이드 출시 알림을 받기 위해 이메일을 모으는 데 동의해요. <small>알림을 보낸 뒤 바로 지워요. <a href="/privacy/" target="_blank" rel="noopener">개인정보 처리방침</a></small></span></label>' +
+      '<p class="x-and-m" id="xAndM" aria-live="polite"></p>' +
+      '<div class="x-and-a"><button type="submit" class="x-and-go" disabled>출시 알림 받기</button><button type="button" class="x-and-x">닫기</button></div></form>';
     document.body.appendChild(d);
-    btn.addEventListener('click', function () { if (d.showModal) d.showModal(); else location.href = mail; });
-    $('button', d).addEventListener('click', function () { d.close(); });
+    var f = $('form', d), em = $('#xAndE', d), ok = $('#xAndOk', d), go = $('.x-and-go', d), m = $('#xAndM', d), sent = false;
+    var valid = function () { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim()); };
+    function check() { if (!sent) go.disabled = !(valid() && ok.checked); }
+    em.addEventListener('input', function () { m.textContent = ''; check(); }); ok.addEventListener('change', check);
+    f.addEventListener('submit', function (e) {
+      e.preventDefault(); if (sent) { d.close(); return; } if (!valid()) { m.textContent = '이메일 주소를 다시 확인해 주세요.'; return; } if (!ok.checked) return;
+      go.disabled = true; go.textContent = '보내는 중…';
+      rpc('join_android_waitlist', { p_email: em.value.trim(), p_consent: true }).then(function (r) {
+        sent = true; f.classList.add('done'); em.disabled = ok.disabled = true;
+        m.textContent = r && r.already ? '이미 신청한 이메일이에요. 나오면 꼭 알려 드릴게요.' : '신청됐어요. 안드로이드 앱이 나오면 이 이메일로 알려 드릴게요.';
+        go.textContent = '확인'; go.disabled = false;
+      }, function (er) {
+        go.textContent = '출시 알림 받기'; check();
+        if (er && (er.code === 'PGRST202' || er.status === 404)) { m.innerHTML = '지금은 신청을 받을 수 없어요. <a href="' + mail + '">메일로 알려 주세요</a>.'; }
+        else if (er && /invalid_email/.test(er.message)) m.textContent = '이메일 주소를 다시 확인해 주세요.';
+        else m.textContent = '지금은 보내지 못했어요. 잠시 뒤에 다시 눌러 주세요.';
+      });
+    });
+    btn.addEventListener('click', function () { if (d.showModal) { d.showModal(); setTimeout(function () { em.focus(); }, 60); } else location.href = mail; });
+    $('.x-and-x', d).addEventListener('click', function () { d.close(); });
     d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
   }
 
@@ -884,7 +975,7 @@
      연결되면 window.DITTO_WISHES = [{ n: 번호, t: '글' }, …] 로 목록을, window.DITTO_WISH_SEND = function (글) { return Promise } 로 보내기를 넘기면 된다 */
   function wish() {
     var box = $('#xWishR'), form = $('#xWishF'), inp = $('#xWishIn'); if (!box || !form || !inp) return;
-    var real = window.DITTO_WISHES && window.DITTO_WISHES.length ? window.DITTO_WISHES : null, len = $('#xWishLen'), msg = $('#xWishMsg'), btn = $('button', form);
+    var real = window.DITTO_WISHES && window.DITTO_WISHES.length ? window.DITTO_WISHES : null, live = false, len = $('#xWishLen'), msg = $('#xWishMsg'), btn = $('button', form);
     var SAMPLE = ['친구랑 같이 쓰는 달력 위젯이 있으면 좋겠어요', '플래터 바탕을 요일마다 다르게 걸고 싶어요', '디토한 위젯만 모아 보는 서랍', '방명록에 그림으로 답하기', '주파수가 열리면 둘만의 위젯이 생겼으면', '여행 간 날은 지도 위젯으로 남기고 싶어요', '친구 생일을 미리 알려 주는 위젯', '음악 위젯에서 친구랑 같이 듣기', '안드로이드에서도 쓰고 싶어요', '플래터를 계절마다 통째로 보관하기', '그룹 대화에서 투표하기', '위젯에 손글씨로 메모하기', '오늘 기분을 색으로만 남기기', '친구 플래터에 스티커 붙이고 가기', '같이 찍은 사진을 한 롤로 모아 보기', '홈 화면 위젯을 더 크게', '읽은 책 한 줄을 남기는 위젯', '운동 기록을 친구와 나란히 보기', '디토한 사람들끼리 작은 방이 열리면 좋겠어요', '영상 위젯에 자막 달기', '다크 모드 테마가 더 많았으면', '친구와 만난 날 도장 찍기', '내 플래터를 포스터로 뽑기', '위젯 크기를 더 자유롭게 바꾸기'];
     var IC = ['ditto', 'group', 'comment', 'guest', 'reaction', 'invite', 'near'], mine = [];
     try { mine = JSON.parse(localStorage.getItem('ditto.wish') || '[]') || []; } catch (e) { mine = []; }
@@ -894,8 +985,12 @@
     }
     function build() {
       box.textContent = '';
-      var list = mine.map(function (t) { return { t: t, tag: '내가 남긴 바람', own: true }; })
-        .concat(real ? real.map(function (w) { return { t: w.t, tag: Number(w.n).toLocaleString('ko-KR') + '번째 바람' }; }) : SAMPLE.map(function (t) { return { t: t, tag: '예시' }; }));
+      /* 남긴 바람이 예시보다 적으면 둘을 섞고(남긴 글 2 : 예시 1), 예시 수를 넘으면 남긴 글만 보여 준다 */
+      var R = (real || []).filter(function (w) { return mine.indexOf(w.t) < 0; }).map(function (w) { return { t: w.t, tag: Number(w.n).toLocaleString('ko-KR') + '번째 바람' }; });
+      var S = SAMPLE.map(function (t) { return { t: t, tag: '예시' }; }), rest = [];
+      if (R.length >= SAMPLE.length) rest = R;
+      else { var ri = 0, si = 0; while (ri < R.length || si < S.length) { if (ri < R.length && (rest.length % 3 !== 2 || si >= S.length)) rest.push(R[ri++]); else rest.push(S[si++]); } }
+      var list = mine.map(function (t) { return { t: t, tag: '내가 남긴 바람', own: true }; }).concat(rest);
       var cols = [[], [], []]; list.forEach(function (w, i) { cols[i % 3].push([w, i]); });
       cols.forEach(function (col) {
         var c = document.createElement('div'); c.className = 'x-wish-col';
@@ -912,11 +1007,20 @@
         mine.unshift(v); mine = mine.slice(0, 5); try { localStorage.setItem('ditto.wish', JSON.stringify(mine)); } catch (er) { /* 저장을 못 해도 화면에는 보인다 */ }
         inp.value = ''; count(); build(); msg.textContent = saved ? '남겨 주셔서 고마워요. 꼼꼼히 읽을게요.' : '남겼어요. 아직은 이 기기에서만 보여요.';
       };
-      if (typeof window.DITTO_WISH_SEND === 'function') { btn.disabled = true; Promise.resolve(window.DITTO_WISH_SEND(v)).then(function () { done(true); }, function () { btn.disabled = false; msg.textContent = '지금은 보내지 못했어요. 잠시 뒤에 다시 눌러 주세요.'; }); }
+      var send = typeof window.DITTO_WISH_SEND === 'function' ? window.DITTO_WISH_SEND : live ? function (t) { return rpc('post_landing_wish', { p_body: t }); } : null;
+      if (send) { var sendFn = send; btn.disabled = true; Promise.resolve(sendFn(v)).then(function () { done(true); load(); }, function () { btn.disabled = false; msg.textContent = '지금은 보내지 못했어요. 잠시 뒤에 다시 눌러 주세요.'; }); }
       else done(false);
     });
+    function load() {
+      return rpc('landing_wishes_list', { p_limit: 60 }).then(function (r) {
+        live = true; real = (r && r.rows) || [];
+        if (msg && !msg.dataset.said) msg.textContent = real.length >= SAMPLE.length ? '이름 없이 모여요. 한 번 남긴 글은 고치거나 지울 수 없어요.' : '남겨 주신 바람과 예시가 함께 흘러요. 이름 없이 모여요.';
+        build();
+      }, function () { /* 서버 함수가 아직 없으면 예시와 이 기기의 글만 */ });
+    }
+    form.addEventListener('submit', function () { if (msg) msg.dataset.said = '1'; });
     if (real && msg) msg.textContent = '이름 없이 모여요. 한 번 남긴 글은 고치거나 지울 수 없어요.';
-    count(); build();
+    count(); build(); seen(box, load, 0.01);
   }
 
   /* ── 첫 화면 글: 내려가는 만큼 위로 흐려지며 물러난다 (toss.im 첫 화면의 물러남: 40px · 투명도) ── */
@@ -931,7 +1035,7 @@
   /* ── 사진은 화면에 그릴 때 따로 풀게 한다 (스크롤 중에 사진을 푸느라 멈칫하지 않게) ── */
   function lazyDecode() { $$('img').forEach(function (im) { if (!im.complete) im.decoding = 'async'; }); }
 
-  var fns = [widgets, ditto, island, warp, heroType, stickers, wall, cover, far, ticketPreview, flow, android, roll, wish, heroOut, lazyDecode];
+  var fns = [widgets, ditto, island, warp, heroType, stickers, wall, members, cover, far, ticketPreview, flow, android, roll, wish, heroOut, lazyDecode];
   window.__dittoX = fns;
   function boot() { fns.forEach(function (fn) { try { fn(); } catch (e) { if (window.console) console.error('[v8 x]', fn.name, e); } }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
