@@ -1271,3 +1271,16 @@
   .x-dm-ps li[data-k="2"]{--x:13!important;--y:82!important}.x-dm-ps li[data-k="3"]{--x:40!important;--y:82!important}.x-dm-ps li[data-k="4"]{--x:79!important;--y:82!important}
   .x-dm-foot{justify-content:center}
 }
+
+/* 안드로이드 신청 완료 화면 (11-21) */
+.x-and-in.done{justify-items:center;gap:8px;padding:34px 24px 22px;text-align:center}
+.x-and-ok{display:grid;place-items:center;width:64px;height:64px;margin-bottom:6px;border-radius:20px;background:linear-gradient(135deg,#AA4AF4,#FA97E2);box-shadow:0 14px 28px -14px rgba(170,74,244,.7)}
+.x-and-ok svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:0}
+@media (prefers-reduced-motion:no-preference){.x-and-ok{animation:xAndOk .5s cubic-bezier(.3,1.6,.5,1)}.x-and-ok svg{animation:xAndCk .5s .25s ease-out both}}
+@keyframes xAndOk{from{transform:scale(.5);opacity:0}}
+@keyframes xAndCk{from{stroke-dashoffset:24}}
+.x-and-in.done h4{margin-top:4px}
+.x-and-in.done .x-and-ok-t{max-width:300px}
+.x-and-mail{margin:6px 0 0!important;padding:10px 16px;border-radius:12px;background:#F6F4F9;color:var(--ink)!important;font-weight:700;word-break:break-all}
+.x-and-ok-s{font-size:12.5px!important;color:#8F88A0!important}
+.x-and-in.done .x-and-a{align-self:stretch;width:100%}
