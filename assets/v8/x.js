@@ -223,186 +223,88 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { live = es[0].isIntersecting; auto(); }, { threshold: 0.35 }).observe(ul);
   }
 
-  /* ── 디토: 태율의 사진 한 장이 다섯 명에게 번진다. 누가 가져갈 때마다 태율에게 알림이 온다 (가져간 사람을 태율이 알게 된다) ──
-     사본마다 출처(@rollbytae)가 남는다. 친구의 친구는 그룹 채팅에 올라온 원본 카드에서 디토한다 (가져온 사본은 다시 디토할 수 없다 — 앱 규칙) */
+  /* ── 디토 지도 v2 (11-21): 태율이 올린 단체 사진 한 장. 같이 찍힌 친구들이 하나씩 디토해 간다.
+     친구(봄 · 서리)는 태율의 플래터에서, 친구의 친구(누리 · 결 · 이안)는 그룹 채팅에 올라온 카드에서 디토한다.
+     디토할 때마다 태율에게 알림이 가고, 처음 보는 사람이면 둘 사이에 새 선이 생긴다 (디토로 새로 이어진 사이) ── */
   function ditto() {
-    var root = $('#xDt'), srcSlot = $('#xDtSrc'), rows = $$('#xDtRow > li'); if (!root || !srcSlot || !rows.length || !DW || !P.rollbytae) return;
-    var src = P.rollbytae.widgets.filter(function (w) { return w.id === 'taeyul-friends'; })[0]; if (!src) return;
-    var ring = $('#xDtHold'), noti = $('#xDtNoti'), cnt = $('#xDtCnt'), sayEl = $('#xDtSay'), T = [], gen = 0, busy = false, done = 0, PW = 3 * 45.75 - 8, PH = 4 * 45.75 - 8;
-    var slots = rows.map(function (li) { return $('.x-dt-slot', li); });
-    function put(slot, copy, w, h) {            // 사본은 받은 사람이 놓고 싶은 크기로 놓인다 (위젯은 크기를 바꿀 수 있다)
-      var d = $('.dpl', slot); d.innerHTML = ''; w = w || 3; h = h || 4;
-      var wd = { id: 'xd-' + (copy ? 'c' : 'o'), kind: src.kind, x: 0, y: 0, w: w, h: h, data: window.DittoScenes.ditto, ditto: !copy };
-      if (copy) wd.source = { name: '태율', handle: 'rollbytae', avatar: P.rollbytae.avatar };
-      var box = DW.box(wd); d.appendChild(box); centre(box, wd, (w * 45.75 - 8) / 2, (h * 45.75 - 8) / 2); slot.classList.add('has');
+    var root = $('#xDm'), st = $('#xDmSt'), svg = $('#xDmLn'); if (!root || !st || !svg) return;
+    var src = $('.x-dm-src', st), ph = $('.x-dm-ph', src), ps = $$('.x-dm-ps > li', st), go = $('#xDmGo'), sayEl = $('#xDmSay'), cnt = $('#xDmCnt'), whoEl = $('#xDmWho');
+    var NS = 'http://www.w3.org/2000/svg', SAY0 = sayEl.innerHTML, gen = 0, step = 0, timer = 0, onScreen = false, busy = false;
+    var from = ps.map(function (li) { return li.dataset.from === 'src' ? -1 : +li.dataset.from; });
+    /* 선: 친구 선(실선) · 친구의 친구 선(점선) · 새로 이어진 선(보라 점선, 처음엔 숨김) */
+    var base = ps.map(function (li, i) { var p = document.createElementNS(NS, 'path'); p.setAttribute('class', from[i] < 0 ? 'f' : 'g'); svg.appendChild(p); return p; });
+    var lit = ps.map(function () { var p = document.createElementNS(NS, 'path'); p.setAttribute('class', 'a'); p.setAttribute('pathLength', '1'); svg.appendChild(p); return p; });
+    var nw = ps.map(function (li) { if (li.dataset.fof !== '1') return null; var p = document.createElementNS(NS, 'path'); p.setAttribute('class', 'n'); p.setAttribute('pathLength', '1'); svg.appendChild(p); return p; });
+    var curves = [];
+    function at(el) { var R = st.getBoundingClientRect(), r = el.getBoundingClientRect(); return { x: r.left - R.left + r.width / 2, y: r.top - R.top + r.height / 2, r: r }; }
+    function d(a, b, bend) {
+      var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2, dx = b.x - a.x, dy = b.y - a.y, k = bend || 0;
+      var cx = mx - dy * k, cy = my + dx * k;
+      return { s: 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) + ' Q' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ' ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1), a: a, b: b, c: { x: cx, y: cy } };
     }
-    function clear(slot) { $('.dpl', slot).innerHTML = ''; slot.classList.remove('has'); }
-    function say(a, b) { if (!sayEl) return; sayEl.innerHTML = a + '<i></i>'; $('i', sayEl).textContent = b; sayEl.classList.remove('sw'); void sayEl.offsetWidth; sayEl.classList.add('sw'); }
-    /* 태율의 카드에서 다섯 자리로 뻗는 선: 바탕은 점선, 디토가 닿으면 보라 → 분홍 파동이 흐른다 */
-    var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'x-dt-th'); svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = '<defs><linearGradient id="xDtG" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="100"><stop offset="0" stop-color="#AA4AF4"/><stop offset="1" stop-color="#FA97E2"/></linearGradient></defs>'
-      + rows.map(function () { return '<path class="k"/>'; }).join('') + rows.map(function () { return '<path class="b"/>'; }).join('') + rows.map(function () { return '<path class="a" pathLength="1"/>'; }).join('');
-    var mapEl = $('#xDtMap') || root, FROM = rows.map(function (li) { return li.dataset.from == null ? -1 : +li.dataset.from; }), homes = rows.map(function (li) { return $('.x-home', li) || $('.x-dt-slot', li); }), srcHome = srcSlot.closest('.x-home') || srcSlot;
-    var bgEl = $('.x-map-bg', mapEl); if (bgEl) mapEl.insertBefore(svg, bgEl.nextSibling); else root.insertBefore(svg, root.firstChild);
-    var pk = $$('.k', svg), pb = $$('.b', svg), pa = $$('.a', svg), grad = $('linearGradient', svg), SEG = [], phase = 0, wraf = 0, wlive = false, wt = 0;
-    function bez(c, t) {
-      var u = 1 - t, x = u * u * u * c[0] + 3 * u * u * t * c[2] + 3 * u * t * t * c[4] + t * t * t * c[6], y = u * u * u * c[1] + 3 * u * u * t * c[3] + 3 * u * t * t * c[5] + t * t * t * c[7];
-      var dx = 3 * u * u * (c[2] - c[0]) + 6 * u * t * (c[4] - c[2]) + 3 * t * t * (c[6] - c[4]), dy = 3 * u * u * (c[3] - c[1]) + 6 * u * t * (c[5] - c[3]) + 3 * t * t * (c[7] - c[5]), l = Math.sqrt(dx * dx + dy * dy) || 1;
-      return [x, y, -dy / l, dx / l];
-    }
-    function plain(c) { return 'M' + c[0].toFixed(1) + ' ' + c[1].toFixed(1) + 'C' + c[2].toFixed(1) + ' ' + c[3].toFixed(1) + ',' + c[4].toFixed(1) + ' ' + c[5].toFixed(1) + ',' + c[6].toFixed(1) + ' ' + c[7].toFixed(1); }
-    function wavy(c, len, amp, ph) {
-      var N = Math.max(18, Math.round(len / 7)), wn = len / 40, d = '';
-      for (var i = 0; i <= N; i++) { var t = i / N, b = bez(c, t), off = amp * Math.sin(t * Math.PI) * Math.sin(t * wn * 6.2832 - ph); d += (i ? 'L' : 'M') + (b[0] + b[2] * off).toFixed(1) + ' ' + (b[1] + b[3] * off).toFixed(1); }
-      return d;
-    }
-    function thread() {            // 길: 태율의 집 → 친구의 집, 친구의 집 → 그 친구의 친구 집 (그룹 채팅으로 건너간 길)
-      var R = mapEl.getBoundingClientRect(); if (!R.width) return;
-      svg.setAttribute('viewBox', '0 0 ' + R.width.toFixed(1) + ' ' + R.height.toFixed(1));
-      var mid = function (el) { var r = el.getBoundingClientRect(); return [r.left - R.left + r.width / 2, r.top - R.top + r.height / 2]; };
-      var s0 = mid(srcHome), lo = s0[1];
-      SEG = rows.map(function (li, i) {
-        var a = FROM[i] < 0 ? s0 : mid(homes[FROM[i]]), b = mid(homes[i]), dx = b[0] - a[0], dy = b[1] - a[1], c;
-        if (Math.abs(dy) > Math.abs(dx) * 0.5) c = [a[0], a[1], a[0], a[1] + dy * 0.56, b[0], b[1] - dy * 0.56, b[0], b[1]];
-        else c = [a[0], a[1], a[0] + dx * 0.5, a[1], b[0] - dx * 0.5, b[1], b[0], b[1]];
-        pk[i].setAttribute('d', plain(c)); pb[i].setAttribute('d', plain(c)); lo = Math.max(lo, b[1]);
-        return { c: c, len: pb[i].getTotalLength ? pb[i].getTotalLength() : 200 };
-      });
-      grad.setAttribute('y1', s0[1]); grad.setAttribute('y2', lo);
-      waves();
-    }
-    function waves() { SEG.forEach(function (g, i) { pa[i].setAttribute('d', plain(g.c)); }); }
-    function pulse(i) {            // 받은 사람 → 태율: 빛 한 점이 길을 거슬러 간다 (친구의 친구는 친구의 집을 거쳐서)
-      if (RM || !SEG[i]) return; var chain = [i]; if (FROM[i] >= 0) chain.push(FROM[i]);
-      var dot = document.createElementNS(NS, 'circle'); dot.setAttribute('r', 6); dot.setAttribute('class', 'p'); svg.appendChild(dot);
-      var t0 = performance.now(), D = 560; (function f(now) {
-        var all = Math.max(0, (now - t0) / D), k = Math.min(chain.length - 1, Math.floor(all)), q = clamp(all - k), e = q * q * (3 - 2 * q), b = bez(SEG[chain[k]].c, 1 - e), end = all >= chain.length;
-        dot.setAttribute('cx', b[0].toFixed(1)); dot.setAttribute('cy', b[1].toFixed(1)); dot.setAttribute('opacity', (all > chain.length - 0.15 ? Math.max(0, (chain.length - all) / 0.15) : 1).toFixed(2));
-        if (!end) requestAnimationFrame(f); else dot.remove();
-      })(t0);
-    }
-    function wloop() { wraf = 0; }            // 길은 곧은 곡선이라 프레임마다 다시 그릴 것이 없다
-    var holdFrame = 0, input = null, autoTimer = 0, onScreen = false;
-    var autoInput = {};
-    function surface(progress, pressed) {
-      ring.classList.toggle('is-pressed', pressed);
-      ring.style.setProperty('--fill', pressed ? 0.08 + 0.92 * (1 - Math.pow(1 - progress, 1.6)) : 0);
-      $('.hb-lbl span', ring).textContent = pressed ? '계속 누르세요' : '디토하기';
-    }
-    function cancelHold() {
-      cancelAnimationFrame(holdFrame);
-      input = null;
-      surface(0, false);
-    }
-    function fly(slot, ms) {
-      if (RM || !document.body.animate) return Promise.resolve();
-      var from = srcSlot.getBoundingClientRect(), to = slot.getBoundingClientRect(), g = document.createElement('div');
-      g.className = 'h8-ghost'; g.style.backgroundImage = 'url("' + window.DittoScenes.ditto.img + '")'; g.style.borderRadius = Math.round(to.width / ((+rows[slots.indexOf(slot)].dataset.w || 3) * 45.75 - 8) * 15.5) + 'px'; document.body.appendChild(g);
-      var mx = (from.left + to.left) / 2 + (from.width - to.width) / 4, my = (from.top + to.top) / 2 - 20;
-      return g.animate([
-        { transform: 'translate(' + from.left + 'px,' + from.top + 'px) rotate(0deg)', width: from.width + 'px', height: from.height + 'px', opacity: 0.96 },
-        { transform: 'translate(' + mx + 'px,' + my + 'px) rotate(' + (to.left < from.left ? -6 : 6) + 'deg)', width: (from.width + to.width) / 2 + 'px', height: (from.height + to.height) / 2 + 'px', opacity: 1, offset: 0.5 },
-        { transform: 'translate(' + to.left + 'px,' + to.top + 'px) rotate(0deg)', width: to.width + 'px', height: to.height + 'px', opacity: 1 }], { duration: ms, easing: 'cubic-bezier(.45,0,.2,1)', fill: 'forwards' }).finished.then(function () {
-        g.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: 'forwards' }).finished.then(function () { g.remove(); });
+    function layout() {
+      var R = st.getBoundingClientRect(); if (!R.width) return;
+      svg.setAttribute('viewBox', '0 0 ' + R.width.toFixed(0) + ' ' + R.height.toFixed(0));
+      var S = at(ph); S.y = S.r.bottom - R.top - 6;
+      var A = ps.map(function (li) { return at($('.x-dm-av', li)); });
+      curves = ps.map(function (li, i) {
+        var a = from[i] < 0 ? S : A[from[i]], b = A[i], c = d(a, b, from[i] < 0 ? (b.x < a.x ? -0.12 : 0.12) : 0);
+        base[i].setAttribute('d', c.s); lit[i].setAttribute('d', c.s);
+        if (nw[i]) { var top = at(src); top = { x: S.x + (A[i].x < S.x ? -40 : 40), y: S.r.top - R.top + S.r.height * 0.5 }; var n = d(A[i], top, A[i].x < S.x ? 0.22 : -0.22); nw[i].setAttribute('d', n.s); }
+        return c;
       });
     }
-    function tell(i) {            // 태율의 알림함에 한 줄 — 가져간 사람이 태율에게 보인다
-      pulse(i); var li = rows[i], el = document.createElement('li'), im = $('.h8-hb img', li) || $('img', li);
-      el.innerHTML = '<img src="' + im.getAttribute('src') + '" alt="" width="64" height="64"><span><b></b> 님이 사진을 디토했어요<i></i></span>';
-      $('b', el).textContent = li.dataset.n; $('i', el).textContent = li.dataset.r + (li.dataset.fof === '1' ? ' · 처음 만난 사람' : '');
-      if (li.dataset.fof === '1') el.className = 'fof';
-      noti.insertBefore(el, noti.firstChild);
-      cnt.textContent = '디토 ' + (i + 1); root.classList.remove('ping'); void root.offsetWidth; root.classList.add('ping');
-      if (i === rows.length - 1) { var g1 = gen; T.push(setTimeout(function () { if (g1 === gen) say('<b>다섯 명</b>이 같은 사진을 간직했어요.', '태율은 다섯 명 모두를 알아봐요.'); }, RM ? 0 : 1500)); }
-      say('<b>' + li.dataset.n + '</b>' + li.dataset.p + ' ' + li.dataset.via + ' 디토했어요.', li.dataset.fof === '1' ? '태율과는 처음이지만, 이제 서로를 알아요.' : '태율은 누가 가져갔는지 바로 알아요.');
+    function q(c, t) { var u = 1 - t; return { x: u * u * c.a.x + 2 * u * t * c.c.x + t * t * c.b.x, y: u * u * c.a.y + 2 * u * t * c.c.y + t * t * c.b.y }; }
+    /* 사진 사본이 선을 따라 날아간다 (친구의 친구는 친구를 거쳐서) */
+    function fly(i) {
+      var chain = from[i] < 0 ? [i] : [from[i], i], g0 = gen;
+      if (RM) return Promise.resolve();
+      var dot = document.createElement('span'); dot.className = 'x-dm-fly'; dot.style.backgroundImage = 'url("/assets/cast/scenes/rooftop-group.webp")'; st.appendChild(dot);
+      return new Promise(function (res) {
+        var t0 = performance.now(), D = 700;
+        (function f(now) {
+          if (g0 !== gen) { dot.remove(); return res(); }
+          var all = (now - t0) / D, k = Math.min(chain.length - 1, Math.floor(all)), t = clamp(all - k), e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2, p = q(curves[chain[k]], e);
+          dot.style.transform = 'translate(' + (p.x - 18).toFixed(1) + 'px,' + (p.y - 14).toFixed(1) + 'px)';
+          if (all < chain.length) requestAnimationFrame(f); else { dot.remove(); res(); }
+        })(t0);
+      });
     }
-    function land(i) { put(slots[i], true, +rows[i].dataset.w, +rows[i].dataset.h); rows[i].classList.add('has'); pa[i].classList.add('on'); done = i + 1; root.dataset.n = done; }
-    function step(i, fast) {
-      var g0 = gen, ok = function () { return g0 === gen; };
-      rows[i].classList.add('next');
-      return fly(slots[i], fast ? 760 : 980)
-        .then(function () { if (!ok()) return; rows[i].classList.remove('next'); land(i); return wait(RM ? 0 : fast ? 320 : 520); })
-        .then(function () { if (!ok()) return; tell(i); return wait(RM ? 0 : fast ? 420 : 760); });
-    }
-    function reset() { cancelHold(); gen++; T.forEach(clearTimeout); T = []; busy = false; done = 0; ring.style.setProperty('--p', 0); $$('.h8-ghost').forEach(function (g) { g.remove(); }); slots.forEach(clear); rows.forEach(function (li) { li.classList.remove('has', 'next'); }); pa.forEach(function (p) { p.classList.remove('on'); }); noti.innerHTML = ''; cnt.textContent = '디토 0'; root.dataset.n = 0; root.classList.remove('ping'); say('<b>태율</b>이 골목 거울 사진을 올렸어요.', '친구들이 태율의 플래터에서 이 사진을 봐요.'); }
-    function schedule(delay) {
-      clearTimeout(autoTimer);
-      if (onScreen && !document.hidden && !RM && !busy && input === null) {
-        autoTimer = setTimeout(function () { beginHold(autoInput); }, delay);
-      }
-    }
-    function release() {
-      cancelHold();
-      schedule(1400);
-    }
-    function syncPlayback() {
-      if (document.hidden || !onScreen) cancelHold();
-      schedule(500);
-    }
-    put(srcSlot, false);
-    function advance() {
-      busy = true;
-      var generation = gen;
-      step(done, false).then(function () {
-        if (generation !== gen) return;
+    function say(a, b) { sayEl.innerHTML = a + '<span></span>'; $('span', sayEl).textContent = b; sayEl.classList.remove('sw'); void sayEl.offsetWidth; sayEl.classList.add('sw'); }
+    function next() {
+      if (busy || step >= ps.length) return; busy = true;
+      var i = step, li = ps[i], g0 = gen; step++;
+      src.classList.add('ping'); setTimeout(function () { src.classList.remove('ping'); }, 500);
+      if (from[i] >= 0) lit[from[i]].classList.add('on');
+      lit[i].classList.add('run');
+      fly(i).then(function () {
+        if (g0 !== gen) return;
+        lit[i].classList.add('on'); li.classList.add('has');
+        var im = document.createElement('img'); im.src = $('.x-dm-av img', li).getAttribute('src'); im.alt = ''; whoEl.insertBefore(im, whoEl.firstChild);
+        cnt.textContent = '디토 ' + (i + 1); root.dataset.n = i + 1;
+        if (li.dataset.fof === '1') {
+          say('<b>' + li.dataset.n + '</b>' + (/[가-힣]/.test(li.dataset.n.slice(-1)) && (li.dataset.n.slice(-1).charCodeAt(0) - 44032) % 28 ? '이 ' : '가 ') + li.dataset.via + ' 디토했어요.', '태율과는 처음이지만, 이제 서로를 알아요.');
+          setTimeout(function () { if (g0 === gen && nw[i]) { nw[i].classList.add('on'); li.classList.add('new'); } }, RM ? 0 : 380);
+        } else say('<b>' + li.dataset.n + '</b>' + ((li.dataset.n.slice(-1).charCodeAt(0) - 44032) % 28 ? '이 ' : '가 ') + li.dataset.via + ' 디토했어요.', '출처는 태율로 남고, 태율은 누가 가져갔는지 알아요.');
         busy = false;
-        schedule(done === rows.length ? 2100 : 650);
+        if (step >= ps.length) { setTimeout(function () { if (g0 === gen) { say('사진 한 장으로 <b>다섯 명</b>이 같은 순간을 간직해요.', '태율은 친구 둘, 그리고 새로운 사람 셋과 이어졌어요.'); root.classList.add('done'); } }, RM ? 0 : 1600); }
+        else schedule(RM ? 1800 : 1500);
       });
     }
-    function beginHold(key) {
-      if (busy || (input !== null && input !== autoInput)) return;
-      clearTimeout(autoTimer);
-      if (input === autoInput) cancelHold();
-      if (done === rows.length) reset();
-      input = key;
-      var start = performance.now();
-      var duration = key === autoInput ? 800 : 3000;
-      function tick(now) {
-        var q = clamp((now - start) / duration);
-        surface(q, true);
-        if (q < 1) holdFrame = requestAnimationFrame(tick);
-        else { cancelHold(); advance(); }
-      }
-      tick(start);
+    function schedule(ms) { clearTimeout(timer); if (onScreen && !document.hidden && step < ps.length) timer = setTimeout(next, ms); }
+    function reset() {
+      gen++; clearTimeout(timer); busy = false; step = 0; root.dataset.n = 0; root.classList.remove('done');
+      ps.forEach(function (li) { li.classList.remove('has', 'new'); });
+      lit.concat(nw).forEach(function (p) { if (p) p.classList.remove('on', 'run'); });
+      $$('.x-dm-fly', st).forEach(function (x) { x.remove(); }); whoEl.textContent = ''; cnt.textContent = '디토 0'; sayEl.innerHTML = SAY0;
     }
-    ring.addEventListener('pointerdown', function (e) {
-      if (!e.isPrimary || e.button !== 0) return;
-      ring.setPointerCapture(e.pointerId);
-      beginHold(e.pointerId);
-    });
-    ring.addEventListener('pointermove', function (e) {
-      if (e.pointerId !== input) return;
-      var r = ring.getBoundingClientRect();
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) release();
-    });
-    ['pointerup','pointercancel','lostpointercapture'].forEach(function (name) {
-      ring.addEventListener(name, function (e) { if (input === e.pointerId) release(); });
-    });
-    ring.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') release();
-      if (e.key !== ' ' && e.key !== 'Enter') return;
-      e.preventDefault();
-      if (!e.repeat) beginHold(e.key);
-    });
-    ring.addEventListener('keyup', function (e) { if (input === e.key) release(); });
-    ring.addEventListener('click', function (e) {
-      if (e.detail !== 0 || busy || (input !== null && input !== autoInput)) return;
-      clearTimeout(autoTimer);
-      cancelHold();
-      if (done === rows.length) reset();
-      advance();
-    });
-    ring.addEventListener('blur', function () { if (input !== null && input !== autoInput) release(); });
-    document.addEventListener('visibilitychange', syncPlayback);
-    $('#xDtReplay').addEventListener('click', function () {
-      reset();
-      if (RM) rows.forEach(function (_, i) { land(i); tell(i); });
-      else schedule(0);
-    });
-    var trz = 0; addEventListener('resize', function () { clearTimeout(trz); trz = setTimeout(thread, 120); });
-    reset(); thread(); setTimeout(thread, 600); if (document.fonts && document.fonts.ready) document.fonts.ready.then(thread);
-    visible(root, function (show) { onScreen = show; syncPlayback(); });
-
+    go.addEventListener('click', function () { if (step >= ps.length) { reset(); schedule(400); return; } clearTimeout(timer); next(); });
+    $('#xDmRe').addEventListener('click', function () { reset(); schedule(500); });
+    addEventListener('resize', layout); layout();
+    var im0 = $('img', ph); if (im0 && !im0.complete) im0.addEventListener('load', layout);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { onScreen = es[0].isIntersecting; if (onScreen) { layout(); schedule(step ? 900 : 1200); } else clearTimeout(timer); }, { threshold: 0.4 }).observe(st);
+    else { onScreen = true; schedule(1200); }
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) schedule(900); });
   }
 
   /* ── 섬 메뉴: 알약이 아래로 길어지고, 넓어지고, 그다음 메뉴가 들어온다. 닫을 때는 거꾸로 ── */
