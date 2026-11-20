@@ -275,17 +275,21 @@
       })(t0);
     }
     function wloop() { wraf = 0; }            // 길은 곧은 곡선이라 프레임마다 다시 그릴 것이 없다
-    function press(ms) {
-      if (RM) return Promise.resolve();
-      return new Promise(function (res) {
-        var t0 = performance.now(), g0 = gen;
-        (function stp(now) { if (g0 !== gen) return; var q = clamp((now - t0) / ms); ring.style.setProperty('--p', q); if (q < 1) requestAnimationFrame(stp); else { ring.style.setProperty('--p', 0); res(); } })(t0);
-      });
+    var holdFrame = 0, input = null, manual = false;
+    function surface(progress, pressed) {
+      ring.classList.toggle('is-pressed', pressed);
+      ring.style.setProperty('--fill', pressed ? 0.08 + 0.92 * (1 - Math.pow(1 - progress, 1.6)) : 0);
+      $('.hb-lbl span', ring).textContent = pressed ? '계속 누르세요' : '디토하기';
+    }
+    function cancelHold() {
+      cancelAnimationFrame(holdFrame);
+      input = null;
+      surface(0, false);
     }
     function fly(slot, ms) {
       if (RM || !document.body.animate) return Promise.resolve();
       var from = srcSlot.getBoundingClientRect(), to = slot.getBoundingClientRect(), g = document.createElement('div');
-      g.className = 'h8-ghost'; g.style.backgroundImage = 'url("' + src.data.img + '")'; g.style.borderRadius = Math.round(to.width / ((+rows[slots.indexOf(slot)].dataset.w || 3) * 45.75 - 8) * 15.5) + 'px'; document.body.appendChild(g);
+      g.className = 'h8-ghost'; g.style.backgroundImage = 'url("' + window.DittoScenes.ditto.img + '")'; g.style.borderRadius = Math.round(to.width / ((+rows[slots.indexOf(slot)].dataset.w || 3) * 45.75 - 8) * 15.5) + 'px'; document.body.appendChild(g);
       var mx = (from.left + to.left) / 2 + (from.width - to.width) / 4, my = (from.top + to.top) / 2 - 20;
       return g.animate([
         { transform: 'translate(' + from.left + 'px,' + from.top + 'px) rotate(0deg)', width: from.width + 'px', height: from.height + 'px', opacity: 0.96 },
@@ -308,24 +312,71 @@
     function step(i, fast) {
       var g0 = gen, ok = function () { return g0 === gen; };
       rows[i].classList.add('next');
-      return press(fast ? 380 : 700).then(function () { if (ok()) return fly(slots[i], fast ? 760 : 980); })
+      return fly(slots[i], fast ? 760 : 980)
         .then(function () { if (!ok()) return; rows[i].classList.remove('next'); land(i); return wait(RM ? 0 : fast ? 320 : 520); })
         .then(function () { if (!ok()) return; tell(i); return wait(RM ? 0 : fast ? 420 : 760); });
     }
-    function reset() { gen++; T.forEach(clearTimeout); T = []; busy = false; done = 0; ring.style.setProperty('--p', 0); $$('.h8-ghost').forEach(function (g) { g.remove(); }); slots.forEach(clear); rows.forEach(function (li) { li.classList.remove('has', 'next'); }); pa.forEach(function (p) { p.classList.remove('on'); }); noti.innerHTML = ''; cnt.textContent = '디토 0'; root.dataset.n = 0; root.classList.remove('ping'); say('<b>태율</b>이 골목 거울 사진을 올렸어요.', '친구들이 태율의 플래터에서 이 사진을 봐요.'); }
+    function reset() { cancelHold(); gen++; T.forEach(clearTimeout); T = []; busy = false; done = 0; ring.style.setProperty('--p', 0); $$('.h8-ghost').forEach(function (g) { g.remove(); }); slots.forEach(clear); rows.forEach(function (li) { li.classList.remove('has', 'next'); }); pa.forEach(function (p) { p.classList.remove('on'); }); noti.innerHTML = ''; cnt.textContent = '디토 0'; root.dataset.n = 0; root.classList.remove('ping'); say('<b>태율</b>이 골목 거울 사진을 올렸어요.', '친구들이 태율의 플래터에서 이 사진을 봐요.'); }
     function run(from) {
       if (busy) return; busy = true; var g0 = gen, seq = Promise.resolve();
       rows.forEach(function (li, i) { if (i < from) return; seq = seq.then(function () { if (g0 === gen) return step(i, i > from); }); });
       seq.then(function () { if (g0 === gen) busy = false; });
     }
-    function play() { reset(); if (RM) { rows.forEach(function (li, i) { land(i); tell(i); }); return; } T.push(setTimeout(function () { run(0); }, 900)); }
+    function play() { manual = false; reset(); if (RM) { rows.forEach(function (li, i) { land(i); tell(i); }); return; } T.push(setTimeout(function () { run(0); }, 900)); }
     put(srcSlot, false);
-    ring.addEventListener('click', function () { if (busy) return; if (done >= rows.length) { play(); return; } busy = true; var g0 = gen; step(done, false).then(function () { if (g0 === gen) busy = false; }); });
+    function advance() {
+      busy = true;
+      var generation = gen;
+      step(done, false).then(function () { if (generation === gen) busy = false; });
+    }
+    function beginHold(key) {
+      if (input !== null || (manual && busy)) return;
+      if (!manual || done === rows.length) reset();
+      manual = true;
+      input = key;
+      var start = performance.now();
+      function tick(now) {
+        var q = clamp((now - start) / 3000);
+        surface(q, true);
+        if (q < 1) holdFrame = requestAnimationFrame(tick);
+        else { cancelHold(); advance(); }
+      }
+      tick(start);
+    }
+    ring.addEventListener('pointerdown', function (e) {
+      if (!e.isPrimary || e.button !== 0) return;
+      ring.setPointerCapture(e.pointerId);
+      beginHold(e.pointerId);
+    });
+    ring.addEventListener('pointermove', function (e) {
+      if (e.pointerId !== input) return;
+      var r = ring.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) cancelHold();
+    });
+    ['pointerup','pointercancel','lostpointercapture'].forEach(function (name) {
+      ring.addEventListener(name, function (e) { if (input === e.pointerId) cancelHold(); });
+    });
+    ring.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') cancelHold();
+      if (e.key !== ' ' && e.key !== 'Enter') return;
+      e.preventDefault();
+      if (!e.repeat) beginHold(e.key);
+    });
+    ring.addEventListener('keyup', function (e) { if (input === e.key) cancelHold(); });
+    ring.addEventListener('click', function (e) {
+      if (e.detail !== 0 || input !== null || (manual && busy)) return;
+      if (!manual || done === rows.length) reset();
+      manual = true;
+      advance();
+    });
+    ring.addEventListener('blur', cancelHold);
+    window.addEventListener('blur', cancelHold);
+    document.addEventListener('visibilitychange', function () { if (document.hidden) cancelHold(); });
     $('#xDtReplay').addEventListener('click', play);
     var trz = 0; addEventListener('resize', function () { clearTimeout(trz); trz = setTimeout(thread, 120); });
     reset(); thread(); setTimeout(thread, 600); if (document.fonts && document.fonts.ready) document.fonts.ready.then(thread);
-    if (RM) { play(); return; }
-    seen(root, play, 0.35);
+    if (!RM) seen(root, function () { if (!manual) play(); }, 0.35);
+
   }
 
   /* ── 섬 메뉴: 알약이 아래로 길어지고, 넓어지고, 그다음 메뉴가 들어온다. 닫을 때는 거꾸로 ── */
@@ -680,6 +731,56 @@
   }
 
   /* ── 초대장 받는 순서: 사진 → 이름·아이디 → 뽑기 → 코드. 지금 하고 있는 칸이 켜진다 ── */
+  function ticketPreview() {
+    var card = $('.x-tk3-card');
+    if (!card) return;
+    var angle = 0, drag = null, skipClick = false;
+    function rotate(y, x) {
+      card.style.setProperty('--turn', y + 'deg');
+      card.style.setProperty('--tilt', x + 'deg');
+    }
+    function settle(next) {
+      angle = next;
+      rotate(angle, 0);
+      card.setAttribute('aria-pressed', String(Math.abs(angle / 180) % 2 === 1));
+    }
+    card.addEventListener('pointerdown', function (e) {
+      if (!e.isPrimary || e.button !== 0) return;
+      drag = {id:e.pointerId, x:e.clientX, dx:0};
+      skipClick = false;
+      card.setPointerCapture(e.pointerId);
+    });
+    card.addEventListener('pointermove', function (e) {
+      var box = card.getBoundingClientRect();
+      var x = (e.clientX - box.left) / box.width, y = (e.clientY - box.top) / box.height;
+      card.style.setProperty('--hx', 100*x + '%');
+      card.style.setProperty('--hy', 100*y + '%');
+      if (drag && drag.id === e.pointerId) {
+        drag.dx = e.clientX - drag.x;
+        if (Math.abs(drag.dx) > 5) skipClick = true;
+        if (skipClick) {
+          card.classList.add('dragging');
+          rotate(angle + 180*drag.dx/box.width, (0.5-y)*8);
+        }
+      } else if (!drag && e.pointerType === 'mouse') rotate(angle + (x-.5)*14, (.5-y)*12);
+    });
+    function end(e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      var flip = e.type === 'pointerup' && Math.abs(drag.dx) > card.clientWidth * .18;
+      card.classList.remove('dragging');
+      settle(angle + (flip ? Math.sign(drag.dx)*180 : 0));
+      drag = null;
+    }
+    ['pointerup','pointercancel','lostpointercapture'].forEach(function (type) { card.addEventListener(type,end); });
+    card.addEventListener('pointerleave', function () { if (!drag) rotate(angle,0); });
+    card.addEventListener('click', function () { if (!skipClick) settle(angle+180); skipClick=false; });
+    card.addEventListener('keydown', function (e) {
+      if (!['Enter',' ','ArrowLeft','ArrowRight'].includes(e.key)) return;
+      e.preventDefault();
+      if (!e.repeat) settle(angle + (e.key === 'ArrowLeft' ? -180 : 180));
+    });
+  }
+
   function flow() {
     var ol = $('#xFlow'); if (!ol) return;
     var lis = $$('li', ol), mach = $('#tmMach'), nm = $('#tmDisp'), id = $('#tmName'), tc = $('#tc'), done = $('#tcDone'), use = $('#h8CamUse'), used = false;
@@ -791,7 +892,7 @@
   /* ── 사진은 화면에 그릴 때 따로 풀게 한다 (스크롤 중에 사진을 푸느라 멈칫하지 않게) ── */
   function lazyDecode() { $$('img').forEach(function (im) { if (!im.complete) im.decoding = 'async'; }); }
 
-  var fns = [widgets, ditto, island, warp, heroType, stickers, wall, cover, far, flow, android, roll, wish, heroOut, lazyDecode];
+  var fns = [widgets, ditto, island, warp, heroType, stickers, wall, cover, far, ticketPreview, flow, android, roll, wish, heroOut, lazyDecode];
   window.__dittoX = fns;
   function boot() { fns.forEach(function (fn) { try { fn(); } catch (e) { if (window.console) console.error('[v8 x]', fn.name, e); } }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

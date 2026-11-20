@@ -345,8 +345,8 @@
     }
   },
   "ditto": {
-    "img": "/assets/cast/scenes/trackside.webp",
-    "title": "산책하다 멈춘 자리"
+    "img": "/assets/cast/scenes/alley-mirror-duo.webp",
+    "title": "골목 거울에서 둘이"
   },
   "camcorder": {
     "img": "/assets/cast/scenes/sun-through-trees.webp",

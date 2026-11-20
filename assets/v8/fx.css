@@ -897,3 +897,28 @@
 .fx-tabv .fx-device{display:block;box-sizing:border-box;aspect-ratio:1206/2622;width:auto;height:calc(100% - 24px);padding:clamp(4px,.5vw,7px);border:1px solid #959598;border-radius:clamp(33px,4vw,51px);background:#171719;box-shadow:inset 0 0 0 1px #505053,0 4px 10px #15131d20;overflow:hidden}
 .fx-device img{display:block;width:100%;height:100%;object-fit:cover;border-radius:clamp(27px,3.6vw,44px)}
 .fx-device::after{content:"";position:absolute;top:1.6%;left:50%;transform:translateX(-50%);width:23%;height:3.65%;border-radius:30px;background:#08080a;pointer-events:none}
+
+/* The preview reserves the centre phone's natural height and space for both side frames. */
+#h8-life .fx-tabv {
+  grid-template: auto / minmax(0, 1fr);
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  padding: 16px 0 26px;
+  overflow: visible;
+}
+#h8-life .fx-tabv .fx-device {
+  grid-area: 1 / 1;
+  position: relative;
+  inset: auto;
+  width: min(44%, 308px);
+  height: auto;
+  aspect-ratio: auto;
+  border-radius: 14% / 6.5%;
+  transform: none;
+}
+#h8-life .fx-device img { height: auto; border-radius: 12% / 5.6%; }
+#h8-life .fx-tabv .fx-device.l { transform: translate(-65%, 5%) scale(.86); }
+#h8-life .fx-tabv .fx-device.r { transform: translate(65%, 5%) scale(.86); }
