@@ -153,7 +153,7 @@
           done = true; feed.hidden = true;
           tiles.forEach(function (t) { var e = item(t.id); if (e) e.style.opacity = ''; });
           others.forEach(function (id) { var e = item(id); if (e) e.style.opacity = ''; });
-          inst.setEditable(true); btns();
+          inst.setEditable(true); btns(); coach();
         }
         return;
       }
@@ -194,9 +194,59 @@
       renderBoard(h, true);
     }
     function auto() {
-      clearInterval(autoT); autoT = 0; if (RM || userSet || !done || !seenNow || chips.length < 2) return;
+      clearInterval(autoT); autoT = 0; return;            /* 2026-11-21: 저절로 넘어가면 '걸려 있는 그림'처럼 보여서 끔 — 직접 만지도록 안내한다 */
       autoT = setInterval(function () { var i = 0; chips.forEach(function (b, k) { if (b.dataset.h === cur) i = k; }); swap(chips[(i + 1) % chips.length].dataset.h, false); }, 3800);
     }
+    /* 편집 안내 — 바뀐 뒤 한 번, 손가락이 위젯 하나를 꾹 눌러 옮기고 모서리를 끌어 키운다. 그 뒤 토스트가 '직접 해 보기'를 권한다 */
+    var co = null, coDone = false, coRun = 0;
+    function coachEl() {
+      if (co) return co; var host = scr ? $('.h8-scr-in', scr) : st.parentNode;
+      co = document.createElement('div'); co.className = 'x-coach';
+      co.innerHTML = '<span class="x-coach-hand" aria-hidden="true"><svg viewBox="0 0 40 48"><path d="M14 4.5c0-2 1.6-3.5 3.5-3.5S21 2.5 21 4.5V20l1.2-.2V15c0-1.9 1.5-3.4 3.4-3.4s3.4 1.5 3.4 3.4v5.4l1-.1v-2.7c0-1.8 1.5-3.3 3.3-3.3s3.3 1.5 3.3 3.3V31c0 8.6-6.9 15.5-15.5 15.5h-1.7c-4.6 0-8.8-2.4-11.2-6.3L2.6 30.6c-1-1.6-.5-3.7 1.1-4.7 1.5-.9 3.5-.6 4.6.8l5.7 6.4z" fill="#fff" stroke="#16131c" stroke-width="2" stroke-linejoin="round"/></svg></span>' +
+        '<div class="x-coach-t" role="status"><b>직접 편집해 보세요!</b><span>꾹 눌러 옮기고, 모서리를 끌어 크기를 바꿔요.<br>음악과 영상은 누르면 재생돼요.</span><div><button type="button" class="x-coach-go">해 볼게요</button><button type="button" class="x-coach-re">다시 보기</button></div></div>';
+      host.appendChild(co);
+      $('.x-coach-go', co).addEventListener('click', function () { hideCoach(); });
+      $('.x-coach-re', co).addEventListener('click', function () { renderBoard(cur, true); setTimeout(demo, 250); });
+      return co;
+    }
+    function hideCoach() { if (co) co.classList.add('gone'); coDone = true; }
+    function handAt(x, y, press) { var h = $('.x-coach-hand', co); h.style.transform = 'translate(' + x + 'px,' + y + 'px)' + (press ? ' scale(.88)' : ''); }
+    function demo() {
+      if (!done || RM) return; coachEl(); co.classList.remove('gone'); co.classList.add('on', 'x-run');
+      var run = ++coRun, host = co.parentNode.getBoundingClientRect(), L = inst.layout().slice().sort(function (a, b) { return a.w * a.h - b.w * b.h; });
+      var it = L.filter(function (x) { return x.w <= 3 && x.h <= 3 && x.y > 0; })[0] || L[0]; if (!it) return;
+      var rect = function () { var r = inst.rectOf(it.id); host = co.parentNode.getBoundingClientRect(); return { x: r.left - host.left, y: r.top - host.top, w: r.width, h: r.height }; };
+      var a = rect(), C = (G && G.COLS) || 8, toX = it.x, toY = it.y;
+      [[it.x - it.w, it.y], [it.x, it.y + it.h], [it.x + it.w, it.y], [it.x, it.y - it.h], [0, it.y], [it.x - 2, it.y + 2]].some(function (c) {       // 놓을 수 있는 이웃 자리를 앱 규칙(G.preview)으로 고른다
+        if (c[0] < 0 || c[1] < 0 || c[0] + it.w > C) return false;
+        var r = G.preview(L, it.id, { x: c[0], y: c[1], w: it.w, h: it.h }, { origin: { x: it.x, y: it.y }, maxRows: 48 });
+        if (r.valid) { toX = c[0]; toY = c[1]; } return r.valid;
+      });
+      co.classList.add('hand'); handAt(a.x + a.w / 2, a.y + a.h / 2, false);
+      setTimeout(function () {
+        if (run !== coRun) return; handAt(a.x + a.w / 2, a.y + a.h / 2, true);
+        inst.select(it.id);
+        var dx = (toX - it.x) * a.w / it.w, dy = (toY - it.y) * a.h / it.h, hand = $('.x-coach-hand', co);
+        hand.style.transition = 'transform 1s cubic-bezier(.45,0,.55,1) .18s';
+        handAt(a.x + a.w / 2 + dx, a.y + a.h / 2 + dy, true);
+        inst.simulateDrag(it.id, toX, toY, { duration: 1000 }).then(function (moved) {
+          if (run !== coRun) return; hand.style.transition = 'transform .35s ease, opacity .3s';
+          setTimeout(function () {
+            if (run !== coRun) return;
+            var nl = inst.layout().filter(function (x) { return x.id === it.id; })[0]; if (!nl) return;
+            var b = rect(); handAt(b.x + b.w - 8, b.y + b.h - 8, false); inst.select(it.id);
+            var nw = Math.min(C - nl.x, nl.w + 1), nh = nl.h + 1, cw = b.w / nl.w, ch = b.h / nl.h;
+            setTimeout(function () {
+              if (run !== coRun) return; handAt(b.x + b.w - 8, b.y + b.h - 8, true);
+              hand.style.transition = 'transform .8s cubic-bezier(.45,0,.55,1)'; handAt(b.x + b.w - 8 + (nw - nl.w) * cw, b.y + b.h - 8 + (nh - nl.h) * ch, true);
+              inst.simulateResize(it.id, nw, nh, { duration: 800 }).then(function () { if (run !== coRun) return; setTimeout(function () { hand.style.transition = ''; co.classList.remove('hand', 'x-run'); inst.select(null); }, 300); });
+            }, 450);
+          }, 450);
+        });
+      }, 700);
+    }
+    function coach() { if (coDone || RM) { if (!coDone && RM) { coachEl(); co.classList.add('on'); } return; } setTimeout(demo, 500); }
+    st.addEventListener('pointerdown', function (e) { if (co && co.classList.contains('x-run')) { coRun++; co.classList.remove('hand', 'x-run'); } if (co && co.classList.contains('on') && !e.target.closest('.x-coach')) setTimeout(hideCoach, 1200); }, true);
     chips.forEach(function (b) { b.addEventListener('click', function () { swap(b.dataset.h, true); }); });
     st.addEventListener('pointerdown', function () { userSet = true; clearInterval(autoT); autoT = 0; });       // 직접 만지기 시작하면 자동 넘김을 멈춘다
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { seenNow = es[0].isIntersecting; auto(); }, { threshold: 0.4 }).observe(st);
@@ -266,7 +316,7 @@
     im.onload = function () {
       var W = cv.width, H = cv.height, ctx = cv.getContext('2d', { willReadFrequently: true }), k = Math.max(W / im.width, H / im.height), sw = W / k, sh = H / k;
       ctx.drawImage(im, (im.width - sw) / 2, (im.height - sh) / 2, sw, sh, 0, 0, W, H);
-      try { ctx.putImageData(grade(ctx.getImageData(0, 0, W, H), LOOKS[1]), 0, 0); } catch (e) { /* 그대로 둔다 */ }
+      loadLut('cam-corder', function () { try { ctx.putImageData(grade(ctx.getImageData(0, 0, W, H), lookOf(CAMS[4])), 0, 0); } catch (e) { /* 그대로 둔다 */ } });
     };
     im.src = window.DittoScenes.camcorder.img;
   }
@@ -579,18 +629,28 @@
      값은 앱 camera-looks 프로필(노출 · 온기 · 틴트 · 대비 · 채도 · 암부 색 · 입자 · 주변 감광 · VHS 번짐)을 그대로 옮겼다. 사진은 이 브라우저 안에서만 다룬다. */
   var NC = { ev: 0, warm: 0, tint: 0, con: 1, sat: 1, lift: 0, sh: [0, 0, 0] };
   /* 색은 앱의 33³ 색감 표(camlook-{id}.lut)를 그림 한 장(1089 × 33)으로 옮긴 것을 그대로 읽는다. 입자 · 주변 감광 값도 앱 camera-looks.json 그대로 */
-  var LOOKS = [
-    { id: 'selfie-12', name: '셀피 12', look: '복숭아빛 셀프샷', type: '플립 LCD 셀카 디카', grain: 0, fall: 0 },
-    { id: 'bori', name: '보리', look: '첫 여름의 기록', type: '필름 똑딱이', grain: 0.65, fall: 0.025 },
-    { id: 'peek', name: '피크', look: '마른 뒤의 마음', type: '접이식 즉석 카메라', grain: 0.4, fall: 0.05 },
-    { id: 'pocket-ccd', name: '포켓 CCD', look: '한밤의 직광', type: 'CCD 디카', grain: 0.35, fall: 0.09 },
-    { id: 'toss-27', name: '토스 27', look: '끝나지 않은 소풍', type: '일회용 필름 카메라', grain: 0.95, fall: 0.035 },
-    { id: 'analog-booth', name: '아날로그 포토부스', look: '커튼 뒤 네 번의 플래시', type: '은염 인화 포토부스', grain: 1.3, fall: 0.07 }];
-  LOOKS.forEach(function (L) { L.c = NC; L.lut = '/assets/v8/looks/lut-' + L.id + '.png'; L.th = '/assets/cast/cameras/' + L.id + '.webp?v=front3'; });
-  function loadLut(L, cb) {
-    if (L._lut || L._ld) return; L._ld = 1;
-    var im = new Image(); im.onload = function () { var c = document.createElement('canvas'); c.width = 1089; c.height = 33; var x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(im, 0, 0); L._lut = x.getImageData(0, 0, 1089, 33).data; if (cb) cb(L); }; im.src = L.lut;
+  /* 앱 카메라 출시 10종(Model/CameraLineup.swift) + 필름 14종(Model/Films.swift) — LUT는 앱 CameraLooks/*.lut를 33×33×33 PNG로 옮긴 것 */
+  var FILMS = { c07: ['Cloud', 25], c03: ['Milk Tea', 40], c01: ['Butter', 50], c02: ['Peach', 64], c13: ['Petal', 80], c04: ['Sunny', 100], c05: ['Mint', 125], c06: ['Ocean', 200], c09: ['Cine', 500], c14: ['Mist', 640], c08: ['Matte', 800], c10: ['Night Walk', 1600], c12: ['Mono', 3200], c11: ['Neon', 6400] };
+  var CAMS = [
+    { id: 'pocket-ccd', name: '포켓 CCD', type: 'CCD 디카', own: 1, grain: 0.35, fall: 0.09, slots: ['c07', 'c01', 'c02', 'c08', 'c10'] },
+    { id: 'peek', name: '피크', type: '즉석 카메라', own: 1, film: 1, grain: 0.4, fall: 0.05, slots: ['c13', 'c01', 'c02', 'c05', 'c12'] },
+    { id: 'toss-27', name: '토스 27', type: '일회용 필름 카메라', own: 1, film: 1, grain: 0.95, fall: 0.035, slots: ['c04', 'c01', 'c06', 'c02', 'c12'] },
+    { id: 'aa-grip', name: 'AA 그립', type: '건전지 디카', grain: 0.3, fall: 0.04, slots: ['c01', 'c04', 'c08', 'c09', 'c10'] },
+    { id: 'cam-corder', name: '캠코더', type: 'DV 캠코더', own: 1, grain: 0, fall: 0, slots: ['c09', 'c05', 'c07', 'c08', 'c11'] },
+    { id: 'slider', name: '슬라이더', type: '슬라이드 커버 디카', grain: 0.3, fall: 0.04, slots: ['c03', 'c07', 'c08', 'c14', 'c04'] },
+    { id: 'manual-76', name: '수동 76', type: '수동 필름 카메라', film: 1, grain: 0.85, fall: 0.03, slots: ['c01', 'c04', 'c12', 'c09', 'c02'] },
+    { id: 'iphone-7', name: '7', type: '2016 스마트폰', own: 1, grain: 0, fall: 0, slots: ['c07', 'c09', 'c08', 'c13', 'c06'] },
+    { id: 'daily-slim', name: '데일리 슬림', type: '슬림 디카', grain: 0.3, fall: 0.04, slots: ['c08', 'c01', 'c07', 'c04', 'c12'] },
+    { id: 'card-slim', name: '카드 슬림', type: '카드 두께 디카', grain: 0.3, fall: 0.04, slots: ['c14', 'c01', 'c06', 'c03', 'c10'] }];
+  var LUTS = {};
+  CAMS.forEach(function (C) { C.th = '/assets/v8/cam10/cam-' + C.id + '.webp'; C.pick = C.own ? null : C.slots[0]; });
+  function lutOf(C) { return C.pick || C.id; }
+  function loadLut(key, cb) {
+    var e = LUTS[key]; if (e && e.data) { if (cb) cb(); return; } if (e) { if (cb) e.cbs.push(cb); return; }
+    e = LUTS[key] = { data: null, cbs: cb ? [cb] : [] };
+    var im = new Image(); im.onload = function () { var c = document.createElement('canvas'); c.width = 1089; c.height = 33; var x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(im, 0, 0); e.data = x.getImageData(0, 0, 1089, 33).data; e.cbs.forEach(function (f) { f(); }); e.cbs = []; }; im.src = '/assets/v8/cam10/lut-' + key + '.png';
   }
+  function lookOf(C) { var e = LUTS[lutOf(C)]; return { c: NC, grain: C.grain, fall: C.fall, _lut: e && e.data }; }
   function lut3(T, a, b, c, d, e, f, g, h, tr, tg, tb) {            // 여덟 꼭짓점 사이를 고르게 섞는다
     var x00 = T[a] + (T[b] - T[a]) * tr, x10 = T[c] + (T[d] - T[c]) * tr, x01 = T[e] + (T[f] - T[e]) * tr, x11 = T[g] + (T[h] - T[g]) * tr, y0 = x00 + (x10 - x00) * tg, y1 = x01 + (x11 - x01) * tg;
     return (y0 + (y1 - y0) * tb) / 255;
@@ -636,53 +696,84 @@
   function cam() {
     var box = $('#h8Cam'); if (!box) return;
     var view = $('.h8-cam-v', box), v = $('video', box), cv = $('#h8CamC'), ctx = cv.getContext('2d', { willReadFrequently: true });
-    var msg = $('#h8CamMsg'), btnRe = $('#h8CamRe'), btnUse = $('#h8CamUse'), hudA = $('#h8CamHudA'), hudB = $('#h8CamHudB'), list = $('#h8Looks');
-    var cur = LOOKS[0], stream = null, raf = 0, last = 0, raw = null, shot = null, PW = 360, PH = 480, SW = 720, SH = 960;
-    LOOKS.forEach(function (L, i) {
-      var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-pressed', i === 0);
-      b.innerHTML = '<u style="background:url(' + L.th + ') center/contain no-repeat"></u><div><b></b><span></span></div><i></i>';
-      $('b', b).textContent = L.name; $('span', b).textContent = L.look; $('i', b).textContent = L.type;
-      b.addEventListener('click', function () { cur = L; $$('button', list).forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); hud(); if (raw) develop(); });
-      li.appendChild(b); list.appendChild(li);
+    var msg = $('#h8CamMsg'), btnRe = $('#h8CamRe'), btnUse = $('#h8CamUse'), hudA = $('#h8CamHudA'), hudB = $('#h8CamHudB'), strip = $('#h8Looks');
+    var pill = $('#c10Film'), pillT = $('#c10FilmT'), pillI = $('img', pill), tray = $('#c10Tray'), off = $('#c10Off');
+    var cur = CAMS[2], stream = null, raf = 0, last = 0, raw = null, shot = null, demo = null, front = true, PW = 360, PH = 480, SW = 720, SH = 960;
+    /* 카메라 줄 — 앱 ChatCamera의 이름 붙은 칸 띠 */
+    CAMS.forEach(function (C) {
+      var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', C === cur); b.dataset.id = C.id;
+      b.innerHTML = '<span><img src="' + C.th + '" alt="" width="64" height="64" loading="lazy" decoding="async"></span><b></b>'; $('b', b).textContent = C.name; b.setAttribute('aria-label', C.name + ' · ' + C.type);
+      b.addEventListener('click', function () { choose(C); });
+      strip.appendChild(b);
     });
-    function hud() {
-      hudA.textContent = cur.name;
-      hudB.textContent = cur.type;
+    function choose(C) {
+      cur = C; $$('button', strip).forEach(function (x) { x.setAttribute('aria-checked', x.dataset.id === C.id); });
+      var me = $('[data-id="' + C.id + '"]', strip); if (me && strip.scrollWidth > strip.clientWidth) strip.scrollTo({ left: me.offsetLeft - (strip.clientWidth - me.offsetWidth) / 2, behavior: RM ? 'auto' : 'smooth' });
+      if (off) off.src = C.th;
+      openTray(false); pillSet(); hud(); loadLut(lutOf(C), redraw); redraw();
     }
+    /* 필름 알약 — 필름 카메라(토스 27 · 수동 76 · 피크)만 눌러서 갈아 끼운다. 나머지는 이름만 */
+    function pillSet() {
+      var f = cur.pick && FILMS[cur.pick];
+      pillT.textContent = cur.name + (f ? ' · ' + f[0] + ' ' + f[1] : '');
+      if (f) { pillI.src = '/assets/v8/cam10/can-' + cur.pick + '.webp'; pillI.hidden = false; } else pillI.hidden = true;
+      pill.disabled = !cur.film; pill.classList.toggle('on', !!cur.film);
+      if (cur.film) buildTray();
+    }
+    function buildTray() {
+      tray.textContent = '';
+      var list = (cur.own ? [null] : []).concat(cur.slots);
+      list.forEach(function (id) {
+        var b = document.createElement('button'), f = id && FILMS[id]; b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', cur.pick === id);
+        b.innerHTML = id ? '<img src="/assets/v8/cam10/can-' + id + '.webp" alt="" width="40" height="68" loading="lazy"><b></b><i></i>' : '<span class="c10-own"><img src="' + cur.th + '" alt="" width="40" height="40"></span><b>본래 색</b><i>' + cur.name + '</i>';
+        if (f) { $('b', b).textContent = f[0]; $('i', b).textContent = f[1]; }
+        b.addEventListener('click', function () { cur.pick = id; pillSet(); loadLut(lutOf(cur), redraw); openTray(false); redraw(); });
+        tray.appendChild(b);
+      });
+    }
+    function openTray(on) { tray.classList.toggle('on', on); pill.setAttribute('aria-expanded', on); view.classList.toggle('tray', on); }
+    pill.addEventListener('click', function () { if (cur.film) openTray(!tray.classList.contains('on')); });
+    function hud() { hudA.textContent = cur.name; hudB.textContent = cur.type; }
     function cover(src, sw, sh, dst, dw, dh, mirror) {
       var k = Math.max(dw / sw, dh / sh), w = dw / k, h = dh / k, c = dst.getContext('2d');
       c.save(); if (mirror) { c.translate(dw, 0); c.scale(-1, 1); } c.drawImage(src, (sw - w) / 2, (sh - h) / 2, w, h, 0, 0, dw, dh); c.restore();
+    }
+    function redraw() { if (stream) return; if (raw) develop(); else if (demo) paintDemo(); }
+    /* 카메라를 켜기 전에도 색이 보이게 — 견본 사진에 고른 카메라 · 필름 색을 입혀 둔다 */
+    function paintDemo() {
+      if (cv.width !== PW) { cv.width = PW; cv.height = PH; }
+      ctx.drawImage(demo, 0, 0); ctx.putImageData(grade(ctx.getImageData(0, 0, PW, PH), lookOf(cur)), 0, 0);
     }
     function frame(now) {
       raf = 0; if (!stream) return; raf = requestAnimationFrame(frame);
       if (now - last < 50 || v.readyState < 2) return; last = now;
       if (cv.width !== PW) { cv.width = PW; cv.height = PH; }
-      cover(v, v.videoWidth, v.videoHeight, cv, PW, PH, true);
-      ctx.putImageData(grade(ctx.getImageData(0, 0, PW, PH), cur), 0, 0);
+      cover(v, v.videoWidth, v.videoHeight, cv, PW, PH, front);
+      ctx.putImageData(grade(ctx.getImageData(0, 0, PW, PH), lookOf(cur)), 0, 0);
     }
     function stopCam() { if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; } if (raf) { cancelAnimationFrame(raf); raf = 0; } }
     function start() {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { msg.textContent = '이 브라우저에서는 카메라를 켤 수 없어요. 사진을 골라 주세요.'; return; }
-      msg.textContent = '카메라를 켜는 중이에요.';
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 960 }, height: { ideal: 1280 } }, audio: false }).then(function (s) {
-        stream = s; v.srcObject = s; raw = shot = null; view.classList.remove('shot'); view.classList.add('live'); hud(); btnRe.hidden = btnUse.hidden = true;
-        msg.textContent = '색감을 고르고 가운데 버튼으로 찍어요.';
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { msg.textContent = '이 브라우저에서는 카메라를 켤 수 없어요. 앨범에서 사진을 골라 주세요.'; return; }
+      msg.textContent = '카메라를 켜는 중이에요.'; stopCam();
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: front ? 'user' : 'environment', width: { ideal: 960 }, height: { ideal: 1280 } }, audio: false }).then(function (s) {
+        stream = s; v.srcObject = s; raw = shot = null; view.classList.remove('shot', 'demo'); view.classList.add('live'); hud(); btnRe.hidden = btnUse.hidden = true;
+        msg.textContent = '아래 줄에서 카메라를 고르고 셔터를 눌러요.';
         var pl = v.play(); if (pl && pl.catch) pl.catch(function () {});
         raf = requestAnimationFrame(frame);
-      }).catch(function () { msg.textContent = '카메라를 켤 수 없어요. 권한을 확인하거나 사진을 골라 주세요.'; });
+      }).catch(function () { msg.textContent = '카메라를 켤 수 없어요. 권한을 확인하거나 앨범에서 사진을 골라 주세요.'; });
     }
     function develop() {
       if (!raw) return;
       shot = document.createElement('canvas'); shot.width = SW; shot.height = SH;
       var sc = shot.getContext('2d'); sc.drawImage(raw, 0, 0);
-      sc.putImageData(grade(sc.getImageData(0, 0, SW, SH), cur), 0, 0);
+      sc.putImageData(grade(sc.getImageData(0, 0, SW, SH), lookOf(cur)), 0, 0);
       cv.width = SW; cv.height = SH; ctx.drawImage(shot, 0, 0);
       if (window.__dittoInvitePhoto) use(true);
     }
     function took(src, sw, sh, mirror) {
       raw = document.createElement('canvas'); raw.width = SW; raw.height = SH; cover(src, sw, sh, raw, SW, SH, mirror);
-      stopCam(); view.classList.remove('live'); view.classList.add('shot', 'flash'); setTimeout(function () { view.classList.remove('flash'); }, 500);
-      hud(); develop(); btnRe.hidden = btnUse.hidden = false; msg.textContent = '색감은 찍은 뒤에도 바꿀 수 있어요.';
+      stopCam(); view.classList.remove('live', 'demo'); view.classList.add('shot', 'flash'); setTimeout(function () { view.classList.remove('flash'); }, 500);
+      hud(); develop(); btnRe.hidden = btnUse.hidden = false; msg.textContent = '찍은 뒤에도 카메라와 필름을 바꿔 볼 수 있어요.';
     }
     function use(quiet) {
       if (!shot) return;
@@ -694,21 +785,28 @@
       if (form) form.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'center' });
       if (name) setTimeout(function () { try { name.focus({ preventScroll: true }); } catch (e) { /* 포커스 실패는 넘어간다 */ } }, 600);
     }
-    $('#h8CamOn').addEventListener('click', start);
-    $('#h8CamShot').addEventListener('click', function () { if (stream && v.readyState >= 2) took(v, v.videoWidth, v.videoHeight, true); else if (!stream) start(); });
-    seen(box, function () { LOOKS.forEach(function (L) { loadLut(L, function (x) { if (x === cur && raw) develop(); }); }); }, 0.01);
-    btnRe.addEventListener('click', function () { window.__dittoInvitePhoto = null; var im = $('#tkPh'); if (im) { im.hidden = true; im.removeAttribute('src'); } start(); });
-    btnUse.addEventListener('click', function () { use(false); });
-    $('#h8CamFile').addEventListener('change', function (e) {
+    function pickFile(e) {
       var f = e.target.files && e.target.files[0]; if (!f) return;
       var im = new Image(), url = URL.createObjectURL(f);
       im.onload = function () { took(im, im.naturalWidth, im.naturalHeight, false); URL.revokeObjectURL(url); };
       im.onerror = function () { msg.textContent = '이 사진은 열 수 없어요. 다른 사진을 골라 주세요.'; URL.revokeObjectURL(url); };
       im.src = url; e.target.value = '';
-    });
-    visible(box, function (on) { if (!on && stream) { stopCam(); view.classList.remove('live'); msg.textContent = '화면을 벗어나 카메라를 껐어요. 다시 켜려면 버튼을 눌러 주세요.'; } });
+    }
+    $('#h8CamOn').addEventListener('click', start);
+    $('#h8CamShot').addEventListener('click', function () { if (stream && v.readyState >= 2) took(v, v.videoWidth, v.videoHeight, front); else if (!stream) start(); });
+    $('#c10Flip').addEventListener('click', function () { front = !front; if (stream) start(); else msg.textContent = front ? '앞 카메라로 찍어요.' : '뒤 카메라로 찍어요.'; });
+    var fl = $('#c10Fl'), flN = 0; fl.addEventListener('click', function () { flN = (flN + 1) % 3; $('b', fl).textContent = ['A', '', ''][flN]; fl.classList.toggle('off', flN === 2); fl.setAttribute('aria-label', ['플래시 자동', '플래시 켬', '플래시 끔'][flN]); fl.setAttribute('aria-pressed', flN === 1); });
+    seen(box, function () {
+      CAMS.forEach(function (C) { loadLut(lutOf(C)); });
+      Object.keys(FILMS).forEach(function (k) { loadLut(k); });
+      var im = new Image(); im.onload = function () { demo = document.createElement('canvas'); demo.width = PW; demo.height = PH; cover(im, im.naturalWidth, im.naturalHeight, demo, PW, PH, false); if (!stream && !raw) { view.classList.add('demo'); loadLut(lutOf(cur), redraw); } }; im.src = '/assets/cast/scenes/after-hours.webp';
+    }, 0.01);
+    btnRe.addEventListener('click', function () { window.__dittoInvitePhoto = null; var im = $('#tkPh'); if (im) { im.hidden = true; im.removeAttribute('src'); } start(); });
+    btnUse.addEventListener('click', function () { use(false); });
+    $('#h8CamFile').addEventListener('change', pickFile); $('#c10Album').addEventListener('change', pickFile);
+    visible(box, function (on) { if (!on && stream) { stopCam(); view.classList.remove('live'); if (demo) { view.classList.add('demo'); paintDemo(); } msg.textContent = '화면을 벗어나 카메라를 껐어요. 셔터를 누르면 다시 켜져요.'; } });
     addEventListener('pagehide', stopCam);
-    hud();
+    pillSet(); hud();
   }
 
   [reveal, hero, strip, lab, shelf, guestbook, camcorder, ditto, why, freq, cam, getMark].forEach(function (fn) {
