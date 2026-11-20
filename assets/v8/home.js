@@ -698,7 +698,7 @@
     var view = $('.h8-cam-v', box), v = $('video', box), cv = $('#h8CamC'), ctx = cv.getContext('2d', { willReadFrequently: true });
     var msg = $('#h8CamMsg'), btnRe = $('#h8CamRe'), btnUse = $('#h8CamUse'), hudA = $('#h8CamHudA'), hudB = $('#h8CamHudB'), strip = $('#h8Looks');
     var pill = $('#c10Film'), pillT = $('#c10FilmT'), pillI = $('img', pill), tray = $('#c10Tray'), off = $('#c10Off');
-    var cur = CAMS[2], stream = null, raf = 0, last = 0, raw = null, shot = null, demo = null, front = true, PW = 360, PH = 480, SW = 720, SH = 960;
+    var cur = CAMS[2], stream = null, raf = 0, last = 0, raw = null, shot = null, demo = null, front = true, PW = 480, PH = 360, SW = 960, SH = 720;   // 11-21 가로(4:3) — 컴퓨터로 단체 사진을 찍는다
     /* 카메라 줄 — 앱 ChatCamera의 이름 붙은 칸 띠 */
     CAMS.forEach(function (C) {
       var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', C === cur); b.dataset.id = C.id;
@@ -748,19 +748,19 @@
       raf = 0; if (!stream) return; raf = requestAnimationFrame(frame);
       if (now - last < 50 || v.readyState < 2) return; last = now;
       if (cv.width !== PW) { cv.width = PW; cv.height = PH; }
-      cover(v, v.videoWidth, v.videoHeight, cv, PW, PH, front);
+      cover(v, v.videoWidth, v.videoHeight, cv, PW, PH, true);   // 늘 좌우반전(거울처럼)
       ctx.putImageData(grade(ctx.getImageData(0, 0, PW, PH), lookOf(cur)), 0, 0);
     }
     function stopCam() { if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; } if (raf) { cancelAnimationFrame(raf); raf = 0; } }
     function start() {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { msg.textContent = '이 브라우저에서는 카메라를 켤 수 없어요. 앨범에서 사진을 골라 주세요.'; return; }
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { msg.textContent = '이 브라우저에서는 카메라를 켤 수 없어요. 사진 없이도 초대장을 뽑을 수 있어요.'; return; }
       msg.textContent = '카메라를 켜는 중이에요.'; stopCam();
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: front ? 'user' : 'environment', width: { ideal: 960 }, height: { ideal: 1280 } }, audio: false }).then(function (s) {
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: front ? 'user' : 'environment', width: { ideal: 1280 }, height: { ideal: 960 } }, audio: false }).then(function (s) {
         stream = s; v.srcObject = s; raw = shot = null; view.classList.remove('shot', 'demo'); view.classList.add('live'); hud(); btnRe.hidden = btnUse.hidden = true;
         msg.textContent = '아래 줄에서 카메라를 고르고 셔터를 눌러요.';
         var pl = v.play(); if (pl && pl.catch) pl.catch(function () {});
         raf = requestAnimationFrame(frame);
-      }).catch(function () { msg.textContent = '카메라를 켤 수 없어요. 권한을 확인하거나 앨범에서 사진을 골라 주세요.'; });
+      }).catch(function () { msg.textContent = '카메라를 켤 수 없어요. 브라우저 주소창에서 카메라 권한을 허용해 주세요.'; });
     }
     function develop() {
       if (!raw) return;
@@ -785,25 +785,17 @@
       if (form) form.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'center' });
       if (name) setTimeout(function () { try { name.focus({ preventScroll: true }); } catch (e) { /* 포커스 실패는 넘어간다 */ } }, 600);
     }
-    function pickFile(e) {
-      var f = e.target.files && e.target.files[0]; if (!f) return;
-      var im = new Image(), url = URL.createObjectURL(f);
-      im.onload = function () { took(im, im.naturalWidth, im.naturalHeight, false); URL.revokeObjectURL(url); };
-      im.onerror = function () { msg.textContent = '이 사진은 열 수 없어요. 다른 사진을 골라 주세요.'; URL.revokeObjectURL(url); };
-      im.src = url; e.target.value = '';
-    }
     $('#h8CamOn').addEventListener('click', start);
-    $('#h8CamShot').addEventListener('click', function () { if (stream && v.readyState >= 2) took(v, v.videoWidth, v.videoHeight, front); else if (!stream) start(); });
+    $('#h8CamShot').addEventListener('click', function () { if (stream && v.readyState >= 2) took(v, v.videoWidth, v.videoHeight, true); else if (!stream) start(); });
     $('#c10Flip').addEventListener('click', function () { front = !front; if (stream) start(); else msg.textContent = front ? '앞 카메라로 찍어요.' : '뒤 카메라로 찍어요.'; });
     var fl = $('#c10Fl'), flN = 0; fl.addEventListener('click', function () { flN = (flN + 1) % 3; $('b', fl).textContent = ['A', '', ''][flN]; fl.classList.toggle('off', flN === 2); fl.setAttribute('aria-label', ['플래시 자동', '플래시 켬', '플래시 끔'][flN]); fl.setAttribute('aria-pressed', flN === 1); });
     seen(box, function () {
       CAMS.forEach(function (C) { loadLut(lutOf(C)); });
       Object.keys(FILMS).forEach(function (k) { loadLut(k); });
-      var im = new Image(); im.onload = function () { demo = document.createElement('canvas'); demo.width = PW; demo.height = PH; cover(im, im.naturalWidth, im.naturalHeight, demo, PW, PH, false); if (!stream && !raw) { view.classList.add('demo'); loadLut(lutOf(cur), redraw); } }; im.src = '/assets/cast/scenes/after-hours.webp';
+      var im = new Image(); im.onload = function () { demo = document.createElement('canvas'); demo.width = PW; demo.height = PH; cover(im, im.naturalWidth, im.naturalHeight, demo, PW, PH, false); if (!stream && !raw) { view.classList.add('demo'); loadLut(lutOf(cur), redraw); } }; im.src = '/assets/cast/scenes/webcam-group.webp';
     }, 0.01);
     btnRe.addEventListener('click', function () { window.__dittoInvitePhoto = null; var im = $('#tkPh'); if (im) { im.hidden = true; im.removeAttribute('src'); } start(); });
     btnUse.addEventListener('click', function () { use(false); });
-    $('#h8CamFile').addEventListener('change', pickFile); $('#c10Album').addEventListener('change', pickFile);
     visible(box, function (on) { if (!on && stream) { stopCam(); view.classList.remove('live'); if (demo) { view.classList.add('demo'); paintDemo(); } msg.textContent = '화면을 벗어나 카메라를 껐어요. 셔터를 누르면 다시 켜져요.'; } });
     addEventListener('pagehide', stopCam);
     pillSet(); hud();
