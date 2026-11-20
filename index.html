@@ -3035,16 +3035,16 @@ html{background:var(--edge-b,var(--bg))}
           <div class="x-unit-cam c10" id="c10">
             <div class="c10-top"><span class="c10-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="c10-room"><i aria-hidden="true"></i>초대장 사진</span><button type="button" class="c10-ic c10-fl" id="c10Fl" aria-label="플래시 자동" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6z"/></svg><b>A</b></button></div>
             <div class="h8-cam-v">
-        <video playsinline muted></video><canvas id="h8CamC" width="360" height="480" role="img" aria-label="카메라 화면"></canvas>
+        <video playsinline muted></video><canvas id="h8CamC" width="480" height="360" role="img" aria-label="카메라 화면"></canvas>
         <span class="c10-cn" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-        <div class="h8-cam-off"><img src="/assets/v8/cam10/cam-toss-27.webp" alt="" width="96" height="96" id="c10Off"><button type="button" class="h8-btn" id="h8CamOn">카메라 켜기</button><label>또는 사진 고르기<input type="file" id="h8CamFile" accept="image/*" hidden></label></div>
+        <div class="h8-cam-off"><img src="/assets/v8/cam10/cam-toss-27.webp" alt="" width="96" height="96" id="c10Off"><button type="button" class="h8-btn" id="h8CamOn">카메라 켜기</button></div>
         <p class="h8-cam-hud" aria-hidden="true"><span id="h8CamHudA"></span><span id="h8CamHudB"></span></p>
         <span class="c10-zm" aria-hidden="true"><b>1×</b><span>2</span></span>
         <button type="button" class="c10-film" id="c10Film" aria-expanded="false"><img alt="" width="20" height="20" hidden><span id="c10FilmT">토스 27</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
         <div class="c10-tray" id="c10Tray" role="radiogroup" aria-label="필름 고르기"></div>
       </div>
-            <div class="c10-strip" id="h8Looks" role="radiogroup" aria-label="카메라 고르기"></div>
-            <div class="c10-row"><label class="c10-side" aria-label="앨범에서 사진 고르기"><span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="9.5" r="1.5"/></svg></span>앨범<input type="file" accept="image/*" hidden id="c10Album"></label><button type="button" class="h8-cam-sh" id="h8CamShot" aria-label="사진 찍기"></button><button type="button" class="c10-side" id="c10Flip" aria-label="앞뒤 카메라 바꾸기"><span><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.7M20 4v4.7h-4.7M20 12a8 8 0 0 1-13.7 5.6L4 15.3M4 20v-4.7h4.7"/></svg></span>전환</button></div>
+            <div class="c10-rail"><div class="c10-strip" id="h8Looks" role="radiogroup" aria-label="카메라 고르기"></div>
+            <div class="c10-row"><span aria-hidden="true"></span><button type="button" class="h8-cam-sh" id="h8CamShot" aria-label="사진 찍기"></button><button type="button" class="c10-side" id="c10Flip" aria-label="앞뒤 카메라 바꾸기"><span><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.7M20 4v4.7h-4.7M20 12a8 8 0 0 1-13.7 5.6L4 15.3M4 20v-4.7h4.7"/></svg></span>전환</button></div><p class="c10-tip">화면은 거울처럼 좌우가 바뀌어 보여요. 다 같이 화면 안에 들어와 셔터를 눌러 보세요.</p></div>
           </div>
           <div class="tm-mach" id="tmMach">
         <div class="tm-body">
@@ -3084,7 +3084,7 @@ html{background:var(--edge-b,var(--bg))}
         <div class="x-unit-side">
           <div class="h8-cam-s">
         <h3>앱 카메라로 찍어 보기</h3>
-        <p class="h8-cam-n c10-say" id="c10Say">디토 앱의 카메라 10종과 필름 색을 그대로 옮겼어요. 아래 줄에서 카메라를 고르고, 필름 카메라는 필름도 갈아 끼워 보세요.</p>
+        <p class="h8-cam-n c10-say" id="c10Say">디토 앱의 카메라 10종과 필름 색을 그대로 옮겼어요. 화면 아래 줄에서 카메라를 고르고, 필름 카메라는 필름도 갈아 끼워 보세요.</p>
         <div class="h8-cam-a"><button type="button" class="h8-btn" id="h8CamRe" hidden>다시 찍기</button><button type="button" class="h8-btn pri" id="h8CamUse" hidden>이 사진으로 초대장 만들기</button></div>
         <p class="h8-cam-n" id="h8CamMsg" aria-live="polite"></p>
         <p class="h8-cam-n">사진은 이 기기 안에서만 쓰이고 서버로 보내지 않아요. 저장한 초대장 이미지에만 남아요.</p>
