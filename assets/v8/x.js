@@ -11,6 +11,7 @@
   var clone = function (o) { return JSON.parse(JSON.stringify(o)); };
   var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+  function ga(name, params) { try { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (e) {} }   // Google 애널리틱스 이벤트 (개인정보는 보내지 않는다)
   /* 서버(Supabase) 함수 부르기 — 공개(publishable) 키. 함수가 아직 없으면(운영 미적용) 거절되고, 화면은 예전 방식으로 남는다 */
   var SB = 'https://lisqekczixwzshmpewzq.supabase.co', SBKEY = 'sb_publishable_wZhXPAWXra62J60VkWJlhQ_2OPv-Zpf';
   function rpc(fn, body) {
@@ -925,7 +926,7 @@
       e.preventDefault(); if (sent) { d.close(); return; } if (!valid()) { m.textContent = '이메일 주소를 다시 확인해 주세요.'; return; } if (!ok.checked) return;
       go.disabled = true; go.textContent = '보내는 중…';
       rpc('join_android_waitlist', { p_email: em.value.trim(), p_consent: true }).then(function (r) {
-        sent = true; f.classList.add('done'); em.disabled = ok.disabled = true;
+        sent = true; f.classList.add('done'); em.disabled = ok.disabled = true; ga('android_waitlist_join', { already: !!(r && r.already) });
         m.textContent = r && r.already ? '이미 신청한 이메일이에요. 나오면 꼭 알려 드릴게요.' : '신청됐어요. 안드로이드 앱이 나오면 이 이메일로 알려 드릴게요.';
         go.textContent = '확인'; go.disabled = false;
       }, function (er) {
@@ -935,7 +936,7 @@
         else m.textContent = '지금은 보내지 못했어요. 잠시 뒤에 다시 눌러 주세요.';
       });
     });
-    btn.addEventListener('click', function () { if (d.showModal) { d.showModal(); setTimeout(function () { em.focus(); }, 60); } else location.href = mail; });
+    btn.addEventListener('click', function () { ga('android_waitlist_open'); if (d.showModal) { d.showModal(); setTimeout(function () { em.focus(); }, 60); } else location.href = mail; });
     $('.x-and-x', d).addEventListener('click', function () { d.close(); });
     d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
   }
@@ -1008,7 +1009,7 @@
         inp.value = ''; count(); build(); msg.textContent = saved ? '남겨 주셔서 고마워요. 꼼꼼히 읽을게요.' : '남겼어요. 아직은 이 기기에서만 보여요.';
       };
       var send = typeof window.DITTO_WISH_SEND === 'function' ? window.DITTO_WISH_SEND : live ? function (t) { return rpc('post_landing_wish', { p_body: t }); } : null;
-      if (send) { var sendFn = send; btn.disabled = true; Promise.resolve(sendFn(v)).then(function () { done(true); load(); }, function () { btn.disabled = false; msg.textContent = '지금은 보내지 못했어요. 잠시 뒤에 다시 눌러 주세요.'; }); }
+      if (send) { var sendFn = send; btn.disabled = true; Promise.resolve(sendFn(v)).then(function () { done(true); load(); ga('wish_post'); }, function () { btn.disabled = false; msg.textContent = '지금은 보내지 못했어요. 잠시 뒤에 다시 눌러 주세요.'; }); }
       else done(false);
     });
     function load() {

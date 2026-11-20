@@ -20,5 +20,6 @@
     var place = "";
     try { place = new URL(a.href).searchParams.get("ct") || ""; } catch (err) {}
     send("store", place);
+    if (typeof window.gtag === "function") window.gtag("event", "app_store_click", { link_placement: place, page_name: page, transport_type: "beacon" });
   }, true);
 })();
