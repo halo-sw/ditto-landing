@@ -855,10 +855,18 @@
     f.addEventListener('submit', function (e) {
       e.preventDefault(); if (sent) { d.close(); return; } if (!valid()) { m.textContent = '이메일 주소를 다시 확인해 주세요.'; return; } if (!ok.checked) return;
       go.disabled = true; go.textContent = '보내는 중…';
-      rpc('join_android_waitlist', { p_email: em.value.trim(), p_consent: true }).then(function (r) {
-        sent = true; f.classList.add('done'); em.disabled = ok.disabled = true; ga('android_waitlist_join', { already: !!(r && r.already) });
-        m.textContent = r && r.already ? '이미 신청한 이메일이에요. 나오면 꼭 알려 드릴게요.' : '신청됐어요. 안드로이드 앱이 나오면 이 이메일로 알려 드릴게요.';
-        go.textContent = '확인'; go.disabled = false;
+      var mailAddr = em.value.trim();
+      rpc('join_android_waitlist', { p_email: mailAddr, p_consent: true }).then(function (r) {
+        sent = true; ga('android_waitlist_join', { already: !!(r && r.already) });
+        /* 완료 화면: 입력 칸 · 동의 줄을 걷고, 무엇이 됐는지와 다음에 무슨 일이 생기는지만 */
+        f.classList.add('done'); f.innerHTML = '<span class="x-and-ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
+          '<h4 id="xAndH"></h4><p class="x-and-ok-t"></p><p class="x-and-mail"></p><p class="x-and-ok-s"></p>' +
+          '<div class="x-and-a"><button type="submit" class="x-and-go">확인</button></div>';
+        $('h4', f).textContent = r && r.already ? '이미 신청해 주셨어요' : '신청이 완료됐어요';
+        $('.x-and-ok-t', f).textContent = r && r.already ? '안드로이드 앱이 나오면 아래 주소로 가장 먼저 알려 드릴게요.' : '고마워요! 안드로이드 앱이 나오면 아래 주소로 가장 먼저 알려 드릴게요.';
+        $('.x-and-mail', f).textContent = mailAddr;
+        $('.x-and-ok-s', f).textContent = '알림 메일을 보낸 뒤에는 이메일을 바로 지워요.';
+        setTimeout(function () { var b = $('.x-and-go', f); if (b) b.focus(); }, 50);
       }, function (er) {
         go.textContent = '출시 알림 받기'; check();
         if (er && (er.code === 'PGRST202' || er.status === 404)) { m.innerHTML = '지금은 신청을 받을 수 없어요. <a href="' + mail + '">메일로 알려 주세요</a>.'; }
