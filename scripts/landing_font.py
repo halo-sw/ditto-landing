@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 src = sys.argv[1]
 chars = set(map(chr, range(0x20, 0x7F))) | set("·…—–‘’“”→←↑↓↗✕✓×©®™❚▶•°%₩")
 chars |= set((ROOT / "index.html").read_text(encoding="utf-8"))
-for sub in ("platter", "ditto", "frequency", "play", "story"):
+for sub in ("platter", "ditto", "frequency", "play", "story", "demo"):
     f = ROOT / sub / "index.html"
     if f.exists():
         chars |= set(f.read_text(encoding="utf-8"))
