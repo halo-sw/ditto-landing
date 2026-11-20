@@ -333,13 +333,13 @@
       schedule(500);
     }
     put(srcSlot, false);
-    function advance() {
+    function advance(automatic) {
       busy = true;
       var generation = gen;
-      step(done, false).then(function () {
+      step(done, automatic).then(function () {
         if (generation !== gen) return;
         busy = false;
-        schedule(done === rows.length ? 2100 : 650);
+        schedule(done === rows.length ? 2100 : 300);
       });
     }
     function beginHold(key) {
@@ -349,11 +349,13 @@
       if (done === rows.length) reset();
       input = key;
       var start = performance.now();
+      var automatic = key === autoInput;
+      var duration = automatic ? 800 : 3000;
       function tick(now) {
-        var q = clamp((now - start) / 3000);
+        var q = clamp((now - start) / duration);
         surface(q, true);
         if (q < 1) holdFrame = requestAnimationFrame(tick);
-        else { cancelHold(); advance(); }
+        else { cancelHold(); advance(automatic); }
       }
       tick(start);
     }
