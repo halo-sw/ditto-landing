@@ -1284,3 +1284,40 @@
 .x-and-mail{margin:6px 0 0!important;padding:10px 16px;border-radius:12px;background:#F6F4F9;color:var(--ink)!important;font-weight:700;word-break:break-all}
 .x-and-ok-s{font-size:12.5px!important;color:#8F88A0!important}
 .x-and-in.done .x-and-a{align-self:stretch;width:100%}
+
+/* ── 11-21 카메라 v3: 나가기 뺌 · 셔터 = 앱 ChatCamera 셔터(은색 테두리 · 검은 고리 · 은색 버튼) · 전환 대신 화면 나누기 ── */
+.c10-sp{width:40px;height:40px}
+.c10-act{display:flex;flex-direction:column;align-items:center;gap:18px}
+.c10-act .c10-row{display:flex;justify-content:center;margin:0}
+.x-unit .c10 .h8-cam-sh{position:relative;left:auto;bottom:auto;transform:none;display:block;width:80px;height:80px;border:0;border-radius:50%;
+  background:linear-gradient(135deg,#F4F4F6 0%,#9A9AA2 50%,#E8E8EC 100%);box-shadow:0 14px 26px -14px rgba(36,28,43,.55);cursor:pointer;transition:transform .12s ease-out,filter .12s}
+.x-unit .c10 .h8-cam-sh::before{content:"";display:block;position:absolute;inset:4px;left:4px;top:4px;width:auto;height:auto;border-radius:50%;background:#0E0B12;filter:none;transform:none}
+.x-unit .c10 .h8-cam-sh::after{content:"";position:absolute;inset:9px;border-radius:50%;background:radial-gradient(circle at 38% 30%,#fff 0,#D2D2D8 55%,#A6A6AE 100%);box-shadow:inset 0 -2px 4px rgba(0,0,0,.18);transition:transform .12s ease-out}
+.x-unit .c10 .h8-cam-sh:hover::after{transform:scale(.97)}
+.x-unit .c10 .h8-cam-sh:active{transform:scale(.92);filter:brightness(.94);box-shadow:0 8px 16px -10px rgba(36,28,43,.5)}
+.x-unit .c10 .h8-cam-sh:active::after{transform:none}
+.x-unit .c10 .h8-cam-sh:focus-visible{outline:3px solid #AA4AF4;outline-offset:4px}
+.c10 .h8-cam-v.seq~.c10-rail .h8-cam-sh,.c10 .h8-cam-v.seq+.c10-rail .h8-cam-sh{pointer-events:none}
+@media (prefers-reduced-motion:no-preference){.c10 .h8-cam-v.seq~* .h8-cam-sh::after{animation:c10Busy 1.4s ease-in-out infinite}}
+@keyframes c10Busy{50%{transform:scale(.86)}}
+.c10-mode{display:flex;flex-direction:column;gap:6px;width:100%;padding:5px;border-radius:18px;background:#fff;box-shadow:0 1px 2px rgba(36,28,43,.06)}
+.c10-mode button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border:0;border-radius:13px;background:none;color:#7A7386;font:inherit;font-size:13.5px;font-weight:600;letter-spacing:-.02em;cursor:pointer;transition:background .15s,color .15s}
+.c10-mode button:hover{background:#F6F4F9;color:var(--ink)}
+.c10-mode svg{flex:none;width:26px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
+.c10-mode b{font-weight:inherit}
+.c10-mode button[aria-checked="true"]{background:#F3E8FE;color:#8C2BD6}
+.c10-mode button[aria-checked="true"] svg{fill:rgba(170,74,244,.16)}
+.c10-mode button:focus-visible{outline:2px solid #AA4AF4;outline-offset:1px}
+@media (min-width:900px){
+  .x-unit-cam.c10{grid-template-columns:minmax(0,1fr) 156px}
+  .c10-rail .c10-act{grid-area:act;align-self:stretch;justify-content:center;gap:20px}
+  .c10-act .c10-tip{margin-top:auto;font-size:12.5px;grid-area:auto;align-self:auto}
+}
+@media (max-width:899px){
+  .c10-act{margin-top:16px}
+  .c10-mode{flex-direction:row;gap:4px}
+  .c10-mode button{flex:1;flex-direction:column;gap:4px;padding:9px 4px;font-size:12.5px}
+  .c10-act .c10-tip{margin-top:0}
+}
+.x-unit .c10 .h8-cam-sh::before{z-index:0}
+.x-unit .c10 .h8-cam-sh::after{z-index:1}
