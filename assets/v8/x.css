@@ -224,7 +224,7 @@
 .x-tk3-in{position:absolute;inset:0}
 .x-tk3-card .tk-back{display:grid}
 .x-tk3-glow{position:absolute;z-index:-1;inset:8% 0;margin:auto;width:min(78vw,380px);border-radius:50%;background:radial-gradient(ellipse,var(--tm-b),transparent 72%);opacity:.35;filter:blur(16px);pointer-events:none}
-.x-tk3-card .tk-stamp{opacity:.85}
+
 .x-tk3-card .tk-holo{background-position:var(--hx) var(--hy)}
 @keyframes x-holo{from{background-position:110% 20%}to{background-position:-10% 60%}}
 @media (prefers-reduced-motion:reduce){.x-tk3-glow,.x-tk3-card .tk-holo{animation:none}}
@@ -997,6 +997,7 @@
 .x-tk3-card { perspective:950px; cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; border-radius:16px; }
 .x-tk3-card:focus-visible { outline:3px solid #862fc6; outline-offset:6px; }
 .x-tk3-in { pointer-events:none; transform-style:preserve-3d; transform:rotateX(var(--tilt,0deg)) rotateY(var(--turn,0deg)); transition:transform .48s cubic-bezier(.22,.8,.24,1); }
+.x-tk3-card.auto-turn .x-tk3-in { transition:transform 1.1s cubic-bezier(.45,.05,.25,1); }
 .x-tk3-card.dragging { cursor:grabbing; }
 .x-tk3-card.dragging .x-tk3-in { transition:none; }
 @media(prefers-reduced-motion:reduce) {

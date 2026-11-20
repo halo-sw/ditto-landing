@@ -128,7 +128,10 @@ window.DITTO_PLATTERS = {
         "kind": "guestbook",
         "data": {
           "title": "방명록",
-          "ownerAvatar": "/assets/cast/bom/avatar.webp?v=2b1bcb09ba"
+          "ownerAvatar": "/assets/cast/bom/avatar.webp?v=2b1bcb09ba",
+          "entries": [{"name": "여울", "handle": "yeoulbass", "time": "방금", "message": "토요일에 베이스 들고 갈게!"}],
+          "newCount": 1,
+          "style": {"bg": "#c23c4e"}
         },
         "x": 6,
         "y": 10,
@@ -267,7 +270,10 @@ window.DITTO_PLATTERS = {
         "kind": "guestbook",
         "data": {
           "title": "방명록",
-          "ownerAvatar": "/assets/cast/taeyul/avatar.webp?v=5876a44b2b"
+          "ownerAvatar": "/assets/cast/taeyul/avatar.webp?v=5876a44b2b",
+          "entries": [{"name": "결", "handle": "gyeol.wav", "time": "방금", "message": "골목 거울 사진 잘 나왔더라"}],
+          "newCount": 1,
+          "style": {"bg": "#6655d2"}
         },
         "x": 6,
         "y": 6,
@@ -464,7 +470,9 @@ window.DITTO_PLATTERS = {
         "kind": "guestbook",
         "data": {
           "title": "방명록",
-          "ownerAvatar": "/assets/cast/nuri/avatar.webp?v=b5274f1613"
+          "ownerAvatar": "/assets/cast/nuri/avatar.webp?v=b5274f1613",
+          "entries": [{"name": "봄", "handle": "bomcut", "time": "방금", "message": "빌려준 책 다 읽었어. 내일 가져갈게!"}],
+          "newCount": 1
         },
         "x": 6,
         "y": 5,

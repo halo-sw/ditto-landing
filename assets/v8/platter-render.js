@@ -48,7 +48,7 @@
  *   music      { title, artist?, img?, palette?:[top,mid,bottom], audio?, ytId?, poster?, provider?, album? }
  *                palette = MusicArtworkPalette stops (precomputed); provider defaults from audio/ytId
  *   video      { img?, title?, ytId?, letterbox?:bool, local?:bool, style? }   letterbox = 4:3 YouTube thumbnail with black bars
- *   guestbook  { title?, entries:[{ name, message, avatar?, handle? }] }      newest first; only entries[0] is drawn
+ *   guestbook  { title?, entries:[{ name, message, avatar?, handle? }] }      newest first; newest message and size-dependent history
  *   block      { title?, text?, img?, count?:'글 3개', emoji? }               the 포스트 widget (data type is "block" in the app)
  *   todo       { title?, cats:[{ id, name, color:'pink'|'blue'|'green'|'cocoa'|'purple' }], items:[{ text, done, cat? }],
  *                week?:[[color…]×7] (Sun→Sat: sections completed that day), today?:0–6 }
@@ -399,21 +399,59 @@
 
   // ── 방명록 — StandardServiceTiles.SpecialGuestbookTile
   R.guestbook = function (w, W, H, d) {
-    var entry = Array.isArray(d.entries) && d.entries[0];
-    var tiny = w.w <= 2 && w.h <= 2, strip = w.h <= 2 && !tiny;
-    var pad = Math.min(W, H) < 100 ? 8 : 12;
-    if (!entry || !trim(entry.message)) {
-      return '<div class="dw-note-preview' + (strip ? ' horizontal' : '') + '" style="padding:' + u(pad) + '">' +
-        imgTag('', '/assets/cast/objects/guestbook-note.webp') + '<b>방명록</b></div>';
+    var entries = Array.isArray(d.entries) ? d.entries.filter(function (entry) {
+      return entry && (trim(entry.message) || trim(entry.media));
+    }) : [];
+    var current = entries[0], unread = Math.max(0, Math.floor(d.newCount) || 0);
+    var layout = w.w <= 2 ? (w.h <= 2 ? 'mini' : 'visitors') :
+      w.h <= 2 ? (w.w < 6 ? 'strip' : 'wide') : 'stack';
+    var history = w.h >= 6 && w.w >= 4;
+    var pad = layout === 'mini' || w.h === 3 ? 12 : history ? 24 : w.w < 4 || w.h <= 2 ? 16 : 20;
+    var bg = background({kind:'guestbook', data:d});
+    var rgb = hexA(bg, 1).match(/\d+/g).map(Number);
+    var photo = trim(styleOf(d).bgImage);
+    var dark = photo || (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2] < 145);
+    var header = '<div class="gb-header"><strong>방명록</strong>' +
+      (current && unread ? '<span>새 글 ' + unread + '</span>' : '') + '</div>';
+    function avatar(entry, badge) {
+      var handle = trim(entry.handle).replace(/^@/, '');
+      var person = (window.DITTO_PLATTERS || {})[handle] || (window.DittoIntroPlatters || {})[handle];
+      var src = entry.avatar || (person && person.avatar);
+      return '<span class="gb-face">' + (src ? imgTag('', src) : esc(Array.from(entry.name || '친구')[0])) +
+        (badge && unread ? '<i>' + unread + '</i>' : '') + '</span>';
     }
-    var face = imgTag('dw-visit-face', entry.avatar || d.ownerAvatar || d.img || '/assets/app/av-flare-1.jpg');
-    var name = '<b>' + esc(entry.name || '친구') + '</b>';
-    var title = tiny || strip ? '' : '<strong>방명록</strong>';
-    var body = tiny ? face + name : title + '<div class="dw-visit-row">' + face + name +
-      '</div><p class="dw-visit-bubble"><span>' + esc(entry.message) + '</span></p>';
-    var lines = strip ? 1 : Math.max(1, Math.floor((H - 2 * pad - 76) / 17));
-    return '<div class="dw-visit dw-visit-' + (tiny ? 'tiny' : strip ? 'strip' : 'stack') +
-      '" style="padding:' + u(pad) + ';--face:' + u(tiny ? 30 : 24) + ';--lines:' + lines + '">' + body + '</div>';
+    function who(entry) {
+      return '<div class="gb-who"><b>' + esc(entry.name || '친구') + '</b>' +
+        (entry.time ? '<small>' + esc(entry.time) + '</small>' : '') + '</div>';
+    }
+    var content;
+    if (!current) {
+      var empty = layout === 'mini' || layout === 'visitors';
+      content = (layout === 'stack' ? header : '') + '<div class="gb-empty">' +
+        avatar({avatar:d.ownerAvatar || d.img, name:'방명록'}) + '<div><b>' +
+        (empty ? '방명록' : '아직 안부가 없어요') + '</b>' +
+        (empty ? '' : '<small>첫 안부를 남겨요</small>') + '</div></div>';
+    } else {
+      var preview = esc(trim(current.message) || '사진');
+      var bubble = '<div class="gb-bubble"><span>' + preview + '</span></div>';
+      var profile = avatar(current, layout !== 'stack') + who(current);
+      if (layout === 'mini') content = avatar(current, true) + '<b>' + esc(current.name || '친구') + '</b>';
+      else if (layout === 'visitors') content = '<strong>방명록</strong>' + entries.slice(0,3).map(function (e,i) {
+        return '<div>' + avatar(e,i === 0) + '<b>' + esc(e.name || '친구') + '</b></div>';
+      }).join('');
+      else if (layout === 'strip') content = avatar(current,true) + '<div class="gb-preview">' +
+        who(current) + '<p>' + preview + '</p></div>';
+      else if (layout === 'wide') content = profile + bubble;
+      else {
+        content = header + '<div class="gb-profile">' + profile + '</div>' + bubble;
+        if (history && entries.length > 1) content += '<div class="gb-history"><strong>지난 안부</strong>' +
+          entries.slice(1,3).map(function (e) { return '<p><b>' + esc(e.name || '친구') + '</b> ' + esc(e.message || '사진') + '</p>'; }).join('') + '</div>';
+      }
+    }
+    var lines = layout === 'wide' ? 2 : w.h === 3 ? 1 : 3;
+    return '<div class="dw-gb gb-' + layout + (dark ? ' gb-dark' : '') + '" style="--pad:' + u(pad) +
+      ';--lines:' + lines + ';--gb-bg:' + bg + ';--face:' + u(w.h === 3 ? 28 : layout === 'stack' ? 36 : 40) + '">' +
+      (photo ? imgTag('gb-bg',photo) : '') + content + '</div>';
   };
 
   function blockWeb(w, W, H, d) {
@@ -944,7 +982,7 @@
   // AppState.widgetBg — style.bg wins when present
   var BG = { vintageCamera: '#fff', block: '#fff', todo: '#fff', video: '#1C1722', sticker: '#FAF9FC',
     polaroid: '#fff', paparazzi: '#fff', ask: '#fff', ditto: '#e9d8f5', image: '#e7e4ee', status: '#fff',
-    mood: '#f1e3a7', text: '#f3eefb', guestbook: '#fff', qna: '#fff', diary: '#d7e39d', dday: '#F2E8FF',
+    mood: '#f1e3a7', text: '#f3eefb', guestbook: '#b3b3b3', qna: '#fff', diary: '#d7e39d', dday: '#F2E8FF',
     nowplaying: '#141317', place: '#b8e9df', weather: 'linear-gradient(#d7effe,#d1e2fd 33%,#bfcdf6 68%,#a0c6f1 84%,#d8e7f9)',
     voice: '#fdf1d7', gif: '#f1e3a7', collection: '#1d1e24', playlist: '#f5f3ef',
     social: 'radial-gradient(circle at 27% 108%,#ffdd55 0,#ffdd55 8.4cqw,#ff543e 41.9cqw,#c837ab 83.8cqw)',   // DGrad.instagram (radius 300)
@@ -961,6 +999,7 @@
   // 앱 Grid.radius (GridEngine.swift 37-39 · Atomic.swift 23-29): 12 + (짧은 변 − 2) × 2 를 20에서 멈추고 8·12·16·20·28 단계에 맞춘다. 음악은 28.
   function radius(w) {
     if (kindOf(w) === 'music') return 28;
+    if (kindOf(w) === 'guestbook') return 20;
     var s = dims(w), raw = Math.min(20, 12 + (Math.min(s.w, s.h) - 2) * 2), steps = [8, 12, 16, 20, 28], best = steps[0];
     for (var i = 0; i < steps.length; i++) if (Math.abs(steps[i] - raw) <= Math.abs(best - raw)) best = steps[i];
     return best;
@@ -989,7 +1028,7 @@
     return {
       radius: radius(w),
       background: background(w),
-      border: open || k === 'music' ? null : { width: 1, color: '#E7E1EE' },     // music draws its own 1px #C8C9CE inside
+      border: open || k === 'music' || k === 'guestbook' ? null : { width: 1, color: '#E7E1EE' },     // music draws its own 1px #C8C9CE inside
       glow: open ? { x: 0, y: 0, blur: 16, spread: 3, color: 'rgba(170,74,244,.30)' } : null
     };
   }
@@ -1101,8 +1140,11 @@
       sample: {"label": "@halosw_", "img": "/assets/cast/shared/halosw-instagram.webp", "url": "https://www.instagram.com/halosw_/"} },
     { kind: 'todo', name: 'To-do', group: G_MINE, section: '기록', desc: '카테고리별 할 일과 이번 주 기록', sizes: sz([[4, 4], [4, 3], [6, 2], [3, 4]]), defaultSize: { w: 3, h: 4 }, freeResize: true,
       sample: {"title": "누리의 교환 책", "cats": [{"id": "read", "name": "책", "color": "purple"}], "items": [{"text": "마당을 나온 암탉 읽기", "cat": "read", "done": true}, {"text": "여울에게 책갈피 건네기", "cat": "read", "done": false}]} },
-    { kind: 'guestbook', name: '방명록', group: G_MINE, section: '함께', desc: '친구가 남긴 안부에 답글을 달아요', sizes: sz(ALL12), defaultSize: { w: 4, h: 3 }, freeResize: true,
-      sample: {"title": "방명록", "ownerAvatar": "/assets/cast/scenes/gallery-notebook-owner.webp"} },
+    { kind: 'guestbook', name: '방명록', group: G_MINE, section: '함께', desc: '친구가 남긴 안부에 답글을 달아요', sizes: sz(ALL12), defaultSize: { w: 4, h: 4 }, freeResize: true,
+      sample: {title:'방명록', ownerAvatar:'/assets/cast/scenes/gallery-notebook-owner.webp', newCount:2, entries:[
+        {name:'봄', handle:'bomcut', avatar:'/assets/cast/bom/avatar.webp', time:'방금', message:'토요일 합주 끝나고 같이 걸을래?'},
+        {name:'결', handle:'gyeol.wav', avatar:'/assets/cast/gyeol/avatar.webp', time:'1시간 전', message:'어제 들려준 노래 또 듣고 있어'},
+        {name:'누리', handle:'nurifold', avatar:'/assets/cast/nuri/avatar.webp', time:'어제', message:'책갈피 챙겨 갈게!'}]} },
     { kind: 'dday', name: 'D-Day', group: G_MINE, section: '기록', desc: '기다리는 날까지 함께 세요', sizes: sz(ALL12), defaultSize: { w: 4, h: 2 }, freeResize: true,
       sample: {"title": "다음 합주", "inDays": 4} },
     { kind: 'sticker', name: '스티커 보드', group: G_MINE, section: '함께', desc: '친구들이 스티커를 붙여 줘요', sizes: sz(ALL12), defaultSize: { w: 4, h: 4 }, freeResize: true,

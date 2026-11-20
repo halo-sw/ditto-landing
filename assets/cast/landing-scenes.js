@@ -341,7 +341,9 @@
       ]
     },
     "guestbook": {
-      "ownerAvatar": "/assets/cast/scenes/roll-notebook-owner.webp"
+      "ownerAvatar": "/assets/cast/scenes/roll-notebook-owner.webp",
+      "newCount": 1, "style": {"bg": "#6655d2"},
+      "entries": [{"name":"여울","handle":"yeoul","avatar":"/assets/cast/yeoul/avatar.webp","time":"방금","message":"오늘 합주 녹음 보내 줘 🎧"}]
     }
   },
   "ditto": {

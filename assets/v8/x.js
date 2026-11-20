@@ -275,7 +275,8 @@
       })(t0);
     }
     function wloop() { wraf = 0; }            // 길은 곧은 곡선이라 프레임마다 다시 그릴 것이 없다
-    var holdFrame = 0, input = null, manual = false;
+    var holdFrame = 0, input = null, autoTimer = 0, onScreen = false;
+    var autoInput = {};
     function surface(progress, pressed) {
       ring.classList.toggle('is-pressed', pressed);
       ring.style.setProperty('--fill', pressed ? 0.08 + 0.92 * (1 - Math.pow(1 - progress, 1.6)) : 0);
@@ -317,22 +318,35 @@
         .then(function () { if (!ok()) return; tell(i); return wait(RM ? 0 : fast ? 420 : 760); });
     }
     function reset() { cancelHold(); gen++; T.forEach(clearTimeout); T = []; busy = false; done = 0; ring.style.setProperty('--p', 0); $$('.h8-ghost').forEach(function (g) { g.remove(); }); slots.forEach(clear); rows.forEach(function (li) { li.classList.remove('has', 'next'); }); pa.forEach(function (p) { p.classList.remove('on'); }); noti.innerHTML = ''; cnt.textContent = '디토 0'; root.dataset.n = 0; root.classList.remove('ping'); say('<b>태율</b>이 골목 거울 사진을 올렸어요.', '친구들이 태율의 플래터에서 이 사진을 봐요.'); }
-    function run(from) {
-      if (busy) return; busy = true; var g0 = gen, seq = Promise.resolve();
-      rows.forEach(function (li, i) { if (i < from) return; seq = seq.then(function () { if (g0 === gen) return step(i, i > from); }); });
-      seq.then(function () { if (g0 === gen) busy = false; });
+    function schedule(delay) {
+      clearTimeout(autoTimer);
+      if (onScreen && !document.hidden && !RM && !busy && input === null) {
+        autoTimer = setTimeout(function () { beginHold(autoInput); }, delay);
+      }
     }
-    function play() { manual = false; reset(); if (RM) { rows.forEach(function (li, i) { land(i); tell(i); }); return; } T.push(setTimeout(function () { run(0); }, 900)); }
+    function release() {
+      cancelHold();
+      schedule(1400);
+    }
+    function syncPlayback() {
+      if (document.hidden || !onScreen) cancelHold();
+      schedule(500);
+    }
     put(srcSlot, false);
     function advance() {
       busy = true;
       var generation = gen;
-      step(done, false).then(function () { if (generation === gen) busy = false; });
+      step(done, false).then(function () {
+        if (generation !== gen) return;
+        busy = false;
+        schedule(done === rows.length ? 2100 : 650);
+      });
     }
     function beginHold(key) {
-      if (input !== null || (manual && busy)) return;
-      if (!manual || done === rows.length) reset();
-      manual = true;
+      if (busy || (input !== null && input !== autoInput)) return;
+      clearTimeout(autoTimer);
+      if (input === autoInput) cancelHold();
+      if (done === rows.length) reset();
       input = key;
       var start = performance.now();
       function tick(now) {
@@ -351,31 +365,35 @@
     ring.addEventListener('pointermove', function (e) {
       if (e.pointerId !== input) return;
       var r = ring.getBoundingClientRect();
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) cancelHold();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) release();
     });
     ['pointerup','pointercancel','lostpointercapture'].forEach(function (name) {
-      ring.addEventListener(name, function (e) { if (input === e.pointerId) cancelHold(); });
+      ring.addEventListener(name, function (e) { if (input === e.pointerId) release(); });
     });
     ring.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') cancelHold();
+      if (e.key === 'Escape') release();
       if (e.key !== ' ' && e.key !== 'Enter') return;
       e.preventDefault();
       if (!e.repeat) beginHold(e.key);
     });
-    ring.addEventListener('keyup', function (e) { if (input === e.key) cancelHold(); });
+    ring.addEventListener('keyup', function (e) { if (input === e.key) release(); });
     ring.addEventListener('click', function (e) {
-      if (e.detail !== 0 || input !== null || (manual && busy)) return;
-      if (!manual || done === rows.length) reset();
-      manual = true;
+      if (e.detail !== 0 || busy || (input !== null && input !== autoInput)) return;
+      clearTimeout(autoTimer);
+      cancelHold();
+      if (done === rows.length) reset();
       advance();
     });
-    ring.addEventListener('blur', cancelHold);
-    window.addEventListener('blur', cancelHold);
-    document.addEventListener('visibilitychange', function () { if (document.hidden) cancelHold(); });
-    $('#xDtReplay').addEventListener('click', play);
+    ring.addEventListener('blur', function () { if (input !== null && input !== autoInput) release(); });
+    document.addEventListener('visibilitychange', syncPlayback);
+    $('#xDtReplay').addEventListener('click', function () {
+      reset();
+      if (RM) rows.forEach(function (_, i) { land(i); tell(i); });
+      else schedule(0);
+    });
     var trz = 0; addEventListener('resize', function () { clearTimeout(trz); trz = setTimeout(thread, 120); });
     reset(); thread(); setTimeout(thread, 600); if (document.fonts && document.fonts.ready) document.fonts.ready.then(thread);
-    if (!RM) seen(root, function () { if (!manual) play(); }, 0.35);
+    visible(root, function (show) { onScreen = show; syncPlayback(); });
 
   }
 
@@ -735,6 +753,20 @@
     var card = $('.x-tk3-card');
     if (!card) return;
     var angle = 0, drag = null, skipClick = false;
+    var timer = 0, inView = false;
+    function scheduleTurn(delay) {
+      clearTimeout(timer);
+      if (RM || !inView || document.hidden || drag) return;
+      timer = setTimeout(function () {
+        card.classList.add('auto-turn');
+        settle(angle + 180);
+        scheduleTurn(2600);
+      }, delay);
+    }
+    function takeControl() {
+      clearTimeout(timer);
+      card.classList.remove('auto-turn');
+    }
     function rotate(y, x) {
       card.style.setProperty('--turn', y + 'deg');
       card.style.setProperty('--tilt', x + 'deg');
@@ -746,6 +778,7 @@
     }
     card.addEventListener('pointerdown', function (e) {
       if (!e.isPrimary || e.button !== 0) return;
+      takeControl();
       drag = {id:e.pointerId, x:e.clientX, dx:0};
       skipClick = false;
       card.setPointerCapture(e.pointerId);
@@ -762,7 +795,7 @@
           card.classList.add('dragging');
           rotate(angle + 180*drag.dx/box.width, (0.5-y)*8);
         }
-      } else if (!drag && e.pointerType === 'mouse') rotate(angle + (x-.5)*14, (.5-y)*12);
+      } else if (!drag && !card.classList.contains('auto-turn') && e.pointerType === 'mouse') rotate(angle + (x-.5)*14, (.5-y)*12);
     });
     function end(e) {
       if (!drag || e.pointerId !== drag.id) return;
@@ -770,15 +803,20 @@
       card.classList.remove('dragging');
       settle(angle + (flip ? Math.sign(drag.dx)*180 : 0));
       drag = null;
+      scheduleTurn(3500);
     }
     ['pointerup','pointercancel','lostpointercapture'].forEach(function (type) { card.addEventListener(type,end); });
     card.addEventListener('pointerleave', function () { if (!drag) rotate(angle,0); });
-    card.addEventListener('click', function () { if (!skipClick) settle(angle+180); skipClick=false; });
+    card.addEventListener('click', function () { takeControl(); if (!skipClick) settle(angle+180); skipClick=false; scheduleTurn(3500); });
     card.addEventListener('keydown', function (e) {
       if (!['Enter',' ','ArrowLeft','ArrowRight'].includes(e.key)) return;
       e.preventDefault();
+      takeControl();
       if (!e.repeat) settle(angle + (e.key === 'ArrowLeft' ? -180 : 180));
+      scheduleTurn(3500);
     });
+    visible(card, function (show) { inView = show; scheduleTurn(750); });
+    document.addEventListener('visibilitychange', function () { scheduleTurn(750); });
   }
 
   function flow() {
