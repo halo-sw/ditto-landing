@@ -1321,3 +1321,37 @@
 }
 .x-unit .c10 .h8-cam-sh::before{z-index:0}
 .x-unit .c10 .h8-cam-sh::after{z-index:1}
+
+/* ── 11-21 가입자 판 v3: 빈 칸 = 작은 점 · 다음 자리에서 번지는 물결 · 이정표(100 · 500 · 1,000) · 최근 친구 줄 정리 · 보는 법은 맨 아래 ── */
+.x-mem-g li:not(.on):not(.x-mem-next){position:relative;background:none}
+.x-mem-g li:not(.on):not(.x-mem-next)::before{content:"";position:absolute;inset:33%;border-radius:50%;background:#D9D3E4}
+@media (prefers-reduced-motion:no-preference){
+  .x-mem.in .x-mem-g li:not(.on):not(.x-mem-next)::before{animation:xMemWave 5.6s cubic-bezier(.4,0,.2,1) infinite;animation-delay:calc(var(--r,0) * 55ms + 1.8s)}
+}
+@keyframes xMemWave{0%,16%,100%{transform:scale(1);background:#D9D3E4}6%{transform:scale(1.7);background:#C99CF7}}
+.x-mem-g li.x-mem-ms::before{inset:22%!important;background:#fff!important;box-shadow:inset 0 0 0 1.5px #C99CF7;animation:none!important}
+.x-mem-g li.x-mem-ms::after{content:attr(data-ms);position:absolute;left:50%;bottom:calc(100% + 4px);transform:translateX(-50%);padding:2px 7px;border-radius:99px;background:#fff;color:#8C2BD6;font-size:10.5px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;box-shadow:0 2px 6px -2px rgba(36,28,43,.18);pointer-events:none}
+.x-mem-g li[data-ms="1,000번째"]::after{left:auto;right:-2px;transform:none}
+.x-mem-gw{padding-top:4px}
+/* 최근 들어온 친구: 제목 줄 → 카드 줄 */
+.x-mem-foot{display:block;margin-top:clamp(22px,2.8vw,32px)}
+.x-mem-k{margin:0 0 10px;font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.x-mem-r{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.x-mem-r li{gap:12px;min-width:0;padding:12px;border-radius:16px}
+.x-mem-r .x-mem-f{width:44px;height:44px;border-radius:12px}
+.x-mem-r b{display:grid;gap:1px;font-size:14.5px}
+.x-mem-r b i{font-size:11.5px;font-weight:700;color:#AA4AF4}
+.x-mem-r span{font-size:12px}
+/* 보는 법 — 부록처럼 맨 아래 */
+.x-mem-note{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:clamp(18px,2.4vw,26px) 0 0;padding:14px 0 0;border-top:1px solid #E7E3EE;list-style:none;font-size:12px;color:#8F88A0;letter-spacing:-.02em}
+.x-mem-note li{display:flex;align-items:center;gap:6px}
+.x-mem-note i{width:10px;height:10px;border-radius:3px}
+.x-mem-note .ph{background:url(/assets/cast/bom/avatar.webp) center/cover}
+.x-mem-note .pal{background:linear-gradient(135deg,#AA4AF4,#FA97E2)}
+.x-mem-note .nx{background:#fff;box-shadow:inset 0 0 0 1.5px #AA4AF4}
+.x-mem-note .em{width:6px;height:6px;margin:2px;border-radius:50%;background:#D9D3E4}
+.x-mem-note .t{margin-left:auto}
+@media (max-width:900px){.x-mem-r{grid-template-columns:repeat(3,minmax(0,1fr))}.x-mem-r li:nth-child(n+4){display:none}}
+@media (max-width:700px){.x-mem-r{grid-template-columns:1fr}.x-mem-r li:nth-child(n+4){display:none}.x-mem-note .t{margin-left:0}.x-mem-g li.x-mem-ms::after{font-size:9.5px;padding:1px 5px}}
+.x-mem-note i{flex:none}.x-mem-note i.em{display:block;width:7px;height:7px;margin:0 1.5px;background:#CFC8DB}
+@media (max-width:700px){.x-mem-g li.x-mem-ms::after{display:none}.x-mem-r{gap:6px}.x-mem-r li{padding:8px 12px 8px 8px}.x-mem-r .x-mem-f{width:36px;height:36px;border-radius:10px}.x-mem-r b{display:block}.x-mem-r b i{margin-right:4px}}

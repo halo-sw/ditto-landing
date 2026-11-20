@@ -539,6 +539,7 @@
   function members() {
     var sec = $('#x-wall'), wallBox = $('#xWall'); if (!sec || !wallBox) return;
     var CAP = 1000, pad = function (n) { return String(n).padStart(4, '0'); };
+    var MS = { 100: '100번째', 500: '500번째', 1000: '1,000번째' };   // 빈 판 위 이정표
     var PAL = ['purple-pink', 'cyan-blue', 'peach-yellow', 'mint-lime', 'coral-red', 'deep-purple', 'lime-green', 'gold-yellow', 'pink-coral', 'neutral-gray'];
     function ago(t) {
       var m = Math.max(0, (Date.now() - new Date(t).getTime()) / 60000);
@@ -578,7 +579,8 @@
           '<div class="x-mem-pg" role="progressbar" aria-valuemin="0" aria-valuemax="1000"><i></i></div>' +
           '<p class="x-mem-s"></p></div>' +
           '<div class="x-mem-gw"><ol class="x-mem-g" aria-label="1,000칸 중 들어온 순서대로 채워진 자리"></ol><div class="x-mem-card" role="status" aria-live="polite" hidden></div></div>' +
-          '<div class="x-mem-foot"><p class="x-mem-k">최근 들어온 친구</p><ol class="x-mem-r"></ol><p class="x-mem-leg"><i></i>한 칸이 한 사람이에요</p></div>';
+          '<div class="x-mem-foot"><p class="x-mem-k">최근 들어온 친구</p><ol class="x-mem-r"></ol></div>' +
+          '<ul class="x-mem-note" aria-label="보는 법"><li><i class="ph"></i>사진을 올린 친구</li><li><i class="pal"></i>사진이 없는 친구는 팔레트 색</li><li><i class="nx"></i>다음 자리</li><li><i class="em"></i>빈 자리</li><li class="t">한 칸이 한 사람이에요. 아이디는 보이지 않아요.</li></ul>';
         var pg = $('.x-mem-pg', box); pg.setAttribute('aria-valuenow', total); pg.setAttribute('aria-label', '1,000자리 중 ' + total + '자리가 채워졌어요');
         pg.style.setProperty('--p', Math.max(0.6, total / CAP * 100).toFixed(2) + '%');
         $('.x-mem-s', box).textContent = (r.today ? '오늘 ' + r.today + '명이 들어왔어요. ' : '') + '남은 자리 ' + (CAP - total).toLocaleString('ko-KR') + '개';
@@ -605,16 +607,24 @@
             li.className = 'on'; li.appendChild(b);
           } else if (n <= total) li.className = 'on x-mem-old';          // 목록 밖 옛 자리 (400명 넘게 들어온 뒤)
           else if (n === total + 1) { li.className = 'x-mem-next'; li.title = 'No.' + pad(n) + ' 다음 자리'; }
+          if (MS[n] && n > total) { li.classList.add('x-mem-ms'); li.dataset.ms = MS[n]; li.title = MS[n] + ' 자리'; }
           frag.appendChild(li);
         }
         g.appendChild(frag);
+        /* 다음 자리에서 빈 칸으로 물결이 번진다 — 칸마다 다음 자리까지의 거리(--r)만큼 늦게 */
+        var lis = g.children;
+        function ripple() {
+          var cols = getComputedStyle(g).gridTemplateColumns.split(' ').length || 50, nx = total % CAP, nr = Math.floor(nx / cols), nc = nx % cols;
+          for (var i = total; i < CAP; i++) { var dr = Math.floor(i / cols) - nr, dc = i % cols - nc; lis[i].style.setProperty('--r', Math.round(Math.sqrt(dr * dr + dc * dc))); }
+        }
+        ripple(); var rpT = 0; addEventListener('resize', function () { clearTimeout(rpT); rpT = setTimeout(ripple, 200); });
         document.addEventListener('click', function (e) { if (pinned && !gw.contains(e.target)) { pinned = null; hide(); } });
         var rl = $('.x-mem-r', box);
         rows.slice(-5).reverse().forEach(function (m) {
           var li = document.createElement('li'); li.appendChild(face(m, 'x-mem-f')); li.appendChild(who(m, ago(m.at))); rl.appendChild(li);
         });
         wallBox.hidden = true; wallBox.parentNode.insertBefore(box, wallBox);
-        var hp = $('header p:not(.h8-k)', sec); if (hp) hp.textContent = '1,000자리 중 들어온 순서대로 한 칸씩 채워져요. 칸에 올리면 누가 언제 들어왔는지 보여요. 아이디는 보이지 않아요.';
+        var hp = $('header p:not(.h8-k)', sec); if (hp) hp.textContent = '1,000자리 중 들어온 순서대로 한 칸씩 채워져요. 칸에 올리면 누가 언제 들어왔는지 보여요.';
         var nEl = $('#xMemN', box), t0 = 0, dur = RM ? 0 : 1400;
         function tick(now) { if (!t0) t0 = now; var k = dur ? clamp((now - t0) / dur) : 1, e = 1 - Math.pow(1 - k, 3); nEl.textContent = Math.round(total * e).toLocaleString('ko-KR'); if (k < 1) requestAnimationFrame(tick); }
         requestAnimationFrame(function () { box.classList.add('in'); requestAnimationFrame(tick); });
