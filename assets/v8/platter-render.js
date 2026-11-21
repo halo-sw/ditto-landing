@@ -1166,7 +1166,7 @@
     { kind: 'music', name: '음악', group: G_GROUP, section: '기본', desc: '요즘 자주 듣는 노래를 담아요', sizes: sz(ALL12), defaultSize: { w: 4, h: 2 }, freeResize: true,
       sample: {"title": "Psycho", "artist": "Red Velvet", "album": "The ReVe Festival Finale", "url": "https://music.youtube.com/watch?v=uR8Mrt1IpXg", "img": "/assets/cast/bom/psycho-album.webp", "provider": "YouTube Music", "palette": ["#bed9d3", "#a3cac1", "#debab5"], "audio": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/01/0d/cb/010dcb95-4d2e-c56d-66b6-aa32d244d604/mzaf_10666588273897692200.plus.aac.p.m4a", "poster": "/assets/cast/bom/psycho.webp", "ytId": "uR8Mrt1IpXg", "playback": "youtube", "format": "뮤직비디오"} },
     { kind: 'video', name: '영상', group: G_GROUP, section: '기본', desc: '짧은 영상으로 일상을 전해요', sizes: sz(ALL12), defaultSize: { w: 4, h: 3 }, freeResize: true,
-      sample: {"ytId": "i6d3K6ln-d4", "url": "https://www.youtube.com/watch?v=i6d3K6ln-d4", "img": "/assets/cast/scenes/chiikawa-sphinx.webp", "title": "치이카와 2화 · 스핑크스", "channel": "めざましテレビチャンネル", "ip": "치이카와"} }
+      sample: {"ytId": "ossq60nJX0E", "url": "https://www.youtube.com/watch?v=ossq60nJX0E", "img": "/assets/cast/scenes/chim-codi.webp", "title": "코디가 안티 ㅋㅋ 진짜 웃김", "channel": "침착맨 플러스"} }
   ];
   catalog.forEach(function (c) { c.dittoable = !!DITTOABLE[c.kind]; });
 

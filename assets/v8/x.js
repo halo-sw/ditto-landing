@@ -50,15 +50,17 @@
     var captureRoot = '/assets/cast/widgets/build65/';
     var nativeWidgets = [
       {kind:'ask', name:'Ask', desc:'친구에게 질문을 받아요', defaultSize:{w:3,h:4}},
-      {kind:'collection', name:'취향 콜렉션', desc:'앨범·영화·책 내 Top 10을 꽂아 둬요', defaultSize:{w:4,h:4}},
+      {kind:'collection', name:'취향 콜렉션', desc:'앨범, 영화, 책 내 Top 10을 꽂아 둬요', defaultSize:{w:4,h:4}},
       {kind:'qna', name:'연말 문답', desc:'D-50부터 하루 한 문답으로 올해의 나를 모아요', defaultSize:{w:4,h:4}}
     ];
     // Build 65 uses the same twelve service sizes as the image widget.
     var serviceSizes = DW.catalog.find(function (item) { return item.kind === 'image'; }).sizes;
-    nativeWidgets.forEach(function (item) { item.sizes = serviceSizes; item.nativePreview = true; });
+    // 11-22 취향 콜렉션은 앱과 같은 8가지 크기 (WidgetRuleGallery ruleRows · 0.4.1 앱에서 새로 찍은 선반 캡처)
+    var tasteSizes = [[2,2],[4,2],[2,6],[6,2],[3,4],[4,4],[6,4],[6,6]].map(function (s) { return {w: s[0], h: s[1]}; });
+    nativeWidgets.forEach(function (item) { item.sizes = item.kind === 'collection' ? tasteSizes : serviceSizes; item.nativePreview = true; });
     function capture(item, size, extent) {
       var img = document.createElement('img');
-      img.src = captureRoot + item.kind + '-' + size.w + 'x' + size.h + '.webp?v=examples2';
+      img.src = captureRoot + item.kind + '-' + size.w + 'x' + size.h + '.webp?v=' + (item.kind === 'collection' ? 'shelf1122' : 'examples2');
       // Reserve the native tile's ratio before the image decodes, including during the opening animation.
       img.width = Math.round((size.w * 45.75 - 8) * 4);
       img.height = Math.round((size.h * 45.75 - 8) * 4);
@@ -66,6 +68,9 @@
       img.style.setProperty('--tile-width', extent * img.width / longest + '%');
       img.style.setProperty('--tile-height', extent * img.height / longest + '%');
       img.alt = item.name + ' ' + size.w + '×' + size.h;
+      // 11-22 캡처를 원래 픽셀보다 키우지 않는다 (2x2가 흐릿하게 커졌다) — 레티나 기준 원본의 절반 크기까지만
+      function cap() { if (img.naturalWidth) { img.style.maxWidth = img.naturalWidth / 2 + 'px'; img.style.maxHeight = img.naturalHeight / 2 + 'px'; } }
+      if (img.complete) cap(); else img.addEventListener('load', cap, { once: true });
       return img;
     }
     var items = DW.catalog.concat(nativeWidgets).map(function (c, idx) {

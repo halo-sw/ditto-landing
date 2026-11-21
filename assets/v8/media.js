@@ -70,7 +70,20 @@
     var p = audio.play(); if (p && p.catch) p.catch(function () { stop(); });
   }
 
-  function ytSrc(id) { return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?playsinline=1&autoplay=1&rel=0&modestbranding=1'; }
+  function ytSrc(id) { return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?playsinline=1&autoplay=1&rel=0&modestbranding=1&enablejsapi=1&origin=' + encodeURIComponent(location.origin); }
+  /* 11-22 재생 중인 영상을 한 번 더 누르면 멈추고, 다시 누르면 이어서 — 영상 위 투명한 판이 누름을 받아 YouTube에 명령을 보낸다 */
+  var PLAY_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+  function tapLayer(holder) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'x-yt-tap'; b.setAttribute('aria-label', '일시정지');
+    b.innerHTML = '<span class="x-yt-pi">' + PLAY_SVG + '</span>';
+    return b;
+  }
+  function toggle(tap) {
+    var holder = tap.parentNode, f = holder && holder.querySelector('iframe'); if (!f || !f.contentWindow) return;
+    var paused = holder.classList.toggle('x-paused');
+    f.contentWindow.postMessage(JSON.stringify({ event: 'command', func: paused ? 'pauseVideo' : 'playVideo', args: [] }), '*');
+    tap.setAttribute('aria-label', paused ? '이어서 재생' : '일시정지');
+  }
   function frameEl(id, title) {
     var f = document.createElement('iframe');
     f.src = ytSrc(id); f.title = title || 'YouTube'; f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true;
@@ -83,7 +96,7 @@
     if (box.getBoundingClientRect().width < 150) { modal(id, title); return; }
     var wrap = document.createElement('div'); wrap.className = 'x-yt';
     var x = document.createElement('button'); x.type = 'button'; x.className = 'x-yt-x'; x.setAttribute('aria-label', '영상 닫기'); x.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-    wrap.appendChild(frameEl(id, title)); wrap.appendChild(x); box.appendChild(wrap); frames.push(wrap);
+    wrap.appendChild(frameEl(id, title)); wrap.appendChild(tapLayer(wrap)); wrap.appendChild(x); box.appendChild(wrap); frames.push(wrap);
   }
   var dlg = null;
   function modal(id, title) {
@@ -95,7 +108,7 @@
       dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
       dlg.addEventListener('close', function () { dlg.querySelector('.x-ytd-in').textContent = ''; });
     }
-    dlg.querySelector('.x-ytd-in').replaceChildren(frameEl(id, title));
+    var inn = dlg.querySelector('.x-ytd-in'); inn.classList.remove('x-paused'); inn.replaceChildren(frameEl(id, title), tapLayer(inn));
     if (dlg.showModal) dlg.showModal(); else window.open('https://www.youtube.com/watch?v=' + id, '_blank', 'noopener');
   }
 
@@ -104,6 +117,8 @@
   document.addEventListener('pointerdown', function (e) { down = { x: e.clientX, y: e.clientY, t: Date.now() }; }, true);
   document.addEventListener('click', function (e) {
     var t = e.target;
+    var tp = t.closest && t.closest('.x-yt-tap');
+    if (tp) { e.preventDefault(); e.stopPropagation(); toggle(tp); return; }
     var cx = t.closest && t.closest('.x-yt-x');
     if (cx) { e.preventDefault(); e.stopPropagation(); var w = cx.parentNode; if (w.parentNode) w.parentNode.removeChild(w); frames = frames.filter(function (f) { return f !== w; }); return; }
     var item = t.closest && t.closest('.dpl-item.x-med'); if (!item) return;
