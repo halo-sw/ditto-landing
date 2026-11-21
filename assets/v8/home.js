@@ -812,7 +812,7 @@
     function blank() { raw = document.createElement('canvas'); raw.width = SW; raw.height = SH; var c = raw.getContext('2d'); c.fillStyle = '#fff'; c.fillRect(0, 0, SW, SH); return c; }
     function done() {
       seq = null; view.classList.remove('seq'); stopCam(); view.classList.remove('live', 'demo'); view.classList.add('shot'); flash();
-      hud(); develop(); btnRe.hidden = btnUse.hidden = false; msg.textContent = '찍은 뒤에도 카메라와 필름을 바꿔 볼 수 있어요.';
+      hud(); develop(); use(true); btnRe.hidden = btnUse.hidden = false; msg.textContent = '사진이 초대장에 들어갔어요. 찍은 뒤에도 카메라와 필름을 바꿔 볼 수 있어요.';
     }
     function stopSeq() { clearTimeout(seqT); seqT = 0; if (seq) { seq = null; raw = null; view.classList.remove('seq'); } }
     /* 여러 컷: 3 · 2 · 1 세고 한 칸 찍고, 잠깐 쉬고 다음 칸 */
@@ -838,7 +838,7 @@
       stopSeq(); mode = m;
       $$('button', modeBox).forEach(function (b) { b.setAttribute('aria-checked', +b.dataset.m === m); });
       view.dataset.split = m;
-      if (raw && !stream) { raw = shot = null; window.__dittoInvitePhoto = null; var im = $('#tkPh'); if (im) { im.hidden = true; im.removeAttribute('src'); } start(); return; }
+      if (raw && !stream) { raw = shot = null; window.__dittoInvitePhoto = null; var im = $('#tkPh'); if (im) { im.hidden = true; im.removeAttribute('src'); } document.dispatchEvent(new CustomEvent('ditto:photo', { detail: false })); start(); return; }
       if (stream) msg.textContent = MODE_TIP[m]; else { msg.textContent = MODE_TIP[m]; if (demo) paintDemo(); }
     }
     if (modeBox) $$('button', modeBox).forEach(function (b) { b.addEventListener('click', function () { setMode(+b.dataset.m); }); });
@@ -846,8 +846,9 @@
       if (!shot) return;
       window.__dittoInvitePhoto = shot;
       var im = $('#tkPh'); if (im) { im.src = shot.toDataURL('image/jpeg', 0.9); im.hidden = false; }
+      document.dispatchEvent(new CustomEvent('ditto:photo', { detail: true }));
       if (quiet) return;
-      msg.textContent = '사진이 초대장에 들어갔어요. 이름과 아이디를 적고 초대장을 뽑아 보세요.';
+      msg.textContent = '이름과 아이디를 적고 초대장을 뽑아 보세요.';
       var form = $('#tmForm'), name = $('#tmDisp');
       if (form) form.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'center' });
       if (name) setTimeout(function () { try { name.focus({ preventScroll: true }); } catch (e) { /* 포커스 실패는 넘어간다 */ } }, 600);
@@ -860,7 +861,7 @@
       Object.keys(FILMS).forEach(function (k) { loadLut(k); });
       var im = new Image(); im.onload = function () { demo = im; if (!stream && !raw) { view.classList.add('demo'); loadLut(lutOf(cur), redraw); } }; im.src = '/assets/cast/scenes/webcam-group.webp';
     }, 0.01);
-    btnRe.addEventListener('click', function () { window.__dittoInvitePhoto = null; var im = $('#tkPh'); if (im) { im.hidden = true; im.removeAttribute('src'); } start(); });
+    btnRe.addEventListener('click', function () { window.__dittoInvitePhoto = null; var im = $('#tkPh'); if (im) { im.hidden = true; im.removeAttribute('src'); } document.dispatchEvent(new CustomEvent('ditto:photo', { detail: false })); start(); });
     btnUse.addEventListener('click', function () { use(false); });
     visible(box, function (on) { if (!on && stream) { stopSeq(); stopCam(); view.classList.remove('live'); if (demo) { view.classList.add('demo'); paintDemo(); } msg.textContent = '화면을 벗어나 카메라를 껐어요. 셔터를 누르면 다시 켜져요.'; } });
     addEventListener('pagehide', stopCam);

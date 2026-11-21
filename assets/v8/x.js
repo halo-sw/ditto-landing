@@ -839,6 +839,7 @@
       lis.forEach(function (li, i) { li.classList.toggle('on', i === s); li.classList.toggle('done', i < s); if (i === s) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
     }
     if (use) use.addEventListener('click', function () { used = true; calc(); });
+    document.addEventListener('ditto:photo', function (e) { used = !!e.detail; calc(); });
     [nm, id].forEach(function (el) { if (el) el.addEventListener('input', calc); });
     if ('MutationObserver' in window) { var mo = new MutationObserver(calc); [mach, tc, done].forEach(function (el) { if (el) mo.observe(el, { attributes: true, attributeFilter: ['class', 'hidden'] }); }); }
     calc();
