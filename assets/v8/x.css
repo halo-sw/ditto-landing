@@ -1355,3 +1355,18 @@
 @media (max-width:700px){.x-mem-r{grid-template-columns:1fr}.x-mem-r li:nth-child(n+4){display:none}.x-mem-note .t{margin-left:0}.x-mem-g li.x-mem-ms::after{font-size:9.5px;padding:1px 5px}}
 .x-mem-note i{flex:none}.x-mem-note i.em{display:block;width:7px;height:7px;margin:0 1.5px;background:#CFC8DB}
 @media (max-width:700px){.x-mem-g li.x-mem-ms::after{display:none}.x-mem-r{gap:6px}.x-mem-r li{padding:8px 12px 8px 8px}.x-mem-r .x-mem-f{width:36px;height:36px;border-radius:10px}.x-mem-r b{display:block}.x-mem-r b i{margin-right:4px}}
+
+/* v8.25 (11-22) 인트로 플래터 넘김 = 앱 디자인 시스템 규격
+   · 프로필 핸들 = 앱 ProfileHandle(최소 높이 64 · 사방 8 · 사이 8 · 사진 48 모서리 12 · 이름 16 Regular · 보조 12 85% · 위 흰빛 18%→22% · 그림자 0/3/8 6%)
+   · 위젯 글자는 11 아래로 줄지 않는다(WidgetSpec.typeMin) — 플래터를 81%(휴대폰 51%)로 줄여 텍스트 위젯이 10.5px(6.6px)까지 작아졌다
+     → 플래터를 거의 실제 크기로 키우고, 텍스트 위젯 글자는 11px 아래로 내려가지 않게 */
+.fx-trio.x-roll{--rw:clamp(300px,31vw,456px);height:clamp(340px,50vh,540px)}
+@media (max-width:760px){.fx-trio.x-roll{--rw:min(84vw,340px);--rg:12px;height:380px}}
+.fx-trio .h8-hb{height:auto;min-height:calc(64 * var(--s));padding:calc(8 * var(--s));gap:calc(8 * var(--s));
+  background:linear-gradient(rgba(255,255,255,.18),rgba(255,255,255,0) 22%),linear-gradient(var(--hb-a,#EEAFC7),var(--hb-b,#E37CA2));
+  box-shadow:0 calc(3 * var(--s)) calc(8 * var(--s)) rgba(0,0,0,.06)}
+.fx-trio .h8-hb img{width:calc(48 * var(--s));height:calc(48 * var(--s));border-radius:calc(12 * var(--s))}
+.fx-trio .h8-hb div{display:flex;flex-direction:column;gap:calc(2 * var(--s));min-width:0}
+.fx-trio .h8-hb b{font-size:calc(16 * var(--s));font-weight:400;line-height:1.45;letter-spacing:-.01em}
+.fx-trio .h8-hb span{font-size:calc(12 * var(--s));line-height:1.4;color:rgba(23,23,25,.85)}
+.fx-trio .dw-tx{font-size:max(calc(13 * var(--u)),11px)!important;line-height:max(calc(22.6 * var(--u)),19px)!important}
