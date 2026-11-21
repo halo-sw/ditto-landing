@@ -218,11 +218,36 @@
   function makePlatter() {
     if (!plBox || !window.DittoPlatter) return;
     if (inst && inst.destroy) inst.destroy();
-    inst = window.DittoPlatter.create(plBox, { widgets: widgets(), editable: true, removable: false, minRows: 16 });
-    later();
+    var ws = widgets();
+    inst = window.DittoPlatter.create(plBox, { widgets: ws, editable: true, removable: false, minRows: 16,
+      onChange: function (e) { sizes(e.layout); }, onSelect: function (id) { mark(id); } });
+    buildKinds(ws); later();
   }
+  /* 위젯 규격표: 종류마다 지금 크기(너비×높이)와 6칸 격자 위 자리 그림. 플래터에서 끌면 같이 바뀐다 */
   var kinds = $('#xwKinds');
-  if (kinds) KINDS.forEach(function (k) { var li = document.createElement('li'); li.textContent = k[1]; kinds.appendChild(li); });
+  function buildKinds(ws) {
+    if (!kinds) return; kinds.textContent = '';
+    var nm = {}; KINDS.forEach(function (k) { nm[k[0]] = k[1]; });
+    ws.forEach(function (w) {
+      var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button'; b.dataset.id = w.id;
+      b.innerHTML = '<span class="t"><b></b><i></i></span><span class="fp" aria-hidden="true"><i></i></span>';
+      b.querySelector('b').textContent = nm[w.kind] || w.kind;
+      b.addEventListener('click', function () { if (inst && inst.select) inst.select(w.id); mark(w.id); });
+      li.appendChild(b); kinds.appendChild(li);
+    });
+    var n = document.getElementById('xwKindN'); if (n) n.textContent = ws.length;
+    sizes(ws);
+  }
+  function sizes(lay) {
+    if (!kinds) return;
+    (lay || []).forEach(function (w) {
+      var b = kinds.querySelector('[data-id="' + w.id + '"]'); if (!b) return;
+      var i = b.querySelector('.t i'), was = i.textContent, now = w.w + '×' + w.h; i.textContent = now;
+      var fp = b.querySelector('.fp i'); fp.style.setProperty('--w', w.w); fp.style.setProperty('--h', Math.min(w.h, 4));
+      if (was && was !== now) { b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); }
+    });
+  }
+  function mark(id) { if (kinds) [].forEach.call(kinds.querySelectorAll('button'), function (b) { b.setAttribute('aria-current', b.dataset.id === id ? 'true' : 'false'); }); }
   var rs = $('#xwPlReset'); if (rs) rs.addEventListener('click', makePlatter);
   if (plBox) { if (window.DittoPlatter) makePlatter(); else addEventListener('load', makePlatter); }
 

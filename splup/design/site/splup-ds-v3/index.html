@@ -436,7 +436,7 @@
 <link rel="stylesheet" href="play-stage.css">
 <link rel="stylesheet" href="/assets/v8/platter-grid.css">
 <link rel="stylesheet" href="/assets/v8/platter.css">
-<link rel="stylesheet" href="xwall.css">
+<link rel="stylesheet" href="xwall.css?v=9f00dbc8d1">
 <header class="topbar">
   <div class="tb-lead"><a class="logo tb-logo" href="#overview" aria-label="Splup 디자인 가이드 처음으로"><svg class="wm" viewBox="0 0 370 134" aria-hidden="true"><use href="#wm-ditto"/></svg><span class="logo-label tb-title">Splup <small>디자인 가이드</small></span></a></div>
   <nav class="top-nav" id="topNav" aria-label="주요 카테고리">
@@ -478,10 +478,12 @@
       <article class="xw-t xw-wide xw-pl" data-span="3">
         <div class="xw-pl-side">
           <a class="xw-l" href="#widget-catalog">플래터</a>
-          <p class="xw-h">꾹 눌러 옮기고,<br>모서리를 끌어 크기를 바꿔요.</p>
+          <p class="xw-h">꾹 눌러 옮기고, 모서리를 끌어 크기를 바꿔요.</p>
           <p class="xw-s">앱과 같은 6칸 격자예요. 음악과 영상은 누르면 재생돼요.</p>
-          <ul class="xw-kinds" id="xwKinds" aria-label="이 플래터에 놓인 위젯"></ul>
-          <dl class="xw-spec" aria-label="위젯 공통 규격"><div><dt>모서리</dt><dd>모든 위젯 20</dd></div><div><dt>안쪽 여백</dt><dd>칸 수에 따라 12, 16, 20, 24</dd></div><div><dt>글자</dt><dd>제목 13, 항목 12, 메타 11</dd></div><div><dt>크기</dt><dd>모두 바꿀 수 있어요. To-do와 Together만 예외</dd></div></dl><button type="button" class="xw-ghost" id="xwPlReset">처음 배치로</button>
+          <dl class="xw-stat" aria-label="위젯 공통 규격"><div><dd>6칸</dd><dt>격자 너비</dt></div><div><dd>20</dd><dt>모서리</dt></div><div><dd>12–24</dd><dt>안쪽 여백</dt></div><div><dd>13</dd><dt>제목 글자</dt></div></dl>
+          <div class="xw-kt"><b>위젯 <span id="xwKindN">12</span>종</b><span>너비×높이, 끌면 바로 바뀌어요</span></div>
+          <ol class="xw-kinds" id="xwKinds" aria-label="이 플래터에 놓인 위젯과 지금 크기"></ol>
+          <div class="xw-pl-foot"><p>크기는 모두 바꿀 수 있어요. To-do와 Together만 정해진 크기를 써요.</p><button type="button" class="xw-ghost" id="xwPlReset">처음 배치로</button></div>
         </div>
         <div class="xw-phone xw-pl-ph"><div class="xw-pl-hd"><span class="xw-pl-av"></span><span><b>봄</b><i>@bomcut</i></span></div><div class="dpl" id="xwPlatter"></div></div>
       </article>
@@ -3362,7 +3364,7 @@
 <script src="/assets/v8/platters.js"></script>
 <script src="/assets/v8/platter.js"></script>
 <script src="/assets/v8/media.js" defer></script>
-<script src="xwall.js"></script>
+<script src="xwall.js?v=2b961fce05"></script>
 <script defer src="play-stage.js"></script>
 
 <script src="profile-handle-recipes.js"></script>
