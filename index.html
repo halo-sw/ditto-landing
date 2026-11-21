@@ -1514,6 +1514,13 @@ mark{padding:0;color:transparent;background:linear-gradient(100deg,#7B3BC4 0%,#A
 .tmd-t{margin-top:10px;font-size:23px;font-weight:800;letter-spacing:-.035em;line-height:1.3}
 .tmd-d{margin-top:8px;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
 .tmd #tcEmail{display:block;width:100%;margin-top:18px}
+.tmd .tc-inv{display:grid;gap:8px;margin-top:12px}
+.tc-inv span{font:700 14px/1.3 var(--kr);color:var(--ink)}
+.tc-inv small{display:block;margin-top:2px;font-weight:500;font-size:12.5px;color:#8A8292}
+#tcInvite{height:52px;padding:0 18px;border:0;border-radius:999px;background:#F3F0F7;font:700 17px/1 var(--kr);letter-spacing:.18em;text-transform:uppercase;color:var(--ink);outline:none}
+#tcInvite::placeholder{letter-spacing:.02em;font-weight:500;text-transform:none;color:#A39BAD}
+#tcInvite:focus-visible{box-shadow:inset 0 0 0 2px var(--violet-d)}
+
 .tmd-b{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 .tmd-b .btn{flex:1 1 auto;justify-content:center}
 @media (prefers-reduced-motion:reduce){.tmd-bg,.tmd-p{transition:none}}
@@ -3108,7 +3115,7 @@ html{background:var(--edge-b,var(--bg))}
           <span class="tm-hint" id="tmNoteHint">좌석표에서 누구나 볼 수 있어요.</span></div>
         <div class="tm-f"><span class="tm-k">색</span><div class="tm-sw" id="tmSw" role="radiogroup" aria-label="초대장 색"></div></div>
         <div class="tm-go-row"><button type="button" class="btn tm-draw" id="tmGo">초대장 뽑기 <span class="ar" aria-hidden="true">→</span></button>
-          <p class="tm-rule" id="tmRule">번호와 코드는 이메일을 남기면 발급돼요. 한 사람당 한 장이에요.</p></div>
+          <p class="tm-rule" id="tmRule">번호와 코드는 이메일을 남기면 발급돼요. 받은 초대 코드가 있으면 그 코드로 발급돼요.</p></div>
       </form>
         </div>
       </div>
@@ -3117,7 +3124,7 @@ html{background:var(--edge-b,var(--bg))}
     <div class="tc" id="tc" hidden>
       <div class="tc-done" id="tcDone" hidden>
         <p class="tc-t" id="tcDoneT">초대장 <b id="tcNo">No. 0001</b>이 발급됐어요.</p>
-        <p class="tc-d" id="tcDoneD">이 링크로 언제든 내 초대장을 다시 볼 수 있어요. 앱에서 코드 <b id="tcCode2">------</b>를 넣고 가입하면 <b id="tcId2"></b>가 그대로 내 아이디가 되고, 이 링크는 그때 닫혀요.</p>
+        <p class="tc-d" id="tcDoneD">앱을 열고 가입할 때 초대 코드 칸에 <b id="tcCode2">------</b>를 직접 입력해 주세요. <b id="tcId2"></b>는 가입할 때 아이디로 적으면 돼요. 이 링크로 언제든 초대장을 다시 볼 수 있어요.</p>
         <div class="tc-link"><code id="tcLink">ditto.place/?t=------</code><button type="button" class="btn line" id="tcCopy">링크 복사</button><button type="button" class="btn line" id="tmSave">이미지로 저장</button></div>
       </div>
     </div>
@@ -3195,6 +3202,7 @@ html{background:var(--edge-b,var(--bg))}
       <h2 class="tmd-t" id="tmdT">이 초대장, 내 걸로 할까요?</h2>
       <p class="tmd-d">이메일을 남기면 번호와 코드가 발급되고 <b id="tmdId">@아이디</b>가 예약돼요. 출시하는 날 이 메일로 초대 링크를 보내 드려요.</p>
       <input id="tcEmail" type="email" placeholder="email@example.com" autocomplete="email" inputmode="email" aria-label="이메일">
+      <label class="tc-inv"><span>받은 초대 코드 <small>있으면 넣어 주세요. 비워 두면 새 코드를 받아요.</small></span><input id="tcInvite" type="text" placeholder="예: AB12CD" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="latin" aria-label="받은 초대 코드"></label>
       <div class="tc-agree">
         <label class="tc-ok"><input type="checkbox" id="tcConsent"> <span><b>[필수]</b> 개인정보 수집 및 이용에 동의합니다</span></label>
         <details class="tc-pol"><summary>내용 보기</summary>
@@ -3216,7 +3224,7 @@ html{background:var(--edge-b,var(--bg))}
     <div class="tmd-ok" id="tmdOk" hidden>
       <p class="tmd-k">Issued_</p>
       <h2 class="tmd-t">초대장 <b id="tmdNo2">No. 0001</b> 발급!</h2>
-      <p class="tmd-d">링크로 언제든 다시 볼 수 있어요. 앱에서 코드 <b id="tmdCode">------</b>로 가입하면 링크는 닫혀요.</p>
+      <p class="tmd-d">앱에서 가입할 때 초대 코드 칸에 <b id="tmdCode">------</b>를 직접 입력해 주세요. 링크로 언제든 다시 볼 수 있어요.</p>
       <div class="tmd-b"><button type="button" class="btn" id="tmdDone">좋아요</button></div>
     </div>
   </div>
@@ -4205,6 +4213,7 @@ html{background:var(--edge-b,var(--bg))}
     }
     const REDRAW = '다시 뽑기 <span class="ar" aria-hidden="true">↻</span>';
     go.addEventListener('click', () => {
+      if (mine && MULTI) { unlock(); return; }
       if (mine || mach.classList.contains('busy')) return;
       if (!dispIn.value.trim()) { dispIn.focus(); dispIn.classList.add('bad'); setTimeout(() => dispIn.classList.remove('bad'), 900); return; }
       if (idState !== 'ok' && idState !== 'offline') { idIn.focus(); setHint(idIn.value.length < 3 ? 'invalid' : idState === 'checking' ? 'checking' : idState); return; }
@@ -4220,10 +4229,18 @@ html{background:var(--edge-b,var(--bg))}
       tk.addEventListener('pointerleave', () => { tk.style.setProperty('--rx', '0deg'); tk.style.setProperty('--ry', '0deg'); });
     }
     // issue
-    const ERR = { 'note length': '한마디는 30자까지예요.', 'no links': '한마디에 링크는 넣을 수 없어요.', 'consent required': '동의에 체크해 주세요.', 'invalid email': '이메일 주소를 다시 확인해 주세요.', 'email used': '이 이메일로 이미 받은 초대장이 있어요.', 'nickname taken': '방금 누가 이 아이디를 가져갔어요. 다른 아이디로 다시 뽑아 주세요.', 'nickname invalid': '아이디는 영문 소문자 3–16자예요.', 'nickname reserved': '쓸 수 없는 아이디예요.', 'name length': '이름은 10자까지예요.', 'blocked words': '이름이나 한마디를 고운 말로 바꿔 주세요.', 'bad photo': '사진을 다시 찍어 주세요.', 'slow down': '잠깐 쉬었다가 다시 해 주세요.', 'sold out': '1,000장이 모두 나갔어요.' };
+    const ERR = { 'note length': '한마디는 30자까지예요.', 'no links': '한마디에 링크는 넣을 수 없어요.', 'consent required': '동의에 체크해 주세요.', 'invalid email': '이메일 주소를 다시 확인해 주세요.', 'email used': '이 이메일로 이미 받은 초대장이 있어요.', 'nickname taken': '방금 누가 이 아이디를 가져갔어요. 다른 아이디로 다시 뽑아 주세요.', 'nickname invalid': '아이디는 영문 소문자 3–16자예요.', 'nickname reserved': '쓸 수 없는 아이디예요.', 'name length': '이름은 10자까지예요.', 'blocked words': '이름이나 한마디를 고운 말로 바꿔 주세요.', 'bad photo': '사진을 다시 찍어 주세요.', 'slow down': '잠깐 쉬었다가 다시 해 주세요.', 'sold out': '1,000장이 모두 나갔어요.', 'code invalid': '앱 초대 코드가 아니에요. 받은 코드를 다시 확인하거나 비워 두세요.', 'code used': '이미 쓴 초대 코드예요. 비워 두면 새 코드를 받아요.' };
     const escH = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const linkOf = code => location.origin.replace(/\/$/, '') + location.pathname + '?t=' + code;
-    function lockForm(t){ dispIn.value = t.name; idIn.value = t.nickname; [dispIn, idIn].forEach(x => x.disabled = true); setHint('ok'); hint.textContent = '이 아이디는 내 거예요.'; go.disabled = true; go.textContent = `내 초대장 No. ${pad(t.no)}`; noteIn.value = t.capsule ? '🔒 봉인된 타임캡슐' : (t.note || ''); noteIn.disabled = true; setPal(t.palette); $('tmRule').textContent = '한 사람당 한 장이에요. 링크로 언제든 다시 볼 수 있어요.'; }
+    const MULTI = true;   // 11-21 잠시: 한 사람이 여러 장 뽑아 볼 수 있게. 끝나면 false
+    function lockForm(t){ dispIn.value = t.name; idIn.value = t.nickname; [dispIn, idIn].forEach(x => x.disabled = true); setHint('ok'); hint.textContent = '이 아이디는 내 거예요.'; go.disabled = true; go.textContent = `내 초대장 No. ${pad(t.no)}`; noteIn.value = t.capsule ? '🔒 봉인된 타임캡슐' : (t.note || ''); noteIn.disabled = true; setPal(t.palette); $('tmRule').textContent = '링크로 언제든 다시 볼 수 있어요.'; if (MULTI) { go.disabled = false; go.innerHTML = '한 장 더 뽑기 <span class="ar" aria-hidden="true">↻</span>'; } }
+    function unlock(){
+      mine = null; try { localStorage.removeItem('ditto.ticket2'); } catch (e) {}
+      [dispIn, idIn].forEach(x => { x.disabled = false; x.value = ''; }); noteIn.disabled = false; noteIn.value = ''; setHint('empty');
+      $('tcEmail').value = ''; $('tcInvite').value = ''; tc.hidden = true; $('tcDone').hidden = true;
+      $('tmRule').textContent = '번호와 코드는 이메일을 남기면 발급돼요. 받은 초대 코드가 있으면 그 코드로 발급돼요.';
+      reset('이름과 아이디를 적고<br><b>초대장 뽑기</b>를 눌러 보세요'); dispIn.focus();
+    }
     function done(t, stamp){
       mine = t; try { localStorage.setItem('ditto.ticket2', JSON.stringify(t)); } catch (e) {}
       paint(t); tk.hidden = false; tk.style.visibility = ''; tk.style.removeProperty('--pull'); $('tmIdle').hidden = true; $('tmPull').hidden = true; mach.classList.remove('ready', 'busy'); mach.classList.add('out', 'full'); if (stamp) tk.classList.add('stamp');
@@ -4236,7 +4253,7 @@ html{background:var(--edge-b,var(--bg))}
       if (!/^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email)) { err.textContent = ERR['invalid email']; return; }
       err.textContent = ''; const btn = $('tcGo'); btn.disabled = true; btn.textContent = '발급하는 중…';
       const name = dispIn.value.trim();
-      rpc('claim_launch_ticket', { p_nickname: idIn.value, p_name: name, p_email: email, p_palette: pal, p_note: noteIn.value.trim() || null, p_consent: true, p_wall: $('tcWall').checked, p_capsule: capsule }).then(r => { try { window.gtag && gtag('event', 'invite_ticket_claim'); } catch (e) {}
+      rpc('claim_launch_ticket', { p_nickname: idIn.value, p_name: name, p_email: email, p_palette: pal, p_note: noteIn.value.trim() || null, p_consent: true, p_wall: $('tcWall').checked, p_capsule: capsule, p_code: ($('tcInvite').value || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase() || null }).then(r => { try { window.gtag && gtag('event', 'invite_ticket_claim'); } catch (e) {}
         const row = r[0] || r; done({ no: row.no, code: row.code, nickname: row.nickname, name, palette: pal, note: noteIn.value.trim() || null, capsule: capsule && !!noteIn.value.trim(), created_at: new Date().toISOString() }, true);
         { const fresh = tk.cloneNode(true); fresh.removeAttribute('id'); fresh.querySelectorAll('[id]').forEach(n => n.removeAttribute('id')); fresh.className = 'tk tk-big issued stamp'; fresh.hidden = false; fresh.style.visibility = ''; slot.replaceChildren(fresh); md.classList.remove('guide'); }
         $('tmdNo2').textContent = 'No. ' + pad(row.no); $('tmdCode').textContent = row.code; $('tmdAsk').hidden = true; $('tmdOk').hidden = false; $('tmdDone').focus();
