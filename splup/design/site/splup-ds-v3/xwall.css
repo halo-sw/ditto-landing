@@ -15,7 +15,7 @@ html{overflow-x:clip}
 .xw-h{margin:0;font-size:clamp(18px,1.5vw,22px);font-weight:700;line-height:1.35;letter-spacing:-.035em;color:#241C2B;word-break:keep-all}
 .xw-h.sm{margin-bottom:12px;font-size:15px}
 .xw-s{margin:10px 0 0;font-size:13.5px;line-height:1.55;color:#6C6676;letter-spacing:-.02em;word-break:keep-all}
-.xw-t button{font:inherit;cursor:pointer}
+.xw-t button{font-family:inherit;cursor:pointer}
 
 /* 넓은 칸: 플래터 · 디토 시연 */
 .xw-wide{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:22px;align-items:center;padding:24px;background:#F7F3FD}
@@ -293,7 +293,7 @@ html{overflow-x:clip}
 
 /* 11-21 손질: 바닥 맞춤 · 넘침 */
 .xw-t.fill{justify-content:center}
-.xw-t.fill>.xw-l:first-child{position:absolute;top:18px;left:18px}
+.xw-t.fill>.xw-hd2:first-child{position:absolute;top:24px;left:24px;right:24px}
 .xw-t.fill.xw-wide>.xw-l:first-child,.xw-t.fill .xw-pl-side>.xw-l{position:static}
 .xw .xw-fam button,.xw .xw-tones button{min-width:0;min-height:0;flex:none}
 .xw .xw-fam button{width:26px;height:26px}
@@ -354,3 +354,53 @@ html{overflow-x:clip}
 .xw-kinds .fp i{width:calc(var(--w,2) * 8px);height:calc(var(--h,2) * 8px)}
 .xw-kt b span{font:inherit;color:inherit}
 @media (max-width:520px){.xw-kinds .t{grid-auto-flow:row;gap:1px}.xw-kinds .fp{width:40px;height:28px;background-size:7px 7px}.xw-kinds .fp i{width:calc(var(--w,2) * 7px);height:calc(var(--h,2) * 7px)}.xw-pl-foot{flex-direction:column;align-items:flex-start}}
+
+/* 11-21 앱 규격 + 시원한 크기: 칸은 앱 화면 너비(360 안팎)로, 머리는 "이름. 설명" */
+.xw-on .xb.xw{max-width:1600px}
+.xw-t{padding:24px;border-radius:28px}
+.xw-hd2{margin:0 0 20px;font-size:17px;line-height:1.45;letter-spacing:-.025em;color:#8F88A0;word-break:keep-all}
+.xw-hd2 .xw-l{display:inline;margin:0;font-size:inherit;font-weight:700;color:#241C2B}
+.xw-hd2 .xw-l:hover{color:#AA4AF4}
+.xw-hd2~.xw-hd2{margin-top:26px}
+.xw-dk.dark .xw-hd2 .xw-l{color:#F4F4F6}
+.xw-dk.dark .xw-hd2{color:#8E8E93}
+.xw-cap{font-size:13px}
+
+/* 버튼 = DButton: 60(시트 아래 큰 버튼, 17 SemiBold) · Neutral Solid 48(16 SemiBold) · 모서리 12 · 납작한 바탕 */
+.xw-bs{display:grid;gap:18px}
+.xw-br{display:grid;gap:8px}
+.xw-bk{font-size:12.5px;font-weight:700;color:#6C6676}
+.xw-bk em{margin-left:6px;font-style:normal;font-weight:500;color:#A8A2B4}
+.xw-b2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.xw-b{display:flex;align-items:center;justify-content:center;width:100%;height:60px;padding:0 16px;border:0;border-radius:12px;font-size:17px;font-weight:600;line-height:1.4;letter-spacing:-.01em;white-space:nowrap;transition:background .11s ease-out}
+.xw-b.p{background:#9D3EE4;color:#fff}.xw-b.p:active{background:#6F26A4}
+.xw-b.n{background:#F3F0F7;color:#443651}.xw-b.n:active{background:#E7E1EE}
+.xw-b.k{height:48px;background:#1C1722;color:#fff;font-size:16px}.xw-b.k:active{background:#000}
+.xw-b.d{background:#B92E5B;color:#fff}
+.xw-b:disabled{background:#E7E1EE;color:#897B99;cursor:default}
+
+/* 프로필 핸들 = ProfileHandle: 64 · 사방 8 · 사이 8 · 아바타 48(12) · 이름 16 Regular · 보조 12 · 아이콘 20(터치 44, 사이 4) */
+.xb .xp-h.xw-hd,.xw-pl-hd{position:relative;display:flex;align-items:center;height:64px;gap:8px;padding:8px;border-radius:16px;box-sizing:border-box}
+.xb .xw-hd .id{gap:2px;line-height:1.3}
+.xb .xw-hd .id b,.xw-pl-hd b{font-size:16px;font-weight:400;letter-spacing:-.16px;color:var(--hk,#171719)}
+.xb .xw-hd .id i,.xw-pl-hd i{font-size:12px;font-weight:400;opacity:.85;color:var(--hk,#171719)}
+.xb .xw-hd .ic,.xw-pl-hd .ic{flex:none;width:44px;height:44px;-webkit-mask-size:20px 20px;mask-size:20px 20px;background:var(--hk,#171719);opacity:.72}
+.xb .xw-hd .ic.i2,.xw-pl-hd .ic.i2{margin-left:-4px}
+.xw-pl-hd .ic.i1{-webkit-mask:url(play-assets/ic-pencil.png) center/20px no-repeat;mask:url(play-assets/ic-pencil.png) center/20px no-repeat}
+.xw-pl-hd .ic.i2{-webkit-mask:url(play-assets/ic-option.png) center/20px no-repeat;mask:url(play-assets/ic-option.png) center/20px no-repeat}
+.xw-pl-hd>span:nth-child(2){flex:1;min-width:0;display:grid;gap:2px;line-height:1.3}
+.xw-pl-hd{margin:0 0 16px;background:linear-gradient(180deg,#FBC2A7 64%,#f6844f 100%);box-shadow:0 3px 8px rgba(0,0,0,.06);overflow:hidden}
+.xw-pl-hd::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0) 22%);pointer-events:none}
+.xw-pl-av{width:48px;height:48px;border-radius:12px}
+
+/* 플래터 폰 = 화면 390, 양옆 16 → 격자 358 그대로 */
+.xw-wide{grid-template-columns:minmax(0,1fr) 404px;gap:32px;padding:28px}
+.xw-pl-ph{width:390px;margin:7px 7px 7px auto;padding:16px 16px 20px}
+.xw.one .xw-wide{grid-template-columns:1fr}
+.xw.one .xw-pl-ph{width:min(390px,100%);margin:7px auto}
+.xw-kinds .fp{width:48px;height:48px;background-size:6px 6px}
+.xw-kinds .fp i{width:calc(var(--w,2) * 6px);height:calc(var(--h,2) * 6px)}
+.xw-kinds button{height:64px}
+
+/* 디토하기 버튼은 앱처럼 화면 너비로 */
+.xw .xa-hold{width:100%}

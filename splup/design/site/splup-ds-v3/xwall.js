@@ -9,11 +9,11 @@
   var root = $('#xp.xw'); if (!root) return;
 
   /* ── 벽 쌓기: 열 너비 ≥ 250, 칸은 가장 낮은 열(넓은 칸은 두 열 중 더 낮은 쪽)에 ── */
-  var tiles = $$('.xw-t', root), GAP = 14, raf = 0;
+  var tiles = $$('.xw-t', root), GAP = 16, raf = 0;
   function pack() {
     raf = 0;
     var W = root.clientWidth; if (!W) return;
-    var cols = Math.max(1, Math.min(6, Math.floor((W + GAP) / (250 + GAP)))), cw = (W - GAP * (cols - 1)) / cols, h = [];
+    var cols = Math.max(1, Math.min(6, Math.floor((W + GAP) / (380 + GAP)))), cw = (W - GAP * (cols - 1)) / cols, h = [];
     for (var i = 0; i < cols; i++) h.push(0);
     root.classList.toggle('one', cols === 1);
     var lastOf = [];
@@ -207,8 +207,10 @@
   });
 
   /* ── 플래터: 랜딩과 같은 코드(DittoPlatter)로, 위젯 종류마다 하나씩. 꾹 눌러 옮기고 모서리로 크기 바꾸기 ── */
-  var KINDS = [['music', '음악', 0, 0, 4, 2], ['dday', 'D-Day', 4, 0, 2, 2], ['image', '사진', 0, 2, 2, 2], ['social', '소셜', 2, 2, 2, 2], ['guestbook', '방명록', 4, 2, 2, 2],
-    ['todo', 'To-do', 0, 4, 3, 4], ['playlist', '플레이리스트', 3, 4, 3, 4], ['text', '글', 0, 8, 6, 2], ['sticker', '스티커 보드', 0, 10, 4, 3], ['gif', 'GIF', 4, 10, 2, 3], ['block', '포스트', 0, 13, 3, 3], ['video', '영상', 3, 13, 3, 3]];
+  /* 앱 플래터 = 8칸 격자(칸 사이 8, 양옆 16, 화면 390). 12종을 빈칸 없이 8×16에 */
+  var KINDS = [['music', '음악', 0, 0, 4, 2], ['dday', 'D-Day', 4, 0, 2, 2], ['social', '소셜', 6, 0, 2, 2], ['image', '사진', 0, 2, 4, 4], ['block', '포스트', 4, 2, 4, 4],
+    ['todo', 'To-do', 0, 6, 3, 4], ['playlist', '플레이리스트', 3, 6, 3, 4], ['guestbook', '방명록', 6, 6, 2, 2], ['gif', 'GIF', 6, 8, 2, 2],
+    ['video', '영상', 0, 10, 6, 4], ['sticker', '스티커 보드', 6, 10, 2, 6], ['text', '글', 0, 14, 6, 2]];
   var plBox = $('#xwPlatter'), inst = null;
   function widgets() {
     var P = window.DITTO_PLATTERS || {}, pick = {};
@@ -243,7 +245,7 @@
     (lay || []).forEach(function (w) {
       var b = kinds.querySelector('[data-id="' + w.id + '"]'); if (!b) return;
       var i = b.querySelector('.t i'), was = i.textContent, now = w.w + '×' + w.h; i.textContent = now;
-      var fp = b.querySelector('.fp i'); fp.style.setProperty('--w', w.w); fp.style.setProperty('--h', Math.min(w.h, 4));
+      var fp = b.querySelector('.fp i'); fp.style.setProperty('--w', w.w); fp.style.setProperty('--h', Math.min(w.h, 8));
       if (was && was !== now) { b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); }
     });
   }
