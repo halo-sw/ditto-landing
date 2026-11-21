@@ -340,3 +340,11 @@
   .h8-fq-w{height:auto}
   .h8-fq{position:relative}
 }
+/* 11-21 찍은 사진이 들어간 초대장: 사진 위에는 d! 로고를 왼쪽 아래에 작게, 위에는 작은 표식 */
+.tk-gr .tk-ph{z-index:1}
+.tk-gr svg.tk-mk{display:none;position:absolute;inset:auto auto 7% 8%;z-index:2;width:22%;height:auto;aspect-ratio:214/204;color:#fff;filter:drop-shadow(0 .4cqw 1.2cqw rgba(0,0,0,.3))}
+.tk-gr .tk-ph-k{display:none;position:absolute;top:6.5%;right:9%;z-index:2;font:italic 900 2.1cqw/1 var(--round,inherit);letter-spacing:.04em;color:rgba(255,255,255,.92);text-shadow:0 .2cqw .8cqw rgba(0,0,0,.3)}
+.tk-gr .tk-ph:not([hidden])~.tk-mk,.tk-gr .tk-ph:not([hidden])~.tk-ph-k{display:block}
+.tk-gr .tk-ph:not([hidden])~.tk-mk{display:block}
+.tk-gr:has(.tk-ph:not([hidden]))::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,0) 26%,rgba(0,0,0,0) 62%,rgba(0,0,0,.28))}
+.tk-gr::after{z-index:3}
